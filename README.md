@@ -98,11 +98,11 @@ npm run test:interactive
 - `require-as-user-or-as-app` — `requestJira`/`requestConfluence` must be chained from `api.asUser()` or `api.asApp()`
 - `require-route-template` — API requests must use the `` route`...` `` template tag or `assumeTrustedRoute()`
 - `no-absolute-urls-in-api` — no absolute URLs (`http://`, `https://`, or `//`) passed to Forge product request helpers or `assumeTrustedRoute`
-
-### strict/architecture
-
 - `no-native-fetch-in-resolvers` — no native `fetch()` calls in `src/resolvers/`, `src/external/`, `src/import-lifecycle/`
-- `no-frontend-escape-imports` — frontend files must not import from outside `src/frontend/` (except `src/util/`)
+
+### strict/runtime-boundaries
+
+- `no-frontend-escape-imports` — frontend files must not import backend runtime modules from `external`, `import-lifecycle`, or `queues`
 - `no-resolver-import-in-frontend` — frontend must not import from `src/resolvers/`
 - `no-frontend-import-in-backend` — backend runtime files must not import from `src/frontend/`
 

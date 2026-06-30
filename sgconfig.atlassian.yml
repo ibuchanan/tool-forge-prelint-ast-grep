@@ -11,11 +11,11 @@ ruleDirs:
   - rules/recommended/security
   - rules/recommended/triggers
   - rules/strict/api-usage
-  - rules/strict/architecture
   - rules/strict/frontend-ui
   - rules/strict/imports
   - rules/strict/package-json
   - rules/strict/performance
+  - rules/strict/runtime-boundaries
   - rules/strict/security
   - rules/strict/triggers
   # - rules/atlassian/...  (future)

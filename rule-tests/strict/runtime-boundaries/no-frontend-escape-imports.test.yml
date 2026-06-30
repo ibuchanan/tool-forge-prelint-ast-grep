@@ -1,0 +1,17 @@
+id: no-frontend-escape-imports
+valid:
+  # relative import within frontend — stays inside
+  - "import { MyComponent } from './components'"
+  # relative imports that are not known backend runtime directories are left to path-aware tooling
+  - "import { NestedComponent } from '../../components/NestedComponent'"
+  # util remains allowed
+  - "import { formatDate } from '../util'"
+  - "import { formatDate } from '../util/date'"
+  # resolver imports are owned by no-resolver-import-in-frontend
+  - "import { handler } from '../../resolvers'"
+invalid:
+  # backend runtime modules
+  - "import { callExternal } from '../external'"
+  - "import { callExternal } from '../../external/client'"
+  - "import { onInstall } from '../import-lifecycle/on-install'"
+  - "import { queue } from '../../queues/events'"
