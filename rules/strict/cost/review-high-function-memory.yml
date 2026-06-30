@@ -1,0 +1,19 @@
+id: review-high-function-memory
+language: Yaml
+severity: info
+message: >
+  CST-10: Review high Forge function memory allocation against observed usage.
+note: >
+  memoryMiB directly affects GB-second consumption. Keep higher allocations only
+  when profiling shows they reduce duration enough or are required for workload size.
+rule:
+  all:
+    - kind: block_mapping_pair
+      regex: '^\s*memoryMiB\s*:\s*(1024|2048)\b'
+    - inside:
+        stopBy: end
+        kind: block_mapping_pair
+        regex: 'functions\s*:'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

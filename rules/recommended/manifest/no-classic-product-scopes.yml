@@ -1,0 +1,14 @@
+id: no-classic-product-scopes
+language: Yaml
+severity: info
+message: >
+  SEC-09: Prefer granular Forge scopes over classic product scopes when available.
+note: >
+  Classic scopes such as read:jira-work and read:confluence-content.all are
+  broad. Use granular scopes unless the app needs classic scope compatibility.
+rule:
+  kind: block_sequence_item
+  regex: '^\s*-\s*["'']?(read|write|manage):(jira|confluence)[-.]'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

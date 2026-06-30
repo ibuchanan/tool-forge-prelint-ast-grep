@@ -1,0 +1,27 @@
+id: prefer-jira-trigger-ignore-self
+language: Yaml
+severity: info
+message: >
+  TRG-03: Jira product triggers should review filter.ignoreSelf.
+note: >
+  If the app writes to the same Jira entities it listens to, ignoreSelf avoids
+  self-generated invocations and feedback loops.
+rule:
+  all:
+    - kind: block_sequence_item
+    - has:
+        stopBy: end
+        kind: block_sequence_item
+        regex: 'avi:jira:'
+    - not:
+        has:
+          stopBy: end
+          kind: block_mapping_pair
+          regex: '^\s*ignoreSelf\s*:'
+    - inside:
+        stopBy: end
+        kind: block_mapping_pair
+        regex: 'trigger\s*:'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

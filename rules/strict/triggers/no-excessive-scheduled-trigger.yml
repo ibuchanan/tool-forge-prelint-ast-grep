@@ -1,0 +1,19 @@
+id: no-excessive-scheduled-trigger
+language: Yaml
+severity: warning
+message: >
+  TRG-01: Avoid five-minute or hourly scheduled triggers for slow-changing data.
+note: >
+  Frequent schedules increase invocations and product API calls. Prefer product
+  triggers, webhooks, or a slower interval when the data does not change often.
+rule:
+  all:
+    - kind: block_mapping_pair
+      regex: '^\s*interval\s*:\s*(fiveMinutes?|hour|hourly)'
+    - inside:
+        stopBy: end
+        kind: block_mapping_pair
+        regex: 'scheduledTrigger\s*:'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

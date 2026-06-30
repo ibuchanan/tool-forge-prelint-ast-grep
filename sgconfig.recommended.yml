@@ -1,0 +1,9 @@
+# forge-lint: recommended tier
+# Safe for any Forge developer. Catches deprecated package usage,
+# frontend/backend boundary violations, and UI Kit correctness.
+ruleDirs:
+  - rules/recommended/imports
+  - rules/recommended/architecture
+  - rules/recommended/frontend-ui
+  - rules/recommended/security
+  - rules/recommended/manifest

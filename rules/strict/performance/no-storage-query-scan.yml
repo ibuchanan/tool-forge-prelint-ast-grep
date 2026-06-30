@@ -1,0 +1,19 @@
+id: no-storage-query-scan
+language: TypeScript
+severity: warning
+message: >
+  PRF-06: Bound Forge storage queries before getMany().
+note: >
+  storage.query().getMany() and kvs.query().getMany() can scan many entities
+  without an explicit limit. Prefer indexed Custom Entity queries, narrower
+  predicates, and cursor-based pagination.
+rule:
+  kind: call_expression
+  regex: '^(storage|kvs)\.query\(\)(\.[A-Za-z_$][A-Za-z0-9_$]*\([^)]*\))*\.getMany\('
+  not:
+    regex: '\.limit\s*\('
+ignores:
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+  - "**/*.spec.ts"
+  - "**/*.spec.tsx"

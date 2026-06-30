@@ -1,0 +1,14 @@
+id: no-deprecated-storage-import
+language: TypeScript
+severity: error
+message: >
+  Do not import 'storage' from '@forge/api' — it is deprecated.
+  Use '@forge/kvs' instead.
+note: >
+  The storage API from @forge/api is the legacy storage interface.
+  @forge/kvs provides the modern replacement with better typing and custom entities.
+  See https://developer.atlassian.com/platform/forge/runtime-reference/storage-api/
+rule:
+  any:
+    - pattern: "import { $$$A, storage, $$$B } from '@forge/api'"
+    - pattern: 'import { $$$A, storage, $$$B } from "@forge/api"'

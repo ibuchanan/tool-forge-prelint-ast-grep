@@ -1,0 +1,16 @@
+id: no-jira-search-without-fields
+language: TypeScript
+severity: warning
+message: >
+  CST-07: Jira search requests should request explicit fields.
+note: >
+  Search responses can be large. Add fields=... or a fields request property so
+  the function or frontend fetches only the data it needs.
+rule:
+  kind: call_expression
+  regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?requestJira\s*\([\s\S]*(/rest/api/[23]/search|/rest/api/[23]/search/jql)'
+  not:
+    regex: '(fields=|fields\s*:|fields%3D)'
+ignores:
+  - "**/*.test.ts"
+  - "**/*.spec.ts"

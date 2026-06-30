@@ -1,0 +1,19 @@
+# forge-lint: atlassian tier
+# Includes all strict rules plus Atlassian-internal conventions.
+# For Atlassian-built Forge apps only.
+# NOTE: No atlassian-specific rules yet — rules will be added as conventions are identified.
+ruleDirs:
+  - rules/recommended/imports
+  - rules/recommended/architecture
+  - rules/recommended/frontend-ui
+  - rules/recommended/security
+  - rules/recommended/manifest
+  - rules/strict/architecture
+  - rules/strict/api-usage
+  - rules/strict/imports
+  - rules/strict/security
+  - rules/strict/cost
+  - rules/strict/performance
+  - rules/strict/triggers
+  - rules/strict/package-json
+  # - rules/atlassian/...  (future)

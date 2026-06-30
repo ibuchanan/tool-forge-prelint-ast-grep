@@ -1,0 +1,13 @@
+id: no-forge-ui-import
+language: TypeScript
+severity: error
+message: >
+  Do not import from '@forge/ui' — this package is deprecated.
+  Use '@forge/react' instead.
+note: >
+  @forge/ui was the original UI Kit package. It has been replaced by @forge/react
+  (UI Kit 2). See https://developer.atlassian.com/platform/forge/ui-kit-2/compare/
+rule:
+  any:
+    - pattern: "import $$$IMPORTS from '@forge/ui'"
+    - pattern: 'import $$$IMPORTS from "@forge/ui"'

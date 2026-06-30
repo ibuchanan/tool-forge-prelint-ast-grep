@@ -1,0 +1,16 @@
+id: require-forge-reconciler-render
+language: Tsx
+severity: error
+message: >
+  Frontend entrypoints must call ForgeReconciler.render() to register the UI Kit app.
+note: >
+  This rule checks the conventional Forge UI Kit entrypoint at src/frontend/index.tsx.
+  The existing require-strict-mode rule validates the render argument once the call exists.
+rule:
+  kind: program
+  not:
+    has:
+      stopBy: end
+      pattern: ForgeReconciler.render($$$)
+files:
+  - "**/frontend/index.tsx"

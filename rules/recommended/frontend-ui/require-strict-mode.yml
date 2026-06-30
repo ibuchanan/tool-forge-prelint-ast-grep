@@ -1,0 +1,18 @@
+id: require-strict-mode
+language: Tsx
+severity: warning
+message: >
+  ForgeReconciler.render() should wrap the root component in <React.StrictMode>.
+  Found ForgeReconciler.render() call without <React.StrictMode> as the top-level element.
+note: >
+  Wrapping with React.StrictMode enables additional development-time warnings and
+  is the recommended pattern for Forge UI Kit apps.
+  See https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+rule:
+  pattern: ForgeReconciler.render($ARG)
+  not:
+    has:
+      stopBy: end
+      pattern: <React.StrictMode>$$$</React.StrictMode>
+files:
+  - "**/frontend/**"

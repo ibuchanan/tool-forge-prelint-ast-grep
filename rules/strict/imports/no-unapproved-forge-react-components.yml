@@ -1,0 +1,21 @@
+id: no-unapproved-forge-react-components
+language: TypeScript
+severity: error
+message: >
+  Import from '@forge/react' is not in the approved UI Kit export list.
+  Only use components documented at https://developer.atlassian.com/platform/forge/ui-kit/components/
+note: >
+  This rule enforces use of only known-good UI Kit components. If a new component
+  has been released that is not in this list, update the rule or disable it for
+  that import.
+rule:
+  kind: import_specifier
+  inside:
+    stopBy: end
+    kind: import_statement
+    has:
+      regex: "@forge/react"
+  not:
+    regex: '^(type\s+)?(Box|Inline|Stack|Grid|Flex|Text|Heading|Em|Strong|Strike|Code|CodeBlock|Form|FormSection|FormHeader|FormFooter|Label|Textfield|TextArea|Checkbox|CheckboxGroup|Radio|RadioGroup|Select|Toggle|Range|DatePicker|TimePicker|Calendar|UserPicker|Button|LinkButton|LoadingButton|ButtonGroup|DynamicTable|List|ListItem|Badge|Lozenge|Tag|TagGroup|BarChart|LineChart|PieChart|SingleValueChart|HorizontalBarChart|HorizontalStackBarChart|StackBarChart|DonutChart|Modal|ModalHeader|ModalTitle|ModalBody|ModalFooter|ModalTransition|SectionMessage|SectionMessageAction|ErrorMessage|HelperMessage|ValidMessage|EmptyState|Spinner|ProgressBar|ProgressTracker|Icon|Image|Link|Tooltip|Popup|User|UserGroup|Frame|InlineEdit|Comment|AdfRenderer|ForgeReconciler|RequiredAsterisk|FileCard|FilePicker|xcss|useProductContext|useConfig|useTheme|usePermissions|useContentProperty|useSpaceProperty|useIssueProperty|useTranslation|useForm|useObjectStore|I18nProvider|replaceUnsupportedDocumentNodes|Global)(\s+as\s+[A-Za-z_$][A-Za-z0-9_$]*)?$'
+files:
+  - "**/frontend/**"

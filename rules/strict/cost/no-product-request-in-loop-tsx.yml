@@ -1,0 +1,31 @@
+id: no-product-request-in-loop-tsx
+language: Tsx
+severity: warning
+message: >
+  CST-03: Avoid Atlassian product API requests inside loops or array callbacks.
+note: >
+  Product requests in repeated callbacks often create N+1 API patterns. Prefer
+  bulk endpoints, search fields, batching, or bounded pagination.
+rule:
+  kind: call_expression
+  regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?(requestJira|requestConfluence|requestGraph|requestBitbucket)\s*\('
+  inside:
+    stopBy: end
+    any:
+      - kind: for_statement
+      - kind: for_in_statement
+      - kind: while_statement
+      - kind: do_statement
+      - kind: arrow_function
+        inside:
+          stopBy: end
+          kind: call_expression
+          regex: '\.(map|forEach|flatMap|reduce|some|every|filter)\s*\('
+      - kind: function_expression
+        inside:
+          stopBy: end
+          kind: call_expression
+          regex: '\.(map|forEach|flatMap|reduce|some|every|filter)\s*\('
+ignores:
+  - "**/*.test.tsx"
+  - "**/*.spec.tsx"

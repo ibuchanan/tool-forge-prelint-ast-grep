@@ -1,0 +1,40 @@
+id: require-route-template
+language: TypeScript
+severity: error
+message: >
+  API request paths must use the route`` template tag or assumeTrustedRoute().
+  Passing raw strings directly is unsafe and bypasses Forge's URL validation.
+note: >
+  The route`` template tag ensures the URL is validated against the product's
+  allowed endpoints. assumeTrustedRoute() can be used for dynamic paths that
+  have been validated by other means.
+  Use: api.asUser().requestJira(route`/rest/api/3/issue/${issueId}`)
+  See https://developer.atlassian.com/platform/forge/runtime-reference/product-fetch-api/
+rule:
+  any:
+    - pattern: requestJira($STR, $$$)
+    - pattern: requestConfluence($STR, $$$)
+    - pattern: requestGraph($STR, $$$)
+    - pattern: requestBitbucket($STR, $$$)
+  not:
+    any:
+      - pattern: requestJira(route`$$$`, $$$)
+      - pattern: requestJira(assumeTrustedRoute($$$), $$$)
+      - pattern: requestJira(route`$$$`)
+      - pattern: requestJira(assumeTrustedRoute($$$))
+      - pattern: requestConfluence(route`$$$`, $$$)
+      - pattern: requestConfluence(assumeTrustedRoute($$$), $$$)
+      - pattern: requestConfluence(route`$$$`)
+      - pattern: requestConfluence(assumeTrustedRoute($$$))
+      - pattern: requestGraph(route`$$$`, $$$)
+      - pattern: requestGraph(assumeTrustedRoute($$$), $$$)
+      - pattern: requestGraph(route`$$$`)
+      - pattern: requestGraph(assumeTrustedRoute($$$))
+      - pattern: requestBitbucket(route`$$$`, $$$)
+      - pattern: requestBitbucket(assumeTrustedRoute($$$), $$$)
+      - pattern: requestBitbucket(route`$$$`)
+      - pattern: requestBitbucket(assumeTrustedRoute($$$))
+ignores:
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"

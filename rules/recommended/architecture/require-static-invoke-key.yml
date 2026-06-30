@@ -1,0 +1,21 @@
+id: require-static-invoke-key
+language: TypeScript
+severity: error
+message: >
+  invoke() keys must be string literals.
+  Static keys can be validated against manifest.yml and resolver definitions.
+note: >
+  Dynamic invoke keys hide the frontend/backend contract from automated checks.
+  Use invoke('function-key', payload) with a literal key.
+rule:
+  any:
+    - pattern: invoke($KEY)
+    - pattern: invoke($KEY, $$$ARGS)
+  not:
+    any:
+      - pattern: "invoke('$$$KEY')"
+      - pattern: 'invoke("$$$KEY")'
+      - pattern: "invoke('$$$KEY', $$$ARGS)"
+      - pattern: 'invoke("$$$KEY", $$$ARGS)'
+files:
+  - "**/frontend/**"

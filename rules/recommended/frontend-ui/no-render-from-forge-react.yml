@@ -1,0 +1,22 @@
+id: no-render-from-forge-react
+language: Tsx
+severity: error
+message: >
+  Do not import 'render' from '@forge/react'.
+  Use 'ForgeReconciler.render()' instead — import 'ForgeReconciler' from '@forge/react'.
+note: >
+  The top-level 'render' export from @forge/react is the legacy UI Kit 1 API.
+  UI Kit 2 uses ForgeReconciler.render() as the entry point.
+  See https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+rule:
+  any:
+    - pattern: "import { $$$A, render, $$$B } from '@forge/react'"
+    - pattern: "import { render } from '@forge/react'"
+    - pattern: "import { render, $$$B } from '@forge/react'"
+    - pattern: "import { $$$A, render } from '@forge/react'"
+    - pattern: 'import { $$$A, render, $$$B } from "@forge/react"'
+    - pattern: 'import { render } from "@forge/react"'
+    - pattern: 'import { render, $$$B } from "@forge/react"'
+    - pattern: 'import { $$$A, render } from "@forge/react"'
+files:
+  - "**/frontend/**"

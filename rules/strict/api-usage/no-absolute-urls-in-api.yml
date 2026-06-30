@@ -1,0 +1,18 @@
+id: no-absolute-urls-in-api
+language: TypeScript
+severity: error
+message: >
+  Do not pass absolute URLs to Forge API request functions.
+  Use relative paths with the route`` template tag instead.
+note: >
+  Forge API request functions (requestJira, requestConfluence, etc.) expect
+  relative paths. Absolute URLs bypass the route validation and egress controls.
+  Use: api.asUser().requestJira(route`/rest/api/3/issue/${issueId}`)
+  See https://developer.atlassian.com/platform/forge/runtime-reference/product-fetch-api/
+rule:
+  kind: call_expression
+  regex: '^((api\.(asUser|asApp)\(\)\.)?(requestJira|requestConfluence|requestGraph|requestBitbucket)|assumeTrustedRoute)\s*\(\s*["''](https?:)?//'
+ignores:
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"

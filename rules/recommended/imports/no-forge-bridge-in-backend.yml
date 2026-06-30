@@ -1,0 +1,21 @@
+id: no-forge-bridge-in-backend
+language: TypeScript
+severity: error
+message: >
+  Do not import '@forge/bridge' in Forge backend runtime code.
+  Bridge APIs are browser/frontend-only; backend functions should use '@forge/api'
+  or receive data through resolver arguments instead.
+note: >
+  Importing @forge/bridge from resolvers, external clients, lifecycle handlers,
+  or src/index.ts can bundle browser-only APIs into Forge backend code.
+rule:
+  any:
+    - pattern: "import $$$IMPORTS from '@forge/bridge'"
+    - pattern: "import '@forge/bridge'"
+    - pattern: 'import $$$IMPORTS from "@forge/bridge"'
+    - pattern: 'import "@forge/bridge"'
+files:
+  - "**/resolvers/**"
+  - "**/external/**"
+  - "**/import-lifecycle/**"
+  - "**/src/index.ts"

@@ -1,0 +1,15 @@
+id: no-resolver-import-in-frontend-tsx
+language: Tsx
+severity: error
+message: >
+  Frontend files must not import from 'src/resolvers/'.
+  Resolvers are backend-only. Use '@forge/bridge' invoke() to call them.
+note: >
+  Importing resolver modules in the frontend would bundle backend code into the
+  browser bundle, and resolver APIs depend on the Forge backend runtime.
+  See https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+rule:
+  kind: import_statement
+  regex: '(from\s+["''][^"'']*resolvers(?:/|["''])|import\s+["''][^"'']*resolvers(?:/|["'']))'
+files:
+  - "**/frontend/**"

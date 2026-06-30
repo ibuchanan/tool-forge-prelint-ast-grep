@@ -1,0 +1,19 @@
+id: no-forge-kvs-in-frontend
+language: TypeScript
+severity: error
+message: >
+  Do not import '@forge/kvs' in frontend files (src/frontend/**).
+  Storage APIs are backend-only and not available in the browser runtime.
+  Use '@forge/bridge' to call a backend resolver that accesses storage.
+note: >
+  @forge/kvs is a backend-only package. Frontend code must use the resolver
+  pattern to interact with storage.
+  See https://developer.atlassian.com/platform/forge/runtime-reference/storage-api-custom-entities/
+rule:
+  any:
+    - pattern: "import $$$IMPORTS from '@forge/kvs'"
+    - pattern: "import '@forge/kvs'"
+    - pattern: 'import $$$IMPORTS from "@forge/kvs"'
+    - pattern: 'import "@forge/kvs"'
+files:
+  - "**/frontend/**"

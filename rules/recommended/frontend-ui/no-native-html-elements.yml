@@ -1,0 +1,41 @@
+id: no-native-html-elements
+language: Tsx
+severity: error
+message: >
+  Do not use native HTML elements in Forge UI Kit frontend code.
+  Use the equivalent UI Kit component from '@forge/react' instead.
+note: >
+  Forge UI Kit renders components via its own reconciler — native HTML elements
+  are not supported and will cause rendering errors.
+  See https://developer.atlassian.com/platform/forge/ui-kit/components/
+utils:
+  isNativeHtml:
+    any:
+      - pattern: <div $$$>$$$</div>
+      - pattern: <div />
+      - pattern: <span $$$>$$$</span>
+      - pattern: <span />
+      - pattern: <p $$$>$$$</p>
+      - pattern: <p />
+      - pattern: <a $$$>$$$</a>
+      - pattern: <a />
+      - pattern: <button $$$>$$$</button>
+      - pattern: <button />
+      - pattern: <input $$$>$$$</input>
+      - pattern: <input />
+      - pattern: <form $$$>$$$</form>
+      - pattern: <form />
+      - pattern: <strong $$$>$$$</strong>
+      - pattern: <strong />
+      - pattern: <em $$$>$$$</em>
+      - pattern: <em />
+      - pattern: <table $$$>$$$</table>
+      - pattern: <table />
+      - pattern: <tr $$$>$$$</tr>
+      - pattern: <tr />
+      - pattern: <td $$$>$$$</td>
+      - pattern: <td />
+rule:
+  matches: isNativeHtml
+files:
+  - "**/frontend/**"

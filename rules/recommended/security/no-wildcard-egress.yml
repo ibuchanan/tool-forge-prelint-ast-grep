@@ -1,0 +1,20 @@
+id: no-wildcard-egress
+language: Yaml
+severity: error
+message: >
+  SEC-02: Do not use wildcard external egress in Forge manifests.
+  Declare the specific backend or client domains the app needs.
+note: >
+  Wildcard egress makes data movement harder to audit and can block security
+  review. Prefer a narrow permissions.external.fetch allowlist.
+rule:
+  all:
+    - kind: block_sequence_item
+      regex: '^\s*-\s*["'']?\*["'']?\s*$'
+    - inside:
+        stopBy: end
+        kind: block_mapping_pair
+        regex: 'external\s*:'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

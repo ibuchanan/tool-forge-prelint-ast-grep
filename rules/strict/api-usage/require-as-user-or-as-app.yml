@@ -1,0 +1,35 @@
+id: require-as-user-or-as-app
+language: TypeScript
+severity: error
+message: >
+  API requests must be authorized via api.asUser() or api.asApp().
+  Do not call requestJira() or requestConfluence() directly on 'api'.
+note: >
+  Forge requires explicit authorization context for all product API calls.
+  api.asUser() makes the request on behalf of the current user.
+  api.asApp() makes the request as the app itself.
+  See https://developer.atlassian.com/platform/forge/apis-reference/product-rest-api-reference/
+rule:
+  any:
+    - pattern: api.requestJira($$$)
+    - pattern: api.requestConfluence($$$)
+    - pattern: api.requestGraph($$$)
+    - pattern: api.requestBitbucket($$$)
+    - pattern: requestJira($$$)
+    - pattern: requestConfluence($$$)
+    - pattern: requestGraph($$$)
+    - pattern: requestBitbucket($$$)
+  not:
+    any:
+      - pattern: api.asUser().requestJira($$$)
+      - pattern: api.asApp().requestJira($$$)
+      - pattern: api.asUser().requestConfluence($$$)
+      - pattern: api.asApp().requestConfluence($$$)
+      - pattern: api.asUser().requestGraph($$$)
+      - pattern: api.asApp().requestGraph($$$)
+      - pattern: api.asUser().requestBitbucket($$$)
+      - pattern: api.asApp().requestBitbucket($$$)
+ignores:
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"

@@ -1,0 +1,19 @@
+id: review-max-function-timeout
+language: Yaml
+severity: info
+message: >
+  CST-11: Review long Forge function timeout against realistic worst-case runtime.
+note: >
+  Tighter timeouts make crash and out-of-memory costs more predictable. Keep long
+  timeoutSeconds values only when the function genuinely needs them.
+rule:
+  all:
+    - kind: block_mapping_pair
+      regex: '^\s*timeoutSeconds\s*:\s*(25|[3-9][0-9]|[1-9][0-9]{2,})\b'
+    - inside:
+        stopBy: end
+        kind: block_mapping_pair
+        regex: 'functions\s*:'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

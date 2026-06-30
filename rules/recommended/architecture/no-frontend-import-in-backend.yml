@@ -1,0 +1,17 @@
+id: no-frontend-import-in-backend
+language: TypeScript
+severity: error
+message: >
+  Forge backend runtime code must not import frontend modules.
+  Frontend code may depend on browser-only packages such as '@forge/bridge'.
+note: >
+  Keep resolver and backend runtime code separate from UI Kit frontend modules.
+  Share pure utilities through src/util/ rather than importing from src/frontend/.
+rule:
+  kind: import_statement
+  regex: '(from\s+["''][^"'']*frontend(?:/|["''])|import\s+["''][^"'']*frontend(?:/|["'']))'
+files:
+  - "**/resolvers/**"
+  - "**/external/**"
+  - "**/import-lifecycle/**"
+  - "**/src/index.ts"

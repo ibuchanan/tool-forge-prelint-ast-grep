@@ -1,0 +1,16 @@
+id: no-use-action-invoke
+language: Tsx
+severity: warning
+message: >
+  CST-06: Avoid invoking Forge resolvers from useAction().
+note: >
+  useAction() runs during render-oriented UI Kit flows. Fetch once in an effect
+  and store the result in component state when the data is not tied to the action.
+rule:
+  kind: call_expression
+  regex: '^useAction\s*\('
+  has:
+    stopBy: end
+    pattern: invoke($$$)
+files:
+  - "**/frontend/**"

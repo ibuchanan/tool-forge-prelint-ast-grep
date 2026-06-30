@@ -1,0 +1,16 @@
+id: no-unpaginated-product-search-tsx
+language: Tsx
+severity: warning
+message: >
+  CST-02: Product search/list requests should include explicit pagination.
+note: >
+  Add maxResults, limit, cursor, startAt, or equivalent pagination so the app
+  does not fetch more data than it needs.
+rule:
+  kind: call_expression
+  regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?(requestJira|requestConfluence)\s*\([^)]*(/search|/search\?|/rest/api/[^)]*/search|/wiki/rest/api/[^)]*/search)'
+  not:
+    regex: '(maxResults|limit|cursor|startAt|nextPage)'
+ignores:
+  - "**/*.test.tsx"
+  - "**/*.spec.tsx"

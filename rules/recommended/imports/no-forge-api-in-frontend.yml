@@ -1,0 +1,19 @@
+id: no-forge-api-in-frontend
+language: TypeScript
+severity: error
+message: >
+  Do not import '@forge/api' in frontend files (src/frontend/**).
+  Frontend code runs in the browser via @forge/bridge, not the Forge backend runtime.
+  Use '@forge/bridge' to communicate with the backend instead.
+note: >
+  @forge/api is a backend-only package. Importing it in frontend files will cause
+  runtime errors because the Forge runtime APIs are not available in the browser.
+  See https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+rule:
+  any:
+    - pattern: "import $$$IMPORTS from '@forge/api'"
+    - pattern: "import '@forge/api'"
+    - pattern: 'import $$$IMPORTS from "@forge/api"'
+    - pattern: 'import "@forge/api"'
+files:
+  - "**/frontend/**"

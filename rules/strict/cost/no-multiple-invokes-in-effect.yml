@@ -1,0 +1,13 @@
+id: no-multiple-invokes-in-effect
+language: Tsx
+severity: warning
+message: >
+  CST-01: Multiple invoke() calls in one loading effect can often be batched.
+note: >
+  Batch related resolver calls into one resolver action when they are needed
+  for the same screen state.
+rule:
+  kind: call_expression
+  regex: '^useEffect\s*\([\s\S]*invoke\([\s\S]*invoke\('
+files:
+  - "**/frontend/**"
