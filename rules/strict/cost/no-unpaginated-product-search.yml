@@ -2,7 +2,7 @@ id: no-unpaginated-product-search
 language: TypeScript
 severity: warning
 message: >
-  CST-02: Product search/list requests should include explicit pagination.
+  Product search/list requests should include explicit pagination.
 note: >
   Add maxResults, limit, cursor, startAt, or equivalent pagination so the app
   does not fetch more data than it needs.

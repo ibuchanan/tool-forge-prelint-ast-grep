@@ -2,7 +2,7 @@ id: prefer-trigger-filter
 language: Yaml
 severity: info
 message: >
-  TRG-02: Product event triggers should use manifest-level filtering where possible.
+  Product event triggers should use manifest-level filtering where possible.
 note: >
   Manifest filters prevent irrelevant events from invoking the function at all.
   Add filter.expression or document why every matching event needs processing.

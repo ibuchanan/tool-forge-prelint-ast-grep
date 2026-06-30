@@ -2,7 +2,7 @@ id: no-wildcard-egress
 language: Yaml
 severity: error
 message: >
-  SEC-02: Do not use wildcard external egress in Forge manifests.
+  Do not use wildcard external egress in Forge manifests.
   Declare the specific backend or client domains the app needs.
 note: >
   Wildcard egress makes data movement harder to audit and can block security

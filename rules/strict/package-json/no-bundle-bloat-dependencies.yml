@@ -2,7 +2,7 @@ id: no-bundle-bloat-dependencies
 language: Json
 severity: warning
 message: >
-  CST-04: Avoid production dependencies that commonly add avoidable bundle/runtime weight.
+  Avoid production dependencies that commonly add avoidable bundle/runtime weight.
 note: >
   Prefer platform fetch over axios, native date APIs or smaller date libraries
   over moment, and per-function utilities over whole lodash.

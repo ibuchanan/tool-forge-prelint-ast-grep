@@ -2,7 +2,7 @@ id: no-verbose-hot-path-logging
 language: TypeScript
 severity: warning
 message: >
-  CST-12: Avoid console.log in Forge backend hot paths.
+  Avoid console.log in Forge backend hot paths.
 note: >
   Logging entire events, payloads, or resolver arguments can increase log volume
   and expose sensitive data. Use scoped, redacted debug logs instead.

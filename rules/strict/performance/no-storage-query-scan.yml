@@ -2,7 +2,7 @@ id: no-storage-query-scan
 language: TypeScript
 severity: warning
 message: >
-  PRF-06: Bound Forge storage queries before getMany().
+  Bound Forge storage queries before getMany().
 note: >
   storage.query().getMany() and kvs.query().getMany() can scan many entities
   without an explicit limit. Prefer indexed Custom Entity queries, narrower

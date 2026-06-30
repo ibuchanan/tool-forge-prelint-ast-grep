@@ -2,7 +2,7 @@ id: no-storage-operation-in-loop
 language: TypeScript
 severity: warning
 message: >
-  CST-05: Avoid Forge storage reads and writes inside loops or array callbacks.
+  Avoid Forge storage reads and writes inside loops or array callbacks.
 note: >
   KVS operations are billed by data volume, and writes are especially expensive.
   Batch operations, query Custom Entities, or reduce the data touched per run.

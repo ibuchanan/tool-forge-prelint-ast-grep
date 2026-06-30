@@ -2,7 +2,7 @@ id: no-jira-search-without-fields
 language: TypeScript
 severity: warning
 message: >
-  CST-07: Jira search requests should request explicit fields.
+  Jira search requests should request explicit fields.
 note: >
   Search responses can be large. Add fields=... or a fields request property so
   the function or frontend fetches only the data it needs.

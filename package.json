@@ -18,9 +18,9 @@
     "lint:fix": "echo 'ast-grep does not support auto-fix for these rules'",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "ast-grep test --test-dir rules",
-    "test:update": "ast-grep test --test-dir rules --update-all",
-    "test:interactive": "ast-grep test --test-dir rules --interactive",
+    "test": "ast-grep test --test-dir rule-tests",
+    "test:update": "ast-grep test --test-dir rule-tests --update-all",
+    "test:interactive": "ast-grep test --test-dir rule-tests --interactive",
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'"
   },
   "devDependencies": {

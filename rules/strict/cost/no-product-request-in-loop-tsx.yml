@@ -2,7 +2,7 @@ id: no-product-request-in-loop-tsx
 language: Tsx
 severity: warning
 message: >
-  CST-03: Avoid Atlassian product API requests inside loops or array callbacks.
+  Avoid Atlassian product API requests inside loops or array callbacks.
 note: >
   Product requests in repeated callbacks often create N+1 API patterns. Prefer
   bulk endpoints, search fields, batching, or bounded pagination.

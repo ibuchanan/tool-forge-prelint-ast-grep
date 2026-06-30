@@ -2,7 +2,7 @@ id: no-invoke-without-effect-deps
 language: Tsx
 severity: warning
 message: >
-  CST-09: invoke() in useEffect should have an explicit dependency array.
+  invoke() in useEffect should have an explicit dependency array.
 note: >
   Effects without a dependency array run after every render and can create
   avoidable resolver invocations. Add stable dependencies or an empty array.

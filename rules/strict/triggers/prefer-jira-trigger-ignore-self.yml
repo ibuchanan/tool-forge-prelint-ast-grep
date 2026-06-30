@@ -2,7 +2,7 @@ id: prefer-jira-trigger-ignore-self
 language: Yaml
 severity: info
 message: >
-  TRG-03: Jira product triggers should review filter.ignoreSelf.
+  Jira product triggers should review filter.ignoreSelf.
 note: >
   If the app writes to the same Jira entities it listens to, ignoreSelf avoids
   self-generated invocations and feedback loops.

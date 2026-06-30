@@ -2,7 +2,7 @@ id: review-max-function-timeout
 language: Yaml
 severity: info
 message: >
-  CST-11: Review long Forge function timeout against realistic worst-case runtime.
+  Review long Forge function timeout against realistic worst-case runtime.
 note: >
   Tighter timeouts make crash and out-of-memory costs more predictable. Keep long
   timeoutSeconds values only when the function genuinely needs them.

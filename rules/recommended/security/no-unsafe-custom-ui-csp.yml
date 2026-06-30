@@ -2,7 +2,7 @@ id: no-unsafe-custom-ui-csp
 language: Yaml
 severity: warning
 message: >
-  SEC-05: Custom UI CSP must not allow unsafe inline scripts, eval, or wildcard content sources.
+  Custom UI CSP must not allow unsafe inline scripts, eval, or wildcard content sources.
 note: >
   Inline scripts, dynamic evaluation, and wildcard content sources weaken the
   browser sandbox. Use explicit static sources in permissions.content.

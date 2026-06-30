@@ -52,19 +52,19 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 ### recommended/security
 
-- `no-wildcard-egress` — `SEC-02`: no wildcard external egress in `manifest.yml`
-- `no-unsafe-custom-ui-csp` — `SEC-05`: no `unsafe-inline` or `unsafe-eval` Custom UI CSP entries
+- `no-wildcard-egress` — no wildcard external egress in `manifest.yml`
+- `no-unsafe-custom-ui-csp` — no `unsafe-inline` or `unsafe-eval` Custom UI CSP entries
 
 ### recommended/manifest
 
-- `no-classic-product-scopes` — `SEC-09`: prefer granular Jira/Confluence scopes where possible
-- `review-forge-remotes` — `ARC-10`: flag `remotes` for explicit eligibility, residency, and auth review
+- `no-classic-product-scopes` — prefer granular Jira/Confluence scopes where possible
+- `review-forge-remotes` — flag `remotes` for explicit eligibility, residency, and auth review
 
 ### strict/architecture
 
 - `no-native-fetch-in-resolvers` — No native `fetch()` calls in `src/resolvers/`, `src/external/`, `src/import-lifecycle/`
 - `require-static-queue-key` — `new Queue({ key })` must use a string literal key when `Queue` is imported from `@forge/events`
-- `no-monolithic-resolver` — `ARC-02`: flag resolver files with five or more `resolver.define()` actions
+- `no-monolithic-resolver` — flag resolver files with five or more `resolver.define()` actions
 
 ### strict/api-usage
 
@@ -78,34 +78,34 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 ### strict/security
 
-- `no-hardcoded-secret-literals` — `SEC-03`: detect common literal credential and private-key formats in source
+- `no-hardcoded-secret-literals` — detect common literal credential and private-key formats in source
 
 ### strict/cost
 
-- `no-unpaginated-product-search` — `CST-02`: search/list product API calls should include pagination
-- `no-product-request-in-loop` — `CST-03`: avoid N+1 Atlassian product API requests in loops or array callbacks
-- `no-storage-operation-in-loop` — `CST-05`: avoid Forge storage reads/writes in loops or array callbacks
-- `no-use-action-invoke` — `CST-06`: avoid resolver invocations from `useAction()`
-- `no-jira-search-without-fields` — `CST-07`: Jira search requests should select explicit fields
-- `no-invoke-without-effect-deps` — `CST-09`: `invoke()` inside `useEffect` should have stable dependencies
-- `no-multiple-invokes-in-effect` — `CST-01`: multiple load-time invokes can often be batched
-- `review-high-function-memory` — `CST-10`: review high `memoryMiB` values against observed usage
-- `review-max-function-timeout` — `CST-11`: review long `timeoutSeconds` values against realistic runtime
-- `no-verbose-hot-path-logging` — `CST-12`: avoid `console.log` in backend hot paths
+- `no-unpaginated-product-search` — search/list product API calls should include pagination
+- `no-product-request-in-loop` — avoid N+1 Atlassian product API requests in loops or array callbacks
+- `no-storage-operation-in-loop` — avoid Forge storage reads/writes in loops or array callbacks
+- `no-use-action-invoke` — avoid resolver invocations from `useAction()`
+- `no-jira-search-without-fields` — Jira search requests should select explicit fields
+- `no-invoke-without-effect-deps` — `invoke()` inside `useEffect` should have stable dependencies
+- `no-multiple-invokes-in-effect` — multiple load-time invokes can often be batched
+- `review-high-function-memory` — review high `memoryMiB` values against observed usage
+- `review-max-function-timeout` — review long `timeoutSeconds` values against realistic runtime
+- `no-verbose-hot-path-logging` — avoid `console.log` in backend hot paths
 
 ### strict/performance
 
-- `no-storage-query-scan` — `PRF-06`: bound Forge storage queries before `getMany()`
+- `no-storage-query-scan` — bound Forge storage queries before `getMany()`
 
 ### strict/triggers
 
-- `no-excessive-scheduled-trigger` — `TRG-01`: avoid five-minute/hourly schedules for slow-changing data
-- `prefer-trigger-filter` — `TRG-02`: product event triggers should use manifest-level filters where possible
-- `prefer-jira-trigger-ignore-self` — `TRG-03`: Jira triggers should review `filter.ignoreSelf`
+- `no-excessive-scheduled-trigger` — avoid five-minute/hourly schedules for slow-changing data
+- `prefer-trigger-filter` — product event triggers should use manifest-level filters where possible
+- `prefer-jira-trigger-ignore-self` — Jira triggers should review `filter.ignoreSelf`
 
 ### strict/package-json
 
-- `no-bundle-bloat-dependencies` — `CST-04`: flag common avoidable production dependencies
+- `no-bundle-bloat-dependencies` — flag common avoidable production dependencies
 
 ## What stays as Vitest tests
 

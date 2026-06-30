@@ -2,7 +2,7 @@ id: no-excessive-scheduled-trigger
 language: Yaml
 severity: warning
 message: >
-  TRG-01: Avoid five-minute or hourly scheduled triggers for slow-changing data.
+  Avoid five-minute or hourly scheduled triggers for slow-changing data.
 note: >
   Frequent schedules increase invocations and product API calls. Prefer product
   triggers, webhooks, or a slower interval when the data does not change often.

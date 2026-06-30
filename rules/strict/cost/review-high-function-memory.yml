@@ -2,7 +2,7 @@ id: review-high-function-memory
 language: Yaml
 severity: info
 message: >
-  CST-10: Review high Forge function memory allocation against observed usage.
+  Review high Forge function memory allocation against observed usage.
 note: >
   memoryMiB directly affects GB-second consumption. Keep higher allocations only
   when profiling shows they reduce duration enough or are required for workload size.

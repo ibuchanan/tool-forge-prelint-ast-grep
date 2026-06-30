@@ -2,7 +2,7 @@ id: no-monolithic-resolver
 language: TypeScript
 severity: warning
 message: >
-  ARC-02: A resolver file with five or more resolver.define() actions is likely too broad.
+  A resolver file with five or more resolver.define() actions is likely too broad.
 note: >
   Split unrelated resolver actions by domain or feature so validation, API use,
   and error handling remain easy to review.
