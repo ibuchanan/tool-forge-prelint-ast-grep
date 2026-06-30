@@ -3,21 +3,20 @@
 # Enforces sample-app quality standards (strictest tier).
 # NOTE: No ecosol-specific rules yet — rules will be added as sample-app conventions are identified.
 ruleDirs:
-  - rules/recommended/imports
   - rules/recommended/architecture
-  - rules/recommended/frontend-ui
-  - rules/strict/frontend-ui
-  - rules/recommended/security
-  - rules/recommended/manifest
-  - rules/recommended/devtools
-  - rules/strict/architecture
-  - rules/strict/api-usage
-  - rules/strict/imports
-  - rules/strict/security
   - rules/recommended/cost
+  - rules/recommended/devtools
+  - rules/recommended/frontend-ui
+  - rules/recommended/manifest
+  - rules/recommended/security
   - rules/recommended/triggers
-  - rules/strict/performance
-  - rules/strict/triggers
+  - rules/strict/api-usage
+  - rules/strict/architecture
+  - rules/strict/frontend-ui
+  - rules/strict/imports
   - rules/strict/package-json
+  - rules/strict/performance
+  - rules/strict/security
+  - rules/strict/triggers
   # - rules/atlassian/...  (future)
   # - rules/ecosol/...     (future)

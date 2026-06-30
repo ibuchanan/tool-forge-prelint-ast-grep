@@ -2,11 +2,10 @@
 # Safe for any Forge developer. Catches deprecated package usage,
 # frontend/backend boundary violations, and UI Kit correctness.
 ruleDirs:
-  - rules/recommended/imports
   - rules/recommended/architecture
-  - rules/recommended/frontend-ui
-  - rules/recommended/security
-  - rules/recommended/manifest
-  - rules/recommended/devtools
   - rules/recommended/cost
+  - rules/recommended/devtools
+  - rules/recommended/frontend-ui
+  - rules/recommended/manifest
+  - rules/recommended/security
   - rules/recommended/triggers

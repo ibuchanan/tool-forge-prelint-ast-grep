@@ -27,13 +27,7 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 ## Rule categories
 
-### recommended/imports
-
-- `no-forge-ui-import` — No imports from deprecated `@forge/ui` package
-- `no-deprecated-storage-import` — No `storage` imported from `@forge/api` (use `@forge/kvs`)
-- `no-forge-api-in-frontend` — No `@forge/api` imports in `src/frontend/**`
-- `no-forge-kvs-in-frontend` — No `@forge/kvs` imports in `src/frontend/**`
-- `no-forge-bridge-in-backend` — No `@forge/bridge` imports in Forge backend runtime files
+### strict/imports (all import rules)
 
 ### recommended/architecture
 
@@ -80,8 +74,11 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 - `require-route-template` — API requests must use `route\`...\``template tag or`assumeTrustedRoute()`
 - `no-absolute-urls-in-api` — No absolute URLs (`http://`, `https://`, or `//`) passed to Forge product request helpers or `assumeTrustedRoute`
 
-### strict/imports
-
+- `no-forge-ui-import` — No imports from deprecated `@forge/ui` package
+- `no-deprecated-storage-import` — No `storage` imported from `@forge/api` (use `@forge/kvs`)
+- `no-forge-api-in-frontend` — No `@forge/api` imports in `src/frontend/**`
+- `no-forge-kvs-in-frontend` — No `@forge/kvs` imports in `src/frontend/**`
+- `no-forge-bridge-in-backend` — No `@forge/bridge` imports in Forge backend runtime files
 - `no-unapproved-forge-react-components` — Only approved UI Kit components may be imported from `@forge/react`
 
 ### strict/security
