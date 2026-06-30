@@ -1,0 +1,17 @@
+# forge-lint: development config
+# Used by `ast-grep test` (which defaults to sgconfig.yml).
+# Includes all current rule directories across all tiers.
+ruleDirs:
+  - rules/recommended/imports
+  - rules/recommended/architecture
+  - rules/recommended/frontend-ui
+  - rules/recommended/security
+  - rules/recommended/manifest
+  - rules/strict/architecture
+  - rules/strict/api-usage
+  - rules/strict/imports
+  - rules/strict/security
+  - rules/strict/cost
+  - rules/strict/performance
+  - rules/strict/triggers
+  - rules/strict/package-json

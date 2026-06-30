@@ -5,13 +5,15 @@
   "description": "ast-grep lint rules for Atlassian Forge apps",
   "license": "Apache-2.0",
   "scripts": {
-    "check": "npm run lint",
+    "check": "npm run test && npm run lint && npm run format:check",
     "lint": "npm run lint:check",
     "lint:check": "ast-grep scan --config sgconfig.recommended.yml && ast-grep scan --config sgconfig.strict.yml",
     "lint:fix": "echo 'ast-grep does not support auto-fix for these rules'",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "test": "echo 'No tests yet — rules are validated by ast-grep scan'",
+    "test": "ast-grep test --test-dir rules",
+    "test:update": "ast-grep test --test-dir rules --update-all",
+    "test:interactive": "ast-grep test --test-dir rules --interactive",
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'"
   },
   "devDependencies": {
