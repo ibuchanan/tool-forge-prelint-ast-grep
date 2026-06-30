@@ -1,12 +1,11 @@
-# Forge Prelint
+# Forge Prelint — ast-grep rules
 
-ast-grep lint rules for Atlassian Forge apps.
+AST-level lint rules for [Atlassian Forge](https://developer.atlassian.com/platform/forge/) apps, packaged as [ast-grep](https://ast-grep.github.io/) configs. Point one of the tier configs at your Forge app to catch deprecated packages, frontend/backend boundary violations, and common cost and performance mistakes — no build step required.
 
 ## Tiers
 
 Rules are organized into composing tiers. Each tier includes all rules from tiers below it.
-Some frontend checks have `-tsx` companion rule files so the same policy applies
-to both `.ts` and `.tsx` sources.
+Some frontend checks have a `-tsx` companion rule file so the same policy applies to both `.ts` and `.tsx` sources.
 
 | Tier          | Audience                                 | Config                     |
 | ------------- | ---------------------------------------- | -------------------------- |
@@ -15,75 +14,47 @@ to both `.ts` and `.tsx` sources.
 | `atlassian`   | Atlassian-internal Forge apps            | `sgconfig.atlassian.yml`   |
 | `ecosol`      | Atlassian sample/demo apps (ecosol team) | `sgconfig.ecosol.yml`      |
 
-## Usage
+## Quickstart
 
-Run a specific tier against your Forge app:
+Install [ast-grep](https://ast-grep.github.io/guide/quick-start.html) (`npm i -g @ast-grep/cli` or `brew install ast-grep`), then run from your Forge app root:
 
 ```sh
-# From your Forge app root
-ast-grep scan --config path/to/forge-lint/sgconfig.recommended.yml
-ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
+ast-grep scan --config path/to/forge-prelint/sgconfig.recommended.yml
 ```
 
-## Rule categories
+Zero findings on a clean project. Rule IDs with file locations appear for anything that needs attention.
 
-### strict/imports (all import rules)
+## Prerequisites
+
+- [ast-grep](https://ast-grep.github.io/) ≥ 0.38
+
+## Development
+
+```sh
+npm install          # install dev dependencies
+npm test             # run all rule tests (55 rules)
+npm run check        # tests + self-lint + format check
+```
+
+To regenerate snapshots after changing a rule:
+
+```sh
+npm run test:update
+```
+
+To step through mismatches interactively:
+
+```sh
+npm run test:interactive
+```
+
+## Rule reference
 
 ### recommended/architecture
 
 - `require-static-invoke-key` — Frontend `invoke()` calls must use string literal keys
 - `require-static-queue-key` — `new Queue({ key })` must use a string literal key when `Queue` is imported from `@forge/events`
 - `no-monolithic-resolver` — flag resolver files with five or more `resolver.define()` actions
-
-### recommended/frontend-ui
-
-- `require-strict-mode` — `ForgeReconciler.render()` must wrap root in `<React.StrictMode>`
-
-### strict/frontend-ui
-
-- `no-native-html-elements` — No native HTML elements (`<div>`, `<span>`, etc.) in frontend JSX
-- `no-deprecated-table` — Use `<DynamicTable>` not `<Table>`
-- `no-render-from-forge-react` — Do not import `render` from `@forge/react`; use `ForgeReconciler.render()`
-- `require-forge-reconciler-render` — `src/frontend/index.tsx` must call `ForgeReconciler.render()`
-
-### recommended/security
-
-- `no-wildcard-egress` — no wildcard external egress in `manifest.yml`
-- `no-unsafe-custom-ui-csp` — no `unsafe-inline` or `unsafe-eval` Custom UI CSP entries
-
-### recommended/devtools
-
-- `use-size-limit` — add size-limit to measure and enforce bundle size in CI
-- `use-detect-secrets` — add detect-secrets to scan for committed credentials in CI
-
-### recommended/manifest
-
-- `no-classic-product-scopes` — prefer granular Jira/Confluence scopes where possible
-- `review-forge-remotes` — flag `remotes` for explicit eligibility, residency, and auth review
-
-### strict/architecture
-
-- `no-native-fetch-in-resolvers` — No native `fetch()` calls in `src/resolvers/`, `src/external/`, `src/import-lifecycle/`
-- `no-frontend-escape-imports` — Frontend files must not import from outside `src/frontend/` (except `src/util/`)
-- `no-resolver-import-in-frontend` — Frontend must not import from `src/resolvers/`
-- `no-frontend-import-in-backend` — Backend runtime files must not import from `src/frontend/`
-
-### strict/api-usage
-
-- `require-as-user-or-as-app` — `requestJira`/`requestConfluence` must be chained from `api.asUser()` or `api.asApp()`
-- `require-route-template` — API requests must use `route\`...\``template tag or`assumeTrustedRoute()`
-- `no-absolute-urls-in-api` — No absolute URLs (`http://`, `https://`, or `//`) passed to Forge product request helpers or `assumeTrustedRoute`
-
-- `no-forge-ui-import` — No imports from deprecated `@forge/ui` package
-- `no-deprecated-storage-import` — No `storage` imported from `@forge/api` (use `@forge/kvs`)
-- `no-forge-api-in-frontend` — No `@forge/api` imports in `src/frontend/**`
-- `no-forge-kvs-in-frontend` — No `@forge/kvs` imports in `src/frontend/**`
-- `no-forge-bridge-in-backend` — No `@forge/bridge` imports in Forge backend runtime files
-- `no-unapproved-forge-react-components` — Only approved UI Kit components may be imported from `@forge/react`
-
-### strict/security
-
-- `no-hardcoded-atlassian-token` / `no-hardcoded-atlassian-token-tsx` — flag Atlassian API token literals (`ATATT3xFfG…`) committed in source
 
 ### recommended/cost
 
@@ -98,26 +69,78 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 - `review-max-function-timeout` — review long `timeoutSeconds` values against realistic runtime
 - `no-verbose-hot-path-logging` — avoid `console.log` in backend hot paths
 
-### strict/performance
+### recommended/devtools
 
-- `no-storage-query-scan` — bound Forge storage queries before `getMany()`
+- `use-size-limit` — add size-limit to measure and enforce bundle size in CI
+- `use-detect-secrets` — add detect-secrets to scan for committed credentials in CI
+
+### recommended/frontend-ui
+
+- `require-strict-mode` — `ForgeReconciler.render()` must wrap root in `<React.StrictMode>`
+
+### recommended/manifest
+
+- `no-classic-product-scopes` — prefer granular Jira/Confluence scopes where possible
+- `review-forge-remotes` — flag `remotes` for explicit eligibility, residency, and auth review
+
+### recommended/security
+
+- `no-wildcard-egress` — no wildcard external egress in `manifest.yml`
+- `no-unsafe-custom-ui-csp` — no `unsafe-inline` or `unsafe-eval` Custom UI CSP entries
 
 ### recommended/triggers
 
 - `no-excessive-scheduled-trigger` — avoid five-minute/hourly schedules for slow-changing data
 - `prefer-jira-trigger-ignore-self` — Jira triggers should review `filter.ignoreSelf`
 
-### strict/triggers
+### strict/api-usage
 
-- `prefer-trigger-filter` — product event triggers should use manifest-level filters where possible
+- `require-as-user-or-as-app` — `requestJira`/`requestConfluence` must be chained from `api.asUser()` or `api.asApp()`
+- `require-route-template` — API requests must use the `` route`...` `` template tag or `assumeTrustedRoute()`
+- `no-absolute-urls-in-api` — no absolute URLs (`http://`, `https://`, or `//`) passed to Forge product request helpers or `assumeTrustedRoute`
+
+### strict/architecture
+
+- `no-native-fetch-in-resolvers` — no native `fetch()` calls in `src/resolvers/`, `src/external/`, `src/import-lifecycle/`
+- `no-frontend-escape-imports` — frontend files must not import from outside `src/frontend/` (except `src/util/`)
+- `no-resolver-import-in-frontend` — frontend must not import from `src/resolvers/`
+- `no-frontend-import-in-backend` — backend runtime files must not import from `src/frontend/`
+
+### strict/frontend-ui
+
+- `no-native-html-elements` — no native HTML elements (`<div>`, `<span>`, etc.) in frontend JSX
+- `no-deprecated-table` — use `<DynamicTable>` not `<Table>`
+- `no-render-from-forge-react` — do not import `render` from `@forge/react`; use `ForgeReconciler.render()`
+- `require-forge-reconciler-render` — `src/frontend/index.tsx` must call `ForgeReconciler.render()`
+
+### strict/imports
+
+- `no-forge-ui-import` — no imports from deprecated `@forge/ui` package
+- `no-deprecated-storage-import` — no `storage` imported from `@forge/api` (use `@forge/kvs`)
+- `no-forge-api-in-frontend` — no `@forge/api` imports in `src/frontend/**`
+- `no-forge-kvs-in-frontend` — no `@forge/kvs` imports in `src/frontend/**`
+- `no-forge-bridge-in-backend` — no `@forge/bridge` imports in Forge backend runtime files
+- `no-unapproved-forge-react-components` — only approved UI Kit components may be imported from `@forge/react`
 
 ### strict/package-json
 
 - `prefer-forge-fetch` — flag third-party HTTP client libraries that should be replaced with Forge platform fetch
 
-## What stays as Vitest tests
+### strict/performance
 
-The following checks require cross-file context (manifest.yml ↔ source files) and cannot be expressed as single-file ast-grep rules:
+- `no-storage-query-scan` — bound Forge storage queries before `getMany()`
+
+### strict/security
+
+- `no-hardcoded-atlassian-token` / `-tsx` — flag Atlassian API token literals (`ATATT3xFfG…`) committed in source
+
+### strict/triggers
+
+- `prefer-trigger-filter` — product event triggers should use manifest-level filters where possible
+
+## Scope boundaries
+
+These checks require cross-file context and cannot be expressed as single-file ast-grep rules:
 
 - Handler wiring (manifest function handlers → exported symbols)
 - Queue wiring (`new Queue({ key })` → manifest consumer names)
@@ -125,17 +148,20 @@ The following checks require cross-file context (manifest.yml ↔ source files) 
 - `storage:app` scope declared when `@forge/kvs` is used
 - Source dependency cycle detection
 
-## What stays as review guidance
+Judgment-heavy checks that need app intent, cross-file dataflow, or human trade-off evaluation remain as LLM review guidance:
 
-The LLM review skill still covers judgment-heavy checks that need app intent,
-cross-file dataflow, or human trade-off evaluation:
-
-- Unused scopes and unused egress declarations
+- Unused scopes and egress declarations
 - Missing resolver implementation for manifest functions
-- Missing payload validation when validation happens through local helpers
+- Missing payload validation through local helpers
 - Whether `api.asApp()` is necessary for a specific privilege decision
 - Read-only resolver calls that can safely move to `@forge/bridge`
 - N+1 product API patterns across helper functions
-- Missing loading states, oversized payloads, and unused UI fields
-- Replacing polling with web triggers or Forge Realtime when the external system supports it
-- Cache TTL choices, Forge Remote offload decisions, and right-sized memory/timeouts based on observed usage
+- Replacing polling with web triggers or Forge Realtime
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Rule files live under `rules/<tier>/<category>/`, tests mirror that path under `rule-tests/`, and every rule change needs a matching test. Run `npm test` before opening a PR.
+
+## License
+
+Apache 2.0 — see [LICENSE](LICENSE).
