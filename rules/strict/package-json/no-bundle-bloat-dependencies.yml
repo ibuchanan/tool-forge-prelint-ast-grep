@@ -9,7 +9,7 @@ note: >
 rule:
   all:
     - kind: string_content
-      regex: '^(moment|lodash|axios)$'
+      regex: "^(moment|lodash|axios)$"
     - inside:
         stopBy: end
         kind: pair

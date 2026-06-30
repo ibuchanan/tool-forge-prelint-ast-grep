@@ -10,7 +10,7 @@ rule:
   kind: call_expression
   regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?(requestJira|requestConfluence)\s*\([^)]*(/search|/search\?|/rest/api/[^)]*/search|/wiki/rest/api/[^)]*/search)'
   not:
-    regex: '(maxResults|limit|cursor|startAt|nextPage)'
+    regex: "(maxResults|limit|cursor|startAt|nextPage)"
 ignores:
   - "**/*.test.ts"
   - "**/*.test.tsx"

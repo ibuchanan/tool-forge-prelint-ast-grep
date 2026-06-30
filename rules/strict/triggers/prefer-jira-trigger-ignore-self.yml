@@ -12,7 +12,7 @@ rule:
     - has:
         stopBy: end
         kind: block_sequence_item
-        regex: 'avi:jira:'
+        regex: "avi:jira:"
     - not:
         has:
           stopBy: end

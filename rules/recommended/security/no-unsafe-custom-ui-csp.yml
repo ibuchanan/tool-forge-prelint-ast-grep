@@ -8,7 +8,7 @@ note: >
   browser sandbox. Use explicit static sources in permissions.content.
 rule:
   kind: block_sequence_item
-  regex: '(unsafe-inline|unsafe-eval)'
+  regex: "(unsafe-inline|unsafe-eval)"
 files:
   - "**/manifest.yml"
   - "**/manifest.yaml"
