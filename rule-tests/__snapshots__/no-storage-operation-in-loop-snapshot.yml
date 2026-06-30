@@ -5,21 +5,21 @@ snapshots:
       return storage.get(key)
     }))
   : labels:
-    - source: storage.get(key)
-      style: primary
-      start: 51
-      end: 67
-    - source: |-
-        keys.map(async key => {
-          return storage.get(key)
-        })
-      style: secondary
-      start: 18
-      end: 70
-    - source: |-
-        async key => {
-          return storage.get(key)
-        }
-      style: secondary
-      start: 27
-      end: 69
+      - source: storage.get(key)
+        style: primary
+        start: 51
+        end: 67
+      - source: |-
+          keys.map(async key => {
+            return storage.get(key)
+          })
+        style: secondary
+        start: 18
+        end: 70
+      - source: |-
+          async key => {
+            return storage.get(key)
+          }
+        style: secondary
+        start: 27
+        end: 69

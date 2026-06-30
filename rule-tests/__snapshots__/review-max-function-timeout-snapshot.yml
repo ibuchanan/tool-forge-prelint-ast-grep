@@ -6,33 +6,33 @@ snapshots:
         handler: index.handler
         timeoutSeconds: 25
   : labels:
-    - source: 'timeoutSeconds: 25'
-      style: primary
-      start: 56
-      end: 74
-    - source: |
-        functions:
-          - key: main
-            handler: index.handler
-            timeoutSeconds: 25
-      style: secondary
-      start: 0
-      end: 75
+      - source: "timeoutSeconds: 25"
+        style: primary
+        start: 56
+        end: 74
+      - source: |
+          functions:
+            - key: main
+              handler: index.handler
+              timeoutSeconds: 25
+        style: secondary
+        start: 0
+        end: 75
   ? |
     functions:
       - key: main
         handler: index.handler
         timeoutSeconds: 30
   : labels:
-    - source: 'timeoutSeconds: 30'
-      style: primary
-      start: 56
-      end: 74
-    - source: |
-        functions:
-          - key: main
-            handler: index.handler
-            timeoutSeconds: 30
-      style: secondary
-      start: 0
-      end: 75
+      - source: "timeoutSeconds: 30"
+        style: primary
+        start: 56
+        end: 74
+      - source: |
+          functions:
+            - key: main
+              handler: index.handler
+              timeoutSeconds: 30
+        style: secondary
+        start: 0
+        end: 75

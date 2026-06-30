@@ -2,22 +2,22 @@ id: no-hardcoded-atlassian-token
 snapshots:
   authenticate("ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"):
     labels:
-    - source: '"ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
-      style: primary
-      start: 13
-      end: 61
+      - source: '"ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
+        style: primary
+        start: 13
+        end: 61
   ? |
     const config = {
       token: "ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
     }
   : labels:
-    - source: '"ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
-      style: primary
-      start: 26
-      end: 74
+      - source: '"ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
+        style: primary
+        start: 26
+        end: 74
   const token = "ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890":
     labels:
-    - source: '"ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
-      style: primary
-      start: 14
-      end: 62
+      - source: '"ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
+        style: primary
+        start: 14
+        end: 62

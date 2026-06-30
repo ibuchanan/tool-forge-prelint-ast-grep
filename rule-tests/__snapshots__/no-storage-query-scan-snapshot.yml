@@ -2,31 +2,31 @@ id: no-storage-query-scan
 snapshots:
   kvs.query().getMany():
     labels:
-    - source: kvs.query().getMany()
-      style: primary
-      start: 0
-      end: 21
+      - source: kvs.query().getMany()
+        style: primary
+        start: 0
+        end: 21
   storage.query().getMany():
     labels:
-    - source: storage.query().getMany()
-      style: primary
-      start: 0
-      end: 25
+      - source: storage.query().getMany()
+        style: primary
+        start: 0
+        end: 25
   storage.query().orderBy('field', 'ASC').getMany():
     labels:
-    - source: storage.query().orderBy('field', 'ASC').getMany()
-      style: primary
-      start: 0
-      end: 49
+      - source: storage.query().orderBy('field', 'ASC').getMany()
+        style: primary
+        start: 0
+        end: 49
   storage.query().where(condition).getMany():
     labels:
-    - source: storage.query().where(condition).getMany()
-      style: primary
-      start: 0
-      end: 42
+      - source: storage.query().where(condition).getMany()
+        style: primary
+        start: 0
+        end: 42
   storage.query().where(condition).orderBy('field', 'ASC').getMany():
     labels:
-    - source: storage.query().where(condition).orderBy('field', 'ASC').getMany()
-      style: primary
-      start: 0
-      end: 66
+      - source: storage.query().where(condition).orderBy('field', 'ASC').getMany()
+        style: primary
+        start: 0
+        end: 66

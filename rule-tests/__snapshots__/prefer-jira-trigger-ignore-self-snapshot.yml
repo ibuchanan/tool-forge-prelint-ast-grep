@@ -8,24 +8,24 @@ snapshots:
           events:
             - avi:jira:issue_created
   : labels:
-    - source: |
-        - key: my-trigger
-              function: my-function
-              events:
-                - avi:jira:issue_created
-      style: primary
-      start: 24
-      end: 117
-    - source: '- avi:jira:issue_created'
-      style: secondary
-      start: 92
-      end: 116
-    - source: |
-        trigger:
-            - key: my-trigger
-              function: my-function
-              events:
-                - avi:jira:issue_created
-      style: secondary
-      start: 11
-      end: 117
+      - source: |
+          - key: my-trigger
+                function: my-function
+                events:
+                  - avi:jira:issue_created
+        style: primary
+        start: 24
+        end: 117
+      - source: "- avi:jira:issue_created"
+        style: secondary
+        start: 92
+        end: 116
+      - source: |
+          trigger:
+              - key: my-trigger
+                function: my-function
+                events:
+                  - avi:jira:issue_created
+        style: secondary
+        start: 11
+        end: 117

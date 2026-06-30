@@ -6,33 +6,33 @@ snapshots:
         handler: index.handler
         memoryMiB: 1024
   : labels:
-    - source: 'memoryMiB: 1024'
-      style: primary
-      start: 56
-      end: 71
-    - source: |
-        functions:
-          - key: main
-            handler: index.handler
-            memoryMiB: 1024
-      style: secondary
-      start: 0
-      end: 72
+      - source: "memoryMiB: 1024"
+        style: primary
+        start: 56
+        end: 71
+      - source: |
+          functions:
+            - key: main
+              handler: index.handler
+              memoryMiB: 1024
+        style: secondary
+        start: 0
+        end: 72
   ? |
     functions:
       - key: main
         handler: index.handler
         memoryMiB: 2048
   : labels:
-    - source: 'memoryMiB: 2048'
-      style: primary
-      start: 56
-      end: 71
-    - source: |
-        functions:
-          - key: main
-            handler: index.handler
-            memoryMiB: 2048
-      style: secondary
-      start: 0
-      end: 72
+      - source: "memoryMiB: 2048"
+        style: primary
+        start: 56
+        end: 71
+      - source: |
+          functions:
+            - key: main
+              handler: index.handler
+              memoryMiB: 2048
+        style: secondary
+        start: 0
+        end: 72

@@ -6,17 +6,17 @@ snapshots:
         scripts:
           - "'unsafe-eval'"
   : labels:
-    - source: '- "''unsafe-eval''"'
-      style: primary
-      start: 43
-      end: 60
+      - source: '- "''unsafe-eval''"'
+        style: primary
+        start: 43
+        end: 60
   ? |
     permissions:
       content:
         scripts:
           - "'unsafe-inline'"
   : labels:
-    - source: '- "''unsafe-inline''"'
-      style: primary
-      start: 43
-      end: 62
+      - source: '- "''unsafe-inline''"'
+        style: primary
+        start: 43
+        end: 62

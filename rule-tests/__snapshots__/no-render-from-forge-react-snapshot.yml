@@ -2,13 +2,13 @@ id: no-render-from-forge-react
 snapshots:
   import { render } from '@forge/react':
     labels:
-    - source: import { render } from '@forge/react'
-      style: primary
-      start: 0
-      end: 37
+      - source: import { render } from '@forge/react'
+        style: primary
+        start: 0
+        end: 37
   import { render, useState } from '@forge/react':
     labels:
-    - source: import { render, useState } from '@forge/react'
-      style: primary
-      start: 0
-      end: 47
+      - source: import { render, useState } from '@forge/react'
+        style: primary
+        start: 0
+        end: 47

@@ -2,7 +2,7 @@ id: no-forge-kvs-in-frontend-tsx
 snapshots:
   import { storage } from '@forge/kvs':
     labels:
-    - source: import { storage } from '@forge/kvs'
-      style: primary
-      start: 0
-      end: 36
+      - source: import { storage } from '@forge/kvs'
+        style: primary
+        start: 0
+        end: 36

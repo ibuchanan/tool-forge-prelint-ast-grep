@@ -5,16 +5,16 @@ snapshots:
       scopes:
         - read:confluence-content.all
   : labels:
-    - source: '- read:confluence-content.all'
-      style: primary
-      start: 27
-      end: 56
+      - source: "- read:confluence-content.all"
+        style: primary
+        start: 27
+        end: 56
   ? |
     permissions:
       scopes:
         - read:jira-work
   : labels:
-    - source: '- read:jira-work'
-      style: primary
-      start: 27
-      end: 43
+      - source: "- read:jira-work"
+        style: primary
+        start: 27
+        end: 43
