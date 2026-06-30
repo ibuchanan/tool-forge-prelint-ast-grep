@@ -4,6 +4,13 @@
   "private": true,
   "description": "ast-grep lint rules for Atlassian Forge apps",
   "license": "Apache-2.0",
+  "files": [
+    "rules/",
+    "sgconfig.recommended.yml",
+    "sgconfig.strict.yml",
+    "sgconfig.atlassian.yml",
+    "sgconfig.ecosol.yml"
+  ],
   "scripts": {
     "check": "npm run test && npm run lint && npm run format:check",
     "lint": "npm run lint:check",
