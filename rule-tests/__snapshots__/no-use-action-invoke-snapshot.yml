@@ -1,0 +1,12 @@
+id: no-use-action-invoke
+snapshots:
+  useAction(() => invoke('update-issue', { issueId })):
+    labels:
+    - source: useAction(() => invoke('update-issue', { issueId }))
+      style: primary
+      start: 0
+      end: 52
+    - source: invoke('update-issue', { issueId })
+      style: secondary
+      start: 16
+      end: 51

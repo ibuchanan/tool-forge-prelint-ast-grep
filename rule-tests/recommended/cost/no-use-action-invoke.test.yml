@@ -1,0 +1,5 @@
+id: no-use-action-invoke
+valid:
+  - "useAction(() => doSomething())"
+invalid:
+  - "useAction(() => invoke('update-issue', { issueId }))"

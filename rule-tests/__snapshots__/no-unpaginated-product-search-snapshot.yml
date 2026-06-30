@@ -1,0 +1,8 @@
+id: no-unpaginated-product-search
+snapshots:
+  api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`):
+    labels:
+    - source: api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`)
+      style: primary
+      start: 0
+      end: 62

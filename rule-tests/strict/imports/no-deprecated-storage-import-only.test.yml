@@ -1,0 +1,5 @@
+id: no-deprecated-storage-import-only
+valid:
+  - "import { storage } from '@forge/kvs'"
+invalid:
+  - "import { storage } from '@forge/api'"

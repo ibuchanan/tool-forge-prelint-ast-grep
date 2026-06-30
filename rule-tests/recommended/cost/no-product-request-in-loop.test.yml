@@ -1,0 +1,8 @@
+id: no-product-request-in-loop
+valid:
+  - "api.asUser().requestJira(route`/rest/api/3/issue/${issueId}`)"
+invalid:
+  - |
+    issueIds.forEach(id => {
+      api.asUser().requestJira(route`/rest/api/3/issue/${id}`)
+    })

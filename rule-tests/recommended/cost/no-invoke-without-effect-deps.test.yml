@@ -1,0 +1,9 @@
+id: no-invoke-without-effect-deps
+valid:
+  # dependency array present — stable invocation
+  - "useEffect(() => { invoke('get-data') }, [issueId])"
+  # empty deps array — intentional run-once
+  - "useEffect(() => { invoke('get-data') }, [])"
+invalid:
+  # no second argument — runs after every render
+  - "useEffect(() => { invoke('get-data') })"

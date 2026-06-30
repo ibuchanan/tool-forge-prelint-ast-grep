@@ -1,0 +1,18 @@
+id: review-max-function-timeout
+valid:
+  - |
+    functions:
+      - key: main
+        handler: index.handler
+        timeoutSeconds: 10
+invalid:
+  - |
+    functions:
+      - key: main
+        handler: index.handler
+        timeoutSeconds: 25
+  - |
+    functions:
+      - key: main
+        handler: index.handler
+        timeoutSeconds: 30

@@ -1,0 +1,20 @@
+id: no-hardcoded-atlassian-token-tsx
+valid:
+  # env var — safe
+  - "const token = process.env.ATLASSIAN_TOKEN"
+  # placeholder string — not a real token
+  - 'const token = "<your-atlassian-token>"'
+  # prefix too short to be a real token (fewer than 20 chars after prefix)
+  - 'const token = "ATATT3xFfGshort"'
+  # unrelated string
+  - 'const key = "some-unrelated-value"'
+invalid:
+  # real-looking Atlassian API token in variable assignment
+  - 'const token = "ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"'
+  # token passed as argument
+  - 'authenticate("ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")'
+  # token in object literal
+  - |
+    const config = {
+      token: "ATATT3xFfGABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+    }

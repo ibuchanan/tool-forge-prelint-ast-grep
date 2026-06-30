@@ -1,0 +1,25 @@
+id: no-product-request-in-loop
+snapshots:
+  ? |
+    issueIds.forEach(id => {
+      api.asUser().requestJira(route`/rest/api/3/issue/${id}`)
+    })
+  : labels:
+    - source: api.asUser().requestJira(route`/rest/api/3/issue/${id}`)
+      style: primary
+      start: 27
+      end: 83
+    - source: |-
+        issueIds.forEach(id => {
+          api.asUser().requestJira(route`/rest/api/3/issue/${id}`)
+        })
+      style: secondary
+      start: 0
+      end: 86
+    - source: |-
+        id => {
+          api.asUser().requestJira(route`/rest/api/3/issue/${id}`)
+        }
+      style: secondary
+      start: 17
+      end: 85

@@ -1,0 +1,8 @@
+id: no-storage-operation-in-loop
+valid:
+  - "await storage.get('my-key')"
+invalid:
+  - |
+    await Promise.all(keys.map(async key => {
+      return storage.get(key)
+    }))

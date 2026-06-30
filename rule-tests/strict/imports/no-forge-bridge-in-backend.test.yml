@@ -1,0 +1,5 @@
+id: no-forge-bridge-in-backend
+valid:
+  - "import { api } from '@forge/api'"
+invalid:
+  - "import { requestJira } from '@forge/bridge'"

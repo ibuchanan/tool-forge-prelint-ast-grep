@@ -1,0 +1,16 @@
+id: no-multiple-invokes-in-effect
+snapshots:
+  ? |
+    useEffect(() => {
+      invoke('get-issue')
+      invoke('get-comments')
+    }, [])
+  : labels:
+    - source: |-
+        useEffect(() => {
+          invoke('get-issue')
+          invoke('get-comments')
+        }, [])
+      style: primary
+      start: 0
+      end: 71

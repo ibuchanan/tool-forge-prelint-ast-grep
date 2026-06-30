@@ -1,0 +1,5 @@
+id: no-forge-kvs-in-frontend
+valid:
+  - "import { invoke } from '@forge/bridge'"
+invalid:
+  - "import { storage } from '@forge/kvs'"

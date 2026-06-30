@@ -1,0 +1,9 @@
+id: no-multiple-invokes-in-effect
+valid:
+  - "useEffect(() => { invoke('get-issue') }, [])"
+invalid:
+  - |
+    useEffect(() => {
+      invoke('get-issue')
+      invoke('get-comments')
+    }, [])

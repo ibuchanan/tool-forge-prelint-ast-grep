@@ -1,0 +1,5 @@
+id: no-forge-ui-import
+valid:
+  - "import { Button } from '@forge/react'"
+invalid:
+  - "import { Button } from '@forge/ui'"

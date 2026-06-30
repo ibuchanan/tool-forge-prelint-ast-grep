@@ -1,0 +1,8 @@
+id: no-deprecated-storage-import
+snapshots:
+  import { api, storage, route } from '@forge/api':
+    labels:
+    - source: import { api, storage, route } from '@forge/api'
+      style: primary
+      start: 0
+      end: 48

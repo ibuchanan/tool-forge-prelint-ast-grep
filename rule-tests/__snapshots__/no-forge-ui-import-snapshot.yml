@@ -1,0 +1,8 @@
+id: no-forge-ui-import
+snapshots:
+  import { Button } from '@forge/ui':
+    labels:
+    - source: import { Button } from '@forge/ui'
+      style: primary
+      start: 0
+      end: 34

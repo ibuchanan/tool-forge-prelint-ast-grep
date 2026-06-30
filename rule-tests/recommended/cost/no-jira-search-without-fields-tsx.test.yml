@@ -1,0 +1,5 @@
+id: no-jira-search-without-fields-tsx
+valid:
+  - 'api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}&fields=summary,status`)'
+invalid:
+  - 'api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`)'

@@ -1,0 +1,5 @@
+id: no-unpaginated-product-search-tsx
+valid:
+  - 'api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}&maxResults=50`)'
+invalid:
+  - 'api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`)'

@@ -1,0 +1,8 @@
+id: no-forge-bridge-in-backend
+snapshots:
+  import { requestJira } from '@forge/bridge':
+    labels:
+    - source: import { requestJira } from '@forge/bridge'
+      style: primary
+      start: 0
+      end: 43

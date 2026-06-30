@@ -1,0 +1,5 @@
+id: no-deprecated-storage-import
+valid:
+  - "import { api } from '@forge/api'"
+invalid:
+  - "import { api, storage, route } from '@forge/api'"

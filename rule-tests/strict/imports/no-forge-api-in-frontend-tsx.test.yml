@@ -1,0 +1,5 @@
+id: no-forge-api-in-frontend-tsx
+valid:
+  - "import { invoke } from '@forge/bridge'"
+invalid:
+  - "import { api } from '@forge/api'"

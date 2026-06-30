@@ -1,0 +1,8 @@
+id: no-verbose-hot-path-logging
+snapshots:
+  console.log('resolver payload:', payload):
+    labels:
+    - source: console.log('resolver payload:', payload)
+      style: primary
+      start: 0
+      end: 41

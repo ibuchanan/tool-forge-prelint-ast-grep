@@ -1,0 +1,18 @@
+id: review-high-function-memory
+valid:
+  - |
+    functions:
+      - key: main
+        handler: index.handler
+        memoryMiB: 512
+invalid:
+  - |
+    functions:
+      - key: main
+        handler: index.handler
+        memoryMiB: 1024
+  - |
+    functions:
+      - key: main
+        handler: index.handler
+        memoryMiB: 2048
