@@ -4,8 +4,11 @@ severity: error
 message: >
   Do not commit Atlassian API tokens in source.
 note: >
-  Rotate the exposed token immediately, remove it from source, and read it
-  from Forge environment variables or secure configuration instead.
+  Rotate the exposed token immediately and remove it from source.
+  Forge environment variables are backend-only and not available in frontend (TSX) code.
+  Move secret usage into a resolver and call it from the frontend via invoke()
+  from '@forge/bridge'. See the Forge resolver docs:
+  https://developer.atlassian.com/platform/forge/runtime-reference/forge-resolver/
 rule:
   kind: string
   regex: '\b(ATATT3xFfG[a-zA-Z0-9_\-=]{20,})\b'
