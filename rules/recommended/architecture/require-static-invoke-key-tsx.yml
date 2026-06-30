@@ -1,6 +1,6 @@
 id: require-static-invoke-key-tsx
 language: Tsx
-severity: error
+severity: warning
 message: >
   invoke() keys must be string literals.
   Static keys can be validated against manifest.yml and resolver definitions.

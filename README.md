@@ -37,18 +37,20 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 ### recommended/architecture
 
-- `no-frontend-escape-imports` — Frontend files must not import from outside `src/frontend/` (except `src/util/`)
-- `no-resolver-import-in-frontend` — Frontend must not import from `src/resolvers/`
-- `no-frontend-import-in-backend` — Backend runtime files must not import from `src/frontend/`
 - `require-static-invoke-key` — Frontend `invoke()` calls must use string literal keys
+- `require-static-queue-key` — `new Queue({ key })` must use a string literal key when `Queue` is imported from `@forge/events`
+- `no-monolithic-resolver` — flag resolver files with five or more `resolver.define()` actions
 
 ### recommended/frontend-ui
+
+- `require-strict-mode` — `ForgeReconciler.render()` must wrap root in `<React.StrictMode>`
+
+### strict/frontend-ui
 
 - `no-native-html-elements` — No native HTML elements (`<div>`, `<span>`, etc.) in frontend JSX
 - `no-deprecated-table` — Use `<DynamicTable>` not `<Table>`
 - `no-render-from-forge-react` — Do not import `render` from `@forge/react`; use `ForgeReconciler.render()`
 - `require-forge-reconciler-render` — `src/frontend/index.tsx` must call `ForgeReconciler.render()`
-- `require-strict-mode` — `ForgeReconciler.render()` must wrap root in `<React.StrictMode>`
 
 ### recommended/security
 
@@ -68,8 +70,9 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 ### strict/architecture
 
 - `no-native-fetch-in-resolvers` — No native `fetch()` calls in `src/resolvers/`, `src/external/`, `src/import-lifecycle/`
-- `require-static-queue-key` — `new Queue({ key })` must use a string literal key when `Queue` is imported from `@forge/events`
-- `no-monolithic-resolver` — flag resolver files with five or more `resolver.define()` actions
+- `no-frontend-escape-imports` — Frontend files must not import from outside `src/frontend/` (except `src/util/`)
+- `no-resolver-import-in-frontend` — Frontend must not import from `src/resolvers/`
+- `no-frontend-import-in-backend` — Backend runtime files must not import from `src/frontend/`
 
 ### strict/api-usage
 
@@ -85,7 +88,7 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 - `no-hardcoded-atlassian-token` / `no-hardcoded-atlassian-token-tsx` — flag Atlassian API token literals (`ATATT3xFfG…`) committed in source
 
-### strict/cost
+### recommended/cost
 
 - `no-unpaginated-product-search` — search/list product API calls should include pagination
 - `no-product-request-in-loop` — avoid N+1 Atlassian product API requests in loops or array callbacks
@@ -102,11 +105,14 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 - `no-storage-query-scan` — bound Forge storage queries before `getMany()`
 
-### strict/triggers
+### recommended/triggers
 
 - `no-excessive-scheduled-trigger` — avoid five-minute/hourly schedules for slow-changing data
-- `prefer-trigger-filter` — product event triggers should use manifest-level filters where possible
 - `prefer-jira-trigger-ignore-self` — Jira triggers should review `filter.ignoreSelf`
+
+### strict/triggers
+
+- `prefer-trigger-filter` — product event triggers should use manifest-level filters where possible
 
 ### strict/package-json
 

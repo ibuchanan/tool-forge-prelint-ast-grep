@@ -1,12 +1,12 @@
 id: require-static-queue-key
 language: TypeScript
-severity: error
+severity: hint
 message: >
   Queue keys must be string literals when constructing @forge/events Queue objects.
   Static keys can be validated against manifest consumer queue declarations.
 note: >
-  Dynamic queue keys hide the Async Events queue-to-consumer contract from
-  automated checks. Use new Queue({ key: 'queue-name' }).
+  Dynamic queue keys hide the Async Events queue-to-consumer contract from automated checks.
+  Use new Queue({ key: 'queue-name' }).
 rule:
   all:
     - inside:

@@ -2,8 +2,7 @@ id: no-deprecated-table
 language: Tsx
 severity: error
 message: >
-  Do not use <Table> in UI Kit — it is deprecated.
-  Use <DynamicTable> instead.
+  Do not use <Table> in UI Kit; use <DynamicTable> instead
 note: >
   The <Table> component was deprecated in UI Kit 2 in favour of <DynamicTable>,
   which supports sorting, pagination, and better accessibility.

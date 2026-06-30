@@ -8,3 +8,5 @@ ruleDirs:
   - rules/recommended/security
   - rules/recommended/manifest
   - rules/recommended/devtools
+  - rules/recommended/cost
+  - rules/recommended/triggers

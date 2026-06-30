@@ -4,8 +4,8 @@ severity: warning
 message: >
   A resolver file with five or more resolver.define() actions is likely too broad.
 note: >
-  Split unrelated resolver actions by domain or feature so validation, API use,
-  and error handling remain easy to review.
+  Split unrelated resolver actions by domain or feature
+  so validation, API use, and error handling remain easy to review.
 rule:
   kind: program
   regex: 'resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\('

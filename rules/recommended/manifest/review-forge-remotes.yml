@@ -1,11 +1,12 @@
 id: review-forge-remotes
 language: Yaml
-severity: info
+severity: hint
 message: >
   Forge Remote declarations need explicit eligibility, residency, and auth review.
 note: >
-  Remotes are valid when needed, but they change Runs on Atlassian eligibility
-  and data handling. Document why the endpoint is required and how it is secured.
+  Remotes are valid when needed,
+  but they change Runs on Atlassian eligibility and data handling.
+  Document why the endpoint is required and how it is secured.
 rule:
   kind: block_mapping_pair
   regex: '^remotes\s*:'

@@ -2,8 +2,8 @@ id: no-native-fetch-in-resolvers
 language: TypeScript
 severity: error
 message: >
-  Do not use native fetch() in Forge backend code (resolvers, external, import-lifecycle).
-  Use api.fetch() from '@forge/api' instead — native fetch is not available in the Forge runtime.
+  Do not use native fetch() in Forge backend code.
+  Use api.fetch() from '@forge/api' instead.
 note: >
   The Forge backend runtime does not expose the native browser/Node fetch API.
   All HTTP requests must go through api.fetch() which handles authentication

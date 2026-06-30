@@ -5,6 +5,7 @@ ruleDirs:
   - rules/recommended/imports
   - rules/recommended/architecture
   - rules/recommended/frontend-ui
+  - rules/strict/frontend-ui
   - rules/recommended/security
   - rules/recommended/manifest
   - rules/recommended/devtools
@@ -12,7 +13,8 @@ ruleDirs:
   - rules/strict/api-usage
   - rules/strict/imports
   - rules/strict/security
-  - rules/strict/cost
+  - rules/recommended/cost
+  - rules/recommended/triggers
   - rules/strict/performance
   - rules/strict/triggers
   - rules/strict/package-json

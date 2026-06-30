@@ -1,11 +1,12 @@
 id: no-excessive-scheduled-trigger
 language: Yaml
-severity: warning
+severity: info
 message: >
   Avoid five-minute or hourly scheduled triggers for slow-changing data.
 note: >
-  Frequent schedules increase invocations and product API calls. Prefer product
-  triggers, webhooks, or a slower interval when the data does not change often.
+  Frequent schedules increase invocations and product API calls.
+  Prefer product triggers, webhooks, or a slower interval
+  when the data does not change often.
 rule:
   all:
     - kind: block_mapping_pair
