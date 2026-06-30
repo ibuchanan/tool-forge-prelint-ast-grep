@@ -7,3 +7,4 @@ ruleDirs:
   - rules/recommended/frontend-ui
   - rules/recommended/security
   - rules/recommended/manifest
+  - rules/recommended/devtools

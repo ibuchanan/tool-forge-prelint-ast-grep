@@ -1,0 +1,28 @@
+id: use-size-limit
+language: Json
+severity: hint
+message: >
+  Add size-limit to measure and prevent bundle bloat
+note: >
+  Bundle bloat contributes to unwanted Forge spend.
+  size-limit reports the exact byte cost of your JavaScript after build
+  and can fail CI if the bundle exceeds a threshold.
+  Add @size-limit/preset-app to devDependencies
+  and a "size-limit" key to package.json.
+  See https://github.com/ai/size-limit
+rule:
+  kind: string_content
+  regex: "^build$"
+  inside:
+    stopBy: end
+    kind: pair
+    regex: '"scripts"\s*:'
+  not:
+    inside:
+      stopBy: end
+      kind: object
+      has:
+        kind: pair
+        regex: '"size-limit"\s*:'
+files:
+  - "**/package.json"

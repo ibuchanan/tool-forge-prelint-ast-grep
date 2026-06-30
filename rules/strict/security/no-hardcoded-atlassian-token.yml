@@ -1,0 +1,16 @@
+id: no-hardcoded-atlassian-token
+language: TypeScript
+severity: error
+message: >
+  Do not commit Atlassian API tokens in source
+note: >
+  Rotate the exposed token immediately,
+  remove it from source,
+  and read it from Forge environment variables
+  or secure configuration instead.
+rule:
+  kind: string
+  regex: '\b(ATATT3xFfG[a-zA-Z0-9_\-=]{20,})\b'
+ignores:
+  - "**/*.test.ts"
+  - "**/*.spec.ts"

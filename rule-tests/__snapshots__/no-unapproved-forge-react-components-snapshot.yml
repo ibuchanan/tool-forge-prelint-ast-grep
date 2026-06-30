@@ -1,0 +1,16 @@
+id: no-unapproved-forge-react-components
+snapshots:
+  import { OldComponent } from '@forge/react':
+    labels:
+    - source: OldComponent
+      style: primary
+      start: 9
+      end: 21
+    - source: '''@forge/react'''
+      style: secondary
+      start: 29
+      end: 43
+    - source: import { OldComponent } from '@forge/react'
+      style: secondary
+      start: 0
+      end: 43

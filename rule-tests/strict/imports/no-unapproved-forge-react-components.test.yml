@@ -1,0 +1,5 @@
+id: no-unapproved-forge-react-components
+valid:
+  - "import { Button } from '@forge/react'"
+invalid:
+  - "import { OldComponent } from '@forge/react'"

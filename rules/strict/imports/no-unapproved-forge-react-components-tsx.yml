@@ -5,9 +5,9 @@ message: >
   Import from '@forge/react' is not in the approved UI Kit export list.
   Only use components documented at https://developer.atlassian.com/platform/forge/ui-kit/components/
 note: >
-  This rule enforces use of only known-good UI Kit components. If a new component
-  has been released that is not in this list, update the rule or disable it for
-  that import.
+  This rule enforces use of only known-good UI Kit components.
+  If a new component has been released that is not in this list,
+  update the rule or disable it for that import.
 rule:
   kind: import_specifier
   inside:

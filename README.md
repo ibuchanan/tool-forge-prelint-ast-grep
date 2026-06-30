@@ -55,6 +55,11 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 - `no-wildcard-egress` — no wildcard external egress in `manifest.yml`
 - `no-unsafe-custom-ui-csp` — no `unsafe-inline` or `unsafe-eval` Custom UI CSP entries
 
+### recommended/devtools
+
+- `use-size-limit` — add size-limit to measure and enforce bundle size in CI
+- `use-detect-secrets` — add detect-secrets to scan for committed credentials in CI
+
 ### recommended/manifest
 
 - `no-classic-product-scopes` — prefer granular Jira/Confluence scopes where possible
@@ -78,7 +83,7 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 ### strict/security
 
-- `no-hardcoded-secret-literals` — detect common literal credential and private-key formats in source
+- `no-hardcoded-atlassian-token` / `no-hardcoded-atlassian-token-tsx` — flag Atlassian API token literals (`ATATT3xFfG…`) committed in source
 
 ### strict/cost
 
@@ -105,7 +110,7 @@ ast-grep scan --config path/to/forge-lint/sgconfig.strict.yml
 
 ### strict/package-json
 
-- `no-bundle-bloat-dependencies` — flag common avoidable production dependencies
+- `prefer-forge-fetch` — flag third-party HTTP client libraries that should be replaced with Forge platform fetch
 
 ## What stays as Vitest tests
 

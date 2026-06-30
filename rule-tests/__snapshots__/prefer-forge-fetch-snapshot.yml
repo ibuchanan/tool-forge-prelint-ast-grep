@@ -1,0 +1,110 @@
+id: prefer-forge-fetch
+snapshots:
+  ? |
+    {
+      "dependencies": {
+        "abort-controller": "^3.0.0"
+      }
+    }
+  : labels:
+    - source: abort-controller
+      style: primary
+      start: 27
+      end: 43
+    - source: |-
+        "dependencies": {
+            "abort-controller": "^3.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 58
+  ? |
+    {
+      "dependencies": {
+        "axios": "^1.6.0"
+      }
+    }
+  : labels:
+    - source: axios
+      style: primary
+      start: 27
+      end: 32
+    - source: |-
+        "dependencies": {
+            "axios": "^1.6.0"
+          }
+      style: secondary
+      start: 4
+      end: 47
+  ? |
+    {
+      "dependencies": {
+        "form-data": "^4.0.0"
+      }
+    }
+  : labels:
+    - source: form-data
+      style: primary
+      start: 27
+      end: 36
+    - source: |-
+        "dependencies": {
+            "form-data": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 51
+  ? |
+    {
+      "dependencies": {
+        "got": "^13.0.0"
+      }
+    }
+  : labels:
+    - source: got
+      style: primary
+      start: 27
+      end: 30
+    - source: |-
+        "dependencies": {
+            "got": "^13.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 46
+  ? |
+    {
+      "dependencies": {
+        "node-fetch": "^3.3.2"
+      }
+    }
+  : labels:
+    - source: node-fetch
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "node-fetch": "^3.3.2"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "superagent": "^9.0.0"
+      }
+    }
+  : labels:
+    - source: superagent
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "superagent": "^9.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52

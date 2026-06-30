@@ -1,0 +1,21 @@
+id: prefer-forge-fetch
+language: Json
+severity: warning
+message: >
+  Prefer Forge platform fetch over third-party HTTP client libraries.
+note: >
+  The Forge runtime provides api.fetch() for general HTTP requests
+  and api.asUser().requestJira() / api.asApp().requestConfluence() for product APIs.
+  Third-party HTTP clients require egress entries,
+  add bundle weight,
+  and do not integrate with Forge's auth or network policies.
+rule:
+  all:
+    - kind: string_content
+      regex: "^(node-fetch|cross-fetch|isomorphic-fetch|request|axios|form-data|got|superagent|abort-controller|isomorphic-form-data)$"
+    - inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+files:
+  - "**/package.json"

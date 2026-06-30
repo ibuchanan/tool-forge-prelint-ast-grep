@@ -1,0 +1,49 @@
+id: use-size-limit
+valid:
+  # size-limit already configured at root
+  - |
+    {
+      "scripts": {
+        "build": "forge build"
+      },
+      "size-limit": [{ "path": "dist/index.js", "limit": "50 kB" }]
+    }
+  # no build script — not bundling, rule should not apply
+  - |
+    {
+      "scripts": {
+        "test": "vitest"
+      }
+    }
+  # size-limit in scripts (running it as a script counts as using it)
+  - |
+    {
+      "scripts": {
+        "build": "forge build",
+        "size-limit": "size-limit"
+      }
+    }
+invalid:
+  # has build, no size-limit anywhere
+  - |
+    {
+      "scripts": {
+        "build": "forge build"
+      }
+    }
+  # realistic Forge app package.json without size-limit
+  - |
+    {
+      "name": "my-forge-app",
+      "scripts": {
+        "build": "forge build",
+        "test": "vitest"
+      },
+      "dependencies": {
+        "@forge/api": "^4.0.0",
+        "@forge/react": "^10.0.0"
+      },
+      "devDependencies": {
+        "@forge/cli": "^10.0.0"
+      }
+    }

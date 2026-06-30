@@ -1,0 +1,23 @@
+id: no-storage-query-scan
+valid:
+  # limit present — bare chain
+  - "storage.query().limit(10).getMany()"
+  - "kvs.query().limit(5).getMany()"
+  # limit with where
+  - "storage.query().where(condition).limit(10).getMany()"
+  # limit before where
+  - "storage.query().limit(10).where(condition).getMany()"
+  # unrelated storage operations
+  - "storage.get('key')"
+  - "storage.set('key', value)"
+  - "storage.delete('key')"
+invalid:
+  # bare unbounded scan
+  - "storage.query().getMany()"
+  - "kvs.query().getMany()"
+  # where without limit
+  - "storage.query().where(condition).getMany()"
+  # orderBy without limit
+  - "storage.query().orderBy('field', 'ASC').getMany()"
+  # where + orderBy, still no limit
+  - "storage.query().where(condition).orderBy('field', 'ASC').getMany()"
