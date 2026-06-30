@@ -1,0 +1,21 @@
+id: prefer-jira-trigger-ignore-self
+valid:
+  # ignoreSelf present
+  - |
+    modules:
+      trigger:
+        - key: my-trigger
+          function: my-function
+          events:
+            - avi:jira:issue_created
+          filter:
+            ignoreSelf: true
+invalid:
+  # Jira event trigger with no ignoreSelf
+  - |
+    modules:
+      trigger:
+        - key: my-trigger
+          function: my-function
+          events:
+            - avi:jira:issue_created

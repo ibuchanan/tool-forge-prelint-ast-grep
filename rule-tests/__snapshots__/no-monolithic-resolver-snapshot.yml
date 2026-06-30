@@ -1,0 +1,18 @@
+id: no-monolithic-resolver
+snapshots:
+  ? |
+    resolver.define('action-1', handler1);
+    resolver.define('action-2', handler2);
+    resolver.define('action-3', handler3);
+    resolver.define('action-4', handler4);
+    resolver.define('action-5', handler5);
+  : labels:
+    - source: |
+        resolver.define('action-1', handler1);
+        resolver.define('action-2', handler2);
+        resolver.define('action-3', handler3);
+        resolver.define('action-4', handler4);
+        resolver.define('action-5', handler5);
+      style: primary
+      start: 0
+      end: 195

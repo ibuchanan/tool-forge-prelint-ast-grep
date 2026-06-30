@@ -1,0 +1,22 @@
+id: prefer-trigger-filter
+valid:
+  # events with filter — no finding
+  - |
+    modules:
+      trigger:
+        - key: my-trigger
+          function: my-function
+          events:
+            - jira:issue_created
+          filter:
+            expression: "issue.fields.issuetype.name == 'Bug'"
+invalid:
+  # events with no filter — should add filter.expression
+  - |
+    modules:
+      trigger:
+        - key: my-trigger
+          function: my-function
+          events:
+            - jira:issue_created
+            - jira:issue_updated

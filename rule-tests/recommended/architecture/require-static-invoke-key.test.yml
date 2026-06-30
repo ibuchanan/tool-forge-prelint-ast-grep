@@ -1,0 +1,8 @@
+id: require-static-invoke-key
+valid:
+  - "invoke('get-issue')"
+  - "invoke('get-issue', { issueId })"
+invalid:
+  # variable key — contract is hidden from tooling
+  - "invoke(key)"
+  - "invoke(resolverKey, payload)"

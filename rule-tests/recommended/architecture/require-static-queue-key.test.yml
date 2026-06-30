@@ -1,0 +1,9 @@
+id: require-static-queue-key
+valid:
+  - |
+    import { Queue } from '@forge/events';
+    const queue = new Queue({ key: 'my-queue' });
+invalid:
+  - |
+    import { Queue } from '@forge/events';
+    const queue = new Queue({ key: queueName });

@@ -1,0 +1,9 @@
+id: require-route-template
+valid:
+  - "requestJira(route`/rest/api/3/issue/${issueId}`)"
+  - "requestJira(assumeTrustedRoute(dynamicPath))"
+invalid:
+  # raw string literal — no route tag
+  - 'requestJira("/rest/api/3/issue", { method: "GET" })'
+  # bare variable — no route tag
+  - 'requestConfluence(path, { method: "POST", body: JSON.stringify(data) })'

@@ -1,0 +1,14 @@
+id: no-frontend-escape-imports-tsx
+snapshots:
+  import { callExternal } from '../external':
+    labels:
+    - source: import { callExternal } from '../external'
+      style: primary
+      start: 0
+      end: 42
+  import { handler } from '../../resolvers':
+    labels:
+    - source: import { handler } from '../../resolvers'
+      style: primary
+      start: 0
+      end: 41

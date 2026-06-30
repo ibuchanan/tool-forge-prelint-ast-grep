@@ -1,0 +1,14 @@
+id: require-static-invoke-key-tsx
+snapshots:
+  invoke(key):
+    labels:
+    - source: invoke(key)
+      style: primary
+      start: 0
+      end: 11
+  invoke(resolverKey, payload):
+    labels:
+    - source: invoke(resolverKey, payload)
+      style: primary
+      start: 0
+      end: 28

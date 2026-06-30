@@ -1,0 +1,14 @@
+id: no-deprecated-table
+snapshots:
+  <Table />:
+    labels:
+    - source: <Table />
+      style: primary
+      start: 0
+      end: 9
+  <Table><TableBody><TableRow><TableCell>data</TableCell></TableRow></TableBody></Table>:
+    labels:
+    - source: <Table><TableBody><TableRow><TableCell>data</TableCell></TableRow></TableBody></Table>
+      style: primary
+      start: 0
+      end: 86

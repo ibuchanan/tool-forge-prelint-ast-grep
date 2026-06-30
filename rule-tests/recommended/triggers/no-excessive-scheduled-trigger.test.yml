@@ -1,0 +1,28 @@
+id: no-excessive-scheduled-trigger
+valid:
+  # slow intervals are fine
+  - |
+    modules:
+      scheduledTrigger:
+        - key: my-trigger
+          function: my-function
+          interval: day
+  - |
+    modules:
+      scheduledTrigger:
+        - key: my-trigger
+          function: my-function
+          interval: week
+invalid:
+  - |
+    modules:
+      scheduledTrigger:
+        - key: my-trigger
+          function: my-function
+          interval: fiveMinutes
+  - |
+    modules:
+      scheduledTrigger:
+        - key: my-trigger
+          function: my-function
+          interval: hour

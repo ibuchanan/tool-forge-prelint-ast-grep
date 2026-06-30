@@ -1,0 +1,40 @@
+id: no-excessive-scheduled-trigger
+snapshots:
+  ? |
+    modules:
+      scheduledTrigger:
+        - key: my-trigger
+          function: my-function
+          interval: fiveMinutes
+  : labels:
+    - source: 'interval: fiveMinutes'
+      style: primary
+      start: 85
+      end: 106
+    - source: |
+        scheduledTrigger:
+            - key: my-trigger
+              function: my-function
+              interval: fiveMinutes
+      style: secondary
+      start: 11
+      end: 107
+  ? |
+    modules:
+      scheduledTrigger:
+        - key: my-trigger
+          function: my-function
+          interval: hour
+  : labels:
+    - source: 'interval: hour'
+      style: primary
+      start: 85
+      end: 99
+    - source: |
+        scheduledTrigger:
+            - key: my-trigger
+              function: my-function
+              interval: hour
+      style: secondary
+      start: 11
+      end: 100

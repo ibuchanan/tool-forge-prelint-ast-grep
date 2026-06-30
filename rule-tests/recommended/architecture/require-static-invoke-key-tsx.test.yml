@@ -1,0 +1,7 @@
+id: require-static-invoke-key-tsx
+valid:
+  - "invoke('get-issue')"
+  - "invoke('get-issue', { issueId })"
+invalid:
+  - "invoke(key)"
+  - "invoke(resolverKey, payload)"

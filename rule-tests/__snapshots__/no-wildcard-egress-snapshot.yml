@@ -1,0 +1,21 @@
+id: no-wildcard-egress
+snapshots:
+  ? |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - "*"
+  : labels:
+    - source: '- "*"'
+      style: primary
+      start: 59
+      end: 64
+    - source: |
+        external:
+            fetch:
+              backend:
+                - "*"
+      style: secondary
+      start: 15
+      end: 65

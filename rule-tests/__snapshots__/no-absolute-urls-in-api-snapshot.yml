@@ -1,0 +1,20 @@
+id: no-absolute-urls-in-api
+snapshots:
+  api.asApp().requestConfluence("//your-site.atlassian.net/wiki/rest/api/content"):
+    labels:
+    - source: api.asApp().requestConfluence("//your-site.atlassian.net/wiki/rest/api/content")
+      style: primary
+      start: 0
+      end: 80
+  api.asUser().requestJira("https://your-site.atlassian.net/rest/api/3/issue"):
+    labels:
+    - source: api.asUser().requestJira("https://your-site.atlassian.net/rest/api/3/issue")
+      style: primary
+      start: 0
+      end: 76
+  assumeTrustedRoute("https://your-site.atlassian.net/rest/api/3/search"):
+    labels:
+    - source: assumeTrustedRoute("https://your-site.atlassian.net/rest/api/3/search")
+      style: primary
+      start: 0
+      end: 71

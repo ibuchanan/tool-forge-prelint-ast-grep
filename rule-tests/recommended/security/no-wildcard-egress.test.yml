@@ -1,0 +1,17 @@
+id: no-wildcard-egress
+valid:
+  # specific domain — safe
+  - |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - "https://api.example.com"
+invalid:
+  # wildcard backend egress
+  - |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - "*"

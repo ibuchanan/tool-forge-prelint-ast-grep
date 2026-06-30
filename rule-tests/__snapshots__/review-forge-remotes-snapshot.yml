@@ -1,0 +1,16 @@
+id: review-forge-remotes
+snapshots:
+  ? |
+    app:
+      id: ari:cloud:ecosystem::app/my-app
+    remotes:
+      - key: my-remote
+        baseUrl: "https://api.example.com"
+  : labels:
+    - source: |
+        remotes:
+          - key: my-remote
+            baseUrl: "https://api.example.com"
+      style: primary
+      start: 43
+      end: 110

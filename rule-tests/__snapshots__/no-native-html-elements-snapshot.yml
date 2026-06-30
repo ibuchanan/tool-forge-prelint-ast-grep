@@ -1,0 +1,14 @@
+id: no-native-html-elements
+snapshots:
+  <button onClick={handleClick}>Submit</button>:
+    labels:
+    - source: <button onClick={handleClick}>Submit</button>
+      style: primary
+      start: 0
+      end: 45
+  <div>hello</div>:
+    labels:
+    - source: <div>hello</div>
+      style: primary
+      start: 0
+      end: 16

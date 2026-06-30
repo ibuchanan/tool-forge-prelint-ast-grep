@@ -1,0 +1,14 @@
+id: require-as-user-or-as-app
+snapshots:
+  api.requestJira(route`/rest/api/3/issue`):
+    labels:
+    - source: api.requestJira(route`/rest/api/3/issue`)
+      style: primary
+      start: 0
+      end: 41
+  requestConfluence(route`/wiki/rest/api/content`):
+    labels:
+    - source: requestConfluence(route`/wiki/rest/api/content`)
+      style: primary
+      start: 0
+      end: 48

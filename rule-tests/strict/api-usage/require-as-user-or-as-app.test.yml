@@ -1,0 +1,9 @@
+id: require-as-user-or-as-app
+valid:
+  - "api.asUser().requestJira(route`/rest/api/3/issue/${issueId}`)"
+  - "api.asApp().requestConfluence(route`/wiki/rest/api/content`)"
+invalid:
+  # direct call on api without authorization context
+  - "api.requestJira(route`/rest/api/3/issue`)"
+  # bare call with no api object at all
+  - "requestConfluence(route`/wiki/rest/api/content`)"

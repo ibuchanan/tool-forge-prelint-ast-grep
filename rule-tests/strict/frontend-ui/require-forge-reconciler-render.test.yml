@@ -1,0 +1,9 @@
+id: require-forge-reconciler-render
+valid:
+  - |
+    import { ForgeReconciler } from '@forge/react';
+    ForgeReconciler.render(<App />);
+invalid:
+  - |
+    import { ForgeReconciler } from '@forge/react';
+    export const App = () => <div />;

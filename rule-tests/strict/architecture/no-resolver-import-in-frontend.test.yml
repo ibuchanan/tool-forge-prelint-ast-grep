@@ -1,0 +1,7 @@
+id: no-resolver-import-in-frontend
+valid:
+  - "import { invoke } from '@forge/bridge'"
+  - "import { helper } from '../util'"
+invalid:
+  - "import { myResolver } from '../resolvers'"
+  - "import { myResolver } from '../resolvers/index'"

@@ -1,0 +1,13 @@
+id: no-absolute-urls-in-api
+valid:
+  # route template tag — relative path
+  - "api.asUser().requestJira(route`/rest/api/3/issue/${issueId}`)"
+  # assumeTrustedRoute with relative path
+  - "assumeTrustedRoute('/rest/api/3/search')"
+invalid:
+  # https absolute URL
+  - 'api.asUser().requestJira("https://your-site.atlassian.net/rest/api/3/issue")'
+  # protocol-relative URL
+  - 'api.asApp().requestConfluence("//your-site.atlassian.net/wiki/rest/api/content")'
+  # assumeTrustedRoute with absolute URL
+  - 'assumeTrustedRoute("https://your-site.atlassian.net/rest/api/3/search")'

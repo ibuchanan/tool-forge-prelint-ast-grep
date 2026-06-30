@@ -1,0 +1,19 @@
+id: no-unsafe-custom-ui-csp
+valid:
+  # explicit static source — safe
+  - |
+    permissions:
+      content:
+        scripts:
+          - "https://cdn.example.com"
+invalid:
+  - |
+    permissions:
+      content:
+        scripts:
+          - "'unsafe-inline'"
+  - |
+    permissions:
+      content:
+        scripts:
+          - "'unsafe-eval'"

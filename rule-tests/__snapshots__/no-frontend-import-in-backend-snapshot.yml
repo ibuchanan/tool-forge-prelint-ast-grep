@@ -1,0 +1,14 @@
+id: no-frontend-import-in-backend
+snapshots:
+  import { MyComponent } from '../frontend':
+    labels:
+    - source: import { MyComponent } from '../frontend'
+      style: primary
+      start: 0
+      end: 41
+  import { MyComponent } from '../frontend/components':
+    labels:
+    - source: import { MyComponent } from '../frontend/components'
+      style: primary
+      start: 0
+      end: 52

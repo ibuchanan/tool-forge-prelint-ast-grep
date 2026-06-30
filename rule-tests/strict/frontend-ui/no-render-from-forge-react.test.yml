@@ -1,0 +1,7 @@
+id: no-render-from-forge-react
+valid:
+  - "import { ForgeReconciler } from '@forge/react'"
+  - "import { ForgeReconciler, Button } from '@forge/react'"
+invalid:
+  - "import { render } from '@forge/react'"
+  - "import { render, useState } from '@forge/react'"

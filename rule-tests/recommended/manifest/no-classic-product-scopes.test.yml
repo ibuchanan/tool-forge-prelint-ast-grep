@@ -1,0 +1,19 @@
+id: no-classic-product-scopes
+valid:
+  # granular scopes — fine
+  - |
+    permissions:
+      scopes:
+        - read:jira:issue
+        - write:jira:issue
+invalid:
+  # classic Jira scope with hyphen
+  - |
+    permissions:
+      scopes:
+        - read:jira-work
+  # classic Confluence scope with dot
+  - |
+    permissions:
+      scopes:
+        - read:confluence-content.all

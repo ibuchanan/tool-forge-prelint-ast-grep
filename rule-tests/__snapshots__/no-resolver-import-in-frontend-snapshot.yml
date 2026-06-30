@@ -1,0 +1,14 @@
+id: no-resolver-import-in-frontend
+snapshots:
+  import { myResolver } from '../resolvers':
+    labels:
+    - source: import { myResolver } from '../resolvers'
+      style: primary
+      start: 0
+      end: 41
+  import { myResolver } from '../resolvers/index':
+    labels:
+    - source: import { myResolver } from '../resolvers/index'
+      style: primary
+      start: 0
+      end: 47

@@ -1,0 +1,18 @@
+id: review-forge-remotes
+valid:
+  # no remotes key — nothing to flag
+  - |
+    app:
+      id: ari:cloud:ecosystem::app/my-app
+    modules:
+      jira:globalPage:
+        - key: my-page
+          function: main
+invalid:
+  # any remotes declaration triggers review
+  - |
+    app:
+      id: ari:cloud:ecosystem::app/my-app
+    remotes:
+      - key: my-remote
+        baseUrl: "https://api.example.com"

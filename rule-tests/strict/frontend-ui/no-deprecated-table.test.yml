@@ -1,0 +1,8 @@
+id: no-deprecated-table
+valid:
+  - "<DynamicTable head={head} rows={rows} />"
+invalid:
+  # self-closing no-props form
+  - "<Table />"
+  # with children
+  - "<Table><TableBody><TableRow><TableCell>data</TableCell></TableRow></TableBody></Table>"

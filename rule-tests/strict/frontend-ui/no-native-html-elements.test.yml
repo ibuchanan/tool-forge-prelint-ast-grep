@@ -1,0 +1,7 @@
+id: no-native-html-elements
+valid:
+  - "<Box>hello</Box>"
+  - "<Stack><Text>content</Text></Stack>"
+invalid:
+  - "<div>hello</div>"
+  - "<button onClick={handleClick}>Submit</button>"

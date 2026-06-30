@@ -1,0 +1,7 @@
+id: no-frontend-import-in-backend
+valid:
+  - "import { helper } from '../util'"
+  - "import { storage } from '@forge/api'"
+invalid:
+  - "import { MyComponent } from '../frontend'"
+  - "import { MyComponent } from '../frontend/components'"

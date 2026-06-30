@@ -1,0 +1,6 @@
+id: require-strict-mode
+valid:
+  - "ForgeReconciler.render(<React.StrictMode><App /></React.StrictMode>)"
+invalid:
+  # root not wrapped in StrictMode
+  - "ForgeReconciler.render(<App />)"

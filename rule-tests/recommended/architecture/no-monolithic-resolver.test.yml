@@ -1,0 +1,14 @@
+id: no-monolithic-resolver
+valid:
+  - |
+    resolver.define('action-1', handler1);
+    resolver.define('action-2', handler2);
+    resolver.define('action-3', handler3);
+    resolver.define('action-4', handler4);
+invalid:
+  - |
+    resolver.define('action-1', handler1);
+    resolver.define('action-2', handler2);
+    resolver.define('action-3', handler3);
+    resolver.define('action-4', handler4);
+    resolver.define('action-5', handler5);
