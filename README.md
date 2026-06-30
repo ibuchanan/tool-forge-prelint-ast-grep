@@ -2,6 +2,8 @@
 
 AST-level lint rules for [Atlassian Forge](https://developer.atlassian.com/platform/forge/) apps, packaged as [ast-grep](https://ast-grep.github.io/) configs. Point one of the tier configs at your Forge app to catch deprecated packages, frontend/backend boundary violations, and common cost and performance mistakes — no build step required.
 
+Use Forge Prelint as an early local or CI check before deeper Forge validation. It is intentionally single-file and AST-based; it complements `forge lint`, type checking, manifest validation, and human review rather than replacing them. See [Scope boundaries](#scope-boundaries) for checks this rule set deliberately leaves out.
+
 ## Tiers
 
 Rules are organized into composing tiers. Each tier includes all rules from tiers below it.
@@ -16,17 +18,18 @@ Some frontend checks have a `-tsx` companion rule file so the same policy applie
 
 ## Quickstart
 
-Install [ast-grep](https://ast-grep.github.io/guide/quick-start.html) (`npm i -g @ast-grep/cli` or `brew install ast-grep`), then run from your Forge app root:
+Install [ast-grep](https://ast-grep.github.io/guide/quick-start.html) (`npm i -g @ast-grep/cli` or `brew install ast-grep`). From the root of the Forge app you want to scan, reference a config file from a checkout of this repository:
 
 ```sh
 ast-grep scan --config path/to/forge-prelint/sgconfig.recommended.yml
 ```
 
-Zero findings on a clean project. Rule IDs with file locations appear for anything that needs attention.
+Start with `sgconfig.recommended.yml`. Move to `sgconfig.strict.yml` when you want production-oriented API, import, performance, and runtime-boundary checks. Zero findings on a clean project. Rule IDs with file locations appear for anything that needs attention.
 
 ## Prerequisites
 
-- [ast-grep](https://ast-grep.github.io/) ≥ 0.38
+- [ast-grep](https://ast-grep.github.io/) ≥ 0.38 to scan a Forge app
+- Node.js and npm to develop or test rules in this repository
 
 ## Development
 
