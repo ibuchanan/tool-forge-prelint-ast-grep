@@ -1,6 +1,6 @@
 id: review-max-function-timeout
 language: Yaml
-severity: info
+severity: warning
 message: >
   Review long Forge function timeout against realistic worst-case runtime.
 note: >

@@ -1,6 +1,6 @@
 id: review-high-function-memory
 language: Yaml
-severity: info
+severity: warning
 message: >
   Review high Forge function memory allocation against observed usage.
 note: >
