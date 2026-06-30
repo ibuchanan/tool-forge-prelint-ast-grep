@@ -6,6 +6,8 @@ message: >
 note: >
   Product requests in repeated callbacks often create N+1 API patterns. Prefer
   bulk endpoints, search fields, batching, or bounded pagination.
+  See Forge cost optimisation guidance on avoiding N+1 API patterns:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?(requestJira|requestConfluence|requestGraph|requestBitbucket)\s*\('

@@ -6,6 +6,8 @@ message: >
 note: >
   KVS operations are billed by data volume, and writes are especially expensive.
   Batch operations, query Custom Entities, or reduce the data touched per run.
+  See Forge cost optimisation guidance on storage operation costs:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^(storage|kvs)\.(get|set|delete|query)\s*\('

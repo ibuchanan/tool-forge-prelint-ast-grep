@@ -6,6 +6,8 @@ message: >
 note: >
   Effects without a dependency array run after every render and can create
   avoidable resolver invocations. Add stable dependencies or an empty array.
+  See Forge cost optimisation guidance on reducing unnecessary invocations:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^useEffect\s*\('

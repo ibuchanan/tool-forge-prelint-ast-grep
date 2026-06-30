@@ -6,6 +6,8 @@ message: >
 note: >
   Batch related resolver calls into one resolver action when they are needed
   for the same screen state.
+  See Forge cost optimisation guidance on reducing unnecessary invocations:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^useEffect\s*\([\s\S]*invoke\([\s\S]*invoke\('

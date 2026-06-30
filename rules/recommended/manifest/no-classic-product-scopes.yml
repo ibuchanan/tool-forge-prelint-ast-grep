@@ -6,6 +6,9 @@ message: >
 note: >
   Classic scopes such as read:jira-work and read:confluence-content.all are broad.
   Use granular scopes unless the app needs classic scope compatibility.
+# NOTE: Current Atlassian public docs say to prefer classic scopes and use granular only
+# as a fallback. This rule reflects internal direction toward granular scopes; a docs
+# link should be added once that guidance is reflected in the public documentation.
 rule:
   kind: block_sequence_item
   regex: '^\s*-\s*["'']?(read|write|manage):(jira|confluence)[-.]'

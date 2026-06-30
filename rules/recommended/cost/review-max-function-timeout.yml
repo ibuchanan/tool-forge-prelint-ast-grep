@@ -6,6 +6,8 @@ message: >
 note: >
   Tighter timeouts make crash and out-of-memory costs more predictable. Keep long
   timeoutSeconds values only when the function genuinely needs them.
+  See Forge cost optimisation guidance on function timeouts and compute costs:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   all:
     - kind: block_mapping_pair

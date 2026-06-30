@@ -6,6 +6,8 @@ message: >
 note: >
   This rule checks the conventional Forge UI Kit entrypoint at src/frontend/index.tsx.
   The existing require-strict-mode rule validates the render argument once the call exists.
+  See the Forge UI Kit get-started guide for the required ForgeReconciler.render() entrypoint pattern:
+  https://developer.atlassian.com/platform/forge/ui-kit/get-started-with-ui/
 rule:
   kind: program
   not:

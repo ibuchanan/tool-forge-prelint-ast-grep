@@ -7,6 +7,8 @@ message: >
 note: >
   Dynamic invoke keys hide the frontend/backend contract from automated checks.
   Use invoke('function-key', payload) with a literal key.
+  The invoke() functionKey must exactly match the resolver.define() key. See:
+  https://developer.atlassian.com/platform/forge/custom-ui-bridge/invoke/
 rule:
   any:
     - pattern: invoke($KEY)

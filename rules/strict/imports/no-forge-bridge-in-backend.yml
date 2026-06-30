@@ -8,6 +8,9 @@ message: >
 note: >
   Importing @forge/bridge from resolvers, external clients, lifecycle handlers,
   or src/index.ts can bundle browser-only APIs into Forge backend code.
+  @forge/bridge is a frontend-only JavaScript API for UI Kit and Custom UI apps.
+  Backend functions should use '@forge/api' instead. See:
+  https://developer.atlassian.com/platform/forge/apis-reference/ui-api-bridge/bridge/
 rule:
   any:
     - pattern: "import $$$IMPORTS from '@forge/bridge'"

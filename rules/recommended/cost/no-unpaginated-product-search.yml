@@ -6,6 +6,8 @@ message: >
 note: >
   Add maxResults, limit, cursor, startAt, or equivalent pagination so the app
   does not fetch more data than it needs.
+  See Forge cost optimisation guidance on bounding API responses:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?(requestJira|requestConfluence)\s*\([^)]*(/search|/search\?|/rest/api/[^)]*/search|/wiki/rest/api/[^)]*/search)'

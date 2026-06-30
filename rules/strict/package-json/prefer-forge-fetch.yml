@@ -9,6 +9,8 @@ note: >
   Third-party HTTP clients require egress entries,
   add bundle weight,
   and do not integrate with Forge's auth or network policies.
+  See the Forge Fetch API reference for the full range of built-in HTTP options:
+  https://developer.atlassian.com/platform/forge/runtime-reference/fetch-api/
 rule:
   all:
     - kind: string_content

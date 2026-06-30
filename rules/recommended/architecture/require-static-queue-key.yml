@@ -7,6 +7,8 @@ message: >
 note: >
   Dynamic queue keys hide the Async Events queue-to-consumer contract from automated checks.
   Use new Queue({ key: 'queue-name' }).
+  The Queue key must match the queue field in the manifest consumer module. See:
+  https://developer.atlassian.com/platform/forge/runtime-reference/async-events-api/
 rule:
   all:
     - inside:

@@ -6,6 +6,8 @@ message: >
 note: >
   memoryMiB directly affects GB-second consumption. Keep higher allocations only
   when profiling shows they reduce duration enough or are required for workload size.
+  See Forge cost optimisation guidance on function memory and compute costs:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   all:
     - kind: block_mapping_pair

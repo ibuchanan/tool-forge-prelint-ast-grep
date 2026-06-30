@@ -6,6 +6,8 @@ message: >
 note: >
   Search responses can be large. Add fields=... or a fields request property so
   the function or frontend fetches only the data it needs.
+  See Forge cost optimisation guidance on reducing API response sizes:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^((api\.)?(asUser|asApp)\(\)\.|api\.)?requestJira\s*\([\s\S]*(/rest/api/[23]/search|/rest/api/[23]/search/jql)'

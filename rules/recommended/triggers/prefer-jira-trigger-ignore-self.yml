@@ -6,6 +6,8 @@ message: >
 note: >
   If the app writes to the same Jira entities it listens to, ignoreSelf avoids
   self-generated invocations and feedback loops.
+  See the Atlassian app events reference on filtering self-generated events:
+  https://developer.atlassian.com/platform/forge/events-reference/product-events/
 rule:
   all:
     - kind: block_sequence_item

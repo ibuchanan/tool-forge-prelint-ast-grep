@@ -6,6 +6,8 @@ message: >
 note: >
   Logging entire events, payloads, or resolver arguments can increase log volume
   and expose sensitive data. Use scoped, redacted debug logs instead.
+  See Forge cost optimisation guidance on logging best practices:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   pattern: console.log($$$)
 files:

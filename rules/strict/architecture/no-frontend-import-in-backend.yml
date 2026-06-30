@@ -7,6 +7,8 @@ message: >
 note: >
   Keep resolver and backend runtime code separate from UI Kit frontend modules.
   Share pure utilities through src/util/ rather than importing from src/frontend/.
+  See the Forge UI overview for the canonical src/frontend/ vs src/backend/ separation:
+  https://developer.atlassian.com/platform/forge/ui-kit/get-started-with-ui/
 rule:
   kind: import_statement
   regex: '(from\s+["''][^"'']*frontend(?:/|["''])|import\s+["''][^"'']*frontend(?:/|["'']))'

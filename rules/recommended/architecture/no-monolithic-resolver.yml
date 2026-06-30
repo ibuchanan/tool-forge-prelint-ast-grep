@@ -6,6 +6,8 @@ message: >
 note: >
   Split unrelated resolver actions by domain or feature
   so validation, API use, and error handling remain easy to review.
+  See the Forge resolver reference for resolver.define() and getDefinitions():
+  https://developer.atlassian.com/platform/forge/runtime-reference/forge-resolver/
 rule:
   kind: program
   regex: 'resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\('

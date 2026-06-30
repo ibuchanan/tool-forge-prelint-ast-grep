@@ -7,6 +7,8 @@ note: >
   Remotes are valid when needed,
   but they change Runs on Atlassian eligibility and data handling.
   Document why the endpoint is required and how it is secured.
+  See the Forge remotes manifest reference for eligibility, data residency, and inScopeEUD:
+  https://developer.atlassian.com/platform/forge/manifest-reference/remotes/
 rule:
   kind: block_mapping_pair
   regex: '^remotes\s*:'

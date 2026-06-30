@@ -6,6 +6,8 @@ message: >
 note: >
   Inline scripts, dynamic evaluation, and wildcard content sources weaken the
   browser sandbox. Use explicit static sources in permissions.content.
+  See the Forge permissions manifest reference for safe CSP source options:
+  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
 rule:
   kind: block_sequence_item
   regex: "(unsafe-inline|unsafe-eval)"

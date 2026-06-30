@@ -6,6 +6,8 @@ message: >
 note: >
   Manifest filters prevent irrelevant events from invoking the function at all.
   Add filter.expression or document why every matching event needs processing.
+  See the Atlassian app events reference for available filter properties (expression, ignoreSelf, appIsLicensed):
+  https://developer.atlassian.com/platform/forge/events-reference/product-events/
 rule:
   all:
     - kind: block_sequence_item

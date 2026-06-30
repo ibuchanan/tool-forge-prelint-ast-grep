@@ -8,6 +8,8 @@ note: >
   Wildcard egress makes data movement harder to audit
   and can block security review.
   Prefer a narrow permissions.external.fetch allowlist.
+  See the Forge runtime egress permissions reference for declaring specific domains:
+  https://developer.atlassian.com/platform/forge/runtime-egress-permissions/
 rule:
   all:
     - kind: block_sequence_item

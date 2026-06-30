@@ -7,6 +7,8 @@ note: >
   Frequent schedules increase invocations and product API calls.
   Prefer product triggers, webhooks, or a slower interval
   when the data does not change often.
+  See Forge cost optimisation guidance on choosing the right trigger interval:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   all:
     - kind: block_mapping_pair

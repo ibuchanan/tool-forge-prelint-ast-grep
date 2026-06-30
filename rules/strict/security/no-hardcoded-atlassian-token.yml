@@ -8,6 +8,8 @@ note: >
   remove it from source,
   and read it from Forge environment variables
   or secure configuration instead.
+  Use 'forge variables set --encrypt' to store secrets safely per environment:
+  https://developer.atlassian.com/platform/forge/cli-reference/variables-set/
 rule:
   kind: string
   regex: '\b(ATATT3xFfG[a-zA-Z0-9_\-=]{20,})\b'

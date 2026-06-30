@@ -9,6 +9,8 @@ note: >
   Prefer indexed Custom Entity queries,
   narrower predicates,
   and cursor-based pagination.
+  See Forge cost optimisation guidance on bounding storage queries with .limit():
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^(storage|kvs)\.query\(\)(\.[A-Za-z_$][A-Za-z0-9_$]*\([^)]*\))*\.getMany\('

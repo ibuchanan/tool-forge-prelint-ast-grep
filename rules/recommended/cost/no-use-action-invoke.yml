@@ -6,6 +6,8 @@ message: >
 note: >
   useAction() runs during render-oriented UI Kit flows. Fetch once in an effect
   and store the result in component state when the data is not tied to the action.
+  See Forge cost optimisation guidance on reducing unnecessary invocations:
+  https://developer.atlassian.com/platform/forge/optimise-forge-costs/
 rule:
   kind: call_expression
   regex: '^useAction\s*\('
