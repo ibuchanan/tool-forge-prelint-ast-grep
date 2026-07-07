@@ -75,7 +75,6 @@ npm run test:interactive
 ### recommended/devtools
 
 - `use-size-limit` — add size-limit to measure and enforce bundle size in CI
-- `use-detect-secrets` — add detect-secrets to scan for committed credentials in CI
 
 ### recommended/frontend-ui
 
