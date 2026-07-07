@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "description": "ast-grep lint rules for Atlassian Forge apps",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibuchanan/tool-forge-prelint-ast-grep.git"
+  },
+  "homepage": "https://github.com/ibuchanan/tool-forge-prelint-ast-grep#readme",
   "license": "Apache-2.0",
   "files": [
     "rules/",
@@ -24,7 +29,7 @@
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'"
   },
   "devDependencies": {
-    "@ast-grep/cli": "^0.38",
-    "prettier": "^3.9.1"
+    "@ast-grep/cli": "^0.44",
+    "prettier": "^3.9"
   }
 }
