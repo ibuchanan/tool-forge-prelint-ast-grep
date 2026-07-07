@@ -79,6 +79,7 @@ npm run test:interactive
 ### recommended/frontend-ui
 
 - `require-strict-mode` — `ForgeReconciler.render()` must wrap root in `<React.StrictMode>`
+- `review-duplicate-page-title` — review large in-app headings that may duplicate the manifest module `title`
 
 ### recommended/manifest
 

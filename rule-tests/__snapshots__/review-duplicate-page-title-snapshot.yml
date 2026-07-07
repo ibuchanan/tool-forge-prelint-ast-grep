@@ -1,0 +1,68 @@
+id: review-duplicate-page-title
+snapshots:
+  <Heading as="h1" size="xlarge">My App</Heading>:
+    labels:
+      - source: <Heading as="h1" size="xlarge">My App</Heading>
+        style: primary
+        start: 0
+        end: 47
+      - source: Heading
+        style: secondary
+        start: 1
+        end: 8
+      - source: Heading
+        style: secondary
+        start: 1
+        end: 8
+      - source: size="xlarge"
+        style: secondary
+        start: 17
+        end: 30
+      - source: size="xlarge"
+        style: secondary
+        start: 17
+        end: 30
+  <Heading size="xlarge">My App</Heading>:
+    labels:
+      - source: <Heading size="xlarge">My App</Heading>
+        style: primary
+        start: 0
+        end: 39
+      - source: Heading
+        style: secondary
+        start: 1
+        end: 8
+      - source: Heading
+        style: secondary
+        start: 1
+        end: 8
+      - source: size="xlarge"
+        style: secondary
+        start: 9
+        end: 22
+      - source: size="xlarge"
+        style: secondary
+        start: 9
+        end: 22
+  <Heading size="xxlarge">My App</Heading>:
+    labels:
+      - source: <Heading size="xxlarge">My App</Heading>
+        style: primary
+        start: 0
+        end: 40
+      - source: Heading
+        style: secondary
+        start: 1
+        end: 8
+      - source: Heading
+        style: secondary
+        start: 1
+        end: 8
+      - source: size="xxlarge"
+        style: secondary
+        start: 9
+        end: 23
+      - source: size="xxlarge"
+        style: secondary
+        start: 9
+        end: 23

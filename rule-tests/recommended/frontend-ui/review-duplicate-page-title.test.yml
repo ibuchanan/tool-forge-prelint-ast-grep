@@ -1,0 +1,11 @@
+id: review-duplicate-page-title
+valid:
+  - '<Heading size="medium">Section title</Heading>'
+  - "<Text>Just text</Text>"
+invalid:
+  # page-level heading duplicating the manifest title
+  - '<Heading size="xlarge">My App</Heading>'
+  # xxlarge variant
+  - '<Heading size="xxlarge">My App</Heading>'
+  # size is not the first attribute
+  - '<Heading as="h1" size="xlarge">My App</Heading>'

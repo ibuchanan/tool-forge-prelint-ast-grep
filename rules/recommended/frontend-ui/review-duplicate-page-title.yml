@@ -1,0 +1,30 @@
+id: review-duplicate-page-title
+language: Tsx
+severity: warning
+message: >
+  This heading duplicates the page title Forge already renders from the module's
+  `title` in manifest.yml.
+note: >
+  Forge page-type modules (global pages, project pages, admin pages, and similar)
+  display the module's `title` from manifest.yml in the page chrome automatically.
+  An xlarge/xxlarge <Heading> repeating that title is a common duplicate-title
+  pattern, especially in coding-agent-generated Forge UI. Compare this heading
+  against the module's `title` in manifest.yml and remove it if it repeats the
+  title, or use a smaller heading size if it serves a different purpose.
+  See the Forge manifest modules reference:
+  https://developer.atlassian.com/platform/forge/manifest-reference/modules/
+rule:
+  all:
+    - kind: jsx_element
+    - has:
+        field: open_tag
+        has:
+          field: name
+          regex: "^Heading$"
+    - has:
+        field: open_tag
+        has:
+          kind: jsx_attribute
+          regex: 'size\s*=\s*"x?xlarge"'
+files:
+  - "**/frontend/**"
