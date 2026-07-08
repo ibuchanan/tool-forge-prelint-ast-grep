@@ -1,41 +1,169 @@
-# Forge Prelint — ast-grep rules
+# Forge Prelint ast-grep rules
 
-AST-level lint rules for [Atlassian Forge](https://developer.atlassian.com/platform/forge/) apps, packaged as [ast-grep](https://ast-grep.github.io/) configs. Point one of the tier configs at your Forge app to catch deprecated packages, frontend/backend boundary violations, and common cost and performance mistakes — no build step required.
+As explained in [Atlassian Forge documentation](https://go.atlassian.com/forge):
+> Forge makes it possible to build a fully-functional app in just a few hours,
+> with hosting, multiple development environments, and API authentication built-in.
+> Forge can be used to build custom apps and integrations or apps distributed through the Atlassian Marketplace.
 
-Use Forge Prelint as an early local or CI check before deeper Forge validation. It is intentionally single-file and AST-based; it complements `forge lint`, type checking, manifest validation, and human review rather than replacing them. See [Scope boundaries](#scope-boundaries) for checks this rule set deliberately leaves out.
+[The Forge CLI](https://developer.atlassian.com/platform/forge/getting-started/#install-the-forge-cli)
+provides an opinionated developer experience
+so that you can quickly and easily extend Atlassian apps.
+The `forge lint` command checks for Forge-specific errors and gates deployment.
+Those quick static checks help save hours of frustration in runtime debugging
+and help make sure your app is secure by design.
+
+While `forge lint` covers the strictest of checks,
+we find AI coding agents (and maybe people too)
+could use additional guardrails
+that are open to developer preference,
+quick to implement,
+and provide less strict feedback.
+
+This repo provides AST-level lint rules for Forge apps,
+packaged as [ast-grep](https://ast-grep.github.io/) configs.
+Install the rules into a Forge app,
+then point `ast-grep` at one of the tier configs to catch
+deprecated packages,
+frontend/backend boundary violations,
+and common cost and performance mistakes.
+
+Use Forge Prelint as an early local or CI check before deeper Forge validation.
+It is intentionally single-file and AST-based;
+it complements
+`forge lint`,
+type checking,
+manifest validation,
+and human review
+rather than replacing them.
+See [How this fits with forge lint](#how-this-fits-with-forge-lint)
+and [Scope boundaries](#scope-boundaries)
+for where this rule set fits.
+
+## Prerequisites
+
+- [ast-grep](https://ast-grep.github.io/) >= 0.38 to scan a Forge app.
+  when using the dev dependency shown below,
+  ast-grep will be installed into your Forge app's node modules.
+- Node.js and npm to develop or test rules in this repository
+
+## Install
+
+Install the rules package as a GitHub dependency
+in the Forge app you want to scan.
+Prefer pinning a commit SHA or tag
+so installs are reproducible:
+
+```json
+{
+  "devDependencies": {
+    "@ast-grep/cli": "^0.44",
+    "tool-forge-prelint-ast-grep": "github:ibuchanan/tool-forge-prelint-ast-grep#0.1.0"
+  }
+}
+```
+
+This package ships the YAML rule files under `rules/`
+plus the tier configs:
+* `sgconfig.recommended.yml`
+* `sgconfig.strict.yml`
+* `sgconfig.atlassian.yml`
+* `sgconfig.ecosol.yml`
+
+There is no package build step;
+the installed files are the configs that `ast-grep` reads directly.
+
+If npm reports an `allow-scripts` warning,
+it is usually for `@ast-grep/cli`,
+which uses an install script to select the native binary for your platform.
+Approve `@ast-grep/cli` in your repo's script-approval workflow,
+then rerun `npm install`.
+If your project intentionally blocks dependency lifecycle scripts,
+install `ast-grep` through another trusted path such as Homebrew
+and keep this rules package as the Git dependency.
+
+## Run
+
+For a one-off scan from the root of your Forge app,
+point `ast-grep` at the installed config file:
+
+```sh
+./node_modules/.bin/ast-grep scan \
+  --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml
+```
+
+The expected project integration is a package script named `lint:prelint`:
+
+```json
+{
+  "scripts": {
+    "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml",
+    "lint": "npm run lint:prelint && forge lint"
+  }
+}
+```
+
+If your app already has a `lint` script,
+keep it and add `lint:prelint` to the script or CI job
+that should fail early on Forge Prelint findings.
+
+Start with `sgconfig.recommended.yml`.
+Move to `sgconfig.strict.yml`
+when you want production-oriented API, import, performance, and runtime-boundary checks.
+Rule IDs with file locations appear for anything that needs attention.
 
 ## Tiers
 
-Rules are organized into composing tiers. Each tier includes all rules from tiers below it.
-Some frontend checks have a `-tsx` companion rule file so the same policy applies to both `.ts` and `.tsx` sources.
+Rules are organized into composing tiers.
+Each tier includes all rules from tiers below it.
+Some frontend checks have a `-tsx` companion rule file
+so the same policy applies to both `.ts` and `.tsx` sources.
 
 | Tier          | Audience                                 | Config                     |
 | ------------- | ---------------------------------------- | -------------------------- |
 | `recommended` | Any Forge developer                      | `sgconfig.recommended.yml` |
 | `strict`      | Production-quality Forge apps            | `sgconfig.strict.yml`      |
-| `atlassian`   | Atlassian-internal Forge apps            | `sgconfig.atlassian.yml`   |
+| `atlassian`   | Atlassian's standards for Forge apps     | `sgconfig.atlassian.yml`   |
 | `ecosol`      | Atlassian sample/demo apps (ecosol team) | `sgconfig.ecosol.yml`      |
 
-## Quickstart
+## How this fits with forge lint
 
-Install [ast-grep](https://ast-grep.github.io/guide/quick-start.html) (`npm i -g @ast-grep/cli` or `brew install ast-grep`). From the root of the Forge app you want to scan, reference a config file from a checkout of this repository:
+`forge lint` is the canonical Forge CLI validation layer.
+Keep running it.
+Use `forge lint` for
+Forge platform validation,
+manifest semantics,
+and required checks maintained by the Forge tooling itself.
+
+Forge Prelint is a fast AST pass for patterns
+that are useful to catch before Forge CLI validation:
+deprecated package imports,
+frontend/backend boundary mistakes,
+expensive API usage patterns,
+and manifest snippets that deserve review.
+With Forge Prelint and `ast-grep`,
+you can
+build your own rule sets
+and write new rules for problems you don't want to repeat.
+
+A typical local or CI order is:
 
 ```sh
-ast-grep scan --config path/to/forge-prelint/sgconfig.recommended.yml
+npm run lint:prelint
+forge lint
+npm test
 ```
 
-Start with `sgconfig.recommended.yml`. Move to `sgconfig.strict.yml` when you want production-oriented API, import, performance, and runtime-boundary checks. Zero findings on a clean project. Rule IDs with file locations appear for anything that needs attention.
-
-## Prerequisites
-
-- [ast-grep](https://ast-grep.github.io/) ≥ 0.38 to scan a Forge app
-- Node.js and npm to develop or test rules in this repository
+Don't forget type checking,
+tests,
+and human review for cross-file wiring
+and intent-heavy decisions.
+Linting is just 1 guardrail for quality.
 
 ## Development
 
 ```sh
 npm install          # install dev dependencies
-npm test             # run all rule tests (55 rules)
+npm test             # run all rule tests
 npm run check        # tests + self-lint + format check
 ```
 
@@ -163,7 +291,11 @@ Judgment-heavy checks that need app intent, cross-file dataflow, or human trade-
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Rule files live under `rules/<tier>/<category>/`, tests mirror that path under `rule-tests/`, and every rule change needs a matching test. Run `npm test` before opening a PR.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+Rule files live under `rules/<tier>/<category>/`,
+tests mirror that path under `rule-tests/`,
+and every rule change needs a matching test.
+Run `npm test` before opening a PR.
 
 ## License
 
