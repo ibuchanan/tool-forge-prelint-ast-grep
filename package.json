@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "description": "ast-grep lint rules for Atlassian Forge apps",
+  "homepage": "https://github.com/ibuchanan/tool-forge-prelint-ast-grep#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ibuchanan/tool-forge-prelint-ast-grep.git"
   },
-  "homepage": "https://github.com/ibuchanan/tool-forge-prelint-ast-grep#readme",
   "license": "Apache-2.0",
   "files": [
     "rules/",
@@ -17,15 +17,17 @@
     "sgconfig.ecosol.yml"
   ],
   "scripts": {
+    "changelog": "touch CHANGELOG.md && git cliff --offline --unreleased --prepend CHANGELOG.md",
     "check": "npm run test && npm run lint && npm run format:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "npm run lint:check",
     "lint:check": "ast-grep scan --config sgconfig.recommended.yml && ast-grep scan --config sgconfig.strict.yml",
     "lint:fix": "echo 'ast-grep does not support auto-fix for these rules'",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "release:prepare": "scripts/release-prepare.sh",
     "test": "ast-grep test --test-dir rule-tests",
-    "test:update": "ast-grep test --test-dir rule-tests --update-all",
     "test:interactive": "ast-grep test --test-dir rule-tests --interactive",
+    "test:update": "ast-grep test --test-dir rule-tests --update-all",
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'"
   },
   "devDependencies": {
