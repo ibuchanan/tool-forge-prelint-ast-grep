@@ -20,6 +20,10 @@ rule:
           stopBy: end
           kind: block_mapping_pair
           regex: '^\s*filter\s*:'
+    - not:
+        has:
+          stopBy: end
+          regex: 'avi:forge:'
     - inside:
         stopBy: end
         kind: block_mapping_pair

@@ -10,6 +10,14 @@ valid:
             - jira:issue_created
           filter:
             expression: "issue.fields.issuetype.name == 'Bug'"
+  # avi:forge events don't support filter — no finding
+  - |
+    modules:
+      trigger:
+        - key: my-trigger
+          function: my-function
+          events:
+            - avi:forge:installed:app
 invalid:
   # events with no filter — should add filter.expression
   - |
