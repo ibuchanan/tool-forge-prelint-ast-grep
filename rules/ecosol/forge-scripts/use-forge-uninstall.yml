@@ -19,7 +19,7 @@ rule:
             regex: '^"forge:uninstall"\s*:'
     - all:
         - kind: string_content
-          regex: "^@forge/api$"
+          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
           inside:
             stopBy: end
             kind: pair

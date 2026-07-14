@@ -25,7 +25,8 @@
     "lint:check": "ast-grep scan --config sgconfig.recommended.yml && ast-grep scan --config sgconfig.strict.yml",
     "lint:fix": "echo 'ast-grep does not support auto-fix for these rules'",
     "release:prepare": "scripts/release-prepare.sh",
-    "test": "ast-grep test --test-dir rule-tests",
+    "test": "ast-grep test --test-dir rule-tests && npm run test:fixtures",
+    "test:fixtures": "scripts/check-fixtures.sh",
     "test:interactive": "ast-grep test --test-dir rule-tests --interactive",
     "test:update": "ast-grep test --test-dir rule-tests --update-all",
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'"

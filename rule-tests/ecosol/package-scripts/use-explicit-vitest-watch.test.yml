@@ -1,0 +1,59 @@
+id: use-explicit-vitest-watch
+valid:
+  # Not a Forge app - bare vitest is fine for a plain JS/TS repo
+  - |
+    {
+      "scripts": {
+        "test:watch": "vitest"
+      }
+    }
+  # Forge app with an explicit watch invocation
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test:watch": "vitest watch"
+      }
+    }
+  # --watch flag also counts as explicit
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test:watch": "vitest --watch"
+      }
+    }
+  # No test:watch script at all - nothing to flag
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test": "vitest run"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test:watch": "vitest"
+      }
+    }
+  # Frontend-only Forge app (no @forge/api, but @forge/react present)
+  - |
+    {
+      "dependencies": {
+        "@forge/react": "^4.0.0"
+      },
+      "scripts": {
+        "test:watch": "vitest"
+      }
+    }

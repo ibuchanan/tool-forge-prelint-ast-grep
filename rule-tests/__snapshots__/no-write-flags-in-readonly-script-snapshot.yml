@@ -7,17 +7,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"format:check": "biome format --write ."'
-        style: primary
-        start: 21
-        end: 61
-      - source: |-
-          "scripts": {
-              "format:check": "biome format --write ."
-            }
-        style: secondary
-        start: 4
-        end: 65
+    - source: '"format:check": "biome format --write ."'
+      style: primary
+      start: 21
+      end: 61
+    - source: |-
+        "scripts": {
+            "format:check": "biome format --write ."
+          }
+      style: secondary
+      start: 4
+      end: 65
   ? |
     {
       "scripts": {
@@ -25,17 +25,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"lint": "biome lint --write"'
-        style: primary
-        start: 21
-        end: 49
-      - source: |-
-          "scripts": {
-              "lint": "biome lint --write"
-            }
-        style: secondary
-        start: 4
-        end: 53
+    - source: '"lint": "biome lint --write"'
+      style: primary
+      start: 21
+      end: 49
+    - source: |-
+        "scripts": {
+            "lint": "biome lint --write"
+          }
+      style: secondary
+      start: 4
+      end: 53
   ? |
     {
       "scripts": {
@@ -43,14 +43,14 @@ snapshots:
       }
     }
   : labels:
-      - source: '"lint:check": "biome lint --fix"'
-        style: primary
-        start: 21
-        end: 53
-      - source: |-
-          "scripts": {
-              "lint:check": "biome lint --fix"
-            }
-        style: secondary
-        start: 4
-        end: 57
+    - source: '"lint:check": "biome lint --fix"'
+      style: primary
+      start: 21
+      end: 53
+    - source: |-
+        "scripts": {
+            "lint:check": "biome lint --fix"
+          }
+      style: secondary
+      start: 4
+      end: 57

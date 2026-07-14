@@ -1,0 +1,75 @@
+{
+  "name": "example-forge-app",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": "dist/index.mjs",
+      "types": "dist/index.d.mts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "changelog": "git cliff --offline --unreleased --prepend CHANGELOG.md",
+    "check": "npm run format:check && npm run typecheck && npm run lint && npm run test",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "forge:deploy": "secretspec run -- forge deploy --environment \"$FORGE_ENVIRONMENT\"",
+    "forge:install": "secretspec run -- forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive",
+    "forge:register": "forge register",
+    "forge:uninstall": "secretspec run -- forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\"",
+    "forge:upgrade": "secretspec run -- forge install --upgrade --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive",
+    "forge:variables:set": "secretspec run -- forge variables set --environment \"$FORGE_ENVIRONMENT\"",
+    "forge:variables:set-encrypted": "secretspec run -- forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\"",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge",
+    "lint:check": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "lint:forge": "forge lint",
+    "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml",
+    "prepare": "echo 'Not implemented' && lefthook install",
+    "size": "npm run build && size-limit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@forge-ahead/atlassian-api-types": "github:ibuchanan/forge-ahead-atlassian-api-types#0.1.0",
+    "@forge-ahead/errors": "github:ibuchanan/forge-ahead-errors#0.1.0",
+    "@forge/api": "^8.0",
+    "@forge/events": "^3.0.1",
+    "@forge/kvs": "^2.0.1",
+    "@forge/react": "^12.0",
+    "react": "^18.2",
+    "zod": "^4.4"
+  },
+  "devDependencies": {
+    "@ast-grep/cli": "^0.44",
+    "@biomejs/biome": "2.5.2",
+    "@size-limit/file": "^12.1",
+    "@types/node": "24",
+    "lefthook": "^2.1",
+    "size-limit": "^12.1",
+    "tool-forge-prelint-ast-grep": "github:ibuchanan/tool-forge-prelint-ast-grep#v0.2.0",
+    "typescript": "^5.9",
+    "vitest": "^4.1"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "size-limit": [
+    {
+      "name": "Forge backend action bundle",
+      "path": [
+        "dist/**/*.js",
+        "!dist/frontend/**"
+      ],
+      "limit": "15 kB"
+    }
+  ]
+}

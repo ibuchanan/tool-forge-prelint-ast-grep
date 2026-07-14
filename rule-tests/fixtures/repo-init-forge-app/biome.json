@@ -1,0 +1,13 @@
+{
+  "vcs": {
+    "enabled": true,
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "includes": ["**", "!.projen/**", "!dist/**"]
+  },
+  "formatter": {
+    "indentStyle": "space"
+  }
+}

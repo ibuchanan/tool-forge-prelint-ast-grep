@@ -1,0 +1,78 @@
+id: repo-init-package-metadata
+snapshots:
+  ? |
+    {
+      "license": "Apache-2.0",
+      "main": "dist/index.mjs",
+      "types": "dist/index.d.mts",
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs",
+          "types": "dist/index.d.mts"
+        }
+      },
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 218
+      end: 228
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^8.0"
+          }
+      style: secondary
+      start: 195
+      end: 241
+  ? |
+    {
+      "private": true,
+      "license": "Apache-2.0",
+      "main": "dist/index.js",
+      "types": "dist/index.d.ts",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 130
+      end: 140
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^8.0"
+          }
+      style: secondary
+      start: 107
+      end: 153
+  ? |
+    {
+      "private": true,
+      "license": "Apache-2.0",
+      "main": "dist/index.mjs",
+      "types": "dist/index.d.mts",
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs"
+        }
+      },
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 202
+      end: 212
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^8.0"
+          }
+      style: secondary
+      start: 179
+      end: 225

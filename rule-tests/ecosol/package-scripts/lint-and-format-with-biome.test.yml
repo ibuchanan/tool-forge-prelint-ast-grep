@@ -27,6 +27,13 @@ invalid:
         "@forge/api": "^4.0.0"
       }
     }
+  # Missing from a frontend-only Forge app (no @forge/api, but @forge/react present)
+  - |
+    {
+      "dependencies": {
+        "@forge/react": "^4.0.0"
+      }
+    }
   # Biome installed but no scripts wired up
   - |
     {

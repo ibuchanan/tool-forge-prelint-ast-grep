@@ -23,6 +23,13 @@ invalid:
         "@forge/api": "^4.0.0"
       }
     }
+  # Missing from a Forge app that only depends on @forge/events
+  - |
+    {
+      "dependencies": {
+        "@forge/events": "^3.0.0"
+      }
+    }
   # Missing @forge-ahead/errors
   - |
     {

@@ -10,12 +10,18 @@ note: >
   and does only what it claims before trusting it on a teammate's machine,
   or in CI/CD.
   https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts
+  repo-init's own `prepare` placeholder (`echo 'Not implemented'`,
+  optionally chained with `lefthook install`) is a known-safe exception
+  and is not flagged.
 rule:
-  kind: pair
-  regex: '^"(preinstall|install|postinstall|preuninstall|uninstall|postuninstall|prepare|prepublish|prepublishOnly|publish|postpublish|prepack|postpack|preversion|version|postversion)"\s*:'
-  inside:
-    stopBy: end
-    kind: pair
-    regex: '"scripts"\s*:'
+  all:
+    - kind: pair
+      regex: '^"(preinstall|install|postinstall|preuninstall|uninstall|postuninstall|prepare|prepublish|prepublishOnly|publish|postpublish|prepack|postpack|preversion|version|postversion)"\s*:'
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"scripts"\s*:'
+    - not:
+        regex: '^"prepare"\s*:\s*"echo .Not implemented.( && lefthook install)?"$'
 files:
   - "**/package.json"

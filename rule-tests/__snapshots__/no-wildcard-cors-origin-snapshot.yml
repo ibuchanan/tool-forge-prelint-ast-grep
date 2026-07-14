@@ -5,16 +5,16 @@ snapshots:
       'Access-Control-Allow-Origin': '*'
     };
   : labels:
-      - source: "'Access-Control-Allow-Origin': '*'"
-        style: primary
-        start: 20
-        end: 54
+    - source: '''Access-Control-Allow-Origin'': ''*'''
+      style: primary
+      start: 20
+      end: 54
   ? |
     const headers = {
       'Access-Control-Allow-Origin': ['*']
     };
   : labels:
-      - source: "'Access-Control-Allow-Origin': ['*']"
-        style: primary
-        start: 20
-        end: 56
+    - source: '''Access-Control-Allow-Origin'': [''*'']'
+      style: primary
+      start: 20
+      end: 56

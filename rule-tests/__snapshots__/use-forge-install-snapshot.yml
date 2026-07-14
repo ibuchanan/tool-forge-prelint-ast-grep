@@ -10,17 +10,38 @@ snapshots:
       }
     }
   : labels:
-      - source: "@forge/api"
-        style: primary
-        start: 27
-        end: 37
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 52
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/kvs": "^2.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: '@forge/kvs'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/kvs": "^2.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
   ? |
     {
       "scripts": {
@@ -28,14 +49,14 @@ snapshots:
       }
     }
   : labels:
-      - source: '"install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""'
-        style: primary
-        start: 21
-        end: 99
-      - source: |-
-          "scripts": {
-              "install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
-            }
-        style: secondary
-        start: 4
-        end: 103
+    - source: '"install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""'
+      style: primary
+      start: 21
+      end: 99
+    - source: |-
+        "scripts": {
+            "install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+          }
+      style: secondary
+      start: 4
+      end: 103

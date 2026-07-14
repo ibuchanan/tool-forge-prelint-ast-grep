@@ -1,0 +1,37 @@
+id: use-forge-upgrade
+language: Json
+severity: info
+message: >
+  Name this script `forge:upgrade` so forge install --upgrade wrappers are discoverable and composable.
+note: >
+  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
+  `forge install --upgrade` is the separate `forge:upgrade` convention,
+  distinct from a plain `forge install` (named `forge:install`).
+rule:
+  any:
+    - all:
+        - kind: pair
+          regex: 'forge install\b'
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"scripts"\s*:'
+        - regex: "--upgrade"
+        - not:
+            regex: '^"forge:upgrade"\s*:'
+    - all:
+        - kind: string_content
+          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"dependencies"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"forge:upgrade"\s*:'
+files:
+  - "**/package.json"

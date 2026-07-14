@@ -17,14 +17,7 @@ valid:
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
       }
     }
-invalid:
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  # Wired up to the wrong tier
+  # Forge app wired up to the recommended tier (also a valid, documented tier)
   - |
     {
       "dependencies": {
@@ -32,5 +25,39 @@ invalid:
       },
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+      }
+    }
+  # Forge app wired up to the strict tier (also a valid, documented tier)
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # Missing from a frontend-only Forge app (no @forge/api, but @forge/react present)
+  - |
+    {
+      "dependencies": {
+        "@forge/react": "^4.0.0"
+      }
+    }
+  # Wired up to a config that isn't one of this tool's shipped tiers
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml"
       }
     }

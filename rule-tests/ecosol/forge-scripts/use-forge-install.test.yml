@@ -47,3 +47,13 @@ invalid:
         "build": "tsc"
       }
     }
+  # Missing from a Forge app that only depends on @forge/kvs
+  - |
+    {
+      "dependencies": {
+        "@forge/kvs": "^2.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

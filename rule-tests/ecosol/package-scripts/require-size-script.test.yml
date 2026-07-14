@@ -1,0 +1,56 @@
+id: require-size-script
+valid:
+  # No size-limit tooling at all - nothing to wire up
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  # size-limit config key present and size script correctly wired
+  - |
+    {
+      "scripts": {
+        "size": "npm run build && size-limit"
+      },
+      "size-limit": [
+        {
+          "path": "dist/**/*.js",
+          "limit": "15 kB"
+        }
+      ]
+    }
+  # @size-limit/* devDependency present and size script correctly wired
+  - |
+    {
+      "scripts": {
+        "size": "npm run build && size-limit"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }
+invalid:
+  # size-limit config key present but no size script
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      },
+      "size-limit": [
+        {
+          "path": "dist/**/*.js",
+          "limit": "15 kB"
+        }
+      ]
+    }
+  # @size-limit/* devDependency present but no size script
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }

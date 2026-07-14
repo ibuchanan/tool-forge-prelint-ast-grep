@@ -53,3 +53,13 @@ invalid:
         "build": "tsc"
       }
     }
+  # Missing from a frontend-only Forge app (no @forge/api, but @forge/react present)
+  - |
+    {
+      "dependencies": {
+        "@forge/react": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

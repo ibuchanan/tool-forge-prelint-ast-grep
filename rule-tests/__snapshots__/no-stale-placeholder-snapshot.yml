@@ -10,36 +10,76 @@ snapshots:
       }
     }
   : labels:
-      - source: '"docs:build": "echo TODO"'
-        style: primary
-        start: 73
-        end: 98
-      - source: |-
-          "scripts": {
-              "docs:build": "echo TODO"
-            }
-        style: secondary
-        start: 56
-        end: 102
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 52
-      - source: |-
-          {
-            "dependencies": {
-              "@forge/api": "^4.0.0"
-            },
-            "scripts": {
-              "docs:build": "echo TODO"
-            }
+    - source: '"docs:build": "echo TODO"'
+      style: primary
+      start: 73
+      end: 98
+    - source: |-
+        "scripts": {
+            "docs:build": "echo TODO"
           }
-        style: secondary
-        start: 0
-        end: 104
+      style: secondary
+      start: 56
+      end: 102
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "docs:build": "echo TODO"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 104
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "size": "echo TODO"
+      }
+    }
+  : labels:
+    - source: '"size": "echo TODO"'
+      style: primary
+      start: 73
+      end: 92
+    - source: |-
+        "scripts": {
+            "size": "echo TODO"
+          }
+      style: secondary
+      start: 56
+      end: 96
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "size": "echo TODO"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 98
   ? |
     {
       "dependencies": {
@@ -50,36 +90,36 @@ snapshots:
       }
     }
   : labels:
-      - source: '"test": "echo \"Not implemented\" && exit 1"'
-        style: primary
-        start: 73
-        end: 117
-      - source: |-
-          "scripts": {
-              "test": "echo \"Not implemented\" && exit 1"
-            }
-        style: secondary
-        start: 56
-        end: 121
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 52
-      - source: |-
-          {
-            "dependencies": {
-              "@forge/api": "^4.0.0"
-            },
-            "scripts": {
-              "test": "echo \"Not implemented\" && exit 1"
-            }
+    - source: '"test": "echo \"Not implemented\" && exit 1"'
+      style: primary
+      start: 73
+      end: 117
+    - source: |-
+        "scripts": {
+            "test": "echo \"Not implemented\" && exit 1"
           }
-        style: secondary
-        start: 0
-        end: 123
+      style: secondary
+      start: 56
+      end: 121
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "test": "echo \"Not implemented\" && exit 1"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 123
   ? |
     {
       "dependencies": {
@@ -90,33 +130,113 @@ snapshots:
       }
     }
   : labels:
-      - source: '"test:coverage": "echo ''not yet implemented''"'
-        style: primary
-        start: 73
-        end: 118
-      - source: |-
-          "scripts": {
-              "test:coverage": "echo 'not yet implemented'"
-            }
-        style: secondary
-        start: 56
-        end: 122
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 52
-      - source: |-
-          {
-            "dependencies": {
-              "@forge/api": "^4.0.0"
-            },
-            "scripts": {
-              "test:coverage": "echo 'not yet implemented'"
-            }
+    - source: '"test:coverage": "echo ''not yet implemented''"'
+      style: primary
+      start: 73
+      end: 118
+    - source: |-
+        "scripts": {
+            "test:coverage": "echo 'not yet implemented'"
           }
-        style: secondary
-        start: 0
-        end: 124
+      style: secondary
+      start: 56
+      end: 122
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "test:coverage": "echo 'not yet implemented'"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 124
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "typecheck": "echo \"Not implemented\" && exit 1"
+      }
+    }
+  : labels:
+    - source: '"typecheck": "echo \"Not implemented\" && exit 1"'
+      style: primary
+      start: 73
+      end: 122
+    - source: |-
+        "scripts": {
+            "typecheck": "echo \"Not implemented\" && exit 1"
+          }
+      style: secondary
+      start: 56
+      end: 126
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "echo \"Not implemented\" && exit 1"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 128
+  ? |
+    {
+      "dependencies": {
+        "@forge/react": "^4.0.0"
+      },
+      "scripts": {
+        "test": "echo \"Not implemented\" && exit 1"
+      }
+    }
+  : labels:
+    - source: '"test": "echo \"Not implemented\" && exit 1"'
+      style: primary
+      start: 75
+      end: 119
+    - source: |-
+        "scripts": {
+            "test": "echo \"Not implemented\" && exit 1"
+          }
+      style: secondary
+      start: 58
+      end: 123
+    - source: |-
+        "dependencies": {
+            "@forge/react": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 54
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/react": "^4.0.0"
+          },
+          "scripts": {
+            "test": "echo \"Not implemented\" && exit 1"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 125

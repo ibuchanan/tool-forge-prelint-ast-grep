@@ -1,0 +1,30 @@
+id: tsconfig-build-emits-declarations
+valid:
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "declaration": true
+      }
+    }
+invalid:
+  # Missing extends
+  - |
+    {
+      "compilerOptions": {
+        "declaration": true
+      }
+    }
+  # Missing declaration: true
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "declaration": false
+      }
+    }
+  # No compilerOptions at all
+  - |
+    {
+      "extends": "./tsconfig.json"
+    }

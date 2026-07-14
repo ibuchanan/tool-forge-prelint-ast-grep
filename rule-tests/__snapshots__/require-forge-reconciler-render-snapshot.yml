@@ -4,9 +4,9 @@ snapshots:
     import { ForgeReconciler } from '@forge/react';
     export const App = () => <div />;
   : labels:
-      - source: |
-          import { ForgeReconciler } from '@forge/react';
-          export const App = () => <div />;
-        style: primary
-        start: 0
-        end: 82
+    - source: |
+        import { ForgeReconciler } from '@forge/react';
+        export const App = () => <div />;
+      style: primary
+      start: 0
+      end: 82

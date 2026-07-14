@@ -1,0 +1,25 @@
+id: typescript-major-stays-5
+language: Json
+severity: warning
+message: >
+  Keep typescript pinned to a 5.x range, matching the repo-wide Forge
+  bundler constraint.
+note: >
+  repo-init's generated tsconfig.json baseline assumes TypeScript 5.
+  A major bump can silently change ts-loader/Forge bundler output or
+  break the strict compiler options repo-init enables.
+rule:
+  all:
+    - kind: pair
+      regex: '^"typescript"\s*:'
+      not:
+        regex: '^"typescript"\s*:\s*"[\^~]?5(\.(x|\*|[0-9]+)){0,2}"$'
+    - inside:
+        stopBy: end
+        kind: object
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+files:
+  - "**/package.json"

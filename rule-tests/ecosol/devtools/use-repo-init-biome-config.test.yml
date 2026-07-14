@@ -1,0 +1,36 @@
+id: use-repo-init-biome-config
+valid:
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" },
+      "files": { "includes": ["**", "!.projen/**", "!dist/**"] },
+      "formatter": { "indentStyle": "space" }
+    }
+invalid:
+  # Missing vcs entirely
+  - |
+    {
+      "files": { "includes": ["**", "!.projen/**", "!dist/**"] },
+      "formatter": { "indentStyle": "space" }
+    }
+  # defaultBranch drifted from main
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "master" },
+      "files": { "includes": ["**", "!.projen/**", "!dist/**"] },
+      "formatter": { "indentStyle": "space" }
+    }
+  # dist not excluded from files.includes
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" },
+      "files": { "includes": ["**", "!.projen/**"] },
+      "formatter": { "indentStyle": "space" }
+    }
+  # indentStyle drifted to tab
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" },
+      "files": { "includes": ["**", "!.projen/**", "!dist/**"] },
+      "formatter": { "indentStyle": "tab" }
+    }

@@ -2,7 +2,7 @@ id: no-jira-search-without-fields
 snapshots:
   api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`):
     labels:
-      - source: api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`)
-        style: primary
-        start: 0
-        end: 62
+    - source: api.asUser().requestJira(route`/rest/api/3/search?jql=${jql}`)
+      style: primary
+      start: 0
+      end: 62

@@ -24,6 +24,13 @@ invalid:
         "@forge/api": "^4.0.0"
       }
     }
+  # Missing from a Forge app that only depends on @forge/resolver
+  - |
+    {
+      "dependencies": {
+        "@forge/resolver": "^1.0.0"
+      }
+    }
   # Pinned to an older Node.js version
   - |
     {

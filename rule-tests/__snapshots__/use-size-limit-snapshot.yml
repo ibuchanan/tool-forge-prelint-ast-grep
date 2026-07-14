@@ -16,18 +16,18 @@ snapshots:
       }
     }
   : labels:
-      - source: build
-        style: primary
-        start: 48
-        end: 53
-      - source: |-
-          "scripts": {
-              "build": "forge build",
-              "test": "vitest"
-            }
-        style: secondary
-        start: 30
-        end: 95
+    - source: build
+      style: primary
+      start: 48
+      end: 53
+    - source: |-
+        "scripts": {
+            "build": "forge build",
+            "test": "vitest"
+          }
+      style: secondary
+      start: 30
+      end: 95
   ? |
     {
       "scripts": {
@@ -35,14 +35,14 @@ snapshots:
       }
     }
   : labels:
-      - source: build
-        style: primary
-        start: 22
-        end: 27
-      - source: |-
-          "scripts": {
-              "build": "forge build"
-            }
-        style: secondary
-        start: 4
-        end: 47
+    - source: build
+      style: primary
+      start: 22
+      end: 27
+    - source: |-
+        "scripts": {
+            "build": "forge build"
+          }
+      style: secondary
+      start: 4
+      end: 47

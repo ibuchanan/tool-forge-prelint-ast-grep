@@ -7,17 +7,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"postinstall": "node scripts/patch-package.js"'
-        style: primary
-        start: 21
-        end: 67
-      - source: |-
-          "scripts": {
-              "postinstall": "node scripts/patch-package.js"
-            }
-        style: secondary
-        start: 4
-        end: 71
+    - source: '"postinstall": "node scripts/patch-package.js"'
+      style: primary
+      start: 21
+      end: 67
+    - source: |-
+        "scripts": {
+            "postinstall": "node scripts/patch-package.js"
+          }
+      style: secondary
+      start: 4
+      end: 71
   ? |
     {
       "scripts": {
@@ -25,17 +25,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"postpublish": "curl -X POST https://example.com/notify"'
-        style: primary
-        start: 21
-        end: 77
-      - source: |-
-          "scripts": {
-              "postpublish": "curl -X POST https://example.com/notify"
-            }
-        style: secondary
-        start: 4
-        end: 81
+    - source: '"postpublish": "curl -X POST https://example.com/notify"'
+      style: primary
+      start: 21
+      end: 77
+    - source: |-
+        "scripts": {
+            "postpublish": "curl -X POST https://example.com/notify"
+          }
+      style: secondary
+      start: 4
+      end: 81
   ? |
     {
       "scripts": {
@@ -43,17 +43,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"preinstall": "npx only-allow npm"'
-        style: primary
-        start: 21
-        end: 55
-      - source: |-
-          "scripts": {
-              "preinstall": "npx only-allow npm"
-            }
-        style: secondary
-        start: 4
-        end: 59
+    - source: '"preinstall": "npx only-allow npm"'
+      style: primary
+      start: 21
+      end: 55
+    - source: |-
+        "scripts": {
+            "preinstall": "npx only-allow npm"
+          }
+      style: secondary
+      start: 4
+      end: 59
   ? |
     {
       "scripts": {
@@ -61,17 +61,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"prepare": "npm run build"'
-        style: primary
-        start: 21
-        end: 47
-      - source: |-
-          "scripts": {
-              "prepare": "npm run build"
-            }
-        style: secondary
-        start: 4
-        end: 51
+    - source: '"prepare": "npm run build"'
+      style: primary
+      start: 21
+      end: 47
+    - source: |-
+        "scripts": {
+            "prepare": "npm run build"
+          }
+      style: secondary
+      start: 4
+      end: 51
   ? |
     {
       "scripts": {
@@ -79,17 +79,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"prepublish": "npm run build"'
-        style: primary
-        start: 21
-        end: 50
-      - source: |-
-          "scripts": {
-              "prepublish": "npm run build"
-            }
-        style: secondary
-        start: 4
-        end: 54
+    - source: '"prepublish": "npm run build"'
+      style: primary
+      start: 21
+      end: 50
+    - source: |-
+        "scripts": {
+            "prepublish": "npm run build"
+          }
+      style: secondary
+      start: 4
+      end: 54
   ? |
     {
       "scripts": {
@@ -97,17 +97,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"prepublishOnly": "npm run build && npm test"'
-        style: primary
-        start: 21
-        end: 66
-      - source: |-
-          "scripts": {
-              "prepublishOnly": "npm run build && npm test"
-            }
-        style: secondary
-        start: 4
-        end: 70
+    - source: '"prepublishOnly": "npm run build && npm test"'
+      style: primary
+      start: 21
+      end: 66
+    - source: |-
+        "scripts": {
+            "prepublishOnly": "npm run build && npm test"
+          }
+      style: secondary
+      start: 4
+      end: 70
   ? |
     {
       "scripts": {
@@ -115,17 +115,17 @@ snapshots:
       }
     }
   : labels:
-      - source: '"preversion": "npm test"'
-        style: primary
-        start: 21
-        end: 45
-      - source: |-
-          "scripts": {
-              "preversion": "npm test"
-            }
-        style: secondary
-        start: 4
-        end: 49
+    - source: '"preversion": "npm test"'
+      style: primary
+      start: 21
+      end: 45
+    - source: |-
+        "scripts": {
+            "preversion": "npm test"
+          }
+      style: secondary
+      start: 4
+      end: 49
   ? |
     {
       "scripts": {
@@ -133,14 +133,14 @@ snapshots:
       }
     }
   : labels:
-      - source: '"publish": "echo done"'
-        style: primary
-        start: 21
-        end: 43
-      - source: |-
-          "scripts": {
-              "publish": "echo done"
-            }
-        style: secondary
-        start: 4
-        end: 47
+    - source: '"publish": "echo done"'
+      style: primary
+      start: 21
+      end: 43
+    - source: |-
+        "scripts": {
+            "publish": "echo done"
+          }
+      style: secondary
+      start: 4
+      end: 47

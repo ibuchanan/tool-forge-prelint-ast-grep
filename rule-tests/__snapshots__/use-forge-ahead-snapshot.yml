@@ -7,17 +7,17 @@ snapshots:
       }
     }
   : labels:
-      - source: "@forge/api"
-        style: primary
-        start: 27
-        end: 37
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 52
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
   ? |
     {
       "dependencies": {
@@ -26,18 +26,18 @@ snapshots:
       }
     }
   : labels:
-      - source: "@forge/api"
-        style: primary
-        start: 27
-        end: 37
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0",
-              "@forge-ahead/atlassian-api-types": "^1.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 102
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0",
+            "@forge-ahead/atlassian-api-types": "^1.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 102
   ? |
     {
       "dependencies": {
@@ -46,15 +46,33 @@ snapshots:
       }
     }
   : labels:
-      - source: "@forge/api"
-        style: primary
-        start: 27
-        end: 37
-      - source: |-
-          "dependencies": {
-              "@forge/api": "^4.0.0",
-              "@forge-ahead/errors": "^1.0.0"
-            }
-        style: secondary
-        start: 4
-        end: 89
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0",
+            "@forge-ahead/errors": "^1.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 89
+  ? |
+    {
+      "dependencies": {
+        "@forge/events": "^3.0.0"
+      }
+    }
+  : labels:
+    - source: '@forge/events'
+      style: primary
+      start: 27
+      end: 40
+    - source: |-
+        "dependencies": {
+            "@forge/events": "^3.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 55

@@ -1,0 +1,62 @@
+id: use-forge-variables-set-encrypted
+snapshots:
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/bridge": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: '@forge/bridge'
+      style: primary
+      start: 27
+      end: 40
+    - source: |-
+        "dependencies": {
+            "@forge/bridge": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 55
+  ? |
+    {
+      "scripts": {
+        "variables:set-encrypted": "forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  : labels:
+    - source: '"variables:set-encrypted": "forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""'
+      style: primary
+      start: 21
+      end: 116
+    - source: |-
+        "scripts": {
+            "variables:set-encrypted": "forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+          }
+      style: secondary
+      start: 4
+      end: 120

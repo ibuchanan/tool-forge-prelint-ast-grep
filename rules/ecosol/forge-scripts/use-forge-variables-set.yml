@@ -1,0 +1,39 @@
+id: use-forge-variables-set
+language: Json
+severity: info
+message: >
+  Name this script `forge:variables:set` so forge variables set wrappers are discoverable and composable.
+note: >
+  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
+  `forge variables set --encrypt` is the separate `forge:variables:set-encrypted`
+  convention; a plain `forge variables set` (without `--encrypt`) should be named
+  `forge:variables:set`.
+rule:
+  any:
+    - all:
+        - kind: pair
+          regex: 'forge variables set\b'
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"scripts"\s*:'
+        - not:
+            regex: "--encrypt"
+        - not:
+            regex: '^"forge:variables:set"\s*:'
+    - all:
+        - kind: string_content
+          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"dependencies"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"forge:variables:set"\s*:'
+files:
+  - "**/package.json"

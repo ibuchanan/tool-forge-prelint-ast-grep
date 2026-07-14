@@ -17,11 +17,28 @@ valid:
         "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
       }
     }
+  # Extra whitespace around && (e.g. from a formatter) should not cause a false positive
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "check": "npm run format:check && npm run typecheck  && npm run lint && npm run test"
+      }
+    }
 invalid:
   - |
     {
       "dependencies": {
         "@forge/api": "^4.0.0"
+      }
+    }
+  # Missing from a Forge app that only depends on @forge/kvs
+  - |
+    {
+      "dependencies": {
+        "@forge/kvs": "^2.0.0"
       }
     }
   # Missing typecheck from the chain

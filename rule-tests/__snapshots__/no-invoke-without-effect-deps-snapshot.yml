@@ -2,11 +2,11 @@ id: no-invoke-without-effect-deps
 snapshots:
   useEffect(() => { invoke('get-data') }):
     labels:
-      - source: useEffect(() => { invoke('get-data') })
-        style: primary
-        start: 0
-        end: 39
-      - source: invoke('get-data')
-        style: secondary
-        start: 18
-        end: 36
+    - source: useEffect(() => { invoke('get-data') })
+      style: primary
+      start: 0
+      end: 39
+    - source: invoke('get-data')
+      style: secondary
+      start: 18
+      end: 36

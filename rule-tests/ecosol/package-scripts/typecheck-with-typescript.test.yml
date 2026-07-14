@@ -25,6 +25,13 @@ invalid:
         "@forge/api": "^4.0.0"
       }
     }
+  # Missing from a Forge app that only depends on @forge/bridge
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "^4.0.0"
+      }
+    }
   # Missing typecheck script
   - |
     {

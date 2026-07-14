@@ -4,21 +4,21 @@ snapshots:
     import { Queue } from '@forge/events';
     const queue = new Queue({ key: queueName });
   : labels:
-      - source: "key: queueName"
-        style: primary
-        start: 65
-        end: 79
-      - source: import { Queue } from '@forge/events';
-        style: secondary
-        start: 0
-        end: 38
-      - source: |
-          import { Queue } from '@forge/events';
-          const queue = new Queue({ key: queueName });
-        style: secondary
-        start: 0
-        end: 84
-      - source: "new Queue({ key: queueName })"
-        style: secondary
-        start: 53
-        end: 82
+    - source: 'key: queueName'
+      style: primary
+      start: 65
+      end: 79
+    - source: import { Queue } from '@forge/events';
+      style: secondary
+      start: 0
+      end: 38
+    - source: |
+        import { Queue } from '@forge/events';
+        const queue = new Queue({ key: queueName });
+      style: secondary
+      start: 0
+      end: 84
+    - source: 'new Queue({ key: queueName })'
+      style: secondary
+      start: 53
+      end: 82

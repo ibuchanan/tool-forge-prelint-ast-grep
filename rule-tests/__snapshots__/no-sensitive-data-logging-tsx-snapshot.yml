@@ -2,13 +2,13 @@ id: no-sensitive-data-logging-tsx
 snapshots:
   console.log('password:', password):
     labels:
-      - source: console.log('password:', password)
-        style: primary
-        start: 0
-        end: 34
+    - source: console.log('password:', password)
+      style: primary
+      start: 0
+      end: 34
   console.warn('api key is', apiKey):
     labels:
-      - source: console.warn('api key is', apiKey)
-        style: primary
-        start: 0
-        end: 34
+    - source: console.warn('api key is', apiKey)
+      style: primary
+      start: 0
+      end: 34

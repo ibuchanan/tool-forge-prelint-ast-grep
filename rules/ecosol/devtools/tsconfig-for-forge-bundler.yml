@@ -1,0 +1,52 @@
+id: tsconfig-for-forge-bundler
+language: Json
+severity: warning
+message: >
+  Bring tsconfig.json's compilerOptions back in line with the repo-init
+  Forge bundler baseline.
+note: >
+  repo-init generates compilerOptions with module: "ESNext",
+  moduleResolution: "node", jsx: "react-jsx", target: "ES2022",
+  rootDir: "src", outDir: "dist", strict: true, and
+  noUncheckedIndexedAccess: true. Forge's webpack/ts-loader bundler is
+  sensitive to these settings, so drift here is easy to introduce and
+  hard to diagnose from a bundling failure alone.
+rule:
+  kind: object
+  inside:
+    kind: document
+  any:
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"module"\s*:\s*"ESNext"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"moduleResolution"\s*:\s*"node"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"jsx"\s*:\s*"react-jsx"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"target"\s*:\s*"ES2022"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"rootDir"\s*:\s*"src"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"outDir"\s*:\s*"dist"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"strict"\s*:\s*true'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"noUncheckedIndexedAccess"\s*:\s*true'
+files:
+  - "**/tsconfig.json"

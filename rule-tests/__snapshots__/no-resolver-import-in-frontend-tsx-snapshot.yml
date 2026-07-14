@@ -2,13 +2,13 @@ id: no-resolver-import-in-frontend-tsx
 snapshots:
   import { myResolver } from '../resolvers':
     labels:
-      - source: import { myResolver } from '../resolvers'
-        style: primary
-        start: 0
-        end: 41
+    - source: import { myResolver } from '../resolvers'
+      style: primary
+      start: 0
+      end: 41
   import { myResolver } from '../resolvers/index':
     labels:
-      - source: import { myResolver } from '../resolvers/index'
-        style: primary
-        start: 0
-        end: 47
+    - source: import { myResolver } from '../resolvers/index'
+      style: primary
+      start: 0
+      end: 47

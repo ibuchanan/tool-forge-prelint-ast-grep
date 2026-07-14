@@ -17,11 +17,36 @@ valid:
         "test": "vitest run"
       }
     }
+  # Intentionally reserved template placeholders outside repo-init's default
+  # modules (generate:openapi, generate:rovo, preview, start) should not be flagged
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "generate:openapi": "echo \"Not implemented\" && exit 1",
+        "generate:rovo": "echo \"Not implemented\" && exit 1",
+        "preview": "echo TODO",
+        "start": "echo TODO",
+        "docs:build": "echo TODO"
+      }
+    }
 invalid:
   - |
     {
       "dependencies": {
         "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test": "echo \"Not implemented\" && exit 1"
+      }
+    }
+  # Frontend-only Forge app (no @forge/api, but @forge/react present)
+  - |
+    {
+      "dependencies": {
+        "@forge/react": "^4.0.0"
       },
       "scripts": {
         "test": "echo \"Not implemented\" && exit 1"
@@ -36,12 +61,22 @@ invalid:
         "test:coverage": "echo 'not yet implemented'"
       }
     }
+  # typecheck and size are in scope, alongside test/format*/lint*/build/check/changelog
   - |
     {
       "dependencies": {
         "@forge/api": "^4.0.0"
       },
       "scripts": {
-        "docs:build": "echo TODO"
+        "typecheck": "echo \"Not implemented\" && exit 1"
+      }
+    }
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "size": "echo TODO"
       }
     }

@@ -1,0 +1,71 @@
+id: repo-init-package-metadata
+valid:
+  # Not a Forge app (no @forge/api dependency) — metadata drift is not this repo's concern
+  - |
+    {
+      "main": "dist/index.js",
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app fully matching the repo-init baseline
+  - |
+    {
+      "private": true,
+      "license": "Apache-2.0",
+      "main": "dist/index.mjs",
+      "types": "dist/index.d.mts",
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs",
+          "types": "dist/index.d.mts"
+        }
+      },
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+invalid:
+  # CJS-style main/types, no exports map
+  - |
+    {
+      "private": true,
+      "license": "Apache-2.0",
+      "main": "dist/index.js",
+      "types": "dist/index.d.ts",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  # Missing private: true
+  - |
+    {
+      "license": "Apache-2.0",
+      "main": "dist/index.mjs",
+      "types": "dist/index.d.mts",
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs",
+          "types": "dist/index.d.mts"
+        }
+      },
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  # exports map missing types
+  - |
+    {
+      "private": true,
+      "license": "Apache-2.0",
+      "main": "dist/index.mjs",
+      "types": "dist/index.d.mts",
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs"
+        }
+      },
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }

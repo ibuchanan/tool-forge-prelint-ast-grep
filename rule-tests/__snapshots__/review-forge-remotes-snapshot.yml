@@ -7,10 +7,10 @@ snapshots:
       - key: my-remote
         baseUrl: "https://api.example.com"
   : labels:
-      - source: |
-          remotes:
-            - key: my-remote
-              baseUrl: "https://api.example.com"
-        style: primary
-        start: 43
-        end: 110
+    - source: |
+        remotes:
+          - key: my-remote
+            baseUrl: "https://api.example.com"
+      style: primary
+      start: 43
+      end: 110

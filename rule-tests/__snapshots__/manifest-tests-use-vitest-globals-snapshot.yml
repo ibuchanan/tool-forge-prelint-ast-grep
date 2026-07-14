@@ -1,0 +1,38 @@
+id: manifest-tests-use-vitest-globals
+snapshots:
+  ? |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      plugins: [],
+    })
+  : labels:
+    - source: |-
+        defineConfig({
+          plugins: [],
+        })
+      style: primary
+      start: 61
+      end: 93
+    - source: defineConfig
+      style: secondary
+      start: 61
+      end: 73
+  ? |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      test: {},
+    })
+  : labels:
+    - source: |-
+        defineConfig({
+          test: {},
+        })
+      style: primary
+      start: 61
+      end: 90
+    - source: defineConfig
+      style: secondary
+      start: 61
+      end: 73

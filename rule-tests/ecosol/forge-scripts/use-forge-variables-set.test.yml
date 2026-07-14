@@ -1,0 +1,60 @@
+id: use-forge-variables-set
+valid:
+  # Not a Forge app (no @forge/api dependency) and no forge variables set script
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge:variables:set": "source .env && forge variables set --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  # forge variables set --encrypt should not trigger this rule
+  - |
+    {
+      "scripts": {
+        "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  # Forge app with forge:variables:set correctly present
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "forge:variables:set": "source .env && forge variables set --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+invalid:
+  # Present under the wrong key name
+  - |
+    {
+      "scripts": {
+        "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  # Missing entirely from a Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  # Missing from a Forge app that only depends on @forge/events
+  - |
+    {
+      "dependencies": {
+        "@forge/events": "^3.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

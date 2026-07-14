@@ -1,0 +1,74 @@
+id: tsconfig-build-emits-declarations
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "declaration": true
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "declaration": true
+          }
+        }
+      style: primary
+      start: 0
+      end: 54
+    - source: |
+        {
+          "compilerOptions": {
+            "declaration": true
+          }
+        }
+      style: secondary
+      start: 0
+      end: 55
+  ? |
+    {
+      "extends": "./tsconfig.json"
+    }
+  : labels:
+    - source: |-
+        {
+          "extends": "./tsconfig.json"
+        }
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        {
+          "extends": "./tsconfig.json"
+        }
+      style: secondary
+      start: 0
+      end: 35
+  ? |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "declaration": false
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "extends": "./tsconfig.json",
+          "compilerOptions": {
+            "declaration": false
+          }
+        }
+      style: primary
+      start: 0
+      end: 87
+    - source: |
+        {
+          "extends": "./tsconfig.json",
+          "compilerOptions": {
+            "declaration": false
+          }
+        }
+      style: secondary
+      start: 0
+      end: 88

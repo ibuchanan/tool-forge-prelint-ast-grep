@@ -1,0 +1,44 @@
+id: lefthook-runs-generated-guards
+valid:
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged
+        lint:
+          run: npm run lint
+        format:
+          run: npm run format:check
+        typecheck:
+          run: npm run typecheck
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+invalid:
+  # Missing typecheck and the whole pre-push block
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged
+        lint:
+          run: npm run lint
+        format:
+          run: npm run format:check
+  # pre-commit is complete, but pre-push is missing the test guard
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged
+        lint:
+          run: npm run lint
+        format:
+          run: npm run format:check
+        typecheck:
+          run: npm run typecheck
+    pre-push:
+      commands:
+        build:
+          run: npm run build

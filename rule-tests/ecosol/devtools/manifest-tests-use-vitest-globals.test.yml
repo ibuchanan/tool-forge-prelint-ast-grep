@@ -1,0 +1,23 @@
+id: manifest-tests-use-vitest-globals
+valid:
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      test: { globals: true },
+    })
+invalid:
+  # test block present but globals not enabled
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      test: {},
+    })
+  # no test block at all
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      plugins: [],
+    })

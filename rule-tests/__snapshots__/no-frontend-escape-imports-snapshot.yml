@@ -1,26 +1,26 @@
 id: no-frontend-escape-imports
 snapshots:
-  import { callExternal } from '../external':
-    labels:
-      - source: import { callExternal } from '../external'
-        style: primary
-        start: 0
-        end: 42
   import { callExternal } from '../../external/client':
     labels:
-      - source: import { callExternal } from '../../external/client'
-        style: primary
-        start: 0
-        end: 52
+    - source: import { callExternal } from '../../external/client'
+      style: primary
+      start: 0
+      end: 52
+  import { callExternal } from '../external':
+    labels:
+    - source: import { callExternal } from '../external'
+      style: primary
+      start: 0
+      end: 42
   import { onInstall } from '../import-lifecycle/on-install':
     labels:
-      - source: import { onInstall } from '../import-lifecycle/on-install'
-        style: primary
-        start: 0
-        end: 58
+    - source: import { onInstall } from '../import-lifecycle/on-install'
+      style: primary
+      start: 0
+      end: 58
   import { queue } from '../../queues/events':
     labels:
-      - source: import { queue } from '../../queues/events'
-        style: primary
-        start: 0
-        end: 43
+    - source: import { queue } from '../../queues/events'
+      style: primary
+      start: 0
+      end: 43

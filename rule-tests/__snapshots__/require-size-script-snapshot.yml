@@ -1,0 +1,46 @@
+id: require-size-script
+snapshots:
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }
+  : labels:
+    - source: '@size-limit/file'
+      style: primary
+      start: 69
+      end: 85
+    - source: |-
+        "devDependencies": {
+            "@size-limit/file": "^12.1"
+          }
+      style: secondary
+      start: 43
+      end: 99
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      },
+      "size-limit": [
+        {
+          "path": "dist/**/*.js",
+          "limit": "15 kB"
+        }
+      ]
+    }
+  : labels:
+    - source: |-
+        "size-limit": [
+            {
+              "path": "dist/**/*.js",
+              "limit": "15 kB"
+            }
+          ]
+      style: primary
+      start: 43
+      end: 127

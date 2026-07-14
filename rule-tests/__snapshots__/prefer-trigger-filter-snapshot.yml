@@ -9,29 +9,29 @@ snapshots:
             - jira:issue_created
             - jira:issue_updated
   : labels:
-      - source: |
-          - key: my-trigger
-                function: my-function
-                events:
-                  - jira:issue_created
-                  - jira:issue_updated
-        style: primary
-        start: 24
-        end: 142
-      - source: |
-          events:
-                  - jira:issue_created
-                  - jira:issue_updated
-        style: secondary
-        start: 76
-        end: 142
-      - source: |
-          trigger:
-              - key: my-trigger
-                function: my-function
-                events:
-                  - jira:issue_created
-                  - jira:issue_updated
-        style: secondary
-        start: 11
-        end: 142
+    - source: |
+        - key: my-trigger
+              function: my-function
+              events:
+                - jira:issue_created
+                - jira:issue_updated
+      style: primary
+      start: 24
+      end: 142
+    - source: |
+        events:
+                - jira:issue_created
+                - jira:issue_updated
+      style: secondary
+      start: 76
+      end: 142
+    - source: |
+        trigger:
+            - key: my-trigger
+              function: my-function
+              events:
+                - jira:issue_created
+                - jira:issue_updated
+      style: secondary
+      start: 11
+      end: 142

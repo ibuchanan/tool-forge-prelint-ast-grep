@@ -1,0 +1,30 @@
+id: require-size-script
+language: Json
+severity: hint
+message: >
+  Add a `size` script to run size-limit after building
+note: >
+  size-limit tooling is configured (a "size-limit" config key or a
+  @size-limit/* devDependency) but there's no `size` script wiring it into
+  local checks or CI. repo-init generates `size: "npm run build && size-limit"`.
+  See https://github.com/ai/size-limit
+rule:
+  all:
+    - any:
+        - kind: pair
+          regex: '^"size-limit"\s*:'
+        - kind: string_content
+          regex: "^@size-limit/"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"devDependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"size"\s*:\s*"npm run build && size-limit"'
+files:
+  - "**/package.json"

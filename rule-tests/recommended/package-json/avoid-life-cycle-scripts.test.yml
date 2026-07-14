@@ -7,6 +7,20 @@ valid:
         "test": "vitest run"
       }
     }
+  # repo-init's own prepare placeholder is a known-safe exception
+  - |
+    {
+      "scripts": {
+        "prepare": "echo 'Not implemented'"
+      }
+    }
+  # ...and optionally chained with lefthook install
+  - |
+    {
+      "scripts": {
+        "prepare": "echo 'Not implemented' && lefthook install"
+      }
+    }
 invalid:
   - |
     {

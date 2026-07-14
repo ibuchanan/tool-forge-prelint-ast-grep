@@ -6,11 +6,11 @@ snapshots:
       invoke('get-comments')
     }, [])
   : labels:
-      - source: |-
-          useEffect(() => {
-            invoke('get-issue')
-            invoke('get-comments')
-          }, [])
-        style: primary
-        start: 0
-        end: 71
+    - source: |-
+        useEffect(() => {
+          invoke('get-issue')
+          invoke('get-comments')
+        }, [])
+      style: primary
+      start: 0
+      end: 71

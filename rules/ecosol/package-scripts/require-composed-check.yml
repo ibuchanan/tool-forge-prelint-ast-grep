@@ -10,7 +10,7 @@ note: >
 rule:
   all:
     - kind: string_content
-      regex: "^@forge/api$"
+      regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
       inside:
         stopBy: end
         kind: pair
@@ -21,6 +21,6 @@ rule:
           kind: object
           has:
             kind: pair
-            regex: '"check"\s*:\s*"npm run format:check && npm run typecheck && npm run lint && npm run test"'
+            regex: '"check"\s*:\s*"npm run format:check\s*&&\s*npm run typecheck\s*&&\s*npm run lint\s*&&\s*npm run test"'
 files:
   - "**/package.json"

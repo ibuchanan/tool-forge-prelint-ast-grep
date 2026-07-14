@@ -7,7 +7,7 @@ note: >
   Bundle bloat contributes to unwanted Forge spend.
   size-limit reports the exact byte cost of your JavaScript after build
   and can fail CI if the bundle exceeds a threshold.
-  Add @size-limit/preset-app to devDependencies
+  Add @size-limit/file to devDependencies
   and a "size-limit" key to package.json.
   See https://github.com/ai/size-limit
 rule:

@@ -9,10 +9,14 @@ note: >
   Once a repo has real Forge dependencies,
   a leftover placeholder usually means the capability was never implemented
   rather than an explicit template convention.
+  Scoped to the scripts repo-init's default modules are supposed to make real
+  (build, check, format*, lint*, test*, typecheck, changelog, size) so
+  intentionally reserved placeholders (generate:openapi, preview, start, ...)
+  don't get flagged.
 rule:
   all:
     - kind: pair
-      regex: '^"[a-zA-Z0-9:_-]+"\s*:\s*"(echo .*(Not implemented|not yet implemented|TODO).*|exit 1)"'
+      regex: '^"(build|check|format(:[a-zA-Z0-9_-]+)?|lint(:[a-zA-Z0-9_-]+)?|test(:[a-zA-Z0-9_-]+)?|typecheck|changelog|size)"\s*:\s*"(echo .*(Not implemented|not yet implemented|TODO).*|exit 1)"'
       inside:
         stopBy: end
         kind: pair
@@ -22,6 +26,6 @@ rule:
         kind: object
         has:
           kind: pair
-          regex: '"@forge/api"\s*:'
+          regex: '"@forge/(api|react|bridge|kvs|events|resolver)"\s*:'
 files:
   - "**/package.json"

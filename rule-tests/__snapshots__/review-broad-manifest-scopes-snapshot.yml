@@ -5,16 +5,16 @@ snapshots:
       scopes:
         - 'admin:confluence-configuration'
   : labels:
-      - source: "- 'admin:confluence-configuration'"
-        style: primary
-        start: 27
-        end: 61
+    - source: '- ''admin:confluence-configuration'''
+      style: primary
+      start: 27
+      end: 61
   ? |
     permissions:
       scopes:
         - admin:jira-platform
   : labels:
-      - source: "- admin:jira-platform"
-        style: primary
-        start: 27
-        end: 48
+    - source: '- admin:jira-platform'
+      style: primary
+      start: 27
+      end: 48

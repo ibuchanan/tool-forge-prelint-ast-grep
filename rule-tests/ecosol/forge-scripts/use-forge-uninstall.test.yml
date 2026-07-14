@@ -41,3 +41,13 @@ invalid:
         "build": "tsc"
       }
     }
+  # Missing from a Forge app that only depends on @forge/bridge
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

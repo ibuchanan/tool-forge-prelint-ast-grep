@@ -2,13 +2,13 @@ id: require-route-template
 snapshots:
   'requestConfluence(path, { method: "POST", body: JSON.stringify(data) })':
     labels:
-      - source: 'requestConfluence(path, { method: "POST", body: JSON.stringify(data) })'
-        style: primary
-        start: 0
-        end: 71
+    - source: 'requestConfluence(path, { method: "POST", body: JSON.stringify(data) })'
+      style: primary
+      start: 0
+      end: 71
   'requestJira("/rest/api/3/issue", { method: "GET" })':
     labels:
-      - source: 'requestJira("/rest/api/3/issue", { method: "GET" })'
-        style: primary
-        start: 0
-        end: 51
+    - source: 'requestJira("/rest/api/3/issue", { method: "GET" })'
+      style: primary
+      start: 0
+      end: 51

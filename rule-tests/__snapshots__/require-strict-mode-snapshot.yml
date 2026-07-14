@@ -2,7 +2,7 @@ id: require-strict-mode
 snapshots:
   ForgeReconciler.render(<App />):
     labels:
-      - source: ForgeReconciler.render(<App />)
-        style: primary
-        start: 0
-        end: 31
+    - source: ForgeReconciler.render(<App />)
+      style: primary
+      start: 0
+      end: 31
