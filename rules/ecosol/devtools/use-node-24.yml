@@ -2,11 +2,13 @@ id: use-node-24
 language: Json
 severity: hint
 message: >
-  Bring this Forge repo up to the repo-init baseline by pinning Node.js 24.x.
+  Set package.json `engines.node` to `24.x` to match the repo-init baseline.
 note: >
-  repo-init writes package.json engines.node = "24.x" and a matching .nvmrc.
-  Older generated repos commonly drift on Node version, which can change local,
-  CI, and Forge CLI behavior.
+  repo-init writes package.json engines.node = "24.x". Older generated repos
+  commonly drift on Node version, which can change local, CI, and Forge CLI
+  behavior.
+  npm engines reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#engines
 rule:
   all:
     - kind: string_content

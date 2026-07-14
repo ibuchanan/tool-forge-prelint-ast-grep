@@ -7,6 +7,8 @@ note: >
   repo-init's generated Forge tests assume global describe/it/expect
   (defineConfig({ test: { globals: true } })). Without test.globals, those
   tests fail to run until every file adds explicit Vitest imports.
+  Vitest globals config reference:
+  https://vitest.dev/config/#globals
 rule:
   kind: call_expression
   has:

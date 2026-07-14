@@ -8,6 +8,10 @@ note: >
   repo-init's generated tsconfig.json baseline assumes TypeScript 5.
   A major bump can silently change ts-loader/Forge bundler output or
   break the strict compiler options repo-init enables.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/
+  npm dependency version reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#dependencies
 rule:
   all:
     - kind: pair

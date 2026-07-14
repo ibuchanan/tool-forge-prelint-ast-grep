@@ -2,11 +2,13 @@ id: use-forge-register
 language: Json
 severity: info
 message: >
-  Name this script `forge:register` so forge register wrappers are discoverable and composable.
+  Add or rename this wrapper script as `forge:register` for `forge register`.
 note: >
   repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
   Unlike deploy/install/uninstall, `forge register` needs no site, product,
   or environment flags.
+  Forge CLI register reference:
+  https://developer.atlassian.com/platform/forge/cli-reference/register/
 rule:
   any:
     - all:

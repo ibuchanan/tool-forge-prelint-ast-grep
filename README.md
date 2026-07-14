@@ -202,7 +202,7 @@ searches, batchable invokes, and verbose backend logging.
 
 ### recommended/devtools
 
-Bundle-size guardrails for CI.
+Bundle-size guardrails for CI, including size-limit setup and script wiring.
 
 ### recommended/frontend-ui
 
@@ -218,8 +218,8 @@ eligibility/residency/auth review.
 ### recommended/package-json
 
 package.json hygiene that applies to any Forge app, independent of team-specific
-tooling choices — currently, review of automatically-triggered npm lifecycle
-scripts.
+tooling choices — automatically-triggered npm lifecycle scripts and read-only
+check scripts that should not mutate files.
 
 ### recommended/security
 

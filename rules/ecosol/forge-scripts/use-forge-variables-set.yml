@@ -2,12 +2,14 @@ id: use-forge-variables-set
 language: Json
 severity: info
 message: >
-  Name this script `forge:variables:set` so forge variables set wrappers are discoverable and composable.
+  Add or rename this wrapper script as `forge:variables:set` for `forge variables set`.
 note: >
   repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
   `forge variables set --encrypt` is the separate `forge:variables:set-encrypted`
   convention; a plain `forge variables set` (without `--encrypt`) should be named
   `forge:variables:set`.
+  Forge CLI variables set reference:
+  https://developer.atlassian.com/platform/forge/cli-reference/variables-set/
 rule:
   any:
     - all:

@@ -2,10 +2,12 @@ id: use-forge-uninstall
 language: Json
 severity: info
 message: >
-  Name this script `forge:uninstall` so forge uninstall wrappers are discoverable and composable.
+  Add or rename this wrapper script as `forge:uninstall` for `forge uninstall`.
 note: >
   repo-init names Forge CLI wrapper scripts with a `forge:` namespace
   (`forge:deploy`, `forge:install`, `forge:uninstall`, `forge:register`, ...).
+  Forge CLI uninstall reference:
+  https://developer.atlassian.com/platform/forge/cli-reference/uninstall/
 rule:
   any:
     - all:

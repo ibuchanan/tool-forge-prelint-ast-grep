@@ -2,11 +2,13 @@ id: use-forge-install
 language: Json
 severity: info
 message: >
-  Name this script `forge:install` so forge install wrappers are discoverable and composable.
+  Add or rename this wrapper script as `forge:install` for `forge install`.
 note: >
   repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
   `forge install --upgrade` is the separate `forge:upgrade` convention;
   a plain `forge install` (without `--upgrade`) should be named `forge:install`.
+  Forge CLI install reference:
+  https://developer.atlassian.com/platform/forge/cli-reference/install/
 rule:
   any:
     - all:

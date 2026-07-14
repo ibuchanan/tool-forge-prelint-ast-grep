@@ -2,12 +2,14 @@ id: use-forge-deploy
 language: Json
 severity: info
 message: >
-  Name this script `forge:deploy` so forge deploy wrappers are discoverable and composable.
+  Add or rename this wrapper script as `forge:deploy` for `forge deploy`.
 note: >
   repo-init names Forge CLI wrapper scripts with a `forge:` namespace
   (`forge:deploy`, `forge:install`, `forge:uninstall`, `forge:register`, ...)
   so tooling and humans can find the deploy step by a predictable name instead
   of hunting for whichever key happens to call `forge deploy`.
+  Forge CLI deploy reference:
+  https://developer.atlassian.com/platform/forge/cli-reference/deploy/
 rule:
   any:
     - all:

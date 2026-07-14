@@ -7,6 +7,10 @@ note: >
   repo-init wires pre-commit gitleaks, lint, format, and typecheck guards
   plus a pre-push test guard. Repos that predate the hook template, or that
   hand-edited lefthook.yml, commonly drop one of these on the way.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+  Gitleaks project:
+  https://github.com/gitleaks/gitleaks
 rule:
   kind: block_mapping
   inside:

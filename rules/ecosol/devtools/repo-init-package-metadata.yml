@@ -10,6 +10,8 @@ note: >
   exports["."].import/types. This is template-derived, so it's a lower
   priority hint for real apps that intentionally differ (e.g. a non-ESM
   build, or a different license).
+  npm package.json fields reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/
 rule:
   all:
     - kind: string_content

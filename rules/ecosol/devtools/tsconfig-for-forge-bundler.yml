@@ -11,6 +11,8 @@ note: >
   noUncheckedIndexedAccess: true. Forge's webpack/ts-loader bundler is
   sensitive to these settings, so drift here is easy to introduce and
   hard to diagnose from a bundling failure alone.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/
 rule:
   kind: object
   inside:

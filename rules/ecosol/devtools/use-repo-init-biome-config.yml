@@ -8,6 +8,8 @@ note: >
   .gitignore, pins vcs.defaultBranch to "main" for correct changed-file
   detection, excludes .projen/** and dist from files.includes since those
   are generated, and sets formatter.indentStyle to "space".
+  Biome configuration reference:
+  https://biomejs.dev/reference/configuration/
 rule:
   kind: object
   inside:

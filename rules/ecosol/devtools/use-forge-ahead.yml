@@ -7,6 +7,8 @@ note: >
   repo-init adds @forge-ahead/atlassian-api-types and @forge-ahead/errors
   as production dependencies so apps can share generated Atlassian API types
   and common error helpers.
+  npm dependencies reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#dependencies
 rule:
   all:
     - kind: string_content

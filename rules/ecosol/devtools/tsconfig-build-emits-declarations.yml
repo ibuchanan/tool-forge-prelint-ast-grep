@@ -9,6 +9,10 @@ note: >
   compilerOptions.declaration: true so the build output stays type-checked
   against the same settings as local development while still emitting the
   .d.ts files consumers need.
+  TypeScript TSConfig extends reference:
+  https://www.typescriptlang.org/tsconfig/#extends
+  TypeScript declaration emit reference:
+  https://www.typescriptlang.org/tsconfig/#declaration
 rule:
   kind: object
   inside:
