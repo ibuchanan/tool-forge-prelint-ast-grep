@@ -1,0 +1,20 @@
+id: no-write-flags-in-readonly-script
+language: Json
+severity: warning
+message: >
+  Read-only script should not include a write-back flag; move it to the `:fix` variant instead.
+note: >
+  Scripts like `lint`, `lint:check`, and `format:check` are expected to be read-only
+  gates in CI. A `--write` or `--fix` flag on one of these makes the "check" script
+  mutate files, which hides drift instead of failing on it.
+  See the Biome CLI reference for the read-only vs --write distinction:
+  https://biomejs.dev/reference/cli/
+rule:
+  kind: pair
+  regex: '^"(lint|lint:check|format:check)"\s*:\s*"[^"]*(--write|--fix)[^"]*"'
+  inside:
+    stopBy: end
+    kind: pair
+    regex: '"scripts"\s*:'
+files:
+  - "**/package.json"

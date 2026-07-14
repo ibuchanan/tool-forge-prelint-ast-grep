@@ -1,0 +1,47 @@
+id: typecheck-with-typescript
+valid:
+  # Not a Forge app (no @forge/api dependency)
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app already using the repo-init TypeScript build scripts
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc -p tsconfig.build.json",
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # Missing typecheck script
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc -p tsconfig.build.json"
+      }
+    }
+  # Missing build script
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    }

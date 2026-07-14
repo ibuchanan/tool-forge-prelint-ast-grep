@@ -1,0 +1,27 @@
+id: no-invalid-script-name-chars
+language: Json
+severity: hint
+message: >
+  Use the colon-namespaced script name instead of a hyphenated or mixed-case variant.
+note: >
+  Standard script variants use a colon namespace
+  (lint:check, lint:fix, lint:prelint, lint:forge, format:check, test:watch, test:coverage).
+  Hyphenated look-alikes or mixed-case, space, or underscore names
+  usually mean a script was added by hand without matching the established convention.
+  https://docs.npmjs.com/cli/v10/using-npm/scripts
+rule:
+  any:
+    - kind: pair
+      regex: '^"(lint-check|lint-fix|lint-prelint|lint-forge|format-check|test-watch|test-coverage)"\s*:'
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"scripts"\s*:'
+    - kind: pair
+      regex: '^"[^"]*[A-Z_ ][^"]*"\s*:'
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"scripts"\s*:'
+files:
+  - "**/package.json"

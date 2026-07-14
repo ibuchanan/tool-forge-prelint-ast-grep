@@ -1,0 +1,35 @@
+id: use-forge-uninstall
+language: Json
+severity: info
+message: >
+  Name this script `forge:uninstall` so forge uninstall wrappers are discoverable and composable.
+note: >
+  repo-init names Forge CLI wrapper scripts with a `forge:` namespace
+  (`forge:deploy`, `forge:install`, `forge:uninstall`, `forge:register`, ...).
+rule:
+  any:
+    - all:
+        - kind: pair
+          regex: 'forge uninstall\b'
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"scripts"\s*:'
+        - not:
+            regex: '^"forge:uninstall"\s*:'
+    - all:
+        - kind: string_content
+          regex: "^@forge/api$"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"dependencies"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"forge:uninstall"\s*:'
+files:
+  - "**/package.json"

@@ -1,0 +1,36 @@
+id: lint-with-forge
+valid:
+  # Not a Forge app (no @forge/api dependency)
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app with lint:forge already aliased
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint:forge": "forge lint"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # forge lint called directly instead of through the alias
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint": "forge lint"
+      }
+    }

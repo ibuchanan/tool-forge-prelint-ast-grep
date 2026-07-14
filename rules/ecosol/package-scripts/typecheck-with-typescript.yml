@@ -1,0 +1,37 @@
+id: typecheck-with-typescript
+language: Json
+severity: warning
+message: >
+  Use a type safety check to verify declared data structures, especially for APIs
+note: >
+  TypeScript catches type errors locally
+  to prevent sudden, hard-to-debug runtime crashes inside the remote hosting environment.
+  Type checking is especially useful for Forge-specific parameters,
+  REST API requests & responses,
+  and for the mappings from manifest into functions.
+  https://www.typescriptlang.org/
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - any:
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"build"\s*:\s*"tsc -p tsconfig\.build\.json"'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"typecheck"\s*:\s*"tsc --noEmit -p tsconfig\.json"'
+files:
+  - "**/package.json"

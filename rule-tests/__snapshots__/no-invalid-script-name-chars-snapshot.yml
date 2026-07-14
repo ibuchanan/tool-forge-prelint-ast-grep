@@ -1,0 +1,182 @@
+id: no-invalid-script-name-chars
+snapshots:
+  ? |
+    {
+      "scripts": {
+        "Lint:Check": "biome lint"
+      }
+    }
+  : labels:
+      - source: '"Lint:Check": "biome lint"'
+        style: primary
+        start: 21
+        end: 47
+      - source: |-
+          "scripts": {
+              "Lint:Check": "biome lint"
+            }
+        style: secondary
+        start: 4
+        end: 51
+  ? |
+    {
+      "scripts": {
+        "format-check": "biome format ."
+      }
+    }
+  : labels:
+      - source: '"format-check": "biome format ."'
+        style: primary
+        start: 21
+        end: 53
+      - source: |-
+          "scripts": {
+              "format-check": "biome format ."
+            }
+        style: secondary
+        start: 4
+        end: 57
+  ? |
+    {
+      "scripts": {
+        "lint check": "biome lint"
+      }
+    }
+  : labels:
+      - source: '"lint check": "biome lint"'
+        style: primary
+        start: 21
+        end: 47
+      - source: |-
+          "scripts": {
+              "lint check": "biome lint"
+            }
+        style: secondary
+        start: 4
+        end: 51
+  ? |
+    {
+      "scripts": {
+        "lint-check": "biome lint"
+      }
+    }
+  : labels:
+      - source: '"lint-check": "biome lint"'
+        style: primary
+        start: 21
+        end: 47
+      - source: |-
+          "scripts": {
+              "lint-check": "biome lint"
+            }
+        style: secondary
+        start: 4
+        end: 51
+  ? |
+    {
+      "scripts": {
+        "lint-fix": "biome lint --write"
+      }
+    }
+  : labels:
+      - source: '"lint-fix": "biome lint --write"'
+        style: primary
+        start: 21
+        end: 53
+      - source: |-
+          "scripts": {
+              "lint-fix": "biome lint --write"
+            }
+        style: secondary
+        start: 4
+        end: 57
+  ? |
+    {
+      "scripts": {
+        "lint-forge": "forge lint"
+      }
+    }
+  : labels:
+      - source: '"lint-forge": "forge lint"'
+        style: primary
+        start: 21
+        end: 47
+      - source: |-
+          "scripts": {
+              "lint-forge": "forge lint"
+            }
+        style: secondary
+        start: 4
+        end: 51
+  ? |
+    {
+      "scripts": {
+        "lint-prelint": "ast-grep scan --config sgconfig.ecosol.yml"
+      }
+    }
+  : labels:
+      - source: '"lint-prelint": "ast-grep scan --config sgconfig.ecosol.yml"'
+        style: primary
+        start: 21
+        end: 81
+      - source: |-
+          "scripts": {
+              "lint-prelint": "ast-grep scan --config sgconfig.ecosol.yml"
+            }
+        style: secondary
+        start: 4
+        end: 85
+  ? |
+    {
+      "scripts": {
+        "lint_check": "biome lint"
+      }
+    }
+  : labels:
+      - source: '"lint_check": "biome lint"'
+        style: primary
+        start: 21
+        end: 47
+      - source: |-
+          "scripts": {
+              "lint_check": "biome lint"
+            }
+        style: secondary
+        start: 4
+        end: 51
+  ? |
+    {
+      "scripts": {
+        "test-coverage": "vitest run --coverage"
+      }
+    }
+  : labels:
+      - source: '"test-coverage": "vitest run --coverage"'
+        style: primary
+        start: 21
+        end: 61
+      - source: |-
+          "scripts": {
+              "test-coverage": "vitest run --coverage"
+            }
+        style: secondary
+        start: 4
+        end: 65
+  ? |
+    {
+      "scripts": {
+        "test-watch": "vitest watch"
+      }
+    }
+  : labels:
+      - source: '"test-watch": "vitest watch"'
+        style: primary
+        start: 21
+        end: 49
+      - source: |-
+          "scripts": {
+              "test-watch": "vitest watch"
+            }
+        style: secondary
+        start: 4
+        end: 53

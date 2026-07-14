@@ -1,0 +1,76 @@
+id: no-invalid-script-name-chars
+valid:
+  - |
+    {
+      "scripts": {
+        "lint:check": "biome lint",
+        "lint:fix": "biome lint --write",
+        "lint:prelint": "ast-grep scan --config sgconfig.ecosol.yml",
+        "lint:forge": "forge lint",
+        "format:check": "biome format .",
+        "test:watch": "vitest watch",
+        "test:coverage": "vitest run --coverage",
+        "db-migrate": "knex migrate:latest"
+      }
+    }
+invalid:
+  - |
+    {
+      "scripts": {
+        "lint-check": "biome lint"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "lint-fix": "biome lint --write"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "lint-prelint": "ast-grep scan --config sgconfig.ecosol.yml"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "lint-forge": "forge lint"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "format-check": "biome format ."
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "test-watch": "vitest watch"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "test-coverage": "vitest run --coverage"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "Lint:Check": "biome lint"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "lint_check": "biome lint"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "lint check": "biome lint"
+      }
+    }

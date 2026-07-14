@@ -1,0 +1,31 @@
+id: no-write-flags-in-readonly-script
+valid:
+  - |
+    {
+      "scripts": {
+        "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge",
+        "lint:check": "biome lint",
+        "lint:fix": "biome lint --write",
+        "format:check": "biome format .",
+        "format": "biome format --write ."
+      }
+    }
+invalid:
+  - |
+    {
+      "scripts": {
+        "lint": "biome lint --write"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "lint:check": "biome lint --fix"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "format:check": "biome format --write ."
+      }
+    }

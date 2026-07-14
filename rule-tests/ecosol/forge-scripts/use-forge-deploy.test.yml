@@ -1,0 +1,55 @@
+id: use-forge-deploy
+valid:
+  # Not a Forge app (no @forge/api dependency) and no forge deploy script
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge:deploy": "forge deploy --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge:deploy": "source .env && forge deploy --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  # Forge app with forge:deploy correctly present
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "forge:deploy": "forge deploy --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+invalid:
+  # Present under the wrong key name
+  - |
+    {
+      "scripts": {
+        "deploy": "forge deploy --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge-deploy": "forge deploy"
+      }
+    }
+  # Missing entirely from a Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

@@ -1,0 +1,21 @@
+id: avoid-life-cycle-scripts
+language: Json
+severity: hint
+message: >
+  Review npm lifecycle scripts; package managers run them automatically on every install
+note: >
+  Lifecycle scripts execute without an explicit developer action,
+  which is a common supply-chain attack vector.
+  Confirm the script is necessary
+  and does only what it claims before trusting it on a teammate's machine,
+  or in CI/CD.
+  https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts
+rule:
+  kind: pair
+  regex: '^"(preinstall|install|postinstall|preuninstall|uninstall|postuninstall|prepare|prepublish|prepublishOnly|publish|postpublish|prepack|postpack|preversion|version|postversion)"\s*:'
+  inside:
+    stopBy: end
+    kind: pair
+    regex: '"scripts"\s*:'
+files:
+  - "**/package.json"

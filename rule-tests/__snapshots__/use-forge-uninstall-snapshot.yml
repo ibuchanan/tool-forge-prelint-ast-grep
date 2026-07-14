@@ -1,0 +1,41 @@
+id: use-forge-uninstall
+snapshots:
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "scripts": {
+        "uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+      }
+    }
+  : labels:
+      - source: '"uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""'
+        style: primary
+        start: 21
+        end: 103
+      - source: |-
+          "scripts": {
+              "uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+            }
+        style: secondary
+        start: 4
+        end: 107

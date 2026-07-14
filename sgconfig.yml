@@ -7,6 +7,7 @@ ruleDirs:
   - rules/recommended/devtools
   - rules/recommended/frontend-ui
   - rules/recommended/manifest
+  - rules/recommended/package-json
   - rules/recommended/security
   - rules/recommended/triggers
   - rules/strict/api-usage
@@ -17,3 +18,5 @@ ruleDirs:
   - rules/strict/runtime-boundaries
   - rules/strict/security
   - rules/strict/triggers
+  - rules/ecosol/package-scripts
+  - rules/ecosol/forge-scripts

@@ -1,0 +1,58 @@
+id: avoid-life-cycle-scripts
+valid:
+  - |
+    {
+      "scripts": {
+        "build": "tsc -p tsconfig.build.json",
+        "test": "vitest run"
+      }
+    }
+invalid:
+  - |
+    {
+      "scripts": {
+        "postinstall": "node scripts/patch-package.js"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "preinstall": "npx only-allow npm"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "prepare": "npm run build"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "prepublishOnly": "npm run build && npm test"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "preversion": "npm test"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "prepublish": "npm run build"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "publish": "echo done"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "postpublish": "curl -X POST https://example.com/notify"
+      }
+    }

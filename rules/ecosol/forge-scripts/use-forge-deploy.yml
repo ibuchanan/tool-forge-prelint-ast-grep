@@ -1,0 +1,37 @@
+id: use-forge-deploy
+language: Json
+severity: info
+message: >
+  Name this script `forge:deploy` so forge deploy wrappers are discoverable and composable.
+note: >
+  repo-init names Forge CLI wrapper scripts with a `forge:` namespace
+  (`forge:deploy`, `forge:install`, `forge:uninstall`, `forge:register`, ...)
+  so tooling and humans can find the deploy step by a predictable name instead
+  of hunting for whichever key happens to call `forge deploy`.
+rule:
+  any:
+    - all:
+        - kind: pair
+          regex: 'forge deploy\b'
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"scripts"\s*:'
+        - not:
+            regex: '^"forge:deploy"\s*:'
+    - all:
+        - kind: string_content
+          regex: "^@forge/api$"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"dependencies"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"forge:deploy"\s*:'
+files:
+  - "**/package.json"

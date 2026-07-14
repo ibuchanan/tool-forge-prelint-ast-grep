@@ -1,0 +1,88 @@
+id: lint-and-format-with-biome
+snapshots:
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "devDependencies": {
+        "@biomejs/biome": "^1.9.0"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "lint:check": "biome lint ."
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "lint:check": "eslint .",
+        "lint:fix": "biome lint --write ."
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52

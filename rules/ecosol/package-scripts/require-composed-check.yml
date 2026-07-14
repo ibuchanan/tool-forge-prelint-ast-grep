@@ -1,0 +1,26 @@
+id: require-composed-check
+language: Json
+severity: info
+message: >
+  Use a composed `check` script as a broad guardrail for AI coding agents (if not humans)
+note: >
+  The `check` script should check formatting, types, lint rules, and tests.
+  See this project's own composed check script for the pattern:
+  https://github.com/ibuchanan/tool-forge-prelint-ast-grep#development
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"check"\s*:\s*"npm run format:check && npm run typecheck && npm run lint && npm run test"'
+files:
+  - "**/package.json"

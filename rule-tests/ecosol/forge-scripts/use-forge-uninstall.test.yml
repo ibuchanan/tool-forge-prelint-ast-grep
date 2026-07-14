@@ -1,0 +1,43 @@
+id: use-forge-uninstall
+valid:
+  # Not a Forge app (no @forge/api dependency) and no forge uninstall script
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge:uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+      }
+    }
+  # Forge app with forge:uninstall correctly present
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "forge:uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+      }
+    }
+invalid:
+  # Present under the wrong key name
+  - |
+    {
+      "scripts": {
+        "uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+      }
+    }
+  # Missing entirely from a Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

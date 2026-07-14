@@ -1,0 +1,38 @@
+id: use-forge-install
+language: Json
+severity: info
+message: >
+  Name this script `forge:install` so forge install wrappers are discoverable and composable.
+note: >
+  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
+  `forge install --upgrade` is the separate `forge:upgrade` convention;
+  a plain `forge install` (without `--upgrade`) should be named `forge:install`.
+rule:
+  any:
+    - all:
+        - kind: pair
+          regex: 'forge install\b'
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"scripts"\s*:'
+        - not:
+            regex: "--upgrade"
+        - not:
+            regex: '^"forge:install"\s*:'
+    - all:
+        - kind: string_content
+          regex: "^@forge/api$"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"dependencies"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"forge:install"\s*:'
+files:
+  - "**/package.json"

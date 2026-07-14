@@ -1,0 +1,26 @@
+id: require-composed-lint
+language: Json
+severity: info
+message: >
+  Use a composed `lint` script to combine general code rules with Forge-specific rules
+note: >
+  The `lint` script should bring together Forge Prelint, Biome, and Forge Lint.
+  See this project's recommended local/CI order:
+  https://github.com/ibuchanan/tool-forge-prelint-ast-grep#how-this-fits-with-forge-lint
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"lint"\s*:\s*"npm run lint:prelint && npm run lint:check && npm run lint:forge"'
+files:
+  - "**/package.json"

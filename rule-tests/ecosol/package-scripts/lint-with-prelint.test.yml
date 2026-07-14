@@ -1,0 +1,36 @@
+id: lint-with-prelint
+valid:
+  # Not a Forge app (no @forge/api dependency)
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app with forge-prelint's ecosol tier already wired up
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # Wired up to the wrong tier
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+      }
+    }

@@ -1,0 +1,62 @@
+id: typecheck-with-typescript
+snapshots:
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc -p tsconfig.build.json"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52

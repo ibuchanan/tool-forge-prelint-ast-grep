@@ -1,0 +1,47 @@
+id: no-stale-placeholder
+valid:
+  # Not a Forge app (no @forge/api dependency) - placeholder is an acceptable template convention
+  - |
+    {
+      "scripts": {
+        "test": "echo \"Not implemented\" && exit 1"
+      }
+    }
+  # Forge app with a real test script
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test": "vitest run"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test": "echo \"Not implemented\" && exit 1"
+      }
+    }
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "test:coverage": "echo 'not yet implemented'"
+      }
+    }
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "docs:build": "echo TODO"
+      }
+    }

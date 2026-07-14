@@ -1,0 +1,28 @@
+id: lint-with-forge
+language: Json
+severity: info
+message: >
+  Analyze Forge app code for platform-specific errors and rule violations.
+note: >
+  Forge Lint catches Forge-specific runtime errors.
+  Even though it is required for deployment,
+  frequent checks with Forge Lint ensures security and compliance early.
+  Use an npm wrapper script (lint:forge) for better composability.
+  https://developer.atlassian.com/platform/forge/cli-reference/lint/
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"lint:forge"\s*:\s*"forge lint"'
+files:
+  - "**/package.json"

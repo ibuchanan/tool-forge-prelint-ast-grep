@@ -1,0 +1,62 @@
+id: require-composed-lint
+snapshots:
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint": "npm run lint:prelint && forge lint"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint": "npm run lint:prelint && npm run lint:check"
+      }
+    }
+  : labels:
+      - source: "@forge/api"
+        style: primary
+        start: 27
+        end: 37
+      - source: |-
+          "dependencies": {
+              "@forge/api": "^4.0.0"
+            }
+        style: secondary
+        start: 4
+        end: 52

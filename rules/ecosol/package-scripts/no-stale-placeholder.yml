@@ -1,0 +1,27 @@
+id: no-stale-placeholder
+language: Json
+severity: warning
+message: >
+  Replace this placeholder script now that the app has real dependencies wired up.
+note: >
+  Bootstrap/template packages may ship placeholder scripts
+  like `echo "Not implemented"` intentionally.
+  Once a repo has real Forge dependencies,
+  a leftover placeholder usually means the capability was never implemented
+  rather than an explicit template convention.
+rule:
+  all:
+    - kind: pair
+      regex: '^"[a-zA-Z0-9:_-]+"\s*:\s*"(echo .*(Not implemented|not yet implemented|TODO).*|exit 1)"'
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"scripts"\s*:'
+    - inside:
+        stopBy: end
+        kind: object
+        has:
+          kind: pair
+          regex: '"@forge/api"\s*:'
+files:
+  - "**/package.json"

@@ -1,0 +1,43 @@
+id: use-forge-register
+valid:
+  # Not a Forge app (no @forge/api dependency) and no forge register script
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge:register": "forge register"
+      }
+    }
+  # Forge app with forge:register correctly present
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "forge:register": "forge register"
+      }
+    }
+invalid:
+  # Present under the wrong key name
+  - |
+    {
+      "scripts": {
+        "register": "forge register"
+      }
+    }
+  # Missing entirely from a Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "build": "tsc"
+      }
+    }

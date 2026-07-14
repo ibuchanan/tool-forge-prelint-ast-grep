@@ -1,13 +1,13 @@
 # forge-lint: ecosol tier
 # Includes all atlassian rules plus ecosol team conventions for sample/demo apps.
 # Enforces sample-app quality standards (strictest tier).
-# NOTE: No ecosol-specific rules yet — rules will be added as sample-app conventions are identified.
 ruleDirs:
   - rules/recommended/architecture
   - rules/recommended/cost
   - rules/recommended/devtools
   - rules/recommended/frontend-ui
   - rules/recommended/manifest
+  - rules/recommended/package-json
   - rules/recommended/security
   - rules/recommended/triggers
   - rules/strict/api-usage
@@ -18,5 +18,7 @@ ruleDirs:
   - rules/strict/runtime-boundaries
   - rules/strict/security
   - rules/strict/triggers
+  - rules/ecosol/package-scripts
+  - rules/ecosol/forge-scripts
   # - rules/atlassian/...  (future)
-  # - rules/ecosol/...     (future)
+  # - rules/ecosol/repo-init  (future)

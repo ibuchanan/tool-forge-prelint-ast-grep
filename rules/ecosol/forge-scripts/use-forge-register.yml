@@ -1,0 +1,36 @@
+id: use-forge-register
+language: Json
+severity: info
+message: >
+  Name this script `forge:register` so forge register wrappers are discoverable and composable.
+note: >
+  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
+  Unlike deploy/install/uninstall, `forge register` needs no site, product,
+  or environment flags.
+rule:
+  any:
+    - all:
+        - kind: pair
+          regex: 'forge register\b'
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"scripts"\s*:'
+        - not:
+            regex: '^"forge:register"\s*:'
+    - all:
+        - kind: string_content
+          regex: "^@forge/api$"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"dependencies"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"forge:register"\s*:'
+files:
+  - "**/package.json"

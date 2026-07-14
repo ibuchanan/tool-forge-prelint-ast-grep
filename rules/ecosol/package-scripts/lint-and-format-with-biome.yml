@@ -1,0 +1,49 @@
+id: lint-and-format-with-biome
+language: Json
+severity: info
+message: >
+  Biome is a blazing-fast, Rust-based toolchain that unifies linting and formatting
+note: >
+  Biome reduce dev dep bloat
+  and is "batteries included" (zero config) for TypeScript and React.
+  Use @biomejs/biome in package scripts for format, format:check, lint:check, and lint:fix.
+  https://biomejs.dev/
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - any:
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"format"\s*:\s*"[^"]*biome[^"]*"'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"format:check"\s*:\s*"[^"]*biome[^"]*"'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"lint:check"\s*:\s*"[^"]*biome[^"]*"'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"lint:fix"\s*:\s*"[^"]*biome[^"]*"'
+files:
+  - "**/package.json"

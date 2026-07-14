@@ -7,5 +7,6 @@ ruleDirs:
   - rules/recommended/devtools
   - rules/recommended/frontend-ui
   - rules/recommended/manifest
+  - rules/recommended/package-json
   - rules/recommended/security
   - rules/recommended/triggers
