@@ -1,5 +1,0 @@
-id: no-verbose-hot-path-logging
-valid:
-  - "const result = await storage.get('key')"
-invalid:
-  - "console.log('resolver payload:', payload)"

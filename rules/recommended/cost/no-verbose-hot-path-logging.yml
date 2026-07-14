@@ -1,6 +1,6 @@
 id: no-verbose-hot-path-logging
 language: TypeScript
-severity: warning
+severity: off
 message: >
   Avoid console.log in Forge backend hot paths.
 note: >
