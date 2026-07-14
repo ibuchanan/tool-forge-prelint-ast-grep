@@ -13,3 +13,5 @@ rule:
   regex: '^useEffect\s*\([\s\S]*invoke\([\s\S]*invoke\('
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

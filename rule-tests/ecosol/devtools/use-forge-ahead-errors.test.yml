@@ -1,0 +1,51 @@
+id: use-forge-ahead-errors
+valid:
+  # Not a Forge app
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app with shared Forge Ahead errors package
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*",
+        "@forge-ahead/errors": "^1.0.0"
+      }
+    }
+  # API-using Forge app with shared Forge Ahead errors package
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0",
+        "@forge-ahead/errors": "^1.0.0"
+      }
+    }
+invalid:
+  # Missing from an API-using Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # Missing from a frontend/resolver Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*"
+      }
+    }
+  # Missing from an event-only Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/events": "^3.0.0"
+      }
+    }

@@ -47,3 +47,5 @@ rule:
                 regex: '"lint:fix"\s*:\s*"[^"]*biome[^"]*"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

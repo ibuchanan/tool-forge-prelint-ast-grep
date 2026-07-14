@@ -11,3 +11,5 @@ rule:
   any:
     - pattern: "import $$$IMPORTS from '@forge/ui'"
     - pattern: 'import $$$IMPORTS from "@forge/ui"'
+ignores:
+  - "**/node_modules/**"

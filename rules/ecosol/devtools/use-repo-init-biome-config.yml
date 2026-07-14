@@ -37,3 +37,5 @@ rule:
           regex: '"formatter"\s*:[\s\S]*?"indentStyle"\s*:\s*"space"'
 files:
   - "**/biome.json"
+ignores:
+  - "**/node_modules/**"

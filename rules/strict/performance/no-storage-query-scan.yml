@@ -17,6 +17,7 @@ rule:
   not:
     regex: '\.limit\s*\('
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"
   - "**/*.spec.ts"

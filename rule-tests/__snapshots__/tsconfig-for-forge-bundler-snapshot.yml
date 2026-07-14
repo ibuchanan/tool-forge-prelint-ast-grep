@@ -73,6 +73,52 @@ snapshots:
       end: 198
   ? |
     {
+      "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "jsx": "react-jsx",
+        "target": "ES2022",
+        "rootDir": "src",
+        "outDir": "dist",
+        "strict": true,
+        "noUncheckedIndexedAccess": true
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "module": "NodeNext",
+            "moduleResolution": "NodeNext",
+            "jsx": "react-jsx",
+            "target": "ES2022",
+            "rootDir": "src",
+            "outDir": "dist",
+            "strict": true,
+            "noUncheckedIndexedAccess": true
+          }
+        }
+      style: primary
+      start: 0
+      end: 241
+    - source: |
+        {
+          "compilerOptions": {
+            "module": "NodeNext",
+            "moduleResolution": "NodeNext",
+            "jsx": "react-jsx",
+            "target": "ES2022",
+            "rootDir": "src",
+            "outDir": "dist",
+            "strict": true,
+            "noUncheckedIndexedAccess": true
+          }
+        }
+      style: secondary
+      start: 0
+      end: 242
+  ? |
+    {
       "include": ["src"]
     }
   : labels:

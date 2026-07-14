@@ -25,6 +25,26 @@ valid:
         "@forge/api": "^8.0"
       }
     }
+  # Forge app using npm's conventional ./ package target form in exports
+  - |
+    {
+      "private": true,
+      "license": "Apache-2.0",
+      "exports": {
+        ".": {
+          "import": "./dist/index.mjs",
+          "types": "./dist/index.d.mts"
+        }
+      },
+      "main": "dist/index.mjs",
+      "types": "dist/index.d.mts",
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*",
+        "react": "^18.2"
+      }
+    }
 invalid:
   # CJS-style main/types, no exports map
   - |

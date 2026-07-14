@@ -26,3 +26,5 @@ rule:
             regex: '"node"\s*:\s*"24\.x"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

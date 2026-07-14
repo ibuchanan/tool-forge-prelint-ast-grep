@@ -38,3 +38,5 @@ rule:
                 regex: '"forge:variables:set-encrypted"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

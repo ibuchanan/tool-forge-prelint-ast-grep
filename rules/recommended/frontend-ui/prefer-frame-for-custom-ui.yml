@@ -16,3 +16,5 @@ rule:
     - pattern: <iframe />
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

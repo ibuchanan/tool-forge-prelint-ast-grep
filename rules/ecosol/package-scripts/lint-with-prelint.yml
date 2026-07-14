@@ -8,7 +8,8 @@ note: >
   many of which should not block deployment.
   It is based on ast-grep to avoid dev dependency bloat,
   to make rules & sets easy to improve,
-  and to run fast.
+  and to run fast. Pass --globs '!node_modules/**' so ast-grep does not
+  descend into vendored packages.
   https://github.com/ibuchanan/tool-forge-prelint-ast-grep
 rule:
   all:
@@ -24,6 +25,8 @@ rule:
           kind: object
           has:
             kind: pair
-            regex: '"lint:prelint"\s*:\s*"ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig\.(recommended|strict|ecosol|atlassian)\.yml"'
+            regex: '"lint:prelint"\s*:\s*"ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig\.(recommended|strict|ecosol|atlassian)\.yml --globs ''!node_modules/\*\*''"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

@@ -25,3 +25,5 @@ rule:
         regex: '^"prepare"\s*:\s*"echo .Not implemented.( && lefthook install)?"$'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

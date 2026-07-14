@@ -13,3 +13,5 @@ rule:
   regex: 'resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\([\s\S]*resolver\.define\('
 files:
   - "**/resolvers/**"
+ignores:
+  - "**/node_modules/**"

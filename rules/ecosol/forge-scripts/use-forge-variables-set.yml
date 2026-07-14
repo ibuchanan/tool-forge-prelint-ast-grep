@@ -39,3 +39,5 @@ rule:
                 regex: '"forge:variables:set"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

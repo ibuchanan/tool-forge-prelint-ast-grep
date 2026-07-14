@@ -13,3 +13,5 @@ rule:
     - pattern: <Table />
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

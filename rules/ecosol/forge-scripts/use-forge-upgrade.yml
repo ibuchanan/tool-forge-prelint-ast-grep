@@ -37,3 +37,5 @@ rule:
                 regex: '"forge:upgrade"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

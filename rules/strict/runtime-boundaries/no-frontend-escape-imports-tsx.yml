@@ -14,3 +14,5 @@ rule:
   regex: '(from\s+["''](?:\.\./)+(?:external|import-lifecycle|queues)(?:/|["''])|import\s+["''](?:\.\./)+(?:external|import-lifecycle|queues)(?:/|["'']))'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

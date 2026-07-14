@@ -36,3 +36,5 @@ rule:
                 regex: '"forge:register"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

@@ -24,3 +24,5 @@ rule:
             regex: '"check"\s*:\s*"npm run format:check\s*&&\s*npm run typecheck\s*&&\s*npm run lint\s*&&\s*npm run test"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

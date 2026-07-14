@@ -26,3 +26,5 @@ rule:
             regex: '"lint:forge"\s*:\s*"forge lint"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

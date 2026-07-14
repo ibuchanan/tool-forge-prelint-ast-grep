@@ -14,5 +14,6 @@ rule:
   not:
     regex: "(maxResults|limit|cursor|startAt|nextPage)"
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"

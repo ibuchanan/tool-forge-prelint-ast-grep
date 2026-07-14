@@ -20,3 +20,5 @@ rule:
     - pattern: 'import { $$$A, render } from "@forge/react"'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

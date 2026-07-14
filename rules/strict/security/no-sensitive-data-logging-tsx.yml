@@ -15,5 +15,6 @@ rule:
 files:
   - "**/frontend/**"
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.tsx"
   - "**/*.spec.tsx"

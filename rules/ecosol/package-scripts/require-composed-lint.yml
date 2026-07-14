@@ -24,3 +24,5 @@ rule:
             regex: '"lint"\s*:\s*"npm run lint:prelint && npm run lint:check && npm run lint:forge"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

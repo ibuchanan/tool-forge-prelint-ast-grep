@@ -35,3 +35,5 @@ rule:
                 regex: '"forge:uninstall"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

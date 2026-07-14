@@ -13,5 +13,6 @@ rule:
   kind: string
   regex: '\b(ATATT3xFfG[a-zA-Z0-9_\-=]{20,})\b'
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.tsx"
   - "**/*.spec.tsx"

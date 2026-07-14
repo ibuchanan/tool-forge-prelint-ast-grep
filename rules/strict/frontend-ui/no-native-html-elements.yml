@@ -39,3 +39,5 @@ rule:
   matches: isNativeHtml
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

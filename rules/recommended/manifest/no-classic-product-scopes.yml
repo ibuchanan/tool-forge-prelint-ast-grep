@@ -15,3 +15,5 @@ rule:
 files:
   - "**/manifest.yml"
   - "**/manifest.yaml"
+ignores:
+  - "**/node_modules/**"

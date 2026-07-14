@@ -23,6 +23,7 @@ files:
   - "**/external/**"
   - "**/import-lifecycle/**"
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"
   - "**/*.spec.ts"

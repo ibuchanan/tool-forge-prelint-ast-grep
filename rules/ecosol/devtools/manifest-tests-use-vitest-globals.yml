@@ -22,3 +22,5 @@ rule:
       regex: "^globals\\s*:\\s*true\\b"
 files:
   - "**/vitest.config.ts"
+ignores:
+  - "**/node_modules/**"

@@ -14,7 +14,7 @@ valid:
         "@forge/api": "^4.0.0"
       },
       "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
       }
     }
   # Forge app wired up to the recommended tier (also a valid, documented tier)
@@ -24,7 +24,7 @@ valid:
         "@forge/api": "^4.0.0"
       },
       "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml --globs '!node_modules/**'"
       }
     }
   # Forge app wired up to the strict tier (also a valid, documented tier)
@@ -34,7 +34,7 @@ valid:
         "@forge/api": "^4.0.0"
       },
       "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml"
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'"
       }
     }
 invalid:
@@ -51,6 +51,16 @@ invalid:
         "@forge/react": "^4.0.0"
       }
     }
+  # Missing node_modules exclusion
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+      }
+    }
   # Wired up to a config that isn't one of this tool's shipped tiers
   - |
     {
@@ -58,6 +68,6 @@ invalid:
         "@forge/api": "^4.0.0"
       },
       "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml"
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml --globs '!node_modules/**'"
       }
     }

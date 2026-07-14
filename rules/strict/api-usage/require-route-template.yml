@@ -36,6 +36,7 @@ rule:
       - pattern: requestBitbucket(route`$$$`)
       - pattern: requestBitbucket(assumeTrustedRoute($$$))
 ignores:
+  - "**/node_modules/**"
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"

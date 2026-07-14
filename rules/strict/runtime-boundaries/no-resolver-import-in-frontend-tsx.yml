@@ -13,3 +13,5 @@ rule:
   regex: '(from\s+["''][^"'']*resolvers(?:/|["''])|import\s+["''][^"'']*resolvers(?:/|["'']))'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

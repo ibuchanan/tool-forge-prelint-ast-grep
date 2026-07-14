@@ -13,5 +13,6 @@ rule:
   kind: call_expression
   regex: '(?is)^console\.(log|warn|error|info|debug)\(.*\b(password|secret|token|api[-_]?key|credentials)\b'
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.ts"
   - "**/*.spec.ts"

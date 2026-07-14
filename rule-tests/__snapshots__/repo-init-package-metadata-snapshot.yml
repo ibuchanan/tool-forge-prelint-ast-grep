@@ -16,8 +16,26 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
+    - source: |-
+        {
+          "license": "Apache-2.0",
+          "main": "dist/index.mjs",
+          "types": "dist/index.d.mts",
+          "exports": {
+            ".": {
+              "import": "dist/index.mjs",
+              "types": "dist/index.d.mts"
+            }
+          },
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
       style: primary
+      start: 0
+      end: 243
+    - source: '@forge/api'
+      style: secondary
       start: 218
       end: 228
     - source: |-
@@ -27,6 +45,24 @@ snapshots:
       style: secondary
       start: 195
       end: 241
+    - source: |
+        {
+          "license": "Apache-2.0",
+          "main": "dist/index.mjs",
+          "types": "dist/index.d.mts",
+          "exports": {
+            ".": {
+              "import": "dist/index.mjs",
+              "types": "dist/index.d.mts"
+            }
+          },
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 244
   ? |
     {
       "private": true,
@@ -38,8 +74,21 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
+    - source: |-
+        {
+          "private": true,
+          "license": "Apache-2.0",
+          "main": "dist/index.js",
+          "types": "dist/index.d.ts",
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
       style: primary
+      start: 0
+      end: 155
+    - source: '@forge/api'
+      style: secondary
       start: 130
       end: 140
     - source: |-
@@ -49,6 +98,19 @@ snapshots:
       style: secondary
       start: 107
       end: 153
+    - source: |
+        {
+          "private": true,
+          "license": "Apache-2.0",
+          "main": "dist/index.js",
+          "types": "dist/index.d.ts",
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 156
   ? |
     {
       "private": true,
@@ -65,8 +127,26 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
+    - source: |-
+        {
+          "private": true,
+          "license": "Apache-2.0",
+          "main": "dist/index.mjs",
+          "types": "dist/index.d.mts",
+          "exports": {
+            ".": {
+              "import": "dist/index.mjs"
+            }
+          },
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
       style: primary
+      start: 0
+      end: 227
+    - source: '@forge/api'
+      style: secondary
       start: 202
       end: 212
     - source: |-
@@ -76,3 +156,21 @@ snapshots:
       style: secondary
       start: 179
       end: 225
+    - source: |
+        {
+          "private": true,
+          "license": "Apache-2.0",
+          "main": "dist/index.mjs",
+          "types": "dist/index.d.mts",
+          "exports": {
+            ".": {
+              "import": "dist/index.mjs"
+            }
+          },
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 228

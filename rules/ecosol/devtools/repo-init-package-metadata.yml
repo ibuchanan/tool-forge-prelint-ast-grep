@@ -7,61 +7,51 @@ message: >
 note: >
   repo-init generates private: true, license: "Apache-2.0",
   main: "dist/index.mjs", types: "dist/index.d.mts", and a matching
-  exports["."].import/types. This is template-derived, so it's a lower
-  priority hint for real apps that intentionally differ (e.g. a non-ESM
-  build, or a different license).
+  exports["."].import/types target. The exports target may use npm's
+  "./dist/..." package target form. This is template-derived, so it's a
+  lower priority hint for real apps that intentionally differ (e.g. a
+  non-ESM build, or a different license).
   npm package.json fields reference:
   https://docs.npmjs.com/cli/v11/configuring-npm/package-json/
 rule:
+  kind: object
+  inside:
+    kind: document
   all:
-    - kind: string_content
-      regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
-      inside:
+    - has:
         stopBy: end
         kind: pair
         regex: '"dependencies"\s*:'
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
     - any:
         - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"private"\s*:\s*true'
+            has:
+              kind: pair
+              regex: '"private"\s*:\s*true'
         - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"license"\s*:\s*"Apache-2\.0"'
+            has:
+              kind: pair
+              regex: '"license"\s*:\s*"Apache-2\.0"'
         - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"main"\s*:\s*"dist/index\.mjs"'
+            has:
+              kind: pair
+              regex: '"main"\s*:\s*"dist/index\.mjs"'
         - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"types"\s*:\s*"dist/index\.d\.mts"'
+            has:
+              kind: pair
+              regex: '"types"\s*:\s*"dist/index\.d\.mts"'
         - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"exports"\s*:[\s\S]*?"import"\s*:\s*"dist/index\.mjs"'
+            has:
+              kind: pair
+              regex: '"exports"\s*:[\s\S]*?"import"\s*:\s*"(?:\./)?dist/index\.mjs"'
         - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"exports"\s*:[\s\S]*?"types"\s*:\s*"dist/index\.d\.mts"'
+            has:
+              kind: pair
+              regex: '"exports"\s*:[\s\S]*?"types"\s*:\s*"(?:\./)?dist/index\.d\.mts"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

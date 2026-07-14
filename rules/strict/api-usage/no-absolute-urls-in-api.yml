@@ -13,6 +13,7 @@ rule:
   kind: call_expression
   regex: '^((api\.(asUser|asApp)\(\)\.)?(requestJira|requestConfluence|requestGraph|requestBitbucket)|assumeTrustedRoute)\s*\(\s*["''](https?:)?//'
 ignores:
+  - "**/node_modules/**"
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"

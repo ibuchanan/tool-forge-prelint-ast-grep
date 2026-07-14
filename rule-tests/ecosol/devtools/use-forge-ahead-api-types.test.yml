@@ -1,0 +1,49 @@
+id: use-forge-ahead-api-types
+valid:
+  # Not a Forge app
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app with @forge/api and generated Atlassian API types
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0",
+        "@forge-ahead/atlassian-api-types": "^1.0.0"
+      }
+    }
+  # Forge app without @forge/api does not need the API types helper
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*"
+      }
+    }
+  # Event-only Forge app does not need the API types helper
+  - |
+    {
+      "dependencies": {
+        "@forge/events": "^3.0.0"
+      }
+    }
+invalid:
+  # Missing when the app uses @forge/api
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # @forge-ahead/errors is separate and does not satisfy API types
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0",
+        "@forge-ahead/errors": "^1.0.0"
+      }
+    }

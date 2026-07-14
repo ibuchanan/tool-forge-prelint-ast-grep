@@ -23,7 +23,7 @@ rule:
     - not:
         has:
           stopBy: end
-          regex: 'avi:forge:'
+          regex: "avi:forge:"
     - inside:
         stopBy: end
         kind: block_mapping_pair
@@ -31,3 +31,5 @@ rule:
 files:
   - "**/manifest.yml"
   - "**/manifest.yaml"
+ignores:
+  - "**/node_modules/**"

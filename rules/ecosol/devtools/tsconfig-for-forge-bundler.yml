@@ -2,15 +2,15 @@ id: tsconfig-for-forge-bundler
 language: Json
 severity: warning
 message: >
-  Bring tsconfig.json's compilerOptions back in line with the repo-init
-  Forge bundler baseline.
+  Keep tsconfig.json's Forge bundler baseline compilerOptions compatible.
 note: >
-  repo-init generates compilerOptions with module: "ESNext",
-  moduleResolution: "node", jsx: "react-jsx", target: "ES2022",
-  rootDir: "src", outDir: "dist", strict: true, and
-  noUncheckedIndexedAccess: true. Forge's webpack/ts-loader bundler is
-  sensitive to these settings, so drift here is easy to introduce and
-  hard to diagnose from a bundling failure alone.
+  repo-init generates deploy-time compilerOptions with module: "ESNext",
+  moduleResolution: "node", jsx: "react-jsx", target: "ES2022", rootDir:
+  "src", outDir: "dist", strict: true, and noUncheckedIndexedAccess: true.
+  Extra React, type, and strictness options are fine, but these baseline
+  values should stay unchanged for Forge's webpack/ts-loader bundler. Use a
+  separate tsconfig.typecheck.json for local-only module resolution choices
+  such as NodeNext or bundler.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/
 rule:
@@ -52,3 +52,5 @@ rule:
           regex: '"compilerOptions"\s*:[\s\S]*?"noUncheckedIndexedAccess"\s*:\s*true'
 files:
   - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

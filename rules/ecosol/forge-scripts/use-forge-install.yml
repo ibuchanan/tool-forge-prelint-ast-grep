@@ -38,3 +38,5 @@ rule:
                 regex: '"forge:install"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

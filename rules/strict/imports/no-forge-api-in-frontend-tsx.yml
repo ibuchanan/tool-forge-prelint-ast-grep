@@ -17,3 +17,5 @@ rule:
     - pattern: 'import "@forge/api"'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

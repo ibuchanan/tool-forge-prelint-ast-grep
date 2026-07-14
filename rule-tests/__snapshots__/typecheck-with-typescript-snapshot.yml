@@ -7,8 +7,17 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+        }
       style: primary
+      start: 0
+      end: 54
+    - source: '@forge/api'
+      style: secondary
       start: 27
       end: 37
     - source: |-
@@ -18,6 +27,15 @@ snapshots:
       style: secondary
       start: 4
       end: 52
+    - source: |
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 55
   ? |
     {
       "dependencies": {
@@ -28,8 +46,20 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "build": "tsc -p tsconfig.build.json"
+          }
+        }
       style: primary
+      start: 0
+      end: 116
+    - source: '@forge/api'
+      style: secondary
       start: 27
       end: 37
     - source: |-
@@ -39,6 +69,18 @@ snapshots:
       style: secondary
       start: 4
       end: 52
+    - source: |
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "build": "tsc -p tsconfig.build.json"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 117
   ? |
     {
       "dependencies": {
@@ -63,12 +105,66 @@ snapshots:
   ? |
     {
       "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "typecheck": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 97
+    - source: '@forge/api'
+      style: secondary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 98
+  ? |
+    {
+      "dependencies": {
         "@forge/bridge": "^4.0.0"
       }
     }
   : labels:
-    - source: '@forge/bridge'
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/bridge": "^4.0.0"
+          }
+        }
       style: primary
+      start: 0
+      end: 57
+    - source: '@forge/bridge'
+      style: secondary
       start: 27
       end: 40
     - source: |-
@@ -78,3 +174,12 @@ snapshots:
       style: secondary
       start: 4
       end: 55
+    - source: |
+        {
+          "dependencies": {
+            "@forge/bridge": "^4.0.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 58

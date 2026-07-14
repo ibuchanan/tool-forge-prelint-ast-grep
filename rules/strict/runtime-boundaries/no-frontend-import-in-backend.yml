@@ -17,3 +17,5 @@ files:
   - "**/external/**"
   - "**/import-lifecycle/**"
   - "**/src/index.ts"
+ignores:
+  - "**/node_modules/**"

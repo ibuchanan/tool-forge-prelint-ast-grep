@@ -26,3 +26,5 @@ rule:
         regex: '"size-limit"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

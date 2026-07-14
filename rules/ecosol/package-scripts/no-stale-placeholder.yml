@@ -29,3 +29,5 @@ rule:
           regex: '"@forge/(api|react|bridge|kvs|events|resolver)"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

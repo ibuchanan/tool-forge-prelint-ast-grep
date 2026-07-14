@@ -2,36 +2,34 @@ id: typecheck-with-typescript
 language: Json
 severity: warning
 message: >
-  Use a type safety check to verify declared data structures, especially for APIs
+  Add a `typecheck` script that runs TypeScript without emitting output.
 note: >
   TypeScript catches type errors locally
   to prevent sudden, hard-to-debug runtime crashes inside the remote hosting environment.
   Type checking is especially useful for Forge-specific parameters,
   REST API requests & responses,
-  and for the mappings from manifest into functions.
+  and for the mappings from manifest into functions. A conventional
+  package-level script is typecheck: "tsc --noEmit"; add an explicit
+  -p/--project argument only when the package needs a non-default tsconfig.
   https://www.typescriptlang.org/
 rule:
+  kind: object
+  inside:
+    kind: document
   all:
-    - kind: string_content
-      regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
-      inside:
+    - has:
         stopBy: end
         kind: pair
         regex: '"dependencies"\s*:'
-    - any:
-        - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"build"\s*:\s*"tsc -p tsconfig\.build\.json"'
-        - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"typecheck"\s*:\s*"tsc --noEmit -p tsconfig\.json"'
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+    - not:
+        has:
+          kind: pair
+          regex: '"typecheck"\s*:\s*"tsc\b[^"]*--noEmit\b[^"]*"'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

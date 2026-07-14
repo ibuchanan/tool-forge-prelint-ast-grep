@@ -14,5 +14,6 @@ rule:
   not:
     regex: '(fields=|fields\s*:|fields%3D)'
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.tsx"
   - "**/*.spec.tsx"

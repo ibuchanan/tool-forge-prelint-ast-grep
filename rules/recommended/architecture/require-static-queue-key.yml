@@ -34,3 +34,5 @@ rule:
           - pattern:
               context: '{ key: "$$$KEY" }'
               selector: pair
+ignores:
+  - "**/node_modules/**"

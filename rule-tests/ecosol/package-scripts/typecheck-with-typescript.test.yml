@@ -18,6 +18,29 @@ valid:
         "typecheck": "tsc --noEmit -p tsconfig.json"
       }
     }
+  # Forge app using the conventional package-level no-emit typecheck script
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*"
+      },
+      "scripts": {
+        "build": "tsc",
+        "typecheck": "tsc --noEmit"
+      }
+    }
+  # The noEmit flag may appear after an explicit project argument
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "typecheck": "tsc -p tsconfig.json --noEmit"
+      }
+    }
 invalid:
   - |
     {
@@ -42,13 +65,13 @@ invalid:
         "build": "tsc -p tsconfig.build.json"
       }
     }
-  # Missing build script
+  # Typecheck script emits output
   - |
     {
       "dependencies": {
         "@forge/api": "^4.0.0"
       },
       "scripts": {
-        "typecheck": "tsc --noEmit -p tsconfig.json"
+        "typecheck": "tsc"
       }
     }

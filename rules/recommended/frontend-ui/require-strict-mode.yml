@@ -16,3 +16,5 @@ rule:
       pattern: <React.StrictMode>$$$</React.StrictMode>
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

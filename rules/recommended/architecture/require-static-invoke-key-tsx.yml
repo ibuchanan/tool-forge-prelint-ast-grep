@@ -21,3 +21,5 @@ rule:
       - pattern: 'invoke("$$$KEY", $$$ARGS)'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

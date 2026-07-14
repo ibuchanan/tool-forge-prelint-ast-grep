@@ -18,3 +18,5 @@ rule:
     regex: '"scripts"\s*:'
 files:
   - "**/package.json"
+ignores:
+  - "**/node_modules/**"

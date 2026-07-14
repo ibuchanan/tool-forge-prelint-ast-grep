@@ -29,5 +29,6 @@ rule:
           kind: call_expression
           regex: '\.(map|forEach|flatMap|reduce|some|every|filter)\s*\('
 ignores:
+  - "**/node_modules/**"
   - "**/*.test.tsx"
   - "**/*.spec.tsx"

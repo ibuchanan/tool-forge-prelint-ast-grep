@@ -30,6 +30,7 @@ rule:
       - pattern: api.asUser().requestBitbucket($$$)
       - pattern: api.asApp().requestBitbucket($$$)
 ignores:
+  - "**/node_modules/**"
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"

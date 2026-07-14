@@ -28,3 +28,5 @@ rule:
           regex: 'size\s*=\s*"x?xlarge"'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

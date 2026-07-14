@@ -40,3 +40,5 @@ rule:
           regex: 'pre-push:[\s\S]*?\btest:'
 files:
   - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

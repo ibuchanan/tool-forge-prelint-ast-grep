@@ -18,3 +18,5 @@ rule:
     regex: '^useEffect\s*\([\s\S]*,\s*[^)]'
 files:
   - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"

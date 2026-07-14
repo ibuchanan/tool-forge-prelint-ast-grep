@@ -16,3 +16,5 @@ rule:
       pattern: ForgeReconciler.render($$$)
 files:
   - "**/frontend/index.tsx"
+ignores:
+  - "**/node_modules/**"
