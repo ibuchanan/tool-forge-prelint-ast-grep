@@ -18,5 +18,6 @@ ruleDirs:
   - rules/strict/runtime-boundaries
   - rules/strict/security
   - rules/strict/triggers
+  - rules/ecosol/repo-init
   - rules/ecosol/package-scripts
   - rules/ecosol/forge-scripts

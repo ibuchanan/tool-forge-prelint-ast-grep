@@ -1,0 +1,36 @@
+id: use-node-24
+valid:
+  # Not a Forge app (no @forge/api dependency)
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app already pinned to Node.js 24.x
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "engines": {
+        "node": "24.x"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # Pinned to an older Node.js version
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "engines": {
+        "node": "18.x"
+      }
+    }

@@ -1,0 +1,34 @@
+id: use-forge-ahead
+language: Json
+severity: hint
+message: >
+  Bring this Forge repo up to the repo-init baseline by adding Forge Ahead helper packages.
+note: >
+  repo-init adds @forge-ahead/atlassian-api-types and @forge-ahead/errors
+  as production dependencies so apps can share generated Atlassian API types
+  and common error helpers.
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - any:
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"@forge-ahead/atlassian-api-types"\s*:'
+        - not:
+            inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"@forge-ahead/errors"\s*:'
+files:
+  - "**/package.json"

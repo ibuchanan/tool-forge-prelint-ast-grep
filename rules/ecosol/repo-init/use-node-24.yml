@@ -1,0 +1,26 @@
+id: use-node-24
+language: Json
+severity: hint
+message: >
+  Bring this Forge repo up to the repo-init baseline by pinning Node.js 24.x.
+note: >
+  repo-init writes package.json engines.node = "24.x" and a matching .nvmrc.
+  Older generated repos commonly drift on Node version, which can change local,
+  CI, and Forge CLI behavior.
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/api$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"node"\s*:\s*"24\.x"'
+files:
+  - "**/package.json"
