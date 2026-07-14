@@ -13,6 +13,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .npm
+.turbo
 package-lock.json
 # CocoIndex Code (ccc)
 /.cocoindex_code/
