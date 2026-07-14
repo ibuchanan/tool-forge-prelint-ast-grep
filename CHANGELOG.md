@@ -1,3 +1,9 @@
+## [0.3.0] - 2026-07-14
+
+### 🚀 Features
+
+- *(ecosol)* Expand repo-init drift checks
+- *(rules)* Promote reusable script checks
 ## [0.2.0] - 2026-07-14
 
 ### 🚀 Features
