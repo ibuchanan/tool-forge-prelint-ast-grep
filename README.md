@@ -1,6 +1,7 @@
 # Forge Prelint ast-grep rules
 
 As explained in [Atlassian Forge documentation](https://go.atlassian.com/forge):
+
 > Forge makes it possible to build a fully-functional app in just a few hours,
 > with hosting, multiple development environments, and API authentication built-in.
 > Forge can be used to build custom apps and integrations or apps distributed through the Atlassian Marketplace.
@@ -64,10 +65,11 @@ so installs are reproducible:
 
 This package ships the YAML rule files under `rules/`
 plus the tier configs:
-* `sgconfig.recommended.yml`
-* `sgconfig.strict.yml`
-* `sgconfig.atlassian.yml`
-* `sgconfig.ecosol.yml`
+
+- `sgconfig.recommended.yml`
+- `sgconfig.strict.yml`
+- `sgconfig.atlassian.yml`
+- `sgconfig.ecosol.yml`
 
 There is no package build step;
 the installed files are the configs that `ast-grep` reads directly.
@@ -181,93 +183,111 @@ npm run test:interactive
 
 ## Rule reference
 
+Each rule file documents itself: `message` states the finding, `note` explains
+the reasoning and usually links to further reading. Browse `rules/<tier>/<category>/`
+for the full list of rule IDs, or run a scan and read the output directly.
+The categories below describe what each rule set covers.
+
 ### recommended/architecture
 
-- `require-static-invoke-key` — Frontend `invoke()` calls must use string literal keys
-- `require-static-queue-key` — `new Queue({ key })` must use a string literal key when `Queue` is imported from `@forge/events`
-- `no-monolithic-resolver` — flag resolver files with five or more `resolver.define()` actions
+Wiring conventions that keep `invoke()` calls, `Queue` keys, and resolver files
+resolvable and maintainable — static keys instead of dynamic strings, and a cap
+on how many actions live in one resolver file.
 
 ### recommended/cost
 
-- `no-unpaginated-product-search` — search/list product API calls should include pagination
-- `no-product-request-in-loop` — avoid N+1 Atlassian product API requests in loops or array callbacks
-- `no-storage-operation-in-loop` — avoid Forge storage reads/writes in loops or array callbacks
-- `no-use-action-invoke` — avoid resolver invocations from `useAction()`
-- `no-jira-search-without-fields` — Jira search requests should select explicit fields
-- `no-invoke-without-effect-deps` — `invoke()` inside `useEffect` should have stable dependencies
-- `no-multiple-invokes-in-effect` — multiple load-time invokes can often be batched
-- `review-high-function-memory` — review high `memoryMiB` values against observed usage
-- `review-max-function-timeout` — review long `timeoutSeconds` values against realistic runtime
-- `no-verbose-hot-path-logging` — avoid `console.log` in backend hot paths
+Patterns that inflate Forge invocation counts, storage reads/writes, or bundle
+memory/timeout settings beyond what's needed — N+1 API calls, unbounded
+searches, batchable invokes, and verbose backend logging.
 
 ### recommended/devtools
 
-- `use-size-limit` — add size-limit to measure and enforce bundle size in CI
+Bundle-size guardrails for CI.
 
 ### recommended/frontend-ui
 
-- `require-strict-mode` — `ForgeReconciler.render()` must wrap root in `<React.StrictMode>`
-- `review-duplicate-page-title` — review large in-app headings that may duplicate the manifest module `title`
+UI Kit correctness and Custom UI embedding conventions — strict mode, avoiding
+duplicate page titles, and preferring `<Frame>` over a raw `<iframe>`.
 
 ### recommended/manifest
 
-- `no-classic-product-scopes` — prefer granular Jira/Confluence scopes where possible
-- `review-forge-remotes` — flag `remotes` for explicit eligibility, residency, and auth review
+Manifest scope and remote review — granular over classic scopes, admin-level
+scopes flagged for least-privilege review, and remotes flagged for
+eligibility/residency/auth review.
+
+### recommended/package-json
+
+package.json hygiene that applies to any Forge app, independent of team-specific
+tooling choices — currently, review of automatically-triggered npm lifecycle
+scripts.
 
 ### recommended/security
 
-- `no-wildcard-egress` — no wildcard external egress in `manifest.yml`
-- `no-unsafe-custom-ui-csp` — no `unsafe-inline` or `unsafe-eval` Custom UI CSP entries
+Manifest-level security: no wildcard egress, no unsafe Custom UI CSP entries.
 
 ### recommended/triggers
 
-- `no-excessive-scheduled-trigger` — avoid five-minute/hourly schedules for slow-changing data
-- `prefer-jira-trigger-ignore-self` — Jira triggers should review `filter.ignoreSelf`
+Trigger filtering to avoid unnecessary invocations — scheduled trigger
+intervals and Jira `filter.ignoreSelf`.
 
 ### strict/api-usage
 
-- `require-as-user-or-as-app` — `requestJira`/`requestConfluence` must be chained from `api.asUser()` or `api.asApp()`
-- `require-route-template` — API requests must use the `` route`...` `` template tag or `assumeTrustedRoute()`
-- `no-absolute-urls-in-api` — no absolute URLs (`http://`, `https://`, or `//`) passed to Forge product request helpers or `assumeTrustedRoute`
-- `no-native-fetch-in-resolvers` — no native `fetch()` calls in `src/resolvers/`, `src/external/`, `src/import-lifecycle/`
+Safe patterns for calling Jira/Confluence product APIs — explicit
+`asUser()`/`asApp()`, route templates over absolute URLs, and no native
+`fetch()` in backend runtime code.
 
 ### strict/runtime-boundaries
 
-- `no-frontend-escape-imports` — frontend files must not import backend runtime modules from `external`, `import-lifecycle`, or `queues`
-- `no-resolver-import-in-frontend` — frontend must not import from `src/resolvers/`
-- `no-frontend-import-in-backend` — backend runtime files must not import from `src/frontend/`
+Enforces the frontend/backend module boundary in both directions, so bundling
+and Forge runtime assumptions aren't violated by a stray import.
 
 ### strict/frontend-ui
 
-- `no-native-html-elements` — no native HTML elements (`<div>`, `<span>`, etc.) in frontend JSX
-- `no-deprecated-table` — use `<DynamicTable>` not `<Table>`
-- `no-render-from-forge-react` — do not import `render` from `@forge/react`; use `ForgeReconciler.render()`
-- `require-forge-reconciler-render` — `src/frontend/index.tsx` must call `ForgeReconciler.render()`
+Stricter UI Kit correctness — no native HTML elements, no deprecated
+components, and a required `ForgeReconciler.render()` entry point.
 
 ### strict/imports
 
-- `no-forge-ui-import` — no imports from deprecated `@forge/ui` package
-- `no-deprecated-storage-import` — no `storage` imported from `@forge/api` (use `@forge/kvs`)
-- `no-forge-api-in-frontend` — no `@forge/api` imports in `src/frontend/**`
-- `no-forge-kvs-in-frontend` — no `@forge/kvs` imports in `src/frontend/**`
-- `no-forge-bridge-in-backend` — no `@forge/bridge` imports in Forge backend runtime files
-- `no-unapproved-forge-react-components` — only approved UI Kit components may be imported from `@forge/react`
+Blocks deprecated packages and boundary-violating imports (`@forge/ui`,
+`@forge/api` storage, `@forge/kvs`/`@forge/bridge` on the wrong side of the
+frontend/backend split, and unapproved `@forge/react` components).
 
 ### strict/package-json
 
-- `prefer-forge-fetch` — flag third-party HTTP client libraries that should be replaced with Forge platform fetch
+Flags third-party dependencies that duplicate a Forge platform capability
+(e.g. HTTP client libraries where Forge fetch already covers the need).
 
 ### strict/performance
 
-- `no-storage-query-scan` — bound Forge storage queries before `getMany()`
+Bounds expensive Forge storage operations before they hit platform limits.
 
 ### strict/security
 
-- `no-hardcoded-atlassian-token` / `-tsx` — flag Atlassian API token literals (`ATATT3xFfG…`) committed in source
+Source-level security hygiene — no committed Atlassian API tokens, no
+wildcard CORS origins, no logging of credential-shaped values.
 
 ### strict/triggers
 
-- `prefer-trigger-filter` — product event triggers should use manifest-level filters where possible
+Prefer manifest-level trigger filters over in-code filtering.
+
+### ecosol/repo-init
+
+Dependency-level conventions from the ecosol repo-init template that don't fit
+the package-scripts checks below (Forge Ahead helper packages, Node version
+pin).
+
+### ecosol/package-scripts
+
+npm script conventions from the ecosol repo-init template — which scripts
+should exist, what they should compose, and naming/behavior hygiene for the
+`scripts` block as a whole.
+
+### ecosol/forge-scripts
+
+Naming and wrapping conventions for scripts that call the Forge CLI directly
+(`forge deploy`, `install`, `uninstall`, `register`, ...) — a `forge:<verb>`
+namespace so wrapper scripts are discoverable by a predictable name, and
+consistent secret/environment handling around those commands.
 
 ## Scope boundaries
 
