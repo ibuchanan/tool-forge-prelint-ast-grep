@@ -1,0 +1,14 @@
+id: prefer-frame-for-custom-ui
+snapshots:
+  <iframe src={customUiUrl} />:
+    labels:
+      - source: <iframe src={customUiUrl} />
+        style: primary
+        start: 0
+        end: 28
+  <iframe src={customUiUrl}>fallback</iframe>:
+    labels:
+      - source: <iframe src={customUiUrl}>fallback</iframe>
+        style: primary
+        start: 0
+        end: 43

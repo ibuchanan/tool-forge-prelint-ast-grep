@@ -1,0 +1,32 @@
+id: no-sensitive-data-logging
+snapshots:
+  console.debug('credentials', credentials):
+    labels:
+      - source: console.debug('credentials', credentials)
+        style: primary
+        start: 0
+        end: 41
+  console.error('secret value', secretValue):
+    labels:
+      - source: console.error('secret value', secretValue)
+        style: primary
+        start: 0
+        end: 42
+  console.log('password:', password):
+    labels:
+      - source: console.log('password:', password)
+        style: primary
+        start: 0
+        end: 34
+  console.log('token', accessToken):
+    labels:
+      - source: console.log('token', accessToken)
+        style: primary
+        start: 0
+        end: 33
+  console.warn('api key is', apiKey):
+    labels:
+      - source: console.warn('api key is', apiKey)
+        style: primary
+        start: 0
+        end: 34

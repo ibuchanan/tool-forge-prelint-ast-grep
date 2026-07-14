@@ -1,0 +1,19 @@
+id: no-sensitive-data-logging-tsx
+language: Tsx
+severity: error
+message: >
+  Do not log values that look like passwords, secrets, tokens, or API keys.
+note: >
+  Logs are often shipped to third-party aggregators or retained beyond the
+  incident they were written for. Redact or omit credential-shaped values
+  before logging instead of passing them to console directly.
+  See the Valiantys Forge style guide's secure logging guidance:
+  https://www.valiantys.com/en/resources/forge-style-guide
+rule:
+  kind: call_expression
+  regex: '(?is)^console\.(log|warn|error|info|debug)\(.*\b(password|secret|token|api[-_]?key|credentials)\b'
+files:
+  - "**/frontend/**"
+ignores:
+  - "**/*.test.tsx"
+  - "**/*.spec.tsx"

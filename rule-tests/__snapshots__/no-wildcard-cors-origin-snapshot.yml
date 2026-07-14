@@ -1,0 +1,20 @@
+id: no-wildcard-cors-origin
+snapshots:
+  ? |
+    const headers = {
+      'Access-Control-Allow-Origin': '*'
+    };
+  : labels:
+      - source: "'Access-Control-Allow-Origin': '*'"
+        style: primary
+        start: 20
+        end: 54
+  ? |
+    const headers = {
+      'Access-Control-Allow-Origin': ['*']
+    };
+  : labels:
+      - source: "'Access-Control-Allow-Origin': ['*']"
+        style: primary
+        start: 20
+        end: 56

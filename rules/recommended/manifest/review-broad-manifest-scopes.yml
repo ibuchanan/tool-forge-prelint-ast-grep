@@ -1,0 +1,16 @@
+id: review-broad-manifest-scopes
+language: Yaml
+severity: hint
+message: >
+  Review this admin-level scope against the principle of least privilege.
+note: >
+  Admin scopes grant broad access across a product. Confirm the app actually
+  needs admin-level access rather than a narrower read/write scope.
+  See the Valiantys Forge style guide's least-privilege guidance:
+  https://www.valiantys.com/en/resources/forge-style-guide
+rule:
+  kind: block_sequence_item
+  regex: '^\s*-\s*["'']?admin:'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"

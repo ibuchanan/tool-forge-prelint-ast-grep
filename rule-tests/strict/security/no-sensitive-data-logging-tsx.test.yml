@@ -1,0 +1,6 @@
+id: no-sensitive-data-logging-tsx
+valid:
+  - "console.log('user signed in', userId)"
+invalid:
+  - "console.log('password:', password)"
+  - "console.warn('api key is', apiKey)"

@@ -1,0 +1,18 @@
+id: prefer-frame-for-custom-ui
+language: Tsx
+severity: warning
+message: >
+  Embed Custom UI inside UI Kit with the Frame component instead of a raw iframe.
+note: >
+  '@forge/react' ships a Frame component specifically for embedding Custom UI
+  inside a UI Kit app. A raw iframe skips the sizing, loading, and permissions
+  handling Frame provides.
+  See the Valiantys Forge style guide's UI Kit vs Custom UI guidance:
+  https://www.valiantys.com/en/resources/forge-style-guide
+rule:
+  any:
+    - pattern: <iframe $$$>$$$</iframe>
+    - pattern: <iframe $$$/>
+    - pattern: <iframe />
+files:
+  - "**/frontend/**"

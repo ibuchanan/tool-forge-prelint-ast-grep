@@ -1,0 +1,7 @@
+id: prefer-frame-for-custom-ui
+valid:
+  - "<Frame src={customUiUrl} />"
+  - "<Box>hello</Box>"
+invalid:
+  - "<iframe src={customUiUrl} />"
+  - "<iframe src={customUiUrl}>fallback</iframe>"

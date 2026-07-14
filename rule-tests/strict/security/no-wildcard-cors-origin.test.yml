@@ -1,0 +1,19 @@
+id: no-wildcard-cors-origin
+valid:
+  - |
+    const headers = {
+      'Access-Control-Allow-Origin': 'https://example.atlassian.net'
+    };
+  - |
+    const headers = {
+      'Access-Control-Allow-Origin': [allowedOrigin]
+    };
+invalid:
+  - |
+    const headers = {
+      'Access-Control-Allow-Origin': '*'
+    };
+  - |
+    const headers = {
+      'Access-Control-Allow-Origin': ['*']
+    };

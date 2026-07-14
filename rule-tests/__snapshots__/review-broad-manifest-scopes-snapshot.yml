@@ -1,0 +1,20 @@
+id: review-broad-manifest-scopes
+snapshots:
+  ? |
+    permissions:
+      scopes:
+        - 'admin:confluence-configuration'
+  : labels:
+      - source: "- 'admin:confluence-configuration'"
+        style: primary
+        start: 27
+        end: 61
+  ? |
+    permissions:
+      scopes:
+        - admin:jira-platform
+  : labels:
+      - source: "- admin:jira-platform"
+        style: primary
+        start: 27
+        end: 48

@@ -1,0 +1,17 @@
+id: no-wildcard-cors-origin
+language: TypeScript
+severity: warning
+message: >
+  Do not set Access-Control-Allow-Origin to a wildcard in web trigger or resolver responses.
+note: >
+  A wildcard CORS origin lets any site read the response, which defeats the
+  browser's same-origin protections for web trigger endpoints. Return an
+  explicit allow-list of origins instead.
+  See the Valiantys Forge style guide's CORS security guidance:
+  https://www.valiantys.com/en/resources/forge-style-guide
+rule:
+  kind: pair
+  regex: '(?i)["''`]Access-Control-Allow-Origin["''`]\s*:\s*(\[\s*)?["''`]\*["''`]'
+ignores:
+  - "**/*.test.ts"
+  - "**/*.spec.ts"

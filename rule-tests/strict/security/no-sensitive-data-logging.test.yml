@@ -1,0 +1,10 @@
+id: no-sensitive-data-logging
+valid:
+  - "console.log('user signed in', userId)"
+  - "console.error('request failed', error.message)"
+invalid:
+  - "console.log('password:', password)"
+  - "console.log('token', accessToken)"
+  - "console.warn('api key is', apiKey)"
+  - "console.error('secret value', secretValue)"
+  - "console.debug('credentials', credentials)"

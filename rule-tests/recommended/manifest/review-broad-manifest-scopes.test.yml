@@ -1,0 +1,16 @@
+id: review-broad-manifest-scopes
+valid:
+  - |
+    permissions:
+      scopes:
+        - read:jira:issue
+        - write:jira:issue
+invalid:
+  - |
+    permissions:
+      scopes:
+        - admin:jira-platform
+  - |
+    permissions:
+      scopes:
+        - 'admin:confluence-configuration'
