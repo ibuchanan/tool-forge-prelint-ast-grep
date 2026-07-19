@@ -1,3 +1,9 @@
+## [0.5.0] - 2026-07-19
+
+### 🚀 Features
+
+- *(devtools)* Flag @size-limit/preset-app in Forge apps
+
 ## [0.4.4] - 2026-07-19
 
 ### 🐛 Bug Fixes
