@@ -2,20 +2,17 @@
 
 ### 🚀 Features
 
-- *(ecosol)* Expand repo-init drift checks
-- *(rules)* Promote reusable script checks
+- _(ecosol)_ Expand repo-init drift checks
+- _(rules)_ Promote reusable script checks
+
 ## [0.2.0] - 2026-07-14
 
 ### 🚀 Features
 
-- *(rules)* Add ecosol package-scripts and forge-scripts rule sets
-- *(rules)* Add rules inspired by the Valiantys Forge style guide
-- *(rules)* Add ecosol repo-init dependency rules
+- _(rules)_ Add ecosol package-scripts and forge-scripts rule sets
+- _(rules)_ Add rules inspired by the Valiantys Forge style guide
+- _(rules)_ Add ecosol repo-init dependency rules
 
 ### 📚 Documentation
 
-- *(readme)* Restructure rule reference into per-category summaries
-
-### ⚙️ Miscellaneous Tasks
-
-- *(gitignore)* Ignore .turbo cache directory
+- _(readme)_ Restructure rule reference into per-category summaries
