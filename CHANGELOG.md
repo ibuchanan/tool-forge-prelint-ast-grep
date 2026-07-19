@@ -1,3 +1,9 @@
+## [0.4.4] - 2026-07-19
+
+### 🐛 Bug Fixes
+
+- *(recommended)* Allow 'lefthook install || true' in prepare script
+
 ## [0.4.3] - 2026-07-19
 
 ### 🐛 Bug Fixes
