@@ -22,7 +22,7 @@
     "lint:fix": "biome lint --write .",
     "lint:forge": "forge lint",
     "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'",
-    "prepare": "echo 'Not implemented' && lefthook install",
+    "prepare": "lefthook install",
     "size": "npm run build && size-limit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
