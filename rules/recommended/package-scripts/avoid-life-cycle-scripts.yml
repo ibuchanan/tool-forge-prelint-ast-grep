@@ -19,7 +19,7 @@ rule:
         kind: pair
         regex: '"scripts"\s*:'
     - not:
-        regex: '^"prepare"\s*:\s*"lefthook install"$'
+        regex: '^"prepare"\s*:\s*"lefthook install(\s*\|\|\s*true)?"$'
 files:
   - "**/package.json"
 ignores:
