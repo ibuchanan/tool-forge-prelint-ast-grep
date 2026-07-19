@@ -1,3 +1,21 @@
+## [0.4.1] - 2026-07-19
+
+### 🐛 Bug Fixes
+
+- *(rules)* Accept --force on the required lefthook check script
+- *(rules)* Correct stale ForgeUI JSX assumptions for UI Kit 2
+- *(rules)* Narrow avoid-life-cycle-scripts prepare exemption
+
+### 🚜 Refactor
+
+- *(rules)* Split lint-with-prelint into three focused checks
+- *(rules)* Drop unnecessary @forge dependency gates
+
+### ⚙️ Miscellaneous Tasks
+
+- Configure lefthook for this repo's own dev workflow
+- Exclude generated files from prettier
+
 ## [0.4.0] - 2026-07-19
 
 ### 🚀 Features
