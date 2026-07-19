@@ -18,12 +18,10 @@
   ],
   "scripts": {
     "changelog": "touch CHANGELOG.md && git cliff --offline --unreleased --prepend CHANGELOG.md",
-    "check": "npm run test && npm run lint && npm run format:check",
+    "check": "lefthook run pre-push --force",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "npm run lint:check",
-    "lint:check": "ast-grep scan --config sgconfig.recommended.yml && ast-grep scan --config sgconfig.strict.yml",
-    "lint:fix": "echo 'ast-grep does not support auto-fix for these rules'",
+    "prepare": "lefthook install",
     "release:prepare": "scripts/release-prepare.sh",
     "test": "ast-grep test --test-dir rule-tests && npm run test:fixtures",
     "test:fixtures": "scripts/check-fixtures.sh",
@@ -33,6 +31,7 @@
   },
   "devDependencies": {
     "@ast-grep/cli": "^0.44",
+    "lefthook": "^2.1",
     "prettier": "^3.9"
   }
 }

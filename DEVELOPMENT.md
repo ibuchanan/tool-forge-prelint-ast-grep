@@ -39,9 +39,8 @@ Forge app; it must produce zero findings when scanned with
 
 ```sh
 npm test             # rule tests + fixture regression check
-npm run lint         # self-lint this repo with its own recommended + strict tiers
 npm run format:check # prettier --check
-npm run check        # all three of the above
+npm run check        # both of the above
 ```
 
 To regenerate snapshots after changing a rule:
