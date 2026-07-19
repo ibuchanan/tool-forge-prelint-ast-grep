@@ -12,10 +12,7 @@ note: >
   which is the most likely breaking point
   ("Application code metadata processing failed").
   A major bump can also outpace what the bundler's pinned ts-loader version supports
-  against the TypeScript Compiler API,
-  and risks the hardcoded jsx/jsxFactory/sourceMap overrides
-  (see no-forge-jsx-override-mismatch and its siblings)
-  becoming invalid if TypeScript changes their semantics.
+  against the TypeScript Compiler API.
   The bundler's peerDependencies allow >=5.0.0,
   but it's only tested against the 5.x line.
   TypeScript TSConfig reference:
@@ -23,18 +20,10 @@ note: >
   npm dependency version reference:
   https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#dependencies
 rule:
-  all:
-    - kind: pair
-      regex: '^"typescript"\s*:'
-      not:
-        regex: '^"typescript"\s*:\s*"[\^~]?5(\.(x|\*|[0-9]+)){0,2}"$'
-    - inside:
-        stopBy: end
-        kind: object
-        has:
-          stopBy: end
-          kind: string_content
-          regex: "^@forge/[^/]+$"
+  kind: pair
+  regex: '^"typescript"\s*:'
+  not:
+    regex: '^"typescript"\s*:\s*"[\^~]?5(\.(x|\*|[0-9]+)){0,2}"$'
 files:
   - "**/package.json"
 ignores:

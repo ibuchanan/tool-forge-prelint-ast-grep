@@ -1,13 +1,5 @@
 id: no-package-main
 valid:
-  # Not a Forge app
-  - |
-    {
-      "main": "dist/index.js",
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
   - |
     {
       "dependencies": {
@@ -20,5 +12,13 @@ invalid:
       "main": "dist/index.mjs",
       "dependencies": {
         "@forge/api": "^8.0"
+      }
+    }
+  # main is unwanted regardless of what else is in dependencies
+  - |
+    {
+      "main": "dist/index.js",
+      "dependencies": {
+        "express": "^4.18.0"
       }
     }

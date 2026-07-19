@@ -1,13 +1,6 @@
 id: use-node-24
 valid:
-  # Not a Forge app (no @forge/api dependency)
-  - |
-    {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  # Forge app already pinned to Node.js 24.x
+  # Already pinned to Node.js 24.x
   - |
     {
       "dependencies": {
@@ -18,17 +11,11 @@ valid:
       }
     }
 invalid:
+  # engines missing entirely
   - |
     {
       "dependencies": {
         "@forge/api": "^4.0.0"
-      }
-    }
-  # Missing from a Forge app that only depends on @forge/resolver
-  - |
-    {
-      "dependencies": {
-        "@forge/resolver": "^1.0.0"
       }
     }
   # Pinned to an older Node.js version

@@ -15,18 +15,9 @@ rule:
   kind: object
   inside:
     kind: document
-  all:
-    - has:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-        has:
-          stopBy: end
-          kind: string_content
-          regex: "^@forge/[^/]+$"
-    - has:
-        kind: pair
-        regex: '^"exports"\s*:'
+  has:
+    kind: pair
+    regex: '^"exports"\s*:'
 files:
   - "**/package.json"
 ignores:

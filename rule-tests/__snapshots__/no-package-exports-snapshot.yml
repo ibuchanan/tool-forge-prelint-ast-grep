@@ -28,27 +28,6 @@ snapshots:
       style: primary
       start: 0
       end: 161
-    - source: '@forge/api'
-      style: secondary
-      start: 136
-      end: 146
-    - source: |-
-        "dependencies": {
-            "@forge/api": "^8.0"
-          }
-      style: secondary
-      start: 113
-      end: 159
-    - source: |-
-        "exports": {
-            ".": {
-              "import": "./dist/index.mjs",
-              "types": "./dist/index.d.mts"
-            }
-          }
-      style: secondary
-      start: 4
-      end: 109
     - source: |
         {
           "exports": {
@@ -64,3 +43,62 @@ snapshots:
       style: secondary
       start: 0
       end: 162
+    - source: |-
+        "exports": {
+            ".": {
+              "import": "./dist/index.mjs",
+              "types": "./dist/index.d.mts"
+            }
+          }
+      style: secondary
+      start: 4
+      end: 109
+  ? |
+    {
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs"
+        }
+      },
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "exports": {
+            ".": {
+              "import": "dist/index.mjs"
+            }
+          },
+          "dependencies": {
+            "express": "^4.18.0"
+          }
+        }
+      style: primary
+      start: 0
+      end: 122
+    - source: |
+        {
+          "exports": {
+            ".": {
+              "import": "dist/index.mjs"
+            }
+          },
+          "dependencies": {
+            "express": "^4.18.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 123
+    - source: |-
+        "exports": {
+            ".": {
+              "import": "dist/index.mjs"
+            }
+          }
+      style: secondary
+      start: 4
+      end: 70

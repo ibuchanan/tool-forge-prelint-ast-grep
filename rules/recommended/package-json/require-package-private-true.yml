@@ -3,7 +3,7 @@ language: Json
 severity: warning
 message: >
   package.json's private field should be true,
-  since Forge apps aren't published to npm.
+  since this app isn't published to npm.
 note: >
   private: true stops an accidental `npm publish` of an app
   that was never meant to be a package.
@@ -13,19 +13,11 @@ rule:
   kind: object
   inside:
     kind: document
-  all:
-    - has:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-        has:
-          stopBy: end
-          kind: string_content
-          regex: "^@forge/[^/]+$"
-    - not:
-        has:
-          kind: pair
-          regex: '"private"\s*:\s*true'
+  not:
+    has:
+      stopBy: end
+      kind: pair
+      regex: '"private"\s*:\s*true'
 files:
   - "**/package.json"
 ignores:

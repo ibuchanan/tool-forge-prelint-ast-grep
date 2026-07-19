@@ -12,20 +12,14 @@ note: >
   npm engines reference:
   https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#engines
 rule:
-  all:
-    - kind: string_content
-      regex: "^@forge/[^/]+$"
-      inside:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-    - not:
-        inside:
-          stopBy: end
-          kind: object
-          has:
-            kind: pair
-            regex: '"node"\s*:\s*"24\.x"'
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      stopBy: end
+      kind: pair
+      regex: '"node"\s*:\s*"24\.x"'
 files:
   - "**/package.json"
 ignores:

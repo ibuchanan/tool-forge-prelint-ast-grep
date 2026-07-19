@@ -16,17 +16,6 @@ snapshots:
       style: primary
       start: 0
       end: 54
-    - source: '@forge/api'
-      style: secondary
-      start: 27
-      end: 37
-    - source: |-
-        "dependencies": {
-            "@forge/api": "^4.0.0"
-          }
-      style: secondary
-      start: 4
-      end: 52
     - source: |
         {
           "dependencies": {
@@ -56,19 +45,6 @@ snapshots:
       style: primary
       start: 0
       end: 105
-    - source: '@forge/bridge'
-      style: secondary
-      start: 27
-      end: 40
-    - source: |-
-        "dependencies": {
-            "@forge/bridge": "*",
-            "@forge/react": "*",
-            "@forge/resolver": "*"
-          }
-      style: secondary
-      start: 4
-      end: 103
     - source: |
         {
           "dependencies": {
@@ -96,17 +72,6 @@ snapshots:
       style: primary
       start: 0
       end: 57
-    - source: '@forge/events'
-      style: secondary
-      start: 27
-      end: 40
-    - source: |-
-        "dependencies": {
-            "@forge/events": "^3.0.0"
-          }
-      style: secondary
-      start: 4
-      end: 55
     - source: |
         {
           "dependencies": {
@@ -116,3 +81,28 @@ snapshots:
       style: secondary
       start: 0
       end: 58
+  ? |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "dependencies": {
+            "express": "^4.18.0"
+          }
+        }
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        {
+          "dependencies": {
+            "express": "^4.18.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 53

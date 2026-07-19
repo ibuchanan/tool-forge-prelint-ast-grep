@@ -18,21 +18,6 @@ snapshots:
       style: primary
       start: 0
       end: 83
-    - source: '@forge/api'
-      style: secondary
-      start: 58
-      end: 68
-    - source: |-
-        "dependencies": {
-            "@forge/api": "^8.0"
-          }
-      style: secondary
-      start: 35
-      end: 81
-    - source: '"types": "dist/index.d.mts"'
-      style: secondary
-      start: 4
-      end: 31
     - source: |
         {
           "types": "dist/index.d.mts",
@@ -43,3 +28,39 @@ snapshots:
       style: secondary
       start: 0
       end: 84
+    - source: '"types": "dist/index.d.mts"'
+      style: secondary
+      start: 4
+      end: 31
+  ? |
+    {
+      "types": "dist/index.d.ts",
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "types": "dist/index.d.ts",
+          "dependencies": {
+            "express": "^4.18.0"
+          }
+        }
+      style: primary
+      start: 0
+      end: 82
+    - source: |
+        {
+          "types": "dist/index.d.ts",
+          "dependencies": {
+            "express": "^4.18.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 83
+    - source: '"types": "dist/index.d.ts"'
+      style: secondary
+      start: 4
+      end: 30

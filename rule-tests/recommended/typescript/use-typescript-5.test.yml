@@ -1,16 +1,13 @@
 id: use-typescript-5
 valid:
-  # Not a Forge app — this constraint doesn't apply
+  # TypeScript isn't required at all
   - |
     {
       "dependencies": {
-        "express": "^4.18.0"
-      },
-      "devDependencies": {
-        "typescript": "^4.9"
+        "@forge/api": "^8.0"
       }
     }
-  # Forge app pinned to typescript 5
+  # Pinned to typescript 5
   - |
     {
       "dependencies": {

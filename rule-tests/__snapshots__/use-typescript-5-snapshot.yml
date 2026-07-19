@@ -14,22 +14,6 @@ snapshots:
       style: primary
       start: 79
       end: 99
-    - source: '@forge/api'
-      style: secondary
-      start: 27
-      end: 37
-    - source: |-
-        {
-          "dependencies": {
-            "@forge/api": "^8.0"
-          },
-          "devDependencies": {
-            "typescript": "^4.9"
-          }
-        }
-      style: secondary
-      start: 0
-      end: 105
   ? |
     {
       "dependencies": {
@@ -44,19 +28,3 @@ snapshots:
       style: primary
       start: 79
       end: 99
-    - source: '@forge/api'
-      style: secondary
-      start: 27
-      end: 37
-    - source: |-
-        {
-          "dependencies": {
-            "@forge/api": "^8.0"
-          },
-          "devDependencies": {
-            "typescript": "^6.0"
-          }
-        }
-      style: secondary
-      start: 0
-      end: 105

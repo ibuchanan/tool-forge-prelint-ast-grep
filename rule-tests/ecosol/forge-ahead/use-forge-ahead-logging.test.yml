@@ -1,12 +1,5 @@
 id: use-forge-ahead-logging
 valid:
-  # Not a Forge app
-  - |
-    {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
   # Forge app with the shared Forge Ahead logging package
   - |
     {
@@ -26,6 +19,13 @@ valid:
       }
     }
 invalid:
+  # Missing entirely — always expected, this tool always scans a Forge app
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
   # Missing from an API-using Forge app
   - |
     {

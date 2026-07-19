@@ -1,13 +1,5 @@
 id: no-package-types
 valid:
-  # Not a Forge app
-  - |
-    {
-      "types": "dist/index.d.ts",
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
   - |
     {
       "dependencies": {
@@ -20,5 +12,13 @@ invalid:
       "types": "dist/index.d.mts",
       "dependencies": {
         "@forge/api": "^8.0"
+      }
+    }
+  # types is unwanted regardless of what else is in dependencies
+  - |
+    {
+      "types": "dist/index.d.ts",
+      "dependencies": {
+        "express": "^4.18.0"
       }
     }
