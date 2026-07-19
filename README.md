@@ -45,7 +45,6 @@ for where this rule set fits.
 - [ast-grep](https://ast-grep.github.io/) >= 0.38 to scan a Forge app.
   when using the dev dependency shown below,
   ast-grep will be installed into your Forge app's node modules.
-- Node.js and npm to develop or test rules in this repository
 
 ## Install
 
@@ -164,158 +163,68 @@ and human review for cross-file wiring
 and intent-heavy decisions.
 Linting is just 1 guardrail for quality.
 
-## Development
+## Rule category reference
 
-```sh
-npm install          # install dev dependencies
-npm test             # run all rule tests
-npm run check        # tests + self-lint + format check
-```
+Each rule file documents itself:
+`message` states the finding,
+`note` explains the reasoning and usually links to further reading.
+The same category name can exist under more than one tier — the sections
+below describe what each category covers regardless of tier, and break out
+tier-specific differences where they matter.
+Browse `rules/<tier>/<category>/` for the exact rule files,
+or run a scan and read the output directly.
 
-To regenerate snapshots after changing a rule:
-
-```sh
-npm run test:update
-```
-
-To step through mismatches interactively:
-
-```sh
-npm run test:interactive
-```
-
-## Rule reference
-
-Each rule file documents itself: `message` states the finding, `note` explains
-the reasoning and usually links to further reading. Browse `rules/<tier>/<category>/`
-for the full list of rule IDs, or run a scan and read the output directly.
-The categories below describe what each rule set covers.
-
-### recommended/architecture
-
-Wiring conventions that keep `invoke()` calls, `Queue` keys, and resolver files
-resolvable and maintainable — static keys instead of dynamic strings, and a cap
-on how many actions live in one resolver file.
-
-### recommended/cost
-
-Patterns that inflate Forge invocation counts, storage reads/writes, or bundle
-memory/timeout settings beyond what's needed — N+1 API calls, unbounded
-searches, and batchable invokes.
-
-### recommended/devtools
-
-Bundle-size guardrails for CI, including size-limit setup.
-
-### recommended/frontend-ui
-
-UI Kit correctness and Custom UI embedding conventions — strict mode, avoiding
-duplicate page titles, and preferring `<Frame>` over a raw `<iframe>`.
-
-### recommended/manifest
-
-Manifest scope and remote review — granular over classic scopes, admin-level
-scopes flagged for least-privilege review, and remotes flagged for
-eligibility/residency/auth review.
-
-### recommended/package-json
-
-package.json metadata hygiene that applies to any Forge app, independent of
-team-specific tooling choices — marking the package private so it's never
-accidentally published, and not declaring main/types/exports — a Forge app
-is a deployable, not a library, and Forge's bundler resolves entrypoints
-from manifest.yml regardless of what these fields say.
-
-### recommended/package-scripts
-
-npm script conventions that apply to any Forge app, independent of
-team-specific tooling choices — wiring a `size` script when size-limit
-tooling is configured, keeping read-only check scripts (`lint`,
-`lint:check`, `format:check`) free of `--write`/`--fix` flags that would
-mutate files instead of failing on drift, and reviewing automatically-
-triggered npm lifecycle scripts (a common supply-chain attack vector).
-
-### recommended/security
-
-Manifest-level security: no wildcard egress, no unsafe Custom UI CSP entries.
-
-### recommended/triggers
-
-Trigger filtering to avoid unnecessary invocations — scheduled trigger
-intervals and Jira `filter.ignoreSelf`.
-
-### recommended/typescript
-
-Forge facts that apply to any Forge app's tsconfig.json, regardless of team
-convention. jsx, jsxFactory, and sourceMap are hardcoded by the bundler at
-build time, so declaring (or omitting) anything else misrepresents what
-actually happens to your code. target, module, moduleResolution, and lib are
-derived from the same Node 18 runtime and webpack output every Forge app
-builds through — unlike the hardcoded overrides, the bundler won't correct
-these for you, so drift here can pass local type-checking while breaking at
-runtime. Both groups are flagged as an error. rootDir and include drifting
-from "src" — the directory structure Forge's own CLI scaffolding generates —
-causes real local `tsc` errors or silently excluded files, so they're
-flagged as a warning. strict, esModuleInterop, skipLibCheck, and
-forceConsistentCasingInFileNames are typical but not bundler-enforced —
-flagged as a hint. Keeping the typescript devDependency on a 5.x major is
-also a warning — a major bump risks breaking the bundler's pinned
-@babel/parser metadata pass and ts-loader compatibility, for any Forge app.
-
-### strict/api-usage
+### api-usage
 
 Safe patterns for calling Jira/Confluence product APIs — explicit
 `asUser()`/`asApp()`, route templates over absolute URLs, and no native
-`fetch()` in backend runtime code.
+`fetch()` in backend runtime code. _(strict)_
 
-### strict/runtime-boundaries
+### architecture
 
-Enforces the frontend/backend module boundary in both directions, so bundling
-and Forge runtime assumptions aren't violated by a stray import.
+Wiring conventions that keep `invoke()` calls, `Queue` keys, and resolver files
+resolvable and maintainable — static keys instead of dynamic strings, and a cap
+on how many actions live in one resolver file. _(recommended)_
 
-### strict/frontend-ui
+### cost
 
-Stricter UI Kit correctness — no native HTML elements, no deprecated
-components, and a required `ForgeReconciler.render()` entry point.
+Patterns that inflate Forge invocation counts, storage reads/writes, or bundle
+memory/timeout settings beyond what's needed — N+1 API calls, unbounded
+searches, and batchable invokes. _(recommended)_
 
-### strict/imports
+### devtools
 
-Blocks deprecated packages and boundary-violating imports (`@forge/ui`,
-`@forge/api` storage, `@forge/kvs`/`@forge/bridge` on the wrong side of the
-frontend/backend split, and unapproved `@forge/react` components).
+Tooling conventions that don't fit a more specific category:
 
-### strict/package-json
+- **recommended** — bundle-size guardrails for CI, including size-limit setup.
+- **ecosol** — biome.json config drift and vitest.config.ts globals specific
+  to the ecosol repo-init template.
 
-Flags third-party dependencies that duplicate a Forge platform capability
-(e.g. HTTP client libraries where Forge fetch already covers the need).
+### forge-ahead
 
-### strict/performance
+Conventions tied to the `@forge-ahead/*` helper packages (errors, Atlassian
+API types, structured logging) — adding the right package for what a Forge
+app actually does, and using `@forge-ahead/logging`'s `createForgeLogger`
+instead of raw `console.log` in backend hot paths, where verbose or
+unredacted output can inflate log volume or leak sensitive data. _(ecosol)_
 
-Bounds expensive Forge storage operations before they hit platform limits.
+### forge-scripts
 
-### strict/security
+Naming and wrapping conventions for scripts that call the Forge CLI directly
+(`forge deploy`, `install`, `uninstall`, `register`, ...) — a `forge:<verb>`
+namespace so wrapper scripts are discoverable by a predictable name, and
+consistent secret/environment handling around those commands. _(ecosol)_
 
-Source-level security hygiene — no committed Atlassian API tokens, no
-wildcard CORS origins, no logging of credential-shaped values.
+### frontend-ui
 
-### strict/triggers
+UI Kit and Custom UI correctness:
 
-Prefer manifest-level trigger filters over in-code filtering.
+- **recommended** — strict mode, avoiding duplicate page titles, and
+  preferring `<Frame>` over a raw `<iframe>`.
+- **strict** — no native HTML elements, no deprecated components, and a
+  required `ForgeReconciler.render()` entry point.
 
-### atlassian/package-json
-
-Atlassian-wide OSS conventions that apply to any Atlassian OSS/sample repo,
-not just Forge apps — currently just the Apache-2.0 license requirement from
-Atlassian's OSS credo checklist. Unlike the ecosol/package-json rules below,
-this isn't gated on an `@forge` dependency being present.
-
-### ecosol/devtools
-
-Conventions from the ecosol repo-init template that don't fit the
-package-scripts checks below: biome.json config drift, and vitest.config.ts
-globals.
-
-### ecosol/git-hooks
+### git-hooks
 
 lefthook.yml guard coverage — a lightweight pre-commit gitleaks and format
 guard (lint/typecheck are too heavy-handed for every commit), and a
@@ -323,47 +232,96 @@ comprehensive pre-push guard covering format, typecheck, lint, and test, so
 CI and `npm run check` can both reuse `lefthook run pre-push` as the single
 source of truth. Each guard is its own rule so a missing one is named
 specifically instead of bundled into one generic "hooks are incomplete"
-finding.
+finding. _(ecosol)_
 
-### ecosol/forge-ahead
+### imports
 
-Conventions tied to the `@forge-ahead/*` helper packages (errors, Atlassian
-API types, structured logging) — adding the right package for what a Forge
-app actually does, and using @forge-ahead/logging's createForgeLogger
-instead of raw console.log in backend hot paths, where verbose or
-unredacted output can inflate log volume or leak sensitive data.
+Blocks deprecated packages and boundary-violating imports (`@forge/ui`,
+`@forge/api` storage, `@forge/kvs`/`@forge/bridge` on the wrong side of the
+frontend/backend split, and unapproved `@forge/react` components). _(strict)_
 
-### ecosol/package-json
+### manifest
 
-package.json metadata from the ecosol repo-init template that isn't a
-universal Forge fact — currently just the `engines.node` version pin, which
-each team can reasonably choose independently of what Forge's own runtime
-targets.
+Manifest scope and remote review — granular over classic scopes, admin-level
+scopes flagged for least-privilege review, and remotes flagged for
+eligibility/residency/auth review. _(recommended)_
 
-### ecosol/typescript
+### package-json
 
-TypeScript conventions from the ecosol repo-init template: tsconfig.json's
-outDir baseline, and tsconfig.typecheck.json's extends/noEmit shape and its
-exhaustive-but-not-Biome-covered strict flags
-(noImplicitReturns, noUncheckedIndexedAccess, noUncheckedSideEffectImports,
-noImplicitOverride, noPropertyAccessFromIndexSignature,
-exactOptionalPropertyTypes). (rootDir, include, target, module,
-moduleResolution, lib, and the typescript major version pin are universal
-Forge facts rather than team convention — they live in recommended/typescript
-instead; see above.)
+package.json hygiene, split by how universal each concern is:
 
-### ecosol/package-scripts
+- **recommended** (any Forge app) — marking the package private so it's
+  never accidentally published, and not declaring main/types/exports — a
+  Forge app is a deployable, not a library, and Forge's bundler resolves
+  entrypoints from manifest.yml regardless of what these fields say.
+- **strict** — flags third-party dependencies that duplicate a Forge
+  platform capability (e.g. HTTP client libraries where Forge fetch already
+  covers the need).
+- **atlassian** — the Apache-2.0 license requirement from Atlassian's OSS
+  credo checklist. Applies to any Atlassian OSS/sample repo, not just Forge
+  apps, so it isn't gated on an `@forge` dependency like the tiers above.
+- **ecosol** — the `engines.node` version pin. A team-specific choice, since
+  each team can reasonably pin a different Node version independently of
+  what Forge's own runtime targets.
 
-npm script conventions from the ecosol repo-init template — which scripts
-should exist, what they should compose, and naming/behavior hygiene for the
-`scripts` block as a whole.
+### package-scripts
 
-### ecosol/forge-scripts
+npm script hygiene for the `scripts` block:
 
-Naming and wrapping conventions for scripts that call the Forge CLI directly
-(`forge deploy`, `install`, `uninstall`, `register`, ...) — a `forge:<verb>`
-namespace so wrapper scripts are discoverable by a predictable name, and
-consistent secret/environment handling around those commands.
+- **recommended** — wiring a `size` script when size-limit tooling is
+  configured, keeping read-only check scripts (`lint`, `lint:check`,
+  `format:check`) free of `--write`/`--fix` flags that would mutate files
+  instead of failing on drift, and reviewing automatically-triggered npm
+  lifecycle scripts (a common supply-chain attack vector).
+- **ecosol** — which scripts should exist, what they should compose, and
+  naming/behavior hygiene for the ecosol repo-init template's `scripts`
+  block as a whole.
+
+### performance
+
+Bounds expensive Forge storage operations before they hit platform limits.
+_(strict)_
+
+### runtime-boundaries
+
+Enforces the frontend/backend module boundary in both directions, so bundling
+and Forge runtime assumptions aren't violated by a stray import. _(strict)_
+
+### security
+
+- **recommended** — manifest-level security: no wildcard egress, no unsafe
+  Custom UI CSP entries.
+- **strict** — source-level security hygiene: no committed Atlassian API
+  tokens, no wildcard CORS origins, no logging of credential-shaped values.
+
+### triggers
+
+Trigger filtering to avoid unnecessary invocations:
+
+- **recommended** — scheduled trigger intervals and Jira
+  `filter.ignoreSelf`.
+- **strict** — prefer manifest-level trigger filters over in-code filtering.
+
+### typescript
+
+- **recommended** — Forge facts that apply to any Forge app's tsconfig.json,
+  regardless of team convention. jsx/jsxFactory/sourceMap are hardcoded by
+  the bundler at build time, so declaring (or omitting) anything else
+  misrepresents what actually happens to your code (an error).
+  target/module/moduleResolution/lib are Node 18 runtime facts every Forge
+  app builds through that the bundler won't auto-correct for you (also an
+  error). rootDir/include drifting from `"src"` — Forge's own CLI
+  scaffolding — causes real local `tsc` errors or silently excluded files
+  (a warning). strict/esModuleInterop/skipLibCheck/
+  forceConsistentCasingInFileNames are typical but not bundler-enforced (a
+  hint). Keeping the `typescript` devDependency on a 5.x major is also a
+  warning — a major bump risks breaking the bundler's pinned `@babel/parser`
+  metadata pass and ts-loader compatibility.
+- **ecosol** — tsconfig.json's outDir baseline, and tsconfig.typecheck.json's
+  extends/noEmit shape plus its exhaustive strict flags that Biome's linter
+  can't catch (noImplicitReturns, noUncheckedIndexedAccess,
+  noUncheckedSideEffectImports, noImplicitOverride,
+  noPropertyAccessFromIndexSignature, exactOptionalPropertyTypes).
 
 ## Scope boundaries
 
@@ -384,14 +342,6 @@ Judgment-heavy checks that need app intent, cross-file dataflow, or human trade-
 - Read-only resolver calls that can safely move to `@forge/bridge`
 - N+1 product API patterns across helper functions
 - Replacing polling with web triggers or Forge Realtime
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-Rule files live under `rules/<tier>/<category>/`,
-tests mirror that path under `rule-tests/`,
-and every rule change needs a matching test.
-Run `npm test` before opening a PR.
 
 ## License
 
