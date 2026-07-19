@@ -11,6 +11,9 @@ note: >
   instead of re-enumerating the same checks a second time
   (which drifts silently when one list is updated and the other isn't)
   or falling back to a slower sequential `&&` chain.
+  Add --force (or -f) so it doesn't skip commands whose file filters don't
+  match anything when check runs outside an actual git push, since pre-push
+  otherwise skips any command with no matching push files.
   https://lefthook.dev/configuration/
 rule:
   kind: object
@@ -20,7 +23,7 @@ rule:
     has:
       stopBy: end
       kind: pair
-      regex: '"check"\s*:\s*"lefthook run pre-push"'
+      regex: '"check"\s*:\s*"lefthook run pre-push(\s+(--force|-f))?"'
 files:
   - "**/package.json"
 ignores:

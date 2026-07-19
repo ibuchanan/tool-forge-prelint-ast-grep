@@ -6,6 +6,21 @@ valid:
         "check": "lefthook run pre-push"
       }
     }
+  # --force is needed so check doesn't skip commands when run outside an
+  # actual git push (no push-file diff to match filters against)
+  - |
+    {
+      "scripts": {
+        "check": "lefthook run pre-push --force"
+      }
+    }
+  # -f is the short form of --force
+  - |
+    {
+      "scripts": {
+        "check": "lefthook run pre-push -f"
+      }
+    }
   # Dependencies are irrelevant — this ruleset assumes it only ever runs
   # against a Forge app
   - |
