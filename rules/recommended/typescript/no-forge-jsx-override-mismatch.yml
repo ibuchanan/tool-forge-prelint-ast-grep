@@ -2,16 +2,15 @@ id: no-forge-jsx-override-mismatch
 language: Json
 severity: error
 message: >
-  tsconfig.json compilerOptions.jsx must be "react"
-  to match what the Forge bundler hardcodes.
+  tsconfig.json compilerOptions.jsx should be "react-jsx"
+  for UI Kit 2 apps using @forge/react.
 note: >
-  Forge's webpack/ts-loader bundler hardcodes
-  jsx: "react"
-  at build time, regardless of what this file says.
-  Declaring anything else or omitting makes tsconfig.json misrepresent
-  what actually happens to your code once Forge builds it.
-  TypeScript TSConfig reference:
-  https://www.typescriptlang.org/tsconfig/#jsx
+  UI Kit 2 (@forge/react) is real React and needs the automatic JSX runtime.
+  A documented Forge community fix for a "createElement is not a function"
+  runtime crash was switching jsx to "react-jsx" and removing jsxFactory and
+  jsxFragmentFactory, which are leftovers from the deprecated @forge/ui
+  (UI Kit 1) framework.
+  https://community.developer.atlassian.com/t/forgeui-ui-kit-2-with-typescript-runtime-error-i-default-createelement-is-not-a-function/75838
 rule:
   kind: object
   inside:
@@ -19,7 +18,7 @@ rule:
   not:
     has:
       kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"jsx"\s*:\s*"react"'
+      regex: '"compilerOptions"\s*:[\s\S]*?"jsx"\s*:\s*"react-jsx"'
 files:
   - "**/tsconfig.json"
 ignores:

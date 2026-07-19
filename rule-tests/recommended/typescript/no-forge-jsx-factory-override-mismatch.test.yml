@@ -3,7 +3,7 @@ valid:
   - |
     {
       "compilerOptions": {
-        "jsxFactory": "ForgeUI.createElement",
+        "jsx": "react-jsx",
         "target": "ES2022"
       }
     }
@@ -12,28 +12,36 @@ valid:
       "compilerOptions": {
         "target": "ES2022",
         "module": "CommonJS",
-        "jsx": "react",
-        "jsxFactory": "ForgeUI.createElement",
+        "jsx": "react-jsx",
         "sourceMap": true
-      }
-    }
-invalid:
-  # jsxFactory set to a value other than the hardcoded override
-  - |
-    {
-      "compilerOptions": {
-        "jsxFactory": "React.createElement"
-      }
-    }
-  # jsxFactory missing entirely
-  - |
-    {
-      "compilerOptions": {
-        "jsx": "react"
       }
     }
   # no compilerOptions at all
   - |
     {
       "include": ["src"]
+    }
+invalid:
+  # jsxFactory left over from the deprecated @forge/ui (UI Kit 1) framework
+  - |
+    {
+      "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxFactory": "ForgeUI.createElement"
+      }
+    }
+  # jsxFactory set to any other value is still a stale pragma
+  - |
+    {
+      "compilerOptions": {
+        "jsxFactory": "React.createElement"
+      }
+    }
+  # jsxFragmentFactory alone is also stale
+  - |
+    {
+      "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxFragmentFactory": "Fragment"
+      }
     }

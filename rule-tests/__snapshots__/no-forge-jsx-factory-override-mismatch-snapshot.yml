@@ -3,28 +3,75 @@ snapshots:
   ? |
     {
       "compilerOptions": {
-        "jsx": "react"
+        "jsx": "react-jsx",
+        "jsxFactory": "ForgeUI.createElement"
       }
     }
   : labels:
     - source: |-
         {
           "compilerOptions": {
-            "jsx": "react"
+            "jsx": "react-jsx",
+            "jsxFactory": "ForgeUI.createElement"
           }
         }
       style: primary
       start: 0
-      end: 49
+      end: 96
     - source: |
         {
           "compilerOptions": {
-            "jsx": "react"
+            "jsx": "react-jsx",
+            "jsxFactory": "ForgeUI.createElement"
           }
         }
       style: secondary
       start: 0
-      end: 50
+      end: 97
+    - source: |-
+        "compilerOptions": {
+            "jsx": "react-jsx",
+            "jsxFactory": "ForgeUI.createElement"
+          }
+      style: secondary
+      start: 4
+      end: 94
+  ? |
+    {
+      "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxFragmentFactory": "Fragment"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "jsx": "react-jsx",
+            "jsxFragmentFactory": "Fragment"
+          }
+        }
+      style: primary
+      start: 0
+      end: 91
+    - source: |
+        {
+          "compilerOptions": {
+            "jsx": "react-jsx",
+            "jsxFragmentFactory": "Fragment"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 92
+    - source: |-
+        "compilerOptions": {
+            "jsx": "react-jsx",
+            "jsxFragmentFactory": "Fragment"
+          }
+      style: secondary
+      start: 4
+      end: 89
   ? |
     {
       "compilerOptions": {
@@ -50,22 +97,10 @@ snapshots:
       style: secondary
       start: 0
       end: 71
-  ? |
-    {
-      "include": ["src"]
-    }
-  : labels:
     - source: |-
-        {
-          "include": ["src"]
-        }
-      style: primary
-      start: 0
-      end: 24
-    - source: |
-        {
-          "include": ["src"]
-        }
+        "compilerOptions": {
+            "jsxFactory": "React.createElement"
+          }
       style: secondary
-      start: 0
-      end: 25
+      start: 4
+      end: 68

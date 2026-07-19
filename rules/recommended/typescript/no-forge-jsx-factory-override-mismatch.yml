@@ -2,24 +2,22 @@ id: no-forge-jsx-factory-override-mismatch
 language: Json
 severity: error
 message: >
-  tsconfig.json compilerOptions.jsxFactory must be "ForgeUI.createElement"
-  to match what the Forge bundler hardcodes.
+  tsconfig.json compilerOptions.jsxFactory (and jsxFragmentFactory) should be
+  removed; UI Kit 2 apps don't use a custom JSX pragma.
 note: >
-  Forge's webpack/ts-loader bundler hardcodes
-  jsxFactory: "ForgeUI.createElement"
-  at build time, regardless of what this file says.
-  Declaring anything else or omitting makes tsconfig.json misrepresent
-  what actually happens to your code once Forge builds it.
-  TypeScript TSConfig reference:
-  https://www.typescriptlang.org/tsconfig/#jsxFactory
+  jsxFactory: "ForgeUI.createElement" was required by the deprecated @forge/ui
+  (UI Kit 1) framework, which had its own non-React createElement. UI Kit 2
+  (@forge/react) is real React using the automatic JSX runtime — declaring
+  jsxFactory or jsxFragmentFactory alongside it produces broken createElement
+  calls and a runtime crash. Remove both options.
+  https://community.developer.atlassian.com/t/forgeui-ui-kit-2-with-typescript-runtime-error-i-default-createelement-is-not-a-function/75838
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"jsxFactory"\s*:\s*"ForgeUI\.createElement"'
+  has:
+    kind: pair
+    regex: '"compilerOptions"\s*:[\s\S]*?"(jsxFactory|jsxFragmentFactory)"\s*:'
 files:
   - "**/tsconfig.json"
 ignores:
