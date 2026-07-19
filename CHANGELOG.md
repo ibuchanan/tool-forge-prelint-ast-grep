@@ -1,3 +1,21 @@
+## [0.4.0] - 2026-07-19
+
+### 🚀 Features
+
+- *(rules)* Reorganize rule tiers and add fine-grained checks
+
+### 🐛 Bug Fixes
+
+- *(rules)* Reduce Forge Prelint false positives
+- *(rules)* Disable verbose logging rule
+- *(rules)* Add Pressable to forge-react component allow-list
+- *(changelog)* Add blank line between changelog releases
+
+### 📚 Documentation
+
+- *(readme)* Split dev workflow into DEVELOPMENT.md
+- Fill in CONTRIBUTING.md and LICENSE placeholders
+
 ## [0.3.0] - 2026-07-14
 
 ### 🚀 Features
