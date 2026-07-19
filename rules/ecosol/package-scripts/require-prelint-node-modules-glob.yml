@@ -1,0 +1,27 @@
+id: require-prelint-node-modules-glob
+language: Json
+severity: hint
+message: >
+  `lint:prelint` should exclude node_modules with a `--globs` flag.
+note: >
+  Forge Prelint is based on ast-grep to run fast, but without a `--globs` flag
+  excluding node_modules, ast-grep still walks and parses every vendored
+  package on each scan. Add a --globs flag excluding node_modules (accepted
+  forms: `!node_modules`, `!node_modules/`, `!node_modules/**`, optionally
+  prefixed with `**/`) so ast-grep does not descend into vendored packages.
+  See ast-grep's CLI reference for --globs:
+  https://ast-grep.github.io/reference/cli/scan.html#globs-globs
+rule:
+  all:
+    - kind: pair
+      regex: '^"lint:prelint"\s*:\s*"'
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"scripts"\s*:'
+    - not:
+        regex: "--globs\\s+'!(?:\\*\\*/)?node_modules/?(?:\\*\\*)?'"
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

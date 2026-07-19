@@ -1,0 +1,27 @@
+id: require-valid-prelint-config
+language: Json
+severity: warning
+message: >
+  `lint:prelint` should point `--config` at one of this package's shipped sgconfig files.
+note: >
+  Forge Prelint ships one sgconfig file per tier:
+  sgconfig.recommended.yml, sgconfig.strict.yml, sgconfig.atlassian.yml, sgconfig.ecosol.yml.
+  This package installs from a git dependency rather than the npm registry,
+  so the folder name under node_modules is whatever key you used in your
+  dependencies entry, not necessarily tool-forge-prelint-ast-grep.
+  Point --config at one of the shipped sgconfig.<tier>.yml files, wherever it landed.
+  https://github.com/ibuchanan/tool-forge-prelint-ast-grep
+rule:
+  all:
+    - kind: pair
+      regex: '^"lint:prelint"\s*:\s*"'
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"scripts"\s*:'
+    - not:
+        regex: '--config\s+\S*sgconfig\.(recommended|strict|ecosol|atlassian)\.yml'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

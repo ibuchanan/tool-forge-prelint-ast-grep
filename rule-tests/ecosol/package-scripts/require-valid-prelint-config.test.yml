@@ -1,0 +1,59 @@
+id: require-valid-prelint-config
+valid:
+  # Missing entirely: lint-with-prelint's concern, not this rule's
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  # Installed under its default package name
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
+      }
+    }
+  # Installed under a different dependency key (git dependency, no fixed npm name)
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/forge-prelint/sgconfig.recommended.yml --globs '!node_modules/**'"
+      }
+    }
+  # Any shipped tier is valid
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'"
+      }
+    }
+  # Extra project-specific globs alongside --config are fine
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.atlassian.yml --globs '!docs/examples/**' --globs '!node_modules/**'"
+      }
+    }
+invalid:
+  # No --config flag at all
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --globs '!node_modules/**'"
+      }
+    }
+  # --config points at the root config, not a shipped tier
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config sgconfig.yml --globs '!node_modules/**'"
+      }
+    }
+  # --config points at an unrelated file
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config biome.json --globs '!node_modules/**'"
+      }
+    }

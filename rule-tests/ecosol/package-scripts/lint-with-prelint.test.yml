@@ -1,24 +1,18 @@
 id: lint-with-prelint
 valid:
-  # ecosol tier already wired up
+  # Present, wired to a shipped tier the normal way
   - |
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
       }
     }
-  # Wired up to the recommended tier (also a valid, documented tier)
+  # Present but misconfigured (that's require-valid-prelint-config's and
+  # require-prelint-node-modules-glob's concern, not this rule's)
   - |
     {
       "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml --globs '!node_modules/**'"
-      }
-    }
-  # Wired up to the strict tier (also a valid, documented tier)
-  - |
-    {
-      "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'"
+        "lint:prelint": "ast-grep scan --config sgconfig.yml"
       }
     }
 invalid:
@@ -27,19 +21,5 @@ invalid:
     {
       "scripts": {
         "build": "tsc"
-      }
-    }
-  # Missing node_modules exclusion
-  - |
-    {
-      "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
-      }
-    }
-  # Wired up to a config that isn't one of this tool's shipped tiers
-  - |
-    {
-      "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml --globs '!node_modules/**'"
       }
     }

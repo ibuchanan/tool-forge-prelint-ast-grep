@@ -1,0 +1,56 @@
+id: require-prelint-node-modules-glob
+snapshots:
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!docs/examples/**'"
+      }
+    }
+  : labels:
+    - source: '"lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs ''!docs/examples/**''"'
+      style: primary
+      start: 21
+      end: 150
+    - source: |-
+        "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!docs/examples/**'"
+          }
+      style: secondary
+      start: 4
+      end: 154
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/*'"
+      }
+    }
+  : labels:
+    - source: '"lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs ''!node_modules/*''"'
+      style: primary
+      start: 21
+      end: 148
+    - source: |-
+        "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/*'"
+          }
+      style: secondary
+      start: 4
+      end: 152
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
+      }
+    }
+  : labels:
+    - source: '"lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"'
+      style: primary
+      start: 21
+      end: 122
+    - source: |-
+        "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
+          }
+      style: secondary
+      start: 4
+      end: 126

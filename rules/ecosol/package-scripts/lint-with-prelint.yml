@@ -2,14 +2,14 @@ id: lint-with-prelint
 language: Json
 severity: info
 message: >
-  Forge Prelint checks Forge code for unsavory patterns before deploy
+  Add a `lint:prelint` script to run Forge Prelint before deploy.
 note: >
   Forge Prelint adds a range of rules,
   many of which should not block deployment.
   It is based on ast-grep to avoid dev dependency bloat,
   to make rules & sets easy to improve,
-  and to run fast. Pass --globs '!node_modules/**' so ast-grep does not
-  descend into vendored packages.
+  and to run fast.
+  Wire it into your `lint` script so it runs on every check.
   https://github.com/ibuchanan/tool-forge-prelint-ast-grep
 rule:
   kind: object
@@ -19,7 +19,7 @@ rule:
     has:
       stopBy: end
       kind: pair
-      regex: '"lint:prelint"\s*:\s*"ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig\.(recommended|strict|ecosol|atlassian)\.yml --globs ''!node_modules/\*\*''"'
+      regex: '^"lint:prelint"\s*:'
 files:
   - "**/package.json"
 ignores:

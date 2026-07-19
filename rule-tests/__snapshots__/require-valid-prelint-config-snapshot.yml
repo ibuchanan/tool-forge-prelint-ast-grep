@@ -1,0 +1,56 @@
+id: require-valid-prelint-config
+snapshots:
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config biome.json --globs '!node_modules/**'"
+      }
+    }
+  : labels:
+    - source: '"lint:prelint": "ast-grep scan --config biome.json --globs ''!node_modules/**''"'
+      style: primary
+      start: 21
+      end: 99
+    - source: |-
+        "scripts": {
+            "lint:prelint": "ast-grep scan --config biome.json --globs '!node_modules/**'"
+          }
+      style: secondary
+      start: 4
+      end: 103
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config sgconfig.yml --globs '!node_modules/**'"
+      }
+    }
+  : labels:
+    - source: '"lint:prelint": "ast-grep scan --config sgconfig.yml --globs ''!node_modules/**''"'
+      style: primary
+      start: 21
+      end: 101
+    - source: |-
+        "scripts": {
+            "lint:prelint": "ast-grep scan --config sgconfig.yml --globs '!node_modules/**'"
+          }
+      style: secondary
+      start: 4
+      end: 105
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --globs '!node_modules/**'"
+      }
+    }
+  : labels:
+    - source: '"lint:prelint": "ast-grep scan --globs ''!node_modules/**''"'
+      style: primary
+      start: 21
+      end: 79
+    - source: |-
+        "scripts": {
+            "lint:prelint": "ast-grep scan --globs '!node_modules/**'"
+          }
+      style: secondary
+      start: 4
+      end: 83

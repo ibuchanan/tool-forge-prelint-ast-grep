@@ -1,0 +1,66 @@
+id: require-prelint-node-modules-glob
+valid:
+  # Missing entirely: lint-with-prelint's concern, not this rule's
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  # Double-star form, as documented in the README
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
+      }
+    }
+  # Trailing slash, no double-star: gitignore semantics still exclude the whole directory
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/'"
+      }
+    }
+  # No trailing slash at all
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules'"
+      }
+    }
+  # Leading **/ prefix
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!**/node_modules/**'"
+      }
+    }
+  # An extra project-specific glob before the node_modules exclusion is fine
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!docs/examples/**' --globs '!node_modules/**'"
+      }
+    }
+invalid:
+  # No --globs flag at all
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
+      }
+    }
+  # --globs excludes something else, not node_modules
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!docs/examples/**'"
+      }
+    }
+  # Single star does not match nested paths the way ** does
+  - |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/*'"
+      }
+    }
