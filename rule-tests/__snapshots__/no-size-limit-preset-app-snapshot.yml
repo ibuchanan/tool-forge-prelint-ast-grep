@@ -1,0 +1,51 @@
+id: no-size-limit-preset-app
+snapshots:
+  ? |
+    {
+      "name": "my-forge-app",
+      "scripts": {
+        "build": "forge build",
+        "size": "npm run build && size-limit"
+      },
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "devDependencies": {
+        "@forge/cli": "^10.0.0",
+        "@size-limit/preset-app": "^12.1"
+      }
+    }
+  : labels:
+    - source: '@size-limit/preset-app'
+      style: primary
+      start: 227
+      end: 249
+    - source: |-
+        "devDependencies": {
+            "@forge/cli": "^10.0.0",
+            "@size-limit/preset-app": "^12.1"
+          }
+      style: secondary
+      start: 172
+      end: 263
+  ? |
+    {
+      "scripts": {
+        "size": "npm run build && size-limit"
+      },
+      "devDependencies": {
+        "@size-limit/preset-app": "^12.1"
+      }
+    }
+  : labels:
+    - source: '@size-limit/preset-app'
+      style: primary
+      start: 92
+      end: 114
+    - source: |-
+        "devDependencies": {
+            "@size-limit/preset-app": "^12.1"
+          }
+      style: secondary
+      start: 66
+      end: 128

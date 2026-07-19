@@ -196,7 +196,10 @@ searches, and batchable invokes. _(recommended)_
 
 Tooling conventions that don't fit a more specific category:
 
-- **recommended** — bundle-size guardrails for CI, including size-limit setup.
+- **recommended** — bundle-size guardrails for CI, including size-limit setup
+  and steering away from the `@size-limit/preset-app` preset, which launches
+  headless Chrome via Puppeteer to time a browser page load — a measurement
+  that doesn't apply to a Forge app's backend bundle.
 - **ecosol** — biome.json config drift and vitest.config.ts globals specific
   to the ecosol repo-init template.
 

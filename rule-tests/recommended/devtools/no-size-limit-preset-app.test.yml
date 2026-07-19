@@ -1,0 +1,46 @@
+id: no-size-limit-preset-app
+valid:
+  # @size-limit/file is the right preset for a Forge app's bundle
+  - |
+    {
+      "scripts": {
+        "size": "npm run build && size-limit"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }
+  # no size-limit tooling at all
+  - |
+    {
+      "scripts": {
+        "build": "forge build"
+      }
+    }
+invalid:
+  # preset-app in devDependencies
+  - |
+    {
+      "scripts": {
+        "size": "npm run build && size-limit"
+      },
+      "devDependencies": {
+        "@size-limit/preset-app": "^12.1"
+      }
+    }
+  # realistic Forge app package.json with preset-app instead of file
+  - |
+    {
+      "name": "my-forge-app",
+      "scripts": {
+        "build": "forge build",
+        "size": "npm run build && size-limit"
+      },
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "devDependencies": {
+        "@forge/cli": "^10.0.0",
+        "@size-limit/preset-app": "^12.1"
+      }
+    }

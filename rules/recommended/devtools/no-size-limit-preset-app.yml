@@ -1,0 +1,24 @@
+id: no-size-limit-preset-app
+language: Json
+severity: warning
+message: >
+  Don't use @size-limit/preset-app to measure a Forge app's bundle size.
+note: >
+  preset-app builds with webpack and launches headless Chrome via Puppeteer
+  to time a page load in a browser context. A Forge app's backend bundle
+  never runs in a browser, so that measurement doesn't apply, and the
+  Puppeteer dependency adds unnecessary weight and CI friction.
+  Use @size-limit/file to measure raw byte size instead.
+  See https://github.com/ai/size-limit#-presets-app
+rule:
+  all:
+    - kind: string_content
+      regex: "^@size-limit/preset-app$"
+    - inside:
+        stopBy: end
+        kind: pair
+        regex: '"devDependencies"\s*:'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
