@@ -1,0 +1,25 @@
+id: require-package-license-apache-2-0
+language: Json
+severity: error
+message: >
+  package.json's license field should be "Apache-2.0",
+  matching Atlassian's OSS credo.
+note: >
+  Atlassian's OSS template repo provide an Apache 2.0 license
+  (in a LICENSE file).
+  npm package.json fields reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#license
+  Atlassian's OSS credo for Sample Apps:
+  https://go.atlassian.com/credo-checklist-sample-app
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"license"\s*:\s*"Apache-2\.0"'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

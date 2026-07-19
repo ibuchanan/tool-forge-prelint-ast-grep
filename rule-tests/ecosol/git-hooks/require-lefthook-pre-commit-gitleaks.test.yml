@@ -1,0 +1,31 @@
+id: require-lefthook-pre-commit-gitleaks
+valid:
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged
+        lint:
+          run: npm run lint
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+invalid:
+  - |
+    pre-commit:
+      commands:
+        lint:
+          run: npm run lint
+        format:
+          run: npm run format:check
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+  # No pre-commit block at all
+  - |
+    pre-push:
+      commands:
+        test:
+          run: npm run test

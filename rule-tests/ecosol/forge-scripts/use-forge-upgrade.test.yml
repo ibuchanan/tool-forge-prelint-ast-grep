@@ -1,26 +1,22 @@
 id: use-forge-upgrade
 valid:
-  # Not a Forge app (no @forge/api dependency) and no forge install --upgrade script
-  - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
   - |
     {
       "scripts": {
         "forge:upgrade": "source .env && forge install --upgrade --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive"
       }
     }
-  # forge:install without --upgrade should not trigger this rule
+  # forge:install without --upgrade should not trigger this rule as a
+  # misnamed match (forge:upgrade must still be present separately)
   - |
     {
       "scripts": {
-        "forge:install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive"
+        "forge:install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive",
+        "forge:upgrade": "source .env && forge install --upgrade --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive"
       }
     }
-  # Forge app with forge:upgrade correctly present
+  # Dependencies are irrelevant now — this ruleset assumes it only ever runs
+  # against a Forge app
   - |
     {
       "dependencies": {
@@ -38,21 +34,17 @@ invalid:
         "upgrade": "forge install --upgrade --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
       }
     }
-  # Missing entirely from a Forge app
+  # Missing entirely, regardless of dependencies present
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "build": "tsc"
       }
     }
-  # Missing from a Forge app that only depends on @forge/kvs
   - |
     {
       "dependencies": {
-        "@forge/kvs": "^2.0.0"
+        "@forge/api": "^4.0.0"
       },
       "scripts": {
         "build": "tsc"

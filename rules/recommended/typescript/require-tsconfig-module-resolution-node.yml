@@ -1,0 +1,28 @@
+id: require-tsconfig-module-resolution-node
+language: Json
+severity: error
+message: >
+  tsconfig.json compilerOptions.moduleResolution must be "Node" to match how
+  Forge's Node 18 runtime and webpack actually resolve packages.
+note: >
+  moduleResolution is derived from Forge's Node 18 backend runtime, not a
+  team convention — every Forge app resolves packages the same way. Unlike
+  jsx/jsxFactory/sourceMap, the bundler does not correct a wrong
+  moduleResolution for you: drift here (e.g. "bundler" or "NodeNext") can
+  make tsc accept import specifiers that fail to resolve once actually
+  built. Use a separate tsconfig.typecheck.json if you want a different
+  moduleResolution for local-only tooling.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#moduleResolution
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"moduleResolution"\s*:\s*"Node"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

@@ -1,0 +1,33 @@
+id: no-package-types
+language: Json
+severity: warning
+message: >
+  package.json shouldn't declare types. Forge apps are deployables, not
+  libraries, and nothing in the Forge pipeline reads this field.
+note: >
+  types points consumers at this package's type declarations — a Forge app
+  is never consumed as a dependency, so there are no consumers to point at
+  anything. Declaring it implies a library-consumption contract that
+  doesn't exist.
+  npm package.json fields reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#types
+rule:
+  kind: object
+  inside:
+    kind: document
+  all:
+    - has:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/[^/]+$"
+    - has:
+        kind: pair
+        regex: '^"types"\s*:'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

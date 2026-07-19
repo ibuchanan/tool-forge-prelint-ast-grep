@@ -91,8 +91,20 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "tsc --noEmit -p tsconfig.json"
+          }
+        }
       style: primary
+      start: 0
+      end: 123
+    - source: '@forge/api'
+      style: secondary
       start: 27
       end: 37
     - source: |-
@@ -102,6 +114,63 @@ snapshots:
       style: secondary
       start: 4
       end: 52
+    - source: |
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "tsc --noEmit -p tsconfig.json"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 124
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "typecheck": "tsc --noEmit"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "tsc --noEmit"
+          }
+        }
+      style: primary
+      start: 0
+      end: 106
+    - source: '@forge/api'
+      style: secondary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+    - source: |
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "typecheck": "tsc --noEmit"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 107
   ? |
     {
       "dependencies": {
@@ -183,3 +252,103 @@ snapshots:
       style: secondary
       start: 0
       end: 58
+  ? |
+    {
+      "scripts": {
+        "build": "tsc -p tsconfig.build.json"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc -p tsconfig.build.json"
+          }
+        }
+      style: primary
+      start: 0
+      end: 64
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc -p tsconfig.build.json"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 65
+  ? |
+    {
+      "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "typecheck": "tsc --noEmit -p tsconfig.json"
+          }
+        }
+      style: primary
+      start: 0
+      end: 71
+    - source: |
+        {
+          "scripts": {
+            "typecheck": "tsc --noEmit -p tsconfig.json"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 72
+  ? |
+    {
+      "scripts": {
+        "typecheck": "tsc --noEmit"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "typecheck": "tsc --noEmit"
+          }
+        }
+      style: primary
+      start: 0
+      end: 54
+    - source: |
+        {
+          "scripts": {
+            "typecheck": "tsc --noEmit"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 55
+  ? |
+    {
+      "scripts": {
+        "typecheck": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "typecheck": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {
+          "scripts": {
+            "typecheck": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 46

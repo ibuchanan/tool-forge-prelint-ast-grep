@@ -1,53 +1,41 @@
 id: require-composed-lint
 valid:
-  # Not a Forge app (no @forge/api dependency)
   - |
     {
-      "dependencies": {
-        "express": "^4.18.0"
+      "scripts": {
+        "lint": "lefthook run lint"
       }
     }
-  # lint composes all three namespaced scripts in order
+  # Dependencies are irrelevant — this ruleset assumes it only ever runs
+  # against a Forge app
   - |
     {
       "dependencies": {
         "@forge/api": "^4.0.0"
       },
+      "scripts": {
+        "lint": "lefthook run lint"
+      }
+    }
+invalid:
+  # Missing entirely
+  - |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  # The old sequential chain is no longer the expected form
+  - |
+    {
       "scripts": {
         "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
       }
     }
-invalid:
+  # Wrong lefthook group name
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  # Missing from a Forge app that only depends on @forge/bridge
-  - |
-    {
-      "dependencies": {
-        "@forge/bridge": "^4.0.0"
-      }
-    }
-  # Missing lint:forge from the chain
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
-        "lint": "npm run lint:prelint && npm run lint:check"
-      }
-    }
-  # Calls forge lint directly instead of the composed chain
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "npm run lint:prelint && forge lint"
+        "lint": "lefthook run pre-push"
       }
     }

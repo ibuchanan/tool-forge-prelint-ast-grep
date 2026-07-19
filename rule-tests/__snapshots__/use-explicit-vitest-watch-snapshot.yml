@@ -61,22 +61,21 @@ snapshots:
       style: secondary
       start: 58
       end: 101
+  ? |
+    {
+      "scripts": {
+        "test:watch": "vitest"
+      }
+    }
+  : labels:
+    - source: '"test:watch": "vitest"'
+      style: primary
+      start: 21
+      end: 43
     - source: |-
-        "dependencies": {
-            "@forge/react": "^4.0.0"
+        "scripts": {
+            "test:watch": "vitest"
           }
       style: secondary
       start: 4
-      end: 54
-    - source: |-
-        {
-          "dependencies": {
-            "@forge/react": "^4.0.0"
-          },
-          "scripts": {
-            "test:watch": "vitest"
-          }
-        }
-      style: secondary
-      start: 0
-      end: 103
+      end: 47

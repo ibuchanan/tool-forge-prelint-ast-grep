@@ -1,0 +1,33 @@
+id: use-tsconfig-consistent-file-casing
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+      }
+    }
+invalid:
+  # forceConsistentCasingInFileNames missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

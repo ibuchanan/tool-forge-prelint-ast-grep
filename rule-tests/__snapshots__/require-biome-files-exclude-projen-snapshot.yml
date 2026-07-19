@@ -1,0 +1,40 @@
+id: require-biome-files-exclude-projen
+snapshots:
+  ? |
+    {
+      "files": { "includes": ["**", "!dist/**"] }
+    }
+  : labels:
+    - source: |-
+        {
+          "files": { "includes": ["**", "!dist/**"] }
+        }
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {
+          "files": { "includes": ["**", "!dist/**"] }
+        }
+      style: secondary
+      start: 0
+      end: 50
+  ? |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+  : labels:
+    - source: |-
+        {
+          "formatter": { "indentStyle": "space" }
+        }
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {
+          "formatter": { "indentStyle": "space" }
+        }
+      style: secondary
+      start: 0
+      end: 46

@@ -1,0 +1,44 @@
+id: require-tsconfig-typecheck-extends-no-emit
+valid:
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  - |
+    {
+      "$schema": "https://json.schemastore.org/tsconfig",
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "noEmit": true,
+        "noImplicitReturns": true,
+        "noUncheckedIndexedAccess": true,
+        "noUncheckedSideEffectImports": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "exactOptionalPropertyTypes": true
+      }
+    }
+invalid:
+  # declaration instead of noEmit (the build.json shape, not typecheck)
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "declaration": true
+      }
+    }
+  # missing extends
+  - |
+    {
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "extends": "./tsconfig.json"
+    }

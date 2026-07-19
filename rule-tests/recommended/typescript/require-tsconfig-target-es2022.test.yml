@@ -1,0 +1,37 @@
+id: require-tsconfig-target-es2022
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"]
+      }
+    }
+invalid:
+  # target drifted to a different value
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2020"
+      }
+    }
+  # target missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

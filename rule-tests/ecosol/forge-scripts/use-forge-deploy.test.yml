@@ -1,12 +1,5 @@
 id: use-forge-deploy
 valid:
-  # Not a Forge app (no @forge/api dependency) and no forge deploy script
-  - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
   - |
     {
       "scripts": {
@@ -19,7 +12,8 @@ valid:
         "forge:deploy": "source .env && forge deploy --environment \"$FORGE_ENVIRONMENT\""
       }
     }
-  # Forge app with forge:deploy correctly present
+  # Dependencies are irrelevant now — this ruleset assumes it only ever runs
+  # against a Forge app
   - |
     {
       "dependencies": {
@@ -43,21 +37,17 @@ invalid:
         "forge-deploy": "forge deploy"
       }
     }
-  # Missing entirely from a Forge app
+  # Missing entirely, regardless of dependencies present
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "build": "tsc"
       }
     }
-  # Missing from a frontend-only Forge app (no @forge/api, but @forge/react present)
   - |
     {
       "dependencies": {
-        "@forge/react": "^4.0.0"
+        "@forge/api": "^4.0.0"
       },
       "scripts": {
         "build": "tsc"

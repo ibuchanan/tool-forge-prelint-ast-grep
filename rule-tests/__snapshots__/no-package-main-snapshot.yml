@@ -1,0 +1,45 @@
+id: no-package-main
+snapshots:
+  ? |
+    {
+      "main": "dist/index.mjs",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "main": "dist/index.mjs",
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: primary
+      start: 0
+      end: 80
+    - source: '@forge/api'
+      style: secondary
+      start: 55
+      end: 65
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^8.0"
+          }
+      style: secondary
+      start: 32
+      end: 78
+    - source: '"main": "dist/index.mjs"'
+      style: secondary
+      start: 4
+      end: 28
+    - source: |
+        {
+          "main": "dist/index.mjs",
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 81

@@ -1,0 +1,71 @@
+id: require-tsconfig-target-es2022
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "module": "CommonJS"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "module": "CommonJS"
+          }
+        }
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        {
+          "compilerOptions": {
+            "module": "CommonJS"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 56
+  ? |
+    {
+      "compilerOptions": {
+        "target": "ES2020"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "target": "ES2020"
+          }
+        }
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {
+          "compilerOptions": {
+            "target": "ES2020"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 54
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

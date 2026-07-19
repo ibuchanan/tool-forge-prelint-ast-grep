@@ -1,0 +1,26 @@
+id: require-tsconfig-typecheck-no-implicit-returns
+language: Json
+severity: info
+message: >
+  compilerOptions.noImplicitReturns
+  requires every code path in a function
+  to explicitly return a value.
+note: >
+  noImplicitReturns requires every code path in a function
+  to explicitly return a value.
+  This needs TypeScript's return-type inference;
+  Biome's syntax-only linting has no equivalent rule.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#noImplicitReturns
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"noImplicitReturns"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

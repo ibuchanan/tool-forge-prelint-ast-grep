@@ -1,0 +1,21 @@
+id: require-biome-files-exclude-dist
+language: Json
+severity: warning
+message: >
+  Exclude dist from biome.json's files.includes.
+note: >
+  dist holds generated build output that shouldn't be linted or formatted.
+  Biome configuration reference:
+  https://biomejs.dev/reference/configuration/
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"files"\s*:[\s\S]*?"!dist'
+files:
+  - "**/biome.json"
+ignores:
+  - "**/node_modules/**"

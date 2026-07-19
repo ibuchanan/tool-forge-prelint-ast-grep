@@ -24,7 +24,49 @@ snapshots:
         "@forge/api": "^4.0.0"
       },
       "scripts": {
+        "lint": "lefthook run pre-push"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
         "lint": "npm run lint:prelint && forge lint"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
       }
     }
   : labels:
@@ -78,3 +120,78 @@ snapshots:
       style: secondary
       start: 4
       end: 55
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    {
+      "scripts": {
+        "lint": "lefthook run pre-push"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "lint": "lefthook run pre-push"
+          }
+        }
+      style: primary
+      start: 0
+      end: 58
+    - source: |
+        {
+          "scripts": {
+            "lint": "lefthook run pre-push"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 59
+  ? |
+    {
+      "scripts": {
+        "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
+          }
+        }
+      style: primary
+      start: 0
+      end: 101
+    - source: |
+        {
+          "scripts": {
+            "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 102

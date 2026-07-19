@@ -1,0 +1,41 @@
+id: use-typescript-5
+valid:
+  # Not a Forge app — this constraint doesn't apply
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      },
+      "devDependencies": {
+        "typescript": "^4.9"
+      }
+    }
+  # Forge app pinned to typescript 5
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^8.0"
+      },
+      "devDependencies": {
+        "typescript": "^5.9"
+      }
+    }
+invalid:
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^8.0"
+      },
+      "devDependencies": {
+        "typescript": "^4.9"
+      }
+    }
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^8.0"
+      },
+      "devDependencies": {
+        "typescript": "^6.0"
+      }
+    }

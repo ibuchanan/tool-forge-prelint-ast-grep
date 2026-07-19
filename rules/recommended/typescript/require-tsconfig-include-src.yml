@@ -1,0 +1,26 @@
+id: require-tsconfig-include-src
+language: Json
+severity: warning
+message: >
+  Bring tsconfig.json's include back in line with the repo-init baseline:
+  ["src"].
+note: >
+  repo-init generates include: ["src"] so tsc's file discovery covers the
+  same backend source tree the Forge manifest's handler paths point into.
+  If include drifts away from the directory containing your manifest
+  handlers, local type-checking silently stops covering files the bundler
+  still builds.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#include
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"include"\s*:\s*\[[^\]]*"src"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

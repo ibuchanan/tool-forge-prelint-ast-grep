@@ -1,0 +1,34 @@
+id: require-tsconfig-typecheck-extends-no-emit
+language: Json
+severity: error
+message: >
+  tsconfig.typecheck.json should extend tsconfig.json
+  and set compilerOptions.noEmit to true,
+  since this file exists purely to run `tsc --noEmit`.
+note: >
+  tsconfig.typecheck.json sets extends: "./tsconfig.json"
+  and compilerOptions.noEmit: true
+  so it type-checks against the same baseline
+  without emitting files that would collide with tsconfig.build.json's output.
+  This file exists purely to run `tsc --noEmit`.
+  TypeScript TSConfig extends reference:
+  https://www.typescriptlang.org/tsconfig/#extends
+  TypeScript noEmit reference:
+  https://www.typescriptlang.org/tsconfig/#noEmit
+rule:
+  kind: object
+  inside:
+    kind: document
+  any:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:\s*"\./tsconfig\.json"'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"noEmit"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

@@ -4,9 +4,10 @@ severity: info
 message: >
   Add or rename this wrapper script as `forge:install` for `forge install`.
 note: >
-  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
-  `forge install --upgrade` is the separate `forge:upgrade` convention;
-  a plain `forge install` (without `--upgrade`) should be named `forge:install`.
+  A `forge:` namespace keeps Forge CLI wrapper scripts
+  discoverable by a predictable name.
+  Recommended to use with `use-secretspec-for-forge-commands`:
+  "forge:install": "secretspec run --provider dotenv --reason \"npm run forge:install\" -- sh -c 'forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\" --environment \"$FORGE_ENVIRONMENT\" --non-interactive'",
   Forge CLI install reference:
   https://developer.atlassian.com/platform/forge/cli-reference/install/
 rule:
@@ -23,19 +24,14 @@ rule:
         - not:
             regex: '^"forge:install"\s*:'
     - all:
-        - kind: string_content
-          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+        - kind: object
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"dependencies"\s*:'
+            kind: document
         - not:
-            inside:
+            has:
               stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"forge:install"\s*:'
+              kind: pair
+              regex: '"forge:install"\s*:'
 files:
   - "**/package.json"
 ignores:

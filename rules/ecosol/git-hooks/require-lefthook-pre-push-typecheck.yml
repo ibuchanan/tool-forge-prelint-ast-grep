@@ -1,0 +1,25 @@
+id: require-lefthook-pre-push-typecheck
+language: Yaml
+severity: warning
+message: >
+  Add a pre-push typecheck guard to lefthook.yml.
+note: >
+  pre-push is the comprehensive, "run everything" guard — a full typecheck
+  is too heavy-handed for every commit, but appropriate here since pre-push
+  only runs once before code leaves your machine.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+rule:
+  kind: block_mapping
+  inside:
+    kind: block_node
+    inside:
+      kind: document
+  not:
+    has:
+      kind: block_mapping_pair
+      regex: 'pre-push:[\s\S]*?\btypecheck:'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

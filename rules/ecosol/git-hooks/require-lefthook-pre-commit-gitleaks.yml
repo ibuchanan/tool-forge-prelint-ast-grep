@@ -1,0 +1,29 @@
+id: require-lefthook-pre-commit-gitleaks
+language: Yaml
+severity: warning
+message: >
+  Add a pre-commit gitleaks guard to lefthook.yml.
+note: >
+  Running gitleaks before every commit catches leaked secrets
+  (API keys, tokens)
+  before they ever reach git history,
+  where removing them requires a history rewrite
+  and extra effort to revoke the secrets.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+  Gitleaks project:
+  https://github.com/gitleaks/gitleaks
+rule:
+  kind: block_mapping
+  inside:
+    kind: block_node
+    inside:
+      kind: document
+  not:
+    has:
+      kind: block_mapping_pair
+      regex: 'pre-commit:[\s\S]*?gitleaks:'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

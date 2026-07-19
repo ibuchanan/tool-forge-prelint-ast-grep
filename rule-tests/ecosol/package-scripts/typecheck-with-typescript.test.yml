@@ -1,66 +1,30 @@
 id: typecheck-with-typescript
 valid:
-  # Not a Forge app (no @forge/api dependency)
   - |
     {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  # Forge app already using the repo-init TypeScript build scripts
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "build": "tsc -p tsconfig.build.json",
-        "typecheck": "tsc --noEmit -p tsconfig.json"
+        "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
       }
     }
-  # Forge app using the conventional package-level no-emit typecheck script
   - |
     {
-      "dependencies": {
-        "@forge/bridge": "*",
-        "@forge/react": "*",
-        "@forge/resolver": "*"
-      },
       "scripts": {
         "build": "tsc",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit --project tsconfig.typecheck.json"
       }
     }
-  # The noEmit flag may appear after an explicit project argument
+  # The noEmit flag may appear before or after the project argument
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
-        "typecheck": "tsc -p tsconfig.json --noEmit"
+        "typecheck": "tsc -p tsconfig.typecheck.json --noEmit"
       }
     }
 invalid:
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  # Missing from a Forge app that only depends on @forge/bridge
-  - |
-    {
-      "dependencies": {
-        "@forge/bridge": "^4.0.0"
-      }
-    }
   # Missing typecheck script
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "build": "tsc -p tsconfig.build.json"
       }
@@ -68,10 +32,21 @@ invalid:
   # Typecheck script emits output
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "typecheck": "tsc"
+      }
+    }
+  # Bare --noEmit with no project argument only checks the default tsconfig.json
+  - |
+    {
+      "scripts": {
+        "typecheck": "tsc --noEmit"
+      }
+    }
+  # Points at the deploy baseline instead of the exhaustive typecheck config
+  - |
+    {
+      "scripts": {
+        "typecheck": "tsc --noEmit -p tsconfig.json"
       }
     }

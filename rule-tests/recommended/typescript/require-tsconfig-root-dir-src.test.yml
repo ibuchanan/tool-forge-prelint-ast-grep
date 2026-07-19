@@ -1,0 +1,41 @@
+id: require-tsconfig-root-dir-src
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "rootDir": "src",
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"],
+        "rootDir": "src",
+        "outDir": "dist"
+      },
+      "include": ["src"]
+    }
+invalid:
+  # rootDir drifted to a different directory
+  - |
+    {
+      "compilerOptions": {
+        "rootDir": "lib"
+      }
+    }
+  # rootDir missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

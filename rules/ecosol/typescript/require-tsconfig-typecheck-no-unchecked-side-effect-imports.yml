@@ -1,0 +1,27 @@
+id: require-tsconfig-typecheck-no-unchecked-side-effect-imports
+language: Json
+severity: info
+message: >
+  compilerOptions.noUncheckedSideEffectImports
+  flags side-effect-only imports of modules
+  that can't be resolved.
+note: >
+  noUncheckedSideEffectImports
+  flags side-effect-only imports of modules
+  that can't be resolved.
+  This needs TypeScript's module resolution;
+  Biome's syntax-only linting has no equivalent rule.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#noUncheckedSideEffectImports
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"noUncheckedSideEffectImports"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

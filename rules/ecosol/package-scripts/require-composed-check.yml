@@ -2,26 +2,25 @@ id: require-composed-check
 language: Json
 severity: info
 message: >
-  Use a composed `check` script as a broad guardrail for AI coding agents (if not humans)
+  Delegate the `check` script to `lefthook run pre-push`
+  as a broad guardrail for AI coding agents (if not humans).
 note: >
-  The `check` script should check formatting, types, lint rules, and tests.
-  See this project's own composed check script for the pattern:
-  https://github.com/ibuchanan/tool-forge-prelint-ast-grep#development
+  lefthook.yml's pre-push hook is already the single source of truth
+  for which checks must pass and runs them in parallel;
+  `npm run check` should reuse it via `lefthook run pre-push`
+  instead of re-enumerating the same checks a second time
+  (which drifts silently when one list is updated and the other isn't)
+  or falling back to a slower sequential `&&` chain.
+  https://lefthook.dev/configuration/
 rule:
-  all:
-    - kind: string_content
-      regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
-      inside:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-    - not:
-        inside:
-          stopBy: end
-          kind: object
-          has:
-            kind: pair
-            regex: '"check"\s*:\s*"npm run format:check\s*&&\s*npm run typecheck\s*&&\s*npm run lint\s*&&\s*npm run test"'
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      stopBy: end
+      kind: pair
+      regex: '"check"\s*:\s*"lefthook run pre-push"'
 files:
   - "**/package.json"
 ignores:

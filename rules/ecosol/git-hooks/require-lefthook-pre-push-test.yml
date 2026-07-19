@@ -1,0 +1,25 @@
+id: require-lefthook-pre-push-test
+language: Yaml
+severity: warning
+message: >
+  Add a pre-push test guard to lefthook.yml.
+note: >
+  Running tests before every push catches regressions before they reach a
+  shared branch or CI, where a failing build blocks everyone else instead
+  of just the one commit that introduced it.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+rule:
+  kind: block_mapping
+  inside:
+    kind: block_node
+    inside:
+      kind: document
+  not:
+    has:
+      kind: block_mapping_pair
+      regex: 'pre-push:[\s\S]*?\btest:'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

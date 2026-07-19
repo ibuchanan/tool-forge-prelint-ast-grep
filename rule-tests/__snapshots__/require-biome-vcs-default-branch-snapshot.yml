@@ -1,0 +1,40 @@
+id: require-biome-vcs-default-branch
+snapshots:
+  ? |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+  : labels:
+    - source: |-
+        {
+          "formatter": { "indentStyle": "space" }
+        }
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {
+          "formatter": { "indentStyle": "space" }
+        }
+      style: secondary
+      start: 0
+      end: 46
+  ? |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "master" }
+    }
+  : labels:
+    - source: |-
+        {
+          "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "master" }
+        }
+      style: primary
+      start: 0
+      end: 82
+    - source: |
+        {
+          "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "master" }
+        }
+      style: secondary
+      start: 0
+      end: 83

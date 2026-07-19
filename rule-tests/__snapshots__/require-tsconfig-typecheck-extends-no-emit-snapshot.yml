@@ -1,0 +1,74 @@
+id: require-tsconfig-typecheck-extends-no-emit
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "noEmit": true
+          }
+        }
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {
+          "compilerOptions": {
+            "noEmit": true
+          }
+        }
+      style: secondary
+      start: 0
+      end: 50
+  ? |
+    {
+      "extends": "./tsconfig.json"
+    }
+  : labels:
+    - source: |-
+        {
+          "extends": "./tsconfig.json"
+        }
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        {
+          "extends": "./tsconfig.json"
+        }
+      style: secondary
+      start: 0
+      end: 35
+  ? |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "declaration": true
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "extends": "./tsconfig.json",
+          "compilerOptions": {
+            "declaration": true
+          }
+        }
+      style: primary
+      start: 0
+      end: 86
+    - source: |
+        {
+          "extends": "./tsconfig.json",
+          "compilerOptions": {
+            "declaration": true
+          }
+        }
+      style: secondary
+      start: 0
+      end: 87

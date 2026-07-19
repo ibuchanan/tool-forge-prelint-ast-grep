@@ -1,0 +1,71 @@
+id: require-tsconfig-module-resolution-node
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "moduleResolution": "bundler"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "moduleResolution": "bundler"
+          }
+        }
+      style: primary
+      start: 0
+      end: 64
+    - source: |
+        {
+          "compilerOptions": {
+            "moduleResolution": "bundler"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 65
+  ? |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 54
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

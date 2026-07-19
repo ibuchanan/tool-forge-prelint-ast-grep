@@ -1,0 +1,25 @@
+id: require-tsconfig-root-dir-src
+language: Json
+severity: warning
+message: >
+  Bring tsconfig.json's compilerOptions.rootDir back in line with the
+  repo-init baseline: "src".
+note: >
+  repo-init generates compilerOptions.rootDir: "src" so the bundler knows
+  where the backend source tree starts. Forge's bundler manages its own
+  temporary build directory regardless of this setting, but drift here
+  still breaks local tsc output layout and IDE tooling.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#rootDir
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"rootDir"\s*:\s*"src"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

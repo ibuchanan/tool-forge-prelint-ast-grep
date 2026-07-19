@@ -1,0 +1,17 @@
+id: require-biome-formatter-indent-style
+valid:
+  - |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+invalid:
+  # Missing formatter entirely
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" }
+    }
+  # indentStyle drifted to tab
+  - |
+    {
+      "formatter": { "indentStyle": "tab" }
+    }

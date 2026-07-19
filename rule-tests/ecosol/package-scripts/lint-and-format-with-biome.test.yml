@@ -1,18 +1,7 @@
 id: lint-and-format-with-biome
 valid:
-  # Not a Forge app (no @forge/api dependency)
   - |
     {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  # Forge app with all four Biome scripts wired up
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "format": "biome format --write .",
         "format:check": "biome format .",
@@ -21,25 +10,16 @@ valid:
       }
     }
 invalid:
+  # Missing entirely
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  # Missing from a frontend-only Forge app (no @forge/api, but @forge/react present)
-  - |
-    {
-      "dependencies": {
-        "@forge/react": "^4.0.0"
+      "scripts": {
+        "build": "tsc"
       }
     }
   # Biome installed but no scripts wired up
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "devDependencies": {
         "@biomejs/biome": "^1.9.0"
       }
@@ -47,9 +27,6 @@ invalid:
   # Missing lint:fix script
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "format": "biome format --write .",
         "format:check": "biome format .",
@@ -59,9 +36,6 @@ invalid:
   # lint:check script present but does not invoke biome
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "format": "biome format --write .",
         "format:check": "biome format .",

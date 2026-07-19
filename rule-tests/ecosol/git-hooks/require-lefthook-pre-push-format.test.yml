@@ -1,0 +1,33 @@
+id: require-lefthook-pre-push-format
+valid:
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged
+    pre-push:
+      commands:
+        format:
+          run: npm run format:check
+        typecheck:
+          run: npm run typecheck
+        lint:
+          run: npm run lint
+        test:
+          run: npm run test
+invalid:
+  - |
+    pre-push:
+      commands:
+        typecheck:
+          run: npm run typecheck
+        lint:
+          run: npm run lint
+        test:
+          run: npm run test
+  # No pre-push block at all
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged

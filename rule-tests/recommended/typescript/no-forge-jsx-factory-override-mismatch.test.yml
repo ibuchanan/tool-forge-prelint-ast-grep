@@ -1,0 +1,39 @@
+id: no-forge-jsx-factory-override-mismatch
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "jsxFactory": "ForgeUI.createElement",
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "jsx": "react",
+        "jsxFactory": "ForgeUI.createElement",
+        "sourceMap": true
+      }
+    }
+invalid:
+  # jsxFactory set to a value other than the hardcoded override
+  - |
+    {
+      "compilerOptions": {
+        "jsxFactory": "React.createElement"
+      }
+    }
+  # jsxFactory missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "jsx": "react"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

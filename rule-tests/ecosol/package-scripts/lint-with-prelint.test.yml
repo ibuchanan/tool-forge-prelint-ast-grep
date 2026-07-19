@@ -1,62 +1,37 @@
 id: lint-with-prelint
 valid:
-  # Not a Forge app (no @forge/api dependency)
+  # ecosol tier already wired up
   - |
     {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  # Forge app with forge-prelint's ecosol tier already wired up
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
       }
     }
-  # Forge app wired up to the recommended tier (also a valid, documented tier)
+  # Wired up to the recommended tier (also a valid, documented tier)
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml --globs '!node_modules/**'"
       }
     }
-  # Forge app wired up to the strict tier (also a valid, documented tier)
+  # Wired up to the strict tier (also a valid, documented tier)
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'"
       }
     }
 invalid:
+  # Missing entirely
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  # Missing from a frontend-only Forge app (no @forge/api, but @forge/react present)
-  - |
-    {
-      "dependencies": {
-        "@forge/react": "^4.0.0"
+      "scripts": {
+        "build": "tsc"
       }
     }
   # Missing node_modules exclusion
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
       }
@@ -64,9 +39,6 @@ invalid:
   # Wired up to a config that isn't one of this tool's shipped tiers
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml --globs '!node_modules/**'"
       }

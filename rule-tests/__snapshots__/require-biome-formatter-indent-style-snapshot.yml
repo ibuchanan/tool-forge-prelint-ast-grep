@@ -1,0 +1,40 @@
+id: require-biome-formatter-indent-style
+snapshots:
+  ? |
+    {
+      "formatter": { "indentStyle": "tab" }
+    }
+  : labels:
+    - source: |-
+        {
+          "formatter": { "indentStyle": "tab" }
+        }
+      style: primary
+      start: 0
+      end: 43
+    - source: |
+        {
+          "formatter": { "indentStyle": "tab" }
+        }
+      style: secondary
+      start: 0
+      end: 44
+  ? |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" }
+    }
+  : labels:
+    - source: |-
+        {
+          "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" }
+        }
+      style: primary
+      start: 0
+      end: 80
+    - source: |
+        {
+          "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" }
+        }
+      style: secondary
+      start: 0
+      end: 81

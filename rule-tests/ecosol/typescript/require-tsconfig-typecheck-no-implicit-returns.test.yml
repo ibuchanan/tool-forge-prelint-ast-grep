@@ -1,0 +1,37 @@
+id: require-tsconfig-typecheck-no-implicit-returns
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "noImplicitReturns": true
+      }
+    }
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "noEmit": true,
+        "noImplicitReturns": true,
+        "noUncheckedIndexedAccess": true
+      }
+    }
+invalid:
+  # explicitly disabled
+  - |
+    {
+      "compilerOptions": {
+        "noImplicitReturns": false
+      }
+    }
+  # missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "extends": "./tsconfig.json"
+    }

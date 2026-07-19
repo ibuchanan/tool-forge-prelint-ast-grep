@@ -24,7 +24,49 @@ snapshots:
         "@forge/api": "^4.0.0"
       },
       "scripts": {
+        "check": "lefthook run pre-commit"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
         "check": "npm run format:check && npm run lint && npm run test"
+      }
+    }
+  : labels:
+    - source: '@forge/api'
+      style: primary
+      start: 27
+      end: 37
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 4
+      end: 52
+  ? |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      },
+      "scripts": {
+        "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
       }
     }
   : labels:
@@ -78,3 +120,78 @@ snapshots:
       style: secondary
       start: 4
       end: 52
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    {
+      "scripts": {
+        "check": "lefthook run pre-commit"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "check": "lefthook run pre-commit"
+          }
+        }
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {
+          "scripts": {
+            "check": "lefthook run pre-commit"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 62
+  ? |
+    {
+      "scripts": {
+        "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
+          }
+        }
+      style: primary
+      start: 0
+      end: 111
+    - source: |
+        {
+          "scripts": {
+            "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 112

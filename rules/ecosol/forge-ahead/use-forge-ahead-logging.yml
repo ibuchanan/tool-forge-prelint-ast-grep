@@ -1,0 +1,31 @@
+id: use-forge-ahead-logging
+language: Json
+severity: hint
+message: >
+  Add `@forge-ahead/logging` for structured & redacted Forge logging.
+note: >
+  Use `@forge-ahead/logging` for structured and redacted logging
+  instead of backing into those features with ad hoc console.log calls
+  that can leak unredacted payloads or blow up log volume.
+  https://github.com/ibuchanan/forge-ahead-logging
+rule:
+  kind: object
+  inside:
+    kind: document
+  all:
+    - has:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/[^/]+$"
+    - not:
+        has:
+          kind: pair
+          regex: '"@forge-ahead/logging"\s*:'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

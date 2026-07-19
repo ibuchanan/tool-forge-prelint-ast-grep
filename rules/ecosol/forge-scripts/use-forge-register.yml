@@ -4,9 +4,9 @@ severity: info
 message: >
   Add or rename this wrapper script as `forge:register` for `forge register`.
 note: >
-  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
-  Unlike deploy/install/uninstall, `forge register` needs no site, product,
-  or environment flags.
+  A `forge:` namespace keeps Forge CLI wrapper scripts
+  discoverable by a predictable name.
+  `forge register` needs no site, product, or environment flags.
   Forge CLI register reference:
   https://developer.atlassian.com/platform/forge/cli-reference/register/
 rule:
@@ -21,19 +21,14 @@ rule:
         - not:
             regex: '^"forge:register"\s*:'
     - all:
-        - kind: string_content
-          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+        - kind: object
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"dependencies"\s*:'
+            kind: document
         - not:
-            inside:
+            has:
               stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"forge:register"\s*:'
+              kind: pair
+              regex: '"forge:register"\s*:'
 files:
   - "**/package.json"
 ignores:

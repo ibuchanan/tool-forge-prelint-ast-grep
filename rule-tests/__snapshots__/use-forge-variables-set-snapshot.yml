@@ -10,17 +10,30 @@ snapshots:
       }
     }
   : labels:
-    - source: '@forge/api'
-      style: primary
-      start: 27
-      end: 37
     - source: |-
-        "dependencies": {
+        {
+          "dependencies": {
             "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "build": "tsc"
           }
+        }
+      style: primary
+      start: 0
+      end: 93
+    - source: |
+        {
+          "dependencies": {
+            "@forge/api": "^4.0.0"
+          },
+          "scripts": {
+            "build": "tsc"
+          }
+        }
       style: secondary
-      start: 4
-      end: 52
+      start: 0
+      end: 94
   ? |
     {
       "dependencies": {
@@ -45,18 +58,75 @@ snapshots:
   ? |
     {
       "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    {
+      "scripts": {
+        "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 143
+    - source: |
+        {
+          "scripts": {
+            "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 144
+  ? |
+    {
+      "scripts": {
         "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
       }
     }
   : labels:
-    - source: '"variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""'
-      style: primary
-      start: 21
-      end: 96
     - source: |-
-        "scripts": {
+        {
+          "scripts": {
             "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
           }
+        }
+      style: primary
+      start: 0
+      end: 102
+    - source: |
+        {
+          "scripts": {
+            "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
       style: secondary
-      start: 4
-      end: 100
+      start: 0
+      end: 103

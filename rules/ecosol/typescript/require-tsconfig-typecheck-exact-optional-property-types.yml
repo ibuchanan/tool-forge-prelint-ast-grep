@@ -1,0 +1,32 @@
+id: require-tsconfig-typecheck-exact-optional-property-types
+language: Json
+severity: hint
+message: >
+  compilerOptions.exactOptionalPropertyTypes
+  distinguishes an optional property
+  that's absent from one explicitly set to undefined.
+note: >
+  exactOptionalPropertyTypes
+  distinguishes an optional property
+  that's absent from one explicitly set to undefined.
+  This needs TypeScript's type system;
+  Biome's syntax-only linting has no equivalent rule.
+  This is the most disruptive flag to adopt:
+  it commonly surfaces errors against third-party .d.ts files
+  (React's types especially)
+  that weren't written with it in mind,
+  not just your own code.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"exactOptionalPropertyTypes"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

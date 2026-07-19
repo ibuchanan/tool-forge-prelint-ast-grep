@@ -1,0 +1,86 @@
+id: require-lefthook-pre-commit-format
+snapshots:
+  ? |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: gitleaks protect --staged
+        lint:
+          run: npm run lint
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+  : labels:
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: gitleaks protect --staged
+            lint:
+              run: npm run lint
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: primary
+      start: 0
+      end: 165
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: gitleaks protect --staged
+            lint:
+              run: npm run lint
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 165
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: gitleaks protect --staged
+            lint:
+              run: npm run lint
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 165
+  ? |
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+  : labels:
+    - source: |
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 56
+    - source: |
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 56

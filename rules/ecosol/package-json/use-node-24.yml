@@ -1,0 +1,32 @@
+id: use-node-24
+language: Json
+severity: hint
+message: >
+  Set package.json `engines.node` to `24.x`.
+note: >
+  engines.node pins the Node version this Forge app is verified against,
+  so local development, CI, and the Forge CLI itself run consistent behavior.
+  A drifted or unpinned Node version
+  is a common source of environment-specific bugs
+  that don't reproduce on other machines.
+  npm engines reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#engines
+rule:
+  all:
+    - kind: string_content
+      regex: "^@forge/[^/]+$"
+      inside:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"node"\s*:\s*"24\.x"'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

@@ -1,26 +1,21 @@
 id: use-forge-variables-set
 valid:
-  # Not a Forge app (no @forge/api dependency) and no forge variables set script
-  - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
   - |
     {
       "scripts": {
         "forge:variables:set": "source .env && forge variables set --environment \"$FORGE_ENVIRONMENT\""
       }
     }
-  # forge variables set --encrypt should not trigger this rule
+  # A dedicated script file is an accepted equivalent — repo-init no longer
+  # requires calling `forge variables set` directly in package.json
   - |
     {
       "scripts": {
-        "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+        "forge:variables:set": "node scripts/forge-vars-from-secretspec.js"
       }
     }
-  # Forge app with forge:variables:set correctly present
+  # Dependencies are irrelevant now — this ruleset assumes it only ever runs
+  # against a Forge app
   - |
     {
       "dependencies": {
@@ -38,21 +33,24 @@ invalid:
         "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
       }
     }
-  # Missing entirely from a Forge app
+  # The separate encrypted-variant naming is now folded into forge:variables:set
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
+      "scripts": {
+        "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  # Missing entirely, regardless of dependencies present
+  - |
+    {
       "scripts": {
         "build": "tsc"
       }
     }
-  # Missing from a Forge app that only depends on @forge/events
   - |
     {
       "dependencies": {
-        "@forge/events": "^3.0.0"
+        "@forge/api": "^4.0.0"
       },
       "scripts": {
         "build": "tsc"

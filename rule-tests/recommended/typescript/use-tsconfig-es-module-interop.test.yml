@@ -1,0 +1,33 @@
+id: use-tsconfig-es-module-interop
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "esModuleInterop": true,
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+      }
+    }
+invalid:
+  # esModuleInterop missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

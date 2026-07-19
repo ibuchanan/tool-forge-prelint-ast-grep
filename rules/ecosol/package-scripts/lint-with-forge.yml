@@ -10,20 +10,14 @@ note: >
   Use an npm wrapper script (lint:forge) for better composability.
   https://developer.atlassian.com/platform/forge/cli-reference/lint/
 rule:
-  all:
-    - kind: string_content
-      regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
-      inside:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-    - not:
-        inside:
-          stopBy: end
-          kind: object
-          has:
-            kind: pair
-            regex: '"lint:forge"\s*:\s*"forge lint"'
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      stopBy: end
+      kind: pair
+      regex: '"lint:forge"\s*:\s*"forge lint"'
 files:
   - "**/package.json"
 ignores:

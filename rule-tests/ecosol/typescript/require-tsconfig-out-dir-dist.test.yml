@@ -1,0 +1,41 @@
+id: require-tsconfig-out-dir-dist
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "outDir": "dist",
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"],
+        "rootDir": "src",
+        "outDir": "dist"
+      },
+      "include": ["src"]
+    }
+invalid:
+  # outDir drifted to a different directory
+  - |
+    {
+      "compilerOptions": {
+        "outDir": "build"
+      }
+    }
+  # outDir missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

@@ -1,0 +1,17 @@
+id: require-biome-files-exclude-dist
+valid:
+  - |
+    {
+      "files": { "includes": ["**", "!.projen/**", "!dist/**"] }
+    }
+invalid:
+  # Missing files entirely
+  - |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+  # dist not excluded from files.includes
+  - |
+    {
+      "files": { "includes": ["**", "!.projen/**"] }
+    }

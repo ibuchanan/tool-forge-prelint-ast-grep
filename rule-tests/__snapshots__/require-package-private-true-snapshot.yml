@@ -1,0 +1,41 @@
+id: require-package-private-true
+snapshots:
+  ? |
+    {
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "license": "Apache-2.0",
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: primary
+      start: 0
+      end: 79
+    - source: '@forge/api'
+      style: secondary
+      start: 54
+      end: 64
+    - source: |-
+        "dependencies": {
+            "@forge/api": "^8.0"
+          }
+      style: secondary
+      start: 31
+      end: 77
+    - source: |
+        {
+          "license": "Apache-2.0",
+          "dependencies": {
+            "@forge/api": "^8.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 80

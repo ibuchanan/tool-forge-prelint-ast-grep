@@ -1,0 +1,86 @@
+id: require-lefthook-pre-commit-gitleaks
+snapshots:
+  ? |
+    pre-commit:
+      commands:
+        lint:
+          run: npm run lint
+        format:
+          run: npm run format:check
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+  : labels:
+    - source: |
+        pre-commit:
+          commands:
+            lint:
+              run: npm run lint
+            format:
+              run: npm run format:check
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: primary
+      start: 0
+      end: 158
+    - source: |
+        pre-commit:
+          commands:
+            lint:
+              run: npm run lint
+            format:
+              run: npm run format:check
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 158
+    - source: |
+        pre-commit:
+          commands:
+            lint:
+              run: npm run lint
+            format:
+              run: npm run format:check
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 158
+  ? |
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+  : labels:
+    - source: |
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 56
+    - source: |
+        pre-push:
+          commands:
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 56

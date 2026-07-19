@@ -1,19 +1,13 @@
 id: use-forge-uninstall
 valid:
-  # Not a Forge app (no @forge/api dependency) and no forge uninstall script
-  - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
   - |
     {
       "scripts": {
         "forge:uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
       }
     }
-  # Forge app with forge:uninstall correctly present
+  # Dependencies are irrelevant now — this ruleset assumes it only ever runs
+  # against a Forge app
   - |
     {
       "dependencies": {
@@ -31,21 +25,17 @@ invalid:
         "uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
       }
     }
-  # Missing entirely from a Forge app
+  # Missing entirely, regardless of dependencies present
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "build": "tsc"
       }
     }
-  # Missing from a Forge app that only depends on @forge/bridge
   - |
     {
       "dependencies": {
-        "@forge/bridge": "^4.0.0"
+        "@forge/api": "^4.0.0"
       },
       "scripts": {
         "build": "tsc"

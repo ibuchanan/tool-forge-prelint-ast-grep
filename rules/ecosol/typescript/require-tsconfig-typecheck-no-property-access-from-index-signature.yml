@@ -1,0 +1,27 @@
+id: require-tsconfig-typecheck-no-property-access-from-index-signature
+language: Json
+severity: info
+message: >
+  compilerOptions.noPropertyAccessFromIndexSignature
+  requires bracket notation for properties
+  that only exist through an index signature.
+note: >
+  noPropertyAccessFromIndexSignature
+  requires bracket notation for properties
+  that only exist through an index signature.
+  This needs TypeScript's type system;
+  Biome's syntax-only linting has no equivalent rule.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#noPropertyAccessFromIndexSignature
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"noPropertyAccessFromIndexSignature"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

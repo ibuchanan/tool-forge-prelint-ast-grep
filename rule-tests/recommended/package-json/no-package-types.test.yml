@@ -1,0 +1,24 @@
+id: no-package-types
+valid:
+  # Not a Forge app
+  - |
+    {
+      "types": "dist/index.d.ts",
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+invalid:
+  - |
+    {
+      "types": "dist/index.d.mts",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }

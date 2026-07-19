@@ -1,0 +1,46 @@
+id: use-tsconfig-skip-lib-check
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 54
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

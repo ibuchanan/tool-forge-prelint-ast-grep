@@ -1,0 +1,17 @@
+id: require-biome-vcs-default-branch
+valid:
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" }
+    }
+invalid:
+  # Missing vcs entirely
+  - |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+  # defaultBranch drifted from main
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "master" }
+    }

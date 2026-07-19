@@ -1,19 +1,13 @@
 id: use-forge-register
 valid:
-  # Not a Forge app (no @forge/api dependency) and no forge register script
-  - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
   - |
     {
       "scripts": {
         "forge:register": "forge register"
       }
     }
-  # Forge app with forge:register correctly present
+  # Dependencies are irrelevant now — this ruleset assumes it only ever runs
+  # against a Forge app
   - |
     {
       "dependencies": {
@@ -31,21 +25,17 @@ invalid:
         "register": "forge register"
       }
     }
-  # Missing entirely from a Forge app
+  # Missing entirely, regardless of dependencies present
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "build": "tsc"
       }
     }
-  # Missing from a Forge app that only depends on @forge/events
   - |
     {
       "dependencies": {
-        "@forge/events": "^3.0.0"
+        "@forge/api": "^4.0.0"
       },
       "scripts": {
         "build": "tsc"

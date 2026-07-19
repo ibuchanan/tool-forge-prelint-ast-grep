@@ -1,0 +1,39 @@
+id: no-forge-jsx-override-mismatch
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "jsx": "react",
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "jsx": "react",
+        "jsxFactory": "ForgeUI.createElement",
+        "sourceMap": true
+      }
+    }
+invalid:
+  # jsx set to a value other than the hardcoded override
+  - |
+    {
+      "compilerOptions": {
+        "jsx": "react-jsx"
+      }
+    }
+  # jsx missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

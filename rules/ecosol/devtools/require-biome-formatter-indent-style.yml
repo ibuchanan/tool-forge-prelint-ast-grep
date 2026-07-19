@@ -1,0 +1,21 @@
+id: require-biome-formatter-indent-style
+language: Json
+severity: warning
+message: >
+  Set biome.json's formatter.indentStyle to "space".
+note: >
+  formatter.indentStyle: "space" keeps formatting consistent across editors and CI.
+  Biome configuration reference:
+  https://biomejs.dev/reference/configuration/
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"formatter"\s*:[\s\S]*?"indentStyle"\s*:\s*"space"'
+files:
+  - "**/biome.json"
+ignores:
+  - "**/node_modules/**"

@@ -1,0 +1,26 @@
+id: require-tsconfig-target-es2022
+language: Json
+severity: error
+message: >
+  tsconfig.json compilerOptions.target must be "ES2022" to match the Forge
+  Node 18 runtime.
+note: >
+  target is derived from Forge's Node 18 backend runtime, not a team
+  convention — every Forge app compiles against the same runtime. Unlike
+  jsx/jsxFactory/sourceMap, the bundler does not correct a wrong target for
+  you: drift here means tsc silently allows syntax the runtime can't
+  actually execute.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#target
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"target"\s*:\s*"ES2022"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

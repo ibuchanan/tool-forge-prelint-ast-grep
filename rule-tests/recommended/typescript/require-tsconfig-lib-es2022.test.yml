@@ -1,0 +1,37 @@
+id: require-tsconfig-lib-es2022
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "lib": ["ES2022"]
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022", "DOM"]
+      }
+    }
+invalid:
+  # lib missing ES2022
+  - |
+    {
+      "compilerOptions": {
+        "lib": ["DOM"]
+      }
+    }
+  # lib missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

@@ -1,0 +1,25 @@
+id: require-lefthook-pre-commit-format
+language: Yaml
+severity: warning
+message: >
+  Add a pre-commit format guard to lefthook.yml.
+note: >
+  Running a format check before every commit
+  catches formatting drift before it's committed,
+  keeping diffs focused on real changes instead of mixed-in reformatting.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+rule:
+  kind: block_mapping
+  inside:
+    kind: block_node
+    inside:
+      kind: document
+  not:
+    has:
+      kind: block_mapping_pair
+      regex: 'pre-commit:[\s\S]*?\bformat:'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

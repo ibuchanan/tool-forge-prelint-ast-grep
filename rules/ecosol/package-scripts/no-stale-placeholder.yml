@@ -26,7 +26,7 @@ rule:
         kind: object
         has:
           kind: pair
-          regex: '"@forge/(api|react|bridge|kvs|events|resolver)"\s*:'
+          regex: '"@forge/[^/]+"\s*:'
 files:
   - "**/package.json"
 ignores:

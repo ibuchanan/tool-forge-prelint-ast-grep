@@ -1,0 +1,21 @@
+id: require-biome-files-exclude-projen
+language: Json
+severity: warning
+message: >
+  Exclude .projen/** from biome.json's files.includes.
+note: >
+  .projen/** holds generated files that shouldn't be linted or formatted.
+  Biome configuration reference:
+  https://biomejs.dev/reference/configuration/
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"files"\s*:[\s\S]*?"!\.projen'
+files:
+  - "**/biome.json"
+ignores:
+  - "**/node_modules/**"

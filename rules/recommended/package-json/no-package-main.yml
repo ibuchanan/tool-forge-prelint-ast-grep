@@ -1,0 +1,34 @@
+id: no-package-main
+language: Json
+severity: warning
+message: >
+  package.json shouldn't declare main. Forge apps are deployables, not
+  libraries, and Forge's bundler resolves entrypoints from manifest.yml
+  regardless of what package.json says.
+note: >
+  main tells Node/npm which file to load when something imports this
+  package by name — a Forge app is never imported that way, it's deployed.
+  Declaring it implies a library-consumption contract that doesn't exist
+  and that nothing in the Forge pipeline honors.
+  npm package.json fields reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#main
+rule:
+  kind: object
+  inside:
+    kind: document
+  all:
+    - has:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/[^/]+$"
+    - has:
+        kind: pair
+        regex: '^"main"\s*:'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

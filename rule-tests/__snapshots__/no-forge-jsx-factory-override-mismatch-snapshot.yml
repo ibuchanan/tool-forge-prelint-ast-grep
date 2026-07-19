@@ -1,0 +1,71 @@
+id: no-forge-jsx-factory-override-mismatch
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "jsx": "react"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "jsx": "react"
+          }
+        }
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {
+          "compilerOptions": {
+            "jsx": "react"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 50
+  ? |
+    {
+      "compilerOptions": {
+        "jsxFactory": "React.createElement"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "jsxFactory": "React.createElement"
+          }
+        }
+      style: primary
+      start: 0
+      end: 70
+    - source: |
+        {
+          "compilerOptions": {
+            "jsxFactory": "React.createElement"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 71
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

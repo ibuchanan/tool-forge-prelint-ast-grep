@@ -1,0 +1,39 @@
+id: no-forge-source-map-override-mismatch
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "sourceMap": true,
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "jsx": "react",
+        "jsxFactory": "ForgeUI.createElement",
+        "sourceMap": true
+      }
+    }
+invalid:
+  # sourceMap explicitly disabled
+  - |
+    {
+      "compilerOptions": {
+        "sourceMap": false
+      }
+    }
+  # sourceMap missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "jsx": "react"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

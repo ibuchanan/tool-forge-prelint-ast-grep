@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "jsx": "react-jsx",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "target": "ES2022",
+    "lib": ["ES2022"],
     "rootDir": "src",
     "outDir": "dist",
+    "jsx": "react",
+    "jsxFactory": "ForgeUI.createElement",
+    "sourceMap": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"]
 }

@@ -104,3 +104,118 @@ snapshots:
       style: secondary
       start: 4
       end: 54
+  ? |
+    {
+      "devDependencies": {
+        "@biomejs/biome": "^1.9.0"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "devDependencies": {
+            "@biomejs/biome": "^1.9.0"
+          }
+        }
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {
+          "devDependencies": {
+            "@biomejs/biome": "^1.9.0"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 62
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    {
+      "scripts": {
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "lint:check": "biome lint ."
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "format": "biome format --write .",
+            "format:check": "biome format .",
+            "lint:check": "biome lint ."
+          }
+        }
+      style: primary
+      start: 0
+      end: 133
+    - source: |
+        {
+          "scripts": {
+            "format": "biome format --write .",
+            "format:check": "biome format .",
+            "lint:check": "biome lint ."
+          }
+        }
+      style: secondary
+      start: 0
+      end: 134
+  ? |
+    {
+      "scripts": {
+        "format": "biome format --write .",
+        "format:check": "biome format .",
+        "lint:check": "eslint .",
+        "lint:fix": "biome lint --write ."
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "format": "biome format --write .",
+            "format:check": "biome format .",
+            "lint:check": "eslint .",
+            "lint:fix": "biome lint --write ."
+          }
+        }
+      style: primary
+      start: 0
+      end: 169
+    - source: |
+        {
+          "scripts": {
+            "format": "biome format --write .",
+            "format:check": "biome format .",
+            "lint:check": "eslint .",
+            "lint:fix": "biome lint --write ."
+          }
+        }
+      style: secondary
+      start: 0
+      end: 170

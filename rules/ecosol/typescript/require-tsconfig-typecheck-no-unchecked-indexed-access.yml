@@ -1,0 +1,25 @@
+id: require-tsconfig-typecheck-no-unchecked-indexed-access
+language: Json
+severity: info
+message: >
+  compilerOptions.noUncheckedIndexedAccess
+  adds undefined to the type of array/object index access results.
+note: >
+  noUncheckedIndexedAccess
+  adds undefined to the type of array/object index access results.
+  This needs TypeScript's type system;
+  Biome's syntax-only linting has no equivalent rule.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#noUncheckedIndexedAccess
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"noUncheckedIndexedAccess"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

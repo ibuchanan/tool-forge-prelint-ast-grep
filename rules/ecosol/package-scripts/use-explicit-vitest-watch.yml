@@ -9,19 +9,12 @@ note: >
   watch invocation (e.g. `vitest watch`) so intent is clear from the command
   alone.
 rule:
-  all:
-    - kind: pair
-      regex: '^"test:watch"\s*:\s*"vitest"\s*$'
-      inside:
-        stopBy: end
-        kind: pair
-        regex: '"scripts"\s*:'
-    - inside:
-        stopBy: end
-        kind: object
-        has:
-          kind: pair
-          regex: '"@forge/(api|react|bridge|kvs|events|resolver)"\s*:'
+  kind: pair
+  regex: '^"test:watch"\s*:\s*"vitest"\s*$'
+  inside:
+    stopBy: end
+    kind: pair
+    regex: '"scripts"\s*:'
 files:
   - "**/package.json"
 ignores:

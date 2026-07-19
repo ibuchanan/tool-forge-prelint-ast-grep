@@ -4,10 +4,10 @@ severity: info
 message: >
   Add or rename this wrapper script as `forge:deploy` for `forge deploy`.
 note: >
-  repo-init names Forge CLI wrapper scripts with a `forge:` namespace
-  (`forge:deploy`, `forge:install`, `forge:uninstall`, `forge:register`, ...)
-  so tooling and humans can find the deploy step by a predictable name instead
-  of hunting for whichever key happens to call `forge deploy`.
+  A `forge:` namespace keeps Forge CLI wrapper scripts
+  discoverable by a predictable name.
+  Recommended to use with `use-secretspec-for-forge-commands`:
+  "forge:deploy": "secretspec run --provider dotenv --reason \"npm run forge:deploy\" -- sh -c 'forge deploy --environment \"$FORGE_ENVIRONMENT\"'",
   Forge CLI deploy reference:
   https://developer.atlassian.com/platform/forge/cli-reference/deploy/
 rule:
@@ -22,19 +22,14 @@ rule:
         - not:
             regex: '^"forge:deploy"\s*:'
     - all:
-        - kind: string_content
-          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+        - kind: object
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"dependencies"\s*:'
+            kind: document
         - not:
-            inside:
+            has:
               stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"forge:deploy"\s*:'
+              kind: pair
+              regex: '"forge:deploy"\s*:'
 files:
   - "**/package.json"
 ignores:

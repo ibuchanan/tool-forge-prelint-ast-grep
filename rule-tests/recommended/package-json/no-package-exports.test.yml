@@ -1,0 +1,33 @@
+id: no-package-exports
+valid:
+  # Not a Forge app
+  - |
+    {
+      "exports": {
+        ".": {
+          "import": "dist/index.mjs"
+        }
+      },
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+invalid:
+  - |
+    {
+      "exports": {
+        ".": {
+          "import": "./dist/index.mjs",
+          "types": "./dist/index.d.mts"
+        }
+      },
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }

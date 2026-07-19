@@ -4,8 +4,10 @@ severity: info
 message: >
   Add or rename this wrapper script as `forge:uninstall` for `forge uninstall`.
 note: >
-  repo-init names Forge CLI wrapper scripts with a `forge:` namespace
-  (`forge:deploy`, `forge:install`, `forge:uninstall`, `forge:register`, ...).
+  A `forge:` namespace keeps Forge CLI wrapper scripts
+  discoverable by a predictable name.
+  Recommended to use with `use-secretspec-for-forge-commands`:
+  "forge:uninstall": "secretspec run --provider dotenv --reason \"npm run forge:uninstall\" -- sh -c 'forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\"'",
   Forge CLI uninstall reference:
   https://developer.atlassian.com/platform/forge/cli-reference/uninstall/
 rule:
@@ -20,19 +22,14 @@ rule:
         - not:
             regex: '^"forge:uninstall"\s*:'
     - all:
-        - kind: string_content
-          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+        - kind: object
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"dependencies"\s*:'
+            kind: document
         - not:
-            inside:
+            has:
               stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"forge:uninstall"\s*:'
+              kind: pair
+              regex: '"forge:uninstall"\s*:'
 files:
   - "**/package.json"
 ignores:

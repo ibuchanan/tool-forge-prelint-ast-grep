@@ -1,0 +1,28 @@
+id: require-tsconfig-out-dir-dist
+language: Json
+severity: error
+message: >
+  compilerOptions.outDir should be "dist",
+  the standard local build output location.
+note: >
+  compilerOptions.outDir: "dist" is the standard local build output placeholder.
+  Forge's bundler emits through its own temporary build directory
+  regardless of this setting.
+  Drift here still breaks
+  local tsc output layout,
+  .gitignore assumptions,
+  and IDE tooling.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#outDir
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"outDir"\s*:\s*"dist"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

@@ -1,0 +1,27 @@
+id: require-tsconfig-lib-es2022
+language: Json
+severity: error
+message: >
+  tsconfig.json compilerOptions.lib must include "ES2022" to match the
+  global APIs available on Forge's Node 18 runtime.
+note: >
+  lib is derived from Forge's Node 18 backend runtime's global API surface,
+  not a team convention — every Forge app runs against the same globals.
+  Unlike jsx/jsxFactory/sourceMap, the bundler does not correct a wrong lib
+  for you: drift here means tsc can type-check calls to globals the runtime
+  doesn't actually have, or reject globals it does. Extra lib entries (e.g.
+  "DOM" for Custom UI frontend code sharing this tsconfig) are fine on top.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#lib
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"lib"\s*:\s*\[[^\]]*"ES2022"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

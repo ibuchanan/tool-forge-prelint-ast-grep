@@ -1,0 +1,32 @@
+id: require-package-private-true
+language: Json
+severity: warning
+message: >
+  package.json's private field should be true,
+  since Forge apps aren't published to npm.
+note: >
+  private: true stops an accidental `npm publish` of an app
+  that was never meant to be a package.
+  npm package.json fields reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private
+rule:
+  kind: object
+  inside:
+    kind: document
+  all:
+    - has:
+        stopBy: end
+        kind: pair
+        regex: '"dependencies"\s*:'
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/[^/]+$"
+    - not:
+        has:
+          kind: pair
+          regex: '"private"\s*:\s*true'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

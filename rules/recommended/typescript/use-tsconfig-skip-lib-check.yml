@@ -1,0 +1,25 @@
+id: use-tsconfig-skip-lib-check
+language: Json
+severity: info
+message: >
+  Consider setting tsconfig.json compilerOptions.skipLibCheck to true.
+note: >
+  skipLibCheck is typical for Forge apps' tsconfig.json
+  but not enforced by the Forge bundler itself.
+  It is safe to omit,
+  but recommended to avoid type-checking third-party .d.ts files
+  you don't control.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#skipLibCheck
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"skipLibCheck"\s*:\s*true'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

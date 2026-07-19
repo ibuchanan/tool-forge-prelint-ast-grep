@@ -1,0 +1,71 @@
+id: require-tsconfig-root-dir-src
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "rootDir": "lib"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "rootDir": "lib"
+          }
+        }
+      style: primary
+      start: 0
+      end: 51
+    - source: |
+        {
+          "compilerOptions": {
+            "rootDir": "lib"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 52
+  ? |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 54
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

@@ -1,0 +1,41 @@
+id: use-typescript-5
+language: Json
+severity: warning
+message: >
+  package.json's typescript devDependency
+  should stay pinned to a 5.x major version.
+note: >
+  Forge bundler runs a separate, pinned @babel/parser pass
+  to extract metadata like dependency lists and ESM detection.
+  New syntax introduced in a TypeScript 6.x/7.x release can fail that parse
+  before your code even reaches type-checking,
+  which is the most likely breaking point
+  ("Application code metadata processing failed").
+  A major bump can also outpace what the bundler's pinned ts-loader version supports
+  against the TypeScript Compiler API,
+  and risks the hardcoded jsx/jsxFactory/sourceMap overrides
+  (see no-forge-jsx-override-mismatch and its siblings)
+  becoming invalid if TypeScript changes their semantics.
+  The bundler's peerDependencies allow >=5.0.0,
+  but it's only tested against the 5.x line.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/
+  npm dependency version reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#dependencies
+rule:
+  all:
+    - kind: pair
+      regex: '^"typescript"\s*:'
+      not:
+        regex: '^"typescript"\s*:\s*"[\^~]?5(\.(x|\*|[0-9]+)){0,2}"$'
+    - inside:
+        stopBy: end
+        kind: object
+        has:
+          stopBy: end
+          kind: string_content
+          regex: "^@forge/[^/]+$"
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

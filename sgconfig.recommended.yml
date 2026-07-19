@@ -8,5 +8,7 @@ ruleDirs:
   - rules/recommended/frontend-ui
   - rules/recommended/manifest
   - rules/recommended/package-json
+  - rules/recommended/package-scripts
   - rules/recommended/security
   - rules/recommended/triggers
+  - rules/recommended/typescript

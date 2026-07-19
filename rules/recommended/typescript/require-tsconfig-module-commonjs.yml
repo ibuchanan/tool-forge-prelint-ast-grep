@@ -1,0 +1,26 @@
+id: require-tsconfig-module-commonjs
+language: Json
+severity: error
+message: >
+  tsconfig.json compilerOptions.module must be "CommonJS" to match the Forge
+  Node 18 runtime and webpack output.
+note: >
+  module is derived from Forge's Node 18 backend runtime and webpack's
+  CommonJS library output, not a team convention — every Forge app builds
+  through the same pipeline. Unlike jsx/jsxFactory/sourceMap, the bundler
+  does not correct a wrong module setting for you: drift here means local
+  type-checking and module resolution can diverge from what actually runs.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#module
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"module"\s*:\s*"CommonJS"'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

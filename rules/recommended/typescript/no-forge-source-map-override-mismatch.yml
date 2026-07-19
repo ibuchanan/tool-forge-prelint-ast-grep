@@ -1,0 +1,26 @@
+id: no-forge-source-map-override-mismatch
+language: Json
+severity: error
+message: >
+  tsconfig.json compilerOptions.sourceMap must be true
+  to match what the Forge bundler hardcodes.
+note: >
+  Forge's webpack/ts-loader bundler hardcodes
+  sourceMap: true
+  at build time, regardless of what this file says.
+  Declaring anything else or omitting makes tsconfig.json misrepresent
+  what actually happens to your code once Forge builds it.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#sourceMap
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"sourceMap"\s*:\s*true'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

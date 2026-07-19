@@ -1,0 +1,38 @@
+id: require-package-license-apache-2-0
+valid:
+  - |
+    {
+      "license": "Apache-2.0"
+    }
+  # Applies to any OSS repo, not just Forge apps
+  - |
+    {
+      "license": "Apache-2.0",
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  - |
+    {
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+invalid:
+  - |
+    {
+      "license": "MIT"
+    }
+  - |
+    {
+      "private": true
+    }
+  # No @forge dependency at all — this rule is not Forge-gated
+  - |
+    {
+      "license": "MIT",
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }

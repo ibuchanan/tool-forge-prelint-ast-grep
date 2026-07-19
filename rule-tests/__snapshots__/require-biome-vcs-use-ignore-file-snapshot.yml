@@ -1,0 +1,40 @@
+id: require-biome-vcs-use-ignore-file
+snapshots:
+  ? |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+  : labels:
+    - source: |-
+        {
+          "formatter": { "indentStyle": "space" }
+        }
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {
+          "formatter": { "indentStyle": "space" }
+        }
+      style: secondary
+      start: 0
+      end: 46
+  ? |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": false, "defaultBranch": "main" }
+    }
+  : labels:
+    - source: |-
+        {
+          "vcs": { "enabled": true, "useIgnoreFile": false, "defaultBranch": "main" }
+        }
+      style: primary
+      start: 0
+      end: 81
+    - source: |
+        {
+          "vcs": { "enabled": true, "useIgnoreFile": false, "defaultBranch": "main" }
+        }
+      style: secondary
+      start: 0
+      end: 82

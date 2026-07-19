@@ -2,33 +2,32 @@ id: typecheck-with-typescript
 language: Json
 severity: warning
 message: >
-  Add a `typecheck` script that runs TypeScript without emitting output.
+  Add a `typecheck` script that runs TypeScript against tsconfig.typecheck.json
+  without emitting output.
 note: >
   TypeScript catches type errors locally
   to prevent sudden, hard-to-debug runtime crashes inside the remote hosting environment.
   Type checking is especially useful for Forge-specific parameters,
   REST API requests & responses,
-  and for the mappings from manifest into functions. A conventional
-  package-level script is typecheck: "tsc --noEmit"; add an explicit
-  -p/--project argument only when the package needs a non-default tsconfig.
+  and for the mappings from manifest into functions. tsconfig.typecheck.json
+  carries the exhaustive strict flags beyond the Forge deploy baseline, so
+  the typecheck script must point at it explicitly — the conventional
+  typecheck: "tsc --noEmit" on its own only checks against the default
+  tsconfig.json and misses those flags entirely.
   https://www.typescriptlang.org/
 rule:
   kind: object
   inside:
     kind: document
-  all:
-    - has:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-        has:
-          stopBy: end
-          kind: string_content
-          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+  any:
     - not:
         has:
           kind: pair
           regex: '"typecheck"\s*:\s*"tsc\b[^"]*--noEmit\b[^"]*"'
+    - not:
+        has:
+          kind: pair
+          regex: '"typecheck"\s*:\s*"tsc\b[^"]*(-p|--project)\s+tsconfig\.typecheck\.json\b[^"]*"'
 files:
   - "**/package.json"
 ignores:

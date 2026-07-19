@@ -1,0 +1,18 @@
+id: no-verbose-hot-path-logging
+snapshots:
+  ? |
+    console.log("starting up");
+  : labels:
+    - source: console.log("starting up")
+      style: primary
+      start: 0
+      end: 26
+  ? |
+    export const handler = (payload: unknown) => {
+      console.log(payload);
+    };
+  : labels:
+    - source: console.log(payload)
+      style: primary
+      start: 49
+      end: 69

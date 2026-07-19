@@ -1,0 +1,37 @@
+id: require-tsconfig-module-commonjs
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"]
+      }
+    }
+invalid:
+  # module drifted to ESNext
+  - |
+    {
+      "compilerOptions": {
+        "module": "ESNext"
+      }
+    }
+  # module missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

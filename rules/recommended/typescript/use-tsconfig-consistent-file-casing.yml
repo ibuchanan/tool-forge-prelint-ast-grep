@@ -1,0 +1,26 @@
+id: use-tsconfig-consistent-file-casing
+language: Json
+severity: info
+message: >
+  Consider setting tsconfig.json compilerOptions.forceConsistentCasingInFileNames to true.
+note: >
+  forceConsistentCasingInFileNames is typical for Forge apps' tsconfig.json
+  but not enforced by the Forge bundler itself.
+  It is safe to omit,
+  but recommended to catch import-path casing
+  that would break on case-sensitive filesystems
+  (like the ones Forge's build/CI run on).
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#forceConsistentCasingInFileNames
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"forceConsistentCasingInFileNames"\s*:\s*true'
+files:
+  - "**/tsconfig.json"
+ignores:
+  - "**/node_modules/**"

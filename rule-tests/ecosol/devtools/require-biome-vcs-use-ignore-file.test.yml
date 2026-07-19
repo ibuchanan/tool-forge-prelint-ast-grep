@@ -1,0 +1,17 @@
+id: require-biome-vcs-use-ignore-file
+valid:
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": true, "defaultBranch": "main" }
+    }
+invalid:
+  # Missing vcs entirely
+  - |
+    {
+      "formatter": { "indentStyle": "space" }
+    }
+  # useIgnoreFile explicitly disabled
+  - |
+    {
+      "vcs": { "enabled": true, "useIgnoreFile": false, "defaultBranch": "main" }
+    }

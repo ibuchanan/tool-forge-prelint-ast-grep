@@ -57,3 +57,53 @@ snapshots:
       style: secondary
       start: 4
       end: 55
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    {
+      "scripts": {
+        "lint": "forge lint"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "lint": "forge lint"
+          }
+        }
+      style: primary
+      start: 0
+      end: 47
+    - source: |
+        {
+          "scripts": {
+            "lint": "forge lint"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 48

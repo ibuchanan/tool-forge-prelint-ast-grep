@@ -1,0 +1,37 @@
+id: require-tsconfig-typecheck-no-unchecked-indexed-access
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "noUncheckedIndexedAccess": true
+      }
+    }
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "noEmit": true,
+        "noImplicitReturns": true,
+        "noUncheckedIndexedAccess": true
+      }
+    }
+invalid:
+  # explicitly disabled
+  - |
+    {
+      "compilerOptions": {
+        "noUncheckedIndexedAccess": false
+      }
+    }
+  # missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "extends": "./tsconfig.json"
+    }

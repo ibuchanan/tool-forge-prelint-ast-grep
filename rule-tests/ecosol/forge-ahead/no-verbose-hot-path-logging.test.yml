@@ -1,0 +1,21 @@
+id: no-verbose-hot-path-logging
+valid:
+  - |
+    import { createForgeLogger } from "@forge-ahead/logging";
+
+    const logger = createForgeLogger({ name: "my-forge-app" });
+
+    export const handler = () => {
+      logger.info({ userId: "abc-123" }, "handled request");
+    };
+  - |
+    export const format = (value: string) => {
+      return value.trim();
+    };
+invalid:
+  - |
+    export const handler = (payload: unknown) => {
+      console.log(payload);
+    };
+  - |
+    console.log("starting up");

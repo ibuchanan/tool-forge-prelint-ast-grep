@@ -1,0 +1,24 @@
+id: require-package-private-true
+valid:
+  # Not a Forge app — metadata drift is not this rule's concern
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  - |
+    {
+      "private": true,
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }
+invalid:
+  - |
+    {
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@forge/api": "^8.0"
+      }
+    }

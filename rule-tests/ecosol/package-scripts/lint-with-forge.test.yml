@@ -1,42 +1,22 @@
 id: lint-with-forge
 valid:
-  # Not a Forge app (no @forge/api dependency)
   - |
     {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  # Forge app with lint:forge already aliased
-  - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint:forge": "forge lint"
       }
     }
 invalid:
+  # Missing entirely
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  # Missing from a Forge app that only depends on @forge/events
-  - |
-    {
-      "dependencies": {
-        "@forge/events": "^3.0.0"
+      "scripts": {
+        "build": "tsc"
       }
     }
   # forge lint called directly instead of through the alias
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
       "scripts": {
         "lint": "forge lint"
       }

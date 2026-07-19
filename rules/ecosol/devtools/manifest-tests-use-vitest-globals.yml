@@ -2,11 +2,13 @@ id: manifest-tests-use-vitest-globals
 language: TypeScript
 severity: warning
 message: >
-  Enable Vitest globals in vitest.config.ts to match the repo-init baseline.
+  Enable Vitest globals in vitest.config.ts
+  (defineConfig({ test: { globals: true } }))
+  so tests can use describe/it/expect without importing them.
 note: >
-  repo-init's generated Forge tests assume global describe/it/expect
-  (defineConfig({ test: { globals: true } })). Without test.globals, those
-  tests fail to run until every file adds explicit Vitest imports.
+  Forge test suites commonly assume global describe/it/expect.
+  Without test.globals,
+  those tests fail to run until every file adds explicit Vitest imports.
   Vitest globals config reference:
   https://vitest.dev/config/#globals
 rule:

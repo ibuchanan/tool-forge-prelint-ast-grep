@@ -8,8 +8,10 @@ ruleDirs:
   - rules/recommended/frontend-ui
   - rules/recommended/manifest
   - rules/recommended/package-json
+  - rules/recommended/package-scripts
   - rules/recommended/security
   - rules/recommended/triggers
+  - rules/recommended/typescript
   - rules/strict/api-usage
   - rules/strict/frontend-ui
   - rules/strict/imports
@@ -18,7 +20,11 @@ ruleDirs:
   - rules/strict/runtime-boundaries
   - rules/strict/security
   - rules/strict/triggers
+  - rules/atlassian/package-json
   - rules/ecosol/devtools
+  - rules/ecosol/forge-ahead
+  - rules/ecosol/git-hooks
+  - rules/ecosol/package-json
+  - rules/ecosol/typescript
   - rules/ecosol/package-scripts
   - rules/ecosol/forge-scripts
-  # - rules/atlassian/...  (future)

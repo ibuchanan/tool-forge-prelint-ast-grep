@@ -1,0 +1,36 @@
+id: require-tsconfig-typecheck-no-implicit-override
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "noImplicitOverride": true
+      }
+    }
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": {
+        "noEmit": true,
+        "noImplicitOverride": true
+      }
+    }
+invalid:
+  # explicitly disabled
+  - |
+    {
+      "compilerOptions": {
+        "noImplicitOverride": false
+      }
+    }
+  # missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "extends": "./tsconfig.json"
+    }

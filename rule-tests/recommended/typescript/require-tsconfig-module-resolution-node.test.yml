@@ -1,0 +1,37 @@
+id: require-tsconfig-module-resolution-node
+valid:
+  - |
+    {
+      "compilerOptions": {
+        "moduleResolution": "Node"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"]
+      }
+    }
+invalid:
+  # moduleResolution drifted to bundler
+  - |
+    {
+      "compilerOptions": {
+        "moduleResolution": "bundler"
+      }
+    }
+  # moduleResolution missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # no compilerOptions at all
+  - |
+    {
+      "include": ["src"]
+    }

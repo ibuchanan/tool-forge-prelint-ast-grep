@@ -1,0 +1,26 @@
+id: require-lefthook-pre-push-format
+language: Yaml
+severity: warning
+message: >
+  Add a pre-push format guard to lefthook.yml.
+note: >
+  pre-push is the comprehensive, "run everything" guard — slower checks
+  that would be too heavy-handed on every commit are fine here, since
+  pre-push only runs once before code leaves your machine. A format check
+  here catches drift that slipped past (or bypassed) pre-commit.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+rule:
+  kind: block_mapping
+  inside:
+    kind: block_node
+    inside:
+      kind: document
+  not:
+    has:
+      kind: block_mapping_pair
+      regex: 'pre-push:[\s\S]*?\bformat:'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

@@ -99,3 +99,78 @@ snapshots:
       style: secondary
       start: 4
       end: 54
+  ? |
+    {
+      "scripts": {
+        "build": "tsc"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {
+          "scripts": {
+            "build": "tsc"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+          }
+        }
+      style: primary
+      start: 0
+      end: 133
+    - source: |
+        {
+          "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 134
+  ? |
+    {
+      "scripts": {
+        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml --globs '!node_modules/**'"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml --globs '!node_modules/**'"
+          }
+        }
+      style: primary
+      start: 0
+      end: 148
+    - source: |
+        {
+          "scripts": {
+            "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.yml --globs '!node_modules/**'"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 149

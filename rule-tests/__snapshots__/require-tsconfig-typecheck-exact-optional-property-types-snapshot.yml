@@ -1,0 +1,71 @@
+id: require-tsconfig-typecheck-exact-optional-property-types
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "exactOptionalPropertyTypes": false
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "exactOptionalPropertyTypes": false
+          }
+        }
+      style: primary
+      start: 0
+      end: 70
+    - source: |
+        {
+          "compilerOptions": {
+            "exactOptionalPropertyTypes": false
+          }
+        }
+      style: secondary
+      start: 0
+      end: 71
+  ? |
+    {
+      "compilerOptions": {
+        "noEmit": true
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "noEmit": true
+          }
+        }
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {
+          "compilerOptions": {
+            "noEmit": true
+          }
+        }
+      style: secondary
+      start: 0
+      end: 50
+  ? |
+    {
+      "extends": "./tsconfig.json"
+    }
+  : labels:
+    - source: |-
+        {
+          "extends": "./tsconfig.json"
+        }
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        {
+          "extends": "./tsconfig.json"
+        }
+      style: secondary
+      start: 0
+      end: 35

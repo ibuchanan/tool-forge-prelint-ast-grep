@@ -1,0 +1,52 @@
+id: use-forge-ahead-logging
+valid:
+  # Not a Forge app
+  - |
+    {
+      "dependencies": {
+        "express": "^4.18.0"
+      }
+    }
+  # Forge app with the shared Forge Ahead logging package
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*",
+        "@forge-ahead/logging": "^1.0.0"
+      }
+    }
+  # API-using Forge app with the shared Forge Ahead logging package
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0",
+        "@forge-ahead/logging": "^1.0.0"
+      }
+    }
+invalid:
+  # Missing from an API-using Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0"
+      }
+    }
+  # Missing from a frontend/resolver Forge app
+  - |
+    {
+      "dependencies": {
+        "@forge/bridge": "*",
+        "@forge/react": "*",
+        "@forge/resolver": "*"
+      }
+    }
+  # @forge-ahead/errors is separate and does not satisfy the logging helper
+  - |
+    {
+      "dependencies": {
+        "@forge/api": "^4.0.0",
+        "@forge-ahead/errors": "^1.0.0"
+      }
+    }

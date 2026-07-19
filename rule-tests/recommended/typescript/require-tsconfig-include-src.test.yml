@@ -1,0 +1,37 @@
+id: require-tsconfig-include-src
+valid:
+  - |
+    {
+      "include": ["src"],
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  - |
+    {
+      "compilerOptions": {
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2022",
+        "lib": ["ES2022"],
+        "rootDir": "src",
+        "outDir": "dist"
+      },
+      "include": ["src", "types"]
+    }
+invalid:
+  # include drifted to a different directory
+  - |
+    {
+      "include": ["lib"],
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  # include missing entirely
+  - |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }

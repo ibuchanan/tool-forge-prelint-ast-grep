@@ -9,42 +9,30 @@ note: >
   Use @biomejs/biome in package scripts for format, format:check, lint:check, and lint:fix.
   https://biomejs.dev/
 rule:
-  all:
-    - kind: string_content
-      regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
-      inside:
-        stopBy: end
-        kind: pair
-        regex: '"dependencies"\s*:'
-    - any:
-        - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"format"\s*:\s*"[^"]*biome[^"]*"'
-        - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"format:check"\s*:\s*"[^"]*biome[^"]*"'
-        - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"lint:check"\s*:\s*"[^"]*biome[^"]*"'
-        - not:
-            inside:
-              stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"lint:fix"\s*:\s*"[^"]*biome[^"]*"'
+  kind: object
+  inside:
+    kind: document
+  any:
+    - not:
+        has:
+          stopBy: end
+          kind: pair
+          regex: '"format"\s*:\s*"[^"]*biome[^"]*"'
+    - not:
+        has:
+          stopBy: end
+          kind: pair
+          regex: '"format:check"\s*:\s*"[^"]*biome[^"]*"'
+    - not:
+        has:
+          stopBy: end
+          kind: pair
+          regex: '"lint:check"\s*:\s*"[^"]*biome[^"]*"'
+    - not:
+        has:
+          stopBy: end
+          kind: pair
+          regex: '"lint:fix"\s*:\s*"[^"]*biome[^"]*"'
 files:
   - "**/package.json"
 ignores:

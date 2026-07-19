@@ -1,0 +1,71 @@
+id: require-tsconfig-lib-es2022
+snapshots:
+  ? |
+    {
+      "compilerOptions": {
+        "lib": ["DOM"]
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "lib": ["DOM"]
+          }
+        }
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {
+          "compilerOptions": {
+            "lib": ["DOM"]
+          }
+        }
+      style: secondary
+      start: 0
+      end: 50
+  ? |
+    {
+      "compilerOptions": {
+        "target": "ES2022"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {
+          "compilerOptions": {
+            "target": "ES2022"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 54
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

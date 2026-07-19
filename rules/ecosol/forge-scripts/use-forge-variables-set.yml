@@ -2,12 +2,13 @@ id: use-forge-variables-set
 language: Json
 severity: info
 message: >
-  Add or rename this wrapper script as `forge:variables:set` for `forge variables set`.
+  Add or rename this wrapper script as `forge:variables:set`
+  for setting Forge variables.
 note: >
-  repo-init names Forge CLI wrapper scripts with a `forge:` namespace.
-  `forge variables set --encrypt` is the separate `forge:variables:set-encrypted`
-  convention; a plain `forge variables set` (without `--encrypt`) should be named
-  `forge:variables:set`.
+  A `forge:` namespace keeps Forge CLI wrapper scripts
+  discoverable by a predictable name.
+  Recommended to use with `use-secretspec-for-forge-commands`:
+  "forge:variables:set": "node scripts/forge-vars-from-secretspec.js",
   Forge CLI variables set reference:
   https://developer.atlassian.com/platform/forge/cli-reference/variables-set/
 rule:
@@ -20,23 +21,16 @@ rule:
             kind: pair
             regex: '"scripts"\s*:'
         - not:
-            regex: "--encrypt"
-        - not:
             regex: '^"forge:variables:set"\s*:'
     - all:
-        - kind: string_content
-          regex: "^@forge/(api|react|bridge|kvs|events|resolver)$"
+        - kind: object
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"dependencies"\s*:'
+            kind: document
         - not:
-            inside:
+            has:
               stopBy: end
-              kind: object
-              has:
-                kind: pair
-                regex: '"forge:variables:set"\s*:'
+              kind: pair
+              regex: '"forge:variables:set"\s*:'
 files:
   - "**/package.json"
 ignores:

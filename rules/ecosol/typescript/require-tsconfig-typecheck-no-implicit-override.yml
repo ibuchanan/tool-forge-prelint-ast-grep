@@ -1,0 +1,26 @@
+id: require-tsconfig-typecheck-no-implicit-override
+language: Json
+severity: info
+message: >
+  compilerOptions.noImplicitOverride
+  requires an explicit override keyword
+  when a subclass member overrides a base class member.
+note: >
+  noImplicitOverride requires an explicit override keyword
+  when a subclass member overrides a base class member.
+  This needs TypeScript's class hierarchy type information;
+  Biome's syntax-only linting has no equivalent rule.
+  TypeScript TSConfig reference:
+  https://www.typescriptlang.org/tsconfig/#noImplicitOverride
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '"compilerOptions"\s*:[\s\S]*?"noImplicitOverride"\s*:\s*true'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"
