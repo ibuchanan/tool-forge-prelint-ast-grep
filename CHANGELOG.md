@@ -1,3 +1,13 @@
+## [0.4.2] - 2026-07-19
+
+### 💼 Other
+
+- Add build step to prepare script
+
+### 📚 Documentation
+
+- *(changelog)* Regenerate history to include 0.1.0
+
 ## [0.4.1] - 2026-07-19
 
 ### 🐛 Bug Fixes
