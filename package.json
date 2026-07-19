@@ -21,7 +21,7 @@
     "check": "lefthook run pre-push --force",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "npm run build && (lefthook install || true)",
+    "prepare": "lefthook install || true",
     "release:prepare": "scripts/release-prepare.sh",
     "test": "ast-grep test --test-dir rule-tests && npm run test:fixtures",
     "test:fixtures": "scripts/check-fixtures.sh",
