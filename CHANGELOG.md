@@ -1,3 +1,9 @@
+## [0.4.3] - 2026-07-19
+
+### 🐛 Bug Fixes
+
+- *(scripts)* Remove non-existent build step from prepare
+
 ## [0.4.2] - 2026-07-19
 
 ### 💼 Other
