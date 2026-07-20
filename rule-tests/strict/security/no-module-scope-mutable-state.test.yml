@@ -1,0 +1,35 @@
+id: no-module-scope-mutable-state
+valid:
+  - |
+    const MAX_RETRIES = 3;
+
+    export async function handler(context) {
+      let user = await loadUser(context);
+      return user;
+    }
+  - |
+    declare let injected: string;
+
+    export async function handler() {
+      return injected;
+    }
+invalid:
+  - |
+    let cachedUser;
+
+    export async function handler(context) {
+      cachedUser = await loadUser(context);
+      return cachedUser;
+    }
+  - |
+    var sharedIssueCache = {};
+
+    export async function onIssueCreated(event) {
+      sharedIssueCache[event.payload.issue.key] = event.payload.issue;
+    }
+  - |
+    export let cache = {};
+
+    export async function handler() {
+      return cache.currentUser;
+    }

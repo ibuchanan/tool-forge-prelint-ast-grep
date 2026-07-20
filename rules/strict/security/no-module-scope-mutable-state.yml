@@ -1,0 +1,43 @@
+id: no-module-scope-mutable-state
+language: TypeScript
+severity: warning
+message: >
+  Avoid module-scope `let` or `var`.
+  Keep tenant data per invocation or use Forge Storage.
+note: >
+  Forge may reuse warm runtime processes across tenant invocations,
+  so mutable module-scope state can retain data from a previous tenant.
+  Keep request-specific values inside handlers,
+  key caches by a tenant identifier such as cloudId or installationId,
+  or use Forge Storage for cross-invocation data.
+  See Forge security's data isolation guidance:
+  https://developer.atlassian.com/platform/forge/security/
+  See also the tenant data isolation guide:
+  https://developer.atlassian.com/platform/forge/tenant-data-isolation/
+rule:
+  any:
+    - kind: lexical_declaration
+      regex: '^\s*let\b'
+      inside:
+        kind: program
+    - kind: variable_declaration
+      regex: '^\s*var\b'
+      inside:
+        kind: program
+    - kind: lexical_declaration
+      regex: '^\s*let\b'
+      inside:
+        kind: export_statement
+        inside:
+          kind: program
+    - kind: variable_declaration
+      regex: '^\s*var\b'
+      inside:
+        kind: export_statement
+        inside:
+          kind: program
+ignores:
+  - "**/node_modules/**"
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.spec.ts"

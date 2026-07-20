@@ -1,0 +1,49 @@
+id: no-global-state-mutation
+language: TypeScript
+severity: warning
+message: >
+  Avoid mutating `global` or `globalThis`.
+  Keep Forge tenant data per invocation or tenant-keyed.
+note: >
+  Forge runtime processes can be reused across invocations,
+  and tenant-specific data stored through global objects can leak into later invocations.
+  Keep request-specific state local to the handler,
+  key caches by a tenant identifier,
+  or use Forge Storage for durable cross-invocation data.
+  See Forge security's data isolation guidance:
+  https://developer.atlassian.com/platform/forge/security/
+  See also the tenant data isolation guide:
+  https://developer.atlassian.com/platform/forge/tenant-data-isolation/
+rule:
+  any:
+    - pattern: globalThis.$PROP = $VALUE
+    - pattern: globalThis[$KEY] = $VALUE
+    - pattern: global.$PROP = $VALUE
+    - pattern: global[$KEY] = $VALUE
+    - pattern: globalThis.$PROP += $VALUE
+    - pattern: globalThis[$KEY] += $VALUE
+    - pattern: global.$PROP += $VALUE
+    - pattern: global[$KEY] += $VALUE
+    - pattern: globalThis.$PROP ??= $VALUE
+    - pattern: globalThis[$KEY] ??= $VALUE
+    - pattern: global.$PROP ??= $VALUE
+    - pattern: global[$KEY] ??= $VALUE
+    - pattern: globalThis.$PROP ||= $VALUE
+    - pattern: globalThis[$KEY] ||= $VALUE
+    - pattern: global.$PROP ||= $VALUE
+    - pattern: global[$KEY] ||= $VALUE
+    - pattern: globalThis.$PROP++
+    - pattern: global.$PROP++
+    - pattern: ++globalThis.$PROP
+    - pattern: ++global.$PROP
+    - pattern: delete globalThis.$PROP
+    - pattern: delete globalThis[$KEY]
+    - pattern: delete global.$PROP
+    - pattern: delete global[$KEY]
+    - kind: call_expression
+      regex: '^global(This)?\.[A-Za-z_$][A-Za-z0-9_$]*\.(set|add|delete|clear|push|pop|shift|unshift|splice)\s*\('
+ignores:
+  - "**/node_modules/**"
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.spec.ts"

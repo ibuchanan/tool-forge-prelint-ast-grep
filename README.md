@@ -295,7 +295,8 @@ and Forge runtime assumptions aren't violated by a stray import. _(strict)_
 - **recommended** — manifest-level security: no wildcard egress, no unsafe
   Custom UI CSP entries.
 - **strict** — source-level security hygiene: no committed Atlassian API
-  tokens, no wildcard CORS origins, no logging of credential-shaped values.
+  tokens, no wildcard CORS origins, no logging of credential-shaped values,
+  and no cross-tenant-prone module/global runtime state.
 
 ### triggers
 

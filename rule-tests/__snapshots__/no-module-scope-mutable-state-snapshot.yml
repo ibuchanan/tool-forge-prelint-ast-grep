@@ -1,0 +1,68 @@
+id: no-module-scope-mutable-state
+snapshots:
+  ? |
+    export let cache = {};
+
+    export async function handler() {
+      return cache.currentUser;
+    }
+  : labels:
+    - source: let cache = {};
+      style: primary
+      start: 7
+      end: 22
+    - source: |
+        export let cache = {};
+
+        export async function handler() {
+          return cache.currentUser;
+        }
+      style: secondary
+      start: 0
+      end: 88
+    - source: export let cache = {};
+      style: secondary
+      start: 0
+      end: 22
+  ? |
+    let cachedUser;
+
+    export async function handler(context) {
+      cachedUser = await loadUser(context);
+      return cachedUser;
+    }
+  : labels:
+    - source: let cachedUser;
+      style: primary
+      start: 0
+      end: 15
+    - source: |
+        let cachedUser;
+
+        export async function handler(context) {
+          cachedUser = await loadUser(context);
+          return cachedUser;
+        }
+      style: secondary
+      start: 0
+      end: 121
+  ? |
+    var sharedIssueCache = {};
+
+    export async function onIssueCreated(event) {
+      sharedIssueCache[event.payload.issue.key] = event.payload.issue;
+    }
+  : labels:
+    - source: var sharedIssueCache = {};
+      style: primary
+      start: 0
+      end: 26
+    - source: |
+        var sharedIssueCache = {};
+
+        export async function onIssueCreated(event) {
+          sharedIssueCache[event.payload.issue.key] = event.payload.issue;
+        }
+      style: secondary
+      start: 0
+      end: 143

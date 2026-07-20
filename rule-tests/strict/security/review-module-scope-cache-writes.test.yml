@@ -1,0 +1,55 @@
+id: review-module-scope-cache-writes
+valid:
+  - |
+    const cache = {};
+
+    export async function handler(context) {
+      const { cloudId } = context;
+      if (!cache[cloudId]) {
+        cache[cloudId] = {};
+      }
+      cache[cloudId].currentUser = await loadUser(context);
+    }
+  - |
+    export async function handler(context) {
+      const cache = {};
+      cache.currentUser = await loadUser(context);
+      return cache.currentUser;
+    }
+  - |
+    const cache = new Map<string, User>();
+
+    export async function handler(context) {
+      cache.set(context.cloudId, await loadUser(context));
+    }
+invalid:
+  - |
+    const cache = {};
+
+    export async function handler(context) {
+      cache.currentUser = await loadUser(context);
+    }
+  - |
+    const cache: Record<string, User> = {};
+
+    export async function handler(context) {
+      cache["currentUser"] = await loadUser(context);
+    }
+  - |
+    const issueCache = {};
+
+    export async function onIssueCreated(event) {
+      issueCache[event.payload.issue.key] = event.payload.issue;
+    }
+  - |
+    const cache = new Map<string, User>();
+
+    export async function handler(context) {
+      cache.set("currentUser", await loadUser(context));
+    }
+  - |
+    export const cachedUsers = [];
+
+    export async function handler(context) {
+      cachedUsers.push(await loadUser(context));
+    }

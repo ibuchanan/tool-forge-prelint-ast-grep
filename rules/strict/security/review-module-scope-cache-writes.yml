@@ -1,0 +1,75 @@
+id: review-module-scope-cache-writes
+language: TypeScript
+severity: warning
+message: >
+  Review module-scope cache writes.
+  Key tenant data by `cloudId` or use Forge Storage.
+note: >
+  Forge apps run in a multi-tenant runtime
+  where module-level variables and in-memory caches
+  can survive across invocations.
+  Static cache keys and Atlassian identifiers
+  such as issue keys are not tenant identifiers;
+  key in-memory caches by cloudId or installationId,
+  or use Forge Storage for durable cross-invocation data.
+  See Forge security's data isolation guidance:
+  https://developer.atlassian.com/platform/forge/security/
+  See also the tenant data isolation guide:
+  https://developer.atlassian.com/platform/forge/tenant-data-isolation/
+utils:
+  moduleCacheDeclaration:
+    any:
+      - matches: bareModuleCacheDeclaration
+      - kind: export_statement
+        has:
+          matches: bareModuleCacheDeclaration
+  bareModuleCacheDeclaration:
+    any:
+      - all:
+          - pattern: const $CACHE = $INIT
+          - regex: '^\s*const\s+.*=\s*(\{|\[|new\s+(Map|Set)\b)'
+      - all:
+          - pattern: "const $CACHE: $TYPE = $INIT"
+          - regex: '^\s*const\s+.*=\s*(\{|\[|new\s+(Map|Set)\b)'
+rule:
+  any:
+    - pattern: $CACHE.$PROP = $VALUE
+      inside:
+        stopBy: end
+        kind: program
+        has:
+          matches: moduleCacheDeclaration
+    - pattern: $CACHE[$KEY] = $VALUE
+      inside:
+        stopBy: end
+        kind: program
+        has:
+          matches: moduleCacheDeclaration
+    - pattern: $CACHE.set($KEY, $VALUE)
+      inside:
+        stopBy: end
+        kind: program
+        has:
+          matches: moduleCacheDeclaration
+    - pattern: $CACHE.add($VALUE)
+      inside:
+        stopBy: end
+        kind: program
+        has:
+          matches: moduleCacheDeclaration
+    - pattern: $CACHE.push($VALUE)
+      inside:
+        stopBy: end
+        kind: program
+        has:
+          matches: moduleCacheDeclaration
+constraints:
+  KEY:
+    any:
+      - regex: '^["'']'
+      - regex: '(^|\.)(issue\.(key|id)|page\.id|content\.id)$'
+ignores:
+  - "**/node_modules/**"
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.spec.ts"

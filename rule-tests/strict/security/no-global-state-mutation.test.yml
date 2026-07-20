@@ -1,0 +1,16 @@
+id: no-global-state-mutation
+valid:
+  - "const requestId = globalThis.crypto.randomUUID()"
+  - "const globalState = {}; globalState.cache = {}"
+  - |
+    export async function handler(context) {
+      const cache = {};
+      cache[context.cloudId] = {};
+    }
+invalid:
+  - "globalThis.cache = {}"
+  - "global.cache ??= {}"
+  - "globalThis.cache.set(context.cloudId, user)"
+  - "globalThis.count++"
+  - "delete global.cache"
+  - "globalThis['cache'] = {}"

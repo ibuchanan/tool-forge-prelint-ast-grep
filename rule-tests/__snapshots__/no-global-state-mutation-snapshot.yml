@@ -1,0 +1,38 @@
+id: no-global-state-mutation
+snapshots:
+  delete global.cache:
+    labels:
+    - source: delete global.cache
+      style: primary
+      start: 0
+      end: 19
+  global.cache ??= {}:
+    labels:
+    - source: global.cache ??= {}
+      style: primary
+      start: 0
+      end: 19
+  globalThis.cache = {}:
+    labels:
+    - source: globalThis.cache = {}
+      style: primary
+      start: 0
+      end: 21
+  globalThis.cache.set(context.cloudId, user):
+    labels:
+    - source: globalThis.cache.set(context.cloudId, user)
+      style: primary
+      start: 0
+      end: 43
+  globalThis.count++:
+    labels:
+    - source: globalThis.count++
+      style: primary
+      start: 0
+      end: 18
+  globalThis['cache'] = {}:
+    labels:
+    - source: globalThis['cache'] = {}
+      style: primary
+      start: 0
+      end: 24
