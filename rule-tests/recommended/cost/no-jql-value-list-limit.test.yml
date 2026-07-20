@@ -1,0 +1,30 @@
+id: no-jql-value-list-limit
+valid:
+  - |
+    function relatedIssues(parentKey) {
+      return {
+        jql: `"Parent Reference" = "${parentKey}" AND type = "Sub-task"`
+      };
+    }
+  - |
+    function relatedIssues(parentKey, page = 1, pageSize = 500) {
+      const pageResults = allIssues.slice(startIndex, endIndex);
+      return {
+        jql: `key IN (${pageResults.join(', ')})` 
+      };
+    }
+invalid:
+  - |
+    function relatedIssues(parentKey) {
+      const issues = getAllRelatedIssues(parentKey);
+      return {
+        jql: "key IN (" + issues.join(", ") + ")"
+      };
+    }
+  - |
+    function relatedIssues(parentKey) {
+      const issues = getAllRelatedIssues(parentKey);
+      return {
+        jql: `key IN (${issues.join(', ')})`
+      };
+    }

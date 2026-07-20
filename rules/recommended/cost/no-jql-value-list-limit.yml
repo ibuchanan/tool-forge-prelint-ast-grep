@@ -1,0 +1,29 @@
+id: no-jql-value-list-limit
+message: Avoid returning explicit value lists in JQL fragments. Use query conditions or pagination instead to stay under the 1,000-value limit.
+severity: warning
+language: TypeScript
+rule:
+  all:
+    - any:
+        - kind: template_string
+        - kind: binary_expression
+        - kind: string
+    - regex: "(?i)IN\\s*\\("
+    - regex: "\\.join\\s*\\("
+    - not:
+        regex: "(?i)page|limit|offset|filter"
+    - any:
+        - inside:
+            stopBy: end
+            pattern: "{ jql: $$$ }"
+        - inside:
+            stopBy: end
+            pattern: "jql: $VAL"
+note: >
+  Returning a JQL fragment like `key IN (ISSUE-1, ...)` hits a 1,000-value validation limit in Jira.
+  Prefer returning query conditions (e.g., `project = X AND labels = Y`) which bypass this limit entirely.
+  See: https://developer.atlassian.com/platform/forge/working-around-jql-1000-limit/
+ignores:
+  - "**/node_modules/**"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
