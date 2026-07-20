@@ -1,0 +1,19 @@
+id: no-http-fetch-url
+language: TypeScript
+severity: error
+message: >
+  Do not use `http://` in fetch URLs. Forge's egress proxy is HTTPS-only; use `https://` (or `wss://`) instead.
+note: >
+  The Forge Node.js runtime enforces HTTPS-only egress through a custom proxy —
+  plain HTTP (and plain TCP) connections are blocked outright, regardless of destination port.
+  A hardcoded http:// URL fails at runtime even when the port itself is on the allowed list.
+  Use https:// for HTTP(S) requests or wss:// for websocket connections.
+  See https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/#https-only
+rule:
+  kind: call_expression
+  regex: '^(api\.(asUser\(\)\.|asApp\(\)\.)?)?fetch\s*\(\s*["'']http://'
+ignores:
+  - "**/node_modules/**"
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"

@@ -1,0 +1,20 @@
+id: no-disallowed-fetch-port
+snapshots:
+  api.asUser().fetch("http://example.com:22/status"):
+    labels:
+    - source: api.asUser().fetch("http://example.com:22/status")
+      style: primary
+      start: 0
+      end: 50
+  api.fetch("https://internal.example.com:3000/health"):
+    labels:
+    - source: api.fetch("https://internal.example.com:3000/health")
+      style: primary
+      start: 0
+      end: 53
+  fetch("https://example.com:9000/api"):
+    labels:
+    - source: fetch("https://example.com:9000/api")
+      style: primary
+      start: 0
+      end: 37

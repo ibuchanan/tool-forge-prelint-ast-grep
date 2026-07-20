@@ -1,0 +1,12 @@
+id: no-http-fetch-url
+valid:
+  - 'fetch("https://example.com/api")'
+  - 'api.fetch("https://example.com/api")'
+  - 'api.asUser().fetch("wss://example.com/socket")'
+  - 'api.asApp().fetch("https://example.com/api")'
+  - "fetch(url)"
+invalid:
+  - 'fetch("http://example.com/api")'
+  - 'api.fetch("http://example.com/api")'
+  - 'api.asUser().fetch("http://example.com/api")'
+  - 'api.asApp().fetch("http://example.com/api")'

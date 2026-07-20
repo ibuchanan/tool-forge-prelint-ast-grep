@@ -1,0 +1,23 @@
+id: no-disallowed-fetch-port
+language: TypeScript
+severity: error
+message: >
+  Fetch URL uses a port that Forge's egress proxy does not allow. Use one of the ten allowed destination ports instead.
+note: >
+  Forge's Node.js runtime egress proxy allows outbound fetch connections only on ports
+  80, 443, 8080, 8443, 8444, 7990, 8089, 8090, 8085, and 8060 —
+  any other destination port is blocked at runtime.
+  Hardcoding a port outside this list fails once deployed,
+  even if it works against a different host in local testing.
+  See https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/#https-only
+rule:
+  all:
+    - kind: call_expression
+      regex: '^(api\.(asUser\(\)\.|asApp\(\)\.)?)?fetch\s*\(\s*["'']https?://[^/"'']+:[0-9]+'
+    - not:
+        regex: '://[^/"'']+:(?:80|443|8080|8443|8444|7990|8089|8090|8085|8060)(?:[/?#"'']|$)'
+ignores:
+  - "**/node_modules/**"
+  - "**/frontend/**"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"

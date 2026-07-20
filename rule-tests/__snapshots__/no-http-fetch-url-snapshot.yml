@@ -1,0 +1,26 @@
+id: no-http-fetch-url
+snapshots:
+  api.asApp().fetch("http://example.com/api"):
+    labels:
+    - source: api.asApp().fetch("http://example.com/api")
+      style: primary
+      start: 0
+      end: 43
+  api.asUser().fetch("http://example.com/api"):
+    labels:
+    - source: api.asUser().fetch("http://example.com/api")
+      style: primary
+      start: 0
+      end: 44
+  api.fetch("http://example.com/api"):
+    labels:
+    - source: api.fetch("http://example.com/api")
+      style: primary
+      start: 0
+      end: 35
+  fetch("http://example.com/api"):
+    labels:
+    - source: fetch("http://example.com/api")
+      style: primary
+      start: 0
+      end: 31

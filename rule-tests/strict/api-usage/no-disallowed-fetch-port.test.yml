@@ -1,0 +1,12 @@
+id: no-disallowed-fetch-port
+valid:
+  - 'fetch("https://example.com/api")'
+  - 'api.fetch("https://example.com:443/api")'
+  - 'api.asUser().fetch("https://confluence.internal.example.com:8090/rest/api")'
+  - 'api.asApp().fetch("https://bitbucket.internal.example.com:7990/rest/api")'
+  - 'fetch("https://example.com:8080/api")'
+  - "fetch(url)"
+invalid:
+  - 'fetch("https://example.com:9000/api")'
+  - 'api.fetch("https://internal.example.com:3000/health")'
+  - 'api.asUser().fetch("http://example.com:22/status")'
