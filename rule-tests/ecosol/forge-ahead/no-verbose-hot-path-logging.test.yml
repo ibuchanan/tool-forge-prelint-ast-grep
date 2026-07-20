@@ -19,3 +19,7 @@ invalid:
     };
   - |
     console.log("starting up");
+  - |
+    export const handler = (payload: unknown) => {
+      console.error(payload);
+    };

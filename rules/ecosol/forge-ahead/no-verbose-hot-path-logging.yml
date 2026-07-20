@@ -2,8 +2,9 @@ id: no-verbose-hot-path-logging
 language: TypeScript
 severity: warning
 message: >
-  Use @forge-ahead/logging's createForgeLogger instead of console.log
-  in Forge backend hot paths.
+  Use @forge-ahead/logging's createForgeLogger instead of console.log,
+  console.warn, console.error, console.info, or console.debug in Forge
+  backend hot paths.
 note: >
   Logging entire events, payloads, or resolver arguments
   can increase log volume and expose sensitive data.
@@ -14,7 +15,8 @@ note: >
   https://developer.atlassian.com/platform/forge/optimise-forge-costs/
   https://github.com/ibuchanan/forge-ahead-logging
 rule:
-  pattern: console.log($$$)
+  kind: call_expression
+  regex: '(?is)^console\.(log|warn|error|info|debug)\('
 files:
   - "**/resolvers/**"
   - "**/external/**"

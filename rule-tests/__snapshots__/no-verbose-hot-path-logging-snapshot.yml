@@ -9,6 +9,15 @@ snapshots:
       end: 26
   ? |
     export const handler = (payload: unknown) => {
+      console.error(payload);
+    };
+  : labels:
+    - source: console.error(payload)
+      style: primary
+      start: 49
+      end: 71
+  ? |
+    export const handler = (payload: unknown) => {
       console.log(payload);
     };
   : labels:
