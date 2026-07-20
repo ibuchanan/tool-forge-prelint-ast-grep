@@ -1,12 +1,15 @@
 id: require-biome-files-exclude-projen
 language: Json
-severity: warning
+severity: off
 message: >
   Exclude .projen/** from biome.json's files.includes.
 note: >
   .projen/** holds generated files that shouldn't be linted or formatted.
   Biome configuration reference:
   https://biomejs.dev/reference/configuration/
+  This rule is off by default because ast-grep can't detect whether a repo
+  has a .projen/ directory. Projects that use projen can opt in with
+  `ast-grep scan --warning=require-biome-files-exclude-projen ...`.
 rule:
   kind: object
   inside:
