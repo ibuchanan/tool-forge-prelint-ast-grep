@@ -1,6 +1,64 @@
 id: require-lefthook-pre-push-typecheck
 snapshots:
   ? |
+    lint:
+      commands:
+        typecheck:
+          run: npm run typecheck
+
+    pre-push:
+      commands:
+        format:
+          run: npm run format:check
+        test:
+          run: npm run test
+  : labels:
+    - source: |
+        lint:
+          commands:
+            typecheck:
+              run: npm run typecheck
+
+        pre-push:
+          commands:
+            format:
+              run: npm run format:check
+            test:
+              run: npm run test
+      style: primary
+      start: 0
+      end: 163
+    - source: |
+        lint:
+          commands:
+            typecheck:
+              run: npm run typecheck
+
+        pre-push:
+          commands:
+            format:
+              run: npm run format:check
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 163
+    - source: |
+        lint:
+          commands:
+            typecheck:
+              run: npm run typecheck
+
+        pre-push:
+          commands:
+            format:
+              run: npm run format:check
+            test:
+              run: npm run test
+      style: secondary
+      start: 0
+      end: 163
+  ? |
     pre-commit:
       commands:
         gitleaks:

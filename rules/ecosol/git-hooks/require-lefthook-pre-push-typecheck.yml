@@ -6,7 +6,8 @@ message: >
 note: >
   pre-push is the comprehensive, "run everything" guard — a full typecheck
   is too heavy-handed for every commit, but appropriate here since pre-push
-  only runs once before code leaves your machine.
+  only runs once before code leaves your machine. Delegating to a top-level
+  "lint" command group that pre-push already invokes also satisfies this rule.
   Lefthook configuration reference:
   https://lefthook.dev/configuration/
 rule:
@@ -16,9 +17,17 @@ rule:
     inside:
       kind: document
   not:
-    has:
-      kind: block_mapping_pair
-      regex: 'pre-push:[\s\S]*?\btypecheck:'
+    any:
+      - has:
+          kind: block_mapping_pair
+          regex: 'pre-push:[\s\S]*?\btypecheck:'
+      - all:
+          - has:
+              kind: block_mapping_pair
+              regex: '^lint:[\s\S]*?\btypecheck:'
+          - has:
+              kind: block_mapping_pair
+              regex: 'pre-push:[\s\S]*?\blint:'
 files:
   - "**/lefthook.yml"
 ignores:

@@ -11,6 +11,24 @@ valid:
           run: npm run lint
         test:
           run: npm run test
+  - |
+    lint:
+      commands:
+        prelint:
+          run: npm run lint:prelint
+        biome:
+          run: npm run lint:check
+        typecheck:
+          run: npm run typecheck
+
+    pre-push:
+      commands:
+        format:
+          run: npm run format:check
+        lint:
+          run: npm run lint
+        test:
+          run: npm run test
 invalid:
   - |
     pre-push:
@@ -27,3 +45,16 @@ invalid:
       commands:
         gitleaks:
           run: gitleaks protect --staged
+  # lint group has typecheck, but pre-push never invokes lint
+  - |
+    lint:
+      commands:
+        typecheck:
+          run: npm run typecheck
+
+    pre-push:
+      commands:
+        format:
+          run: npm run format:check
+        test:
+          run: npm run test
