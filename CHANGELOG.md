@@ -1,3 +1,17 @@
+## [0.6.0] - 2026-07-21
+
+### 🚀 Features
+
+- *(security)* Add Forge tenant isolation rules
+- *(cost)* Add lint rule for JQL 1000 value limit
+- *(api-usage)* Add Forge egress HTTPS/port lint rules
+
+### 🐛 Bug Fixes
+
+- *(forge-ahead)* Flag all console log levels in hot paths
+- *(ecosol)* Disable require-biome-files-exclude-projen by default
+- *(ecosol)* Allow pre-push typecheck via delegated lint group
+
 ## [0.5.0] - 2026-07-19
 
 ### 🚀 Features
