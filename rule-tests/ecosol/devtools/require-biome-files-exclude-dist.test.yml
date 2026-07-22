@@ -4,6 +4,11 @@ valid:
     {
       "files": { "includes": ["**", "!.projen/**", "!dist/**"] }
     }
+  # Monorepo: exclude dist at any depth
+  - |
+    {
+      "files": { "includes": ["**", "!.projen/**", "!**/dist/**"] }
+    }
 invalid:
   # Missing files entirely
   - |

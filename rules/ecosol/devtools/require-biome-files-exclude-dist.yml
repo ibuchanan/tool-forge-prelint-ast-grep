@@ -14,7 +14,7 @@ rule:
   not:
     has:
       kind: pair
-      regex: '"files"\s*:[\s\S]*?"!dist'
+      regex: '"files"\s*:[\s\S]*?"!(\*\*/)?dist'
 files:
   - "**/biome.json"
 ignores:
