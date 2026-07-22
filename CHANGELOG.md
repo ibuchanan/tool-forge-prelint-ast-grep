@@ -1,3 +1,15 @@
+## [0.6.1] - 2026-07-22
+
+### 🐛 Bug Fixes
+
+- *(ecosol)* Recognize monorepo dist exclusion in biome.json
+- *(recommended,ecosol)* Back off tsconfig rules when extends is present
+- *(ecosol)* Recognize per-package lefthook lint groups
+
+### 📚 Documentation
+
+- *(ecosol,recommended)* Note the Forge-app scan assumption
+
 ## [0.6.0] - 2026-07-21
 
 ### 🚀 Features

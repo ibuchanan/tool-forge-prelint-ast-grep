@@ -1,6 +1,6 @@
 {
   "name": "tool-forge-prelint-ast-grep",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "description": "ast-grep lint rules for Atlassian Forge apps",
   "homepage": "https://github.com/ibuchanan/tool-forge-prelint-ast-grep#readme",
