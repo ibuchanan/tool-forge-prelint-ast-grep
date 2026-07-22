@@ -13,6 +13,9 @@ note: >
   is the single source of truth for that enumeration.
   `npm run lint` should reuse it via `lefthook run lint`
   instead of re-listing the same three commands.
+  In a monorepo, a package's own package.json may instead delegate to a
+  per-package group (e.g. `lefthook run lint-github-import`) that scopes
+  the same three commands to that package via lefthook.yml's `root:`.
   See this project's recommended local/CI order:
   https://github.com/ibuchanan/tool-forge-prelint-ast-grep#how-this-fits-with-forge-lint
   https://lefthook.dev/configuration/
@@ -24,7 +27,7 @@ rule:
     has:
       stopBy: end
       kind: pair
-      regex: '"lint"\s*:\s*"lefthook run lint"'
+      regex: '"lint"\s*:\s*"lefthook run lint(-[\w-]+)?"'
 files:
   - "**/package.json"
 ignores:

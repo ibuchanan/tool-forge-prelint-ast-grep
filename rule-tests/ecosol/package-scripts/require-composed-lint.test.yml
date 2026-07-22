@@ -17,6 +17,13 @@ valid:
         "lint": "lefthook run lint"
       }
     }
+  # Monorepo: package delegates to its own lefthook.yml group
+  - |
+    {
+      "scripts": {
+        "lint": "lefthook run lint-github-import"
+      }
+    }
 invalid:
   # Missing entirely
   - |
