@@ -12,16 +12,25 @@ note: >
   make tsc accept import specifiers that fail to resolve once actually
   built. Use a separate tsconfig.typecheck.json if you want a different
   moduleResolution for local-only tooling.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#moduleResolution
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"moduleResolution"\s*:\s*"Node"'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"moduleResolution"\s*:\s*"Node"'
 files:
   - "**/tsconfig.json"
 ignores:

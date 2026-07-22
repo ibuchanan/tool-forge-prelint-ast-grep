@@ -12,16 +12,25 @@ note: >
   local tsc output layout,
   .gitignore assumptions,
   and IDE tooling.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#outDir
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"outDir"\s*:\s*"dist"'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"outDir"\s*:\s*"dist"'
 files:
   - "**/tsconfig.json"
 ignores:

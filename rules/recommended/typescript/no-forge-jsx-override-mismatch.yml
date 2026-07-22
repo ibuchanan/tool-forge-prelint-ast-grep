@@ -10,15 +10,24 @@ note: >
   runtime crash was switching jsx to "react-jsx" and removing jsxFactory and
   jsxFragmentFactory, which are leftovers from the deprecated @forge/ui
   (UI Kit 1) framework.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   https://community.developer.atlassian.com/t/forgeui-ui-kit-2-with-typescript-runtime-error-i-default-createelement-is-not-a-function/75838
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"jsx"\s*:\s*"react-jsx"'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"jsx"\s*:\s*"react-jsx"'
 files:
   - "**/tsconfig.json"
 ignores:

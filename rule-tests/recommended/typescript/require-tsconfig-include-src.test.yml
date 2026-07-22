@@ -19,6 +19,14 @@ valid:
       },
       "include": ["src", "types"]
     }
+  # extends a shared base config: include may be inherited, can't verify
+  - |
+    {
+      "extends": "./tsconfig.base.json",
+      "compilerOptions": {
+        "rootDir": "src"
+      }
+    }
 invalid:
   # include drifted to a different directory
   - |

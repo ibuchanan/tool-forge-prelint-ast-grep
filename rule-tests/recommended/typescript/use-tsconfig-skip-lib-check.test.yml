@@ -18,6 +18,14 @@ valid:
         "forceConsistentCasingInFileNames": true
       }
     }
+  # extends a shared base config: skipLibCheck may be inherited, can't verify
+  - |
+    {
+      "extends": "./tsconfig.base.json",
+      "compilerOptions": {
+        "rootDir": "src"
+      }
+    }
 invalid:
   # skipLibCheck missing entirely
   - |

@@ -16,6 +16,14 @@ valid:
         "sourceMap": true
       }
     }
+  # extends a shared base config: jsx may be inherited, can't verify
+  - |
+    {
+      "extends": "./tsconfig.base.json",
+      "compilerOptions": {
+        "rootDir": "src"
+      }
+    }
 invalid:
   # jsx set to the legacy UI Kit 1 (@forge/ui) value
   - |

@@ -8,16 +8,25 @@ note: >
   but not enforced by the Forge bundler itself.
   It is safe to omit,
   but recommended for clean interop with Atlassian's mixed CJS/ESM packages.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#esModuleInterop
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"esModuleInterop"\s*:\s*true'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"esModuleInterop"\s*:\s*true'
 files:
   - "**/tsconfig.json"
 ignores:

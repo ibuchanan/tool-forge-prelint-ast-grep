@@ -10,16 +10,25 @@ note: >
   If include drifts away from the directory containing your manifest
   handlers, local type-checking silently stops covering files the bundler
   still builds.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#include
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"include"\s*:\s*\[[^\]]*"src"'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"include"\s*:\s*\[[^\]]*"src"'
 files:
   - "**/tsconfig.json"
 ignores:

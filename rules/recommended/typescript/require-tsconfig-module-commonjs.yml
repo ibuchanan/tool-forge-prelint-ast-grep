@@ -10,16 +10,25 @@ note: >
   through the same pipeline. Unlike jsx/jsxFactory/sourceMap, the bundler
   does not correct a wrong module setting for you: drift here means local
   type-checking and module resolution can diverge from what actually runs.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#module
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"module"\s*:\s*"CommonJS"'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"module"\s*:\s*"CommonJS"'
 files:
   - "**/tsconfig.json"
 ignores:

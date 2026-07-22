@@ -10,16 +10,25 @@ note: >
   at build time, regardless of what this file says.
   Declaring anything else or omitting makes tsconfig.json misrepresent
   what actually happens to your code once Forge builds it.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#sourceMap
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"sourceMap"\s*:\s*true'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"sourceMap"\s*:\s*true'
 files:
   - "**/tsconfig.json"
 ignores:

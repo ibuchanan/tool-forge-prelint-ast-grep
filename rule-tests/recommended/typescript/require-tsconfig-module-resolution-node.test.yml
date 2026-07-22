@@ -15,6 +15,14 @@ valid:
         "lib": ["ES2022"]
       }
     }
+  # extends a shared base config: moduleResolution may be inherited, can't verify
+  - |
+    {
+      "extends": "./tsconfig.base.json",
+      "compilerOptions": {
+        "rootDir": "src"
+      }
+    }
 invalid:
   # moduleResolution drifted to bundler
   - |

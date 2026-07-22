@@ -10,16 +10,25 @@ note: >
   but recommended to catch import-path casing
   that would break on case-sensitive filesystems
   (like the ones Forge's build/CI run on).
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#forceConsistentCasingInFileNames
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"forceConsistentCasingInFileNames"\s*:\s*true'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"forceConsistentCasingInFileNames"\s*:\s*true'
 files:
   - "**/tsconfig.json"
 ignores:

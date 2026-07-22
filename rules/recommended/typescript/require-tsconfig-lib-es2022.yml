@@ -11,16 +11,25 @@ note: >
   for you: drift here means tsc can type-check calls to globals the runtime
   doesn't actually have, or reject globals it does. Extra lib entries (e.g.
   "DOM" for Custom UI frontend code sharing this tsconfig) are fine on top.
+  This rule assumes a single self-contained tsconfig.json:
+  ast-grep can't follow extends to a shared base config,
+  so it backs off entirely whenever extends is present
+  rather than risk flagging a setting that's actually inherited.
   TypeScript TSConfig reference:
   https://www.typescriptlang.org/tsconfig/#lib
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      kind: pair
-      regex: '"compilerOptions"\s*:[\s\S]*?"lib"\s*:\s*\[[^\]]*"ES2022"'
+  all:
+    - not:
+        has:
+          kind: pair
+          regex: '^"extends"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '"compilerOptions"\s*:[\s\S]*?"lib"\s*:\s*\[[^\]]*"ES2022"'
 files:
   - "**/tsconfig.json"
 ignores:
