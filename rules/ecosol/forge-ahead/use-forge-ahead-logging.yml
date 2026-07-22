@@ -7,6 +7,12 @@ note: >
   Use `@forge-ahead/logging` for structured and redacted logging
   instead of backing into those features with ad hoc console.log calls
   that can leak unredacted payloads or blow up log volume.
+  This rule assumes package.json belongs to a Forge app: in a monorepo, a
+  workspace root or an internal shared library's package.json will also
+  match — even one that imports @forge packages without being deployable
+  itself. manifest.yml is the real signal for "is this a Forge app," and
+  ast-grep can't check whether that file exists, so scope the scan to your
+  Forge app directories rather than the whole monorepo.
   https://github.com/ibuchanan/forge-ahead-logging
 rule:
   kind: object

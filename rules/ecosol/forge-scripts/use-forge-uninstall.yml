@@ -8,6 +8,12 @@ note: >
   discoverable by a predictable name.
   Recommended to use with `use-secretspec-for-forge-commands`:
   "forge:uninstall": "secretspec run --provider dotenv --reason \"npm run forge:uninstall\" -- sh -c 'forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\"'",
+  This rule assumes package.json belongs to a Forge app: in a monorepo, a
+  workspace root or an internal shared library's package.json will also
+  match — even one that imports @forge packages without being deployable
+  itself. manifest.yml is the real signal for "is this a Forge app," and
+  ast-grep can't check whether that file exists, so scope the scan to your
+  Forge app directories rather than the whole monorepo.
   Forge CLI uninstall reference:
   https://developer.atlassian.com/platform/forge/cli-reference/uninstall/
 rule:

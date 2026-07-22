@@ -14,6 +14,12 @@ note: >
   Add --force (or -f) so it doesn't skip commands whose file filters don't
   match anything when check runs outside an actual git push, since pre-push
   otherwise skips any command with no matching push files.
+  This rule assumes package.json belongs to a Forge app: in a monorepo, a
+  workspace root or an internal shared library's package.json will also
+  match — even one that imports @forge packages without being deployable
+  itself. manifest.yml is the real signal for "is this a Forge app," and
+  ast-grep can't check whether that file exists, so scope the scan to your
+  Forge app directories rather than the whole monorepo.
   https://lefthook.dev/configuration/
 rule:
   kind: object

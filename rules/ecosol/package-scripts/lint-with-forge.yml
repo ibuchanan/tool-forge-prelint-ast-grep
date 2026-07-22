@@ -8,6 +8,12 @@ note: >
   Even though it is required for deployment,
   frequent checks with Forge Lint ensures security and compliance early.
   Use an npm wrapper script (lint:forge) for better composability.
+  This rule assumes package.json belongs to a Forge app: in a monorepo, a
+  workspace root or an internal shared library's package.json will also
+  match — even one that imports @forge packages without being deployable
+  itself. manifest.yml is the real signal for "is this a Forge app," and
+  ast-grep can't check whether that file exists, so scope the scan to your
+  Forge app directories rather than the whole monorepo.
   https://developer.atlassian.com/platform/forge/cli-reference/lint/
 rule:
   kind: object

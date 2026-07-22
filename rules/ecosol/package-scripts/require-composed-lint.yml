@@ -16,6 +16,12 @@ note: >
   In a monorepo, a package's own package.json may instead delegate to a
   per-package group (e.g. `lefthook run lint-github-import`) that scopes
   the same three commands to that package via lefthook.yml's `root:`.
+  This rule also assumes package.json belongs to a Forge app: a workspace
+  root or an internal shared library's package.json will also match —
+  even one that imports @forge packages without being deployable itself.
+  manifest.yml is the real signal for "is this a Forge app," and ast-grep
+  can't check whether that file exists, so scope the scan to your Forge
+  app directories rather than the whole monorepo.
   See this project's recommended local/CI order:
   https://github.com/ibuchanan/tool-forge-prelint-ast-grep#how-this-fits-with-forge-lint
   https://lefthook.dev/configuration/

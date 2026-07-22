@@ -9,6 +9,12 @@ note: >
   discoverable by a predictable name.
   Recommended to use with `use-secretspec-for-forge-commands`:
   "forge:variables:set": "node scripts/forge-vars-from-secretspec.js",
+  This rule assumes package.json belongs to a Forge app: in a monorepo, a
+  workspace root or an internal shared library's package.json will also
+  match — even one that imports @forge packages without being deployable
+  itself. manifest.yml is the real signal for "is this a Forge app," and
+  ast-grep can't check whether that file exists, so scope the scan to your
+  Forge app directories rather than the whole monorepo.
   Forge CLI variables set reference:
   https://developer.atlassian.com/platform/forge/cli-reference/variables-set/
 rule:

@@ -10,6 +10,13 @@ note: >
   package by name — a Forge app is never imported that way, it's deployed.
   Declaring it implies a library-consumption contract that doesn't exist
   and that nothing in the Forge pipeline honors.
+  This rule assumes package.json belongs to a Forge app: in a monorepo, an
+  internal shared library's package.json legitimately declares main as its
+  library entry point, and will also match — even one that imports @forge
+  packages without being deployable itself. manifest.yml is the real signal
+  for "is this a Forge app," and ast-grep can't check whether that file
+  exists, so scope the scan to your Forge app directories rather than the
+  whole monorepo.
   npm package.json fields reference:
   https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#main
 rule:
