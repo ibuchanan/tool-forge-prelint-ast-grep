@@ -7,7 +7,9 @@ note: >
   pre-push is the comprehensive, "run everything" guard — slower checks
   that would be too heavy-handed on every commit are fine here, since
   pre-push only runs once before code leaves your machine. A format check
-  here catches drift that slipped past (or bypassed) pre-commit.
+  here catches drift that slipped past (or bypassed) pre-commit. Delegating
+  to a top-level "lint" command group that pre-push already invokes also
+  satisfies this rule.
   Lefthook configuration reference:
   https://lefthook.dev/configuration/
 rule:
@@ -17,9 +19,17 @@ rule:
     inside:
       kind: document
   not:
-    has:
-      kind: block_mapping_pair
-      regex: 'pre-push:[\s\S]*?\bformat:'
+    any:
+      - has:
+          kind: block_mapping_pair
+          regex: 'pre-push:[\s\S]*?\bformat:'
+      - all:
+          - has:
+              kind: block_mapping_pair
+              regex: '^lint:[\s\S]*?\bformat:'
+          - has:
+              kind: block_mapping_pair
+              regex: 'pre-push:[\s\S]*?\blint:'
 files:
   - "**/lefthook.yml"
 ignores:
