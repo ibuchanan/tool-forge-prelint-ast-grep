@@ -44,3 +44,25 @@ snapshots:
       style: primary
       start: 43
       end: 127
+  ? |
+    {
+      "scripts": {
+        "size": "npm run size:check",
+        "size:check": "echo skip"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }
+  : labels:
+    - source: '@size-limit/file'
+      style: primary
+      start: 114
+      end: 130
+    - source: |-
+        "devDependencies": {
+            "@size-limit/file": "^12.1"
+          }
+      style: secondary
+      start: 88
+      end: 144

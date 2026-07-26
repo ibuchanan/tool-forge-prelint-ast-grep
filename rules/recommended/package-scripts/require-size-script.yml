@@ -7,7 +7,8 @@ note: >
   size-limit tooling is configured (a "size-limit" config key or a
   @size-limit/* devDependency) but there's no `size` script wiring it into
   local checks or CI. repo-init generates `size: "npm run build && size-limit"`.
-  See https://github.com/ai/size-limit
+  Delegating via a `size:check` script that `size` invokes also satisfies
+  this rule. See https://github.com/ai/size-limit
 rule:
   all:
     - any:
@@ -20,12 +21,26 @@ rule:
             kind: pair
             regex: '"devDependencies"\s*:'
     - not:
-        inside:
-          stopBy: end
-          kind: object
-          has:
-            kind: pair
-            regex: '"size"\s*:\s*"npm run build && size-limit"'
+        any:
+          - inside:
+              stopBy: end
+              kind: object
+              has:
+                kind: pair
+                regex: '"size"\s*:\s*"npm run build && size-limit"'
+          - all:
+              - inside:
+                  stopBy: end
+                  kind: object
+                  has:
+                    kind: pair
+                    regex: '"size"\s*:\s*"npm run size:check"'
+              - inside:
+                  stopBy: end
+                  kind: object
+                  has:
+                    kind: pair
+                    regex: '"size:check"\s*:\s*"[^"]*size-limit'
 files:
   - "**/package.json"
 ignores:

@@ -30,6 +30,17 @@ valid:
         "@size-limit/file": "^12.1"
       }
     }
+  # size delegates to a size:check script that runs size-limit
+  - |
+    {
+      "scripts": {
+        "size": "npm run size:check",
+        "size:check": "npm run build && size-limit"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }
 invalid:
   # size-limit config key present but no size script
   - |
@@ -49,6 +60,17 @@ invalid:
     {
       "scripts": {
         "build": "tsc"
+      },
+      "devDependencies": {
+        "@size-limit/file": "^12.1"
+      }
+    }
+  # size script exists but size:check never runs size-limit
+  - |
+    {
+      "scripts": {
+        "size": "npm run size:check",
+        "size:check": "echo skip"
       },
       "devDependencies": {
         "@size-limit/file": "^12.1"
