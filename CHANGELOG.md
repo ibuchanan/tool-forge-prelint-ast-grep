@@ -1,3 +1,10 @@
+## [0.6.2] - 2026-07-26
+
+### 🐛 Bug Fixes
+
+- *(ecosol)* Recognize lint-group delegation for pre-push format
+- *(recommended)* Recognize size:check delegation for size script
+
 ## [0.6.1] - 2026-07-22
 
 ### 🐛 Bug Fixes
