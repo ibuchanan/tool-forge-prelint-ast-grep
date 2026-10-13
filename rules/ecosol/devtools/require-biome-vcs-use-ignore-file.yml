@@ -2,7 +2,7 @@ id: require-biome-vcs-use-ignore-file
 language: Json
 severity: warning
 message: >
-  Set biome.json's vcs.useIgnoreFile to true.
+  Set the Biome config's vcs.useIgnoreFile to true.
 note: >
   vcs.useIgnoreFile makes Biome respect .gitignore instead of scanning ignored files.
   Biome configuration reference:
@@ -17,5 +17,6 @@ rule:
       regex: '"vcs"\s*:[\s\S]*?"useIgnoreFile"\s*:\s*true'
 files:
   - "**/biome.json"
+  - "**/biome.jsonc"
 ignores:
   - "**/node_modules/**"

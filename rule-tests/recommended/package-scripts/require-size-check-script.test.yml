@@ -1,0 +1,41 @@
+id: require-size-check-script
+valid:
+  # No size-limit tooling configured
+  - |
+    { "scripts": { "build": "tsc" } }
+  # Drop Calf script with a size-limit budget
+  - |
+    {
+      "scripts": { "size:check": "npm run build && size-limit" },
+      "size-limit": [{ "path": "dist/**/*.js", "limit": "10 kB" }]
+    }
+  # Also valid when tooling is identified by its dependency
+  - |
+    {
+      "scripts": { "size:check": "npm run build && size-limit" },
+      "devDependencies": { "@size-limit/file": "^12.1" }
+    }
+invalid:
+  # Configured size-limit but no script
+  - |
+    {
+      "scripts": { "build": "tsc" },
+      "size-limit": [{ "path": "dist/**/*.js", "limit": "10 kB" }]
+    }
+  # A legacy size script alone no longer runs in the generated hook
+  - |
+    {
+      "scripts": { "size": "npm run build && size-limit" },
+      "devDependencies": { "@size-limit/file": "^12.1" }
+    }
+  # A size:check script must build before measuring
+  - |
+    {
+      "scripts": { "size:check": "size-limit" },
+      "devDependencies": { "@size-limit/file": "^12.1" }
+    }
+  - |
+    {
+      "scripts": { "size:check": "echo skip" },
+      "devDependencies": { "@size-limit/file": "^12.1" }
+    }

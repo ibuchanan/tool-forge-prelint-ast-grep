@@ -1,0 +1,4 @@
+{
+  // Deliberately invalid for require-biome-formatter-indent-style.
+  "formatter": { "indentStyle": "tab" },
+}

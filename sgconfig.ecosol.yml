@@ -1,6 +1,8 @@
 # forge-lint: ecosol tier
 # Includes all atlassian rules plus ecosol team conventions for sample/demo apps.
 # Enforces sample-app quality standards (strictest tier).
+languageGlobs:
+  json: ["**/biome.jsonc"]
 ruleDirs:
   - rules/recommended/architecture
   - rules/recommended/cost

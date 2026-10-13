@@ -1,0 +1,66 @@
+id: require-vitest-globals-false
+snapshots:
+  ? |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      globals: false,
+      test: { globals: true },
+    })
+  : labels:
+    - source: |-
+        defineConfig({
+          globals: false,
+          test: { globals: true },
+        })
+      style: primary
+      start: 61
+      end: 123
+    - source: defineConfig
+      style: secondary
+      start: 61
+      end: 73
+  ? |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      test: { globals: true },
+    })
+  : labels:
+    - source: |-
+        defineConfig({
+          test: { globals: true },
+        })
+      style: primary
+      start: 61
+      end: 105
+    - source: defineConfig
+      style: secondary
+      start: 61
+      end: 73
+  ? |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({ plugins: [] })
+  : labels:
+    - source: 'defineConfig({ plugins: [] })'
+      style: primary
+      start: 61
+      end: 90
+    - source: defineConfig
+      style: secondary
+      start: 61
+      end: 73
+  ? |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({ test: {} })
+  : labels:
+    - source: 'defineConfig({ test: {} })'
+      style: primary
+      start: 61
+      end: 87
+    - source: defineConfig
+      style: secondary
+      start: 61
+      end: 73

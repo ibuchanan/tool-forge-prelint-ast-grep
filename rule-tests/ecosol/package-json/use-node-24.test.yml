@@ -1,30 +1,24 @@
 id: use-node-24
 valid:
-  # Already pinned to Node.js 24.x
+  # The package part of Drop Calf's Node 24 baseline
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "engines": {
-        "node": "24.x"
-      }
+      "dependencies": { "@forge/api": "^8.0" },
+      "devDependencies": { "@types/node": "24" }
     }
 invalid:
-  # engines missing entirely
+  # Type definitions missing
+  - |
+    { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
+  # Wrong type definitions, even without engines
+  - |
+    { "devDependencies": { "@types/node": "22" } }
+  # Runtime engine declaration conflicts even when type definitions match
   - |
     {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
+      "devDependencies": { "@types/node": "24" },
+      "engines": { "node": "24.x" }
     }
-  # Pinned to an older Node.js version
+  # A dependency outside devDependencies does not count
   - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "engines": {
-        "node": "18.x"
-      }
-    }
+    { "dependencies": { "@types/node": "24" }, "devDependencies": {} }

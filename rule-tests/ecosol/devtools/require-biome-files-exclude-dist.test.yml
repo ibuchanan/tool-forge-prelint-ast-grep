@@ -2,12 +2,12 @@ id: require-biome-files-exclude-dist
 valid:
   - |
     {
-      "files": { "includes": ["**", "!.projen/**", "!dist/**"] }
+      "files": { "includes": ["**", "!dist/**"] }
     }
   # Monorepo: exclude dist at any depth
   - |
     {
-      "files": { "includes": ["**", "!.projen/**", "!**/dist/**"] }
+      "files": { "includes": ["**", "!**/dist/**"] }
     }
 invalid:
   # Missing files entirely
@@ -18,5 +18,5 @@ invalid:
   # dist not excluded from files.includes
   - |
     {
-      "files": { "includes": ["**", "!.projen/**"] }
+      "files": { "includes": ["**"] }
     }

@@ -1,0 +1,33 @@
+id: require-size-check-script
+language: Json
+severity: hint
+message: >
+  Add `size:check` to build before running size-limit.
+note: >
+  When size-limit tooling is configured (a "size-limit" config key or an
+  @size-limit/* devDependency), run `npm run build && size-limit` via
+  `size:check`. Drop Calf's pre-push hook calls this script directly;
+  a legacy `size` script alone does not satisfy the check.
+  See https://github.com/ai/size-limit
+rule:
+  all:
+    - any:
+        - kind: pair
+          regex: '^"size-limit"\s*:'
+        - kind: string_content
+          regex: "^@size-limit/"
+          inside:
+            stopBy: end
+            kind: pair
+            regex: '"devDependencies"\s*:'
+    - not:
+        inside:
+          stopBy: end
+          kind: object
+          has:
+            kind: pair
+            regex: '"size:check"\s*:\s*"npm run build && size-limit"'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

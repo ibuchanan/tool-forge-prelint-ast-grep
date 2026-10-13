@@ -2,23 +2,23 @@ id: require-biome-files-exclude-dist
 snapshots:
   ? |
     {
-      "files": { "includes": ["**", "!.projen/**"] }
+      "files": { "includes": ["**"] }
     }
   : labels:
     - source: |-
         {
-          "files": { "includes": ["**", "!.projen/**"] }
+          "files": { "includes": ["**"] }
         }
       style: primary
       start: 0
-      end: 52
+      end: 37
     - source: |
         {
-          "files": { "includes": ["**", "!.projen/**"] }
+          "files": { "includes": ["**"] }
         }
       style: secondary
       start: 0
-      end: 53
+      end: 38
   ? |
     {
       "formatter": { "indentStyle": "space" }

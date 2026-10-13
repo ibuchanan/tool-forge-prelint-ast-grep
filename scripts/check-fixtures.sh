@@ -13,3 +13,16 @@ if [ -n "$OUTPUT" ]; then
 fi
 
 echo "$FIXTURE_DIR produced zero ecosol findings, as expected."
+
+# Both Biome filenames must be parsed as JSON and checked by the same rule.
+for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/biome-invalid/biome.jsonc; do
+  matches=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --rule rules/ecosol/devtools/require-biome-formatter-indent-style.yml \
+    --files-with-matches "$path")
+  if [ "$matches" != "$path" ]; then
+    echo "Expected a Biome formatter finding in $path; got: $matches" >&2
+    exit 1
+  fi
+done
+
+echo "Both Biome config formats produced the expected finding."

@@ -1,6 +1,8 @@
 # forge-lint: development config
 # Used by `ast-grep test` (which defaults to sgconfig.yml).
 # Includes all current rule directories across all tiers.
+languageGlobs:
+  json: ["**/biome.jsonc"]
 ruleDirs:
   - rules/recommended/architecture
   - rules/recommended/cost

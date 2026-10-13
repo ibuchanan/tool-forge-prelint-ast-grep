@@ -2,24 +2,30 @@ id: use-node-24
 language: Json
 severity: hint
 message: >
-  Set package.json `engines.node` to `24.x`.
+  Pin `@types/node` to 24 in devDependencies and omit package.json `engines`.
 note: >
-  engines.node pins the Node version this Forge app is verified against,
-  so local development, CI, and the Forge CLI itself run consistent behavior.
-  A drifted or unpinned Node version
-  is a common source of environment-specific bugs
-  that don't reproduce on other machines.
-  npm engines reference:
-  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#engines
+  Drop Calf pins Node 24 in .nvmrc and @types/node, and derives the Forge
+  manifest runtime from .nvmrc. Forge apps omit package.json engines because
+  it can interfere with deployment. This JSON rule checks only package.json;
+  it cannot verify .nvmrc or manifest.yml.
+  Node version manager file reference:
+  https://github.com/nvm-sh/nvm#nvmrc
 rule:
   kind: object
   inside:
     kind: document
-  not:
-    has:
-      stopBy: end
-      kind: pair
-      regex: '"node"\s*:\s*"24\.x"'
+  any:
+    - not:
+        has:
+          kind: pair
+          regex: '^"devDependencies"\s*:'
+          has:
+            stopBy: end
+            kind: pair
+            regex: '^"@types/node"\s*:\s*"24"$'
+    - has:
+        kind: pair
+        regex: '^"engines"\s*:'
 files:
   - "**/package.json"
 ignores:

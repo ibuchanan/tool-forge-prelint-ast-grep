@@ -23,7 +23,7 @@
     "lint:forge": "forge lint",
     "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'",
     "prepare": "lefthook install",
-    "size": "npm run build && size-limit",
+    "size:check": "npm run build && size-limit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
@@ -50,9 +50,6 @@
     "tool-forge-prelint-ast-grep": "github:ibuchanan/tool-forge-prelint-ast-grep#v0.2.0",
     "typescript": "^5.9",
     "vitest": "^4.1"
-  },
-  "engines": {
-    "node": "24.x"
   },
   "size-limit": [
     {

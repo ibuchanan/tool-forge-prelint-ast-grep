@@ -200,8 +200,8 @@ Tooling conventions that don't fit a more specific category:
   and steering away from the `@size-limit/preset-app` preset, which launches
   headless Chrome via Puppeteer to time a browser page load — a measurement
   that doesn't apply to a Forge app's backend bundle.
-- **ecosol** — biome.json config drift and vitest.config.ts globals specific
-  to the ecosol repo-init template.
+- **ecosol** — Biome config drift and explicit Vitest imports (`globals: false`)
+  in the Forge app baseline.
 
 ### forge-ahead
 
@@ -263,15 +263,14 @@ package.json hygiene, split by how universal each concern is:
 - **atlassian** — the Apache-2.0 license requirement from Atlassian's OSS
   credo checklist. Applies to any Atlassian OSS/sample repo, not just Forge
   apps, so it isn't gated on an `@forge` dependency like the tiers above.
-- **ecosol** — the `engines.node` version pin. A team-specific choice, since
-  each team can reasonably pin a different Node version independently of
-  what Forge's own runtime targets.
+- **ecosol** — pinning `@types/node` to 24 without a package `engines`
+  declaration. The `.nvmrc` and Forge manifest runtime are managed separately.
 
 ### package-scripts
 
 npm script hygiene for the `scripts` block:
 
-- **recommended** — wiring a `size` script when size-limit tooling is
+- **recommended** — wiring `size:check` when size-limit tooling is
   configured, keeping read-only check scripts (`lint`, `lint:check`,
   `format:check`) free of `--write`/`--fix` flags that would mutate files
   instead of failing on drift, and reviewing automatically-triggered npm

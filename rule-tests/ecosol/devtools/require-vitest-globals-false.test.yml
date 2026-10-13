@@ -1,0 +1,33 @@
+id: require-vitest-globals-false
+valid:
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      test: { globals: false, coverage: { provider: 'v8' } },
+    })
+invalid:
+  # The previous globals-on default
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      test: { globals: true },
+    })
+  # Explicit value is required
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({ test: {} })
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({ plugins: [] })
+  # A different `globals` property must not satisfy test.globals.
+  - |
+    import { defineConfig } from 'vitest/config'
+
+    export default defineConfig({
+      globals: false,
+      test: { globals: true },
+    })

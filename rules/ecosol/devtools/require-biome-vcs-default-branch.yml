@@ -2,7 +2,7 @@ id: require-biome-vcs-default-branch
 language: Json
 severity: warning
 message: >
-  Set biome.json's vcs.defaultBranch to "main".
+  Set the Biome config's vcs.defaultBranch to "main".
 note: >
   vcs.defaultBranch pinned to "main" is needed for correct changed-file detection.
   Biome configuration reference:
@@ -17,5 +17,6 @@ rule:
       regex: '"vcs"\s*:[\s\S]*?"defaultBranch"\s*:\s*"main"'
 files:
   - "**/biome.json"
+  - "**/biome.jsonc"
 ignores:
   - "**/node_modules/**"

@@ -1,0 +1,30 @@
+id: require-vitest-globals-false
+language: TypeScript
+severity: warning
+message: >
+  Set test.globals to false in vitest.config.ts; import test APIs explicitly.
+note: >
+  Drop Calf disables Vitest globals so tests import describe, test, and expect
+  explicitly instead of relying on ambient names. This rule checks
+  defineConfig calls in vitest.config.ts.
+  Vitest globals config reference:
+  https://vitest.dev/config/#globals
+rule:
+  kind: call_expression
+  has:
+    field: function
+    kind: identifier
+    regex: "^defineConfig$"
+  not:
+    has:
+      stopBy: end
+      kind: pair
+      regex: "^test\\s*:"
+      has:
+        stopBy: end
+        kind: pair
+        regex: "^globals\\s*:\\s*false\\b"
+files:
+  - "**/vitest.config.ts"
+ignores:
+  - "**/node_modules/**"

@@ -59,3 +59,65 @@ snapshots:
       style: secondary
       start: 0
       end: 94
+  ? |
+    {
+      "devDependencies": { "@types/node": "24" },
+      "engines": { "node": "24.x" }
+    }
+  : labels:
+    - source: |-
+        {
+          "devDependencies": { "@types/node": "24" },
+          "engines": { "node": "24.x" }
+        }
+      style: primary
+      start: 0
+      end: 81
+    - source: '"engines": { "node": "24.x" }'
+      style: secondary
+      start: 50
+      end: 79
+    - source: |
+        {
+          "devDependencies": { "@types/node": "24" },
+          "engines": { "node": "24.x" }
+        }
+      style: secondary
+      start: 0
+      end: 82
+  ? |
+    { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
+  : labels:
+    - source: '{ "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }'
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
+      style: secondary
+      start: 0
+      end: 68
+  ? |
+    { "dependencies": { "@types/node": "24" }, "devDependencies": {} }
+  : labels:
+    - source: '{ "dependencies": { "@types/node": "24" }, "devDependencies": {} }'
+      style: primary
+      start: 0
+      end: 66
+    - source: |
+        { "dependencies": { "@types/node": "24" }, "devDependencies": {} }
+      style: secondary
+      start: 0
+      end: 67
+  ? |
+    { "devDependencies": { "@types/node": "22" } }
+  : labels:
+    - source: '{ "devDependencies": { "@types/node": "22" } }'
+      style: primary
+      start: 0
+      end: 46
+    - source: |
+        { "devDependencies": { "@types/node": "22" } }
+      style: secondary
+      start: 0
+      end: 47

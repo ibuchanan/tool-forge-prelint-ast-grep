@@ -5,7 +5,7 @@
     "defaultBranch": "main"
   },
   "files": {
-    "includes": ["**", "!.projen/**", "!dist/**"]
+    "includes": ["**", "!dist/**"]
   },
   "formatter": {
     "indentStyle": "space"
