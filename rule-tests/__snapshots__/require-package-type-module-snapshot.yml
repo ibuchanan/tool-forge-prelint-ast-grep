@@ -1,0 +1,81 @@
+id: require-package-type-module
+snapshots:
+  ? |
+    {
+      "private": true
+    }
+  : labels:
+    - source: |-
+        {
+          "private": true
+        }
+      style: primary
+      start: 0
+      end: 21
+    - source: |
+        {
+          "private": true
+        }
+      style: secondary
+      start: 0
+      end: 22
+  ? |
+    {
+      "scripts": { "type": "module" },
+      "private": true
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": { "type": "module" },
+          "private": true
+        }
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        {
+          "scripts": { "type": "module" },
+          "private": true
+        }
+      style: secondary
+      start: 0
+      end: 57
+  ? |
+    {
+      "type": "commonjs"
+    }
+  : labels:
+    - source: |-
+        {
+          "type": "commonjs"
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "type": "commonjs"
+        }
+      style: secondary
+      start: 0
+      end: 25
+  ? |
+    {
+      "type": null
+    }
+  : labels:
+    - source: |-
+        {
+          "type": null
+        }
+      style: primary
+      start: 0
+      end: 18
+    - source: |
+        {
+          "type": null
+        }
+      style: secondary
+      start: 0
+      end: 19

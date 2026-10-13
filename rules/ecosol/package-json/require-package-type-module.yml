@@ -1,0 +1,24 @@
+id: require-package-type-module
+language: Json
+severity: warning
+message: >
+  Set package.json's top-level `type` to "module" for this Forge app.
+note: >
+  Drop Calf enforces type: "module" for Forge apps on update. This selects
+  ECMAScript module interpretation for .js files and package exports; a nested
+  type field does not set the package's module type. Scope this ecosol rule to
+  Forge app package.json files, not unrelated workspace packages.
+  npm package.json type reference:
+  https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#type
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"type"\s*:\s*"module"$'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

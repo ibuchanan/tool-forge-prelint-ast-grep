@@ -1,0 +1,30 @@
+id: require-package-type-module
+valid:
+  - |
+    {
+      "type": "module",
+      "private": true
+    }
+  - |
+    {
+      "scripts": { "test": "vitest run" },
+      "type": "module"
+    }
+invalid:
+  - |
+    {
+      "private": true
+    }
+  - |
+    {
+      "type": "commonjs"
+    }
+  - |
+    {
+      "type": null
+    }
+  - |
+    {
+      "scripts": { "type": "module" },
+      "private": true
+    }
