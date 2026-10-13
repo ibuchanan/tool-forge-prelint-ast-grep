@@ -1,0 +1,46 @@
+id: require-tsconfig-typecheck-include-tests
+valid:
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "include": ["src", "test", "tests", "vitest.config.ts"]
+    }
+  - |
+    {
+      "include": ["src", "tests"]
+    }
+  - |
+    {
+      "include": ["src", "test/**/*"]
+    }
+  - |
+    {
+      "include": ["./tests/**/*", "src"]
+    }
+  - |
+    {
+      "include": ["src", "test/**/*.ts"]
+    }
+invalid:
+  - |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": { "noEmit": true }
+    }
+  - |
+    {
+      "include": ["src"]
+    }
+  - |
+    {
+      "include": ["src", "test-utils", "tests-archive"]
+    }
+  - |
+    {
+      "include": ["src", "test.ts"]
+    }
+  - |
+    {
+      "compilerOptions": { "include": ["tests"] },
+      "include": ["src"]
+    }

@@ -1,0 +1,103 @@
+id: require-tsconfig-typecheck-include-tests
+snapshots:
+  ? |
+    {
+      "compilerOptions": { "include": ["tests"] },
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "compilerOptions": { "include": ["tests"] },
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 71
+    - source: |
+        {
+          "compilerOptions": { "include": ["tests"] },
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 72
+  ? |
+    {
+      "extends": "./tsconfig.json",
+      "compilerOptions": { "noEmit": true }
+    }
+  : labels:
+    - source: |-
+        {
+          "extends": "./tsconfig.json",
+          "compilerOptions": { "noEmit": true }
+        }
+      style: primary
+      start: 0
+      end: 75
+    - source: |
+        {
+          "extends": "./tsconfig.json",
+          "compilerOptions": { "noEmit": true }
+        }
+      style: secondary
+      start: 0
+      end: 76
+  ? |
+    {
+      "include": ["src", "test-utils", "tests-archive"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src", "test-utils", "tests-archive"]
+        }
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        {
+          "include": ["src", "test-utils", "tests-archive"]
+        }
+      style: secondary
+      start: 0
+      end: 56
+  ? |
+    {
+      "include": ["src", "test.ts"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src", "test.ts"]
+        }
+      style: primary
+      start: 0
+      end: 35
+    - source: |
+        {
+          "include": ["src", "test.ts"]
+        }
+      style: secondary
+      start: 0
+      end: 36
+  ? |
+    {
+      "include": ["src"]
+    }
+  : labels:
+    - source: |-
+        {
+          "include": ["src"]
+        }
+      style: primary
+      start: 0
+      end: 24
+    - source: |
+        {
+          "include": ["src"]
+        }
+      style: secondary
+      start: 0
+      end: 25

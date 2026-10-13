@@ -1,0 +1,30 @@
+id: require-tsconfig-typecheck-include-tests
+language: Json
+severity: warning
+message: >
+  Include the test or tests directory in tsconfig.typecheck.json so typecheck covers tests.
+note: >
+  Drop Calf includes both test and tests in the Forge-app typecheck config.
+  Include the directory you use, or its recursive glob; src alone can let
+  broken tests pass typecheck. A local include overrides the base config's
+  include. This rule cannot verify that the directory exists or resolve
+  another config's file list.
+  TypeScript TSConfig include reference:
+  https://www.typescriptlang.org/tsconfig/#include
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"include"\s*:'
+      has:
+        kind: array
+        has:
+          kind: string
+          regex: '^"(\./)?tests?(/\*\*(/\*(\.[^"/]+)?)?)?"$'
+files:
+  - "**/tsconfig.typecheck.json"
+ignores:
+  - "**/node_modules/**"

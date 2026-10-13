@@ -10,5 +10,6 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "exactOptionalPropertyTypes": true
-  }
+  },
+  "include": ["src", "test", "tests"]
 }
