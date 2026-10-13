@@ -2,6 +2,44 @@ id: require-biome-files-exclude-dist
 snapshots:
   ? |
     {
+      "files": { "ignoreUnknown": "!!**/dist", "includes": ["**"] }
+    }
+  : labels:
+    - source: |-
+        {
+          "files": { "ignoreUnknown": "!!**/dist", "includes": ["**"] }
+        }
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        {
+          "files": { "ignoreUnknown": "!!**/dist", "includes": ["**"] }
+        }
+      style: secondary
+      start: 0
+      end: 68
+  ? |
+    {
+      "files": { "includes": ["**", "!!**/dist-backup"] }
+    }
+  : labels:
+    - source: |-
+        {
+          "files": { "includes": ["**", "!!**/dist-backup"] }
+        }
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        {
+          "files": { "includes": ["**", "!!**/dist-backup"] }
+        }
+      style: secondary
+      start: 0
+      end: 58
+  ? |
+    {
       "files": { "includes": ["**"] }
     }
   : labels:
@@ -19,6 +57,28 @@ snapshots:
       style: secondary
       start: 0
       end: 38
+  ? |
+    {
+      "files": { "includes": ["**"] },
+      "formatter": { "includes": ["**", "!!**/dist"] }
+    }
+  : labels:
+    - source: |-
+        {
+          "files": { "includes": ["**"] },
+          "formatter": { "includes": ["**", "!!**/dist"] }
+        }
+      style: primary
+      start: 0
+      end: 89
+    - source: |
+        {
+          "files": { "includes": ["**"] },
+          "formatter": { "includes": ["**", "!!**/dist"] }
+        }
+      style: secondary
+      start: 0
+      end: 90
   ? |
     {
       "formatter": { "indentStyle": "space" }

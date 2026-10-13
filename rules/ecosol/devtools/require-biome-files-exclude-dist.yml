@@ -5,6 +5,8 @@ message: >
   Exclude dist from the Biome config's files.includes.
 note: >
   dist holds generated build output that shouldn't be linted or formatted.
+  A single ! excludes it from linting and formatting; !! also prevents scanner
+  indexing and is preferred for build output.
   Biome configuration reference:
   https://biomejs.dev/reference/configuration/
 rule:
@@ -14,7 +16,17 @@ rule:
   not:
     has:
       kind: pair
-      regex: '"files"\s*:[\s\S]*?"!(\*\*/)?dist'
+      regex: '^"files"\s*:'
+      has:
+        kind: object
+        has:
+          kind: pair
+          regex: '^"includes"\s*:'
+          has:
+            kind: array
+            has:
+              kind: string
+              regex: '^"!!?(\*\*/)?dist(/\*\*)?"$'
 files:
   - "**/biome.json"
   - "**/biome.jsonc"

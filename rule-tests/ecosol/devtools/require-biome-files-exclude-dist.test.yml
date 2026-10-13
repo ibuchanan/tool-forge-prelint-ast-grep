@@ -9,6 +9,15 @@ valid:
     {
       "files": { "includes": ["**", "!**/dist/**"] }
     }
+  # Preferred hard exclusion: do not scan generated output at any depth
+  - |
+    {
+      "files": { "includes": ["**", "!!**/dist"] }
+    }
+  - |
+    {
+      "files": { "includes": ["**", "!!dist"] }
+    }
 invalid:
   # Missing files entirely
   - |
@@ -19,4 +28,19 @@ invalid:
   - |
     {
       "files": { "includes": ["**"] }
+    }
+  # Excluding dist only from a different tool section does not protect scanning
+  - |
+    {
+      "files": { "includes": ["**"] },
+      "formatter": { "includes": ["**", "!!**/dist"] }
+    }
+  # Another key or a partial folder name is not the dist exclusion
+  - |
+    {
+      "files": { "ignoreUnknown": "!!**/dist", "includes": ["**"] }
+    }
+  - |
+    {
+      "files": { "includes": ["**", "!!**/dist-backup"] }
     }
