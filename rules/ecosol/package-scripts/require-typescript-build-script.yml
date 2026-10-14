@@ -1,0 +1,34 @@
+id: require-typescript-build-script
+language: Json
+severity: warning
+message: >
+  Set `scripts.build` to compile TypeScript with `tsc --project tsconfig.json` (or `tsconfig.build.json`).
+note: >
+  Drop Calf enforces `tsc --project tsconfig.json` for Forge apps. The older
+  Forge-app fixture compiles with `tsc -p tsconfig.build.json`. Both create
+  output for `size:check`, which invokes the build before measuring bundle size.
+  Do not use --noEmit in a build script; use the separate typecheck script.
+  This checks script text, not the referenced config's emit settings or whether
+  compilation succeeds. Scope this ecosol rule to Forge app package.json files.
+  TypeScript compiler reference:
+  https://www.typescriptlang.org/docs/handbook/compiler-options.html
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        has:
+          all:
+            - kind: pair
+            - regex: '^"build"\s*:\s*"tsc\s+(?:--project|-p)\s+tsconfig(?:\.build)?\.json(?:\s|")'
+            - not:
+                regex: '(?:^|\s)--noEmit(?:\s|")'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

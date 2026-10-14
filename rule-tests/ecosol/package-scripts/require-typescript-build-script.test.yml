@@ -1,0 +1,33 @@
+id: require-typescript-build-script
+valid:
+  # Drop Calf's Forge-app build command.
+  - |
+    { "scripts": { "build": "tsc --project tsconfig.json" } }
+  # The older Forge-app fixture has a dedicated build config.
+  - |
+    { "scripts": { "build": "tsc -p tsconfig.build.json" } }
+  - |
+    { "scripts": { "build": "tsc --project tsconfig.build.json --pretty false" } }
+invalid:
+  - |
+    { "name": "forge-app" }
+  - |
+    { "scripts": { "size:check": "npm run build && size-limit" } }
+  - |
+    { "scripts": { "build": "echo Not implemented" } }
+  - |
+    { "scripts": { "build": "tsc" } }
+  - |
+    { "scripts": { "build": "tsc --project tsconfig.typecheck.json" } }
+  - |
+    { "scripts": { "build": "tsc --project tsconfig.json --noEmit" } }
+  - |
+    { "scripts": { "build": "tsc -p tsconfig.build.json --noEmit" } }
+  - |
+    { "scripts": { "build": "echo tsc --project tsconfig.json" } }
+  - |
+    { "scripts": { "build": "tsc --project tsconfig.json.bak" } }
+  - |
+    { "scripts": { "nested": { "build": "tsc -p tsconfig.build.json" } } }
+  - |
+    { "other": { "scripts": { "build": "tsc --project tsconfig.json" } } }

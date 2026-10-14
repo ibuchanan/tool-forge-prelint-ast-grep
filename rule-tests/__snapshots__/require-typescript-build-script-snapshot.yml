@@ -1,0 +1,134 @@
+id: require-typescript-build-script
+snapshots:
+  ? |
+    { "name": "forge-app" }
+  : labels:
+    - source: '{ "name": "forge-app" }'
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  ? |
+    { "other": { "scripts": { "build": "tsc --project tsconfig.json" } } }
+  : labels:
+    - source: '{ "other": { "scripts": { "build": "tsc --project tsconfig.json" } } }'
+      style: primary
+      start: 0
+      end: 70
+    - source: |
+        { "other": { "scripts": { "build": "tsc --project tsconfig.json" } } }
+      style: secondary
+      start: 0
+      end: 71
+  ? |
+    { "scripts": { "build": "echo Not implemented" } }
+  : labels:
+    - source: '{ "scripts": { "build": "echo Not implemented" } }'
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        { "scripts": { "build": "echo Not implemented" } }
+      style: secondary
+      start: 0
+      end: 51
+  ? |
+    { "scripts": { "build": "echo tsc --project tsconfig.json" } }
+  : labels:
+    - source: '{ "scripts": { "build": "echo tsc --project tsconfig.json" } }'
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "scripts": { "build": "echo tsc --project tsconfig.json" } }
+      style: secondary
+      start: 0
+      end: 63
+  ? |
+    { "scripts": { "build": "tsc --project tsconfig.json --noEmit" } }
+  : labels:
+    - source: '{ "scripts": { "build": "tsc --project tsconfig.json --noEmit" } }'
+      style: primary
+      start: 0
+      end: 66
+    - source: |
+        { "scripts": { "build": "tsc --project tsconfig.json --noEmit" } }
+      style: secondary
+      start: 0
+      end: 67
+  ? |
+    { "scripts": { "build": "tsc --project tsconfig.json.bak" } }
+  : labels:
+    - source: '{ "scripts": { "build": "tsc --project tsconfig.json.bak" } }'
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        { "scripts": { "build": "tsc --project tsconfig.json.bak" } }
+      style: secondary
+      start: 0
+      end: 62
+  ? |
+    { "scripts": { "build": "tsc --project tsconfig.typecheck.json" } }
+  : labels:
+    - source: '{ "scripts": { "build": "tsc --project tsconfig.typecheck.json" } }'
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        { "scripts": { "build": "tsc --project tsconfig.typecheck.json" } }
+      style: secondary
+      start: 0
+      end: 68
+  ? |
+    { "scripts": { "build": "tsc -p tsconfig.build.json --noEmit" } }
+  : labels:
+    - source: '{ "scripts": { "build": "tsc -p tsconfig.build.json --noEmit" } }'
+      style: primary
+      start: 0
+      end: 65
+    - source: |
+        { "scripts": { "build": "tsc -p tsconfig.build.json --noEmit" } }
+      style: secondary
+      start: 0
+      end: 66
+  ? |
+    { "scripts": { "build": "tsc" } }
+  : labels:
+    - source: '{ "scripts": { "build": "tsc" } }'
+      style: primary
+      start: 0
+      end: 33
+    - source: |
+        { "scripts": { "build": "tsc" } }
+      style: secondary
+      start: 0
+      end: 34
+  ? |
+    { "scripts": { "nested": { "build": "tsc -p tsconfig.build.json" } } }
+  : labels:
+    - source: '{ "scripts": { "nested": { "build": "tsc -p tsconfig.build.json" } } }'
+      style: primary
+      start: 0
+      end: 70
+    - source: |
+        { "scripts": { "nested": { "build": "tsc -p tsconfig.build.json" } } }
+      style: secondary
+      start: 0
+      end: 71
+  ? |
+    { "scripts": { "size:check": "npm run build && size-limit" } }
+  : labels:
+    - source: '{ "scripts": { "size:check": "npm run build && size-limit" } }'
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "scripts": { "size:check": "npm run build && size-limit" } }
+      style: secondary
+      start: 0
+      end: 63
