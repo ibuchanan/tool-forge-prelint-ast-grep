@@ -1,0 +1,46 @@
+id: require-lefthook-pre-push-size
+language: Yaml
+severity: warning
+message: >
+  Run `size:check` from a pre-push command in lefthook.yml to guard bundle size.
+note: >
+  Drop Calf's Forge-app pre-push hook invokes size:check, which builds before
+  measuring the bundle. A command named size without a runnable size:check
+  invocation does not protect pushes. This rule checks lefthook.yml only; it
+  cannot verify that package.json defines size:check or that the command runs
+  without Lefthook filters. See require-size-check-script for the package script.
+  Lefthook configuration reference:
+  https://lefthook.dev/configuration/
+rule:
+  kind: block_mapping
+  inside:
+    kind: block_node
+    inside:
+      kind: document
+  not:
+    has:
+      kind: block_mapping_pair
+      regex: "^pre-push:"
+      has:
+        stopBy: end
+        kind: block_mapping_pair
+        regex: "^commands:"
+        has:
+          kind: block_node
+          has:
+            kind: block_mapping
+            has:
+              kind: block_mapping_pair
+              not:
+                regex: "^run:"
+              has:
+                kind: block_node
+                has:
+                  kind: block_mapping
+                  has:
+                    kind: block_mapping_pair
+                    regex: '^run:\s*(npm|bun|pnpm|yarn) run size:check(\s+--if-present)?\s*$'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/node_modules/**"

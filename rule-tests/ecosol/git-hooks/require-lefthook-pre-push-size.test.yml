@@ -1,0 +1,55 @@
+id: require-lefthook-pre-push-size
+valid:
+  - |
+    pre-push:
+      commands:
+        size:
+          run: npm run size:check --if-present
+  - |
+    pre-push:
+      parallel: true
+      commands:
+        budget:
+          run: bun run size:check
+        test:
+          run: npm run test
+invalid:
+  # A named command with no size check does not measure the bundle.
+  - |
+    pre-push:
+      commands:
+        size:
+          run: npm run build
+  # Merely naming a command size is insufficient.
+  - |
+    pre-push:
+      commands:
+        size:
+          skip: true
+  # A pre-commit size check does not guard pushes.
+  - |
+    pre-commit:
+      commands:
+        size:
+          run: npm run size:check
+    pre-push:
+      commands:
+        test:
+          run: npm run test
+  # A run key in another pre-push group is not a command.
+  - |
+    pre-push:
+      jobs:
+        - run: npm run size:check
+      commands:
+        test:
+          run: npm run test
+  - |
+    pre-push:
+      commands:
+        run: npm run size:check
+  - |
+    pre-commit:
+      commands:
+        test:
+          run: npm run test
