@@ -1,3 +1,23 @@
+## [0.7.0] - 2026-10-14
+
+### 🚀 Features
+
+- *(ecosol)* Require module package type for Forge apps
+- *(ecosol)* Typecheck Forge app tests
+- *(ecosol)* Guard bundle size before push
+- *(ecosol)* Require Lefthook prepare script
+- *(ecosol)* Require Vitest coverage script
+- *(ecosol)* Require non-watch Vitest test script
+- *(ecosol)* Require TypeScript build script
+
+### 🐛 Bug Fixes
+
+- *(ecosol)* Accept hard dist exclusions
+
+### ⚙️ Miscellaneous Tasks
+
+- *(tooling)* Align Forge lint rules with Drop Calf
+
 ## [0.6.2] - 2026-07-26
 
 ### 🐛 Bug Fixes
