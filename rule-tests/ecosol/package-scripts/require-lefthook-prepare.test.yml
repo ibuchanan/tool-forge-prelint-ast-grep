@@ -1,0 +1,56 @@
+id: require-lefthook-prepare
+valid:
+  # Drop Calf's Forge-app default.
+  - |
+    {
+      "scripts": {
+        "prepare": "lefthook install || true",
+        "test": "vitest run"
+      }
+    }
+  # A failing install can be intentional.
+  - |
+    {
+      "scripts": {
+        "prepare": "lefthook install"
+      }
+    }
+invalid:
+  - |
+    {
+      "scripts": {
+        "test": "vitest run"
+      }
+    }
+  - |
+    {
+      "name": "forge-app"
+    }
+  - |
+    {
+      "scripts": {
+        "prepare": "echo ready"
+      }
+    }
+  # A nested lookalike cannot install hooks for this package.
+  - |
+    {
+      "scripts": {
+        "test": "vitest run"
+      },
+      "other": {
+        "scripts": {
+          "prepare": "lefthook install || true"
+        }
+      }
+    }
+  # An unrelated property under scripts is not the prepare lifecycle script.
+  - |
+    {
+      "scripts": {
+        "test": "vitest run",
+        "nested": {
+          "prepare": "lefthook install"
+        }
+      }
+    }

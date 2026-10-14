@@ -1,0 +1,145 @@
+id: require-lefthook-prepare
+snapshots:
+  ? |
+    {
+      "name": "forge-app"
+    }
+  : labels:
+    - source: |-
+        {
+          "name": "forge-app"
+        }
+      style: primary
+      start: 0
+      end: 25
+    - source: |
+        {
+          "name": "forge-app"
+        }
+      style: secondary
+      start: 0
+      end: 26
+  ? |
+    {
+      "scripts": {
+        "prepare": "echo ready"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "prepare": "echo ready"
+          }
+        }
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        {
+          "scripts": {
+            "prepare": "echo ready"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 51
+  ? |
+    {
+      "scripts": {
+        "test": "vitest run"
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "test": "vitest run"
+          }
+        }
+      style: primary
+      start: 0
+      end: 47
+    - source: |
+        {
+          "scripts": {
+            "test": "vitest run"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 48
+  ? |
+    {
+      "scripts": {
+        "test": "vitest run"
+      },
+      "other": {
+        "scripts": {
+          "prepare": "lefthook install || true"
+        }
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "test": "vitest run"
+          },
+          "other": {
+            "scripts": {
+              "prepare": "lefthook install || true"
+            }
+          }
+        }
+      style: primary
+      start: 0
+      end: 132
+    - source: |
+        {
+          "scripts": {
+            "test": "vitest run"
+          },
+          "other": {
+            "scripts": {
+              "prepare": "lefthook install || true"
+            }
+          }
+        }
+      style: secondary
+      start: 0
+      end: 133
+  ? |
+    {
+      "scripts": {
+        "test": "vitest run",
+        "nested": {
+          "prepare": "lefthook install"
+        }
+      }
+    }
+  : labels:
+    - source: |-
+        {
+          "scripts": {
+            "test": "vitest run",
+            "nested": {
+              "prepare": "lefthook install"
+            }
+          }
+        }
+      style: primary
+      start: 0
+      end: 106
+    - source: |
+        {
+          "scripts": {
+            "test": "vitest run",
+            "nested": {
+              "prepare": "lefthook install"
+            }
+          }
+        }
+      style: secondary
+      start: 0
+      end: 107

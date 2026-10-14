@@ -1,0 +1,30 @@
+id: require-lefthook-prepare
+language: Json
+severity: warning
+message: >
+  Add a `prepare` script that runs `lefthook install` so Git hooks are set up on install.
+note: >
+  Drop Calf enforces `scripts.prepare: "lefthook install || true"` for Forge apps.
+  Accepting `lefthook install` without the fallback also supports repositories
+  that want installation failures to fail the package install. This checks the
+  script configuration, not whether hooks were installed; package managers can
+  skip lifecycle scripts. Scope this ecosol rule to Forge app package.json files.
+  Lefthook installation reference:
+  https://lefthook.dev/installation/
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        has:
+          kind: pair
+          regex: '^"prepare"\s*:\s*"lefthook install(\s*\|\|\s*true)?"$'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
