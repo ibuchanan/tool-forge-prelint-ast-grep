@@ -1,0 +1,31 @@
+id: require-vitest-run-script
+valid:
+  # Drop Calf's generated Forge-app command.
+  - |
+    { "scripts": { "test": "vitest run --passWithNoTests" } }
+  # The older Forge-app fixture runs the same non-watch command.
+  - |
+    { "scripts": { "test": "vitest run" } }
+  - |
+    { "scripts": { "test": "vitest run --reporter=verbose" } }
+invalid:
+  - |
+    { "name": "forge-app" }
+  - |
+    { "scripts": { "test:coverage": "vitest run --coverage" } }
+  - |
+    { "scripts": { "test": "vitest" } }
+  - |
+    { "scripts": { "test": "vitest watch" } }
+  - |
+    { "scripts": { "test": "echo vitest run" } }
+  - |
+    { "scripts": { "test": "vitest runner" } }
+  - |
+    { "scripts": { "test": "vitest run --watch" } }
+  - |
+    { "scripts": { "test": "vitest run -w" } }
+  - |
+    { "scripts": { "nested": { "test": "vitest run" } } }
+  - |
+    { "other": { "scripts": { "test": "vitest run" } } }

@@ -1,0 +1,33 @@
+id: require-vitest-run-script
+language: Json
+severity: warning
+message: >
+  Set `scripts.test` to `vitest run` so tests finish in hooks and CI.
+note: >
+  Drop Calf enforces `vitest run --passWithNoTests` for Forge apps. The older
+  Forge-app fixture uses `vitest run` without that optional flag. Bare `vitest`
+  and `vitest watch` can stay running rather than finish in a pre-push hook.
+  This checks the package.json script text, not whether the command succeeds.
+  Scope this ecosol rule to Forge app package.json files.
+  Vitest CLI reference:
+  https://vitest.dev/guide/cli.html
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        has:
+          all:
+            - kind: pair
+            - regex: '^"test"\s*:\s*"vitest run(?:\s|")'
+            - not:
+                regex: '\s(?:--watch(?:=true|\s+true)?|-w)(?:\s|")'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

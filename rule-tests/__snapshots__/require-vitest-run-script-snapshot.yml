@@ -1,0 +1,122 @@
+id: require-vitest-run-script
+snapshots:
+  ? |
+    { "name": "forge-app" }
+  : labels:
+    - source: '{ "name": "forge-app" }'
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  ? |
+    { "other": { "scripts": { "test": "vitest run" } } }
+  : labels:
+    - source: '{ "other": { "scripts": { "test": "vitest run" } } }'
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        { "other": { "scripts": { "test": "vitest run" } } }
+      style: secondary
+      start: 0
+      end: 53
+  ? |
+    { "scripts": { "nested": { "test": "vitest run" } } }
+  : labels:
+    - source: '{ "scripts": { "nested": { "test": "vitest run" } } }'
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        { "scripts": { "nested": { "test": "vitest run" } } }
+      style: secondary
+      start: 0
+      end: 54
+  ? |
+    { "scripts": { "test": "echo vitest run" } }
+  : labels:
+    - source: '{ "scripts": { "test": "echo vitest run" } }'
+      style: primary
+      start: 0
+      end: 44
+    - source: |
+        { "scripts": { "test": "echo vitest run" } }
+      style: secondary
+      start: 0
+      end: 45
+  ? |
+    { "scripts": { "test": "vitest run --watch" } }
+  : labels:
+    - source: '{ "scripts": { "test": "vitest run --watch" } }'
+      style: primary
+      start: 0
+      end: 47
+    - source: |
+        { "scripts": { "test": "vitest run --watch" } }
+      style: secondary
+      start: 0
+      end: 48
+  ? |
+    { "scripts": { "test": "vitest run -w" } }
+  : labels:
+    - source: '{ "scripts": { "test": "vitest run -w" } }'
+      style: primary
+      start: 0
+      end: 42
+    - source: |
+        { "scripts": { "test": "vitest run -w" } }
+      style: secondary
+      start: 0
+      end: 43
+  ? |
+    { "scripts": { "test": "vitest runner" } }
+  : labels:
+    - source: '{ "scripts": { "test": "vitest runner" } }'
+      style: primary
+      start: 0
+      end: 42
+    - source: |
+        { "scripts": { "test": "vitest runner" } }
+      style: secondary
+      start: 0
+      end: 43
+  ? |
+    { "scripts": { "test": "vitest watch" } }
+  : labels:
+    - source: '{ "scripts": { "test": "vitest watch" } }'
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        { "scripts": { "test": "vitest watch" } }
+      style: secondary
+      start: 0
+      end: 42
+  ? |
+    { "scripts": { "test": "vitest" } }
+  : labels:
+    - source: '{ "scripts": { "test": "vitest" } }'
+      style: primary
+      start: 0
+      end: 35
+    - source: |
+        { "scripts": { "test": "vitest" } }
+      style: secondary
+      start: 0
+      end: 36
+  ? |
+    { "scripts": { "test:coverage": "vitest run --coverage" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "vitest run --coverage" } }'
+      style: primary
+      start: 0
+      end: 59
+    - source: |
+        { "scripts": { "test:coverage": "vitest run --coverage" } }
+      style: secondary
+      start: 0
+      end: 60
