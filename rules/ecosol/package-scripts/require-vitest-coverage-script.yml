@@ -1,0 +1,34 @@
+id: require-vitest-coverage-script
+language: Json
+severity: warning
+message: >
+  Add a `test:coverage` script that runs `vitest run --coverage`.
+note: >
+  Drop Calf enforces a Vitest coverage script for Forge apps. Its generated
+  command also uses --passWithNoTests, but the coverage check does not require
+  that optional flag or its order. This checks package.json script text, not
+  whether Vitest's coverage provider is installed or the command succeeds.
+  Scope this ecosol rule to Forge app package.json files.
+  Vitest coverage reference:
+  https://vitest.dev/guide/coverage.html
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        has:
+          all:
+            - kind: pair
+            - regex: '^"test:coverage"\s*:\s*"vitest run\s'
+            - regex: '\s--coverage(?:\s|")'
+            - not:
+                regex: '\s--coverage(?:=false|\s+false)(?:\s|")'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

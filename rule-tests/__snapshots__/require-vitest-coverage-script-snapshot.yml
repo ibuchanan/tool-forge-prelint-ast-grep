@@ -1,0 +1,122 @@
+id: require-vitest-coverage-script
+snapshots:
+  ? |
+    { "name": "forge-app" }
+  : labels:
+    - source: '{ "name": "forge-app" }'
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  ? |
+    { "other": { "scripts": { "test:coverage": "vitest run --coverage" } } }
+  : labels:
+    - source: '{ "other": { "scripts": { "test:coverage": "vitest run --coverage" } } }'
+      style: primary
+      start: 0
+      end: 72
+    - source: |
+        { "other": { "scripts": { "test:coverage": "vitest run --coverage" } } }
+      style: secondary
+      start: 0
+      end: 73
+  ? |
+    { "scripts": { "nested": { "test:coverage": "vitest run --coverage" } } }
+  : labels:
+    - source: '{ "scripts": { "nested": { "test:coverage": "vitest run --coverage" } } }'
+      style: primary
+      start: 0
+      end: 73
+    - source: |
+        { "scripts": { "nested": { "test:coverage": "vitest run --coverage" } } }
+      style: secondary
+      start: 0
+      end: 74
+  ? |
+    { "scripts": { "test": "vitest run --coverage" } }
+  : labels:
+    - source: '{ "scripts": { "test": "vitest run --coverage" } }'
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        { "scripts": { "test": "vitest run --coverage" } }
+      style: secondary
+      start: 0
+      end: 51
+  ? |
+    { "scripts": { "test:coverage": "echo vitest run --coverage" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "echo vitest run --coverage" } }'
+      style: primary
+      start: 0
+      end: 64
+    - source: |
+        { "scripts": { "test:coverage": "echo vitest run --coverage" } }
+      style: secondary
+      start: 0
+      end: 65
+  ? |
+    { "scripts": { "test:coverage": "vitest run --coverage --coverage=false" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "vitest run --coverage --coverage=false" } }'
+      style: primary
+      start: 0
+      end: 76
+    - source: |
+        { "scripts": { "test:coverage": "vitest run --coverage --coverage=false" } }
+      style: secondary
+      start: 0
+      end: 77
+  ? |
+    { "scripts": { "test:coverage": "vitest run --coverage=false" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "vitest run --coverage=false" } }'
+      style: primary
+      start: 0
+      end: 65
+    - source: |
+        { "scripts": { "test:coverage": "vitest run --coverage=false" } }
+      style: secondary
+      start: 0
+      end: 66
+  ? |
+    { "scripts": { "test:coverage": "vitest run --coverageDetails" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "vitest run --coverageDetails" } }'
+      style: primary
+      start: 0
+      end: 66
+    - source: |
+        { "scripts": { "test:coverage": "vitest run --coverageDetails" } }
+      style: secondary
+      start: 0
+      end: 67
+  ? |
+    { "scripts": { "test:coverage": "vitest run --passWithNoTests" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "vitest run --passWithNoTests" } }'
+      style: primary
+      start: 0
+      end: 66
+    - source: |
+        { "scripts": { "test:coverage": "vitest run --passWithNoTests" } }
+      style: secondary
+      start: 0
+      end: 67
+  ? |
+    { "scripts": { "test:coverage": "vitest watch --coverage" } }
+  : labels:
+    - source: '{ "scripts": { "test:coverage": "vitest watch --coverage" } }'
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        { "scripts": { "test:coverage": "vitest watch --coverage" } }
+      style: secondary
+      start: 0
+      end: 62

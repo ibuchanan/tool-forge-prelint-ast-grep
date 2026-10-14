@@ -1,0 +1,32 @@
+id: require-vitest-coverage-script
+valid:
+  # Drop Calf's generated Forge-app script.
+  - |
+    { "scripts": { "test:coverage": "vitest run --coverage --passWithNoTests" } }
+  # Existing Forge apps can run coverage without the no-tests flag.
+  - |
+    { "scripts": { "test:coverage": "vitest run --coverage" } }
+  - |
+    { "scripts": { "test:coverage": "vitest run --passWithNoTests --coverage --reporter=verbose" } }
+invalid:
+  - |
+    { "scripts": { "test": "vitest run --coverage" } }
+  - |
+    { "name": "forge-app" }
+  - |
+    { "scripts": { "test:coverage": "vitest run --passWithNoTests" } }
+  - |
+    { "scripts": { "test:coverage": "vitest watch --coverage" } }
+  - |
+    { "scripts": { "test:coverage": "echo vitest run --coverage" } }
+  - |
+    { "scripts": { "test:coverage": "vitest run --coverage=false" } }
+  - |
+    { "scripts": { "test:coverage": "vitest run --coverage --coverage=false" } }
+  - |
+    { "scripts": { "test:coverage": "vitest run --coverageDetails" } }
+  # A nested lookalike does not define a package script.
+  - |
+    { "scripts": { "nested": { "test:coverage": "vitest run --coverage" } } }
+  - |
+    { "other": { "scripts": { "test:coverage": "vitest run --coverage" } } }
