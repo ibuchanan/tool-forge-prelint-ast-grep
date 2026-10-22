@@ -1,0 +1,157 @@
+id: use-fence-rider-for-forge-lint
+snapshots:
+  "{\"scripts\": {\"lint\": \"bash scripts/env-var.sh 'forge lint'\"}}\n":
+    labels:
+    - source: "\"lint\": \"bash scripts/env-var.sh 'forge lint'\""
+      style: primary
+      start: 13
+      end: 59
+    - source: |
+        {"scripts": {"lint": "bash scripts/env-var.sh 'forge lint'"}}
+      style: secondary
+      start: 0
+      end: 62
+    - source: "{\"scripts\": {\"lint\": \"bash scripts/env-var.sh 'forge lint'\"}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint\": \"bash scripts/env-var.sh 'forge lint'\"}"
+      style: secondary
+      start: 1
+      end: 60
+    - source: "{\"lint\": \"bash scripts/env-var.sh 'forge lint'\"}"
+      style: secondary
+      start: 12
+      end: 60
+    - source: "\"bash scripts/env-var.sh 'forge lint'\""
+      style: secondary
+      start: 21
+      end: 59
+  "{\"scripts\": {\"lint\": \"cmd=$(fence-rider lint) && sh -c \\\"$cmd\\\" sh && forge lint\"}}\n":
+    labels:
+    - source: "\"lint\": \"cmd=$(fence-rider lint) && sh -c \\\"$cmd\\\" sh && forge lint\""
+      style: primary
+      start: 13
+      end: 81
+    - source: |
+        {"scripts": {"lint": "cmd=$(fence-rider lint) && sh -c \"$cmd\" sh && forge lint"}}
+      style: secondary
+      start: 0
+      end: 84
+    - source: "{\"scripts\": {\"lint\": \"cmd=$(fence-rider lint) && sh -c \\\"$cmd\\\" sh && forge lint\"}}"
+      style: secondary
+      start: 0
+      end: 83
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint\": \"cmd=$(fence-rider lint) && sh -c \\\"$cmd\\\" sh && forge lint\"}"
+      style: secondary
+      start: 1
+      end: 82
+    - source: "{\"lint\": \"cmd=$(fence-rider lint) && sh -c \\\"$cmd\\\" sh && forge lint\"}"
+      style: secondary
+      start: 12
+      end: 82
+    - source: "\"cmd=$(fence-rider lint) && sh -c \\\"$cmd\\\" sh && forge lint\""
+      style: secondary
+      start: 21
+      end: 81
+  "{\"scripts\": {\"lint\": \"npm run lint:check && forge   lint --verbose\"}}\n":
+    labels:
+    - source: "\"lint\": \"npm run lint:check && forge   lint --verbose\""
+      style: primary
+      start: 13
+      end: 67
+    - source: |
+        {"scripts": {"lint": "npm run lint:check && forge   lint --verbose"}}
+      style: secondary
+      start: 0
+      end: 70
+    - source: "{\"scripts\": {\"lint\": \"npm run lint:check && forge   lint --verbose\"}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint\": \"npm run lint:check && forge   lint --verbose\"}"
+      style: secondary
+      start: 1
+      end: 68
+    - source: "{\"lint\": \"npm run lint:check && forge   lint --verbose\"}"
+      style: secondary
+      start: 12
+      end: 68
+    - source: "\"npm run lint:check && forge   lint --verbose\""
+      style: secondary
+      start: 21
+      end: 67
+  "{\"scripts\": {\"lint\": \"secretspec run -- forge lint\"}}\n":
+    labels:
+    - source: "\"lint\": \"secretspec run -- forge lint\""
+      style: primary
+      start: 13
+      end: 51
+    - source: |
+        {"scripts": {"lint": "secretspec run -- forge lint"}}
+      style: secondary
+      start: 0
+      end: 54
+    - source: "{\"scripts\": {\"lint\": \"secretspec run -- forge lint\"}}"
+      style: secondary
+      start: 0
+      end: 53
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint\": \"secretspec run -- forge lint\"}"
+      style: secondary
+      start: 1
+      end: 52
+    - source: "{\"lint\": \"secretspec run -- forge lint\"}"
+      style: secondary
+      start: 12
+      end: 52
+    - source: "\"secretspec run -- forge lint\""
+      style: secondary
+      start: 21
+      end: 51
+  "{\"scripts\": {\"lint:forge\": \"forge lint\"}}\n":
+    labels:
+    - source: "\"lint:forge\": \"forge lint\""
+      style: primary
+      start: 13
+      end: 39
+    - source: |
+        {"scripts": {"lint:forge": "forge lint"}}
+      style: secondary
+      start: 0
+      end: 42
+    - source: "{\"scripts\": {\"lint:forge\": \"forge lint\"}}"
+      style: secondary
+      start: 0
+      end: 41
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint:forge\": \"forge lint\"}"
+      style: secondary
+      start: 1
+      end: 40
+    - source: "{\"lint:forge\": \"forge lint\"}"
+      style: secondary
+      start: 12
+      end: 40
+    - source: "\"forge lint\""
+      style: secondary
+      start: 27
+      end: 39

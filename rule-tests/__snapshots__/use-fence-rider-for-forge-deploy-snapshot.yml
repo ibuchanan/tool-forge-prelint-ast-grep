@@ -1,0 +1,157 @@
+id: use-fence-rider-for-forge-deploy
+snapshots:
+  "{\"scripts\": {\"deploy\": \"bash scripts/env-var.sh 'forge deploy --non-interactive'\"}}\n":
+    labels:
+    - source: "\"deploy\": \"bash scripts/env-var.sh 'forge deploy --non-interactive'\""
+      style: primary
+      start: 13
+      end: 81
+    - source: |
+        {"scripts": {"deploy": "bash scripts/env-var.sh 'forge deploy --non-interactive'"}}
+      style: secondary
+      start: 0
+      end: 84
+    - source: "{\"scripts\": {\"deploy\": \"bash scripts/env-var.sh 'forge deploy --non-interactive'\"}}"
+      style: secondary
+      start: 0
+      end: 83
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"bash scripts/env-var.sh 'forge deploy --non-interactive'\"}"
+      style: secondary
+      start: 1
+      end: 82
+    - source: "{\"deploy\": \"bash scripts/env-var.sh 'forge deploy --non-interactive'\"}"
+      style: secondary
+      start: 12
+      end: 82
+    - source: "\"bash scripts/env-var.sh 'forge deploy --non-interactive'\""
+      style: secondary
+      start: 23
+      end: 81
+  "{\"scripts\": {\"deploy\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh && forge deploy\"}}\n":
+    labels:
+    - source: "\"deploy\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh && forge deploy\""
+      style: primary
+      start: 13
+      end: 87
+    - source: |
+        {"scripts": {"deploy": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh && forge deploy"}}
+      style: secondary
+      start: 0
+      end: 90
+    - source: "{\"scripts\": {\"deploy\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh && forge deploy\"}}"
+      style: secondary
+      start: 0
+      end: 89
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh && forge deploy\"}"
+      style: secondary
+      start: 1
+      end: 88
+    - source: "{\"deploy\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh && forge deploy\"}"
+      style: secondary
+      start: 12
+      end: 88
+    - source: "\"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh && forge deploy\""
+      style: secondary
+      start: 23
+      end: 87
+  "{\"scripts\": {\"deploy\": \"npm run build && forge   deploy --non-interactive\"}}\n":
+    labels:
+    - source: "\"deploy\": \"npm run build && forge   deploy --non-interactive\""
+      style: primary
+      start: 13
+      end: 74
+    - source: |
+        {"scripts": {"deploy": "npm run build && forge   deploy --non-interactive"}}
+      style: secondary
+      start: 0
+      end: 77
+    - source: "{\"scripts\": {\"deploy\": \"npm run build && forge   deploy --non-interactive\"}}"
+      style: secondary
+      start: 0
+      end: 76
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"npm run build && forge   deploy --non-interactive\"}"
+      style: secondary
+      start: 1
+      end: 75
+    - source: "{\"deploy\": \"npm run build && forge   deploy --non-interactive\"}"
+      style: secondary
+      start: 12
+      end: 75
+    - source: "\"npm run build && forge   deploy --non-interactive\""
+      style: secondary
+      start: 23
+      end: 74
+  "{\"scripts\": {\"deploy\": \"secretspec run -- forge deploy\"}}\n":
+    labels:
+    - source: "\"deploy\": \"secretspec run -- forge deploy\""
+      style: primary
+      start: 13
+      end: 55
+    - source: |
+        {"scripts": {"deploy": "secretspec run -- forge deploy"}}
+      style: secondary
+      start: 0
+      end: 58
+    - source: "{\"scripts\": {\"deploy\": \"secretspec run -- forge deploy\"}}"
+      style: secondary
+      start: 0
+      end: 57
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"secretspec run -- forge deploy\"}"
+      style: secondary
+      start: 1
+      end: 56
+    - source: "{\"deploy\": \"secretspec run -- forge deploy\"}"
+      style: secondary
+      start: 12
+      end: 56
+    - source: "\"secretspec run -- forge deploy\""
+      style: secondary
+      start: 23
+      end: 55
+  "{\"scripts\": {\"forge:deploy\": \"forge deploy\"}}\n":
+    labels:
+    - source: "\"forge:deploy\": \"forge deploy\""
+      style: primary
+      start: 13
+      end: 43
+    - source: |
+        {"scripts": {"forge:deploy": "forge deploy"}}
+      style: secondary
+      start: 0
+      end: 46
+    - source: "{\"scripts\": {\"forge:deploy\": \"forge deploy\"}}"
+      style: secondary
+      start: 0
+      end: 45
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:deploy\": \"forge deploy\"}"
+      style: secondary
+      start: 1
+      end: 44
+    - source: "{\"forge:deploy\": \"forge deploy\"}"
+      style: secondary
+      start: 12
+      end: 44
+    - source: "\"forge deploy\""
+      style: secondary
+      start: 29
+      end: 43

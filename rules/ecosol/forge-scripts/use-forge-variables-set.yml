@@ -7,8 +7,8 @@ message: >
 note: >
   A `forge:` namespace keeps Forge CLI wrapper scripts
   discoverable by a predictable name.
-  Recommended to use with `use-secretspec-for-forge-commands`:
-  "forge:variables:set": "node scripts/forge-vars-from-secretspec.js",
+  This rule checks naming only, not the upload implementation.
+  Configuration-resolution conventions live in the `secrets` category.
   This rule assumes package.json belongs to a Forge app: in a monorepo, a
   workspace root or an internal shared library's package.json will also
   match — even one that imports @forge packages without being deployable

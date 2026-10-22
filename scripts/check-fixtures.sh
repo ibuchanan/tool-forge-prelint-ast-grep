@@ -14,8 +14,8 @@ fi
 
 echo "$FIXTURE_DIR produced zero ecosol findings, as expected."
 
-# Drop Calf's default forge-app output is generated separately. Its SecretSpec
-# wrapper findings are unresolved; check only the Biome contract here.
+# Drop Calf's default forge-app output is generated separately. Its Fence Rider
+# migration findings are unresolved; check only the Biome contract here.
 DROP_CALF_BIOME="fixtures/drop-calf-forge-app/biome.jsonc"
 if [ ! -f "$DROP_CALF_BIOME" ]; then
   echo "Missing Drop Calf fixture: $DROP_CALF_BIOME" >&2

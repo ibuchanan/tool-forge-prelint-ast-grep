@@ -30,3 +30,4 @@ ruleDirs:
   - rules/ecosol/typescript
   - rules/ecosol/package-scripts
   - rules/ecosol/forge-scripts
+  - rules/ecosol/secrets

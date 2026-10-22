@@ -1,0 +1,157 @@
+id: use-fence-rider-for-forge-uninstall
+snapshots:
+  "{\"scripts\": {\"forge:uninstall\": \"forge uninstall\"}}\n":
+    labels:
+    - source: "\"forge:uninstall\": \"forge uninstall\""
+      style: primary
+      start: 13
+      end: 49
+    - source: |
+        {"scripts": {"forge:uninstall": "forge uninstall"}}
+      style: secondary
+      start: 0
+      end: 52
+    - source: "{\"scripts\": {\"forge:uninstall\": \"forge uninstall\"}}"
+      style: secondary
+      start: 0
+      end: 51
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:uninstall\": \"forge uninstall\"}"
+      style: secondary
+      start: 1
+      end: 50
+    - source: "{\"forge:uninstall\": \"forge uninstall\"}"
+      style: secondary
+      start: 12
+      end: 50
+    - source: "\"forge uninstall\""
+      style: secondary
+      start: 32
+      end: 49
+  "{\"scripts\": {\"uninstall\": \"bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'\"}}\n":
+    labels:
+    - source: "\"uninstall\": \"bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'\""
+      style: primary
+      start: 13
+      end: 98
+    - source: |
+        {"scripts": {"uninstall": "bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'"}}
+      style: secondary
+      start: 0
+      end: 101
+    - source: "{\"scripts\": {\"uninstall\": \"bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'\"}}"
+      style: secondary
+      start: 0
+      end: 100
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"uninstall\": \"bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'\"}"
+      style: secondary
+      start: 1
+      end: 99
+    - source: "{\"uninstall\": \"bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'\"}"
+      style: secondary
+      start: 12
+      end: 99
+    - source: "\"bash scripts/env-var.sh 'forge uninstall --site example.atlassian.net'\""
+      style: secondary
+      start: 26
+      end: 98
+  "{\"scripts\": {\"uninstall\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh && forge uninstall\"}}\n":
+    labels:
+    - source: "\"uninstall\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh && forge uninstall\""
+      style: primary
+      start: 13
+      end: 96
+    - source: |
+        {"scripts": {"uninstall": "cmd=$(fence-rider uninstall) && sh -c \"$cmd\" sh && forge uninstall"}}
+      style: secondary
+      start: 0
+      end: 99
+    - source: "{\"scripts\": {\"uninstall\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh && forge uninstall\"}}"
+      style: secondary
+      start: 0
+      end: 98
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"uninstall\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh && forge uninstall\"}"
+      style: secondary
+      start: 1
+      end: 97
+    - source: "{\"uninstall\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh && forge uninstall\"}"
+      style: secondary
+      start: 12
+      end: 97
+    - source: "\"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh && forge uninstall\""
+      style: secondary
+      start: 26
+      end: 96
+  "{\"scripts\": {\"uninstall\": \"npm run check; forge   uninstall --product jira\"}}\n":
+    labels:
+    - source: "\"uninstall\": \"npm run check; forge   uninstall --product jira\""
+      style: primary
+      start: 13
+      end: 75
+    - source: |
+        {"scripts": {"uninstall": "npm run check; forge   uninstall --product jira"}}
+      style: secondary
+      start: 0
+      end: 78
+    - source: "{\"scripts\": {\"uninstall\": \"npm run check; forge   uninstall --product jira\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"uninstall\": \"npm run check; forge   uninstall --product jira\"}"
+      style: secondary
+      start: 1
+      end: 76
+    - source: "{\"uninstall\": \"npm run check; forge   uninstall --product jira\"}"
+      style: secondary
+      start: 12
+      end: 76
+    - source: "\"npm run check; forge   uninstall --product jira\""
+      style: secondary
+      start: 26
+      end: 75
+  "{\"scripts\": {\"uninstall\": \"secretspec run -- forge uninstall\"}}\n":
+    labels:
+    - source: "\"uninstall\": \"secretspec run -- forge uninstall\""
+      style: primary
+      start: 13
+      end: 61
+    - source: |
+        {"scripts": {"uninstall": "secretspec run -- forge uninstall"}}
+      style: secondary
+      start: 0
+      end: 64
+    - source: "{\"scripts\": {\"uninstall\": \"secretspec run -- forge uninstall\"}}"
+      style: secondary
+      start: 0
+      end: 63
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"uninstall\": \"secretspec run -- forge uninstall\"}"
+      style: secondary
+      start: 1
+      end: 62
+    - source: "{\"uninstall\": \"secretspec run -- forge uninstall\"}"
+      style: secondary
+      start: 12
+      end: 62
+    - source: "\"secretspec run -- forge uninstall\""
+      style: secondary
+      start: 26
+      end: 61

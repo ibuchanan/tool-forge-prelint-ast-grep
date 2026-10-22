@@ -51,7 +51,7 @@ dagger call -m ./vendor/ranch-rig-drop-calf init-changes \
 
 Remove the empty input directory afterward. `npm run test:fixtures` checks the
 generated Biome hard exclusion, but does not require the whole snapshot to be
-finding-free: the four SecretSpec-wrapper findings are deferred. Review a full
+finding-free: the Fence Rider migration findings are deferred. Review a full
 `ast-grep scan --config sgconfig.ecosol.yml fixtures/drop-calf-forge-app` when
 refreshing it. The snapshot is excluded from Prettier to preserve generator
 output exactly.

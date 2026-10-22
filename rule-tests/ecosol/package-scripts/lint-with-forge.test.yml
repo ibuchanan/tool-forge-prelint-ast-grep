@@ -6,7 +6,21 @@ valid:
         "lint:forge": "forge lint"
       }
     }
+  - |
+    {"scripts": {"lint:forge": "cmd=$(fence-rider lint) && sh -c \"$cmd\" sh"}}
+  - |
+    {"scripts": {"lint:forge": "secretspec run -- forge lint --verbose"}}
 invalid:
+  # The named script must still contain a recognizable lint command.
+  - |
+    {"scripts": {"lint:forge": "echo ready"}}
+  - |
+    {"scripts": {"lint:forge": "my-forge lint && fence-rider linting"}}
+  # Unrelated metadata cannot satisfy the script requirement.
+  - |
+    {"lint:forge": "forge lint", "scripts": {"build": "tsc"}}
+  - |
+    {"config": {"scripts": {"lint:forge": "fence-rider lint"}}}
   # Missing entirely
   - |
     {

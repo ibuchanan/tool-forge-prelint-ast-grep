@@ -1,13 +1,8 @@
 id: lint-with-forge
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -18,17 +13,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "forge lint"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"lint\": \"forge lint\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -39,14 +26,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/events": "^3.0.0"
-      }
-    }
-  : labels:
-    - source: '@forge/events'
+  "{\n  \"dependencies\": {\n    \"@forge/events\": \"^3.0.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/events"
       style: primary
       start: 27
       end: 40
@@ -57,13 +39,8 @@ snapshots:
       style: secondary
       start: 4
       end: 55
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -82,13 +59,8 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "lint": "forge lint"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"lint\": \"forge lint\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -107,3 +79,47 @@ snapshots:
       style: secondary
       start: 0
       end: 48
+  "{\"config\": {\"scripts\": {\"lint:forge\": \"fence-rider lint\"}}}\n":
+    labels:
+    - source: "{\"config\": {\"scripts\": {\"lint:forge\": \"fence-rider lint\"}}}"
+      style: primary
+      start: 0
+      end: 59
+    - source: |
+        {"config": {"scripts": {"lint:forge": "fence-rider lint"}}}
+      style: secondary
+      start: 0
+      end: 60
+  "{\"lint:forge\": \"forge lint\", \"scripts\": {\"build\": \"tsc\"}}\n":
+    labels:
+    - source: "{\"lint:forge\": \"forge lint\", \"scripts\": {\"build\": \"tsc\"}}"
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        {"lint:forge": "forge lint", "scripts": {"build": "tsc"}}
+      style: secondary
+      start: 0
+      end: 58
+  "{\"scripts\": {\"lint:forge\": \"echo ready\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"lint:forge\": \"echo ready\"}}"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {"scripts": {"lint:forge": "echo ready"}}
+      style: secondary
+      start: 0
+      end: 42
+  "{\"scripts\": {\"lint:forge\": \"my-forge lint && fence-rider linting\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"lint:forge\": \"my-forge lint && fence-rider linting\"}}"
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        {"scripts": {"lint:forge": "my-forge lint && fence-rider linting"}}
+      style: secondary
+      start: 0
+      end: 68

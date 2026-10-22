@@ -30,7 +30,7 @@
     "todo": "grep -rn 'TODO' --exclude='package.json' . --color=auto || echo 'No TODOs found!'"
   },
   "devDependencies": {
-    "@ast-grep/cli": "^0.50",
+    "@ast-grep/cli": "^0.51",
     "lefthook": "^2.2",
     "prettier": "^3.9"
   }

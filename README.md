@@ -213,10 +213,10 @@ unredacted output can inflate log volume or leak sensitive data. _(ecosol)_
 
 ### forge-scripts
 
-Naming and wrapping conventions for scripts that call the Forge CLI directly
-(`forge deploy`, `install`, `uninstall`, `register`, ...) — a `forge:<verb>`
-namespace so wrapper scripts are discoverable by a predictable name, and
-consistent secret/environment handling around those commands. _(ecosol)_
+Naming conventions for Forge CLI wrapper scripts — a `forge:<verb>` namespace
+so scripts are discoverable regardless of whether they call Forge directly or
+through a tool such as Fence Rider. Secret/configuration handling belongs in
+`secrets`, not in the script-naming category. _(ecosol)_
 
 ### frontend-ui
 
@@ -289,7 +289,32 @@ _(strict)_
 Enforces the frontend/backend module boundary in both directions, so bundling
 and Forge runtime assumptions aren't violated by a stray import. _(strict)_
 
+### secrets
+
+Secret and configuration declaration, resolution, scoping, and delivery,
+including SecretSpec and Fence Rider integration conventions. This category
+covers local, manifest, and runtime configuration, not only confidential values.
+The ecosol rules recommend Fence Rider for package scripts containing literal
+`forge install` (including upgrades), `forge uninstall`, `forge lint`, or
+`forge deploy` commands. They replace `use-secretspec-for-forge-commands` and do
+not cover tunnel. Generate and execute the Fence Rider script; generation alone
+does not run Forge. These are workflow conventions, not proof of credential
+isolation: the whole profile is resolved and Forge output is not redacted.
+The checks inspect command text, not arbitrary shell semantics or external helpers.
+
+Rules live under `rules/ecosol/secrets/`, with matching tests under
+`rule-tests/ecosol/secrets/`. The rationale follows
+[OWASP's guidance to minimize sensitive data in agent context](https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html#8-data-protection-privacy):
+a command can need credentials without a coding agent needing to inspect their values.
+
+Script names remain in `forge-scripts`. Credential exposure and unsafe behavior,
+such as hardcoded tokens, sensitive logging, and insecure transport, belong in
+`security` rather than `secrets`.
+
 ### security
+
+Exposure and unsafe-behavior checks, rather than secret-management workflow
+conventions:
 
 - **recommended** — manifest-level security: no wildcard egress, no unsafe
   Custom UI CSP entries.

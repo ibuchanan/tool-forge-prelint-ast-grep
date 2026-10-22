@@ -6,8 +6,8 @@ message: >
 note: >
   A `forge:` namespace keeps Forge CLI wrapper scripts
   discoverable by a predictable name.
-  Recommended to use with `use-secretspec-for-forge-commands`:
-  "forge:uninstall": "secretspec run --provider dotenv --reason \"npm run forge:uninstall\" -- sh -c 'forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\"'",
+  Pair this naming convention with `use-fence-rider-for-forge-uninstall`
+  for the ecosol configuration-resolution workflow.
   This rule assumes package.json belongs to a Forge app: in a monorepo, a
   workspace root or an internal shared library's package.json will also
   match — even one that imports @forge packages without being deployable

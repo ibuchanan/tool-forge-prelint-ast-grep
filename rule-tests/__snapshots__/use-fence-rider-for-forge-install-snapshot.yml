@@ -1,0 +1,219 @@
+id: use-fence-rider-for-forge-install
+snapshots:
+  "{\"scripts\": {\"forge:install\": \"forge install\"}}\n":
+    labels:
+    - source: "\"forge:install\": \"forge install\""
+      style: primary
+      start: 13
+      end: 45
+    - source: |
+        {"scripts": {"forge:install": "forge install"}}
+      style: secondary
+      start: 0
+      end: 48
+    - source: "{\"scripts\": {\"forge:install\": \"forge install\"}}"
+      style: secondary
+      start: 0
+      end: 47
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:install\": \"forge install\"}"
+      style: secondary
+      start: 1
+      end: 46
+    - source: "{\"forge:install\": \"forge install\"}"
+      style: secondary
+      start: 12
+      end: 46
+    - source: "\"forge install\""
+      style: secondary
+      start: 30
+      end: 45
+  "{\"scripts\": {\"forge:upgrade\": \"forge install --upgrade --non-interactive\"}}\n":
+    labels:
+    - source: "\"forge:upgrade\": \"forge install --upgrade --non-interactive\""
+      style: primary
+      start: 13
+      end: 73
+    - source: |
+        {"scripts": {"forge:upgrade": "forge install --upgrade --non-interactive"}}
+      style: secondary
+      start: 0
+      end: 76
+    - source: "{\"scripts\": {\"forge:upgrade\": \"forge install --upgrade --non-interactive\"}}"
+      style: secondary
+      start: 0
+      end: 75
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:upgrade\": \"forge install --upgrade --non-interactive\"}"
+      style: secondary
+      start: 1
+      end: 74
+    - source: "{\"forge:upgrade\": \"forge install --upgrade --non-interactive\"}"
+      style: secondary
+      start: 12
+      end: 74
+    - source: "\"forge install --upgrade --non-interactive\""
+      style: secondary
+      start: 30
+      end: 73
+  "{\"scripts\": {\"forge:upgrade\": \"forge install -u\"}}\n":
+    labels:
+    - source: "\"forge:upgrade\": \"forge install -u\""
+      style: primary
+      start: 13
+      end: 48
+    - source: |
+        {"scripts": {"forge:upgrade": "forge install -u"}}
+      style: secondary
+      start: 0
+      end: 51
+    - source: "{\"scripts\": {\"forge:upgrade\": \"forge install -u\"}}"
+      style: secondary
+      start: 0
+      end: 50
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:upgrade\": \"forge install -u\"}"
+      style: secondary
+      start: 1
+      end: 49
+    - source: "{\"forge:upgrade\": \"forge install -u\"}"
+      style: secondary
+      start: 12
+      end: 49
+    - source: "\"forge install -u\""
+      style: secondary
+      start: 30
+      end: 48
+  "{\"scripts\": {\"install\": \"bash scripts/env-var.sh 'forge install --site example.atlassian.net'\"}}\n":
+    labels:
+    - source: "\"install\": \"bash scripts/env-var.sh 'forge install --site example.atlassian.net'\""
+      style: primary
+      start: 13
+      end: 94
+    - source: |
+        {"scripts": {"install": "bash scripts/env-var.sh 'forge install --site example.atlassian.net'"}}
+      style: secondary
+      start: 0
+      end: 97
+    - source: "{\"scripts\": {\"install\": \"bash scripts/env-var.sh 'forge install --site example.atlassian.net'\"}}"
+      style: secondary
+      start: 0
+      end: 96
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"install\": \"bash scripts/env-var.sh 'forge install --site example.atlassian.net'\"}"
+      style: secondary
+      start: 1
+      end: 95
+    - source: "{\"install\": \"bash scripts/env-var.sh 'forge install --site example.atlassian.net'\"}"
+      style: secondary
+      start: 12
+      end: 95
+    - source: "\"bash scripts/env-var.sh 'forge install --site example.atlassian.net'\""
+      style: secondary
+      start: 24
+      end: 94
+  "{\"scripts\": {\"install\": \"cmd=$(fence-rider install) && sh -c \\\"$cmd\\\" sh && forge install\"}}\n":
+    labels:
+    - source: "\"install\": \"cmd=$(fence-rider install) && sh -c \\\"$cmd\\\" sh && forge install\""
+      style: primary
+      start: 13
+      end: 90
+    - source: |
+        {"scripts": {"install": "cmd=$(fence-rider install) && sh -c \"$cmd\" sh && forge install"}}
+      style: secondary
+      start: 0
+      end: 93
+    - source: "{\"scripts\": {\"install\": \"cmd=$(fence-rider install) && sh -c \\\"$cmd\\\" sh && forge install\"}}"
+      style: secondary
+      start: 0
+      end: 92
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"install\": \"cmd=$(fence-rider install) && sh -c \\\"$cmd\\\" sh && forge install\"}"
+      style: secondary
+      start: 1
+      end: 91
+    - source: "{\"install\": \"cmd=$(fence-rider install) && sh -c \\\"$cmd\\\" sh && forge install\"}"
+      style: secondary
+      start: 12
+      end: 91
+    - source: "\"cmd=$(fence-rider install) && sh -c \\\"$cmd\\\" sh && forge install\""
+      style: secondary
+      start: 24
+      end: 90
+  "{\"scripts\": {\"install\": \"npm run build && forge   install --non-interactive\"}}\n":
+    labels:
+    - source: "\"install\": \"npm run build && forge   install --non-interactive\""
+      style: primary
+      start: 13
+      end: 76
+    - source: |
+        {"scripts": {"install": "npm run build && forge   install --non-interactive"}}
+      style: secondary
+      start: 0
+      end: 79
+    - source: "{\"scripts\": {\"install\": \"npm run build && forge   install --non-interactive\"}}"
+      style: secondary
+      start: 0
+      end: 78
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"install\": \"npm run build && forge   install --non-interactive\"}"
+      style: secondary
+      start: 1
+      end: 77
+    - source: "{\"install\": \"npm run build && forge   install --non-interactive\"}"
+      style: secondary
+      start: 12
+      end: 77
+    - source: "\"npm run build && forge   install --non-interactive\""
+      style: secondary
+      start: 24
+      end: 76
+  "{\"scripts\": {\"install\": \"secretspec run -- forge install\"}}\n":
+    labels:
+    - source: "\"install\": \"secretspec run -- forge install\""
+      style: primary
+      start: 13
+      end: 57
+    - source: |
+        {"scripts": {"install": "secretspec run -- forge install"}}
+      style: secondary
+      start: 0
+      end: 60
+    - source: "{\"scripts\": {\"install\": \"secretspec run -- forge install\"}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"install\": \"secretspec run -- forge install\"}"
+      style: secondary
+      start: 1
+      end: 58
+    - source: "{\"install\": \"secretspec run -- forge install\"}"
+      style: secondary
+      start: 12
+      end: 58
+    - source: "\"secretspec run -- forge install\""
+      style: secondary
+      start: 24
+      end: 57
