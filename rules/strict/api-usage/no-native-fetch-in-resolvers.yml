@@ -19,15 +19,19 @@ rule:
       - pattern: api.asUser().fetch($$$)
       - pattern: api.asApp().fetch($$$)
 files:
-  - "**/resolvers/**"
   - "**/external/**"
   - "**/import-lifecycle/**"
+  - "**/resolvers/**"
 ignores:
+  - "**/*.spec.*"
+  - "**/*.test.*"
+  - "**/__tests__/**"
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.test.tsx"
-  - "**/*.spec.ts"
-  - "**/*.spec.tsx"
+  - "**/specs/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   category: api-usage
   references:
@@ -41,4 +45,4 @@ metadata:
   scope-profile:
     - unique
   scope-rationale: >-
-    Preserve positive selection of resolvers, external and import-lifecycle only; backend directories and src/index.ts are not selected. Ignores contain node_modules and test/spec.ts/tsx suffixes, but omit dist, coverage, specs, __tests__, test and tests. This is not the full standard backend profile; ticket 08 owns routing review.
+    Restrict this client convention to resolvers, external and import-lifecycle directories. Preserve the existing omission of backend directories and root src/index.ts rather than silently broadening a runtime convention. Use the shared baseline and complete test exclusions; directory names are not runtime discovery.

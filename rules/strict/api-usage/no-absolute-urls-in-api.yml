@@ -13,10 +13,16 @@ rule:
   kind: call_expression
   regex: '^((api\.(asUser|asApp)\(\)\.)?(requestJira|requestConfluence|requestGraph|requestBitbucket)|assumeTrustedRoute)\s*\(\s*["''](https?:)?//'
 ignores:
-  - "**/node_modules/**"
+  - "**/*.spec.*"
+  - "**/*.test.*"
+  - "**/__tests__/**"
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/frontend/**"
-  - "**/*.test.ts"
-  - "**/*.test.tsx"
+  - "**/node_modules/**"
+  - "**/specs/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   category: api-usage
   references:
@@ -30,4 +36,4 @@ metadata:
   scope-profile:
     - unique
   scope-rationale: >-
-    Preserve unrestricted positive TypeScript scope with frontend excluded, not the standard backend directory selection. Legacy ignores contain only node_modules, frontend and *.test.ts/tsx; dist, coverage, specs, *.spec.*, __tests__, test and tests remain scanned. Ticket 08 owns reviewed normalization; no runtime is inferred from the parser.
+    Exclude conventional frontend paths while retaining root src/index.ts, shared utilities and unconventional server layouts. This negative boundary is intentionally not the standard backend directory selection and does not establish runtime identity. Use the shared baseline and complete test exclusions; build, vendors and fixtures remain included outside excluded paths.

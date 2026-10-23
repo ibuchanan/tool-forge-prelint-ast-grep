@@ -76,10 +76,13 @@ rule:
 ignores:
   - "**/node_modules/**"
   - "**/dist/**"
-  - "**/build/**"
+  - "**/coverage/**"
+  - "**/specs/**"
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   category: api-usage
   references:
@@ -93,8 +96,7 @@ metadata:
   impact-rationale: >-
     Forge SQL binding guidance, OWASP injection guidance and CWE-89 support the risk: untrusted text interpreted as SQL structure can read or alter records under the connection privileges. Interpolation alone does not establish attacker control, query execution or exploitable SQL injection.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve unrestricted positive source scope with node_modules, dist, build, *.test.*, *.spec.* and __tests__ excluded. Coverage, specs and test/tests directories remain scanned unless suffix exclusions apply; build is an extra exclusion versus the shared baseline. All three companions retain this reviewed legacy exception pending ticket 08.
+    - frontend
+    - backend
   owasp: A05:2025 - Injection
   cwe: "CWE-89: Improper Neutralization of Special Elements used in an SQL Command"
