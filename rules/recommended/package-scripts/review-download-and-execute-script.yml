@@ -36,14 +36,17 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Tests cover curl/wget pipelines, shell substitutions, flags and sudo under root scripts, excluding downloads, local scripts and unrelated metadata. Quoted examples can match; source provenance, indirect commands and integrity verification are unresolved gaps, as the note states. Evidence: rule-tests/recommended/package-scripts/review-download-and-execute-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-download-and-execute-script-snapshot.yml."
   impact: high
   impact-rationale: Executing an unverified downloaded script gives its source developer/CI execution privileges and can compromise credentials or build artifacts. HTTPS and a version-looking URL do not establish integrity; a verified trusted bootstrap may still be legitimate.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+    - package-json
+    - tests
   category: package-scripts
   references:
     - https://docs.npmjs.com/cli/using-npm/scripts

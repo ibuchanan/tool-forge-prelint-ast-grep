@@ -20,14 +20,17 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "The regex finds --write or --fix text in lint/lint:check/format:check script values. Tests distinguish fix variants, but inert quoted examples, flag substrings and tool-specific meanings are untested gaps; the rule is not a shell parser. Evidence: rule-tests/recommended/package-scripts/no-write-flags-in-readonly-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-write-flags-in-readonly-script-snapshot.yml."
   impact: medium
   impact-rationale: A genuinely mutating check can rewrite source during CI and hide formatting or lint drift instead of reporting it, reducing gate reliability. Biome documents the write flag, but a textual flag match alone does not prove mutation.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+    - package-json
+    - tests
   category: package-scripts
   references:
     - https://biomejs.dev/reference/cli/
