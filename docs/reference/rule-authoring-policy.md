@@ -15,7 +15,7 @@ rollout; this document does not claim that the whole repository already conforms
 | Stage | Boundary                                                                                                                            |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | 01    | Policy and metadata-only pilot; no executable policy checker.                                                                       |
-| 02    | Mechanical category/reference backfill, with explicit check/apply modes.                                                            |
+| 02    | Mechanical metadata backfills, scope/evidence analysis, and shared policy data; explicit check/apply, no native-scope changes.      |
 | 03    | Repository-only validation, with an explicit, non-growing allowance for existing unmigrated rules. Calculated severity is advisory. |
 | 04–07 | Reviewed metadata migration by tier/category, including inline rationale and scope declarations.                                    |
 | 08    | Reviewed materialization/normalization of scope profiles, including every coverage change.                                          |
@@ -290,10 +290,21 @@ There is no separate add/remove deviation structure or assessment file tree.
 
 Repository-only authoring tooling is responsible for materializing native scope
 and checking its agreement with the declared profile. Consumers need no custom
-preprocessor. Ticket 03 provides validation and actionable repairs; ticket 08
-applies reviewed normalization. No such new tooling is introduced by ticket 01.
-The shared sets have one policy source, not competing lists embedded in separate
-checks.
+preprocessor. Ticket 02 establishes shared policy data and supported scope
+analysis for mechanical backfills and assessment preparation. Ticket 03 reuses
+that foundation for validation and actionable repairs; ticket 08 reuses it for
+reviewed normalization. No such new tooling is introduced by ticket 01. The
+shared sets and composition rules have one policy source, not competing lists
+or semantics embedded in separate checks.
+
+Ticket 02 can backfill standard scope metadata only when existing native scope
+is demonstrably conformant, including permitted positive narrowing. Partial
+matches are review proposals with explicit differences, not declarations of
+compliance. Existing reviewed metadata is preserved. No automatic `[unique]`
+assignment or fabricated rationale substitutes for a scope decision. Evidence
+and companion discovery prepare review without inferring ratings or copying
+judgments. Such reports are not a permanent parallel assessment store. Native
+scope remains unchanged until separately reviewed normalization.
 
 Changes to effective `files` or `ignores` require explicit coverage review and
 real-file scanner evidence, including root/nested paths, supported languages,
