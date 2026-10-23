@@ -18,21 +18,27 @@ rule:
   kind: call_expression
   regex: '(?is)^console\.(log|warn|error|info|debug)\('
 files:
-  - "**/resolvers/**"
   - "**/external/**"
   - "**/import-lifecycle/**"
+  - "**/resolvers/**"
   - "**/src/index.ts"
 ignores:
+  - "**/*.spec.*"
+  - "**/*.test.*"
+  - "**/__tests__/**"
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.spec.ts"
+  - "**/specs/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/
     - https://github.com/ibuchanan/forge-ahead-logging
   category: forge-ahead
   scope-profile: [unique]
-  scope-rationale: Preserve resolvers/external/import-lifecycle and src/index.ts, not standard backend directories; keep node_modules and only .test.ts/.spec.ts exclusions. Missing backend paths, dist/coverage/specs and test-directory exclusions remain explicit legacy deviations for ticket 08.
+  scope-rationale: Preserve resolvers, external and import-lifecycle directories plus the exact src/index.ts entrypoint, without adding backend directories or other entrypoint extensions. This reviewed server-layout convention differs from the standard backend envelope and does not classify shared code automatically. Apply the shared baseline and complete test exclusions; build, vendors and fixtures remain eligible within the positive paths.
   precision: high
   precision-rationale: "Tests flag direct console.log/error calls, including a harmless startup literal, and accept the preferred logger or no logging. This directly detects the team's console-call prohibition, not verbosity, sensitive payloads or measured hotness. Lexically shadowed console and logger aliases are untested assessment gaps. Evidence: rule-tests/ecosol/forge-ahead/no-verbose-hot-path-logging.test.yml (valid/invalid) and rule-tests/__snapshots__/no-verbose-hot-path-logging-snapshot.yml."
   impact: low

@@ -31,11 +31,13 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://github.com/ibuchanan/forge-ahead-atlassian-api-types"]
   category: forge-ahead
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; tests and generated dist/coverage/specs packages remain included rather than the shared baseline. App identity is not resolved from this file; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision: medium
   precision-rationale: "Tests distinguish production @forge/api from bridge/react/resolver/event-only dependencies and accept the preferred types package. Depending on @forge/api does not prove product API calls or a deployable app; equivalent local types and actual package usage remain assessment gaps. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-api-types.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-ahead-api-types-snapshot.yml."
   impact: low

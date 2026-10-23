@@ -27,11 +27,13 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://github.com/ibuchanan/forge-ahead-errors"]
   category: forge-ahead
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; tests and generated dist/coverage/specs packages remain included rather than the shared baseline. App identity is not resolved from this file; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision: medium
   precision-rationale: "Tests accept the preferred package and flag its absence even in an express-only package. The descendant-key check does not prove production dependency placement, app identity or actual helper usage; those are assessment gaps. Equivalent error normalization may already exist. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-errors.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-ahead-errors-snapshot.yml."
   impact: low
