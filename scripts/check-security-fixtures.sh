@@ -64,4 +64,39 @@ for rule in no-wildcard-egress no-unsafe-custom-ui-csp; do
 done
 printf '%s/package.json\n' "$TMP" > "$TMP/expected"
 scan sgconfig.strict.yml '^no-disabled-tls-verification-package-script$'
+# Second-wave review rules: separate fixtures keep each family's expectations isolated.
+mkdir -p "$TMP/review/tests" "$TMP/review/__tests__" "$TMP/review/dist" "$TMP/review/build" "$TMP/review/node_modules/example"
+for ext in ts tsx js jsx mjs cjs mts cts; do
+  cp rule-tests/fixtures/security/review-source.txt "$TMP/review/source.$ext"
+  cp rule-tests/fixtures/security/review-safe-source.txt "$TMP/review/safe.$ext"
+done
+cp rule-tests/fixtures/security/review-source.txt "$TMP/review/tests/source.test.ts"
+cp rule-tests/fixtures/security/review-source.txt "$TMP/review/tests/source.spec.js"
+for dir in __tests__ dist build node_modules/example; do
+  cp rule-tests/fixtures/security/review-source.txt "$TMP/review/$dir/source.ts"
+done
+for rule in review-untrusted-authorization-identity review-fail-open-authorization review-llm-call-in-loop; do
+  for config in sgconfig.recommended.yml sgconfig.strict.yml; do
+    : > "$TMP/expected"
+    if [ "$config" = sgconfig.strict.yml ] || [ "$rule" = review-llm-call-in-loop ]; then
+      for ext in ts tsx js jsx mjs cjs mts cts; do
+        printf '%s/review/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+      done
+    fi
+    scan "$config" "^($rule(-tsx|-js)?|no-package-main)$"
+  done
+done
+cp rule-tests/fixtures/security/review-manifest.txt "$TMP/review/manifest.yml"
+cp rule-tests/fixtures/security/review-manifest.txt "$TMP/review/manifest.yaml"
+cp rule-tests/fixtures/security/review-manifest.txt "$TMP/review/other.yaml"
+cp rule-tests/fixtures/security/review-manifest.txt "$TMP/review/node_modules/example/manifest.yml"
+cp rule-tests/fixtures/security/review-package.txt "$TMP/review/package.json"
+cp rule-tests/fixtures/security/review-package.txt "$TMP/review/other.json"
+cp rule-tests/fixtures/security/review-package.txt "$TMP/review/node_modules/example/package.json"
+for config in sgconfig.recommended.yml sgconfig.strict.yml; do
+  printf '%s/review/manifest.yaml\n%s/review/manifest.yml\n' "$TMP" "$TMP" > "$TMP/expected"
+  scan "$config" '^review-privileged-manifest-capabilities$'
+  printf '%s/review/package.json\n' "$TMP" > "$TMP/expected"
+  scan "$config" '^review-download-and-execute-script$'
+done
 echo 'Security fixtures: language variants, tier inclusion, manifest/package paths, and source exclusions passed.'

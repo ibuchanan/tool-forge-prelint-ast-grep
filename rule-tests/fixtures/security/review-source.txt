@@ -1,0 +1,14 @@
+import api from '@forge/api';
+import { chat } from '@forge/llm';
+
+api.asUser(payload.accountId);
+async function canEdit() {
+  try {
+    return await checkPermission();
+  } catch {
+    return true;
+  }
+}
+for (const item of items) {
+  await chat(item);
+}

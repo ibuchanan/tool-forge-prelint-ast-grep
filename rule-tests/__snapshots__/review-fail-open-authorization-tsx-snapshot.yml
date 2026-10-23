@@ -1,0 +1,240 @@
+id: review-fail-open-authorization-tsx
+snapshots:
+  "async function canEdit(){ try { return await checkPermission() } catch { return true } }":
+    labels:
+    - source: return true
+      style: primary
+      start: 73
+      end: 84
+    - source: checkPermission
+      style: secondary
+      start: 45
+      end: 60
+    - source: checkPermission()
+      style: secondary
+      start: 45
+      end: 62
+    - source: checkPermission()
+      style: secondary
+      start: 45
+      end: 62
+    - source: try { return await checkPermission() } catch { return true }
+      style: secondary
+      start: 26
+      end: 86
+    - source: catch { return true }
+      style: secondary
+      start: 65
+      end: 86
+    - source: canEdit
+      style: secondary
+      start: 15
+      end: 22
+    - source: >-
+        async function canEdit(){ try { return await checkPermission() } catch { return
+        true } }
+      style: secondary
+      start: 0
+      end: 88
+  "class Policy { canDelete(){try{return permissions.canDelete()}catch{return true}} }":
+    labels:
+    - source: return true
+      style: primary
+      start: 68
+      end: 79
+    - source: canDelete
+      style: secondary
+      start: 50
+      end: 59
+    - source: permissions.canDelete
+      style: secondary
+      start: 38
+      end: 59
+    - source: permissions.canDelete()
+      style: secondary
+      start: 38
+      end: 61
+    - source: permissions.canDelete()
+      style: secondary
+      start: 38
+      end: 61
+    - source: try{return permissions.canDelete()}catch{return true}
+      style: secondary
+      start: 27
+      end: 80
+    - source: catch{return true}
+      style: secondary
+      start: 62
+      end: 80
+    - source: canDelete
+      style: secondary
+      start: 15
+      end: 24
+    - source: canDelete(){try{return permissions.canDelete()}catch{return true}}
+      style: secondary
+      start: 15
+      end: 81
+  "const canRead = function(){try{return permissions.canRead()}catch{return true}}":
+    labels:
+    - source: return true
+      style: primary
+      start: 66
+      end: 77
+    - source: canRead
+      style: secondary
+      start: 50
+      end: 57
+    - source: permissions.canRead
+      style: secondary
+      start: 38
+      end: 57
+    - source: permissions.canRead()
+      style: secondary
+      start: 38
+      end: 59
+    - source: permissions.canRead()
+      style: secondary
+      start: 38
+      end: 59
+    - source: try{return permissions.canRead()}catch{return true}
+      style: secondary
+      start: 27
+      end: 78
+    - source: catch{return true}
+      style: secondary
+      start: 60
+      end: 78
+    - source: canRead
+      style: secondary
+      start: 6
+      end: 13
+    - source: canRead = function(){try{return permissions.canRead()}catch{return true}}
+      style: secondary
+      start: 6
+      end: 79
+    - source: function(){try{return permissions.canRead()}catch{return true}}
+      style: secondary
+      start: 16
+      end: 79
+  "const isAuthorized = async () => {try {return await checkAuthorization()} catch(error){logger.error(error); return true}}":
+    labels:
+    - source: return true
+      style: primary
+      start: 108
+      end: 119
+    - source: checkAuthorization
+      style: secondary
+      start: 52
+      end: 70
+    - source: checkAuthorization()
+      style: secondary
+      start: 52
+      end: 72
+    - source: checkAuthorization()
+      style: secondary
+      start: 52
+      end: 72
+    - source: >-
+        try {return await checkAuthorization()} catch(error){logger.error(error);
+        return true}
+      style: secondary
+      start: 34
+      end: 120
+    - source: catch(error){logger.error(error); return true}
+      style: secondary
+      start: 74
+      end: 120
+    - source: isAuthorized
+      style: secondary
+      start: 6
+      end: 18
+    - source: >-
+        isAuthorized = async () => {try {return await checkAuthorization()}
+        catch(error){logger.error(error); return true}}
+      style: secondary
+      start: 6
+      end: 121
+    - source: >-
+        async () => {try {return await checkAuthorization()}
+        catch(error){logger.error(error); return true}}
+      style: secondary
+      start: 21
+      end: 121
+  "function canEdit(){try{if(ready){return checkPermission()}}catch{if(optional){return true} return false}}":
+    labels:
+    - source: return true
+      style: primary
+      start: 78
+      end: 89
+    - source: checkPermission
+      style: secondary
+      start: 40
+      end: 55
+    - source: checkPermission()
+      style: secondary
+      start: 40
+      end: 57
+    - source: checkPermission()
+      style: secondary
+      start: 40
+      end: 57
+    - source: >-
+        try{if(ready){return checkPermission()}}catch{if(optional){return true} return
+        false}
+      style: secondary
+      start: 19
+      end: 104
+    - source: catch{if(optional){return true} return false}
+      style: secondary
+      start: 59
+      end: 104
+    - source: canEdit
+      style: secondary
+      start: 9
+      end: 16
+    - source: >-
+        function canEdit(){try{if(ready){return
+        checkPermission()}}catch{if(optional){return true} return false}}
+      style: secondary
+      start: 0
+      end: 105
+  "function hasAccess(){try{return authorize().onConfluenceContent(id).canRead()}catch{return true}}":
+    labels:
+    - source: return true
+      style: primary
+      start: 84
+      end: 95
+    - source: canRead
+      style: secondary
+      start: 68
+      end: 75
+    - source: authorize().onConfluenceContent(id).canRead
+      style: secondary
+      start: 32
+      end: 75
+    - source: authorize().onConfluenceContent(id).canRead()
+      style: secondary
+      start: 32
+      end: 77
+    - source: authorize().onConfluenceContent(id).canRead()
+      style: secondary
+      start: 32
+      end: 77
+    - source: try{return authorize().onConfluenceContent(id).canRead()}catch{return true}
+      style: secondary
+      start: 21
+      end: 96
+    - source: catch{return true}
+      style: secondary
+      start: 78
+      end: 96
+    - source: hasAccess
+      style: secondary
+      start: 9
+      end: 18
+    - source: >-
+        function hasAccess(){try{return
+        authorize().onConfluenceContent(id).canRead()}catch{return true}}
+      style: secondary
+      start: 0
+      end: 97

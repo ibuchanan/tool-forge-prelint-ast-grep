@@ -1,0 +1,84 @@
+id: review-fail-open-authorization-tsx
+language: Tsx
+severity: warning
+message: >
+  Review allow-on-error authorization. Deny access or propagate permission-check failures.
+note: >
+  Reviews literal return true from a try/catch handler in narrowly named authorization helpers
+  when the try body contains a permission-check-shaped call. Names and method shapes are review
+  heuristics, not semantic proof of authorization or exploitability. Logging the failure does
+  not make an allow fallback safe. Nested function returns and unrelated true values are
+  excluded; only the nearest catch handler is considered. Promise catch callbacks, implicit
+  allow values, custom helper names, permission checks in other files and complete control-flow
+  semantics are outside this matcher. Confirm fail-closed behavior with failure-path tests. See
+  https://top10.owasp.org/2025/A10_2025-Mishandling_of_Exceptional_Conditions/ and
+  https://developer.atlassian.com/platform/forge/runtime-reference/authorize-api/
+rule:
+  kind: return_statement
+  pattern: return true
+  all:
+    - inside:
+        stopBy:
+          any:
+            - kind: function_declaration
+            - kind: function_expression
+            - kind: arrow_function
+            - kind: method_definition
+            - kind: catch_clause
+        kind: catch_clause
+        inside:
+          kind: try_statement
+          has:
+            field: body
+            has:
+              stopBy:
+                any:
+                  - kind: function_declaration
+                  - kind: function_expression
+                  - kind: arrow_function
+                  - kind: method_definition
+              kind: call_expression
+              has:
+                field: function
+                any:
+                  - kind: identifier
+                    regex: ^(checkPermission|checkAuthorization|authorizeUser|verifyAccess|verifyPermission|hasPermission|isAuthorized)$
+                  - kind: member_expression
+                    has:
+                      field: property
+                      regex: ^(checkPermission|checkAuthorization|verifyAccess|verifyPermission|hasPermission|isAuthorized|canRead|canEdit|canDelete|canUpdate|canCreate|canAccess)$
+    - inside:
+        stopBy:
+          any:
+            - kind: function_declaration
+            - kind: function_expression
+            - kind: arrow_function
+            - kind: method_definition
+        any:
+          - kind: function_declaration
+            has:
+              field: name
+              regex: ^(isAuthorized|isAllowed|hasPermission|hasAccess|checkPermission|checkAuthorization|authorizeUser|can(Read|Edit|Write|Delete|Create|Update|Access|Administer))$
+          - kind: function_expression
+            has:
+              field: name
+              regex: ^(isAuthorized|isAllowed|hasPermission|hasAccess|checkPermission|checkAuthorization|authorizeUser|can(Read|Edit|Write|Delete|Create|Update|Access|Administer))$
+          - kind: method_definition
+            has:
+              field: name
+              regex: ^(isAuthorized|isAllowed|hasPermission|hasAccess|checkPermission|checkAuthorization|authorizeUser|can(Read|Edit|Write|Delete|Create|Update|Access|Administer))$
+          - any:
+              - kind: arrow_function
+              - kind: function_expression
+            inside:
+              kind: variable_declarator
+              has:
+                field: name
+                regex: ^(isAuthorized|isAllowed|hasPermission|hasAccess|checkPermission|checkAuthorization|authorizeUser|can(Read|Edit|Write|Delete|Create|Update|Access|Administer))$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

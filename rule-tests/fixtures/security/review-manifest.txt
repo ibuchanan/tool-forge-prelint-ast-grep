@@ -1,0 +1,17 @@
+permissions:
+  scopes:
+    read:jira-work:
+      allowImpersonation: true
+modules:
+  endpoint:
+    - key: api
+      remote: api
+      auth:
+        appSystemToken:
+          enabled: true
+remotes:
+  - key: api
+    baseUrl: https://example.com
+    auth:
+      appSystemToken:
+        enabled: true

@@ -1,0 +1,24 @@
+id: review-untrusted-authorization-identity
+valid:
+  - "import api from '@forge/api'; api.asUser()"
+  - "import api from '@forge/api'; api.asUser(context.accountId)"
+  - "import api from '@forge/api'; api.asUser(validatedAccountId)"
+  - "import api from '@forge/api'; assignIssue(payload.accountId)"
+  - "import {authorize} from '@forge/api'; authorize().onJiraIssue(payload.issueId).canEdit()"
+  - other.asUser(payload.accountId)
+  - "import api from 'other'; api.asUser(payload.accountId)"
+  - "import api from '@forge/api'; api.asUser(validate(payload.accountId))"
+  - "import api from '@forge/api'; api.asUser(payload.target)"
+  - "import api from '@forge/api'; api.asUser('fixed-account')"
+  - "import {asApp as asUser} from '@forge/api'; asUser(payload.accountId)"
+  - "import api from '@forge/api'; api.asUser(context.accountId).requestJira(route`/rest/api/3/user?accountId=${payload.accountId}`)"
+invalid:
+  - "import api from '@forge/api'; api.asUser(payload.accountId)"
+  - "import forge from '@forge/api'; forge.asUser(inputs.userId)"
+  - "import * as api from '@forge/api'; api.asUser(modelOutput.callerAccountId)"
+  - "import {asUser as impersonate} from '@forge/api'; impersonate(toolArgs.accountId)"
+  - "import api from '@forge/api'; api.asUser(request.payload.accountId)"
+  - "import api from '@forge/api'; api.asUser(inputs['accountId'])"
+  - "import client from '@forge/api'; client.asUser(request.body.userId)"
+  - "import client from '@forge/api'; client.asUser(event.body.accountId)"
+  - 'import client from ''@forge/api''; client.asUser(toolArgs["userId"])'

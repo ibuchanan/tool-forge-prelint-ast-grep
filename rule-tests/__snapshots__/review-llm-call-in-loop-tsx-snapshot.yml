@@ -1,0 +1,428 @@
+id: review-llm-call-in-loop-tsx
+snapshots:
+  import * as llm from '@forge/llm'; items.map(async x=>llm.chat(x)):
+    labels:
+    - source: llm.chat(x)
+      style: primary
+      start: 54
+      end: 65
+    - source: llm
+      style: secondary
+      start: 54
+      end: 57
+    - source: chat
+      style: secondary
+      start: 58
+      end: 62
+    - source: llm.chat
+      style: secondary
+      start: 54
+      end: 62
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 21
+      end: 33
+    - source: llm
+      style: secondary
+      start: 12
+      end: 15
+    - source: "* as llm"
+      style: secondary
+      start: 7
+      end: 15
+    - source: "* as llm"
+      style: secondary
+      start: 7
+      end: 15
+    - source: import * as llm from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 34
+    - source: import * as llm from '@forge/llm'; items.map(async x=>llm.chat(x))
+      style: secondary
+      start: 0
+      end: 66
+    - source: map
+      style: secondary
+      start: 41
+      end: 44
+    - source: items.map
+      style: secondary
+      start: 35
+      end: 44
+    - source: items.map(async x=>llm.chat(x))
+      style: secondary
+      start: 35
+      end: 66
+    - source: (async x=>llm.chat(x))
+      style: secondary
+      start: 44
+      end: 66
+    - source: async x=>llm.chat(x)
+      style: secondary
+      start: 45
+      end: 65
+  "import {chat} from '@forge/llm'; async function run(){for await(const x of items){await chat(x)}}":
+    labels:
+    - source: chat(x)
+      style: primary
+      start: 88
+      end: 95
+    - source: chat
+      style: secondary
+      start: 88
+      end: 92
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: >-
+        import {chat} from '@forge/llm'; async function run(){for await(const x of
+        items){await chat(x)}}
+      style: secondary
+      start: 0
+      end: 97
+    - source: for await(const x of items){await chat(x)}
+      style: secondary
+      start: 54
+      end: 96
+  "import {chat} from '@forge/llm'; do {await chat(prompt)} while(next)":
+    labels:
+    - source: chat(prompt)
+      style: primary
+      start: 43
+      end: 55
+    - source: chat
+      style: secondary
+      start: 43
+      end: 47
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import {chat} from '@forge/llm'; do {await chat(prompt)} while(next)
+      style: secondary
+      start: 0
+      end: 68
+    - source: do {await chat(prompt)} while(next)
+      style: secondary
+      start: 33
+      end: 68
+  "import {chat} from '@forge/llm'; for(const item of items){await chat(prompt)}":
+    labels:
+    - source: chat(prompt)
+      style: primary
+      start: 64
+      end: 76
+    - source: chat
+      style: secondary
+      start: 64
+      end: 68
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import {chat} from '@forge/llm'; for(const item of items){await chat(prompt)}
+      style: secondary
+      start: 0
+      end: 77
+    - source: for(const item of items){await chat(prompt)}
+      style: secondary
+      start: 33
+      end: 77
+  "import {chat} from '@forge/llm'; for(let i=0;i<3;i++){chat(prompt)}":
+    labels:
+    - source: chat(prompt)
+      style: primary
+      start: 54
+      end: 66
+    - source: chat
+      style: secondary
+      start: 54
+      end: 58
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import {chat} from '@forge/llm'; for(let i=0;i<3;i++){chat(prompt)}
+      style: secondary
+      start: 0
+      end: 67
+    - source: for(let i=0;i<3;i++){chat(prompt)}
+      style: secondary
+      start: 33
+      end: 67
+  "import {chat} from '@forge/llm'; items.flatMap(x=>chat(x))":
+    labels:
+    - source: chat(x)
+      style: primary
+      start: 50
+      end: 57
+    - source: chat
+      style: secondary
+      start: 50
+      end: 54
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import {chat} from '@forge/llm'; items.flatMap(x=>chat(x))
+      style: secondary
+      start: 0
+      end: 58
+    - source: flatMap
+      style: secondary
+      start: 39
+      end: 46
+    - source: items.flatMap
+      style: secondary
+      start: 33
+      end: 46
+    - source: items.flatMap(x=>chat(x))
+      style: secondary
+      start: 33
+      end: 58
+    - source: (x=>chat(x))
+      style: secondary
+      start: 46
+      end: 58
+    - source: x=>chat(x)
+      style: secondary
+      start: 47
+      end: 57
+  "import {chat} from '@forge/llm'; items.forEach(function(x){chat(x)})":
+    labels:
+    - source: chat(x)
+      style: primary
+      start: 59
+      end: 66
+    - source: chat
+      style: secondary
+      start: 59
+      end: 63
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import {chat} from '@forge/llm'; items.forEach(function(x){chat(x)})
+      style: secondary
+      start: 0
+      end: 68
+    - source: forEach
+      style: secondary
+      start: 39
+      end: 46
+    - source: items.forEach
+      style: secondary
+      start: 33
+      end: 46
+    - source: items.forEach(function(x){chat(x)})
+      style: secondary
+      start: 33
+      end: 68
+    - source: (function(x){chat(x)})
+      style: secondary
+      start: 46
+      end: 68
+    - source: function(x){chat(x)}
+      style: secondary
+      start: 47
+      end: 67
+  "import {chat} from '@forge/llm'; items.reduce(async (p,x)=>chat(x), initial)":
+    labels:
+    - source: chat(x)
+      style: primary
+      start: 59
+      end: 66
+    - source: chat
+      style: secondary
+      start: 59
+      end: 63
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: chat
+      style: secondary
+      start: 8
+      end: 12
+    - source: import {chat} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import {chat} from '@forge/llm'; items.reduce(async (p,x)=>chat(x), initial)
+      style: secondary
+      start: 0
+      end: 76
+    - source: reduce
+      style: secondary
+      start: 39
+      end: 45
+    - source: items.reduce
+      style: secondary
+      start: 33
+      end: 45
+    - source: items.reduce(async (p,x)=>chat(x), initial)
+      style: secondary
+      start: 33
+      end: 76
+    - source: (async (p,x)=>chat(x), initial)
+      style: secondary
+      start: 45
+      end: 76
+    - source: async (p,x)=>chat(x)
+      style: secondary
+      start: 46
+      end: 66
+  "import {stream as infer} from '@forge/llm'; while(remaining){infer(prompt)}":
+    labels:
+    - source: infer(prompt)
+      style: primary
+      start: 61
+      end: 74
+    - source: infer
+      style: secondary
+      start: 61
+      end: 66
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 30
+      end: 42
+    - source: stream
+      style: secondary
+      start: 8
+      end: 14
+    - source: infer
+      style: secondary
+      start: 18
+      end: 23
+    - source: stream as infer
+      style: secondary
+      start: 8
+      end: 23
+    - source: import {stream as infer} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 43
+    - source: import {stream as infer} from '@forge/llm'; while(remaining){infer(prompt)}
+      style: secondary
+      start: 0
+      end: 75
+    - source: while(remaining){infer(prompt)}
+      style: secondary
+      start: 44
+      end: 75
+  "import {stream as run} from '@forge/llm'; for(const key in items){run(key)}":
+    labels:
+    - source: run(key)
+      style: primary
+      start: 66
+      end: 74
+    - source: run
+      style: secondary
+      start: 66
+      end: 69
+    - source: "'@forge/llm'"
+      style: secondary
+      start: 28
+      end: 40
+    - source: stream
+      style: secondary
+      start: 8
+      end: 14
+    - source: run
+      style: secondary
+      start: 18
+      end: 21
+    - source: stream as run
+      style: secondary
+      start: 8
+      end: 21
+    - source: import {stream as run} from '@forge/llm';
+      style: secondary
+      start: 0
+      end: 41
+    - source: import {stream as run} from '@forge/llm'; for(const key in items){run(key)}
+      style: secondary
+      start: 0
+      end: 75
+    - source: for(const key in items){run(key)}
+      style: secondary
+      start: 42
+      end: 75

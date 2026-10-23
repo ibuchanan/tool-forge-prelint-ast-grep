@@ -1,0 +1,22 @@
+id: review-privileged-manifest-capabilities
+valid:
+  - 'permissions: {scopes: {"read:jira-work": {allowImpersonation: false}}}'
+  - 'permissions: {scopes: {"read:jira-work": {allowImpersonation: "true"}}}'
+  - 'other: {scopes: {"read:jira-work": {allowImpersonation: true}}}'
+  - "remotes: [{key: api, auth: {appSystemToken: {enabled: false}}}]"
+  - "modules: {endpoint: [{key: api, auth: {appUserToken: {enabled: true}}}]}"
+  - "other: {remotes: [{auth: {appSystemToken: {enabled: true}}}]}"
+  - "modules: {function: [{auth: {appSystemToken: {enabled: true}}}]}"
+  - 'permissions: {scopes: {"read:jira-work": {nested: {allowImpersonation: true}}}}'
+  - 'permissions: {scopes: {"read:jira-work": {unrelated: true}}}'
+  - "remotes: [{auth: {appSystemToken: {unrelated: true}}}]"
+  - "modules: {endpoint: [{auth: {appSystemToken: {unrelated: true}}}]}"
+  - "endpoint: [{auth: {appSystemToken: {unrelated: true}}}]"
+  - 'remotes: [{auth: {appSystemToken: {enabled: "true"}}}]'
+invalid:
+  - 'permissions: {scopes: {"read:jira-work": {allowImpersonation: true}}}'
+  - "permissions:\n  scopes:\n    read:confluence-content.summary:\n      allowImpersonation: true"
+  - "remotes: [{key: api, auth: {appSystemToken: {enabled: true}}}]"
+  - "modules: {endpoint: [{key: api, auth: {appSystemToken: {enabled: true}}}]}"
+  - "endpoint:\n  - key: api\n    auth:\n      appSystemToken:\n        enabled: true"
+  - '"modules": {"endpoint": [{"auth": {"appSystemToken": {"enabled": true}}}]}'

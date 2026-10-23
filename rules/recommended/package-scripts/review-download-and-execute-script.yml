@@ -1,0 +1,38 @@
+id: review-download-and-execute-script
+language: Json
+severity: warning
+message: >
+  Review downloaded code execution. Pin the source and verify provenance before running it.
+note: >
+  Reviews literal curl/wget-to-shell pipelines and shell command substitution in package.json
+  script values. Matches immediate execution by sh/bash/zsh, including shell flags and sudo
+  before the interpreter. Download-only commands, local scripts and unrelated metadata are
+  outside scope. This is command-text matching, not a shell parser or provenance verifier:
+  quoted examples may need suppression, indirect scripts/variables, multi-command
+  download-then-run, PowerShell and fetched JavaScript execution are not traced. HTTPS or a
+  version-looking URL alone does not establish integrity. No autofix is supplied. See
+  https://top10.owasp.org/2025/A03_2025-Software_Supply_Chain_Failures/,
+  https://top10.owasp.org/2025/A08_2025-Software_or_Data_Integrity_Failures/ and
+  https://docs.npmjs.com/cli/using-npm/scripts
+rule:
+  kind: string
+  regex: "(?i)(\\b(curl|wget)\\s+[^|;\\r\\n]*\\|\\s*(sudo\\s+)?(ba|z)?sh\\b|\\b(ba|z)?sh\\b[^;\\r\\n]*\\$\\(\\s*(curl|wget)\\s+)"
+  inside:
+    field: value
+    kind: pair
+    inside:
+      kind: object
+      inside:
+        field: value
+        kind: pair
+        has:
+          field: key
+          regex: '^"scripts"$'
+        inside:
+          kind: object
+          inside:
+            kind: document
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

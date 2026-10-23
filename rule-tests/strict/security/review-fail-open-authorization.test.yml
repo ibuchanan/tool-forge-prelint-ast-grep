@@ -1,0 +1,20 @@
+id: review-fail-open-authorization
+valid:
+  - "async function canEdit(){ try { return await checkPermission() } catch { return false } }"
+  - "async function canEdit(){ try { return await checkPermission() } catch(error) { throw error } }"
+  - "function load(){ try { return read() } catch { return true } }"
+  - "function canEdit(){ try { return readConfig() } catch { return true } }"
+  - "function canEdit(){ try { return checkPermission() } catch { const fallback = () => true; return false } }"
+  - "function canEdit(){ try { return checkPermission() } catch { return function(){return true} } }"
+  - "function canEdit(){try{return checkPermission()}catch{try{return readConfig()}catch{return true}}}"
+  - "function canEdit(){try{const later=()=>checkPermission(); return readConfig()}catch{return true}}"
+  - "function canEdit(){try{return checkPermission()}catch{function unrelated(){return true} return false}}"
+  - "function canEdit(){try{return readConfig()}catch{checkPermission(); return true}}"
+  - "function canEdit(){try{return checkPermission()}finally{return true}}"
+invalid:
+  - "async function canEdit(){ try { return await checkPermission() } catch { return true } }"
+  - "const isAuthorized = async () => {try {return await checkAuthorization()} catch(error){logger.error(error); return true}}"
+  - "function hasAccess(){try{return authorize().onConfluenceContent(id).canRead()}catch{return true}}"
+  - "class Policy { canDelete(){try{return permissions.canDelete()}catch{return true}} }"
+  - "const canRead = function(){try{return permissions.canRead()}catch{return true}}"
+  - "function canEdit(){try{if(ready){return checkPermission()}}catch{if(optional){return true} return false}}"

@@ -1,0 +1,490 @@
+id: review-untrusted-authorization-identity-js
+snapshots:
+  import * as api from '@forge/api'; api.asUser(modelOutput.callerAccountId):
+    labels:
+    - source: api.asUser(modelOutput.callerAccountId)
+      style: primary
+      start: 35
+      end: 74
+    - source: api
+      style: secondary
+      start: 35
+      end: 38
+    - source: asUser
+      style: secondary
+      start: 39
+      end: 45
+    - source: api.asUser
+      style: secondary
+      start: 35
+      end: 45
+    - source: "'@forge/api'"
+      style: secondary
+      start: 21
+      end: 33
+    - source: api
+      style: secondary
+      start: 12
+      end: 15
+    - source: "* as api"
+      style: secondary
+      start: 7
+      end: 15
+    - source: "* as api"
+      style: secondary
+      start: 7
+      end: 15
+    - source: import * as api from '@forge/api';
+      style: secondary
+      start: 0
+      end: 34
+    - source: import * as api from '@forge/api'; api.asUser(modelOutput.callerAccountId)
+      style: secondary
+      start: 0
+      end: 74
+    - source: callerAccountId
+      style: secondary
+      start: 58
+      end: 73
+    - source: modelOutput
+      style: secondary
+      start: 46
+      end: 57
+    - source: modelOutput.callerAccountId
+      style: secondary
+      start: 46
+      end: 73
+    - source: modelOutput.callerAccountId
+      style: secondary
+      start: 46
+      end: 73
+  "import api from '@forge/api'; api.asUser(inputs['accountId'])":
+    labels:
+    - source: api.asUser(inputs['accountId'])
+      style: primary
+      start: 30
+      end: 61
+    - source: api
+      style: secondary
+      start: 30
+      end: 33
+    - source: asUser
+      style: secondary
+      start: 34
+      end: 40
+    - source: api.asUser
+      style: secondary
+      start: 30
+      end: 40
+    - source: "'@forge/api'"
+      style: secondary
+      start: 16
+      end: 28
+    - source: api
+      style: secondary
+      start: 7
+      end: 10
+    - source: api
+      style: secondary
+      start: 7
+      end: 10
+    - source: import api from '@forge/api';
+      style: secondary
+      start: 0
+      end: 29
+    - source: import api from '@forge/api'; api.asUser(inputs['accountId'])
+      style: secondary
+      start: 0
+      end: 61
+    - source: "'accountId'"
+      style: secondary
+      start: 48
+      end: 59
+    - source: inputs
+      style: secondary
+      start: 41
+      end: 47
+    - source: inputs['accountId']
+      style: secondary
+      start: 41
+      end: 60
+    - source: inputs['accountId']
+      style: secondary
+      start: 41
+      end: 60
+  import api from '@forge/api'; api.asUser(payload.accountId):
+    labels:
+    - source: api.asUser(payload.accountId)
+      style: primary
+      start: 30
+      end: 59
+    - source: api
+      style: secondary
+      start: 30
+      end: 33
+    - source: asUser
+      style: secondary
+      start: 34
+      end: 40
+    - source: api.asUser
+      style: secondary
+      start: 30
+      end: 40
+    - source: "'@forge/api'"
+      style: secondary
+      start: 16
+      end: 28
+    - source: api
+      style: secondary
+      start: 7
+      end: 10
+    - source: api
+      style: secondary
+      start: 7
+      end: 10
+    - source: import api from '@forge/api';
+      style: secondary
+      start: 0
+      end: 29
+    - source: import api from '@forge/api'; api.asUser(payload.accountId)
+      style: secondary
+      start: 0
+      end: 59
+    - source: accountId
+      style: secondary
+      start: 49
+      end: 58
+    - source: payload
+      style: secondary
+      start: 41
+      end: 48
+    - source: payload.accountId
+      style: secondary
+      start: 41
+      end: 58
+    - source: payload.accountId
+      style: secondary
+      start: 41
+      end: 58
+  import api from '@forge/api'; api.asUser(request.payload.accountId):
+    labels:
+    - source: api.asUser(request.payload.accountId)
+      style: primary
+      start: 30
+      end: 67
+    - source: api
+      style: secondary
+      start: 30
+      end: 33
+    - source: asUser
+      style: secondary
+      start: 34
+      end: 40
+    - source: api.asUser
+      style: secondary
+      start: 30
+      end: 40
+    - source: "'@forge/api'"
+      style: secondary
+      start: 16
+      end: 28
+    - source: api
+      style: secondary
+      start: 7
+      end: 10
+    - source: api
+      style: secondary
+      start: 7
+      end: 10
+    - source: import api from '@forge/api';
+      style: secondary
+      start: 0
+      end: 29
+    - source: import api from '@forge/api'; api.asUser(request.payload.accountId)
+      style: secondary
+      start: 0
+      end: 67
+    - source: accountId
+      style: secondary
+      start: 57
+      end: 66
+    - source: request.payload
+      style: secondary
+      start: 41
+      end: 56
+    - source: request.payload.accountId
+      style: secondary
+      start: 41
+      end: 66
+    - source: request.payload.accountId
+      style: secondary
+      start: 41
+      end: 66
+  import client from '@forge/api'; client.asUser(event.body.accountId):
+    labels:
+    - source: client.asUser(event.body.accountId)
+      style: primary
+      start: 33
+      end: 68
+    - source: client
+      style: secondary
+      start: 33
+      end: 39
+    - source: asUser
+      style: secondary
+      start: 40
+      end: 46
+    - source: client.asUser
+      style: secondary
+      start: 33
+      end: 46
+    - source: "'@forge/api'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: client
+      style: secondary
+      start: 7
+      end: 13
+    - source: client
+      style: secondary
+      start: 7
+      end: 13
+    - source: import client from '@forge/api';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import client from '@forge/api'; client.asUser(event.body.accountId)
+      style: secondary
+      start: 0
+      end: 68
+    - source: accountId
+      style: secondary
+      start: 58
+      end: 67
+    - source: event.body
+      style: secondary
+      start: 47
+      end: 57
+    - source: event.body.accountId
+      style: secondary
+      start: 47
+      end: 67
+    - source: event.body.accountId
+      style: secondary
+      start: 47
+      end: 67
+  import client from '@forge/api'; client.asUser(request.body.userId):
+    labels:
+    - source: client.asUser(request.body.userId)
+      style: primary
+      start: 33
+      end: 67
+    - source: client
+      style: secondary
+      start: 33
+      end: 39
+    - source: asUser
+      style: secondary
+      start: 40
+      end: 46
+    - source: client.asUser
+      style: secondary
+      start: 33
+      end: 46
+    - source: "'@forge/api'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: client
+      style: secondary
+      start: 7
+      end: 13
+    - source: client
+      style: secondary
+      start: 7
+      end: 13
+    - source: import client from '@forge/api';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import client from '@forge/api'; client.asUser(request.body.userId)
+      style: secondary
+      start: 0
+      end: 67
+    - source: userId
+      style: secondary
+      start: 60
+      end: 66
+    - source: request.body
+      style: secondary
+      start: 47
+      end: 59
+    - source: request.body.userId
+      style: secondary
+      start: 47
+      end: 66
+    - source: request.body.userId
+      style: secondary
+      start: 47
+      end: 66
+  "import client from '@forge/api'; client.asUser(toolArgs[\"userId\"])":
+    labels:
+    - source: client.asUser(toolArgs["userId"])
+      style: primary
+      start: 33
+      end: 66
+    - source: client
+      style: secondary
+      start: 33
+      end: 39
+    - source: asUser
+      style: secondary
+      start: 40
+      end: 46
+    - source: client.asUser
+      style: secondary
+      start: 33
+      end: 46
+    - source: "'@forge/api'"
+      style: secondary
+      start: 19
+      end: 31
+    - source: client
+      style: secondary
+      start: 7
+      end: 13
+    - source: client
+      style: secondary
+      start: 7
+      end: 13
+    - source: import client from '@forge/api';
+      style: secondary
+      start: 0
+      end: 32
+    - source: import client from '@forge/api'; client.asUser(toolArgs["userId"])
+      style: secondary
+      start: 0
+      end: 66
+    - source: "\"userId\""
+      style: secondary
+      start: 56
+      end: 64
+    - source: toolArgs
+      style: secondary
+      start: 47
+      end: 55
+    - source: toolArgs["userId"]
+      style: secondary
+      start: 47
+      end: 65
+    - source: toolArgs["userId"]
+      style: secondary
+      start: 47
+      end: 65
+  import forge from '@forge/api'; forge.asUser(inputs.userId):
+    labels:
+    - source: forge.asUser(inputs.userId)
+      style: primary
+      start: 32
+      end: 59
+    - source: forge
+      style: secondary
+      start: 32
+      end: 37
+    - source: asUser
+      style: secondary
+      start: 38
+      end: 44
+    - source: forge.asUser
+      style: secondary
+      start: 32
+      end: 44
+    - source: "'@forge/api'"
+      style: secondary
+      start: 18
+      end: 30
+    - source: forge
+      style: secondary
+      start: 7
+      end: 12
+    - source: forge
+      style: secondary
+      start: 7
+      end: 12
+    - source: import forge from '@forge/api';
+      style: secondary
+      start: 0
+      end: 31
+    - source: import forge from '@forge/api'; forge.asUser(inputs.userId)
+      style: secondary
+      start: 0
+      end: 59
+    - source: userId
+      style: secondary
+      start: 52
+      end: 58
+    - source: inputs
+      style: secondary
+      start: 45
+      end: 51
+    - source: inputs.userId
+      style: secondary
+      start: 45
+      end: 58
+    - source: inputs.userId
+      style: secondary
+      start: 45
+      end: 58
+  "import {asUser as impersonate} from '@forge/api'; impersonate(toolArgs.accountId)":
+    labels:
+    - source: impersonate(toolArgs.accountId)
+      style: primary
+      start: 50
+      end: 81
+    - source: impersonate
+      style: secondary
+      start: 50
+      end: 61
+    - source: "'@forge/api'"
+      style: secondary
+      start: 36
+      end: 48
+    - source: asUser
+      style: secondary
+      start: 8
+      end: 14
+    - source: impersonate
+      style: secondary
+      start: 18
+      end: 29
+    - source: asUser as impersonate
+      style: secondary
+      start: 8
+      end: 29
+    - source: import {asUser as impersonate} from '@forge/api';
+      style: secondary
+      start: 0
+      end: 49
+    - source: >-
+        import {asUser as impersonate} from '@forge/api';
+        impersonate(toolArgs.accountId)
+      style: secondary
+      start: 0
+      end: 81
+    - source: accountId
+      style: secondary
+      start: 71
+      end: 80
+    - source: toolArgs
+      style: secondary
+      start: 62
+      end: 70
+    - source: toolArgs.accountId
+      style: secondary
+      start: 62
+      end: 80
+    - source: toolArgs.accountId
+      style: secondary
+      start: 62
+      end: 80

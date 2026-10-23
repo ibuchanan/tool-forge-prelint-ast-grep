@@ -1,0 +1,221 @@
+id: review-privileged-manifest-capabilities
+language: Yaml
+severity: hint
+message: >
+  Review impersonation or system-token forwarding. Confirm least privilege and independent
+  caller authorization.
+note: >
+  Reviews literal allowImpersonation: true under permissions.scopes map entries and
+  appSystemToken.enabled: true under remote/endpoint auth. Supports block/flow mappings; false
+  and quoted true are not enabled booleans. These are supported capabilities, not invalid
+  configurations or proof of privilege escalation. Compare with the intended workflow, remote
+  token handling and caller/resource authorization. Existing admin-scope and remote-presence
+  checks remain separate; this rule does not claim scopes are unused. YAML aliases/merge
+  expansion and computed values are not resolved. See
+  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/,
+  https://developer.atlassian.com/platform/forge/manifest-reference/endpoint/,
+  https://developer.atlassian.com/platform/forge/remote/calling-product-apis/,
+  https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
+  https://genai.owasp.org/llmrisk/llm062025-excessive-agency/
+utils:
+  mapping-pair:
+    any:
+      - kind: block_mapping_pair
+      - kind: flow_pair
+rule:
+  any:
+    - any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      inside:
+        stopBy:
+          matches: mapping-pair
+        any:
+          - kind: block_mapping_pair
+          - kind: flow_pair
+        inside:
+          stopBy:
+            matches: mapping-pair
+          any:
+            - kind: block_mapping_pair
+            - kind: flow_pair
+          has:
+            field: key
+            regex: '^["'']?(?:scopes)["'']?$'
+          inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:permissions)["'']?$'
+            not:
+              inside:
+                stopBy: end
+                matches: mapping-pair
+      all:
+        - has:
+            field: key
+            regex: '^["'']?allowImpersonation["'']?$'
+        - has:
+            field: value
+            kind: flow_node
+            has:
+              kind: plain_scalar
+              has:
+                kind: boolean_scalar
+                regex: ^true$
+    - any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      inside:
+        stopBy:
+          matches: mapping-pair
+        any:
+          - kind: block_mapping_pair
+          - kind: flow_pair
+        has:
+          field: key
+          regex: '^["'']?(?:appSystemToken)["'']?$'
+        inside:
+          stopBy:
+            matches: mapping-pair
+          any:
+            - kind: block_mapping_pair
+            - kind: flow_pair
+          has:
+            field: key
+            regex: '^["'']?(?:auth)["'']?$'
+          inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:remotes)["'']?$'
+            not:
+              inside:
+                stopBy: end
+                matches: mapping-pair
+      all:
+        - has:
+            field: key
+            regex: '^["'']?enabled["'']?$'
+        - has:
+            field: value
+            kind: flow_node
+            has:
+              kind: plain_scalar
+              has:
+                kind: boolean_scalar
+                regex: ^true$
+    - any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      inside:
+        stopBy:
+          matches: mapping-pair
+        any:
+          - kind: block_mapping_pair
+          - kind: flow_pair
+        has:
+          field: key
+          regex: '^["'']?(?:appSystemToken)["'']?$'
+        inside:
+          stopBy:
+            matches: mapping-pair
+          any:
+            - kind: block_mapping_pair
+            - kind: flow_pair
+          has:
+            field: key
+            regex: '^["'']?(?:auth)["'']?$'
+          inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:endpoint)["'']?$'
+            not:
+              inside:
+                stopBy: end
+                matches: mapping-pair
+      all:
+        - has:
+            field: key
+            regex: '^["'']?enabled["'']?$'
+        - has:
+            field: value
+            kind: flow_node
+            has:
+              kind: plain_scalar
+              has:
+                kind: boolean_scalar
+                regex: ^true$
+    - any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      inside:
+        stopBy:
+          matches: mapping-pair
+        any:
+          - kind: block_mapping_pair
+          - kind: flow_pair
+        has:
+          field: key
+          regex: '^["'']?(?:appSystemToken)["'']?$'
+        inside:
+          stopBy:
+            matches: mapping-pair
+          any:
+            - kind: block_mapping_pair
+            - kind: flow_pair
+          has:
+            field: key
+            regex: '^["'']?(?:auth)["'']?$'
+          inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:endpoint)["'']?$'
+            inside:
+              stopBy:
+                matches: mapping-pair
+              any:
+                - kind: block_mapping_pair
+                - kind: flow_pair
+              has:
+                field: key
+                regex: '^["'']?(?:modules)["'']?$'
+              not:
+                inside:
+                  stopBy: end
+                  matches: mapping-pair
+      all:
+        - has:
+            field: key
+            regex: '^["'']?enabled["'']?$'
+        - has:
+            field: value
+            kind: flow_node
+            has:
+              kind: plain_scalar
+              has:
+                kind: boolean_scalar
+                regex: ^true$
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"
+ignores:
+  - "**/node_modules/**"

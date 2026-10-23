@@ -193,7 +193,11 @@ on how many actions live in one resolver file. _(recommended)_
 
 Patterns that inflate Forge invocation counts, storage reads/writes, or bundle
 memory/timeout settings beyond what's needed — N+1 API calls, unbounded
-searches, and batchable invokes. _(recommended)_
+searches, and batchable invokes. `review-llm-call-in-loop` also reviews imported
+`@forge/llm` chat/stream calls in loops and direct array callbacks for batch,
+concurrency, retry, and budget controls. It does not cover external-provider SDKs,
+embedding wrappers, or cross-file dispatch, and a bounded loop can still trigger
+review. _(recommended)_
 
 ### devtools
 
@@ -250,7 +254,10 @@ frontend/backend split, and unapproved `@forge/react` components). _(strict)_
 
 Manifest scope and remote review — granular over classic scopes, admin-level
 scopes flagged for least-privilege review, and remotes flagged for
-eligibility/residency/auth review. _(recommended)_
+eligibility/residency/auth review. `review-privileged-manifest-capabilities` adds
+review hints for explicit scope impersonation and app-system-token forwarding
+under remote/endpoint auth. These are supported capabilities, not invalid
+configurations; YAML aliases and merge expansion are not resolved. _(recommended)_
 
 ### package-json
 
@@ -277,7 +284,11 @@ npm script hygiene for the `scripts` block:
   configured, keeping read-only check scripts (`lint`, `lint:check`,
   `format:check`) free of `--write`/`--fix` flags that would mutate files
   instead of failing on drift, and reviewing automatically-triggered npm
-  lifecycle scripts (a common supply-chain attack vector).
+  lifecycle scripts (a common supply-chain attack vector). The
+  `review-download-and-execute-script` warning also checks literal curl/wget
+  pipelines to sh/bash/zsh and shell command substitution. It does not parse shell
+  semantics or trace separate download-then-run commands; quoted examples may
+  require suppression.
 - **ecosol** — which scripts should exist, what they should compose, and
   naming/behavior hygiene for the ecosol repo-init template's `scripts`
   block as a whole.
@@ -326,7 +337,11 @@ conventions:
   tokens, no wildcard CORS origins, no logging of credential-shaped values,
   and no cross-tenant-prone module/global runtime state. Additional families flag
   whole-environment disclosure, direct dynamic code evaluation, raw HTML sinks,
-  and explicit TLS-verification bypasses (including package scripts).
+  and explicit TLS-verification bypasses (including package scripts). Review rules
+  also flag input-supplied impersonation identities in imported Forge `asUser`
+  calls and literal allow-on-error returns in narrowly named authorization helpers.
+  Ordinary target IDs are not authorization decisions; provenance, validation,
+  custom wrappers, and full control flow are not inferred.
 
 The source families inspect local syntax, not taint flows. Logging checks recognize
 `console`, `logger`, and `log`; SQL/TLS client checks recognize imports in the same

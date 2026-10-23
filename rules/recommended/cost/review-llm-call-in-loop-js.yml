@@ -1,0 +1,116 @@
+id: review-llm-call-in-loop-js
+language: JavaScript
+severity: warning
+message: >
+  Review repeated LLM calls. Check batch limits, concurrency, retries, and per-user or
+  installation budgets.
+note: >
+  Reviews imported @forge/llm chat/stream calls in loops or direct repeated array callbacks,
+  including named/namespace aliases. A call with an upstream bound still deserves review; this
+  does not prove unbounded consumption or an actual billing attack. Platform request/context
+  limits and per-response max_completion_tokens do not establish an application-wide budget.
+  Deferred nested functions are excluded. Client aliases created after import, lexical
+  shadowing, external-provider SDKs, embedding wrappers, recursion and cross-file dispatch are
+  not recognized by this first implementation. See
+  https://developer.atlassian.com/platform/forge/runtime-reference/forge-llms-api-reference/,
+  https://developer.atlassian.com/platform/forge/limits-llm/ and
+  https://genai.owasp.org/llmrisk/llm102025-unbounded-consumption/
+rule:
+  all:
+    - kind: call_expression
+    - any:
+        - all:
+            - has:
+                field: function
+                kind: identifier
+                pattern: $LLM
+            - inside:
+                stopBy: end
+                kind: program
+                has:
+                  kind: import_statement
+                  all:
+                    - has:
+                        field: source
+                        regex: '^["'']@forge/llm["'']$'
+                    - has:
+                        stopBy: end
+                        kind: import_specifier
+                        any:
+                          - all:
+                              - has:
+                                  field: name
+                                  pattern: $LLM
+                                  regex: ^(chat|stream)$
+                              - not:
+                                  has:
+                                    field: alias
+                                    kind: identifier
+                          - all:
+                              - has:
+                                  field: name
+                                  regex: ^(chat|stream)$
+                              - has:
+                                  field: alias
+                                  pattern: $LLM
+        - all:
+            - has:
+                field: function
+                kind: member_expression
+                all:
+                  - has:
+                      field: object
+                      kind: identifier
+                      pattern: $SDK
+                  - has:
+                      field: property
+                      regex: ^(chat|stream)$
+            - inside:
+                stopBy: end
+                kind: program
+                has:
+                  kind: import_statement
+                  all:
+                    - has:
+                        field: source
+                        regex: '^["'']@forge/llm["'']$'
+                    - has:
+                        kind: import_clause
+                        has:
+                          kind: namespace_import
+                          has:
+                            kind: identifier
+                            pattern: $SDK
+    - inside:
+        stopBy:
+          any:
+            - kind: function_declaration
+            - kind: function_expression
+            - kind: arrow_function
+            - kind: method_definition
+        any:
+          - kind: for_statement
+          - kind: for_in_statement
+          - kind: while_statement
+          - kind: do_statement
+          - nthChild: 1
+            any:
+              - kind: arrow_function
+              - kind: function_expression
+            inside:
+              kind: arguments
+              inside:
+                kind: call_expression
+                has:
+                  field: function
+                  kind: member_expression
+                  has:
+                    field: property
+                    regex: ^(map|forEach|flatMap|reduce|reduceRight|some|every|filter)$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

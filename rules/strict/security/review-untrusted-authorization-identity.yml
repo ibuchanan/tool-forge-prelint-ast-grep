@@ -1,0 +1,124 @@
+id: review-untrusted-authorization-identity
+language: TypeScript
+severity: warning
+message: >
+  Review input-supplied impersonation identity. Use trusted caller context or independently
+  authorize the target.
+note: >
+  Reviews direct payload/inputs/modelOutput/toolArgs identity fields (accountId, userId,
+  callerAccountId) passed to imported @forge/api asUser, including default, namespace and named
+  aliases. This is explicit impersonation, not an ordinary target account ID in application
+  data. Such targets can be legitimate when independently authorized; validation may exist
+  elsewhere. Source names are a heuristic, not proof of untrusted provenance. Destructuring,
+  renamed sources, lexical shadowing, cross-file flows, custom permission wrappers and
+  role-based decisions are not analyzed. Forge authorize() takes no caller-identity argument and
+  is not treated as one. See
+  https://developer.atlassian.com/platform/forge/apis-reference/fetch-api-product-requestjira/,
+  https://developer.atlassian.com/platform/forge/app-context-security/,
+  https://developer.atlassian.com/platform/forge/manifest-reference/modules/rovo-action/ and
+  https://top10.owasp.org/2025/A01_2025-Broken_Access_Control/
+rule:
+  all:
+    - kind: call_expression
+    - any:
+        - all:
+            - has:
+                field: function
+                kind: member_expression
+                all:
+                  - has:
+                      field: object
+                      kind: identifier
+                      pattern: $API
+                  - has:
+                      field: property
+                      regex: ^asUser$
+            - inside:
+                stopBy: end
+                kind: program
+                has:
+                  kind: import_statement
+                  all:
+                    - has:
+                        field: source
+                        regex: '^["'']@forge/api["'']$'
+                    - has:
+                        kind: import_clause
+                        any:
+                          - has:
+                              kind: identifier
+                              pattern: $API
+                          - has:
+                              kind: namespace_import
+                              has:
+                                kind: identifier
+                                pattern: $API
+        - all:
+            - has:
+                field: function
+                kind: identifier
+                pattern: $ASUSER
+            - inside:
+                stopBy: end
+                kind: program
+                has:
+                  kind: import_statement
+                  all:
+                    - has:
+                        field: source
+                        regex: '^["'']@forge/api["'']$'
+                    - has:
+                        stopBy: end
+                        kind: import_specifier
+                        any:
+                          - all:
+                              - has:
+                                  field: name
+                                  pattern: $ASUSER
+                                  regex: ^asUser$
+                              - not:
+                                  has:
+                                    field: alias
+                                    kind: identifier
+                          - all:
+                              - has:
+                                  field: name
+                                  regex: ^asUser$
+                              - has:
+                                  field: alias
+                                  pattern: $ASUSER
+    - has:
+        field: arguments
+        has:
+          nthChild: 1
+          any:
+            - kind: member_expression
+              all:
+                - has:
+                    field: property
+                    regex: ^(accountId|userId|callerAccountId)$
+                - has:
+                    field: object
+                    any:
+                      - kind: identifier
+                        regex: ^(payload|inputs|modelOutput|toolArgs)$
+                      - pattern: request.payload
+                      - pattern: request.body
+                      - pattern: event.body
+            - kind: subscript_expression
+              all:
+                - has:
+                    field: index
+                    kind: string
+                    regex: '^["''](accountId|userId|callerAccountId)["'']$'
+                - has:
+                    field: object
+                    kind: identifier
+                    regex: ^(payload|inputs|modelOutput|toolArgs)$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

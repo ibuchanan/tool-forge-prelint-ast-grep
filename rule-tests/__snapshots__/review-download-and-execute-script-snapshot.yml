@@ -1,0 +1,152 @@
+id: review-download-and-execute-script
+snapshots:
+  "{\"scripts\":{\"postinstall\":\"wget -qO- https://example.com/tool.sh | sh\"}}":
+    labels:
+    - source: "\"wget -qO- https://example.com/tool.sh | sh\""
+      style: primary
+      start: 26
+      end: 70
+    - source: "{\"scripts\":{\"postinstall\":\"wget -qO- https://example.com/tool.sh | sh\"}}"
+      style: secondary
+      start: 0
+      end: 72
+    - source: "{\"scripts\":{\"postinstall\":\"wget -qO- https://example.com/tool.sh | sh\"}}"
+      style: secondary
+      start: 0
+      end: 72
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"postinstall\":\"wget -qO- https://example.com/tool.sh | sh\"}"
+      style: secondary
+      start: 1
+      end: 71
+    - source: "{\"postinstall\":\"wget -qO- https://example.com/tool.sh | sh\"}"
+      style: secondary
+      start: 11
+      end: 71
+    - source: "\"postinstall\":\"wget -qO- https://example.com/tool.sh | sh\""
+      style: secondary
+      start: 12
+      end: 70
+  "{\"scripts\":{\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\"}}":
+    labels:
+    - source: "\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\""
+      style: primary
+      start: 20
+      end: 75
+    - source: "{\"scripts\":{\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "{\"scripts\":{\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\"}"
+      style: secondary
+      start: 1
+      end: 76
+    - source: "{\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\"}"
+      style: secondary
+      start: 11
+      end: 76
+    - source: "\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\""
+      style: secondary
+      start: 12
+      end: 75
+  "{\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | bash\"}}":
+    labels:
+    - source: "\"curl -fsSL https://example.com/tool.sh | bash\""
+      style: primary
+      start: 20
+      end: 67
+    - source: "{\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | bash\"}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "{\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | bash\"}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | bash\"}"
+      style: secondary
+      start: 1
+      end: 68
+    - source: "{\"setup\":\"curl -fsSL https://example.com/tool.sh | bash\"}"
+      style: secondary
+      start: 11
+      end: 68
+    - source: "\"setup\":\"curl -fsSL https://example.com/tool.sh | bash\""
+      style: secondary
+      start: 12
+      end: 67
+  "{\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\"}}":
+    labels:
+    - source: "\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\""
+      style: primary
+      start: 20
+      end: 85
+    - source: "{\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\"}}"
+      style: secondary
+      start: 0
+      end: 87
+    - source: "{\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\"}}"
+      style: secondary
+      start: 0
+      end: 87
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"setup\":\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\"}"
+      style: secondary
+      start: 1
+      end: 86
+    - source: "{\"setup\":\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\"}"
+      style: secondary
+      start: 11
+      end: 86
+    - source: "\"setup\":\"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag\""
+      style: secondary
+      start: 12
+      end: 85
+  "{\"scripts\":{\"setup\":\"sh $(wget -qO- https://example.com/tool.sh)\"}}":
+    labels:
+    - source: "\"sh $(wget -qO- https://example.com/tool.sh)\""
+      style: primary
+      start: 20
+      end: 65
+    - source: "{\"scripts\":{\"setup\":\"sh $(wget -qO- https://example.com/tool.sh)\"}}"
+      style: secondary
+      start: 0
+      end: 67
+    - source: "{\"scripts\":{\"setup\":\"sh $(wget -qO- https://example.com/tool.sh)\"}}"
+      style: secondary
+      start: 0
+      end: 67
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"setup\":\"sh $(wget -qO- https://example.com/tool.sh)\"}"
+      style: secondary
+      start: 1
+      end: 66
+    - source: "{\"setup\":\"sh $(wget -qO- https://example.com/tool.sh)\"}"
+      style: secondary
+      start: 11
+      end: 66
+    - source: "\"setup\":\"sh $(wget -qO- https://example.com/tool.sh)\""
+      style: secondary
+      start: 12
+      end: 65

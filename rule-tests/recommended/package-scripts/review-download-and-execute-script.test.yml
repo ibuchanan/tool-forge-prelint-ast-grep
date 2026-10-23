@@ -1,0 +1,16 @@
+id: review-download-and-execute-script
+valid:
+  - '{"scripts":{"download":"curl -o tool.sh https://example.com/tool.sh"}}'
+  - '{"scripts":{"start":"sh scripts/local.sh"}}'
+  - '{"scripts":{"check":"curl -I https://example.com | head -1"}}'
+  - '{"description":"curl https://example.com/tool.sh | bash"}'
+  - '{"other":{"scripts":{"setup":"curl https://example.com/tool.sh | bash"}}}'
+  - '{"scripts":{"start":"bash -c echo"}}'
+  - '{"scripts":{"start":"curl https://example.com/check; bash local.sh"}}'
+  - '{"scripts":{"check":"wget -qO- https://example.com/file | wc -c"}}'
+invalid:
+  - '{"scripts":{"setup":"curl -fsSL https://example.com/tool.sh | bash"}}'
+  - '{"scripts":{"postinstall":"wget -qO- https://example.com/tool.sh | sh"}}'
+  - '{"scripts":{"setup":"curl -fsSL https://example.com/tool.sh | sudo bash -s -- --flag"}}'
+  - "{\"scripts\":{\"setup\":\"bash -c \\\"$(curl -fsSL https://example.com/tool.sh)\\\"\"}}"
+  - '{"scripts":{"setup":"sh $(wget -qO- https://example.com/tool.sh)"}}'
