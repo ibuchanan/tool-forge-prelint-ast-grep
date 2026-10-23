@@ -17,7 +17,10 @@ rule:
 files:
   - "**/frontend/index.tsx"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   category: frontend-ui
   references:
@@ -31,4 +34,4 @@ metadata:
   scope-profile:
     - unique
   scope-rationale: >-
-    Preserve only **/frontend/index.tsx, narrower than frontend scope and not restricted specifically to src/frontend. Node_modules is the only exclusion; tests, dist, coverage and specs may be scanned. The filename does not prove UI Kit runtime; ticket 08 owns normalization and real-file routing review.
+    Check only frontend/index.tsx entrypoints, not every frontend module, because registration is an entrypoint responsibility. Preserve this reviewed narrowing without claiming UI Kit identity from the path. Use the shared baseline and retain test-local entrypoints; other filenames and extensions remain outside scope.

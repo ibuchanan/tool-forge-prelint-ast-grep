@@ -41,6 +41,9 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: frontend-ui
   references:
@@ -52,6 +55,5 @@ metadata:
   impact-rationale: >-
     UI Kit component documentation supports its reconciler-based component model. Genuine unsupported native elements in a UI Kit root can prevent the app UI from rendering, a substantial application failure. This consequence does not apply to valid DOM rendering in Custom UI.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve **/frontend/** positive selection and node_modules-only exclusion, including tests and generated content. The directory does not establish UI Kit versus Custom UI. Missing dist, coverage and specs exclusions prevent a standard frontend/tests declaration; ticket 08 must review routing and runtime distinctions.
+    - frontend
+    - tests

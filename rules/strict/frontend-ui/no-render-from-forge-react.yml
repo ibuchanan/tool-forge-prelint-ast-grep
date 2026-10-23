@@ -22,6 +22,9 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: frontend-ui
   references:
@@ -33,6 +36,5 @@ metadata:
   impact-rationale: >-
     The UI Kit entrypoint reference specifies ForgeReconciler.render. Importing an unavailable legacy render export in a current UI Kit entrypoint can stop bundling or startup and prevent the whole UI from loading. The matcher does not inspect installed package versions or execute the app.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve **/frontend/** positive selection and node_modules-only exclusion, including tests and generated content. The directory does not establish UI Kit versus Custom UI. Missing dist, coverage and specs exclusions prevent a standard frontend/tests declaration; ticket 08 must review routing and runtime distinctions.
+    - frontend
+    - tests

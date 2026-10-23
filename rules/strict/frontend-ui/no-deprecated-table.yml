@@ -15,6 +15,9 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: frontend-ui
   references:
@@ -26,6 +29,5 @@ metadata:
   impact-rationale: >-
     The DynamicTable reference supports the replacement UI Kit component and its rendering/pagination features. Genuine legacy table usage can break the affected table or require migration, a bounded functionality consequence; a same-named local component does not establish that harm.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve **/frontend/** positive selection and node_modules-only exclusion, including tests and generated content. The directory does not establish UI Kit versus Custom UI. Missing dist, coverage and specs exclusions prevent a standard frontend/tests declaration; ticket 08 must review routing and runtime distinctions.
+    - frontend
+    - tests
