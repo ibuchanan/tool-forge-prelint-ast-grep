@@ -13,3 +13,17 @@ rule:
     - pattern: 'import $$$IMPORTS from "@forge/ui"'
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit-2/compare/
+  precision: high
+  precision-rationale: >-
+    Imports with bindings from exact @forge/ui directly violate the deprecated-package convention; @forge/react imports are negative. Tests do not cover aliases, namespace imports, both quote variants or side-effect imports; unrecognized forms are coverage gaps, not proof of a supported legacy runtime. Evidence: rule-tests/strict/imports/no-forge-ui-import.test.yml and rule-tests/__snapshots__/no-forge-ui-import-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    The UI Kit comparison reference documents migration from legacy @forge/ui to @forge/react. A genuine dependency on an unsupported legacy UI runtime can prevent the entire Forge UI from running on the supported platform. The matcher does not inspect deployment compatibility or establish immediate failure for every package version.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope, including frontend, backend and tests, with node_modules as the only exclusion. Dist, coverage and specs remain scanned; this is not a standard runtime profile and parser language is not runtime intent. Ticket 08 owns reviewed normalization.

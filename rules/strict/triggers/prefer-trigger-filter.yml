@@ -33,3 +33,17 @@ files:
   - "**/manifest.yaml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: triggers
+  references:
+    - https://developer.atlassian.com/platform/forge/events-reference/product-events/
+  precision: low
+  precision-rationale: >-
+    Trigger sequence items with events but no filter match, except items containing avi:forge events. Tests cover a filter, a lifecycle event and an unfiltered product trigger. A handler may legitimately process every event, as the note allows, and documented exemptions are not recognized; this ordinary compliant-match case is an untested assessment gap. Filter validity and selectivity are not checked. Evidence: rule-tests/strict/triggers/prefer-trigger-filter.test.yml and rule-tests/__snapshots__/prefer-trigger-filter-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    Product-event documentation explains manifest filtering before invocation. Genuinely avoidable invocations can add compute cost and operational load, a bounded consumption consequence; not every unfiltered trigger has irrelevant events or warrants a filter.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve manifest.yml/manifest.yaml selection with only node_modules ignored and tests included. Dist, coverage and specs exclusions required by [manifest, tests] are absent. Ticket 08 owns the reviewed native-scope change; this exception does not change trigger behavior.

@@ -22,3 +22,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: frontend-ui
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+  precision: high
+  precision-rationale: >-
+    Named render imports from the exact @forge/react package directly violate the stated import convention; ForgeReconciler imports are negative. Tests cover sole/leading render imports, not every ordering or quote branch; aliases and namespace access are coverage gaps rather than evidence of valid matching imports. Evidence: rule-tests/strict/frontend-ui/no-render-from-forge-react.test.yml and rule-tests/__snapshots__/no-render-from-forge-react-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    The UI Kit entrypoint reference specifies ForgeReconciler.render. Importing an unavailable legacy render export in a current UI Kit entrypoint can stop bundling or startup and prevent the whole UI from loading. The matcher does not inspect installed package versions or execute the app.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/frontend/** positive selection and node_modules-only exclusion, including tests and generated content. The directory does not establish UI Kit versus Custom UI. Missing dist, coverage and specs exclusions prevent a standard frontend/tests declaration; ticket 08 must review routing and runtime distinctions.

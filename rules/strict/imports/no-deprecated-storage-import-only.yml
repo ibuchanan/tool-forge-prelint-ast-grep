@@ -14,3 +14,17 @@ rule:
     - pattern: 'import { storage } from "@forge/api"'
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/storage-api/
+  precision: high
+  precision-rationale: >-
+    The sole named storage import from exact @forge/api matches; the same name from @forge/kvs is negative. The sibling variadic rule targets mixed imports and may overlap sole imports; it is not a language companion. Aliased/type-only forms and double-quote matching are not covered by this test. Evidence: rule-tests/strict/imports/no-deprecated-storage-import-only.test.yml and rule-tests/__snapshots__/no-deprecated-storage-import-only-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    The storage API reference documents @forge/kvs as the replacement for legacy @forge/api storage. Genuine legacy usage incurs migration work and misses newer supported storage capabilities, a bounded maintenance/delivery consequence; deprecation alone does not prove data loss or immediate runtime failure.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope, including frontend, backend and tests, with node_modules as the only exclusion. Dist, coverage and specs remain scanned; this is not a standard runtime profile and parser language is not runtime intent. Ticket 08 owns reviewed normalization.

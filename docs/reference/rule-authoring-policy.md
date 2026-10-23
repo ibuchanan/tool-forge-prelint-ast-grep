@@ -490,6 +490,107 @@ All 206 consumer rule tests, tooling/security routing fixtures, native authoring
 value, orchestration and recipe suites pass. Review judgments and untested gaps
 are distinct from these structural and behavioral checks.
 
+## Ticket 05 remaining strict migration
+
+As of 2026-10-23, the remaining 32 strict definitions satisfy the metadata
+contract without allowances: API usage (9), frontend UI (4), imports (11),
+package JSON (1), performance (1), runtime boundaries (5), and triggers (1).
+Removing their 271 frozen diagnostics leaves 943 diagnostics across 110
+unchanged legacy definitions in other tiers. The orchestration regression
+requires zero findings and zero allowance rows for this batch, including
+future non-security strict definitions.
+
+### Assessment and companion review
+
+Every definition cites its existing positive/negative test and match snapshot.
+Category and reference edits use the explicit yq recipes; references are selected
+from the existing Forge sources plus OWASP 2025 injection guidance and CWE-89
+for dynamic SQL. Reference validation is offline, not fresh reachability evidence.
+Only the three SQL rules receive security classifications: `A05:2025` and
+`CWE-89`. No exact module tags are warranted for these cross-cutting policies.
+
+- SQL TS/TSX/JS matchers and scopes are identical after removing ID and parser
+  declarations. Their ratings, references and classifications agree. Imported
+  aliases are recognized, but controlled identifiers can be legitimate and
+  shadowing, trust and dataflow remain unresolved; precision is medium, not
+  proof of exploitable injection. Generic type arguments appear only in the
+  TS/TSX test examples; JS has an equivalent non-generic example.
+- Six import/runtime-boundary TS/TSX pairs have equivalent matchers and scope;
+  metadata differs only in actual evidence paths. The two storage-import
+  definitions are same-language structural variants, not language companions;
+  their patterns may overlap. Existing tests demonstrate mixed and sole imports
+  separately, not disjointness.
+- Name-based API requests cannot prove imported client identity or authorization
+  context. A route variable may already be validated. Existing notes about
+  native-fetch availability and absolute-URL egress bypass remain unchanged, but
+  neither stronger claim is established by these matchers/tests. Metadata records
+  conditional integration failures rather than asserting platform bypasses.
+- Frontend paths alone do not distinguish UI Kit from Custom UI. Local `Table`
+  components, legitimate DOM rendering, aliased/delegated reconciler registration,
+  erased type imports, pure modules and unresolved paths require context. The
+  fixed component export list can lag documented releases. These limitations
+  prevent treating every matching name or path as a proven runtime failure.
+- Missing storage limits do not establish unlimited scans or large read volume.
+  HTTP-client dependencies may have legitimate uses and the matcher also sees
+  string values. Unfiltered triggers may deliberately process every event, as
+  their preserved note permits; their broad recommendation has low precision.
+  Inline rationales distinguish tested examples from these untested gaps.
+
+### Reviewed legacy scope
+
+All 32 definitions deliberately retain `[unique]`, not inferred standard scope:
+
+- Most frontend, import and boundary rules ignore only node_modules. Tests and
+  generated files remain in scope; dist, coverage and specs exclusions are missing.
+- Backend entrypoint selectors add `src/index.ts` but omit standard backend
+  directories. Native-fetch selects only resolvers/external/import-lifecycle.
+- Other API rules exclude frontend and `.test.ts`/`.test.tsx` rather than selecting
+  standard backend directories. Performance/native-fetch exclusions add spec
+  suffixes but still omit the full baseline and test-directory sets.
+- SQL rules additionally exclude dist, build, test/spec suffixes and `__tests__`,
+  but not coverage, specs or unsuffixed test/tests directories.
+- Package and manifest rules include tests but lack the shared baseline beyond
+  node_modules. The reconciler rule selects only `**/frontend/index.tsx`.
+
+Each rule records its specific exception. Ticket 08 owns normalization and
+routing changes; a unique declaration does not validate runtime identity.
+
+### Advisory severity differences
+
+No current severity changes. Ticket 09 must review these 24 matrix differences:
+
+| Definitions                                                   | Precision | Impact | Current | Candidate |
+| ------------------------------------------------------------- | --------- | ------ | ------- | --------- |
+| API URL, port, HTTP, native-fetch and authorization rules (5) | medium    | medium | error   | warning   |
+| Route-template rule (1)                                       | medium    | high   | error   | warning   |
+| Deprecated Table (1)                                          | medium    | medium | error   | warning   |
+| Native HTML and missing reconciler registration (2)           | medium    | high   | error   | warning   |
+| Legacy storage-import variants (2)                            | high      | medium | error   | warning   |
+| Frontend API/KVS and backend Bridge imports (5)               | medium    | high   | error   | warning   |
+| Fixed UI Kit export allowlist (2)                             | medium    | medium | error   | warning   |
+| Runtime-boundary path imports (5)                             | medium    | high   | error   | warning   |
+| Trigger-filter recommendation (1)                             | low       | medium | warning | info      |
+
+The other eight definitions agree with the matrix. High conditional impact
+requires genuine unsupported runtime code, absent UI registration or untrusted
+SQL/path text, not merely a suspicious syntax match.
+
+### Verification
+
+The user approved authoring output/exit status, metadata-document contracts and
+unchanged consumer behavior as the public test seams. The retained regression
+failed first on 271 frozen findings, then on stale allowance rows. Seven category
+slices failed on copied, unallowlisted definitions before their metadata edits
+and passed afterward; the regression passes after allowance removal.
+
+All 32 parsed documents excluding metadata equal their pre-migration versions.
+Original non-metadata presentation is retained as well. IDs, parsers, matchers,
+utilities, fixes, messages, notes, files/ignores and severities remain unchanged.
+Consumer test files, snapshots, configurations, dependencies and lockfile are
+unchanged. All 206 consumer tests, real-file tooling/security fixtures, native
+self-checks, value/orchestration/recipe suites, formatting and shell checks pass.
+No companion subsystem, scope inference or parallel assessment store is added.
+
 ## Model references
 
 - [ast-grep rule configuration](https://ast-grep.github.io/reference/yaml.html)

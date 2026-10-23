@@ -28,3 +28,17 @@ ignores:
   - "**/*.test.tsx"
   - "**/*.spec.ts"
   - "**/*.spec.tsx"
+metadata:
+  category: api-usage
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/fetch-api/
+  precision: medium
+  precision-rationale: >-
+    Bare one/two-argument fetch calls match and api.fetch/asUser fetch examples are negative. The matcher cannot distinguish the global API from a correctly imported or locally wrapped fetch; those compliant bindings are an untested gap. The preserved note about native-fetch availability is not established by syntax or these tests. Evidence: rule-tests/strict/api-usage/no-native-fetch-in-resolvers.test.yml and rule-tests/__snapshots__/no-native-fetch-in-resolvers-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    The Forge Fetch API reference supports using the platform client for backend HTTP and egress integration. A genuinely incompatible client can fail the affected backend request; a bare call alone proves neither missing authentication nor that native fetch is unavailable in every runtime version.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve positive selection of resolvers, external and import-lifecycle only; backend directories and src/index.ts are not selected. Ignores contain node_modules and test/spec.ts/tsx suffixes, but omit dist, coverage, specs, __tests__, test and tests. This is not the full standard backend profile; ticket 08 owns routing review.

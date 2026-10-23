@@ -17,3 +17,17 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"
+metadata:
+  category: api-usage
+  references:
+    - https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/#https-only
+  precision: medium
+  precision-rationale: >-
+    Quoted http:// arguments on fetch and the listed api receivers match; HTTPS, WSS and variable arguments are negative. Function/import identity is not checked, so local clients with the same names are an untested compliant-match gap; dynamic URLs are not analyzed. Evidence: rule-tests/strict/api-usage/no-http-fetch-url.test.yml and rule-tests/__snapshots__/no-http-fetch-url-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    The runtime HTTPS-only contract supports deployment-time rejection of genuine plain-HTTP egress. Repeated failed calls can break the affected integration, a bounded reliability consequence; a finding is not proof that the platform sends cleartext traffic.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive TypeScript scope with frontend excluded, not the standard backend directory selection. Legacy ignores contain only node_modules, frontend and *.test.ts/tsx; dist, coverage, specs, *.spec.*, __tests__, test and tests remain scanned. Ticket 08 owns reviewed normalization; no runtime is inferred from the parser.

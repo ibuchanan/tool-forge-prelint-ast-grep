@@ -98,4 +98,14 @@ if grep -q '^rules/strict/security/' authoring/legacy-allowances.tsv; then
   printf 'Migrated strict security rules still have legacy allowances.\n' >&2
   exit 1
 fi
+# The remaining strict categories are migrated too, including future definitions.
+strict_rules=()
+for rule in rules/strict/*/*.yml; do
+  [[ $rule == rules/strict/security/* ]] || strict_rules+=("$rule")
+done
+run_check 0 'Authoring checks passed (0 frozen legacy findings' "${strict_rules[@]}"
+if awk -F '\t' '$1 ~ /^rules\/strict\// && $1 !~ /^rules\/strict\/security\// { found = 1 } END { exit !found }' authoring/legacy-allowances.tsv; then
+  printf 'Migrated non-security strict rules still have legacy allowances.\n' >&2
+  exit 1
+fi
 printf 'Authoring orchestration checks passed.\n'

@@ -34,3 +34,17 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"
+metadata:
+  category: api-usage
+  references:
+    - https://developer.atlassian.com/platform/forge/apis-reference/product-rest-api-reference/
+  precision: medium
+  precision-rationale: >-
+    Direct api product methods and bare named product requests match while asUser/asApp examples are negative. Import provenance and locally bound wrappers are unresolved; a bare wrapper may already supply authorization, an untested compliant-match gap. The rule does not prove an authorization bypass. Evidence: rule-tests/strict/api-usage/require-as-user-or-as-app.test.yml and rule-tests/__snapshots__/require-as-user-or-as-app-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    The product REST reference defines explicit user/app authorization contexts. Genuine misuse can fail API requests or select the wrong intended principal, disrupting the affected workflow. No request execution, privileges or unauthorized access is demonstrated by a name-only match.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive TypeScript scope with frontend excluded, not the standard backend directory selection. Legacy ignores contain only node_modules, frontend and *.test.ts/tsx; dist, coverage, specs, *.spec.*, __tests__, test and tests remain scanned. Ticket 08 owns reviewed normalization; no runtime is inferred from the parser.

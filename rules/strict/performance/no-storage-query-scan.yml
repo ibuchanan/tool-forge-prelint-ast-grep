@@ -22,3 +22,17 @@ ignores:
   - "**/*.test.tsx"
   - "**/*.spec.ts"
   - "**/*.spec.tsx"
+metadata:
+  category: performance
+  references:
+    - https://developer.atlassian.com/platform/forge/optimise-forge-costs/
+  precision: medium
+  precision-rationale: >-
+    storage/kvs query chains ending in getMany without a visible limit match. Tests cover predicates/orderBy, explicit limits at different positions and non-query storage calls. Import provenance, default platform bounds, query selectivity and result volume are unresolved; small/default-bounded queries are untested compliant-match distinctions. Evidence: rule-tests/strict/performance/no-storage-query-scan.test.yml and rule-tests/__snapshots__/no-storage-query-scan-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    Forge cost guidance recommends bounding storage reads and paginating. Genuinely broad repeated queries can increase read consumption and latency, a bounded cost/reliability problem. A missing explicit limit alone does not prove an unlimited scan, large result volume or substantial resource exhaustion.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive TypeScript scope; only node_modules and test/spec.ts/tsx suffixes are ignored. Dist, coverage, specs, __tests__, test and tests remain scanned. Parser language does not select backend runtime; this reviewed unique legacy exception awaits ticket 08.

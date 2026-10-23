@@ -15,3 +15,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: runtime-boundaries
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+  precision: medium
+  precision-rationale: >-
+    Import paths containing a resolvers suffix segment match in frontend files; tests cover direct/index resolver paths and bridge/util negatives. Filesystem identity, path aliases, pure shared code and erased type imports are not resolved; similarly named packages and type-only imports are untested compliant-match distinctions. Evidence: rule-tests/strict/runtime-boundaries/no-resolver-import-in-frontend-tsx.test.yml and rule-tests/__snapshots__/no-resolver-import-in-frontend-tsx-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    UI Kit guidance routes frontend calls to backend resolvers through bridge. Actually bundling resolver runtime APIs into the frontend can break the entire app UI at build/startup. A path-name match does not establish execution, privileged access or sensitive-data exposure.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.

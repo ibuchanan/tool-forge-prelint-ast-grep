@@ -19,3 +19,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+  precision: medium
+  precision-rationale: >-
+    Exact @forge/api import patterns are selected in frontend paths; the test distinguishes an api import from bridge invoke. Runtime-bearing imports violate the frontend boundary, but erased type-only imports and non-runtime frontend content are untested compliant-match distinctions. Namespace/side-effect/quote variants lack dedicated tests; no module-resolution analysis occurs. Evidence: rule-tests/strict/imports/no-forge-api-in-frontend.test.yml and rule-tests/__snapshots__/no-forge-api-in-frontend-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    UI Kit guidance separates frontend bridge access from backend Forge APIs. Actually bundling backend-only runtime code into the UI can prevent the application frontend from building or loading. The import spelling alone does not establish that erased types contribute runtime code.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.

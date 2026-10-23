@@ -23,3 +23,17 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: package-json
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/fetch-api/
+  precision: medium
+  precision-rationale: >-
+    Exact listed client names beneath a dependencies pair match; tests cover production clients, devDependencies, other packages and partial-name negatives. The matcher also accepts matching string values, not just dependency keys. Actual usage, frontend/backend needs and legitimate multipart/polyfill requirements are untested contextual gaps; presence alone does not prove an incompatible client. Evidence: rule-tests/strict/package-json/prefer-forge-fetch.test.yml and rule-tests/__snapshots__/prefer-forge-fetch-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    The Forge Fetch API reference supplies built-in HTTP/product request capabilities. A genuinely unnecessary or incompatible third-party client can add bundle weight or break affected backend HTTP integration, a bounded delivery/reliability cost. Package presence proves neither missing authorization nor bypass of network policy.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/package.json selection with only node_modules ignored. Tests are intentionally included, but dist, coverage and specs exclusions are missing versus [package-json, tests]. This reviewed unique legacy scope remains unchanged pending ticket 08.

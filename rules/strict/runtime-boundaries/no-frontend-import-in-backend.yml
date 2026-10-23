@@ -19,3 +19,17 @@ files:
   - "**/src/index.ts"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: runtime-boundaries
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/get-started-with-ui/
+  precision: medium
+  precision-rationale: >-
+    Import paths containing a frontend suffix segment match in selected backend locations. Tests contrast frontend and frontend/components imports with util and @forge/api. Filesystem resolution, pure shared modules, type-only imports and transitive browser dependencies are not examined; similarly named packages are an untested compliant-match gap. Evidence: rule-tests/strict/runtime-boundaries/no-frontend-import-in-backend.test.yml and rule-tests/__snapshots__/no-frontend-import-in-backend-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    The UI Kit get-started reference separates frontend and backend code. Genuinely importing browser-only dependencies into a backend root can prevent backend startup or resolver execution, causing substantial application failure. A frontend-looking path alone does not demonstrate a browser-only dependency.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve resolvers, external, import-lifecycle and **/src/index.ts selection. The standard backend profile includes backend directories instead of the entrypoint exception; only node_modules is ignored, leaving tests, dist, coverage and specs scanned. Ticket 08 owns routing review; this unique legacy declaration preserves current behavior.

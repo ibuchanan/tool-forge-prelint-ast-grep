@@ -19,3 +19,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/storage-api-custom-entities/
+  precision: medium
+  precision-rationale: >-
+    Exact @forge/kvs import patterns are selected in frontend paths; the test distinguishes a kvs import from bridge invoke. Type-only imports can disappear before runtime, and frontend directory identity is not a runtime proof; these are untested contextual distinctions. Side-effect, namespace and quote branches lack dedicated tests. Evidence: rule-tests/strict/imports/no-forge-kvs-in-frontend.test.yml and rule-tests/__snapshots__/no-forge-kvs-in-frontend-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    Forge storage documentation places data operations in the backend runtime. Actually bundling backend storage APIs into a browser UI can prevent application startup or storage-backed UI operation; use a bridge resolver instead. A source import alone does not prove runtime execution or data exposure.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.

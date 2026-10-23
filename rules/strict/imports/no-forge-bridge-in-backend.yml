@@ -24,3 +24,17 @@ files:
   - "**/src/index.ts"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/apis-reference/ui-api-bridge/bridge/
+  precision: medium
+  precision-rationale: >-
+    Exact @forge/bridge imports match in selected backend paths, while @forge/api is negative. The matcher does not resolve erased type-only imports or whether a selected file is bundled as backend; those are untested compliant-match distinctions. Side-effect, namespace and quote variants lack dedicated tests. Evidence: rule-tests/strict/imports/no-forge-bridge-in-backend.test.yml and rule-tests/__snapshots__/no-forge-bridge-in-backend-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    The Bridge reference defines frontend interaction with Atlassian host APIs. Executing browser-only bridge dependencies in a backend entrypoint can prevent backend startup or resolver operation, a substantial app failure. Erased imports and unused modules need not cause this consequence.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve resolvers, external, import-lifecycle and **/src/index.ts selection. The standard backend profile includes backend directories instead of the entrypoint exception; only node_modules is ignored, leaving tests, dist, coverage and specs scanned. Ticket 08 owns routing review; this unique legacy declaration preserves current behavior.

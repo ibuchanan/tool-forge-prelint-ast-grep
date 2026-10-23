@@ -40,3 +40,17 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"
+metadata:
+  category: api-usage
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/product-fetch-api/
+  precision: medium
+  precision-rationale: >-
+    Bare product request calls with an unrecognized first argument match; direct route templates and assumeTrustedRoute calls are negative. Variables holding an already validated route, same-named local functions, qualified receivers and interprocedural flows are not resolved; validated variables are an untested compliant-match gap. Evidence: rule-tests/strict/api-usage/require-route-template.test.yml and rule-tests/__snapshots__/require-route-template-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    The product-fetch reference explains route construction and encoding of untrusted path/query values. If raw untrusted values redirect a privileged product request, unauthorized records can be read or changed. This conditional high-impact path-manipulation risk is not proof that every matched argument is unvalidated.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive TypeScript scope with frontend excluded, not the standard backend directory selection. Legacy ignores contain only node_modules, frontend and *.test.ts/tsx; dist, coverage, specs, *.spec.*, __tests__, test and tests remain scanned. Ticket 08 owns reviewed normalization; no runtime is inferred from the parser.

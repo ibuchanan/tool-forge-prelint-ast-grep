@@ -18,3 +18,17 @@ files:
   - "**/frontend/index.tsx"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: frontend-ui
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/get-started-with-ui/
+  precision: medium
+  precision-rationale: >-
+    A program without a literal ForgeReconciler.render call matches; tests distinguish a direct render from a component export without registration. Aliased reconcilers, delegated registration and Custom UI entrypoints are not resolved and may comply without that spelling; these are untested contextual gaps. Evidence: rule-tests/strict/frontend-ui/require-forge-reconciler-render.test.yml and rule-tests/__snapshots__/require-forge-reconciler-render-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    The UI Kit get-started reference requires root registration to render the app. A genuinely unregistered UI Kit entrypoint leaves the app UI unavailable. A missing literal call alone does not prove that registration is absent through an alias or helper.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve only **/frontend/index.tsx, narrower than frontend scope and not restricted specifically to src/frontend. Node_modules is the only exclusion; tests, dist, coverage and specs may be scanned. The filename does not prove UI Kit runtime; ticket 08 owns normalization and real-file routing review.

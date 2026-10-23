@@ -21,3 +21,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/components/
+  precision: medium
+  precision-rationale: >-
+    Named imports outside a fixed export list match; Button/Pressable are negative and OldComponent is positive. The note allows newly released exports that the list has not caught up with, so absence from the list is not proof of an unsupported API. Source matching is a broad @forge/react regex, not exact package resolution; new exports, aliases and similarly named packages are untested contextual gaps. Evidence: rule-tests/strict/imports/no-unapproved-forge-react-components-tsx.test.yml and rule-tests/__snapshots__/no-unapproved-forge-react-components-tsx-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    UI Kit component documentation is the source of supported exports. A genuinely unavailable component import can fail the affected frontend build/render, a bounded delivery/functionality problem. A stale local allowlist alone does not establish that the platform export is unavailable.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.

@@ -17,3 +17,17 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.test.tsx"
+metadata:
+  category: api-usage
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/product-fetch-api/
+  precision: medium
+  precision-rationale: >-
+    Quoted absolute/protocol-relative arguments to named product requests and assumeTrustedRoute are detected; relative route and trusted-route examples are negative. Receiver/import identity and computed URLs are not resolved; local same-named functions are an untested compliant-match gap. A match does not establish an actual egress bypass. Evidence: rule-tests/strict/api-usage/no-absolute-urls-in-api.test.yml and rule-tests/__snapshots__/no-absolute-urls-in-api-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    The product-fetch reference requires product-relative routes. Genuine absolute arguments can reject product requests and break the affected integration workflow; this bounded request failure does not by itself prove unauthorized access or bypass of platform egress enforcement.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive TypeScript scope with frontend excluded, not the standard backend directory selection. Legacy ignores contain only node_modules, frontend and *.test.ts/tsx; dist, coverage, specs, *.spec.*, __tests__, test and tests remain scanned. Ticket 08 owns reviewed normalization; no runtime is inferred from the parser.

@@ -16,3 +16,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: runtime-boundaries
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/
+  precision: medium
+  precision-rationale: >-
+    Relative imports escaping into external, import-lifecycle or queues names match. Tests distinguish those paths from components, util and the separately checked resolvers. No filesystem or transitive dependency resolution establishes backend runtime content; same-named pure modules, type-only imports and path aliases are untested contextual distinctions. Evidence: rule-tests/strict/runtime-boundaries/no-frontend-escape-imports-tsx.test.yml and rule-tests/__snapshots__/no-frontend-escape-imports-tsx-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    UI Kit frontend/backend separation supports calling backend code through bridge. A genuine runtime boundary escape can pull backend-only APIs into the browser and prevent application UI startup. Pure shared modules or erased type imports do not necessarily have this consequence; naming alone proves no sensitive-data leak.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.

@@ -80,3 +80,21 @@ ignores:
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+metadata:
+  category: api-usage
+  references:
+    - https://developer.atlassian.com/platform/forge/storage-reference/sql-api/
+    - https://top10.owasp.org/2025/A05_2025-Injection/
+    - https://cwe.mitre.org/data/definitions/89.html
+  precision: medium
+  precision-rationale: >-
+    Imported default/named @forge/sql client aliases with direct interpolated or concatenated prepare/executeRaw arguments match. Tests distinguish fixed/bound SQL, unrelated clients, non-sql named imports and query variables. Controlled identifiers may be compliant; source trust, allowlisting, lexical shadowing and cross-file flows are not resolved. Those safety distinctions are untested gaps, not proven injection. Evidence: rule-tests/strict/api-usage/review-dynamic-forge-sql.test.yml and rule-tests/__snapshots__/review-dynamic-forge-sql-snapshot.yml.
+  impact: high
+  impact-rationale: >-
+    Forge SQL binding guidance, OWASP injection guidance and CWE-89 support the risk: untrusted text interpreted as SQL structure can read or alter records under the connection privileges. Interpolation alone does not establish attacker control, query execution or exploitable SQL injection.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope with node_modules, dist, build, *.test.*, *.spec.* and __tests__ excluded. Coverage, specs and test/tests directories remain scanned unless suffix exclusions apply; build is an extra exclusion versus the shared baseline. All three companions retain this reviewed legacy exception pending ticket 08.
+  owasp: A05:2025 - Injection
+  cwe: "CWE-89: Improper Neutralization of Special Elements used in an SQL Command"
