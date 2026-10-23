@@ -32,7 +32,10 @@ rule:
 files:
   - "**/tsconfig.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Tests require a literal src array entry, permit additional entries and skip extends. Default discovery, src glob equivalents, files lists and alternate handler directories are untested gaps; missing this exact text need not leave handlers unchecked. Evidence: rule-tests/recommended/typescript/require-tsconfig-include-src.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-include-src-snapshot.yml."
@@ -40,7 +43,7 @@ metadata:
   impact-rationale: Actually excluding handler sources from local compilation can leave type errors undiscovered until bundling or execution. TypeScript file-discovery documentation supports the consequence, but the matcher cannot inspect handlers or effective project coverage.
   scope-profile:
     - unique
-  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.json, not arbitrary extended/compiler config names. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   category: typescript
   references:
     - https://www.typescriptlang.org/tsconfig/#include

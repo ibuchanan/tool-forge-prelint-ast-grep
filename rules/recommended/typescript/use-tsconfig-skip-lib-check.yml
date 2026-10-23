@@ -31,7 +31,10 @@ rule:
 files:
   - "**/tsconfig.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests compare explicit true with false/absence and skip extends. Full declaration checking is legitimate and can catch real incompatibilities; performance and third-party declaration failures are untested gaps rather than proven violations. Evidence: rule-tests/recommended/typescript/use-tsconfig-skip-lib-check.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-skip-lib-check-snapshot.yml."
@@ -39,7 +42,7 @@ metadata:
   impact-rationale: Checking dependency declaration files may increase local typecheck time or expose third-party diagnostics. TypeScript documents the speed-versus-accuracy tradeoff; enabling skipLibCheck can hide errors, so this is tooling advice, not mandatory correctness.
   scope-profile:
     - unique
-  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.json, not arbitrary extended/compiler config names. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   category: typescript
   references:
     - https://www.typescriptlang.org/tsconfig/#skipLibCheck

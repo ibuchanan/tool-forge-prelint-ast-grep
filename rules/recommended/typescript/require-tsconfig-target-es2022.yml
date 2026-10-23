@@ -32,7 +32,10 @@ rule:
 files:
   - "**/tsconfig.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Tests compare exact ES2022 with other/missing targets and skip extends. Older compatible emit targets, alternate runtimes and build overrides are untested gaps. The preserved Node 18 assertion is not verified by metadata migration. Evidence: rule-tests/recommended/typescript/require-tsconfig-target-es2022.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-target-es2022-snapshot.yml."
@@ -40,7 +43,7 @@ metadata:
   impact-rationale: A genuinely unsupported emitted syntax target can cause build or execution failures. TypeScript target documentation explains downleveling; a lower compatible target is not inherently a Forge runtime violation.
   scope-profile:
     - unique
-  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.json, not arbitrary extended/compiler config names. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   category: typescript
   references:
     - https://www.typescriptlang.org/tsconfig/#target

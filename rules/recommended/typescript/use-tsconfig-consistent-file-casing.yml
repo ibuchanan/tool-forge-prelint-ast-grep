@@ -32,7 +32,10 @@ rule:
 files:
   - "**/tsconfig.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests recognize explicit true, false/absence and extends backoff. The note permits omission; compiler-version defaults and actual casing inconsistencies are untested gaps. A missing explicit option routinely matches otherwise working projects. Evidence: rule-tests/recommended/typescript/use-tsconfig-consistent-file-casing.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-consistent-file-casing-snapshot.yml."
@@ -40,7 +43,7 @@ metadata:
   impact-rationale: Actual path-case inconsistencies can break imports on case-sensitive CI or deployment filesystems. TypeScript documents the check, but absence of explicit true does not establish such an inconsistency or whether the effective default is already true.
   scope-profile:
     - unique
-  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.json, not arbitrary extended/compiler config names. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   category: typescript
   references:
     - https://www.typescriptlang.org/tsconfig/#forceConsistentCasingInFileNames

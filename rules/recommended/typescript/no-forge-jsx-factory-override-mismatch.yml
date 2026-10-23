@@ -21,7 +21,10 @@ rule:
 files:
   - "**/tsconfig.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Tests distinguish explicit factory/fragment-factory declarations from no pragma. The matcher does not establish UI Kit 2 usage, automatic runtime settings or the property value; legitimate non-UI-Kit JSX factories remain an untested gap. Unlike sibling config checks it does not back off on extends. Evidence: rule-tests/recommended/typescript/no-forge-jsx-factory-override-mismatch.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-forge-jsx-factory-override-mismatch-snapshot.yml."
@@ -29,7 +32,7 @@ metadata:
   impact-rationale: A genuinely incompatible legacy JSX factory in a UI Kit 2 build can prevent UI rendering through createElement failures, as the linked community incident illustrates. Declaring any factory in an arbitrary tsconfig does not prove that incident applies.
   scope-profile:
     - unique
-  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.json, not arbitrary extended/compiler config names. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   category: typescript
   references:
     - https://community.developer.atlassian.com/t/forgeui-ui-kit-2-with-typescript-runtime-error-i-default-createelement-is-not-a-function/75838
