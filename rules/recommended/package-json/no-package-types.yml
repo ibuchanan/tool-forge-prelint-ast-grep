@@ -22,14 +22,17 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "The root package object directly declares types in tests, but the matcher cannot establish deployable identity or inspect a neighboring manifest. Internal libraries legitimately declare this field; their treatment and package self-reference uses remain assessment gaps. Evidence: rule-tests/recommended/package-json/no-package-types.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-package-types-snapshot.yml."
   impact: low
   impact-rationale: Library-facing metadata on a deployable can mislead maintainers about its entrypoint/consumer contract. Official npm documentation describes these fields, but harmless unused fields do not establish a build or runtime failure; shared library packages may require them.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+    - package-json
+    - tests
   category: package-json
   references:
     - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#types

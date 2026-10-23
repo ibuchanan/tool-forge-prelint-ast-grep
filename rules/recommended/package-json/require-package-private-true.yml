@@ -26,12 +26,7 @@ metadata:
     and recovery problem. Sensitive-data exposure is not assumed for every app.
   references:
     - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private
-  scope-profile: [unique]
-  scope-rationale: >
-    Preserve **/package.json selection and only the node_modules exclusion for
-    this metadata-only pilot. The standard subject is package-json, but dist,
-    coverage, specs, and test-local package files remain scanned. Ticket 08 must
-    review normalization before replacing this legacy scope with a standard profile.
+  scope-profile: [package-json, tests]
 rule:
   kind: object
   inside:
@@ -45,3 +40,6 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
