@@ -27,17 +27,17 @@ metadata:
   references:
     - https://developer.atlassian.com/platform/forge/runtime-reference/forge-resolver/
     - https://cwe.mitre.org/data/definitions/798.html
-  scope-profile: [unique]
-  scope-rationale: >
-    Preserve legacy unrestricted positive scope, node_modules exclusion, and
-    only .test.tsx/.spec.tsx test exclusions for this metadata-only pilot. dist,
-    coverage, specs, other test suffixes, and test directories remain scanned.
-    This differs from the shared sets and the TypeScript companion's suffixes;
-    ticket 08 must review normalization rather than treating this as permanent approval.
+  scope-profile: [frontend, backend]
 rule:
   kind: string
   regex: '\b(ATATT3xFfG[a-zA-Z0-9_\-=]{20,})\b'
 ignores:
   - "**/node_modules/**"
-  - "**/*.test.tsx"
-  - "**/*.spec.tsx"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"

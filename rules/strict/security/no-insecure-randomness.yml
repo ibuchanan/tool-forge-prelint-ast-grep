@@ -38,14 +38,8 @@ metadata:
     - https://nodejs.org/api/crypto.html#cryptorandombytessize-callback
     - https://cwe.mitre.org/data/definitions/338.html
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve unrestricted positive source scope across frontend, backend and
-    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
-    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
-    test/tests directories without those suffixes remain scanned, while build is
-    additionally excluded. This reviewed migration exception preserves behavior
-    only; ticket 08 must review normalization.
+    - frontend
+    - backend
 rule:
   pattern: Math.random()
   inside:
@@ -91,7 +85,10 @@ utils:
 ignores:
   - "**/node_modules/**"
   - "**/dist/**"
-  - "**/build/**"
+  - "**/coverage/**"
+  - "**/specs/**"
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"

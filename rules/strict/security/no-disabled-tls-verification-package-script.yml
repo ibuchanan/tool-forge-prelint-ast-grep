@@ -32,6 +32,9 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: security
   precision: medium
@@ -58,12 +61,7 @@ metadata:
     - https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/
     - https://cwe.mitre.org/data/definitions/295.html
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve package.json-only positive scope and the sole node_modules
-    exclusion. All test, dist, build, coverage and specs package files remain in
-    scope. This is not standard [package-json, tests], whose baseline exclusions
-    are absent. Unlike source companions this rule parses JSON script text, not
-    client imports; ticket 08 must separately review routing normalization.
+    - package-json
+    - tests
   owasp: "A04:2025 - Cryptographic Failures"
   cwe: "CWE-295: Improper Certificate Validation"

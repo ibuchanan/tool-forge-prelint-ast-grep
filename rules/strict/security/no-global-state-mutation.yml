@@ -43,10 +43,16 @@ rule:
     - kind: call_expression
       regex: '^global(This)?\.[A-Za-z_$][A-Za-z0-9_$]*\.(set|add|delete|clear|push|pop|shift|unshift|splice)\s*\('
 ignores:
-  - "**/node_modules/**"
+  - "**/*.spec.*"
+  - "**/*.test.*"
+  - "**/__tests__/**"
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/frontend/**"
-  - "**/*.test.ts"
-  - "**/*.spec.ts"
+  - "**/node_modules/**"
+  - "**/specs/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   category: security
   references:
@@ -72,10 +78,4 @@ metadata:
   scope-profile:
     - unique
   scope-rationale: >-
-    Preserve legacy TypeScript-only scanning with unrestricted positive scope
-    minus frontend paths, node_modules and .test.ts/.spec.ts filenames. This is
-    a backend-intended exclusion boundary, not the standard backend
-    positive-directory selection. dist, build, coverage, specs, other test
-    suffixes and test directories remain scanned. No JS/TSX companions exist;
-    those parser coverage gaps and scope normalization require separate review
-    in ticket 08.
+    Exclude conventional frontend paths while retaining root src/index.ts, shared utilities and unconventional server layouts. This negative boundary is intentionally not the standard backend directory selection and does not establish runtime identity. Use the shared baseline and complete test exclusions; build, vendors and fixtures remain included outside excluded paths.

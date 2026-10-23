@@ -30,14 +30,8 @@ metadata:
     consequence. Safe literal/sanitized rendering and non-DOM receivers do not
     establish executable injection.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve unrestricted positive source scope across frontend, backend and
-    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
-    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
-    test/tests directories without those suffixes remain scanned, while build is
-    additionally excluded. This reviewed migration exception preserves behavior
-    only; ticket 08 must review normalization.
+    - frontend
+    - backend
 message: >
   Raw HTML rendering can execute untrusted content. Prefer text rendering or review
   sanitization.
@@ -77,7 +71,10 @@ rule:
 ignores:
   - "**/node_modules/**"
   - "**/dist/**"
-  - "**/build/**"
+  - "**/coverage/**"
+  - "**/specs/**"
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
