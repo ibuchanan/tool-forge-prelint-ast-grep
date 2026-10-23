@@ -18,10 +18,14 @@ rule:
     regex: '\.limit\s*\('
 ignores:
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.test.tsx"
-  - "**/*.spec.ts"
-  - "**/*.spec.tsx"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   category: performance
   references:
@@ -33,6 +37,5 @@ metadata:
   impact-rationale: >-
     Forge cost guidance recommends bounding storage reads and paginating. Genuinely broad repeated queries can increase read consumption and latency, a bounded cost/reliability problem. A missing explicit limit alone does not prove an unlimited scan, large result volume or substantial resource exhaustion.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve unrestricted positive TypeScript scope; only node_modules and test/spec.ts/tsx suffixes are ignored. Dist, coverage, specs, __tests__, test and tests remain scanned. Parser language does not select backend runtime; this reviewed unique legacy exception awaits ticket 08.
+    - frontend
+    - backend
