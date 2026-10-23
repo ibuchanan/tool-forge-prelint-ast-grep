@@ -14,6 +14,9 @@ rule:
     - pattern: 'import { $$$A, storage, $$$B } from "@forge/api"'
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: imports
   references:
@@ -25,6 +28,6 @@ metadata:
   impact-rationale: >-
     The storage API reference documents @forge/kvs as the replacement for legacy @forge/api storage. Genuine legacy usage incurs migration work and misses newer supported storage capabilities, a bounded maintenance/delivery consequence; deprecation alone does not prove data loss or immediate runtime failure.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve unrestricted positive source scope, including frontend, backend and tests, with node_modules as the only exclusion. Dist, coverage and specs remain scanned; this is not a standard runtime profile and parser language is not runtime intent. Ticket 08 owns reviewed normalization.
+    - frontend
+    - backend
+    - tests

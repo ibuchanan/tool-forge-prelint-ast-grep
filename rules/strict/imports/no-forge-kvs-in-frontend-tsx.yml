@@ -19,6 +19,9 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: imports
   references:
@@ -30,6 +33,5 @@ metadata:
   impact-rationale: >-
     Forge storage documentation places data operations in the backend runtime. Actually bundling backend storage APIs into a browser UI can prevent application startup or storage-backed UI operation; use a bridge resolver instead. A source import alone does not prove runtime execution or data exposure.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.
+    - frontend
+    - tests

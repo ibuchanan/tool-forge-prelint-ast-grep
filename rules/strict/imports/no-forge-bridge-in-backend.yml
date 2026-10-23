@@ -18,12 +18,15 @@ rule:
     - pattern: 'import $$$IMPORTS from "@forge/bridge"'
     - pattern: 'import "@forge/bridge"'
 files:
-  - "**/resolvers/**"
   - "**/external/**"
   - "**/import-lifecycle/**"
+  - "**/resolvers/**"
   - "**/src/index.ts"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   category: imports
   references:
@@ -37,4 +40,4 @@ metadata:
   scope-profile:
     - unique
   scope-rationale: >-
-    Preserve resolvers, external, import-lifecycle and **/src/index.ts selection. The standard backend profile includes backend directories instead of the entrypoint exception; only node_modules is ignored, leaving tests, dist, coverage and specs scanned. Ticket 08 owns routing review; this unique legacy declaration preserves current behavior.
+    Preserve resolvers, external and import-lifecycle directories plus the exact src/index.ts entrypoint, without adding backend directories or other entrypoint extensions. This reviewed server-layout convention differs from the standard backend envelope and does not classify shared code automatically. Apply the shared baseline and intentionally include test-local configurations and helpers within those positive paths.

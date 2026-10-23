@@ -13,6 +13,9 @@ rule:
     - pattern: 'import $$$IMPORTS from "@forge/ui"'
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: imports
   references:
@@ -24,6 +27,6 @@ metadata:
   impact-rationale: >-
     The UI Kit comparison reference documents migration from legacy @forge/ui to @forge/react. A genuine dependency on an unsupported legacy UI runtime can prevent the entire Forge UI from running on the supported platform. The matcher does not inspect deployment compatibility or establish immediate failure for every package version.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve unrestricted positive source scope, including frontend, backend and tests, with node_modules as the only exclusion. Dist, coverage and specs remain scanned; this is not a standard runtime profile and parser language is not runtime intent. Ticket 08 owns reviewed normalization.
+    - frontend
+    - backend
+    - tests
