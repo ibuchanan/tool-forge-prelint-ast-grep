@@ -25,16 +25,22 @@ note: >
   See: https://developer.atlassian.com/platform/forge/working-around-jql-1000-limit/
 ignores:
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.test.tsx"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   precision: medium
   precision-rationale: "Tests cover joined IN lists and a page-named sliced list exemption. The matcher does not count values or trace upstream bounds, and keyword exemptions are textual; a small joined list is an untested compliant case, not proof of exceeding 1,000 values. Evidence: rule-tests/recommended/cost/no-jql-value-list-limit.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-jql-value-list-limit-snapshot.yml."
   impact: medium
   impact-rationale: Actually exceeding the documented JQL function value limit can reject a query and break the dependent search workflow. A joined list below the limit is valid; the matcher does not establish cardinality.
   scope-profile:
-    - unique
-  scope-rationale: Preserve unrestricted TypeScript source and exclusions for node_modules, .test.ts and .test.tsx only. Spec suffixes, shared baseline and test-directory sets are incomplete; ticket 08 owns normalization.
+    - frontend
+    - backend
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/working-around-jql-1000-limit/

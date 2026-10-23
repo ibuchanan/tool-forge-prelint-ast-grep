@@ -110,18 +110,21 @@ rule:
 ignores:
   - "**/node_modules/**"
   - "**/dist/**"
-  - "**/build/**"
+  - "**/coverage/**"
+  - "**/specs/**"
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   precision: low
   precision-rationale: "Tests establish named/namespace import aliases, direct loop/callback ancestry, and exclusions for unrelated imports and deferred functions. A bounded three-iteration loop explicitly still matches, so repeated calls do not prove missing budgets. Shadowing, retry policy and application-wide quotas remain untested gaps. Evidence: rule-tests/recommended/cost/review-llm-call-in-loop.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-llm-call-in-loop-snapshot.yml."
   impact: high
   impact-rationale: Without effective iteration/concurrency/retry and user or installation budgets, repeated inference can multiply token/compute consumption and exhaust shared quotas. The LLM API and unbounded-consumption guidance explain this risk; bounded reviewed work is legitimate and a match is not an actual billing attack.
   scope-profile:
-    - unique
-  scope-rationale: Preserve unrestricted source selection with node_modules/dist/build, test/spec suffixes and __tests__ excluded. Coverage, specs and unsuffixed test/tests directories remain included; ticket 08 owns normalization.
+    - frontend
+    - backend
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/runtime-reference/forge-llms-api-reference/

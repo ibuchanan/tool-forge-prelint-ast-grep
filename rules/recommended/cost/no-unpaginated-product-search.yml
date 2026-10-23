@@ -15,16 +15,22 @@ rule:
     regex: "(maxResults|limit|cursor|startAt|nextPage)"
 ignores:
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.test.tsx"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   precision: medium
   precision-rationale: "Tests compare a literal search URL with/without maxResults. The regex recognizes pagination-related tokens but cannot follow options variables, endpoint defaults or imported receiver identity. Bounded server defaults and indirection are untested gaps; absent text does not prove an unbounded response. Evidence: rule-tests/recommended/cost/no-unpaginated-product-search.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-unpaginated-product-search-snapshot.yml."
   impact: medium
   impact-rationale: A genuinely oversized search response adds transfer work and latency, while incorrect page handling can omit needed results. Cost guidance supports bounding API work; the matcher does not prove data loss or substantial consumption.
   scope-profile:
-    - unique
-  scope-rationale: Preserve unrestricted TypeScript source and exclusions for node_modules, .test.ts and .test.tsx only. Spec suffixes and shared baseline/test-directory sets are incomplete; ticket 08 owns normalization.
+    - frontend
+    - backend
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

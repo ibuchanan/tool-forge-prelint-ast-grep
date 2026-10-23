@@ -17,18 +17,21 @@ rule:
         kind: block_mapping_pair
         regex: 'functions\s*:'
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests compare 512 MiB with 1024/2048 MiB under a functions key. The matcher does not profile duration or workload size; supported allocations can be cost-effective. Flow YAML and actual GB-seconds remain assessment gaps. Evidence: rule-tests/recommended/cost/review-high-function-memory.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-high-function-memory-snapshot.yml."
   impact: medium
   impact-rationale: Unnecessarily high memory can increase memory-times-duration consumption; a larger allocation may instead shorten runtime or be required. Cost guidance requires profiling, not automatic downsizing; a declaration alone proves no spend increase.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+    - manifest
+    - tests
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

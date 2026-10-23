@@ -18,14 +18,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests distinguish useAction calling invoke from another action. The note permits data tied to the action, and an intentional update action is the matching example. Imported identity, actual action lifecycle and redundant invocations remain untested gaps; ordinary legitimate actions can match. Evidence: rule-tests/recommended/cost/no-use-action-invoke.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-use-action-invoke-snapshot.yml."
   impact: medium
   impact-rationale: Fetching unrelated screen data repeatedly during action/render flows can add latency and resolver cost. Cost guidance favors eliminating unnecessary calls, but moving a genuine action mutation into an effect can be wrong; necessity requires review.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+    - frontend
+    - tests
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

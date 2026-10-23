@@ -17,18 +17,21 @@ rule:
         kind: block_mapping_pair
         regex: 'functions\s*:'
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests compare 10 seconds with 25/30 seconds under a functions key. This is a selected regex threshold, not all timeouts or a runtime observation; legitimate long-running functions routinely match. Actual execution duration and cancellation remain assessment gaps. Evidence: rule-tests/recommended/cost/review-max-function-timeout.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-max-function-timeout-snapshot.yml."
   impact: medium
   impact-rationale: An unnecessarily generous timeout can let stuck work consume compute longer before termination. Cost guidance supports realistic bounds, but a timeout maximum is not billed duration and short limits may break legitimate workloads.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+    - manifest
+    - tests
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

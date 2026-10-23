@@ -20,14 +20,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Tests compare missing dependencies with explicit empty/nonempty arrays. The matcher uses textual argument shape and does not resolve hook/invoke imports or intent. A deliberately every-render effect and commas inside the callback are untested gaps, not proof of excess calls. Evidence: rule-tests/recommended/cost/no-invoke-without-effect-deps.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-invoke-without-effect-deps-snapshot.yml."
   impact: medium
   impact-rationale: Unintended every-render resolver work can increase invocation cost and slow the screen; React documents effect dependency behavior. Deliberately repeated synchronization may be correct and the syntax alone does not establish a runaway render loop.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+    - frontend
+    - tests
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

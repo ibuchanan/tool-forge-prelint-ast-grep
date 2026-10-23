@@ -30,16 +30,22 @@ rule:
           regex: '\.(map|forEach|flatMap|reduce|some|every|filter)\s*\('
 ignores:
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.spec.ts"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
 metadata:
   precision: medium
   precision-rationale: "Tests contrast a standalone storage.get with Promise.all over mapped keys. Receiver names and ancestor callbacks do not establish Forge import identity, operation count or batch feasibility; small independent key access and deferred calls remain untested gaps. Evidence: rule-tests/recommended/cost/no-storage-operation-in-loop.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-storage-operation-in-loop-snapshot.yml."
   impact: medium
   impact-rationale: Avoidable repeated storage reads/writes increase data touched, latency and operational cost. Cost guidance supports reducing work, but the syntax proves neither large volumes nor that a supported batch can replace independent operations.
   scope-profile:
-    - unique
-  scope-rationale: Preserve unrestricted TypeScript source selection with node_modules and .test.ts/.spec.ts exclusions only. Shared dist/coverage/specs and test-directory exclusions are missing; ticket 08 owns normalization.
+    - frontend
+    - backend
   category: cost
   references:
     - https://developer.atlassian.com/platform/forge/optimise-forge-costs/
