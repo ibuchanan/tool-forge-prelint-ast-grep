@@ -19,12 +19,15 @@ files:
   - "**/biome.json"
   - "**/biome.jsonc"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   references: ["https://biomejs.dev/reference/configuration/"]
   category: devtools
   scope-profile: [unique]
-  scope-rationale: Preserve the reviewed Biome JSON/JSONC filename selection and node_modules-only exclusion; dist, coverage, specs and test-local configurations remain included, unlike the shared baseline. This artifact has no standard selector; ticket 08 owns scope normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: biome.json and biome.jsonc. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   precision: medium
   precision-rationale: "Tests accept main and flag master or absence. The matcher cannot establish the actual repository default branch, resolve inheritance or observe changed-file invocation; a different real default is legitimate. Those contextual distinctions are assessment gaps. Evidence: rule-tests/ecosol/devtools/require-biome-vcs-default-branch.test.yml (valid/invalid) and rule-tests/__snapshots__/require-biome-vcs-default-branch-snapshot.yml."
   impact: low

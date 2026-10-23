@@ -31,12 +31,15 @@ files:
   - "**/biome.json"
   - "**/biome.jsonc"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   references: ["https://biomejs.dev/reference/configuration/"]
   category: devtools
   scope-profile: [unique]
-  scope-rationale: Preserve the reviewed Biome JSON/JSONC filename selection and node_modules-only exclusion; dist, coverage, specs and test-local configurations remain included, unlike the shared baseline. This artifact has no standard selector; ticket 08 owns scope normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: biome.json and biome.jsonc. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   precision: medium
   precision-rationale: "Tests distinguish files.includes from formatter-only exclusions and accept single/double negations. The matcher cannot resolve inherited configs, broader exclusions or a scan already restricted to source; absence of these exact dist spellings does not prove generated files are scanned. Those effective-scope alternatives are assessment gaps. Evidence: rule-tests/ecosol/devtools/require-biome-files-exclude-dist.test.yml (valid/invalid) and rule-tests/__snapshots__/require-biome-files-exclude-dist-snapshot.yml."
   impact: low

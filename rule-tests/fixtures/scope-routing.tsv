@@ -1,2 +1,7 @@
 # Rule path	Reviewed positive scope	Test policy
 rules/atlassian/package-json/require-package-license-apache-2-0.yml	package	include
+rules/ecosol/devtools/require-biome-files-exclude-dist.yml	biome	include
+rules/ecosol/devtools/require-biome-formatter-indent-style.yml	biome	include
+rules/ecosol/devtools/require-biome-vcs-default-branch.yml	biome	include
+rules/ecosol/devtools/require-biome-vcs-use-ignore-file.yml	biome	include
+rules/ecosol/devtools/require-vitest-globals-false.yml	vitest	include

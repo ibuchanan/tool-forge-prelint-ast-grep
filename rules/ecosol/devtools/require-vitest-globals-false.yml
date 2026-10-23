@@ -27,12 +27,15 @@ rule:
 files:
   - "**/vitest.config.ts"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   references: ["https://vitest.dev/config/#globals"]
   category: devtools
   scope-profile: [unique]
-  scope-rationale: Preserve only vitest.config.ts and node_modules exclusion; test-local and dist/coverage/specs configs remain included. There is no standard Vitest-config selector; ticket 08 owns scope normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: vitest.config.ts, not alternative Vitest config extensions. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   precision: medium
   precision-rationale: "Tests cover defineConfig with globals false, true, missing test/globals and an unrelated top-level globals property. The name is not import-resolved and omitted globals defaults to false; aliases, inherited/merged configs and effective defaults remain assessment gaps. This enforces an explicit declaration, not proven ambient-global use. Evidence: rule-tests/ecosol/devtools/require-vitest-globals-false.test.yml (valid/invalid) and rule-tests/__snapshots__/require-vitest-globals-false-snapshot.yml."
   impact: low
