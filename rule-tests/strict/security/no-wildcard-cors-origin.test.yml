@@ -9,6 +9,8 @@ valid:
       'Access-Control-Allow-Origin': [allowedOrigin]
     };
 invalid:
+  - "headers['Access-Control-Allow-Origin'] = '*'"
+  - "headers['access-control-allow-origin'] = '*'"
   - |
     const headers = {
       'Access-Control-Allow-Origin': '*'

@@ -11,14 +11,48 @@ note: >
   authorization bypass or credentialed data theft. Browsers reject wildcard origins for requests
   using credentials mode include. For restricted browser access, return a validated allowed
   origin (not a comma-separated origin list) and set Vary: Origin when selecting origins
-  dynamically. Keep handler authentication and authorization independent. This rule identifies
-  literal object entries only; it does not evaluate the endpoint policy. See
+  dynamically. Keep handler authentication and authorization independent. Matches literal
+  object entries and subscript assignments, not endpoint policy or header setter APIs. See
   https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
-  and https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/
+  and https://owasp.org/Top10/A05_2021-Security_Misconfiguration/
+metadata:
+  category: security
+  owasp: "A05:2021 - Security Misconfiguration"
+  cwe: "CWE-942: Permissive Cross-domain Policy with Untrusted Domains"
 rule:
-  kind: pair
-  regex: "(?i)[\"'`]Access-Control-Allow-Origin[\"'`]\\s*:\\s*(\\[\\s*)?[\"'`]\\*[\"'`]"
+  any:
+    - kind: pair
+      all:
+        - has:
+            field: key
+            kind: string
+            regex: '(?i)^["'']Access-Control-Allow-Origin["'']$'
+        - has:
+            field: value
+            any:
+              - kind: string
+                regex: '^["'']\*["'']$'
+              - kind: array
+                has:
+                  kind: string
+                  regex: '^["'']\*["'']$'
+    - kind: assignment_expression
+      all:
+        - has:
+            field: left
+            kind: subscript_expression
+            has:
+              field: index
+              kind: string
+              regex: '(?i)^["'']Access-Control-Allow-Origin["'']$'
+        - has:
+            field: right
+            kind: string
+            regex: '^["'']\*["'']$'
 ignores:
   - "**/node_modules/**"
-  - "**/*.test.ts"
-  - "**/*.spec.ts"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

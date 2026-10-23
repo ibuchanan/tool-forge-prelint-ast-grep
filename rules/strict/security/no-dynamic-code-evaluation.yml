@@ -1,13 +1,18 @@
 id: no-dynamic-code-evaluation
 language: TypeScript
 severity: error
+metadata:
+  category: security
+  owasp: "A03:2021 - Injection"
+  cwe: "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code (Eval Injection)"
 message: >
   Avoid dynamic code evaluation. Use fixed operations and validated data instead.
 note: >
-  Flags direct eval and Function calls/constructors, not object methods. Visible declarations
-  and parameters of the same name in enclosing scopes are excluded conservatively; this is not a
-  JavaScript name resolver and aliases/indirect evaluation need separate analysis. A match
-  identifies an execution sink, not proven exploitability. See
+  Flags direct eval and Function calls/constructors, string-form setTimeout and setInterval callbacks,
+  not object methods. Visible declarations and parameters of the same name in enclosing scopes are
+  excluded conservatively; this is not a JavaScript name resolver and aliases/indirect evaluation need
+  separate analysis. Arrow functions and function expressions as callbacks are valid; shadowed local
+  timer identifiers are excluded. A match identifies an execution sink, not proven exploitability. See
   https://top10.owasp.org/2025/A05_2025-Injection/,
   https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/ and
   https://developer.atlassian.com/platform/forge/shared-responsibility-model/
@@ -26,6 +31,23 @@ rule:
             kind: identifier
             pattern: $NAME
             regex: ^Function$
+        - kind: call_expression
+          all:
+            - has:
+                field: function
+                kind: identifier
+                pattern: $NAME
+                regex: ^(setTimeout|setInterval)$
+            - has:
+                field: arguments
+                has:
+                  nthChild: 1
+                  any:
+                    - kind: string
+                    - kind: template_string
+                      not:
+                        has:
+                          kind: template_substitution
     - not:
         inside:
           stopBy: end

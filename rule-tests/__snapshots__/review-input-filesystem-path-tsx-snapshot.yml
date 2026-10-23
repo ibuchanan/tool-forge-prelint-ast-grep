@@ -1,0 +1,78 @@
+id: review-input-filesystem-path-tsx
+snapshots:
+  "fs.appendFile(request.queryParameters.path, data)":
+    labels:
+    - source: fs.appendFile(request.queryParameters.path, data)
+      style: primary
+      start: 0
+      end: 49
+    - source: request.queryParameters
+      style: secondary
+      start: 14
+      end: 37
+  "fs.appendFileSync('/base/' + payload.path, data)":
+    labels:
+    - source: fs.appendFileSync('/base/' + payload.path, data)
+      style: primary
+      start: 0
+      end: 48
+    - source: payload
+      style: secondary
+      start: 29
+      end: 36
+  "fs.createReadStream(`/base/${payload.path}`)":
+    labels:
+    - source: fs.createReadStream(`/base/${payload.path}`)
+      style: primary
+      start: 0
+      end: 44
+    - source: payload
+      style: secondary
+      start: 29
+      end: 36
+  fs.createWriteStream(resolvePath(payload.path)):
+    labels:
+    - source: fs.createWriteStream(resolvePath(payload.path))
+      style: primary
+      start: 0
+      end: 47
+    - source: payload
+      style: secondary
+      start: 33
+      end: 40
+  "fs.readFile(payload.path, 'utf8')":
+    labels:
+    - source: fs.readFile(payload.path, 'utf8')
+      style: primary
+      start: 0
+      end: 33
+    - source: payload
+      style: secondary
+      start: 12
+      end: 19
+  fs.readFileSync(payload):
+    labels:
+    - source: fs.readFileSync(payload)
+      style: primary
+      start: 0
+      end: 24
+  "fs.writeFile(request.payload.path, data)":
+    labels:
+    - source: fs.writeFile(request.payload.path, data)
+      style: primary
+      start: 0
+      end: 40
+    - source: request.payload
+      style: secondary
+      start: 13
+      end: 28
+  "fs.writeFileSync(request.body.path, data)":
+    labels:
+    - source: fs.writeFileSync(request.body.path, data)
+      style: primary
+      start: 0
+      end: 41
+    - source: request.body
+      style: secondary
+      start: 17
+      end: 29

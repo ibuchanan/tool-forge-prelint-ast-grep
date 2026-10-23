@@ -1,0 +1,41 @@
+id: review-input-redirect-js
+language: JavaScript
+severity: warning
+message: Review input-derived redirect targets. Allow only approved destinations.
+note: >
+  Matches the first redirect argument when its syntax contains payload, an object.payload,
+  request.body or request.queryParameters expression. Only destination-first signatures
+  are checked, not status-code-first redirect APIs. Source and receiver names
+  are heuristics. No taint tracking, alias resolution, destination validation or sanitizer
+  recognition is performed; a match is not proof of an open redirect.
+  See https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+metadata:
+  category: security
+  owasp: "A01:2021 - Broken Access Control"
+  cwe: "CWE-601: URL Redirection to Untrusted Site (Open Redirect)"
+rule:
+  any:
+    - pattern: $RES.redirect($TARGET, $$$ARGS)
+    - pattern: $RES.redirect($TARGET)
+constraints:
+  TARGET:
+    any:
+      - matches: input-source
+      - has:
+          stopBy: end
+          matches: input-source
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - pattern: $X.payload
+      - pattern: $REQ.queryParameters
+      - pattern: $REQ.body
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

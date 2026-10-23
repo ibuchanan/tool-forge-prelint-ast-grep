@@ -1,0 +1,316 @@
+id: no-insecure-randomness-js
+snapshots:
+  const TOKEN = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 14
+      end: 27
+    - source: TOKEN
+      style: secondary
+      start: 6
+      end: 11
+    - source: Math.random()
+      style: secondary
+      start: 14
+      end: 27
+    - source: TOKEN = Math.random()
+      style: secondary
+      start: 6
+      end: 27
+  const apiKey = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 15
+      end: 28
+    - source: apiKey
+      style: secondary
+      start: 6
+      end: 12
+    - source: Math.random()
+      style: secondary
+      start: 15
+      end: 28
+    - source: apiKey = Math.random()
+      style: secondary
+      start: 6
+      end: 28
+  const csrf = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 13
+      end: 26
+    - source: csrf
+      style: secondary
+      start: 6
+      end: 10
+    - source: Math.random()
+      style: secondary
+      start: 13
+      end: 26
+    - source: csrf = Math.random()
+      style: secondary
+      start: 6
+      end: 26
+  const nonce = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 14
+      end: 27
+    - source: nonce
+      style: secondary
+      start: 6
+      end: 11
+    - source: Math.random()
+      style: secondary
+      start: 14
+      end: 27
+    - source: nonce = Math.random()
+      style: secondary
+      start: 6
+      end: 27
+  "const obj = { csrfToken: Math.random() }":
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 25
+      end: 38
+    - source: csrfToken
+      style: secondary
+      start: 14
+      end: 23
+    - source: Math.random()
+      style: secondary
+      start: 25
+      end: 38
+    - source: "csrfToken: Math.random()"
+      style: secondary
+      start: 14
+      end: 38
+  "const obj = { sessionKey: Math.random() }":
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 26
+      end: 39
+    - source: sessionKey
+      style: secondary
+      start: 14
+      end: 24
+    - source: Math.random()
+      style: secondary
+      start: 26
+      end: 39
+    - source: "sessionKey: Math.random()"
+      style: secondary
+      start: 14
+      end: 39
+  "const obj = {'csrfToken': Math.random()}":
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 26
+      end: 39
+    - source: "'csrfToken'"
+      style: secondary
+      start: 13
+      end: 24
+    - source: Math.random()
+      style: secondary
+      start: 26
+      end: 39
+    - source: "'csrfToken': Math.random()"
+      style: secondary
+      start: 13
+      end: 39
+  const otp = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 12
+      end: 25
+    - source: otp
+      style: secondary
+      start: 6
+      end: 9
+    - source: Math.random()
+      style: secondary
+      start: 12
+      end: 25
+    - source: otp = Math.random()
+      style: secondary
+      start: 6
+      end: 25
+  const passwd = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 15
+      end: 28
+    - source: passwd
+      style: secondary
+      start: 6
+      end: 12
+    - source: Math.random()
+      style: secondary
+      start: 15
+      end: 28
+    - source: passwd = Math.random()
+      style: secondary
+      start: 6
+      end: 28
+  const password = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 17
+      end: 30
+    - source: password
+      style: secondary
+      start: 6
+      end: 14
+    - source: Math.random()
+      style: secondary
+      start: 17
+      end: 30
+    - source: password = Math.random()
+      style: secondary
+      start: 6
+      end: 30
+  const salt = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 13
+      end: 26
+    - source: salt
+      style: secondary
+      start: 6
+      end: 10
+    - source: Math.random()
+      style: secondary
+      start: 13
+      end: 26
+    - source: salt = Math.random()
+      style: secondary
+      start: 6
+      end: 26
+  const secret = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 15
+      end: 28
+    - source: secret
+      style: secondary
+      start: 6
+      end: 12
+    - source: Math.random()
+      style: secondary
+      start: 15
+      end: 28
+    - source: secret = Math.random()
+      style: secondary
+      start: 6
+      end: 28
+  "const session = `id-${Math.random()}`":
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 22
+      end: 35
+    - source: session
+      style: secondary
+      start: 6
+      end: 13
+    - source: Math.random()
+      style: secondary
+      start: 22
+      end: 35
+    - source: "`id-${Math.random()}`"
+      style: secondary
+      start: 16
+      end: 37
+    - source: session = `id-${Math.random()}`
+      style: secondary
+      start: 6
+      end: 37
+  const token = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 14
+      end: 27
+    - source: token
+      style: secondary
+      start: 6
+      end: 11
+    - source: Math.random()
+      style: secondary
+      start: 14
+      end: 27
+    - source: token = Math.random()
+      style: secondary
+      start: 6
+      end: 27
+  const token = Math.random().toString(36):
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 14
+      end: 27
+    - source: token
+      style: secondary
+      start: 6
+      end: 11
+    - source: Math.random()
+      style: secondary
+      start: 14
+      end: 27
+    - source: Math.random().toString(36)
+      style: secondary
+      start: 14
+      end: 40
+    - source: token = Math.random().toString(36)
+      style: secondary
+      start: 6
+      end: 40
+  let refreshToken; refreshToken = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 33
+      end: 46
+    - source: refreshToken
+      style: secondary
+      start: 18
+      end: 30
+    - source: Math.random()
+      style: secondary
+      start: 33
+      end: 46
+    - source: refreshToken = Math.random()
+      style: secondary
+      start: 18
+      end: 46
+  token = Math.random():
+    labels:
+    - source: Math.random()
+      style: primary
+      start: 8
+      end: 21
+    - source: token
+      style: secondary
+      start: 0
+      end: 5
+    - source: Math.random()
+      style: secondary
+      start: 8
+      end: 21
+    - source: token = Math.random()
+      style: secondary
+      start: 0
+      end: 21

@@ -1,0 +1,64 @@
+id: no-insecure-randomness
+language: TypeScript
+severity: warning
+message: Avoid `Math.random()` for secret-like values. Use `crypto.randomBytes()` or `crypto.randomUUID()`.
+note: >
+  Reports Math.random() calls within the value of a declaration, assignment or object
+  property with a security-sensitive name suffix. Names are heuristics, not proof of
+  security use. Randomness in unrelated sibling values is not matched. Aliases, dataflow,
+  and lexical shadowing are not resolved; only token/secret/password/passwd/key/nonce/salt/
+  otp/session/csrf suffixes are recognized (not sessionId).
+  See https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+metadata:
+  category: security
+  owasp: "A02:2021 - Cryptographic Failures"
+  cwe: "CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)"
+rule:
+  pattern: Math.random()
+  inside:
+    stopBy: end
+    any:
+      - kind: variable_declarator
+        all:
+          - has:
+              field: name
+              kind: identifier
+              regex: "(?i)(token|secret|password|passwd|key|nonce|salt|otp|session|csrf)$"
+          - has:
+              field: value
+              matches: random-expression
+      - kind: assignment_expression
+        all:
+          - has:
+              field: left
+              kind: identifier
+              regex: "(?i)(token|secret|password|passwd|key|nonce|salt|otp|session|csrf)$"
+          - has:
+              field: right
+              matches: random-expression
+      - kind: pair
+        all:
+          - has:
+              field: key
+              any:
+                - kind: property_identifier
+                  regex: "(?i)(token|secret|password|passwd|key|nonce|salt|otp|session|csrf)$"
+                - kind: string
+                  regex: '(?i)(token|secret|password|passwd|key|nonce|salt|otp|session|csrf)["'']$'
+          - has:
+              field: value
+              matches: random-expression
+utils:
+  random-expression:
+    any:
+      - pattern: Math.random()
+      - has:
+          stopBy: end
+          pattern: Math.random()
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

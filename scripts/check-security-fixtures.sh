@@ -28,7 +28,7 @@ cp rule-tests/fixtures/security/package.txt "$TMP/other.json"
 # --files-with-matches can exit 1 for error findings; other failures must fail CI.
 scan() {
   status=0
-  "$AST_GREP" scan --config "$1" --filter "$2" --files-with-matches "$TMP" > "$TMP/actual" 2> "$TMP/errors" || status=$?
+  "$AST_GREP" scan --config "$1" --filter "$2" --files-with-matches "${3:-$TMP}" > "$TMP/actual" 2> "$TMP/errors" || status=$?
   if [ "$status" -gt 1 ]; then
     echo "Scanner failed for $2 (exit $status)" >&2
     while IFS= read -r line; do printf '%s\n' "$line" >&2; done < "$TMP/errors"
@@ -119,5 +119,28 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
     printf '%s/logging/static/custom-ui/widget.jsx\n' "$TMP" >> "$TMP/expected"
   fi
   scan "$config" '^(review-personal-data-logging(-tsx|-js)?|no-package-main)$'
+done
+# OWASP security families must route consistently across languages and tiers.
+mkdir -p "$TMP/owasp/tests" "$TMP/owasp/__tests__" "$TMP/owasp/dist" "$TMP/owasp/build" "$TMP/owasp/node_modules/example"
+for ext in ts tsx js jsx mjs cjs mts cts; do
+  cp rule-tests/fixtures/security/owasp-source.txt "$TMP/owasp/source.$ext"
+  cp rule-tests/fixtures/security/owasp-safe-source.txt "$TMP/owasp/safe.$ext"
+done
+cp rule-tests/fixtures/security/owasp-source.txt "$TMP/owasp/tests/source.test.ts"
+cp rule-tests/fixtures/security/owasp-source.txt "$TMP/owasp/tests/source.spec.js"
+for dir in __tests__ dist build node_modules/example; do
+  cp rule-tests/fixtures/security/owasp-source.txt "$TMP/owasp/$dir/source.ts"
+done
+for rule in review-input-filesystem-path review-input-redirect no-weak-hash no-insecure-randomness no-jwt-none-algorithm review-input-sql review-input-shell-command no-dynamic-code-evaluation review-raw-html-sink no-disabled-tls-verification no-wildcard-cors-origin review-hardcoded-secret review-input-module-load review-input-fetch-url; do
+  for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+    : > "$TMP/expected"
+    if [ "$config" != sgconfig.recommended.yml ]; then
+      for ext in ts tsx js jsx mjs cjs mts cts; do
+        printf '%s/owasp/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+      done
+    fi
+    # Earlier fixture groups may also contain this family; isolate the new group.
+    scan "$config" "^($rule(-tsx|-js)?|no-package-main)$" "$TMP/owasp"
+  done
 done
 echo 'Security fixtures: language variants, tier inclusion, manifest/package paths, and source exclusions passed.'

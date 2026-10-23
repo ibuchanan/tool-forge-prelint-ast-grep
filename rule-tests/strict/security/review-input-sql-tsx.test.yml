@@ -1,0 +1,17 @@
+id: review-input-sql-tsx
+valid:
+  - db.query('SELECT * FROM users WHERE id = ?', [payload.id])
+  - db.execute('SELECT $1', [request.body.value])
+  - db.raw('SELECT ?', payload.values)
+  - const query = payload.sql; db.query(query)
+  - db.query('payload.sql')
+  - "// db.query(payload.sql)"
+  - "const text = 'db.query(payload.sql)'"
+invalid:
+  - db.query(payload.sql)
+  - db.execute(request.payload.sql)
+  - db.raw(request.body.sql)
+  - db.query(request.queryParameters.sql, [])
+  - db.query(`SELECT * FROM users WHERE id = ${payload.id}`)
+  - db.execute('SELECT * FROM users WHERE id = ' + payload.id)
+  - db.raw(payload.sql, [payload.value])

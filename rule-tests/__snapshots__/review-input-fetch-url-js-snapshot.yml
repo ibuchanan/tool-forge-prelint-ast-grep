@@ -1,0 +1,68 @@
+id: review-input-fetch-url-js
+snapshots:
+  api.fetch(request.payload.url):
+    labels:
+    - source: api.fetch(request.payload.url)
+      style: primary
+      start: 0
+      end: 30
+    - source: request.payload
+      style: secondary
+      start: 10
+      end: 25
+  "fetch('https://example.com/' + payload.path)":
+    labels:
+    - source: fetch('https://example.com/' + payload.path)
+      style: primary
+      start: 0
+      end: 44
+    - source: payload
+      style: secondary
+      start: 31
+      end: 38
+  "fetch(`https://example.com/${payload.path}`)":
+    labels:
+    - source: fetch(`https://example.com/${payload.path}`)
+      style: primary
+      start: 0
+      end: 44
+    - source: payload
+      style: secondary
+      start: 29
+      end: 36
+  "fetch(payload, options)":
+    labels:
+    - source: fetch(payload, options)
+      style: primary
+      start: 0
+      end: 23
+  fetch(payload.url):
+    labels:
+    - source: fetch(payload.url)
+      style: primary
+      start: 0
+      end: 18
+    - source: payload
+      style: secondary
+      start: 6
+      end: 13
+  fetch(request.body.url):
+    labels:
+    - source: fetch(request.body.url)
+      style: primary
+      start: 0
+      end: 23
+    - source: request.body
+      style: secondary
+      start: 6
+      end: 18
+  fetch(request.queryParameters.url):
+    labels:
+    - source: fetch(request.queryParameters.url)
+      style: primary
+      start: 0
+      end: 34
+    - source: request.queryParameters
+      style: secondary
+      start: 6
+      end: 29

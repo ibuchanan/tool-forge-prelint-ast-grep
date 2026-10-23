@@ -1,0 +1,14 @@
+fs.writeFile('/safe/file', payload.content);
+res.redirect('/home');
+crypto.createHash('sha256');
+const token = crypto.randomBytes(32);
+const jwtOptions = { algorithms: ['HS256', 'RS256'] };
+db.query('SELECT * FROM users WHERE id = ?', [payload.id]);
+cp.spawn('tool', [payload.arg]);
+setTimeout(() => run(), 100);
+node.textContent = payload.text;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
+headers['Access-Control-Allow-Origin'] = 'https://example.com';
+const apiKey = process.env.API_KEY;
+import('./fixed-module');
+fetch('https://example.com', { body: payload.body });

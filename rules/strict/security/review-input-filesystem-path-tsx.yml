@@ -1,0 +1,55 @@
+id: review-input-filesystem-path-tsx
+language: Tsx
+severity: warning
+message: Review input-derived filesystem paths. Resolve and confine paths to an allowed base directory.
+note: >
+  Matches the first argument of the listed fs methods when its syntax contains payload,
+  an object.payload, request.body or request.queryParameters expression. Source and receiver
+  names are heuristics, not proven provenance. No taint tracking, alias resolution, sanitizer
+  recognition or path-containment analysis is performed. Normalization alone does not prevent
+  traversal; check that the resolved path remains within the allowed base directory.
+  See https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+metadata:
+  category: security
+  owasp: "A01:2021 - Broken Access Control"
+  cwe: "CWE-22: Improper Limitation of a Pathname to a Restricted Directory"
+rule:
+  any:
+    - pattern: fs.readFile($TARGET, $$$ARGS)
+    - pattern: fs.readFile($TARGET)
+    - pattern: fs.readFileSync($TARGET, $$$ARGS)
+    - pattern: fs.readFileSync($TARGET)
+    - pattern: fs.writeFile($TARGET, $$$ARGS)
+    - pattern: fs.writeFile($TARGET)
+    - pattern: fs.writeFileSync($TARGET, $$$ARGS)
+    - pattern: fs.writeFileSync($TARGET)
+    - pattern: fs.appendFile($TARGET, $$$ARGS)
+    - pattern: fs.appendFile($TARGET)
+    - pattern: fs.appendFileSync($TARGET, $$$ARGS)
+    - pattern: fs.appendFileSync($TARGET)
+    - pattern: fs.createReadStream($TARGET, $$$ARGS)
+    - pattern: fs.createReadStream($TARGET)
+    - pattern: fs.createWriteStream($TARGET, $$$ARGS)
+    - pattern: fs.createWriteStream($TARGET)
+constraints:
+  TARGET:
+    any:
+      - matches: input-source
+      - has:
+          stopBy: end
+          matches: input-source
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - pattern: $X.payload
+      - pattern: $REQ.queryParameters
+      - pattern: $REQ.body
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

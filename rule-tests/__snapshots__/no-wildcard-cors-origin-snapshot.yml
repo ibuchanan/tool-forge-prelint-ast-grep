@@ -6,9 +6,65 @@ snapshots:
       style: primary
       start: 20
       end: 54
+    - source: "'Access-Control-Allow-Origin'"
+      style: secondary
+      start: 20
+      end: 49
+    - source: "'*'"
+      style: secondary
+      start: 51
+      end: 54
   "const headers = {\n  'Access-Control-Allow-Origin': ['*']\n};\n":
     labels:
     - source: "'Access-Control-Allow-Origin': ['*']"
       style: primary
       start: 20
       end: 56
+    - source: "'Access-Control-Allow-Origin'"
+      style: secondary
+      start: 20
+      end: 49
+    - source: "'*'"
+      style: secondary
+      start: 52
+      end: 55
+    - source: "['*']"
+      style: secondary
+      start: 51
+      end: 56
+  "headers['Access-Control-Allow-Origin'] = '*'":
+    labels:
+    - source: headers['Access-Control-Allow-Origin'] = '*'
+      style: primary
+      start: 0
+      end: 44
+    - source: "'Access-Control-Allow-Origin'"
+      style: secondary
+      start: 8
+      end: 37
+    - source: headers['Access-Control-Allow-Origin']
+      style: secondary
+      start: 0
+      end: 38
+    - source: "'*'"
+      style: secondary
+      start: 41
+      end: 44
+  "headers['access-control-allow-origin'] = '*'":
+    labels:
+    - source: headers['access-control-allow-origin'] = '*'
+      style: primary
+      start: 0
+      end: 44
+    - source: "'access-control-allow-origin'"
+      style: secondary
+      start: 8
+      end: 37
+    - source: headers['access-control-allow-origin']
+      style: secondary
+      start: 0
+      end: 38
+    - source: "'*'"
+      style: secondary
+      start: 41
+      end: 44

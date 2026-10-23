@@ -1,0 +1,68 @@
+id: review-input-redirect
+snapshots:
+  res.redirect('/next/' + payload.path):
+    labels:
+    - source: res.redirect('/next/' + payload.path)
+      style: primary
+      start: 0
+      end: 37
+    - source: payload
+      style: secondary
+      start: 24
+      end: 31
+  "res.redirect(`/next/${payload.path}`)":
+    labels:
+    - source: res.redirect(`/next/${payload.path}`)
+      style: primary
+      start: 0
+      end: 37
+    - source: payload
+      style: secondary
+      start: 22
+      end: 29
+  "res.redirect(payload, options)":
+    labels:
+    - source: res.redirect(payload, options)
+      style: primary
+      start: 0
+      end: 30
+  res.redirect(payload.url):
+    labels:
+    - source: res.redirect(payload.url)
+      style: primary
+      start: 0
+      end: 25
+    - source: payload
+      style: secondary
+      start: 13
+      end: 20
+  res.redirect(request.body.url):
+    labels:
+    - source: res.redirect(request.body.url)
+      style: primary
+      start: 0
+      end: 30
+    - source: request.body
+      style: secondary
+      start: 13
+      end: 25
+  res.redirect(request.payload.url):
+    labels:
+    - source: res.redirect(request.payload.url)
+      style: primary
+      start: 0
+      end: 33
+    - source: request.payload
+      style: secondary
+      start: 13
+      end: 28
+  res.redirect(request.queryParameters.url):
+    labels:
+    - source: res.redirect(request.queryParameters.url)
+      style: primary
+      start: 0
+      end: 41
+    - source: request.queryParameters
+      style: secondary
+      start: 13
+      end: 36

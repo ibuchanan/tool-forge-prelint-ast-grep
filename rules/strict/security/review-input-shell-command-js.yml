@@ -1,0 +1,52 @@
+id: review-input-shell-command-js
+language: JavaScript
+severity: warning
+message: Review input-derived process commands. Avoid shells and validate executables and arguments.
+note: >
+  Matches only the first exec/execSync/spawn/spawnSync argument when its syntax contains
+  payload, an object.payload, request.body or request.queryParameters expression. Bare
+  exec/execSync calls are also matched. Subsequent argument arrays and shell:true options
+  are not analyzed. Spawn does not imply shell execution; executable selection still needs
+  review. Method and source names are heuristics, not resolved child_process imports.
+  No taint tracking, alias resolution or sanitizer recognition is performed.
+  See https://owasp.org/Top10/A03_2021-Injection/
+metadata:
+  category: security
+  owasp: "A03:2021 - Injection"
+  cwe: "CWE-78: Improper Neutralization of Special Elements used in an OS Command"
+rule:
+  any:
+    - pattern: $CP.exec($TARGET, $$$ARGS)
+    - pattern: $CP.exec($TARGET)
+    - pattern: $CP.execSync($TARGET, $$$ARGS)
+    - pattern: $CP.execSync($TARGET)
+    - pattern: $CP.spawn($TARGET, $$$ARGS)
+    - pattern: $CP.spawn($TARGET)
+    - pattern: $CP.spawnSync($TARGET, $$$ARGS)
+    - pattern: $CP.spawnSync($TARGET)
+    - pattern: exec($TARGET, $$$ARGS)
+    - pattern: exec($TARGET)
+    - pattern: execSync($TARGET, $$$ARGS)
+    - pattern: execSync($TARGET)
+constraints:
+  TARGET:
+    any:
+      - matches: input-source
+      - has:
+          stopBy: end
+          matches: input-source
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - pattern: $X.payload
+      - pattern: $REQ.queryParameters
+      - pattern: $REQ.body
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

@@ -70,3 +70,75 @@ snapshots:
       style: secondary
       start: 4
       end: 12
+  "setInterval('run()', 100)":
+    labels:
+    - source: setInterval('run()', 100)
+      style: primary
+      start: 0
+      end: 25
+    - source: setInterval
+      style: secondary
+      start: 0
+      end: 11
+    - source: "'run()'"
+      style: secondary
+      start: 12
+      end: 19
+    - source: "'run()'"
+      style: secondary
+      start: 12
+      end: 19
+  "setInterval('run()', 100, value)":
+    labels:
+    - source: setInterval('run()', 100, value)
+      style: primary
+      start: 0
+      end: 32
+    - source: setInterval
+      style: secondary
+      start: 0
+      end: 11
+    - source: "'run()'"
+      style: secondary
+      start: 12
+      end: 19
+    - source: "'run()'"
+      style: secondary
+      start: 12
+      end: 19
+  "setTimeout('run()', 100)":
+    labels:
+    - source: setTimeout('run()', 100)
+      style: primary
+      start: 0
+      end: 24
+    - source: setTimeout
+      style: secondary
+      start: 0
+      end: 10
+    - source: "'run()'"
+      style: secondary
+      start: 11
+      end: 18
+    - source: "'run()'"
+      style: secondary
+      start: 11
+      end: 18
+  "setTimeout(`run()`, 100)":
+    labels:
+    - source: setTimeout(`run()`, 100)
+      style: primary
+      start: 0
+      end: 24
+    - source: setTimeout
+      style: secondary
+      start: 0
+      end: 10
+    - source: "`run()`"
+      style: secondary
+      start: 11
+      end: 18
+    - source: "`run()`"
+      style: secondary
+      start: 11
+      end: 18

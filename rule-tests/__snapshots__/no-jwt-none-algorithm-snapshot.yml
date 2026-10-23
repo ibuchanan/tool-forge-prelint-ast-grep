@@ -1,0 +1,172 @@
+id: no-jwt-none-algorithm
+snapshots:
+  "const cfg = {'ALGORITHMS': ['HS256', 'NONE']}":
+    labels:
+    - source: "'ALGORITHMS': ['HS256', 'NONE']"
+      style: primary
+      start: 13
+      end: 44
+    - source: "'ALGORITHMS'"
+      style: secondary
+      start: 13
+      end: 25
+    - source: "'NONE'"
+      style: secondary
+      start: 37
+      end: 43
+    - source: "['HS256', 'NONE']"
+      style: secondary
+      start: 27
+      end: 44
+  "const cfg = {algorithm:'none'}":
+    labels:
+    - source: algorithm:'none'
+      style: primary
+      start: 13
+      end: 29
+    - source: algorithm
+      style: secondary
+      start: 13
+      end: 22
+    - source: "'none'"
+      style: secondary
+      start: 23
+      end: 29
+  "const opts = {\"algorithm\": \"none\"}":
+    labels:
+    - source: "\"algorithm\": \"none\""
+      style: primary
+      start: 14
+      end: 33
+    - source: "\"algorithm\""
+      style: secondary
+      start: 14
+      end: 25
+    - source: "\"none\""
+      style: secondary
+      start: 27
+      end: 33
+  "const opts = {'algorithm': 'none'}":
+    labels:
+    - source: "'algorithm': 'none'"
+      style: primary
+      start: 14
+      end: 33
+    - source: "'algorithm'"
+      style: secondary
+      start: 14
+      end: 25
+    - source: "'none'"
+      style: secondary
+      start: 27
+      end: 33
+  "const opts = {algorithm: \"none\"}":
+    labels:
+    - source: "algorithm: \"none\""
+      style: primary
+      start: 14
+      end: 31
+    - source: algorithm
+      style: secondary
+      start: 14
+      end: 23
+    - source: "\"none\""
+      style: secondary
+      start: 25
+      end: 31
+  "const opts = {algorithm: 'none'}":
+    labels:
+    - source: "algorithm: 'none'"
+      style: primary
+      start: 14
+      end: 31
+    - source: algorithm
+      style: secondary
+      start: 14
+      end: 23
+    - source: "'none'"
+      style: secondary
+      start: 25
+      end: 31
+  "const opts = {algorithms: ['HS256', 'none']}":
+    labels:
+    - source: "algorithms: ['HS256', 'none']"
+      style: primary
+      start: 14
+      end: 43
+    - source: algorithms
+      style: secondary
+      start: 14
+      end: 24
+    - source: "'none'"
+      style: secondary
+      start: 36
+      end: 42
+    - source: "['HS256', 'none']"
+      style: secondary
+      start: 26
+      end: 43
+  "const opts = {algorithms: ['none', 'HS256']}":
+    labels:
+    - source: "algorithms: ['none', 'HS256']"
+      style: primary
+      start: 14
+      end: 43
+    - source: algorithms
+      style: secondary
+      start: 14
+      end: 24
+    - source: "'none'"
+      style: secondary
+      start: 27
+      end: 33
+    - source: "['none', 'HS256']"
+      style: secondary
+      start: 26
+      end: 43
+  "const opts = {algorithms: ['none']}":
+    labels:
+    - source: "algorithms: ['none']"
+      style: primary
+      start: 14
+      end: 34
+    - source: algorithms
+      style: secondary
+      start: 14
+      end: 24
+    - source: "'none'"
+      style: secondary
+      start: 27
+      end: 33
+    - source: "['none']"
+      style: secondary
+      start: 26
+      end: 34
+  "jwt.sign(payload, secret, {algorithm: 'none'})":
+    labels:
+    - source: "algorithm: 'none'"
+      style: primary
+      start: 27
+      end: 44
+    - source: algorithm
+      style: secondary
+      start: 27
+      end: 36
+    - source: "'none'"
+      style: secondary
+      start: 38
+      end: 44
+  "jwt.verify(token, secret, {algorithm: 'none'})":
+    labels:
+    - source: "algorithm: 'none'"
+      style: primary
+      start: 27
+      end: 44
+    - source: algorithm
+      style: secondary
+      start: 27
+      end: 36
+    - source: "'none'"
+      style: secondary
+      start: 38
+      end: 44

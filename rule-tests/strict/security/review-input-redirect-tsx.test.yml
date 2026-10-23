@@ -1,0 +1,16 @@
+id: review-input-redirect-tsx
+valid:
+  - res.redirect('/home')
+  - res.redirect('payload.url')
+  - res.redirect('/home', payload.options)
+  - const url = payload.url; res.redirect(url)
+  - "// res.redirect(payload.url)"
+  - "const text = 'res.redirect(payload.url)'"
+invalid:
+  - res.redirect(payload.url)
+  - res.redirect(request.payload.url)
+  - res.redirect(request.body.url)
+  - res.redirect(request.queryParameters.url)
+  - res.redirect(`/next/${payload.path}`)
+  - res.redirect('/next/' + payload.path)
+  - res.redirect(payload, options)

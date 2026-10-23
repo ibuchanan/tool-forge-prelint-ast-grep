@@ -1,0 +1,46 @@
+id: review-input-sql-js
+language: JavaScript
+severity: warning
+message: Review input-derived SQL statements. Bind values and allowlist dynamic identifiers.
+note: >
+  Matches only the first query/execute/raw argument when its syntax contains payload,
+  an object.payload, request.body or request.queryParameters expression. Bound values in
+  subsequent arguments are not matched. Method and source names are heuristics, not
+  resolved SQL clients or proven provenance. No taint tracking, alias resolution or
+  sanitizer recognition is performed. The imported Forge SQL prepare/executeRaw APIs
+  are covered separately by review-dynamic-forge-sql.
+  See https://owasp.org/Top10/A03_2021-Injection/
+metadata:
+  category: security
+  owasp: "A03:2021 - Injection"
+  cwe: "CWE-89: Improper Neutralization of Special Elements used in an SQL Command"
+rule:
+  any:
+    - pattern: $DB.query($TARGET, $$$ARGS)
+    - pattern: $DB.query($TARGET)
+    - pattern: $DB.execute($TARGET, $$$ARGS)
+    - pattern: $DB.execute($TARGET)
+    - pattern: $DB.raw($TARGET, $$$ARGS)
+    - pattern: $DB.raw($TARGET)
+constraints:
+  TARGET:
+    any:
+      - matches: input-source
+      - has:
+          stopBy: end
+          matches: input-source
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - pattern: $X.payload
+      - pattern: $REQ.queryParameters
+      - pattern: $REQ.body
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

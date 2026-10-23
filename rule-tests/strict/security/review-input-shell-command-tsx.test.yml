@@ -1,0 +1,18 @@
+id: review-input-shell-command-tsx
+valid:
+  - cp.spawn('tool', [payload.arg])
+  - cp.spawnSync('tool', [request.body.arg])
+  - cp.exec('fixed-command', payload.options)
+  - execSync('fixed-command', payload.options)
+  - const cmd = payload.command; exec(cmd)
+  - exec('payload.command')
+  - "// cp.exec(payload.command)"
+  - "const text = 'cp.exec(payload.command)'"
+invalid:
+  - cp.exec(payload.command)
+  - cp.execSync(request.payload.command)
+  - cp.spawn(request.body.executable, [])
+  - cp.spawnSync(request.queryParameters.executable, [])
+  - exec(`tool ${payload.arg}`)
+  - execSync('tool ' + payload.arg)
+  - exec(payload)

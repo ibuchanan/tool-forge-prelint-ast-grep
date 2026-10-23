@@ -1,0 +1,14 @@
+fs.readFile(payload.path, 'utf8');
+res.redirect(request.payload.url);
+crypto.createHash('md5');
+const token = Math.random().toString(36);
+const jwtOptions = { algorithms: ['HS256', 'none'] };
+db.query(`SELECT * FROM users WHERE id = ${payload.id}`);
+cp.exec(request.body.command);
+setTimeout('run()', 100);
+node.innerHTML = payload.html;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+headers['Access-Control-Allow-Origin'] = '*';
+const config = { 'api-key': 'placeholder-needs-review' };
+import(request.queryParameters.module);
+fetch(payload.url);

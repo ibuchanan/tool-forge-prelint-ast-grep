@@ -1,0 +1,37 @@
+id: no-jwt-none-algorithm-tsx
+language: Tsx
+severity: error
+message: Remove the JWT `none` algorithm. Configure an explicit allowed signing algorithm.
+note: >
+  Matches object pairs with an algorithm/algorithms key and a literal none value or
+  array entry, case-insensitively. Comments and strings containing configuration text
+  are not matched. This configuration-shape policy assumes JWT usage; unrelated algorithm
+  objects can match too. It does not resolve JWT libraries, prove that verification is
+  disabled, or trace option variables. There is no automatic algorithm substitution.
+  See https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+metadata:
+  category: security
+  owasp: "A02:2021 - Cryptographic Failures"
+  cwe: "CWE-347: Improper Verification of Cryptographic Signature"
+rule:
+  kind: pair
+  all:
+    - has:
+        field: key
+        regex: '(?i)^["'']?algorithms?["'']?$'
+    - has:
+        field: value
+        any:
+          - kind: string
+            regex: '(?i)^["'']none["'']$'
+          - kind: array
+            has:
+              kind: string
+              regex: '(?i)^["'']none["'']$'
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

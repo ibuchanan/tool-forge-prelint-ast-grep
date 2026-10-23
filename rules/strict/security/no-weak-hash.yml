@@ -1,0 +1,31 @@
+id: no-weak-hash
+language: TypeScript
+severity: warning
+message: Avoid MD5/SHA-1 for cryptographic integrity. Use SHA-256 or a dedicated password-hashing algorithm.
+note: >
+  Matches createHash calls and methods with literal MD5/SHA-1 first arguments,
+  case-insensitively. Method names are a heuristic; imports, aliases, purpose and lexical
+  shadowing are not resolved. Non-security checksums may be legitimate. SHA-256 alone is
+  not suitable for password storage; use a password hashing scheme such as scrypt or Argon2.
+  See https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+metadata:
+  category: security
+  owasp: "A02:2021 - Cryptographic Failures"
+  cwe: "CWE-327: Use of a Broken or Risky Cryptographic Algorithm"
+rule:
+  any:
+    - pattern: $C.createHash($ALGORITHM, $$$ARGS)
+    - pattern: $C.createHash($ALGORITHM)
+    - pattern: createHash($ALGORITHM, $$$ARGS)
+    - pattern: createHash($ALGORITHM)
+constraints:
+  ALGORITHM:
+    kind: string
+    regex: '(?i)^["''](md5|sha1)["'']$'
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

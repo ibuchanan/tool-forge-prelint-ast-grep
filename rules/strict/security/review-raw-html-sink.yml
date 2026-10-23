@@ -1,6 +1,10 @@
 id: review-raw-html-sink
 language: TypeScript
 severity: warning
+metadata:
+  category: security
+  owasp: "A03:2021 - Injection"
+  cwe: "CWE-79: Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)"
 message: >
   Raw HTML rendering can execute untrusted content. Prefer text rendering or review
   sanitization.

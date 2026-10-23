@@ -1,0 +1,44 @@
+id: review-input-fetch-url-tsx
+language: Tsx
+severity: warning
+message: Review input-derived fetch URLs. Allowlist destination hosts and validate redirects.
+note: >
+  Matches only the first fetch argument when its syntax contains payload, an object.payload,
+  request.body or request.queryParameters expression. Subsequent body/header arguments are
+  not matched. Source and receiver names are heuristics, not proven provenance. Even an
+  interpolation on a fixed host triggers review; this rule does not understand URL structure,
+  server versus browser execution, destination validation or Forge egress restrictions.
+  No taint tracking, alias resolution or sanitizer recognition is performed.
+  See https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
+metadata:
+  category: security
+  owasp: "A10:2021 - Server-Side Request Forgery (SSRF)"
+  cwe: "CWE-918: Server-Side Request Forgery (SSRF)"
+rule:
+  any:
+    - pattern: fetch($TARGET, $$$ARGS)
+    - pattern: fetch($TARGET)
+    - pattern: $API.fetch($TARGET, $$$ARGS)
+    - pattern: $API.fetch($TARGET)
+constraints:
+  TARGET:
+    any:
+      - matches: input-source
+      - has:
+          stopBy: end
+          matches: input-source
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - pattern: $X.payload
+      - pattern: $REQ.queryParameters
+      - pattern: $REQ.body
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

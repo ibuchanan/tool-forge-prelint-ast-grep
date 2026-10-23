@@ -1,0 +1,18 @@
+id: review-input-fetch-url
+valid:
+  - fetch('https://example.com')
+  - "fetch('https://example.com', {body: payload.body})"
+  - api.fetch('https://example.com', payload.options)
+  - fetch('payload.url')
+  - fetch(`payload.url`)
+  - const url = payload.url; fetch(url)
+  - "// fetch(payload.url)"
+  - "const text = 'fetch(payload.url)'"
+invalid:
+  - fetch(payload.url)
+  - api.fetch(request.payload.url)
+  - fetch(request.body.url)
+  - fetch(request.queryParameters.url)
+  - fetch(`https://example.com/${payload.path}`)
+  - fetch('https://example.com/' + payload.path)
+  - fetch(payload, options)

@@ -1,0 +1,68 @@
+id: no-weak-hash
+snapshots:
+  const hash = crypto.createHash('md5'); hash.update('data'):
+    labels:
+    - source: crypto.createHash('md5')
+      style: primary
+      start: 13
+      end: 37
+  createHash('md5'):
+    labels:
+    - source: createHash('md5')
+      style: primary
+      start: 0
+      end: 17
+  createHash('sha1'):
+    labels:
+    - source: createHash('sha1')
+      style: primary
+      start: 0
+      end: 18
+  crypto.createHash('MD5'):
+    labels:
+    - source: crypto.createHash('MD5')
+      style: primary
+      start: 0
+      end: 24
+  crypto.createHash('Md5'):
+    labels:
+    - source: crypto.createHash('Md5')
+      style: primary
+      start: 0
+      end: 24
+  crypto.createHash('SHA1'):
+    labels:
+    - source: crypto.createHash('SHA1')
+      style: primary
+      start: 0
+      end: 25
+  crypto.createHash('Sha1'):
+    labels:
+    - source: crypto.createHash('Sha1')
+      style: primary
+      start: 0
+      end: 25
+  crypto.createHash('md5'):
+    labels:
+    - source: crypto.createHash('md5')
+      style: primary
+      start: 0
+      end: 24
+  crypto.createHash('sha1'):
+    labels:
+    - source: crypto.createHash('sha1')
+      style: primary
+      start: 0
+      end: 25
+  "import {createHash} from 'crypto'; createHash('sha1')":
+    labels:
+    - source: createHash('sha1')
+      style: primary
+      start: 35
+      end: 53
+  someLib.createHash('md5'):
+    labels:
+    - source: someLib.createHash('md5')
+      style: primary
+      start: 0
+      end: 25

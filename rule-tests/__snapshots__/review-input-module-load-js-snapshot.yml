@@ -1,0 +1,68 @@
+id: review-input-module-load-js
+snapshots:
+  import('./plugins/' + payload.name):
+    labels:
+    - source: import('./plugins/' + payload.name)
+      style: primary
+      start: 0
+      end: 35
+    - source: payload
+      style: secondary
+      start: 22
+      end: 29
+  import(payload):
+    labels:
+    - source: import(payload)
+      style: primary
+      start: 0
+      end: 15
+  import(request.payload.module):
+    labels:
+    - source: import(request.payload.module)
+      style: primary
+      start: 0
+      end: 30
+    - source: request.payload
+      style: secondary
+      start: 7
+      end: 22
+  import(request.queryParameters.module):
+    labels:
+    - source: import(request.queryParameters.module)
+      style: primary
+      start: 0
+      end: 38
+    - source: request.queryParameters
+      style: secondary
+      start: 7
+      end: 30
+  "require(`./plugins/${payload.name}`)":
+    labels:
+    - source: require(`./plugins/${payload.name}`)
+      style: primary
+      start: 0
+      end: 36
+    - source: payload
+      style: secondary
+      start: 21
+      end: 28
+  require(payload.module):
+    labels:
+    - source: require(payload.module)
+      style: primary
+      start: 0
+      end: 23
+    - source: payload
+      style: secondary
+      start: 8
+      end: 15
+  require(request.body.module):
+    labels:
+    - source: require(request.body.module)
+      style: primary
+      start: 0
+      end: 28
+    - source: request.body
+      style: secondary
+      start: 8
+      end: 20

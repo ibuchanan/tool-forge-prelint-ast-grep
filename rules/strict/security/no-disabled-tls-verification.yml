@@ -1,6 +1,10 @@
 id: no-disabled-tls-verification
 language: TypeScript
 severity: error
+metadata:
+  category: security
+  owasp: "A05:2021 - Security Misconfiguration"
+  cwe: "CWE-295: Improper Certificate Validation"
 message: >
   TLS certificate verification is disabled. Restore verification or configure a trusted CA.
 note: >

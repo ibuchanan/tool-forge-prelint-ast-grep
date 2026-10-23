@@ -1,0 +1,23 @@
+id: no-jwt-none-algorithm
+valid:
+  - "const opts = {algorithm: 'HS256'}"
+  - "const opts = {algorithm: 'RS256'}"
+  - "const opts = {algorithms: ['HS256', 'RS256']}"
+  - "const opts = {algorithm: 'ES256'}"
+  - "const opts = {}; opts.algorithm = 'RS256'"
+  - "// const config = {algorithms: ['none']}"
+  - "const str = 'algorithm: none'"
+  - "const opts = {algorithm: process.env.ALGO}"
+  - "const opts = {other: 'none'}"
+invalid:
+  - "const cfg = {'ALGORITHMS': ['HS256', 'NONE']}"
+  - "const opts = {algorithm: 'none'}"
+  - 'const opts = {algorithm: "none"}'
+  - "const opts = {'algorithm': 'none'}"
+  - 'const opts = {"algorithm": "none"}'
+  - "const opts = {algorithms: ['none']}"
+  - "const opts = {algorithms: ['HS256', 'none']}"
+  - "const opts = {algorithms: ['none', 'HS256']}"
+  - "jwt.verify(token, secret, {algorithm: 'none'})"
+  - "jwt.sign(payload, secret, {algorithm: 'none'})"
+  - "const cfg = {algorithm:'none'}"

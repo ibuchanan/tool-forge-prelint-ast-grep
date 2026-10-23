@@ -1,0 +1,43 @@
+id: review-input-module-load
+language: TypeScript
+severity: warning
+message: Review input-derived module names. Load code only from a fixed allowlist.
+note: >
+  Matches the first require/import argument when its syntax contains payload,
+  an object.payload, request.body or request.queryParameters expression. Source names
+  are heuristics, not proven provenance. No taint tracking, alias resolution, lexical
+  shadowing or sanitizer recognition is performed. Fixed module names are not matched;
+  variable aliases and cross-function or cross-file flows are not traced.
+  See https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/
+metadata:
+  category: security
+  owasp: "A08:2021 - Software and Data Integrity Failures"
+  cwe: "CWE-829: Inclusion of Functionality from Untrusted Control Sphere"
+rule:
+  any:
+    - pattern: require($TARGET, $$$ARGS)
+    - pattern: require($TARGET)
+    - pattern: import($TARGET, $$$ARGS)
+    - pattern: import($TARGET)
+constraints:
+  TARGET:
+    any:
+      - matches: input-source
+      - has:
+          stopBy: end
+          matches: input-source
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - pattern: $X.payload
+      - pattern: $REQ.queryParameters
+      - pattern: $REQ.body
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

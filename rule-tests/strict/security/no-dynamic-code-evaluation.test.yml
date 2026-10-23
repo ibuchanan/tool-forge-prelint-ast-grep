@@ -1,5 +1,11 @@
 id: no-dynamic-code-evaluation
 valid:
+  - "setTimeout(() => run(), 100)"
+  - "setInterval(function () { run() }, 100)"
+  - "setTimeout(run, 100, 'data-not-code')"
+  - "function run(setTimeout) { setTimeout('local callback', 100) }"
+  - "const setInterval = scheduler; setInterval('local callback', 100)"
+  - "obj.setTimeout('not a global timer', 100)"
   - JSON.parse(text)
   - obj.eval(text)
   - obj.Function(text)
@@ -10,6 +16,10 @@ valid:
   - "function eval(code) { return code }; eval(text)"
   - const run = eval => eval(text)
 invalid:
+  - "setTimeout('run()', 100)"
+  - "setInterval('run()', 100)"
+  - "setTimeout(`run()`, 100)"
+  - "setInterval('run()', 100, value)"
   - eval(code)
   - eval()
   - "Function('a', 'b', code)"

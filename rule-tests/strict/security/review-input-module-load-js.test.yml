@@ -1,0 +1,17 @@
+id: review-input-module-load-js
+valid:
+  - require('./fixed-module')
+  - import('./fixed-module')
+  - import('./fixed-module', payload.options)
+  - require('payload.module')
+  - const moduleName = payload.module; require(moduleName)
+  - "// import(payload.module)"
+  - "const text = 'require(payload.module)'"
+invalid:
+  - require(payload.module)
+  - import(request.payload.module)
+  - require(request.body.module)
+  - import(request.queryParameters.module)
+  - require(`./plugins/${payload.name}`)
+  - import('./plugins/' + payload.name)
+  - import(payload)

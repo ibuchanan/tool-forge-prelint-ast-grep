@@ -1,0 +1,58 @@
+id: no-wildcard-cors-origin-tsx
+language: Tsx
+severity: warning
+message: >
+  Review wildcard CORS access. Use a specific allowed origin unless this response is
+  intentionally public.
+note: >
+  A wildcard Access-Control-Allow-Origin permits non-credentialed browser reads from any origin.
+  Public responses may intentionally allow this; review the intended browser exposure before
+  changing it. CORS is not server authentication, and wildcard syntax alone does not prove an
+  authorization bypass or credentialed data theft. Browsers reject wildcard origins for requests
+  using credentials mode include. For restricted browser access, return a validated allowed
+  origin (not a comma-separated origin list) and set Vary: Origin when selecting origins
+  dynamically. Keep handler authentication and authorization independent. Matches literal
+  object entries and subscript assignments, not endpoint policy or header setter APIs. See
+  https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+  and https://owasp.org/Top10/A05_2021-Security_Misconfiguration/
+metadata:
+  category: security
+  owasp: "A05:2021 - Security Misconfiguration"
+  cwe: "CWE-942: Permissive Cross-domain Policy with Untrusted Domains"
+rule:
+  any:
+    - kind: pair
+      all:
+        - has:
+            field: key
+            kind: string
+            regex: '(?i)^["'']Access-Control-Allow-Origin["'']$'
+        - has:
+            field: value
+            any:
+              - kind: string
+                regex: '^["'']\*["'']$'
+              - kind: array
+                has:
+                  kind: string
+                  regex: '^["'']\*["'']$'
+    - kind: assignment_expression
+      all:
+        - has:
+            field: left
+            kind: subscript_expression
+            has:
+              field: index
+              kind: string
+              regex: '(?i)^["'']Access-Control-Allow-Origin["'']$'
+        - has:
+            field: right
+            kind: string
+            regex: '^["'']\*["'']$'
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

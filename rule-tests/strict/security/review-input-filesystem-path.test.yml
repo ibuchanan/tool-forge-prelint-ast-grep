@@ -1,0 +1,19 @@
+id: review-input-filesystem-path
+valid:
+  - fs.readFile('/safe/file', 'utf8')
+  - fs.writeFile('/safe/file', payload.content)
+  - fs.readFile('payload.path')
+  - fs.readFile(`payload.path`)
+  - const filename = payload.path; fs.readFile(filename)
+  - "// fs.readFile(payload.path)"
+  - "const text = 'fs.readFile(payload.path)'"
+  - fs.readFile('/safe/file', /* payload */ options)
+invalid:
+  - fs.readFile(payload.path, 'utf8')
+  - fs.readFileSync(payload)
+  - fs.writeFile(request.payload.path, data)
+  - fs.writeFileSync(request.body.path, data)
+  - fs.appendFile(request.queryParameters.path, data)
+  - fs.appendFileSync('/base/' + payload.path, data)
+  - fs.createReadStream(`/base/${payload.path}`)
+  - fs.createWriteStream(resolvePath(payload.path))

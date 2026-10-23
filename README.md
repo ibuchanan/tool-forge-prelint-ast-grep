@@ -367,8 +367,14 @@ The source families inspect local syntax, not taint flows. Logging checks recogn
 file. Raw HTML findings are review warnings even when a sanitizer is present, and
 apply outside UI Kit frontend paths. Source test/spec files, dependencies, and
 `dist`/`build` output are excluded. No security-boundary autofixes are supplied.
-Rule notes link to the OWASP 2025 categories and describe individual limitations;
+Rule notes link to OWASP categories and describe individual limitations;
 a clean scan is not OWASP compliance or proof of authorization, redaction, or AI safety.
+
+The [OWASP security rules reference](docs/reference/owasp-security-rules.md)
+details source-level OWASP 2021 coverage, including weak hashes, secret-bound
+randomness, JWT `none`, and direct-input filesystem, redirect, SQL, process,
+module-loader, and fetch sinks. These extend the existing OWASP instrumentation.
+Direct-input checks are advisory syntax heuristics, not taint tracking.
 
 ### triggers
 
