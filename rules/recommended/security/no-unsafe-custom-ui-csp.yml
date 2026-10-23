@@ -59,18 +59,21 @@ rule:
                 stopBy: end
                 matches: mapping-pair
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Path-aware block/flow matchers distinguish unsafe script entries from styles, hashes, URLs and unrelated keys; inline anchors are covered. A supported reviewed script exception can still be justified. Alias/merge resolution and whether unsafe execution is actually needed remain assessment gaps. Evidence: rule-tests/recommended/security/no-unsafe-custom-ui-csp.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-unsafe-custom-ui-csp-snapshot.yml."
   impact: high
   impact-rationale: Permitting unrestricted inline or evaluated scripts weakens CSP defense in depth. If untrusted script text reaches execution, weakened restrictions can permit sensitive-data access or user-context actions. The configuration alone does not establish an exploitable injection.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+    - manifest
+    - tests
   category: security
   references:
     - https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
