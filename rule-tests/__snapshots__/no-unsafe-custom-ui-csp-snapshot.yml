@@ -81,6 +81,45 @@ snapshots:
       style: primary
       start: 43
       end: 62
+  "permissions:\n  content:\n    scripts:\n      - &unsafe unsafe-eval":
+    labels:
+    - source: unsafe-eval
+      style: primary
+      start: 53
+      end: 64
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |-
+        permissions:
+          content:
+            scripts:
+              - &unsafe unsafe-eval
+      style: secondary
+      start: 0
+      end: 64
+    - source: content
+      style: secondary
+      start: 15
+      end: 22
+    - source: |-
+        content:
+            scripts:
+              - &unsafe unsafe-eval
+      style: secondary
+      start: 15
+      end: 64
+    - source: scripts
+      style: secondary
+      start: 28
+      end: 35
+    - source: |-
+        scripts:
+              - &unsafe unsafe-eval
+      style: secondary
+      start: 28
+      end: 64
   "permissions:\n  content:\n    scripts:\n      - unsafe-eval":
     labels:
     - source: unsafe-eval
@@ -155,6 +194,66 @@ snapshots:
       style: secondary
       start: 28
       end: 54
+  "permissions: {content: {scripts: [!!str unsafe-eval]}}":
+    labels:
+    - source: unsafe-eval
+      style: primary
+      start: 40
+      end: 51
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {content: {scripts: [!!str unsafe-eval]}}"
+      style: secondary
+      start: 0
+      end: 54
+    - source: content
+      style: secondary
+      start: 14
+      end: 21
+    - source: "content: {scripts: [!!str unsafe-eval]}"
+      style: secondary
+      start: 14
+      end: 53
+    - source: scripts
+      style: secondary
+      start: 24
+      end: 31
+    - source: "scripts: [!!str unsafe-eval]"
+      style: secondary
+      start: 24
+      end: 52
+  "permissions: {content: {scripts: [&unsafe \"'unsafe-inline'\"]}}":
+    labels:
+    - source: "\"'unsafe-inline'\""
+      style: primary
+      start: 42
+      end: 59
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {content: {scripts: [&unsafe \"'unsafe-inline'\"]}}"
+      style: secondary
+      start: 0
+      end: 62
+    - source: content
+      style: secondary
+      start: 14
+      end: 21
+    - source: "content: {scripts: [&unsafe \"'unsafe-inline'\"]}"
+      style: secondary
+      start: 14
+      end: 61
+    - source: scripts
+      style: secondary
+      start: 24
+      end: 31
+    - source: "scripts: [&unsafe \"'unsafe-inline'\"]"
+      style: secondary
+      start: 24
+      end: 60
   "permissions: {content: {scripts: [unsafe-eval, \"*\"]}}":
     labels:
     - source: unsafe-eval

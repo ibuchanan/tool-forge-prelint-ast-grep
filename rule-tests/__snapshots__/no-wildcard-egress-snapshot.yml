@@ -112,6 +112,58 @@ snapshots:
       style: secondary
       start: 15
       end: 65
+  "permissions:\n  external:\n    fetch:\n      backend:\n        - &all '*'":
+    labels:
+    - source: "'*'"
+      style: primary
+      start: 66
+      end: 69
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |-
+        permissions:
+          external:
+            fetch:
+              backend:
+                - &all '*'
+      style: secondary
+      start: 0
+      end: 69
+    - source: external
+      style: secondary
+      start: 15
+      end: 23
+    - source: |-
+        external:
+            fetch:
+              backend:
+                - &all '*'
+      style: secondary
+      start: 15
+      end: 69
+    - source: fetch
+      style: secondary
+      start: 29
+      end: 34
+    - source: |-
+        fetch:
+              backend:
+                - &all '*'
+      style: secondary
+      start: 29
+      end: 69
+    - source: backend
+      style: secondary
+      start: 42
+      end: 49
+    - source: |-
+        backend:
+                - &all '*'
+      style: secondary
+      start: 42
+      end: 69
   "permissions:\n  external:\n    fetch:\n      client:\n        - address: \"*\"\n          category: analytics":
     labels:
     - source: "\"*\""
@@ -223,6 +275,44 @@ snapshots:
       style: secondary
       start: 42
       end: 55
+  "permissions: {external: {fetch: {backend: [!!str \"*\"]}}}":
+    labels:
+    - source: "\"*\""
+      style: primary
+      start: 49
+      end: 52
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {fetch: {backend: [!!str \"*\"]}}}"
+      style: secondary
+      start: 0
+      end: 56
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {fetch: {backend: [!!str \"*\"]}}"
+      style: secondary
+      start: 14
+      end: 55
+    - source: fetch
+      style: secondary
+      start: 25
+      end: 30
+    - source: "fetch: {backend: [!!str \"*\"]}"
+      style: secondary
+      start: 25
+      end: 54
+    - source: backend
+      style: secondary
+      start: 33
+      end: 40
+    - source: "backend: [!!str \"*\"]"
+      style: secondary
+      start: 33
+      end: 53
   "permissions: {external: {fetch: {backend: [\"*\", {address: \"*\"}]}}}":
     labels:
     - source: "\"*\""
@@ -261,3 +351,49 @@ snapshots:
       style: secondary
       start: 33
       end: 63
+  "permissions: {external: {fetch: {client: [{address: &all \"*\"}]}}}":
+    labels:
+    - source: "\"*\""
+      style: primary
+      start: 57
+      end: 60
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {fetch: {client: [{address: &all \"*\"}]}}}"
+      style: secondary
+      start: 0
+      end: 65
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {fetch: {client: [{address: &all \"*\"}]}}"
+      style: secondary
+      start: 14
+      end: 64
+    - source: fetch
+      style: secondary
+      start: 25
+      end: 30
+    - source: "fetch: {client: [{address: &all \"*\"}]}"
+      style: secondary
+      start: 25
+      end: 63
+    - source: client
+      style: secondary
+      start: 33
+      end: 39
+    - source: "client: [{address: &all \"*\"}]"
+      style: secondary
+      start: 33
+      end: 62
+    - source: address
+      style: secondary
+      start: 43
+      end: 50
+    - source: "address: &all \"*\""
+      style: secondary
+      start: 43
+      end: 60

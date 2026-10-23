@@ -2,16 +2,22 @@ id: no-wildcard-cors-origin
 language: TypeScript
 severity: warning
 message: >
-  Do not set Access-Control-Allow-Origin to a wildcard in web trigger or resolver responses.
+  Review wildcard CORS access. Use a specific allowed origin unless this response is
+  intentionally public.
 note: >
-  A wildcard CORS origin lets any site read the response, which defeats the
-  browser's same-origin protections for web trigger endpoints. Return an
-  explicit allow-list of origins instead.
-  See the Valiantys Forge style guide's CORS security guidance:
-  https://www.valiantys.com/en/resources/forge-style-guide
+  A wildcard Access-Control-Allow-Origin permits non-credentialed browser reads from any origin.
+  Public responses may intentionally allow this; review the intended browser exposure before
+  changing it. CORS is not server authentication, and wildcard syntax alone does not prove an
+  authorization bypass or credentialed data theft. Browsers reject wildcard origins for requests
+  using credentials mode include. For restricted browser access, return a validated allowed
+  origin (not a comma-separated origin list) and set Vary: Origin when selecting origins
+  dynamically. Keep handler authentication and authorization independent. This rule identifies
+  literal object entries only; it does not evaluate the endpoint policy. See
+  https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+  and https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/
 rule:
   kind: pair
-  regex: '(?i)["''`]Access-Control-Allow-Origin["''`]\s*:\s*(\[\s*)?["''`]\*["''`]'
+  regex: "(?i)[\"'`]Access-Control-Allow-Origin[\"'`]\\s*:\\s*(\\[\\s*)?[\"'`]\\*[\"'`]"
 ignores:
   - "**/node_modules/**"
   - "**/*.test.ts"

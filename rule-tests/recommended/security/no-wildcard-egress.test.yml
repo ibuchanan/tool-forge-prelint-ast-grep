@@ -8,9 +8,14 @@ valid:
   - 'backend: ["*"]'
   - 'permissions: {external: {fetch: {backend: [{metadata: {address: "*"}}]}}}'
   - 'permissions: {external: {fetch: {backend: ["https://*.example.com"]}}}'
+  - "other:\n  external:\n    fetch:\n      backend:\n        - &all '*'"
+  - "permissions: {external: {fetch: {backend: [{address: &host 'https://api.example.com'}]}}}"
 invalid:
+  - 'permissions: {external: {fetch: {backend: [!!str "*"]}}}'
   - "permissions:\n  external:\n    fetch:\n      backend:\n        - \"*\""
   - "permissions:\n  external:\n    fetch:\n      client:\n        - address: \"*\"\n          category: analytics"
   - 'permissions: {external: {fetch: {backend: ["*", {address: "*"}]}}}'
   - "permissions:\n  external:\n    fetch:\n      client: [\"*\"]"
   - '"permissions": {"external": {"fetch": {"backend": [{"address": "*"}]}}}'
+  - "permissions:\n  external:\n    fetch:\n      backend:\n        - &all '*'"
+  - 'permissions: {external: {fetch: {client: [{address: &all "*"}]}}}'

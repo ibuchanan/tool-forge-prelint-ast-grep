@@ -1,7 +1,7 @@
 import sql from '@forge/sql';
 import https from 'node:https';
 console.log(process.env);
-console.log(accessToken);
+console.log(JSON.stringify({session: {accessToken}}));
 eval(code);
 node.innerHTML = data;
 sql.prepare(`SELECT ${field}`);

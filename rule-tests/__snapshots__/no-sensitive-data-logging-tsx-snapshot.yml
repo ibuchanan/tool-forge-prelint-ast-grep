@@ -84,18 +84,48 @@ snapshots:
       style: secondary
       start: 29
       end: 40
-    - source: JSON.stringify
+    - source: JSON.stringify(credentials)
       style: secondary
       start: 14
+      end: 41
+    - source: JSON.stringify(credentials)
+      style: secondary
+      start: 14
+      end: 41
+  "console.log(\"credential: \" + accessToken)":
+    labels:
+    - source: "console.log(\"credential: \" + accessToken)"
+      style: primary
+      start: 0
+      end: 41
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: +
+      style: secondary
+      start: 27
       end: 28
-    - source: JSON.stringify(credentials)
+    - source: accessToken
       style: secondary
-      start: 14
-      end: 41
-    - source: JSON.stringify(credentials)
+      start: 29
+      end: 40
+    - source: "\"credential: \" + accessToken"
       style: secondary
-      start: 14
-      end: 41
+      start: 12
+      end: 40
+    - source: "\"credential: \" + accessToken"
+      style: secondary
+      start: 12
+      end: 40
   "console.log('password:', password)":
     labels:
     - source: console.log('password:', password)
@@ -148,6 +178,116 @@ snapshots:
       style: secondary
       start: 21
       end: 32
+  "console.log(JSON.stringify(credentials, null))":
+    labels:
+    - source: console.log(JSON.stringify(credentials, null))
+      style: primary
+      start: 0
+      end: 46
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: credentials
+      style: secondary
+      start: 27
+      end: 38
+    - source: credentials
+      style: secondary
+      start: 27
+      end: 38
+    - source: JSON.stringify(credentials, null)
+      style: secondary
+      start: 12
+      end: 45
+    - source: JSON.stringify(credentials, null)
+      style: secondary
+      start: 12
+      end: 45
+  "console.log(JSON.stringify({nested: {accessToken}}))":
+    labels:
+    - source: "console.log(JSON.stringify({nested: {accessToken}}))"
+      style: primary
+      start: 0
+      end: 52
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: accessToken
+      style: secondary
+      start: 37
+      end: 48
+    - source: "{nested: {accessToken}}"
+      style: secondary
+      start: 27
+      end: 50
+    - source: "{nested: {accessToken}}"
+      style: secondary
+      start: 27
+      end: 50
+    - source: "JSON.stringify({nested: {accessToken}})"
+      style: secondary
+      start: 12
+      end: 51
+    - source: "JSON.stringify({nested: {accessToken}})"
+      style: secondary
+      start: 12
+      end: 51
+  "console.log(JSON.stringify({token}, null, 2))":
+    labels:
+    - source: console.log(JSON.stringify({token}, null, 2))
+      style: primary
+      start: 0
+      end: 45
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: token
+      style: secondary
+      start: 28
+      end: 33
+    - source: "{token}"
+      style: secondary
+      start: 27
+      end: 34
+    - source: "{token}"
+      style: secondary
+      start: 27
+      end: 34
+    - source: JSON.stringify({token}, null, 2)
+      style: secondary
+      start: 12
+      end: 44
+    - source: JSON.stringify({token}, null, 2)
+      style: secondary
+      start: 12
+      end: 44
   "console.log([password])":
     labels:
     - source: console.log([password])
@@ -178,6 +318,120 @@ snapshots:
       style: secondary
       start: 12
       end: 22
+  "console.log([{secret: user.clientSecret}])":
+    labels:
+    - source: "console.log([{secret: user.clientSecret}])"
+      style: primary
+      start: 0
+      end: 42
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: clientSecret
+      style: secondary
+      start: 27
+      end: 39
+    - source: user.clientSecret
+      style: secondary
+      start: 22
+      end: 39
+    - source: "[{secret: user.clientSecret}]"
+      style: secondary
+      start: 12
+      end: 41
+    - source: "[{secret: user.clientSecret}]"
+      style: secondary
+      start: 12
+      end: 41
+  "console.log(`credential: ${accessToken}`)":
+    labels:
+    - source: "console.log(`credential: ${accessToken}`)"
+      style: primary
+      start: 0
+      end: 41
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: accessToken
+      style: secondary
+      start: 27
+      end: 38
+    - source: "`credential: ${accessToken}`"
+      style: secondary
+      start: 12
+      end: 40
+    - source: "`credential: ${accessToken}`"
+      style: secondary
+      start: 12
+      end: 40
+  "console.log(`header: ${headers.get(\"authorization\")}`)":
+    labels:
+    - source: "console.log(`header: ${headers.get(\"authorization\")}`)"
+      style: primary
+      start: 0
+      end: 54
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: headers
+      style: secondary
+      start: 23
+      end: 30
+    - source: get
+      style: secondary
+      start: 31
+      end: 34
+    - source: headers.get
+      style: secondary
+      start: 23
+      end: 34
+    - source: "\"authorization\""
+      style: secondary
+      start: 35
+      end: 50
+    - source: "\"authorization\""
+      style: secondary
+      start: 35
+      end: 50
+    - source: headers.get("authorization")
+      style: secondary
+      start: 23
+      end: 51
+    - source: "`header: ${headers.get(\"authorization\")}`"
+      style: secondary
+      start: 12
+      end: 53
+    - source: "`header: ${headers.get(\"authorization\")}`"
+      style: secondary
+      start: 12
+      end: 53
   console.log(headers.authorization):
     labels:
     - source: headers.authorization
@@ -220,6 +474,36 @@ snapshots:
       style: secondary
       start: 12
       end: 28
+  "console.log(user['refreshToken'])":
+    labels:
+    - source: console.log(user['refreshToken'])
+      style: primary
+      start: 0
+      end: 33
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: "'refreshToken'"
+      style: secondary
+      start: 17
+      end: 31
+    - source: user['refreshToken']
+      style: secondary
+      start: 12
+      end: 32
+    - source: user['refreshToken']
+      style: secondary
+      start: 12
+      end: 32
   "console.log({key: token})":
     labels:
     - source: "console.log({key: token})"
@@ -250,6 +534,48 @@ snapshots:
       style: secondary
       start: 12
       end: 24
+  "console.log({serialized: JSON.stringify({token})})":
+    labels:
+    - source: "console.log({serialized: JSON.stringify({token})})"
+      style: primary
+      start: 0
+      end: 50
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: token
+      style: secondary
+      start: 41
+      end: 46
+    - source: "{token}"
+      style: secondary
+      start: 40
+      end: 47
+    - source: "{token}"
+      style: secondary
+      start: 40
+      end: 47
+    - source: JSON.stringify({token})
+      style: secondary
+      start: 25
+      end: 48
+    - source: "{serialized: JSON.stringify({token})}"
+      style: secondary
+      start: 12
+      end: 49
+    - source: "{serialized: JSON.stringify({token})}"
+      style: secondary
+      start: 12
+      end: 49
   "console.log({token})":
     labels:
     - source: console.log({token})
@@ -416,6 +742,64 @@ snapshots:
       style: secondary
       start: 23
       end: 52
+  "logger.info(JSON.stringify({authorization: headers.get('authorization')}))":
+    labels:
+    - source: "logger.info(JSON.stringify({authorization: headers.get('authorization')}))"
+      style: primary
+      start: 0
+      end: 74
+    - source: logger
+      style: secondary
+      start: 0
+      end: 6
+    - source: info
+      style: secondary
+      start: 7
+      end: 11
+    - source: logger.info
+      style: secondary
+      start: 0
+      end: 11
+    - source: headers
+      style: secondary
+      start: 43
+      end: 50
+    - source: get
+      style: secondary
+      start: 51
+      end: 54
+    - source: headers.get
+      style: secondary
+      start: 43
+      end: 54
+    - source: "'authorization'"
+      style: secondary
+      start: 55
+      end: 70
+    - source: "'authorization'"
+      style: secondary
+      start: 55
+      end: 70
+    - source: headers.get('authorization')
+      style: secondary
+      start: 43
+      end: 71
+    - source: "{authorization: headers.get('authorization')}"
+      style: secondary
+      start: 27
+      end: 72
+    - source: "{authorization: headers.get('authorization')}"
+      style: secondary
+      start: 27
+      end: 72
+    - source: "JSON.stringify({authorization: headers.get('authorization')})"
+      style: secondary
+      start: 12
+      end: 73
+    - source: "JSON.stringify({authorization: headers.get('authorization')})"
+      style: secondary
+      start: 12
+      end: 73
   logger.info(request.headers.get('Authorization')):
     labels:
     - source: logger.info(request.headers.get('Authorization'))

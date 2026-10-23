@@ -1,1 +1,1 @@
-permissions: {external: {fetch: {backend: [{address: "*"}]}}, content: {scripts: [unsafe-eval]}}
+permissions: {external: {fetch: {backend: [{address: &all "*"}]}}, content: {scripts: [&unsafe unsafe-eval]}}

@@ -10,6 +10,7 @@ AST_GREP=${AST_GREP:-ast-grep}
 # Each source file has one sink per new/improved source rule family.
 for ext in ts tsx js jsx mjs cjs mts cts; do
   cp rule-tests/fixtures/security/source.txt "$TMP/source.$ext"
+  cp rule-tests/fixtures/security/safe-logging.txt "$TMP/safe-logging.$ext"
 done
 mkdir -p "$TMP/static/custom-ui" "$TMP/tests" "$TMP/dist" "$TMP/build" "$TMP/node_modules/example"
 cp rule-tests/fixtures/security/html.txt "$TMP/static/custom-ui/widget.jsx"

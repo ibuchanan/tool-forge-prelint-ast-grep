@@ -9,7 +9,9 @@ note: >
   intentional (for example client popup workflows); a match is not an invalid manifest or proof
   of exfiltration. Specific host wildcards and remote-reference resolution are outside this
   check. See https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
-  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/ Inline scalar
+  declarations with YAML anchors/tags are inspected; alias references and merge expansion are
+  not resolved.
 utils:
   mapping-pair:
     any:
@@ -17,8 +19,13 @@ utils:
       - kind: flow_pair
 rule:
   all:
-    - kind: flow_node
-      regex: "^[\"']\\*[\"']$"
+    - any:
+        - kind: plain_scalar
+          regex: "^[\"']\\*[\"']$"
+        - kind: single_quote_scalar
+          regex: "^[\"']\\*[\"']$"
+        - kind: double_quote_scalar
+          regex: "^[\"']\\*[\"']$"
     - any:
         - inside:
             stopBy:

@@ -10,6 +10,16 @@ valid:
   - "console.log('password')"
   - "console.log({tokenCount:1, status:'token expired'})"
   - "console.log(otherheaders.get('authorization'))"
+  - "console.log({count: token.length})"
+  - "console.log({get value(){ return token }})"
+  - "console.log(JSON.stringify({token: redact(token)}))"
+  - "console.log({publicValue: redact(user.token)})"
+  - "console.log(JSON.stringify(credentials, redact))"
+  - "console.log({value: object[token]})"
+  - "console.log(JSON.stringify({length: token.length}, null, 2))"
+  - "console.log(JSON.stringify({value(){return token}}))"
+  - "console.log(`count: ${token.length}`)"
+  - 'console.log({value: sanitize(headers.get("authorization"))})'
 invalid:
   - "console.log('password:', password)"
   - "console.log('token', accessToken)"
@@ -25,3 +35,13 @@ invalid:
   - "console.log([password])"
   - console.error(JSON.stringify(credentials))
   - "logger.info(request.headers.get('Authorization'))"
+  - "console.log(JSON.stringify({nested: {accessToken}}))"
+  - "logger.info(JSON.stringify({authorization: headers.get('authorization')}))"
+  - "console.log(`credential: ${accessToken}`)"
+  - 'console.log("credential: " + accessToken)'
+  - "console.log(user['refreshToken'])"
+  - "console.log([{secret: user.clientSecret}])"
+  - "console.log(JSON.stringify({token}, null, 2))"
+  - "console.log({serialized: JSON.stringify({token})})"
+  - "console.log(JSON.stringify(credentials, null))"
+  - 'console.log(`header: ${headers.get("authorization")}`)'

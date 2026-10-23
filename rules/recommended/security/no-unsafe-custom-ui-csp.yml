@@ -10,7 +10,9 @@ note: >
   implications and is not matched; hash-pinned script entries are not unrestricted inline
   execution. Supported CSP exceptions require review, not automatic removal. See
   https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
-  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/ Inline scalar
+  declarations with YAML anchors/tags are inspected; alias references and merge expansion are
+  not resolved.
 utils:
   mapping-pair:
     any:
@@ -18,8 +20,13 @@ utils:
       - kind: flow_pair
 rule:
   all:
-    - kind: flow_node
-      regex: "^[\"']*(unsafe-inline|unsafe-eval|\\*)[\"']*$"
+    - any:
+        - kind: plain_scalar
+          regex: "^[\"']*(unsafe-inline|unsafe-eval|\\*)[\"']*$"
+        - kind: single_quote_scalar
+          regex: "^[\"']*(unsafe-inline|unsafe-eval|\\*)[\"']*$"
+        - kind: double_quote_scalar
+          regex: "^[\"']*(unsafe-inline|unsafe-eval|\\*)[\"']*$"
     - inside:
         stopBy:
           matches: mapping-pair

@@ -5,10 +5,13 @@ message: >
   Do not log credential values or authorization headers. Redact or omit sensitive data.
 note: >
   Detects direct credential-named values and authorization-header reads at console, logger, and
-  log methods (log/info/warn/error/debug/trace/fatal), including inline object/array values. A
-  message mentioning a token is not a credential. Redaction calls are not inspected; their
-  presence does not prove effective redaction. Aliases, computed flows, unknown logger names and
-  arbitrary objects require review; no taint tracking is performed. See
+  log methods (log/info/warn/error/debug/trace/fatal), including inline objects/arrays,
+  interpolation, concatenation and JSON.stringify without a custom replacer. Metadata such as
+  token.length and deferred method bodies are not treated as credential disclosure. Redaction
+  calls and custom JSON replacers are not inspected; their presence does not prove effective
+  redaction. Getters/toJSON methods may execute during serialization and require review.
+  Aliases, computed flows, unknown logger names and arbitrary objects require review;
+  no taint tracking is performed. See
   https://top10.owasp.org/2025/A09_2025-Security_Logging_and_Alerting_Failures/ and
   https://developer.atlassian.com/platform/forge/logging-guidelines/
 utils:
@@ -23,11 +26,10 @@ utils:
           field: property
           regex: (?i)^(password|secret|token|access_?token|api_?key|api_?secret|session_?token|auth_?token|bearer_?token|credentials|private_?key|client_?secret|refresh_?token|api_?password|webhook_?secret|secret_?value)$
       - kind: subscript_expression
-        all:
-          - has:
-              field: index
-              kind: string
-              regex: '(?i)^["''](password|secret|token|access_?token|api_?key|credentials|client_?secret)["'']$'
+        has:
+          field: index
+          kind: string
+          regex: '(?i)^["''](password|secret|token|access_?token|api_?key|api_?secret|session_?token|auth_?token|bearer_?token|credentials|private_?key|client_?secret|refresh_?token|api_?password|webhook_?secret|secret_?value)["'']$'
       - kind: member_expression
         has:
           field: property
@@ -58,33 +60,38 @@ utils:
               field: index
               kind: string
               regex: '(?i)^["''](authorization|proxy-authorization)["'']$'
-      - kind: call_expression
+  inline-credential-value:
+    any:
+      - matches: credential-value
+      - any:
+          - kind: object
+          - kind: array
+          - kind: template_string
+          - kind: binary_expression
+            has:
+              field: operator
+              regex: ^\+$
         has:
-          field: function
-          pattern: JSON.stringify
-        all:
-          - has:
-              field: arguments
-              has:
-                any:
-                  - kind: identifier
-                    regex: (?i)^(password|secret|token|access_?token|api_?key|api_?secret|session_?token|auth_?token|bearer_?token|credentials|private_?key|client_?secret|refresh_?token|api_?password|webhook_?secret|secret_?value)$
-                  - kind: shorthand_property_identifier
-                    regex: (?i)^(password|secret|token|access_?token|api_?key|api_?secret|session_?token|auth_?token|bearer_?token|credentials|private_?key|client_?secret|refresh_?token|api_?password|webhook_?secret|secret_?value)$
-                  - kind: member_expression
-                    has:
-                      field: property
-                      regex: (?i)^(password|secret|token|access_?token|api_?key|api_?secret|session_?token|auth_?token|bearer_?token|credentials|private_?key|client_?secret|refresh_?token|api_?password|webhook_?secret|secret_?value)$
-                  - kind: subscript_expression
-                    all:
-                      - has:
-                          field: index
-                          kind: string
-                          regex: '(?i)^["''](password|secret|token|access_?token|api_?key|credentials|client_?secret)["'']$'
-                  - kind: member_expression
-                    has:
-                      field: property
-                      regex: (?i)^(authorization|proxyAuthorization)$
+          stopBy:
+            any:
+              - kind: call_expression
+              - kind: arrow_function
+              - kind: function_expression
+              - kind: method_definition
+              - kind: member_expression
+              - kind: subscript_expression
+          matches: credential-value
+  serialized-credential-value:
+    all:
+      - any:
+          - pattern: JSON.stringify($VALUE)
+          - pattern: "JSON.stringify($VALUE, null)"
+          - pattern: "JSON.stringify($VALUE, null, $SPACE)"
+      - has:
+          field: arguments
+          has:
+            nthChild: 1
+            matches: inline-credential-value
 rule:
   all:
     - kind: call_expression
@@ -103,17 +110,26 @@ rule:
         field: arguments
         has:
           any:
-            - matches: credential-value
+            - matches: inline-credential-value
+            - matches: serialized-credential-value
             - any:
                 - kind: object
                 - kind: array
+                - kind: template_string
+                - kind: binary_expression
+                  has:
+                    field: operator
+                    regex: ^\+$
               has:
                 stopBy:
                   any:
                     - kind: call_expression
                     - kind: arrow_function
                     - kind: function_expression
-                matches: credential-value
+                    - kind: method_definition
+                    - kind: member_expression
+                    - kind: subscript_expression
+                matches: serialized-credential-value
 ignores:
   - "**/node_modules/**"
   - "**/dist/**"

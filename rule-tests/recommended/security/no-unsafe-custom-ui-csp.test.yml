@@ -7,9 +7,15 @@ valid:
   - "other: {content: {scripts: [unsafe-eval]}}"
   - 'permissions: {content: {scripts: ["https://cdn.example.com/unsafe-eval.js"]}}'
   - "scripts: [unsafe-eval]"
+  - "permissions:\n  content:\n    styles:\n      - &inline unsafe-inline"
+  - "permissions: {content: {scripts: [&pin 'sha256-abc123']}}"
+  - "other: {content: {scripts: [&unsafe unsafe-eval]}}"
 invalid:
+  - "permissions: {content: {scripts: [!!str unsafe-eval]}}"
   - "permissions:\n  content:\n    scripts:\n      - \"'unsafe-inline'\""
   - "permissions:\n  content:\n    scripts:\n      - unsafe-eval"
   - 'permissions: {content: {scripts: [unsafe-eval, "*"]}}'
   - "permissions:\n  content:\n    scripts: [\"unsafe-inline\"]"
   - '"permissions": {"content": {"scripts": ["''unsafe-eval''"]}}'
+  - "permissions:\n  content:\n    scripts:\n      - &unsafe unsafe-eval"
+  - 'permissions: {content: {scripts: [&unsafe "''unsafe-inline''"]}}'
