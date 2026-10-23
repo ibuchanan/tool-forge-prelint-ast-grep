@@ -1,0 +1,2 @@
+# Rule path	Reviewed positive scope	Test policy
+rules/atlassian/package-json/require-package-license-apache-2-0.yml	package	include

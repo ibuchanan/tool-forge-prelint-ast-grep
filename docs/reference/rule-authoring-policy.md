@@ -853,6 +853,13 @@ and recipe suites pass, with zero frozen findings. Repository Prettier, ShellChe
 changed-shell shfmt and git diff --check pass. Scope normalization, severity
 application and removal of the compatibility machinery remain later-ticket work.
 
+## Ticket 08 native scope normalization
+
+The [native scope routing reference](rule-scope-routing.md) records approved
+coverage changes, permanent custom boundaries, category progress and real-file
+scanner evidence. Historical legacy-scope descriptions above describe their
+metadata-only stages, not permanent exceptions to the shared baseline.
+
 ## Model references
 
 - [ast-grep rule configuration](https://ast-grep.github.io/reference/yaml.html)
