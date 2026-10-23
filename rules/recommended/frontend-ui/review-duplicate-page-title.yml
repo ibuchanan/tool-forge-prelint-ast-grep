@@ -30,14 +30,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests distinguish xlarge/xxlarge Heading elements from smaller headings and Text. The matcher never reads module title, heading text or module type; legitimate large section headings routinely match. Cross-file duplication and component identity remain assessment gaps. Evidence: rule-tests/recommended/frontend-ui/review-duplicate-page-title.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-duplicate-page-title-snapshot.yml."
   impact: low
   impact-rationale: A genuinely repeated module title adds visual clutter and confusing heading hierarchy. Forge modules define page titles, but a large heading alone does not establish duplication or accessibility noncompliance; removing it without comparison may remove useful structure.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+    - frontend
+    - tests
   category: frontend-ui
   references:
     - https://developer.atlassian.com/platform/forge/manifest-reference/modules/

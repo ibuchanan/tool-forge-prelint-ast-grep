@@ -18,14 +18,17 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "Tests distinguish raw iframe syntax from Frame and other components. Frontend paths alone do not establish UI Kit rather than ordinary Custom UI DOM; legitimate iframe embedding and imported component identity remain untested contextual gaps. Evidence: rule-tests/recommended/frontend-ui/prefer-frame-for-custom-ui.test.yml (valid/invalid cases) and rule-tests/__snapshots__/prefer-frame-for-custom-ui-snapshot.yml."
   impact: medium
   impact-rationale: Trying to embed Custom UI through unsupported DOM in UI Kit can prevent the embedded surface working as intended. Frame documents a supported UI Kit embedding boundary; ordinary browser iframe usage is not universally incorrect.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+    - frontend
+    - tests
   category: frontend-ui
   references:
     - https://developer.atlassian.com/platform/forge/ui-kit/components/frame/
