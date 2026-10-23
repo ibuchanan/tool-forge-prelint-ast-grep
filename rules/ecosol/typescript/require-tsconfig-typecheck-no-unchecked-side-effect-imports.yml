@@ -24,14 +24,17 @@ rule:
 files:
   - "**/tsconfig.typecheck.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   references:
     ["https://www.typescriptlang.org/tsconfig/#noUncheckedSideEffectImports"]
   category: typescript
   precision: medium
   scope-profile: [unique]
-  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.typecheck.json, not every tsconfig variant. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   precision-rationale: "Tests cover explicit true, false and omission including extends. Effective inherited flags, compiler version, ambient module declarations and actual imports are unresolved assessment gaps. The matcher detects no specific unresolved module. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-no-unchecked-side-effect-imports.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-no-unchecked-side-effect-imports-snapshot.yml."
   impact: medium
   impact-rationale: TypeScript documents diagnostics for unresolved side-effect-only imports. Genuine loss of that guard can hide a misspelled import and missing initialization until integration, causing bounded build/functionality rework rather than established substantial application failure.

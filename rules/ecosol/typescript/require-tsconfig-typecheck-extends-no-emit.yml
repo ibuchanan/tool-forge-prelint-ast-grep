@@ -31,7 +31,10 @@ rule:
 files:
   - "**/tsconfig.typecheck.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   references:
     - https://www.typescriptlang.org/tsconfig/#extends
@@ -39,7 +42,7 @@ metadata:
   category: typescript
   precision: medium
   scope-profile: [unique]
-  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.typecheck.json, not every tsconfig variant. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   precision-rationale: "Tests cover literal ./tsconfig.json plus explicit noEmit and missing components. Effective inheritance, equivalent base paths/arrays and CLI noEmit can be compliant; regex matching does not load the base or validate nested structure. These are assessment gaps, not detected emit collisions. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-extends-no-emit.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-extends-no-emit-snapshot.yml."
   impact: medium
   impact-rationale: TypeScript documents extends and noEmit; genuine baseline divergence or unintended typecheck emit can produce inconsistent diagnostics or collide with local build artifacts. Harm is bounded workflow/build rework, not proof of a broken deployment.

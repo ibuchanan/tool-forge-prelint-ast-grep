@@ -23,13 +23,16 @@ rule:
 files:
   - "**/tsconfig.typecheck.json"
 ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
   - "**/node_modules/**"
+  - "**/specs/**"
 metadata:
   references: ["https://www.typescriptlang.org/tsconfig/#noImplicitOverride"]
   category: typescript
   precision: medium
   scope-profile: [unique]
-  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  scope-rationale: "Select only the reviewed configuration filenames: tsconfig.typecheck.json, not every tsconfig variant. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
   precision-rationale: "Tests cover explicit true, false and omission including extends-only input. Effective inherited values and the presence of relevant class hierarchies are unresolved; nested regex structure and CLI settings are assessment gaps. The rule detects a config signal, not a faulty override. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-no-implicit-override.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-no-implicit-override-snapshot.yml."
   impact: low
   impact-rationale: TypeScript documents explicit override annotations as a refactoring check. Genuine omission weakens local inheritance-intent feedback and adds maintainability risk; the matcher does not support assuming a material application defect from the setting alone.
