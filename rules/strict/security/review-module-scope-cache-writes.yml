@@ -73,3 +73,36 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.spec.ts"
+metadata:
+  category: security
+  references:
+    - https://developer.atlassian.com/platform/forge/security/
+    - https://developer.atlassian.com/platform/forge/tenant-data-isolation/
+  precision: medium
+  precision-rationale: >-
+    Selected writes to module-declared object/array/Map/Set caches with static
+    or listed resource keys signal possible missing tenant isolation.
+    rule-tests/strict/security/review-module-scope-cache-writes.test.yml and
+    rule-tests/__snapshots__/review-module-scope-cache-writes-snapshot.yml
+    together cover static/resource-key and exported-array writes, with
+    handler-local and cloudId-keyed cache use negative. The matcher does not
+    establish value sensitivity, tenant confinement, binding identity under
+    shadowing or all key forms; shared public caches can be legitimate and
+    require review.
+  impact: high
+  impact-rationale: >-
+    A process-reused cache holding private tenant data under a shared key can
+    return one tenant's data to another; issue/page identifiers are not a
+    general tenant partition. Forge tenant-isolation guidance supports
+    tenant-keying or isolated storage. Public cached data alone does not
+    establish disclosure.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve legacy TypeScript-only scanning with unrestricted positive scope
+    minus frontend paths, node_modules and .test.ts/.spec.ts filenames. This is
+    a backend-intended exclusion boundary, not the standard backend
+    positive-directory selection. dist, build, coverage, specs, other test
+    suffixes and test directories remain scanned. No JS/TSX companions exist;
+    those parser coverage gaps and scope normalization require separate review
+    in ticket 08.

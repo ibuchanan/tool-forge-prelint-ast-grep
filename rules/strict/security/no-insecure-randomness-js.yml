@@ -12,7 +12,40 @@ note: >
 metadata:
   category: security
   owasp: "A02:2021 - Cryptographic Failures"
-  cwe: "CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)"
+  cwe: "CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator
+    (PRNG)"
+  precision: medium
+  precision-rationale: >-
+    Math.random in a value with a security-sensitive name suffix is a concrete
+    weak-randomness signal, but names do not establish security use.
+    rule-tests/strict/security/no-insecure-randomness-js.test.yml and
+    rule-tests/__snapshots__/no-insecure-randomness-js-snapshot.yml together
+    cover declarations, assignments, properties and composed values, with
+    unrelated siblings, sessionId, secure generators and aliases negative.
+    Harmless similarly named values and lexical shadowing remain assessment
+    gaps; no measured false-positive rate or dataflow analysis is available.
+  impact: high
+  impact-rationale: >-
+    If predictable non-cryptographic randomness supplies an authentication
+    token, OTP or CSRF secret, guessing that value can enable unauthorized
+    actions. MDN Math.random, Node crypto and CWE-338 support using
+    cryptographic randomness. Not every named key, nonce or salt needs
+    unpredictability, and matching source syntax does not establish an
+    exploitable token.
+  references:
+    - https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    - https://nodejs.org/api/crypto.html#cryptorandombytessize-callback
+    - https://cwe.mitre.org/data/definitions/338.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   pattern: Math.random()
   inside:

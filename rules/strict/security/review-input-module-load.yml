@@ -13,6 +13,33 @@ metadata:
   category: security
   owasp: "A08:2021 - Software and Data Integrity Failures"
   cwe: "CWE-829: Inclusion of Functionality from Untrusted Control Sphere"
+  references:
+    - https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/
+    - https://cwe.mitre.org/data/definitions/829.html
+  precision: medium
+  precision-rationale: >-
+    Direct input syntax in require/import's first argument signals dynamic code
+    selection. rule-tests/strict/security/review-input-module-load.test.yml and
+    rule-tests/__snapshots__/review-input-module-load-snapshot.yml together
+    cover direct and composed module names, with fixed names, options-only
+    input, strings/comments and aliases negative. Allowlisting, source trust,
+    require shadowing and cross-file flows are not resolved; a permitted
+    selection can still match and is an assessment gap.
+  impact: high
+  impact-rationale: >-
+    If an attacker selects executable code outside a fixed trusted allowlist,
+    loading it can execute under the application's privileges. OWASP software
+    integrity guidance and CWE-829 support this consequence. A dynamic name does
+    not prove untrusted code exists or is reachable in the runtime/bundle.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: require($TARGET, $$$ARGS)

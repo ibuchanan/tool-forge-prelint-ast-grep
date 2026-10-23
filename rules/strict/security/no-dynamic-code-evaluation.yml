@@ -4,7 +4,46 @@ severity: error
 metadata:
   category: security
   owasp: "A03:2021 - Injection"
-  cwe: "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code (Eval Injection)"
+  cwe:
+    "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code
+    (Eval Injection)"
+  precision: high
+  precision-rationale: >-
+    Direct eval/Function invocations and literal string timer callbacks
+    establish the stated dynamic-evaluation convention violation, not input
+    trust or an exploit.
+    rule-tests/strict/security/no-dynamic-code-evaluation.test.yml and
+    rule-tests/__snapshots__/no-dynamic-code-evaluation-snapshot.yml together
+    cover these calls and negative function callbacks, object methods and
+    visible declaration/import/parameter shadowing. Shadowing is conservatively
+    excluded, not fully resolved; aliases, indirect evaluation and
+    stored/interpolated timer expressions remain coverage gaps. TypeScript/TSX
+    recognize required_parameter and optional_parameter nodes; the JavaScript
+    companion only needs identifier parameters. This parser difference does not
+    change policy judgments.
+  impact: high
+  impact-rationale: >-
+    When untrusted input is evaluated as code, it can execute under application
+    privileges and access private data or perform unauthorized operations. OWASP
+    injection/output-handling guidance and CWE-95 support this consequence.
+    Fixed trusted expressions and empty invocations still violate the convention
+    but do not by themselves establish exploitation.
+  references:
+    - https://top10.owasp.org/2025/A05_2025-Injection/
+    - https://owasp.org/Top10/A03_2021-Injection/
+    - https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
+    - https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+    - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
+    - https://cwe.mitre.org/data/definitions/95.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 message: >
   Avoid dynamic code evaluation. Use fixed operations and validated data instead.
 note: >

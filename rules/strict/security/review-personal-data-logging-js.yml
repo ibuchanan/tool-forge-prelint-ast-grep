@@ -170,3 +170,37 @@ ignores:
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+metadata:
+  category: security
+  references:
+    - https://developer.atlassian.com/platform/forge/logging-guidelines/
+    - https://cwe.mitre.org/data/definitions/532.html
+  precision: medium
+  precision-rationale: >-
+    Named identifiers, user/profile properties and selected content/URL fields
+    at known logger names are privacy-review signals.
+    rule-tests/strict/security/review-personal-data-logging-js.test.yml and
+    rule-tests/__snapshots__/review-personal-data-logging-js-snapshot.yml
+    together cover direct, nested, serialized, header and content cases, with
+    metadata, masking calls, custom replacers and deferred bodies negative.
+    Necessity, de-identification, actual sensitivity and logger identity remain
+    unresolved; not every ID is prohibited and no legal-compliance conclusion
+    follows.
+  impact: high
+  impact-rationale: >-
+    Unnecessary logging of actual personal identifiers or user content can
+    expose private data to log readers and increase retention/access beyond the
+    original operation. Forge logging guidelines support minimization. The high
+    consequence is conditional on sensitive content and inappropriate access;
+    bounded operational identifiers do not automatically establish serious
+    exposure.
+  cwe: "CWE-532: Insertion of Sensitive Information into Log File"
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.

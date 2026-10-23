@@ -14,6 +14,35 @@ metadata:
   category: security
   owasp: "A10:2021 - Server-Side Request Forgery (SSRF)"
   cwe: "CWE-918: Server-Side Request Forgery (SSRF)"
+  references:
+    - https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
+    - https://cwe.mitre.org/data/definitions/918.html
+  precision: medium
+  precision-rationale: >-
+    Direct payload/body/query syntax in the first fetch URL is a concrete input
+    signal. rule-tests/strict/security/review-input-fetch-url.test.yml and
+    rule-tests/__snapshots__/review-input-fetch-url-snapshot.yml together cover
+    direct and interpolated/concatenated destinations, with fixed URLs,
+    body/options-only input, strings/comments and aliases negative. Fixed-host
+    interpolation can still match; URL structure, allowed hosts, browser/server
+    context, import identity and sanitizer correctness are not resolved. This is
+    not taint analysis or proof of SSRF.
+  impact: high
+  impact-rationale: >-
+    If an attacker controls a server-side fetch destination without suitable
+    restrictions, the server can access private services or disclose data using
+    its network privileges. OWASP SSRF and CWE-918 support this consequence.
+    Browser fetches and validated/fixed-host destinations need contextual
+    review; Forge egress controls also constrain reachability.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: fetch($TARGET, $$$ARGS)

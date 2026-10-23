@@ -82,3 +82,37 @@ ignores:
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+metadata:
+  category: security
+  references:
+    - https://top10.owasp.org/2025/A10_2025-Mishandling_of_Exceptional_Conditions/
+    - https://developer.atlassian.com/platform/forge/runtime-reference/authorize-api/
+    - https://cwe.mitre.org/data/definitions/636.html
+  precision: medium
+  precision-rationale: >-
+    Literal return true in the nearest catch of a narrowly named authorization
+    helper with a permission-shaped try call is a concrete allow-on-error
+    signal.
+    rule-tests/strict/security/review-fail-open-authorization-js.test.yml and
+    rule-tests/__snapshots__/review-fail-open-authorization-js-snapshot.yml
+    together cover helper forms and logging before allow, with deny/throw,
+    unrelated calls and nested returns negative. Names do not resolve permission
+    semantics; Promise catches, implicit allow and cross-file checks are gaps.
+  impact: high
+  impact-rationale: >-
+    When true grants access, converting a failed permission check into true lets
+    a caller bypass authorization during an exception. OWASP
+    exceptional-condition guidance and Forge authorize support fail-closed
+    handling; a syntactic match does not prove the helper is a security decision
+    or that an exception occurs.
+  owasp: "A10:2025 - Mishandling of Exceptional Conditions"
+  cwe: "CWE-636: Not Failing Securely (Failing Open)"
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.

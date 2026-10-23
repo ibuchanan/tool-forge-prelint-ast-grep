@@ -14,6 +14,36 @@ metadata:
   category: security
   owasp: "A03:2021 - Injection"
   cwe: "CWE-78: Improper Neutralization of Special Elements used in an OS Command"
+  references:
+    - https://owasp.org/Top10/A03_2021-Injection/
+    - https://cwe.mitre.org/data/definitions/78.html
+    - https://nodejs.org/api/child_process.html
+  precision: medium
+  precision-rationale: >-
+    Direct input syntax in the executable/command argument of exec/execSync and
+    spawn/spawnSync is a concrete execution-review signal.
+    rule-tests/strict/security/review-input-shell-command-js.test.yml and
+    rule-tests/__snapshots__/review-input-shell-command-js-snapshot.yml together
+    cover direct and composed commands, with fixed executables and later input
+    arrays/options, strings/comments and aliases negative. Imports and quoting
+    are unresolved; spawn does not imply a shell and later shell:true arguments
+    are not analyzed.
+  impact: high
+  impact-rationale: >-
+    Attacker-controlled shell commands or executable selection can execute with
+    the process's privileges when not confined to safe operations. OWASP
+    injection guidance and CWE-78 support shell-command risk. Fixed-executable
+    spawn arguments are not automatically shell injection; runtime capability
+    and validation determine whether a matching call is unsafe.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: $CP.exec($TARGET, $$$ARGS)

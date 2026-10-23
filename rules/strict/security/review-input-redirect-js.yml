@@ -13,6 +13,35 @@ metadata:
   category: security
   owasp: "A01:2021 - Broken Access Control"
   cwe: "CWE-601: URL Redirection to Untrusted Site (Open Redirect)"
+  references:
+    - https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+    - https://cwe.mitre.org/data/definitions/601.html
+  precision: medium
+  precision-rationale: >-
+    Direct input syntax in a destination-first redirect argument is a concrete
+    destination-review signal.
+    rule-tests/strict/security/review-input-redirect-js.test.yml and
+    rule-tests/__snapshots__/review-input-redirect-js-snapshot.yml together
+    cover direct/composed targets and fixed, options-only, string/comment and
+    alias negatives. Approved destinations and receiver identity are not
+    resolved; status-code-first APIs and sanitizer behavior are coverage gaps,
+    not evidence of an open redirect.
+  impact: medium
+  impact-rationale: >-
+    An unrestricted user-supplied redirect can send users from a trusted
+    workflow to an attacker-controlled site and enable phishing or disrupt
+    navigation. CWE-601 and OWASP access-control guidance support this bounded
+    consequence. Authentication bypass or credential theft requires additional
+    conditions and is not established by the first-argument signal.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: $RES.redirect($TARGET, $$$ARGS)

@@ -12,6 +12,35 @@ metadata:
   category: security
   owasp: "A02:2021 - Cryptographic Failures"
   cwe: "CWE-327: Use of a Broken or Risky Cryptographic Algorithm"
+  precision: medium
+  precision-rationale: >-
+    Literal MD5/SHA-1 first arguments to createHash calls/methods signal weak
+    cryptographic hashing. rule-tests/strict/security/no-weak-hash-tsx.test.yml
+    and rule-tests/__snapshots__/no-weak-hash-tsx-snapshot.yml together cover
+    case variants and arbitrary receivers, with stronger algorithms, computed
+    first arguments and later md5 arguments negative. Imports, purpose and
+    shadowing are unresolved; legitimate non-security checksums can match and
+    are an assessment gap, not a measured false-positive rate.
+  impact: high
+  impact-rationale: >-
+    Using collision-broken MD5/SHA-1 where adversarial integrity depends on
+    collision resistance can permit forged content. OWASP cryptographic guidance
+    and CWE-327 support this consequence. Non-security checksums need not suffer
+    that harm; plain SHA-256 is also insufficient for password storage, which
+    requires a dedicated password-hashing scheme.
+  references:
+    - https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+    - https://nodejs.org/api/crypto.html#cryptocreatehashalgorithm-options
+    - https://cwe.mitre.org/data/definitions/327.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: $C.createHash($ALGORITHM, $$$ARGS)

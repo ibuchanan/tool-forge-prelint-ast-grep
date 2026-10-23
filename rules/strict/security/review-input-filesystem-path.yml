@@ -13,6 +13,35 @@ metadata:
   category: security
   owasp: "A01:2021 - Broken Access Control"
   cwe: "CWE-22: Improper Limitation of a Pathname to a Restricted Directory"
+  references:
+    - https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+    - https://cwe.mitre.org/data/definitions/22.html
+  precision: medium
+  precision-rationale: >-
+    Direct input syntax in the first path of listed fs read/write/stream calls
+    signals a path-containment review.
+    rule-tests/strict/security/review-input-filesystem-path.test.yml and
+    rule-tests/__snapshots__/review-input-filesystem-path-snapshot.yml together
+    cover these methods and composed paths, with fixed paths, content-only
+    input, strings/comments and aliases negative. Receiver identity,
+    sanitization and resolved path containment are not established; a validated
+    path can still match and is an assessment gap.
+  impact: high
+  impact-rationale: >-
+    An unconfined attacker-controlled filesystem path can read private files or
+    overwrite application data outside the intended directory, subject to
+    runtime filesystem permissions. OWASP access-control guidance and CWE-22
+    support the disclosure/integrity consequence; merely accepting a path is not
+    traversal.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: fs.readFile($TARGET, $$$ARGS)

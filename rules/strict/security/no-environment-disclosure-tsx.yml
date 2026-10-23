@@ -147,3 +147,39 @@ ignores:
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+metadata:
+  category: security
+  references:
+    - https://top10.owasp.org/2025/A09_2025-Security_Logging_and_Alerting_Failures/
+    - https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/
+    - https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+    - https://cwe.mitre.org/data/definitions/532.html
+    - https://cwe.mitre.org/data/definitions/200.html
+  precision: medium
+  precision-rationale: >-
+    Direct whole-environment expressions occur at named logging, exported/define
+    return, or inline model-message sinks.
+    rule-tests/strict/security/no-environment-disclosure-tsx.test.yml and
+    rule-tests/__snapshots__/no-environment-disclosure-tsx-snapshot.yml together
+    cover these positives and negative individual-field reads and non-exported
+    helpers. Sink/handler names and environment sensitivity remain contextual;
+    aliases, wrapper identity and cross-file flows are not resolved. A clean
+    match set is not proof of secrecy.
+  impact: high
+  impact-rationale: >-
+    If the environment contains credentials or private configuration, disclosing
+    it in logs, handler responses or model messages exposes those values beyond
+    their intended boundary. OWASP disclosure guidance and Forge shared
+    responsibility support this consequence; actual content and sink access
+    determine exposure, not the expression alone.
+  owasp: "A09:2025 - Security Logging and Alerting Failures"
+  cwe: "CWE-200: Exposure of Sensitive Information to an Unauthorized Actor"
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.

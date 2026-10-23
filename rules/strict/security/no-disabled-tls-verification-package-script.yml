@@ -32,3 +32,38 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  category: security
+  precision: medium
+  precision-rationale: >-
+    The package scripts string regex recognizes literal TLS-bypass assignments,
+    including quoted zero.
+    rule-tests/strict/security/no-disabled-tls-verification-package-script.test.yml
+    and
+    rule-tests/__snapshots__/no-disabled-tls-verification-package-script-snapshot.yml
+    together cover assignments and safe nonzero values. This is shell text, not
+    shell parsing: quoted command arguments or echoed assignment text can match
+    without changing the environment. That distinction is an assessment gap in
+    existing tests; indirect/computed commands are not resolved. Source-client
+    import matching is not part of this JSON rule.
+  impact: high
+  impact-rationale: >-
+    An effective NODE_TLS_REJECT_UNAUTHORIZED=0 setting disables certificate
+    validation in Node processes launched by the script, permitting peer
+    impersonation and interception of sensitive traffic. Node CLI documentation
+    and CWE-295 support that consequence; literal text alone need not execute or
+    set the variable.
+  references:
+    - https://nodejs.org/api/cli.html#node_tls_reject_unauthorizedvalue
+    - https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/
+    - https://cwe.mitre.org/data/definitions/295.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve package.json-only positive scope and the sole node_modules
+    exclusion. All test, dist, build, coverage and specs package files remain in
+    scope. This is not standard [package-json, tests], whose baseline exclusions
+    are absent. Unlike source companions this rule parses JSON script text, not
+    client imports; ticket 08 must separately review routing normalization.
+  owasp: "A04:2025 - Cryptographic Failures"
+  cwe: "CWE-295: Improper Certificate Validation"

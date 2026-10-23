@@ -404,6 +404,92 @@ unchanged. An actual 213-entry package archive excludes authoring data/recipes,
 scripts, tests, docs, scratch tickets, and other repository-only content. These
 are opt-in authoring recipes, not ticket 03's self-evaluation or CI enforcement.
 
+## Ticket 04 strict-security migration
+
+As of 2026-10-23, all 63 definitions in `rules/strict/security/` satisfy the
+metadata contract without legacy allowances. Five pilot definitions already
+conformed; 58 definitions were migrated. Their 504 frozen diagnostics were
+removed, leaving 1,214 diagnostics across 142 unchanged legacy definitions in
+other batches. The authoring orchestration regression requires zero findings
+and zero allowance entries for this category.
+
+Every definition has its own existing positive/negative test evidence. New
+rationales also cite the corresponding unchanged match snapshot. References
+were selected explicitly from existing sources and authoritative Forge, Node,
+MDN, OWASP, RFC and CWE documentation using the category/reference yq recipes;
+URL validation is offline, not a claim of current network reachability. Existing
+OWASP 2021 mappings remain edition-specific. New mappings identify logging
+(CWE-532), broader environment disclosure (CWE-200), fail-open authorization
+(CWE-636), input-selected impersonation (CWE-639), and the package TLS bypass
+(CWE-295). These classify potential weaknesses, not proven exploitation.
+No module tags were added: these policies are cross-cutting, not specific to
+one exact Forge module.
+
+### Companion and scope review
+
+- Equivalent language companions retain the same precision, impact and
+  classifications. Test and snapshot paths are language-specific.
+- The JavaScript dynamic-evaluation matcher omits TypeScript/TSX
+  `required_parameter`/`optional_parameter` node branches; all three retain
+  conservative visible-shadowing exclusions. This parser distinction does not
+  change their policy ratings.
+- Raw-HTML JS/TSX companions add the JSX `dangerouslySetInnerHTML` attribute
+  branch. Sanitized and literal rendering still match; low precision records
+  the broad review heuristic, not a sanitizer or DOM type analysis.
+- The package TLS check parses JSON script strings, not imported source clients.
+  Its shell-text regex can match inert assignment text, an untested contextual
+  distinction supporting medium rather than the source companions' high
+  precision. Both retain high impact; the package rule remains `error`.
+- The token pilot's source versus resolver references and remediation rationale
+  remain intentionally different. Its test exclusions remain `.test.ts`/`.spec.ts`
+  versus `.test.tsx`/`.spec.tsx`; a suffix does not establish runtime identity.
+- All 63 definitions retain reviewed `[unique]` migration scope. Most source
+  families exclude node_modules, dist, build, test/spec filename suffixes and
+  `__tests__`, but not the complete shared baseline/test sets. The three
+  TypeScript-only global/module/cache rules exclude frontend paths rather than
+  selecting standard backend directories. They have no JS/TSX companions.
+  The package TLS rule only excludes node_modules. Inline scope rationale
+  records these exact deviations; ticket 08 owns normalization and routing
+  changes, not this migration.
+
+### Advisory severity differences
+
+The matrix produces the following differences; **none is applied**. All other
+strict-security definitions already agree with their candidate severity.
+
+| Definitions                                                  | Precision | Impact | Current | Candidate |
+| ------------------------------------------------------------ | --------- | ------ | ------- | --------- |
+| Atlassian-token pilot (2)                                    | medium    | high   | error   | warning   |
+| Environment disclosure (3)                                   | medium    | high   | error   | warning   |
+| Sensitive-data logging (3)                                   | medium    | high   | error   | warning   |
+| JWT `none` (3)                                               | medium    | high   | error   | warning   |
+| Package-script TLS bypass (1)                                | medium    | high   | error   | warning   |
+| Global mutation and module-scope `let`/`var` conventions (2) | high      | high   | warning | error     |
+
+High precision for a convention violation does not prove tenant leakage or
+code injection. Medium input/name-based signals do not establish missing
+validation, source trust, receiver identity or exploitable flows. Low precision
+for name-only secrets and raw-HTML sinks permits ordinary compliant matches.
+Impact rationale states the concrete conditions for harm; missing tests remain
+explicit assessment gaps rather than tested behavior. Ticket 09 must review
+all gate changes, including demotions.
+
+### Verification
+
+The user approved native authoring output/status, metadata-document contracts
+and existing consumer behavior as test seams. Red-green slices demonstrated
+unallowlisted missing metadata on copied definitions, then zero findings after
+migration. The retained regression first failed with legacy findings, then
+failed on stale allowance rows, then passed after this batch's removal.
+
+All 63 parsed documents with metadata removed match their pre-migration versions.
+IDs, parsers, matchers, utilities, constraints, fixes, messages, notes, native
+files/ignores and severities are unchanged. Existing consumer tests, snapshots,
+real-file fixtures, tier configurations, dependencies and lockfile are unchanged.
+All 206 consumer rule tests, tooling/security routing fixtures, native authoring,
+value, orchestration and recipe suites pass. Review judgments and untested gaps
+are distinct from these structural and behavioral checks.
+
 ## Model references
 
 - [ast-grep rule configuration](https://ast-grep.github.io/reference/yaml.html)

@@ -92,4 +92,10 @@ PATH="$work/bin:$PATH" run_check 2 'Expected Mike Farah yq'
 # shellcheck disable=SC2016
 printf '#!/usr/bin/env bash\nif [[ $1 == --version ]]; then printf "yq (https://github.com/mikefarah/yq/) version v4.54.1\\n"; else exit 7; fi\n' >"$work/bin/yq"
 PATH="$work/bin:$PATH" run_check 2 'parse/structure' "$file"
+# Migrated strict security definitions must pass without inheriting legacy debt.
+run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/strict/security/*.yml
+if grep -q '^rules/strict/security/' authoring/legacy-allowances.tsv; then
+  printf 'Migrated strict security rules still have legacy allowances.\n' >&2
+  exit 1
+fi
 printf 'Authoring orchestration checks passed.\n'

@@ -14,6 +14,34 @@ metadata:
   category: security
   owasp: "A03:2021 - Injection"
   cwe: "CWE-89: Improper Neutralization of Special Elements used in an SQL Command"
+  references:
+    - https://owasp.org/Top10/A03_2021-Injection/
+    - https://cwe.mitre.org/data/definitions/89.html
+  precision: medium
+  precision-rationale: >-
+    Direct input syntax in query/execute/raw's first statement argument is a
+    concrete SQL-review signal.
+    rule-tests/strict/security/review-input-sql.test.yml and
+    rule-tests/__snapshots__/review-input-sql-snapshot.yml together cover
+    direct/composed statements, with bound values in later arguments, fixed
+    statements, strings/comments and aliases negative. Method names do not
+    establish SQL clients; sanitizers and dataflow are not resolved. Forge SQL
+    prepare/executeRaw has separate rules.
+  impact: high
+  impact-rationale: >-
+    Untrusted input interpreted as SQL syntax can read or alter unauthorized
+    records under the database connection's privileges. OWASP injection guidance
+    and CWE-89 support the confidentiality/integrity consequence. A direct input
+    expression alone does not prove executable SQL injection or unsafe bindings.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - pattern: $DB.query($TARGET, $$$ARGS)

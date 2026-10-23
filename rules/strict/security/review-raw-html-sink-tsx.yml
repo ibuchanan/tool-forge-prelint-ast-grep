@@ -4,7 +4,40 @@ severity: warning
 metadata:
   category: security
   owasp: "A03:2021 - Injection"
-  cwe: "CWE-79: Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)"
+  cwe: "CWE-79: Improper Neutralization of Input During Web Page Generation
+    (Cross-site Scripting)"
+  references:
+    - https://top10.owasp.org/2025/A05_2025-Injection/
+    - https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/
+    - https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+    - https://owasp.org/Top10/A03_2021-Injection/
+    - https://cwe.mitre.org/data/definitions/79.html
+  precision: low
+  precision-rationale: >-
+    Raw-HTML assignments, document writes, insertion calls and dangerous React
+    properties are broad review signals, including ordinary sanitized/literal
+    values. rule-tests/strict/security/review-raw-html-sink-tsx.test.yml and
+    rule-tests/__snapshots__/review-raw-html-sink-tsx-snapshot.yml together
+    cover sinks and negative text rendering/non-sink strings. Receiver DOM
+    identity, source trust and sanitizer correctness are unresolved; a match is
+    not proof of XSS. TSX/JS add a JSX-attribute branch absent from the
+    TypeScript parser rule; the policy and ratings remain the same.
+  impact: high
+  impact-rationale: >-
+    Unsanitized attacker-controlled HTML rendered into an active DOM can execute
+    script in the page's origin and expose private content or authenticated
+    actions. CWE-79 and OWASP injection/output-handling guidance support that
+    consequence. Safe literal/sanitized rendering and non-DOM receivers do not
+    establish executable injection.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 message: >
   Raw HTML rendering can execute untrusted content. Prefer text rendering or review
   sanitization.

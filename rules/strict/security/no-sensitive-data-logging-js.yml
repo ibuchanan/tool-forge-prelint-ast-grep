@@ -137,3 +137,38 @@ ignores:
   - "**/*.test.*"
   - "**/*.spec.*"
   - "**/__tests__/**"
+metadata:
+  category: security
+  references:
+    - https://developer.atlassian.com/platform/forge/logging-guidelines/
+    - https://top10.owasp.org/2025/A09_2025-Security_Logging_and_Alerting_Failures/
+    - https://cwe.mitre.org/data/definitions/532.html
+  precision: medium
+  precision-rationale: >-
+    Credential-named expressions and authorization-header reads at named logger
+    methods are concrete disclosure signals.
+    rule-tests/strict/security/no-sensitive-data-logging-js.test.yml and
+    rule-tests/__snapshots__/no-sensitive-data-logging-js-snapshot.yml together
+    cover direct, nested, serialized and interpolated positives and negative
+    metadata reads, wrappers, custom replacers and deferred methods. Names do
+    not prove secret contents or logger identity; aliases and redactor
+    correctness are not analyzed. Harmless credential-named values are an
+    assessment gap rather than proven secrets.
+  impact: high
+  impact-rationale: >-
+    Recording real passwords, tokens or authorization headers makes credentials
+    accessible to log readers and potentially retained beyond the request. Forge
+    logging guidance and OWASP logging guidance support omitting/redacting these
+    values. This consequence assumes genuine credentials and log access;
+    matching names alone does not prove compromise.
+  owasp: "A09:2025 - Security Logging and Alerting Failures"
+  cwe: "CWE-532: Insertion of Sensitive Information into Log File"
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.

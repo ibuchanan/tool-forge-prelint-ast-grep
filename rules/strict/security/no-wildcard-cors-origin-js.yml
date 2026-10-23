@@ -19,6 +19,37 @@ metadata:
   category: security
   owasp: "A05:2021 - Security Misconfiguration"
   cwe: "CWE-942: Permissive Cross-domain Policy with Untrusted Domains"
+  precision: medium
+  precision-rationale: >-
+    Literal wildcard Access-Control-Allow-Origin entries and bracket assignments
+    identify permissive browser-read policy.
+    rule-tests/strict/security/no-wildcard-cors-origin-js.test.yml and
+    rule-tests/__snapshots__/no-wildcard-cors-origin-js-snapshot.yml together
+    cover case/array forms and negative explicit origins. Intentionally public
+    responses can match; endpoint intent and data sensitivity are not resolved.
+    Header setter APIs and browser behavior are not exercised by these AST
+    tests.
+  impact: medium
+  impact-rationale: >-
+    An unintended wildcard permits non-credentialed browser scripts from other
+    origins to read responses meant for a narrower audience, subject to response
+    reachability. MDN CORS and CWE-942 support this access-policy consequence.
+    Browsers reject wildcard with credentials mode include; this is not server
+    authentication, proof of credential theft or automatically serious exposure.
+    Sensitive response content would require a separate impact review.
+  references:
+    - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+    - https://owasp.org/Top10/A05_2021-Security_Misconfiguration/
+    - https://cwe.mitre.org/data/definitions/942.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   any:
     - kind: pair

@@ -5,6 +5,37 @@ metadata:
   category: security
   owasp: "A05:2021 - Security Misconfiguration"
   cwe: "CWE-295: Improper Certificate Validation"
+  precision: high
+  precision-rationale: >-
+    Literal global TLS bypasses and false rejectUnauthorized options at imported
+    Node HTTPS/TLS/undici clients directly violate the verification policy.
+    rule-tests/strict/security/no-disabled-tls-verification-tsx.test.yml and
+    rule-tests/__snapshots__/no-disabled-tls-verification-tsx-snapshot.yml
+    together cover bypasses, client/import aliases and inline options, with true
+    verification and unrelated objects negative. External option objects,
+    CommonJS imports, other libraries and lexical binding identity remain gaps.
+  impact: high
+  impact-rationale: >-
+    Disabling certificate validation permits an attacker able to intercept a
+    connection to impersonate the peer and read or alter sensitive traffic. Node
+    TLS documentation and CWE-295 support this concrete consequence;
+    runtime/network access and transmitted data determine actual exposure.
+  references:
+    - https://nodejs.org/api/tls.html
+    - https://nodejs.org/api/cli.html#node_tls_reject_unauthorizedvalue
+    - https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/
+    - https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+    - https://owasp.org/Top10/A05_2021-Security_Misconfiguration/
+    - https://cwe.mitre.org/data/definitions/295.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 message: >
   TLS certificate verification is disabled. Restore verification or configure a trusted CA.
 note: >

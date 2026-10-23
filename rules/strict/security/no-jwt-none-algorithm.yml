@@ -13,6 +13,36 @@ metadata:
   category: security
   owasp: "A02:2021 - Cryptographic Failures"
   cwe: "CWE-347: Improper Verification of Cryptographic Signature"
+  precision: medium
+  precision-rationale: >-
+    An algorithm/algorithms object key with a literal none entry is a concrete
+    unsigned-token configuration signal.
+    rule-tests/strict/security/no-jwt-none-algorithm.test.yml and
+    rule-tests/__snapshots__/no-jwt-none-algorithm-snapshot.yml together cover
+    case/quote/array forms and JWT-shaped calls, with signed algorithms,
+    comments, strings and computed options negative. Unrelated algorithm objects
+    can match; library identity, option use and signature-verification behavior
+    are not resolved.
+  impact: high
+  impact-rationale: >-
+    A verifier accepting attacker-controlled unsigned JWTs as authenticated can
+    allow forged claims and authorization bypass. RFC 7518 defines unsecured
+    JWTs, and CWE-347 supports the signature-verification consequence. Merely
+    creating an unsigned token or an unrelated algorithm object does not prove a
+    verifier accepts it or grants access.
+  references:
+    - https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+    - https://www.rfc-editor.org/rfc/rfc7518.html#section-3.6
+    - https://cwe.mitre.org/data/definitions/347.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve unrestricted positive source scope across frontend, backend and
+    Custom UI paths. Legacy ignores exclude node_modules, dist, build, *.test.*,
+    *.spec.* and __tests__. Unlike the shared sets, coverage, specs and
+    test/tests directories without those suffixes remain scanned, while build is
+    additionally excluded. This reviewed migration exception preserves behavior
+    only; ticket 08 must review normalization.
 rule:
   kind: pair
   all:

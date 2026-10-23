@@ -41,3 +41,34 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.spec.ts"
+metadata:
+  category: security
+  references:
+    - https://developer.atlassian.com/platform/forge/security/
+    - https://developer.atlassian.com/platform/forge/tenant-data-isolation/
+  precision: high
+  precision-rationale: >-
+    Top-level let/var, including exports, directly violate the stated
+    module-scope declaration convention.
+    rule-tests/strict/security/no-module-scope-mutable-state.test.yml and
+    rule-tests/__snapshots__/no-module-scope-mutable-state-snapshot.yml together
+    cover let, var and exported let positives, with handler-local let, const and
+    ambient declare negative. The matcher does not prove that a binding contains
+    tenant data or is later mutated; other shared-state forms and runtime reuse
+    are outside this syntax check.
+  impact: high
+  impact-rationale: >-
+    A module binding retaining tenant data can survive a warm invocation and
+    expose it to another tenant when later reads are not isolated. Forge's
+    tenant-isolation guidance supports keeping request data local or in isolated
+    storage. A module declaration alone does not establish that exposure.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve legacy TypeScript-only scanning with unrestricted positive scope
+    minus frontend paths, node_modules and .test.ts/.spec.ts filenames. This is
+    a backend-intended exclusion boundary, not the standard backend
+    positive-directory selection. dist, build, coverage, specs, other test
+    suffixes and test directories remain scanned. No JS/TSX companions exist;
+    those parser coverage gaps and scope normalization require separate review
+    in ticket 08.

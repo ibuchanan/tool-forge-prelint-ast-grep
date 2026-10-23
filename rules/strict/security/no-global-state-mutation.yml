@@ -47,3 +47,35 @@ ignores:
   - "**/frontend/**"
   - "**/*.test.ts"
   - "**/*.spec.ts"
+metadata:
+  category: security
+  references:
+    - https://developer.atlassian.com/platform/forge/security/
+    - https://developer.atlassian.com/platform/forge/tenant-data-isolation/
+  precision: high
+  precision-rationale: >-
+    Assignments, updates, deletes and listed mutator calls on global/globalThis
+    directly violate the stated no-global-mutation convention.
+    rule-tests/strict/security/no-global-state-mutation.test.yml and
+    rule-tests/__snapshots__/no-global-state-mutation-snapshot.yml together
+    cover direct/bracket writes, increment, delete and a tenant-keyed global Map
+    write, with local state and global crypto reads negative. This is not proof
+    of tenant data leakage; shadowed global names and unlisted mutation forms
+    are assessment gaps, not covered runtime identity or dataflow analysis.
+  impact: high
+  impact-rationale: >-
+    If request-specific tenant data is retained in a reused Forge process and
+    later read without tenant isolation, another invocation can receive that
+    data. Forge tenant-isolation guidance supports this cross-tenant exposure
+    risk. Harmless global constants or tenant-keyed state do not establish that
+    harm.
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Preserve legacy TypeScript-only scanning with unrestricted positive scope
+    minus frontend paths, node_modules and .test.ts/.spec.ts filenames. This is
+    a backend-intended exclusion boundary, not the standard backend
+    positive-directory selection. dist, build, coverage, specs, other test
+    suffixes and test directories remain scanned. No JS/TSX companions exist;
+    those parser coverage gaps and scope normalization require separate review
+    in ticket 08.
