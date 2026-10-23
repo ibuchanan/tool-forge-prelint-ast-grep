@@ -715,6 +715,144 @@ changed shell file's shfmt check pass. Whole-script shfmt also reports existing
 redirection-spacing differences in the untouched security-fixture script; those
 are outside this metadata-only commit.
 
+## Ticket 07 Ecosol and Atlassian migration
+
+As of 2026-10-23, all 57 definitions in this batch satisfy the metadata contract:
+Ecosol devtools (5), Forge Ahead (4), Forge scripts (6), Git hooks (7), package
+JSON (2), package scripts (15), secrets (8), TypeScript (9), and Atlassian package
+JSON (1). Their 491 frozen diagnostics and 57 allowance rows are retired. The
+allowance file is now empty; its compatibility machinery remains until ticket 10.
+The orchestration regression requires zero findings and zero allowance rows for
+both tiers, including future definitions.
+
+### Assessment and evidence review
+
+Every definition cites its actual positive/negative test and match snapshot.
+Categories and explicitly selected reference URLs use ticket 02's yq recipes
+with previews. Existing notes and source links remain intact. Reference checks
+are offline shape validation, not current reachability or authority verification.
+The sample-app credo link is preserved as organization-policy context, not a
+legal approval or an externally verified mandate.
+
+- No language companions were discovered in these tiers. Similar naming, hook
+  and configuration rules have different predicates; they are not assumed to be
+  equivalent from their IDs. Each assessment records those differences.
+- Biome's explicit settings can differ from effective inherited/override settings.
+  A real branch other than main is legitimate; missing a particular exclusion
+  spelling does not prove generated files are processed. Vitest defaults globals
+  to false: requiring an explicit declaration is a team convention, not proof
+  that ambient globals are enabled. These policies have low impact.
+- Forge Ahead dependency checks do not establish helper use, production placement
+  or deployable identity. Tests for errors/logging deliberately flag express-only
+  packages too. Equivalent error handling, types or redaction can exist without
+  the preferred package. Direct console calls violate the stated team convention,
+  but a tested startup literal is not sensitive or verbose logging. None of these
+  checks establishes substantial resource consumption or credential disclosure.
+- Forge wrapper names concern discoverability, not consent, encryption or correct
+  targets. Most presence branches search descendant keys rather than validating
+  script implementation. Install excludes literal --upgrade; upgrade requires it.
+  The variable wrapper explicitly accepts a legacy implementation. Those are
+  distinct naming predicates, not configuration-resolution checks.
+- Hook-name regexes cannot establish run contents, skip/filter behavior or actual
+  installation. Format/typecheck support invoked lint-group delegation; the size
+  rule instead requires a specific pre-push.commands run shape and can flag valid
+  jobs/wrapper alternatives. Gitleaks alone receives high conditional impact:
+  a real staged credential escaping the intended guard can enter history and
+  require revocation. Missing a key does not establish that event or the absence
+  of other secret scanning.
+- Package-script checks cannot validate filesystem inputs, compiler/coverage
+  providers or successful execution. The composed-check matcher accepts missing
+  force despite the note's recommendation. Global ignore rules and source-only
+  scans can replace an explicit node_modules flag; alternate orchestration can
+  run all checks. Tool preference, naming, coverage and hook setup are not promoted
+  to security impact. Real stale placeholders, missing build output and interactive
+  tests in noninteractive guards can instead cause bounded delivery failures.
+- The Node rule checks a literal types version and engines, not .nvmrc or manifest
+  runtime. The nvm source does not establish a blanket engines deployment ban;
+  metadata records that authority gap. ESM mismatch has medium conditional impact
+  for tools relying on ESM, not a claim that CommonJS itself is unsupported.
+  Apache-2.0 consistency is bounded release/compliance risk, not a security flaw;
+  the matcher cannot compare LICENSE text or determine legal applicability.
+- Typecheck options may already be inherited. Unlike outDir's explicit extends
+  backoff, the typecheck flag matchers do not follow or exempt inheritance. Test
+  directory existence/custom layouts and CLI overrides remain assessment gaps.
+  Bracket-notation/override intent is primarily maintainability; absent-entry,
+  return, optional-property and side-effect-import checking can prevent bounded
+  functionality errors when relevant code exists. No specific runtime bug is
+  proven by missing a flag.
+- Fence Rider is a team implementation choice, not a Forge or OWASP requirement.
+  Supported direct commands and maintained alternatives routinely need context;
+  even an encrypted upload matches the variable migration check. No wrapper alone
+  isolates credentials, redacts output or authorizes remote changes. Failure-status
+  masking and generation-without-execution concern bounded workflow false success,
+  not untrusted code injection. Bare generation can intentionally print reviewed
+  text; pipefail mentions do not establish effective shell state. Actual shell
+  behavior, input values and downstream handling remain assessment gaps.
+
+No new OWASP/CWE mappings or exact module tags are justified for this batch's
+convention signals. The existing OWASP agent-data-protection links remain useful
+context without making the chosen wrapper a security requirement. Untested
+limitations above remain assessment gaps, not invented coverage.
+
+### Reviewed legacy scope
+
+All 57 deliberately retain `[unique]`; ticket 08 owns scope/routing changes:
+
+- Thirty-five package rules select package.json and exclude only node_modules.
+  Tests and dist/coverage/specs packages remain in scope, not the shared baseline.
+- Four Biome rules select biome.json/biome.jsonc; seven hook rules select only
+  lefthook.yml; one Vitest rule selects vitest.config.ts. Each excludes only
+  node_modules and retains test-local/generated configurations. These artifacts
+  have no standard selector; alternate filenames are not silently added.
+- Nine TypeScript rules select tsconfig.json (one) or tsconfig.typecheck.json
+  (eight), with node_modules-only exclusions and test-local configs included.
+- The console convention selects resolvers/external/import-lifecycle and
+  src/index.ts, not every standard backend directory. It excludes node_modules
+  and only .test.ts/.spec.ts, not the complete baseline/test-directory sets.
+
+Inline rationales state the actual legacy deviations rather than inferring a
+standard profile from an artifact name or parser.
+
+### Advisory severity differences
+
+No current severity changes. Ticket 09 owns these 28 differences; the other
+29 definitions already agree with the candidate matrix:
+
+| Definitions                                                  | Precision | Impact | Current | Candidate |
+| ------------------------------------------------------------ | --------- | ------ | ------- | --------- |
+| Biome settings and explicit Vitest globals (5)               | medium    | low    | warning | info      |
+| Direct console convention (1)                                | high      | low    | warning | info      |
+| Forge Ahead dependency preferences and Node types pin (4)    | medium    | low    | hint    | info      |
+| Commit/push format and push-size guards (3)                  | medium    | low    | warning | info      |
+| Forge lint wrapper (1)                                       | medium    | medium | info    | warning   |
+| Script naming and explicit watch conventions (2)             | high      | low    | hint    | info      |
+| Hook prepare, Prelint config and coverage scripts (3)        | medium    | low    | warning | info      |
+| Prelint node_modules flag (1)                                | medium    | low    | hint    | info      |
+| Bare Fence Rider generator review (1)                        | low       | medium | warning | info      |
+| Local outDir (1)                                             | medium    | low    | error   | info      |
+| Exact optional properties (1)                                | medium    | medium | hint    | warning   |
+| Typecheck extends/noEmit and organization license (2)        | medium    | medium | error   | warning   |
+| Implicit returns, indexed access and side-effect imports (3) | medium    | medium | info    | warning   |
+
+### Verification
+
+The user confirmed authoring output/exit status, metadata-document contracts and
+unchanged consumer behavior as public TDD seams. The retained regression failed
+on 491 frozen findings, then on stale allowance rows, then passed after removal.
+Nine category slices failed on copied unallowlisted originals and passed after
+metadata edits. Frozen-allowance compatibility tests now use an isolated repository
+fixture instead of keeping a real rule unmigrated; exact path, source digest and
+new-diagnostic rejection remain tested through the unchanged public checker.
+
+All 57 parsed documents excluding metadata equal their pre-migration versions.
+IDs, parsers, matchers, utilities, fixes, messages, notes, files/ignores and
+severities remain unchanged. Consumer tests, snapshots, tier configurations,
+dependencies and lockfile are unchanged. All 206 consumer tests, real-file
+tooling/security fixtures, six native authoring tests and the value, orchestration
+and recipe suites pass, with zero frozen findings. Repository Prettier, ShellCheck,
+changed-shell shfmt and git diff --check pass. Scope normalization, severity
+application and removal of the compatibility machinery remain later-ticket work.
+
 ## Model references
 
 - [ast-grep rule configuration](https://ast-grep.github.io/reference/yaml.html)

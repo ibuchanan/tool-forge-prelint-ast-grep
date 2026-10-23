@@ -27,3 +27,12 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://github.com/ibuchanan/forge-ahead-logging"]
+  category: forge-ahead
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; tests and generated dist/coverage/specs packages remain included rather than the shared baseline. App identity is not resolved from this file; ticket 08 owns scope normalization.
+  precision: medium
+  precision-rationale: "Tests accept the preferred package and flag absence in Forge and express-only examples. The descendant-key check does not establish production dependency placement, app identity, redaction configuration or logger use; those are assessment gaps. Equivalent safe logging is possible. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-logging.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-ahead-logging-snapshot.yml."
+  impact: low
+  impact-rationale: The referenced package provides a shared structured/redacted logger. Failing this dependency convention creates maintenance divergence; it does not establish sensitive logging, excessive volume or that installing the package makes logging safe.

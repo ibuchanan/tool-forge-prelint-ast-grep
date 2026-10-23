@@ -26,3 +26,14 @@ ignores:
   - "**/node_modules/**"
   - "**/*.test.ts"
   - "**/*.spec.ts"
+metadata:
+  references:
+    - https://developer.atlassian.com/platform/forge/optimise-forge-costs/
+    - https://github.com/ibuchanan/forge-ahead-logging
+  category: forge-ahead
+  scope-profile: [unique]
+  scope-rationale: Preserve resolvers/external/import-lifecycle and src/index.ts, not standard backend directories; keep node_modules and only .test.ts/.spec.ts exclusions. Missing backend paths, dist/coverage/specs and test-directory exclusions remain explicit legacy deviations for ticket 08.
+  precision: high
+  precision-rationale: "Tests flag direct console.log/error calls, including a harmless startup literal, and accept the preferred logger or no logging. This directly detects the team's console-call prohibition, not verbosity, sensitive payloads or measured hotness. Lexically shadowed console and logger aliases are untested assessment gaps. Evidence: rule-tests/ecosol/forge-ahead/no-verbose-hot-path-logging.test.yml (valid/invalid) and rule-tests/__snapshots__/no-verbose-hot-path-logging-snapshot.yml."
+  impact: low
+  impact-rationale: Forge cost guidance and the logger reference support controlling logging and consistent structure. Genuine bypass of the chosen logger adds local diagnostic inconsistency; this rule does not inspect payload sensitivity or call frequency, so it does not establish credential exposure or substantial log cost.

@@ -20,3 +20,12 @@ files:
   - "**/biome.jsonc"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://biomejs.dev/reference/configuration/"]
+  category: devtools
+  scope-profile: [unique]
+  scope-rationale: Preserve the reviewed Biome JSON/JSONC filename selection and node_modules-only exclusion; dist, coverage, specs and test-local configurations remain included, unlike the shared baseline. This artifact has no standard selector; ticket 08 owns scope normalization.
+  precision: medium
+  precision-rationale: "Tests distinguish true, false and absent useIgnoreFile. Inherited settings, vcs.enabled and equivalent explicit file exclusions are unresolved assessment gaps; absence alone does not establish unwanted scanning. Evidence: rule-tests/ecosol/devtools/require-biome-vcs-use-ignore-file.test.yml (valid/invalid) and rule-tests/__snapshots__/require-biome-vcs-use-ignore-file-snapshot.yml."
+  impact: low
+  impact-rationale: Biome's VCS ignore integration can avoid generated/vendor noise; failing the intended exclusion policy adds bounded local scanning and maintenance friction. No actual sensitive-file disclosure is established.

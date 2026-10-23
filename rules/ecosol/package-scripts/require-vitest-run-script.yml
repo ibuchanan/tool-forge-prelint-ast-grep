@@ -31,3 +31,12 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://vitest.dev/guide/cli.html"]
+  category: package-scripts
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  precision-rationale: "Tests accept run with optional flags and reject watch modes, echo, lookalike runner and nested scripts. Equivalent wrappers and environment-dependent bare Vitest defaults remain assessment gaps; script text does not establish success or whether tests exist. Evidence: rule-tests/ecosol/package-scripts/require-vitest-run-script.test.yml (valid/invalid) and rule-tests/__snapshots__/require-vitest-run-script-snapshot.yml."
+  impact: medium
+  impact-rationale: Vitest run provides one-shot execution suitable for hooks/CI. A genuinely interactive command in a noninteractive guard can stall checks and delivery, while missing/alternate scripts require context; no unbounded production resource consumption is inferred.

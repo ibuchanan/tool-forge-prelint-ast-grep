@@ -32,3 +32,12 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://vitest.dev/guide/coverage.html"]
+  category: package-scripts
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover flag ordering, missing/false coverage flags, echo and nested script rejection. Provider installation, successful execution and equivalent wrappers remain assessment gaps; text alone cannot prove coverage collection or its usefulness. Evidence: rule-tests/ecosol/package-scripts/require-vitest-coverage-script.test.yml (valid/invalid) and rule-tests/__snapshots__/require-vitest-coverage-script-snapshot.yml."
+  impact: low
+  impact-rationale: Vitest documents optional coverage reporting. Missing the team's coverage command reduces local test-observability consistency and adds review friction; coverage absence is not evidence of untested code or a production defect.

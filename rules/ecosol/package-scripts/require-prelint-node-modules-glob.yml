@@ -25,3 +25,12 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://ast-grep.github.io/reference/cli/scan.html#globs-globs"]
+  category: package-scripts
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  precision-rationale: "Tests accept several single-quoted node_modules negations and flag missing/incomplete globs. Shell quoting, ignore files, external helpers and a source-only scan can already exclude dependencies; these effective-scope alternatives are assessment gaps, so missing literal flags do not prove all dependencies are parsed. Evidence: rule-tests/ecosol/package-scripts/require-prelint-node-modules-glob.test.yml (valid/invalid) and rule-tests/__snapshots__/require-prelint-node-modules-glob-snapshot.yml."
+  impact: low
+  impact-rationale: ast-grep documents glob filtering; genuinely scanning irrelevant dependencies adds local lint noise and processing time. Neither scan volume nor substantial resource consumption is measured, and a dedicated flag is only the team's convention.

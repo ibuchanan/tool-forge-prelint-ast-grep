@@ -27,3 +27,14 @@ files:
   - "**/lefthook.yml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    - https://lefthook.dev/configuration/
+    - https://github.com/gitleaks/gitleaks
+  category: git-hooks
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only lefthook.yml and node_modules exclusion; lefthook.yaml is not selected and dist/coverage/specs plus test-local hooks remain included. There is no standard hook-config selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover a gitleaks-named pre-commit entry and its absence. Key spelling is not executable scanner validation; alternate names, external configuration and effective skip/filter behavior remain assessment gaps. Absence does not establish a committed secret or lack of other secret scanning. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-commit-gitleaks.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-commit-gitleaks-snapshot.yml."
+  impact: high
+  impact-rationale: Gitleaks detects credentials before they enter history. Where a real credential is staged and no equivalent guard catches it, omitting the intended scan can permit credential exposure and unauthorized access requiring revocation. This conditional harm is not established by missing configuration alone.

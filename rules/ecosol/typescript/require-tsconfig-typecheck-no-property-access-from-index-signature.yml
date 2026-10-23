@@ -25,3 +25,15 @@ files:
   - "**/tsconfig.typecheck.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    [
+      "https://www.typescriptlang.org/tsconfig/#noPropertyAccessFromIndexSignature",
+    ]
+  category: typescript
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover explicit true, false and absence including extends. Inherited settings, index-signature use and effective CLI options are unresolved assessment gaps; the regex does not establish an unsafe access or type error. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-no-property-access-from-index-signature.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-no-property-access-from-index-signature-snapshot.yml."
+  impact: low
+  impact-rationale: TypeScript documents bracket notation to make index-signature access explicit. Genuine omission loses local readability/type-intent guidance; it does not itself add undefined checks or prove a bounded runtime failure, much less a security defect.

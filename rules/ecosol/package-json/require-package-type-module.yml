@@ -22,3 +22,13 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    ["https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#type"]
+  category: package-json
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; test-local packages and dist/coverage/specs remain included instead of the complete baseline. Single-file detection cannot establish intended Forge or organization-policy membership; ticket 08 owns scope normalization.
+  precision-rationale: "Tests distinguish a top-level module declaration from commonjs, absence and a nested type key. The matcher directly checks the explicit team setting but cannot establish Forge-app identity; unrelated CommonJS workspace packages can be legitimate. App identity is an assessment gap, not a tested runtime failure. Evidence: rule-tests/ecosol/package-json/require-package-type-module.test.yml (valid/invalid) and rule-tests/__snapshots__/require-package-type-module-snapshot.yml."
+  impact: medium
+  impact-rationale: The npm type field controls JavaScript module interpretation; in an app relying on ESM, genuine mismatch can prevent local tools or imports from loading. CommonJS itself is supported, and this declaration does not alone prove Forge deployment or application failure.

@@ -23,3 +23,12 @@ files:
   - "**/lefthook.yml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://lefthook.dev/configuration/"]
+  category: git-hooks
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only lefthook.yml and node_modules exclusion; lefthook.yaml is not selected and dist/coverage/specs plus test-local hooks remain included. There is no standard hook-config selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover lint-named pre-push entries and absent hook/entry. The regex cannot validate invoked checks, skip filters or alternative names; those effective-execution distinctions and inherited/flow configurations remain assessment gaps. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-push-lint.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-push-lint-snapshot.yml."
+  impact: medium
+  impact-rationale: The documented pre-push runner can catch actionable lint failures before sharing. Genuine loss of that intended guard can delay delivery through shared CI failures and bounded integration rework; it is not evidence of a deployed vulnerability.

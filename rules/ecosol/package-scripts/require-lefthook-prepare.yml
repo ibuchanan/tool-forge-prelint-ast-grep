@@ -28,3 +28,12 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://lefthook.dev/installation/"]
+  category: package-scripts
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  precision-rationale: "Tests distinguish a top-level prepare install command with optional fallback from missing, inert and nested entries. Alternative installation workflows can be effective; lifecycle skipping and actual hook installation are unresolved assessment gaps, not facts established by script text. Evidence: rule-tests/ecosol/package-scripts/require-lefthook-prepare.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-prepare-snapshot.yml."
+  impact: low
+  impact-rationale: Lefthook installation wires local hooks; genuine absence of the intended setup creates local configuration friction and inconsistent feedback. It does not show that security guards or CI are absent, and a configured prepare command need not execute.

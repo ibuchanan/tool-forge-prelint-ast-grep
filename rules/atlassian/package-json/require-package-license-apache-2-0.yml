@@ -23,3 +23,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#license
+    - https://go.atlassian.com/credo-checklist-sample-app
+  category: package-json
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; test-local packages and dist/coverage/specs remain included instead of the complete baseline. Single-file detection cannot establish intended Forge or organization-policy membership; ticket 08 owns scope normalization.
+  precision-rationale: "Tests accept Apache-2.0 and flag MIT or missing license, including private and express-only packages. The matcher reads a top-level pair but cannot establish that the package is an Atlassian OSS sample or compare LICENSE text. Applicability and legal approval are assessment gaps, not inferred from the filename. Evidence: rule-tests/atlassian/package-json/require-package-license-apache-2-0.test.yml (valid/invalid) and rule-tests/__snapshots__/require-package-license-apache-2-0-snapshot.yml."
+  impact: medium
+  impact-rationale: npm documents license declarations and the referenced sample-app credo supplies the organization convention. Genuine divergence in an approved sample can misstate downstream usage terms and block release until corrected; this is bounded compliance/release risk, not a security flaw or a legal determination.

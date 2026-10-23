@@ -19,3 +19,12 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://vitest.dev/guide/cli.html"]
+  category: package-scripts
+  precision: high
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  precision-rationale: "Tests distinguish exact bare vitest in test:watch from explicit watch/--watch and absent watch scripts. This directly identifies implicit-mode wording contrary to the team's explicit convention; it does not establish an incorrect Vitest default. Non-string/deeper script structures remain an assessment gap. Evidence: rule-tests/ecosol/package-scripts/use-explicit-vitest-watch.test.yml (valid/invalid) and rule-tests/__snapshots__/use-explicit-vitest-watch-snapshot.yml."
+  impact: low
+  impact-rationale: Vitest documents explicit watch mode; spelling it out improves local readability. Bare Vitest can already watch in development, so this is recoverable intent/consistency friction, not a production or security problem.

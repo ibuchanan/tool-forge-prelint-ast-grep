@@ -20,3 +20,12 @@ files:
   - "**/biome.jsonc"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://biomejs.dev/reference/configuration/"]
+  category: devtools
+  scope-profile: [unique]
+  scope-rationale: Preserve the reviewed Biome JSON/JSONC filename selection and node_modules-only exclusion; dist, coverage, specs and test-local configurations remain included, unlike the shared baseline. This artifact has no standard selector; ticket 08 owns scope normalization.
+  precision: medium
+  precision-rationale: "Tests cover explicit space, tab and absence. A text regex under formatter does not resolve extends or language/override settings; inherited spacing can be compliant. Those effective-configuration distinctions are assessment gaps. Evidence: rule-tests/ecosol/devtools/require-biome-formatter-indent-style.test.yml (valid/invalid) and rule-tests/__snapshots__/require-biome-formatter-indent-style-snapshot.yml."
+  impact: low
+  impact-rationale: The documented indentStyle controls a team formatting choice; genuine inconsistency creates recoverable diff and editor friction. Tabs are supported, not a security defect.

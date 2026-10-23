@@ -23,3 +23,12 @@ files:
   - "**/lefthook.yml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://lefthook.dev/configuration/"]
+  category: git-hooks
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only lefthook.yml and node_modules exclusion; lefthook.yaml is not selected and dist/coverage/specs plus test-local hooks remain included. There is no standard hook-config selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover a format-named pre-commit entry, missing entry and absent pre-commit hook. The regex checks a key, not run contents or skip/filter behavior; equivalently named scripts, inherited configuration and flow YAML are untested assessment gaps. A missing key is not proof formatting never runs. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-commit-format.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-commit-format-snapshot.yml."
+  impact: low
+  impact-rationale: Lefthook can run formatting before commits; genuine omission of the local guard permits recoverable formatting churn and noisier reviews, not a demonstrated production or security failure.

@@ -30,3 +30,13 @@ files:
   - "**/tsconfig.typecheck.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    ["https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes"]
+  category: typescript
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover explicit true, false and omission with or without extends. The regex does not resolve inherited options, strict prerequisites or actual assignments; a compliant inherited flag can match. These are assessment gaps, not demonstrated incorrect optional-property behavior. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-exact-optional-property-types.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-exact-optional-property-types-snapshot.yml."
+  impact: medium
+  impact-rationale: TypeScript documents distinguishing absent optional properties from explicit undefined. Where application logic relies on that difference, genuine loss of checking can permit bounded data-handling mistakes. Missing the flag alone proves neither such code nor a security issue; adoption can also require third-party type changes.

@@ -44,3 +44,12 @@ files:
   - "**/lefthook.yml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://lefthook.dev/configuration/"]
+  category: git-hooks
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only lefthook.yml and node_modules exclusion; lefthook.yaml is not selected and dist/coverage/specs plus test-local hooks remain included. There is no standard hook-config selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests require a runnable size:check command under pre-push.commands, accept a budget-named entry and reject name-only/skip-only and jobs forms. Supported jobs or wrapper commands can be equivalent; package-script existence, --if-present behavior and filters remain explicit assessment gaps. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-push-size.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-push-size-snapshot.yml."
+  impact: low
+  impact-rationale: Lefthook can invoke the local size budget before pushing; omission delays bundle-growth feedback and adds bounded rework. The matcher neither measures a bundle nor proves a platform limit breach or substantial resource consumption.

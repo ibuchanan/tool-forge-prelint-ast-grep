@@ -32,3 +32,12 @@ files:
   - "**/lefthook.yml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://lefthook.dev/configuration/"]
+  category: git-hooks
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only lefthook.yml and node_modules exclusion; lefthook.yaml is not selected and dist/coverage/specs plus test-local hooks remain included. There is no standard hook-config selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests accept direct typecheck and delegation via an invoked lint group, rejecting an uninvoked group. Named keys cannot establish the run body, effective compiler inputs or skip filters; equivalent alternate names and inherited configs remain assessment gaps. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-push-typecheck.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-push-typecheck-snapshot.yml."
+  impact: medium
+  impact-rationale: Lefthook can run the typecheck contract before sharing; genuine omission permits preventable typecheck failures and integration delay. It does not establish an actual runtime crash or missing CI enforcement.

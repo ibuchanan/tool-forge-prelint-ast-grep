@@ -39,3 +39,13 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    ["https://developer.atlassian.com/platform/forge/cli-reference/register/"]
+  category: forge-scripts
+  precision: medium
+  impact: low
+  impact-rationale: Forge documents the command's operation, not a mandatory package-script name. Missing the team's forge namespace creates discoverability and maintenance friction; it does not itself select the wrong app, grant consent, expose a secret or execute remote changes.
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded, including test-local and dist/coverage/specs packages. Native scope cannot establish deployable Forge identity; standard package scope would require the full baseline. Ticket 08 owns normalization.
+  precision-rationale: "Tests cover named/misnamed registration and absence with or without Forge dependencies. Descendant-key presence is not scripts-specific, and registration may intentionally be a one-time external workflow. These contextual limitations and inert command text are assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-register.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-register-snapshot.yml."

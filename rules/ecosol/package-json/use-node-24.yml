@@ -30,3 +30,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references:
+    - https://github.com/nvm-sh/nvm#nvmrc
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/main/src/node.ts
+  category: package-json
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve package.json files with only node_modules excluded; test-local packages and dist/coverage/specs remain included instead of the complete baseline. Single-file detection cannot establish intended Forge or organization-policy membership; ticket 08 owns scope normalization.
+  precision-rationale: "Tests accept literal @types/node 24 without engines, rejecting an older type version, engines and missing devDependencies. This does not read .nvmrc or the runtime, and compatible semver ranges can match. Effective version alignment and the note's engines/deployment claim remain assessment gaps. Evidence: rule-tests/ecosol/package-json/use-node-24.test.yml (valid/invalid) and rule-tests/__snapshots__/use-node-24-snapshot.yml."
+  impact: low
+  impact-rationale: nvm documents runtime selection through .nvmrc; the team pins matching type declarations for consistency. A different declaration alone causes local type/version friction, not proof of an unsupported runtime or deployment failure. The nvm reference does not substantiate a blanket ban on engines.

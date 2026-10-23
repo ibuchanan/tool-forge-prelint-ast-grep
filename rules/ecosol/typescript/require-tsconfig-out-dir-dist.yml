@@ -35,3 +35,12 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://www.typescriptlang.org/tsconfig/#outDir"]
+  category: typescript
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only tsconfig.json and node_modules exclusion; dist/coverage/specs and test-local configs remain included. There is no standard tsconfig selector; ticket 08 owns normalization.
+  precision-rationale: "Tests cover dist, another output path, missing options and extends backoff. The matcher cannot establish local layout requirements, effective CLI overrides or whether output is needed; alternative valid directories and nested regex structure are assessment gaps. Inherited configs are deliberately not checked. Evidence: rule-tests/ecosol/typescript/require-tsconfig-out-dir-dist.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-out-dir-dist-snapshot.yml."
+  impact: low
+  impact-rationale: TypeScript outDir selects local emit layout; divergence from dist can create bounded ignore/IDE and local build friction. Forge's bundler uses its own output, and a different valid local directory is not substantial application failure.

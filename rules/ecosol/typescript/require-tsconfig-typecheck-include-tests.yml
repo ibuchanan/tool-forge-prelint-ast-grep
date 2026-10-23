@@ -28,3 +28,12 @@ files:
   - "**/tsconfig.typecheck.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://www.typescriptlang.org/tsconfig/#include"]
+  category: typescript
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover test/tests directory/glob forms and reject src-only, similarly named folders, test.ts and nested include. Effective inherited file lists, custom test layouts and directory existence remain assessment gaps; a missing literal entry does not prove tests are excluded. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-include-tests.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-include-tests-snapshot.yml."
+  impact: medium
+  impact-rationale: TypeScript include determines checked files and overrides inherited include. Genuinely omitting the project's tests can hide type errors until shared validation or test integration, causing bounded reliability/delivery rework rather than proven production failure.

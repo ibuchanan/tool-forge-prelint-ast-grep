@@ -32,3 +32,12 @@ files:
   - "**/biome.jsonc"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://biomejs.dev/reference/configuration/"]
+  category: devtools
+  scope-profile: [unique]
+  scope-rationale: Preserve the reviewed Biome JSON/JSONC filename selection and node_modules-only exclusion; dist, coverage, specs and test-local configurations remain included, unlike the shared baseline. This artifact has no standard selector; ticket 08 owns scope normalization.
+  precision: medium
+  precision-rationale: "Tests distinguish files.includes from formatter-only exclusions and accept single/double negations. The matcher cannot resolve inherited configs, broader exclusions or a scan already restricted to source; absence of these exact dist spellings does not prove generated files are scanned. Those effective-scope alternatives are assessment gaps. Evidence: rule-tests/ecosol/devtools/require-biome-files-exclude-dist.test.yml (valid/invalid) and rule-tests/__snapshots__/require-biome-files-exclude-dist-snapshot.yml."
+  impact: low
+  impact-rationale: Biome's documented includes determine processing and indexing; genuinely scanning generated output creates avoidable local lint noise, formatting churn and development overhead, not demonstrated production failure or security exposure.

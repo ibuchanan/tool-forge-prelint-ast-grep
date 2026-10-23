@@ -13,7 +13,7 @@ cp "$base" "$file"
 run_check() {
   local expected=$1 pattern=$2 status=0
   shift 2
-  bash scripts/check-authoring.sh "$@" >"$work/out" 2>&1 || status=$?
+  bash "${check_script:-scripts/check-authoring.sh}" "$@" >"$work/out" 2>&1 || status=$?
   [[ $status == "$expected" ]] || {
     printf 'Expected status %s, got %s\n' "$expected" "$status" >&2
     tail -15 "$work/out" >&2
@@ -68,12 +68,20 @@ PATH="$work/bin:$PATH" run_check 2 'scanner failed' "$file"
 # Even a misleading findings status without a valid result must fail as a tool error.
 printf '#!/usr/bin/env bash\nprintf "[]\\n"\nexit 1\n' >"$work/bin/ast-grep"
 PATH="$work/bin:$PATH" run_check 2 'scanner failed' "$file"
-# Existing debt remains compatible, but copies cannot inherit an allowance.
-legacy=rules/atlassian/package-json/require-package-license-apache-2-0.yml
-run_check 0 'frozen legacy findings' "$legacy"
-mkdir -p "$work/rules/atlassian/package-json"
-copy="$work/rules/atlassian/package-json/require-package-license-apache-2-0.yml"
-cp "$legacy" "$copy"
+# Exercise frozen-debt compatibility without keeping a real rule unmigrated.
+# The checker runs unchanged in an isolated repository with one explicit allowance.
+sandbox="$work/repository"
+mkdir -p "$sandbox/scripts" "$sandbox/rules/recommended/security"
+cp scripts/check-authoring.sh scripts/rule-metadata-env.sh "$sandbox/scripts/"
+cp -R authoring "$sandbox/authoring"
+legacy=rules/recommended/security/example.yml
+yq 'del(.metadata)' "$base" >"$sandbox/$legacy"
+digest=$(shasum -a 256 "$sandbox/$legacy")
+printf '%s\t%s\t%s\n' "$legacy" "${digest%% *}" ' category metadata ratings rationales references require-authoring-metadata scope-ignores scope-selectors' >"$sandbox/authoring/legacy-allowances.tsv"
+check_script="$sandbox/scripts/check-authoring.sh"
+run_check 0 'Authoring checks passed (8 frozen legacy findings' "$legacy"
+copy="$work/rules/recommended/security/example.yml"
+cp "$sandbox/$legacy" "$copy"
 run_check 1 'unallowlisted findings' "$copy"
 rm "$work/bin/ast-grep"
 printf '#!/usr/bin/env bash\nprintf "changed-digest\\n"\n' >"$work/bin/shasum"
@@ -81,7 +89,7 @@ chmod +x "$work/bin/shasum"
 PATH="$work/bin:$PATH" run_check 1 'unallowlisted findings' "$legacy"
 rm "$work/bin/shasum"
 # An unrelated scanner diagnostic cannot inherit existing per-file debt.
-printf '#!/usr/bin/env bash\nprintf '\''[{"file":"rules/atlassian/package-json/require-package-license-apache-2-0.yml","ruleId":"new-diagnostic","message":"New defect","severity":"error"}]\\n'\''\nexit 1\n' >"$work/bin/ast-grep"
+printf '#!/usr/bin/env bash\nprintf '\''[{"file":"rules/recommended/security/example.yml","ruleId":"new-diagnostic","message":"New defect","severity":"error"}]\\n'\''\nexit 1\n' >"$work/bin/ast-grep"
 chmod +x "$work/bin/ast-grep"
 PATH="$work/bin:$PATH" run_check 1 'new-diagnostic' "$legacy"
 # Wrong yq implementations and failing parsers are execution failures, not findings.
@@ -92,6 +100,7 @@ PATH="$work/bin:$PATH" run_check 2 'Expected Mike Farah yq'
 # shellcheck disable=SC2016
 printf '#!/usr/bin/env bash\nif [[ $1 == --version ]]; then printf "yq (https://github.com/mikefarah/yq/) version v4.54.1\\n"; else exit 7; fi\n' >"$work/bin/yq"
 PATH="$work/bin:$PATH" run_check 2 'parse/structure' "$file"
+unset check_script
 # Migrated strict security definitions must pass without inheriting legacy debt.
 run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/strict/security/*.yml
 if grep -q '^rules/strict/security/' authoring/legacy-allowances.tsv; then
@@ -112,6 +121,12 @@ fi
 run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/recommended/*/*.yml
 if grep -q '^rules/recommended/' authoring/legacy-allowances.tsv; then
   printf 'Migrated recommended rules still have legacy allowances.\n' >&2
+  exit 1
+fi
+# Ecosol and Atlassian definitions must pass without frozen metadata debt.
+run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/ecosol/*/*.yml rules/atlassian/*/*.yml
+if awk -F '\t' '$1 ~ /^rules\/(ecosol|atlassian)\// { found = 1 } END { exit !found }' authoring/legacy-allowances.tsv; then
+  printf 'Migrated Ecosol/Atlassian rules still have legacy allowances.\n' >&2
   exit 1
 fi
 printf 'Authoring orchestration checks passed.\n'

@@ -34,3 +34,12 @@ files:
   - "**/lefthook.yml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://lefthook.dev/configuration/"]
+  category: git-hooks
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only lefthook.yml and node_modules exclusion; lefthook.yaml is not selected and dist/coverage/specs plus test-local hooks remain included. There is no standard hook-config selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover direct format entries and delegation through a top-level lint group, rejecting an uninvoked group. Named keys do not establish run contents, filters or execution; equivalent differently named guards and inherited configuration are assessment gaps. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-push-format.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-push-format-snapshot.yml."
+  impact: low
+  impact-rationale: Lefthook pre-push formatting catches local drift before sharing; genuine omission adds recoverable formatting noise and review friction. CI or other guards may still protect the branch.

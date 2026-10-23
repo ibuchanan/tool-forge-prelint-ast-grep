@@ -24,3 +24,12 @@ files:
   - "**/tsconfig.typecheck.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  references: ["https://www.typescriptlang.org/tsconfig/#noImplicitReturns"]
+  category: typescript
+  precision: medium
+  scope-profile: [unique]
+  scope-rationale: Preserve only tsconfig.typecheck.json and node_modules exclusion; dist/coverage/specs and test-local configurations remain included. This filename has no standard artifact selector; ticket 08 owns scope normalization.
+  precision-rationale: "Tests cover explicit true, false and omission with extends. Effective inherited settings and return-type coverage are unresolved assessment gaps; the regex does not analyze code paths. Missing the explicit setting does not establish an incorrect return. Evidence: rule-tests/ecosol/typescript/require-tsconfig-typecheck-no-implicit-returns.test.yml (valid/invalid) and rule-tests/__snapshots__/require-tsconfig-typecheck-no-implicit-returns-snapshot.yml."
+  impact: medium
+  impact-rationale: TypeScript documents checking that applicable function paths return consistently. Where callers require values, genuine loss of that guard can let undefined results cause bounded functionality failures; no particular failing path or security exploit is demonstrated.
