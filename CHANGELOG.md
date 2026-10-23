@@ -1,3 +1,15 @@
+## [0.8.0] - 2026-10-23
+
+### 🚀 Features
+
+- *(ecosol)* Prefer Fence Rider for Forge commands
+- *(security)* Add OWASP-derived lint rules
+- *(security)* Add second-wave OWASP review rules
+
+### 🐛 Bug Fixes
+
+- *(security)* Improve existing rule coverage
+
 ## [0.7.0] - 2026-10-14
 
 ### 🚀 Features
