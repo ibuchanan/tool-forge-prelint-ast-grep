@@ -1,0 +1,13 @@
+id: require-authoring-metadata
+valid:
+  - "metadata: {}"
+  - '"metadata": {category: security}'
+  - "{'metadata': {category: security}, rule: {metadata: null}}"
+invalid:
+  - "id: example"
+  - "metadata: null"
+  - "metadata: []"
+  - "metadata: text"
+  - "rule: {metadata: {category: security}}"
+  - "severity: off"
+  - "note: |\n  metadata: {}\nrule: {kind: string}"

@@ -1,0 +1,12 @@
+id: rule-document
+language: Yaml
+rule:
+  any:
+    - kind: block_mapping
+    - kind: flow_mapping
+  inside:
+    any:
+      - kind: block_node
+      - kind: flow_node
+    inside:
+      kind: document

@@ -1,0 +1,11 @@
+# eval-all slurps documents before checking; unsafe YAML is a tool/input error,
+# never a migratable policy finding. No anchors, aliases, tags or complex keys.
+[.] as $docs |
+select(($docs | length) == 1) // error("YAML: expected exactly one document") |
+$docs[0] |
+select(tag == "!!map") // error("YAML: expected a rule mapping") |
+select(([.. | select(anchor != "" or tag == "!!merge" or tag == "!!alias")] | length) == 0) // error("YAML: anchors, aliases and merges are unsupported") |
+select(([.. | select(tag != "!!map" and tag != "!!seq" and tag != "!!str" and tag != "!!int" and tag != "!!float" and tag != "!!bool" and tag != "!!null")] | length) == 0) // error("YAML: unsupported tag") |
+select(([.. | select(kind == "map") | keys | select((unique | length) != length)] | length) == 0) // error("YAML: duplicate mapping keys") |
+select(([.. | select(kind == "map") | keys | .[] | select(tag != "!!str")] | length) == 0) // error("YAML: mapping keys must be strings") |
+true

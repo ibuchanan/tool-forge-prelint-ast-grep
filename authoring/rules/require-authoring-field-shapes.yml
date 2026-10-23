@@ -1,0 +1,48 @@
+id: require-authoring-field-shapes
+language: Yaml
+severity: error
+message: Use a supported impact rating and nonempty references/scope-profile sequences directly in metadata.
+note: >
+  See docs/reference/rule-authoring-policy.md and
+  https://ast-grep.github.io/reference/rule-config.html.
+  Preview reference.yq from docs/how-to/backfill-rule-metadata.md for explicit additions.
+  Values and set comparisons use supplemental yq; never infer or overwrite approved scope or judgments.
+utils:
+  nonempty-sequence:
+    any:
+      - kind: block_sequence
+        has:
+          kind: block_sequence_item
+      - kind: flow_sequence
+        has:
+          kind: flow_node
+rule:
+  matches: metadata-mapping
+  not:
+    all:
+      - has:
+          all:
+            - has:
+                field: key
+                regex: '^(impact|"impact"|''impact'')$'
+            - has:
+                field: value
+                regex: '^(low|medium|high|"(low|medium|high)"|''(low|medium|high)'')$'
+      - has:
+          all:
+            - has:
+                field: key
+                regex: '^(references|"references"|''references'')$'
+            - has:
+                field: value
+                has:
+                  matches: nonempty-sequence
+      - has:
+          all:
+            - has:
+                field: key
+                regex: '^(scope-profile|"scope-profile"|''scope-profile'')$'
+            - has:
+                field: value
+                has:
+                  matches: nonempty-sequence

@@ -1,0 +1,22 @@
+id: require-authoring-precision
+language: Yaml
+severity: error
+message: Declare metadata.precision as low, medium, or high after reviewing matcher evidence.
+note: >
+  See docs/reference/rule-authoring-policy.md and
+  https://ast-grep.github.io/reference/rule-config.html.
+  Ratings require maintainer review; yq recipes never assign approved judgments.
+rule:
+  matches: metadata-mapping
+  not:
+    has:
+      any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      all:
+        - has:
+            field: key
+            regex: '^(precision|"precision"|''precision'')$'
+        - has:
+            field: value
+            regex: '^(low|medium|high|"(low|medium|high)"|''(low|medium|high)'')$'

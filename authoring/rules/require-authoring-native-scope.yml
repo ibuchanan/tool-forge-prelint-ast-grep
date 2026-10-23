@@ -1,0 +1,26 @@
+id: require-authoring-native-scope
+language: Yaml
+severity: error
+message: Declare a top-level ignores sequence; omitted scope must not silently include generated files.
+note: >
+  See docs/reference/rule-authoring-policy.md and
+  https://ast-grep.github.io/reference/rule-config.html.
+  Preview normalize.yq from docs/how-to/backfill-rule-metadata.md for safe repairs;
+  never replace native files or ignores from metadata.scope-profile alone.
+rule:
+  matches: rule-document
+  not:
+    has:
+      any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      all:
+        - has:
+            field: key
+            regex: '^(ignores|"ignores"|''ignores'')$'
+        - has:
+            field: value
+            has:
+              any:
+                - kind: block_sequence
+                - kind: flow_sequence

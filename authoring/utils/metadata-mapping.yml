@@ -1,0 +1,19 @@
+id: metadata-mapping
+language: Yaml
+rule:
+  any:
+    - kind: block_mapping
+    - kind: flow_mapping
+  inside:
+    any:
+      - kind: block_node
+      - kind: flow_node
+    inside:
+      any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      has:
+        field: key
+        regex: '^(metadata|"metadata"|''metadata'')$'
+      inside:
+        matches: rule-document

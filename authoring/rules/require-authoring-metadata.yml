@@ -1,0 +1,26 @@
+id: require-authoring-metadata
+language: Yaml
+severity: error
+message: Declare a top-level metadata mapping; nested matcher keys do not count.
+note: >
+  See docs/reference/rule-authoring-policy.md and
+  https://ast-grep.github.io/reference/rule-config.html.
+  Preview category.yq or reference.yq from docs/how-to/backfill-rule-metadata.md
+  for explicit metadata repairs. Never overwrite approved scope or judgments.
+rule:
+  matches: rule-document
+  not:
+    has:
+      any:
+        - kind: block_mapping_pair
+        - kind: flow_pair
+      all:
+        - has:
+            field: key
+            regex: '^(metadata|"metadata"|''metadata'')$'
+        - has:
+            field: value
+            has:
+              any:
+                - kind: block_mapping
+                - kind: flow_mapping

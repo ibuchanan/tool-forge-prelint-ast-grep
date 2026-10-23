@@ -6,7 +6,8 @@ repository. If you just want to _use_ the rules in a Forge app, see the
 
 ## Prerequisites
 
-- Node.js and npm
+- Node.js and npm (or Bun for running the package scripts)
+- Mike Farah yq v4 (tested with v4.54.1), Bash, jq, and shasum for authoring checks
 
 ## Setup
 
@@ -94,9 +95,21 @@ bash scripts/test-rule-metadata.sh
 These need Bash and Mike Farah yq v4 (tested with v4.54.1), not a custom CLI or
 JavaScript/TypeScript runtime. The small sourced tool guard does not edit files.
 Automatic scope inference, prose URL extraction, and assessment/companion reports
-are deliberately out of scope. Ticket 03 owns repository-only ast-grep self-checks
-and minimal Bash/yq supplements, including CI integration. Scope normalization
-and severity changes require their later, explicit reviews.
+are deliberately out of scope. Ticket 03 adds repository-only native self-checks
+and a frozen legacy allowance. `npm test` (also the existing pre-push/CI entry
+point) runs them after consumer tests and fixtures. Run them independently with:
+
+```sh
+bun run test:authoring
+# Check explicitly selected rule documents without editing them:
+bash scripts/check-authoring.sh rules/recommended/package-json/require-package-private-true.yml
+```
+
+The [self-evaluation reference](docs/reference/rule-authoring-checks.md) lists
+checked invariants, exit statuses, supported scope comparisons, migration
+allowances, and remaining review responsibilities. A `REVIEW:` line is not
+validated scope compliance. Scope normalization and severity changes require
+their later, explicit reviews.
 
 1. Add or edit the `.yml` rule file under `rules/<tier>/<category>/`.
 2. Add or update the matching test file under

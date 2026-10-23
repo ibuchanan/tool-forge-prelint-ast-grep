@@ -1,0 +1,72 @@
+# One diagnostic string per line; REVIEW is visible but not a proof of compliance.
+# Only direct conventional sets are compared. No glob evaluation or inference.
+load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $p |
+. as $r | (.metadata // {}) as $m |
+(filename | split("/")) as $parts |
+(if (($m | tag) != "!!map") then {} else $m end) as $m |
+($m."scope-profile" // []) as $raw |
+(if ($raw | tag) == "!!seq" then $raw else [] end) as $s |
+($s | contains(["unique"])) as $unique |
+($s | map(select(. == "frontend" or . == "backend"))) as $runtimes |
+($s | map(select(. == "package-json" or . == "manifest"))) as $artifacts |
+($p.baseline + (if ($s | contains(["tests"])) then [] else $p."test-exclusions" end) | sort) as $ignores |
+# Both runtimes impose no restriction. Artifacts union within their kind.
+(if ($runtimes | length) == 1 then $p.runtime[$runtimes[0]] else [] end) as $runtime |
+(if ($artifacts | length) == 0 then [] else [$artifacts[] as $a | $p.artifacts[$a][]] end | sort) as $artifact |
+(if ($runtime | length) == 0 then $artifact
+ elif ($artifact | length) == 0 then $runtime
+ else [$runtime[] as $root | $artifact[] | $root + "/" + (. | sub("^\\*\\*/"; ""))] end | sort) as $expected |
+(if ($r | has("files")) then $r.files else ["**/*"] end) as $files |
+# Enumerate only conventional shapes for distinguishing a known mismatch from review.
+([ ["**/*"], $p.runtime.frontend, $p.runtime.backend,
+   $p.artifacts."package-json", $p.artifacts.manifest,
+   ($p.artifacts."package-json" + $p.artifacts.manifest) ] +
+ [[$p.runtime.frontend, $p.runtime.backend][] as $roots |
+   [$p.artifacts."package-json", $p.artifacts.manifest, ($p.artifacts."package-json" + $p.artifacts.manifest)][] as $ends |
+   [$roots[] as $root | $ends[] | $root + "/" + (. | sub("^\\*\\*/"; ""))]]) as $conventional |
+(if ($files | tag) == "!!seq" then ($files | sort) else [] end) as $actual |
+(if ($expected | length) == 0 then ["**/*"] else $expected end) as $expected |
+(if ($m | has("references")) then $m.references else null end) as $refs |
+(if ($m | has("tags")) then $m.tags else [] end) as $tags |
+(if (filename | test("(^|/)rules/[^/]+/[^/]+/[^/]+\\.yml$") | not) or
+    ($p.tiers | contains([$parts[-3]]) | not) or
+    ($p.categories | contains([$parts[-2]]) | not) or
+    $r.id != ($parts[-1] | sub("\\.yml$"; ""))
+ then ["layout: use rules/<tier>/<category>/<id>.yml with a matching id"] else [] end) +
+(if ($r.metadata | tag) != "!!map" then ["metadata: declare a top-level mapping"] else [] end) +
+(if $m.category != $parts[-2] then ["category: match the containing category; preview category.yq"] else [] end) +
+(if (["low", "medium", "high"] | contains([($m.precision // null)])) and (["low", "medium", "high"] | contains([($m.impact // null)]))
+ then [] else ["ratings: declare precision and impact as low, medium, or high; review judgments"] end) +
+(if ([($m."precision-rationale" // null), ($m."impact-rationale" // null)] | map(select(tag != "!!str" or (test("\\S") | not))) | length) > 0
+ then ["rationales: supply nonempty inline precision-rationale and impact-rationale; review evidence"] else [] end) +
+(if (($m | to_entries | map(select(.key == "owasp" or .key == "cwe") | .value | select(tag != "!!str" or (test("\\S") | not))) | length) > 0)
+ then ["classification: optional owasp and cwe values must be nonempty strings"] else [] end) +
+(if ($refs | tag) != "!!seq" then ["references: declare a nonempty HTTP(S) string sequence; preview reference.yq"]
+ elif ($refs | length) == 0 or ($refs | unique | length) != ($refs | length) or
+      ($refs | map(select(tag != "!!str" or (test($p."reference-pattern") | not))) | length) > 0
+ then ["references: require distinct explicit HTTP(S) URLs with host text and no whitespace"] else [] end) +
+(if ($tags | tag) != "!!seq" then ["tags: optional tags must be a sequence"]
+ elif ($tags | unique | length) != ($tags | length) or
+      ($tags | map(select(tag != "!!str" or (test("^module:[A-Za-z][A-Za-z0-9-]*:[A-Za-z][A-Za-z0-9]*$") | not))) | length) > 0
+ then ["tags: require distinct module:<namespace>:<identifier> strings; exact identity needs review"] else [] end) +
+(if ($r.ignores | tag) != "!!seq" or ($r | has("ignores") | not)
+ then ["native-globs: declare an explicit ignores string sequence"]
+ elif ($r.ignores | unique | length) != ($r.ignores | length) or ($r.ignores | map(select(tag != "!!str" or (test("\\S") | not))) | length) > 0
+ then ["native-globs: ignores must contain distinct nonempty strings"] else [] end) +
+(if ($r | has("files")) then
+   (if ($files | tag) != "!!seq" then ["native-globs: files must be a nonempty string sequence"]
+    elif ($files | length) == 0 or ($files | unique | length) != ($files | length) or ($files | map(select(tag != "!!str" or (test("\\S") | not))) | length) > 0
+    then ["native-globs: files must contain distinct nonempty strings"] else [] end)
+ else [] end) +
+(if ($raw | tag) != "!!seq" or ($s | length) == 0 or ($s | unique | length) != ($s | length) or
+    ($s | map(select(. as $v | $p."scope-order" | contains([$v]) | not)) | length) > 0 or
+    ($unique and (($s | length) != 1 or ($m."scope-rationale" | tag) != "!!str" or ($m."scope-rationale" | test("\\S") | not))) or
+    (($unique | not) and ($runtimes + $artifacts | length) == 0)
+ then ["scope-selectors: use distinct known selectors, runtime/artifact or exclusive unique with an inline rationale"] else [] end) +
+(if ($unique | not) and ($r.ignores | tag) == "!!seq" and ($r.ignores | sort | to_json | @base64) != ($ignores | to_json | @base64)
+ then ["scope-ignores: standard scope must match shared baseline/test sets; native edits belong to ticket 08"] else [] end) +
+(if ($unique | not) and ($actual | length) > 0 and ($actual | to_json | @base64) != ($expected | to_json | @base64) then
+   (if ($conventional | map(sort | to_json | @base64) | contains([($actual | to_json | @base64)]))
+    then ["positive-scope: known native set disagrees with runtime/artifact union and intersection; review, do not infer"]
+    else ["REVIEW: unsupported positive-scope comparison; maintainer review and routing fixtures required"] end)
+ else [] end) | .[]

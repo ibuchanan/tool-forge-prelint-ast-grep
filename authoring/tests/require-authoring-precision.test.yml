@@ -1,0 +1,14 @@
+id: require-authoring-precision
+valid:
+  - "metadata: {precision: high}"
+  - '"metadata": {"precision": "low"}'
+  - "{'metadata': {'precision': 'medium'}}"
+  - "metadata:\n  precision: high\nrule:\n  precision: unknown"
+invalid:
+  - "metadata: {}"
+  - "metadata: {precision: null}"
+  - "metadata: {precision: []}"
+  - "metadata: {precision: 42}"
+  - "metadata: {precision: HIGH}"
+  - "metadata: {nested: {precision: high}}"
+  - "severity: off\nmetadata: {precision: invalid}"

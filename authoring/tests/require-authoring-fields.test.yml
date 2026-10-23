@@ -1,0 +1,12 @@
+id: require-authoring-fields
+valid:
+  - "metadata: {category: security, impact: high, references: [], scope-profile: [unique]}"
+  - "{'metadata': {'category': security, 'impact': high, 'references': [], 'scope-profile': [unique]}}"
+  - "metadata:\n  category: security\n  impact: high\n  references: []\n  scope-profile: [unique]"
+invalid:
+  - "metadata: {}"
+  - "metadata: {category: security, impact: high, references: []}"
+  - "metadata: {category: security, references: [], scope-profile: [unique]}"
+  - "metadata: {impact: high, references: [], scope-profile: [unique]}"
+  - "metadata: {category: security, impact: high, scope-profile: [unique]}"
+  - "metadata: {nested: {category: security, impact: high, references: [], scope-profile: [unique]}}"

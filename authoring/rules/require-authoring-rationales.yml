@@ -1,0 +1,42 @@
+id: require-authoring-rationales
+language: Yaml
+severity: error
+message: Supply nonempty inline precision-rationale and impact-rationale; ratings alone are not evidence.
+note: >
+  See docs/reference/rule-authoring-policy.md and
+  https://ast-grep.github.io/reference/rule-config.html.
+  Cite reviewed evidence inline. Recipes do not assign judgments or approve scope changes.
+utils:
+  inline-text:
+    any:
+      - kind: plain_scalar
+        not:
+          regex: "^(null|~|true|false|[0-9]+)$"
+      - kind: double_quote_scalar
+      - kind: single_quote_scalar
+      - kind: block_scalar
+    regex: '\S'
+    not:
+      regex: '^("\s*"|''\s*''|[|>][-+0-9]*\s*)$'
+rule:
+  matches: metadata-mapping
+  not:
+    all:
+      - has:
+          all:
+            - has:
+                field: key
+                regex: '^(precision-rationale|"precision-rationale"|''precision-rationale'')$'
+            - has:
+                field: value
+                has:
+                  matches: inline-text
+      - has:
+          all:
+            - has:
+                field: key
+                regex: '^(impact-rationale|"impact-rationale"|''impact-rationale'')$'
+            - has:
+                field: value
+                has:
+                  matches: inline-text

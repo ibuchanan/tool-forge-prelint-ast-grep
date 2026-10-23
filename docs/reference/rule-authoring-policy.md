@@ -334,6 +334,16 @@ notes, sources, and explicitly justified native scope can differ. Extensions
 alone do not justify differing ratings or inferred frontend/backend tags.
 Disputed differences require review, not blind copying of metadata.
 
+## Ticket 03 self-evaluation
+
+Repository-only checks are implemented through native ast-grep diagnostics and
+small Bash/yq supplements. The [self-evaluation reference](rule-authoring-checks.md)
+records checked invariants, exact conventional scope comparisons, status codes,
+frozen source-bound legacy allowances, and remaining review responsibilities.
+Consumer tests and configurations are unchanged; the default test/pre-push path
+also runs authoring checks. Tool/input failures cannot become migration debt,
+and visible `REVIEW:` comparisons do not establish compliant scope.
+
 ## Ticket 01 pilot
 
 | Family                         | Files                   | Precision | Impact | Current severity | Candidate severity |

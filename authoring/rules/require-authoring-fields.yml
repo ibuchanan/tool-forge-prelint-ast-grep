@@ -1,0 +1,29 @@
+id: require-authoring-fields
+language: Yaml
+severity: error
+message: Declare category, impact, references, and scope-profile directly in metadata; review their values.
+note: >
+  See docs/reference/rule-authoring-policy.md and
+  https://ast-grep.github.io/reference/rule-config.html.
+  Preview category.yq or reference.yq from docs/how-to/backfill-rule-metadata.md.
+  Never infer or overwrite approved ratings or scope; supplemental yq checks validate values.
+rule:
+  matches: metadata-mapping
+  not:
+    all:
+      - has:
+          has:
+            field: key
+            regex: '^(category|"category"|''category'')$'
+      - has:
+          has:
+            field: key
+            regex: '^(impact|"impact"|''impact'')$'
+      - has:
+          has:
+            field: key
+            regex: '^(references|"references"|''references'')$'
+      - has:
+          has:
+            field: key
+            regex: '^(scope-profile|"scope-profile"|''scope-profile'')$'

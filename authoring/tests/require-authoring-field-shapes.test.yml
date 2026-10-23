@@ -1,0 +1,13 @@
+id: require-authoring-field-shapes
+valid:
+  - 'metadata: {impact: low, references: ["https://example.com"], scope-profile: [frontend]}'
+  - "{'metadata': {'impact': 'high', 'references': ['https://example.com'], 'scope-profile': [unique]}}"
+  - "metadata:\n  impact: medium\n  references:\n    - https://example.com\n  scope-profile:\n    - frontend"
+invalid:
+  - "metadata: {impact: HIGH, references: [url], scope-profile: [frontend]}"
+  - "metadata: {impact: null, references: [url], scope-profile: [frontend]}"
+  - "metadata: {impact: low, references: [], scope-profile: [frontend]}"
+  - "metadata: {impact: low, references: text, scope-profile: [frontend]}"
+  - "metadata: {impact: low, references: [url], scope-profile: []}"
+  - "metadata: {impact: low, references: [url], scope-profile: null}"
+  - "metadata: {nested: {impact: high, references: [url], scope-profile: [frontend]}}"

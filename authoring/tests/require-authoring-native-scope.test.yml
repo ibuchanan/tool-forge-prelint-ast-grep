@@ -1,0 +1,15 @@
+id: require-authoring-native-scope
+valid:
+  - "ignores: []"
+  - '"ignores": ["**/node_modules/**"]'
+  - "{'ignores': ['**/dist/**']}"
+  - "ignores:\n  - '**/dist/**'"
+  - "metadata: {ignores: null}, ignores: []"
+invalid:
+  - "id: example"
+  - "ignores: null"
+  - 'ignores: "string"'
+  - "ignores: 123"
+  - "ignores: {}"
+  - "severity: off"
+  - 'rule: {ignores: ["nested"]}'

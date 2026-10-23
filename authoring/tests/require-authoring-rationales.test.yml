@@ -1,0 +1,13 @@
+id: require-authoring-rationales
+valid:
+  - 'metadata: {precision-rationale: "匹配证据", impact-rationale: "影响证据"}'
+  - "metadata: {precision-rationale: Reviewed matcher, impact-rationale: Reviewed impact}"
+  - "{'metadata': {'precision-rationale': 'Matcher evidence', 'impact-rationale': 'Impact evidence'}}"
+  - "metadata:\n  precision-rationale: |\n    Reviewed matcher.\n  impact-rationale: >\n    Reviewed impact."
+invalid:
+  - "metadata: {}"
+  - 'metadata: {precision-rationale: "", impact-rationale: Impact}'
+  - 'metadata: {precision-rationale: Matcher, impact-rationale: "   "}'
+  - "metadata: {precision-rationale: null, impact-rationale: Impact}"
+  - "metadata: {precision-rationale: [], impact-rationale: Impact}"
+  - "metadata: {nested: {precision-rationale: Matcher, impact-rationale: Impact}}"
