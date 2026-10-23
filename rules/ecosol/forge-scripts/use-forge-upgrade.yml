@@ -41,6 +41,9 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references:
     ["https://developer.atlassian.com/platform/forge/cli-reference/install/"]
@@ -48,6 +51,5 @@ metadata:
   precision: medium
   impact: low
   impact-rationale: Forge documents the command's operation, not a mandatory package-script name. Missing the team's forge namespace creates discoverability and maintenance friction; it does not itself select the wrong app, grant consent, expose a secret or execute remote changes.
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded, including test-local and dist/coverage/specs packages. Native scope cannot establish deployable Forge identity; standard package scope would require the full baseline. Ticket 08 owns normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests distinguish named upgrade wrappers from install and missing scripts. The text matcher requires --upgrade somewhere in a forge install pair; it does not parse argument semantics or validate descendant-key placement, implementation or app identity. Those are assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-upgrade.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-upgrade-snapshot.yml."

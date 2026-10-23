@@ -40,6 +40,9 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references:
     ["https://developer.atlassian.com/platform/forge/cli-reference/uninstall/"]
@@ -47,6 +50,5 @@ metadata:
   precision: medium
   impact: low
   impact-rationale: Forge documents the command's operation, not a mandatory package-script name. Missing the team's forge namespace creates discoverability and maintenance friction; it does not itself select the wrong app, grant consent, expose a secret or execute remote changes.
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded, including test-local and dist/coverage/specs packages. Native scope cannot establish deployable Forge identity; standard package scope would require the full baseline. Ticket 08 owns normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests cover named/misnamed uninstall wrappers and missing scripts. Descendant-key presence does not prove scripts placement or implementation, and removal may intentionally use a separate controlled workflow. Those contextual distinctions and shell quoting are assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-uninstall.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-uninstall-snapshot.yml."

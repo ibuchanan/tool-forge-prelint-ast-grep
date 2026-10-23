@@ -9,3 +9,9 @@ rules/ecosol/forge-ahead/no-verbose-hot-path-logging.yml	entry	exclude
 rules/ecosol/forge-ahead/use-forge-ahead-api-types.yml	package	include
 rules/ecosol/forge-ahead/use-forge-ahead-errors.yml	package	include
 rules/ecosol/forge-ahead/use-forge-ahead-logging.yml	package	include
+rules/ecosol/forge-scripts/use-forge-deploy.yml	package	include
+rules/ecosol/forge-scripts/use-forge-install.yml	package	include
+rules/ecosol/forge-scripts/use-forge-register.yml	package	include
+rules/ecosol/forge-scripts/use-forge-uninstall.yml	package	include
+rules/ecosol/forge-scripts/use-forge-upgrade.yml	package	include
+rules/ecosol/forge-scripts/use-forge-variables-set.yml	package	include
