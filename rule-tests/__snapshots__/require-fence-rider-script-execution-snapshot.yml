@@ -1,0 +1,188 @@
+id: require-fence-rider-script-execution
+snapshots:
+  "{\"scripts\": {\"deploy\": \"fence-rider deploy -- --approve RULE_WITH--help-IN-NAME\"}}\n":
+    labels:
+    - source: "\"deploy\": \"fence-rider deploy -- --approve RULE_WITH--help-IN-NAME\""
+      style: primary
+      start: 13
+      end: 80
+    - source: |
+        {"scripts": {"deploy": "fence-rider deploy -- --approve RULE_WITH--help-IN-NAME"}}
+      style: secondary
+      start: 0
+      end: 83
+    - source: "{\"scripts\": {\"deploy\": \"fence-rider deploy -- --approve RULE_WITH--help-IN-NAME\"}}"
+      style: secondary
+      start: 0
+      end: 82
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"fence-rider deploy -- --approve RULE_WITH--help-IN-NAME\"}"
+      style: secondary
+      start: 1
+      end: 81
+    - source: "{\"deploy\": \"fence-rider deploy -- --approve RULE_WITH--help-IN-NAME\"}"
+      style: secondary
+      start: 12
+      end: 81
+    - source: "\"fence-rider deploy -- --approve RULE_WITH--help-IN-NAME\""
+      style: secondary
+      start: 23
+      end: 80
+  "{\"scripts\": {\"forge:deploy\": \"fence-rider deploy\"}}\n":
+    labels:
+    - source: "\"forge:deploy\": \"fence-rider deploy\""
+      style: primary
+      start: 13
+      end: 49
+    - source: |
+        {"scripts": {"forge:deploy": "fence-rider deploy"}}
+      style: secondary
+      start: 0
+      end: 52
+    - source: "{\"scripts\": {\"forge:deploy\": \"fence-rider deploy\"}}"
+      style: secondary
+      start: 0
+      end: 51
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:deploy\": \"fence-rider deploy\"}"
+      style: secondary
+      start: 1
+      end: 50
+    - source: "{\"forge:deploy\": \"fence-rider deploy\"}"
+      style: secondary
+      start: 12
+      end: 50
+    - source: "\"fence-rider deploy\""
+      style: secondary
+      start: 29
+      end: 49
+  "{\"scripts\": {\"forge:install\": \"fence-rider install -- --confirm-scopes --non-interactive\"}}\n":
+    labels:
+    - source: "\"forge:install\": \"fence-rider install -- --confirm-scopes --non-interactive\""
+      style: primary
+      start: 13
+      end: 89
+    - source: |
+        {"scripts": {"forge:install": "fence-rider install -- --confirm-scopes --non-interactive"}}
+      style: secondary
+      start: 0
+      end: 92
+    - source: "{\"scripts\": {\"forge:install\": \"fence-rider install -- --confirm-scopes --non-interactive\"}}"
+      style: secondary
+      start: 0
+      end: 91
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:install\": \"fence-rider install -- --confirm-scopes --non-interactive\"}"
+      style: secondary
+      start: 1
+      end: 90
+    - source: "{\"forge:install\": \"fence-rider install -- --confirm-scopes --non-interactive\"}"
+      style: secondary
+      start: 12
+      end: 90
+    - source: "\"fence-rider install -- --confirm-scopes --non-interactive\""
+      style: secondary
+      start: 30
+      end: 89
+  "{\"scripts\": {\"forge:uninstall\": \"fence-rider uninstall\"}}\n":
+    labels:
+    - source: "\"forge:uninstall\": \"fence-rider uninstall\""
+      style: primary
+      start: 13
+      end: 55
+    - source: |
+        {"scripts": {"forge:uninstall": "fence-rider uninstall"}}
+      style: secondary
+      start: 0
+      end: 58
+    - source: "{\"scripts\": {\"forge:uninstall\": \"fence-rider uninstall\"}}"
+      style: secondary
+      start: 0
+      end: 57
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:uninstall\": \"fence-rider uninstall\"}"
+      style: secondary
+      start: 1
+      end: 56
+    - source: "{\"forge:uninstall\": \"fence-rider uninstall\"}"
+      style: secondary
+      start: 12
+      end: 56
+    - source: "\"fence-rider uninstall\""
+      style: secondary
+      start: 32
+      end: 55
+  "{\"scripts\": {\"lint:forge\": \"fence-rider lint -- --verbose\"}}\n":
+    labels:
+    - source: "\"lint:forge\": \"fence-rider lint -- --verbose\""
+      style: primary
+      start: 13
+      end: 58
+    - source: |
+        {"scripts": {"lint:forge": "fence-rider lint -- --verbose"}}
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{\"scripts\": {\"lint:forge\": \"fence-rider lint -- --verbose\"}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint:forge\": \"fence-rider lint -- --verbose\"}"
+      style: secondary
+      start: 1
+      end: 59
+    - source: "{\"lint:forge\": \"fence-rider lint -- --verbose\"}"
+      style: secondary
+      start: 12
+      end: 59
+    - source: "\"fence-rider lint -- --verbose\""
+      style: secondary
+      start: 27
+      end: 58
+  "{\"scripts\": {\"tunnel\": \"  fence-rider   tunnel -e development  \"}}\n":
+    labels:
+    - source: "\"tunnel\": \"  fence-rider   tunnel -e development  \""
+      style: primary
+      start: 13
+      end: 64
+    - source: |
+        {"scripts": {"tunnel": "  fence-rider   tunnel -e development  "}}
+      style: secondary
+      start: 0
+      end: 67
+    - source: "{\"scripts\": {\"tunnel\": \"  fence-rider   tunnel -e development  \"}}"
+      style: secondary
+      start: 0
+      end: 66
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"  fence-rider   tunnel -e development  \"}"
+      style: secondary
+      start: 1
+      end: 65
+    - source: "{\"tunnel\": \"  fence-rider   tunnel -e development  \"}"
+      style: secondary
+      start: 12
+      end: 65
+    - source: "\"  fence-rider   tunnel -e development  \""
+      style: secondary
+      start: 23
+      end: 64

@@ -309,12 +309,25 @@ Secret and configuration declaration, resolution, scoping, and delivery,
 including SecretSpec and Fence Rider integration conventions. This category
 covers local, manifest, and runtime configuration, not only confidential values.
 The ecosol rules recommend Fence Rider for package scripts containing literal
-`forge install` (including upgrades), `forge uninstall`, `forge lint`, or
-`forge deploy` commands. They replace `use-secretspec-for-forge-commands` and do
-not cover tunnel. Generate and execute the Fence Rider script; generation alone
-does not run Forge. These are workflow conventions, not proof of credential
-isolation: the whole profile is resolved and Forge output is not redacted.
-The checks inspect command text, not arbitrary shell semantics or external helpers.
+`forge install` (including upgrades), `forge uninstall`, `forge lint`,
+`forge deploy`, `forge tunnel`, or `forge variables set` commands. The variable
+rule also recognizes node/bun calls to `scripts/forge-vars-from-secretspec.js`,
+replacing that helper's separate inventory with SecretSpec's runtime scope.
+These rules supersede `use-secretspec-for-forge-commands`.
+
+`require-fence-rider-script-execution` flags bare generator-only scripts;
+`no-unguarded-fence-rider-evaluation` flags direct command-substitution execution
+and simple generator-to-shell pipes that can hide generation failures. Guarded
+capture and execution (`cmd=$(fence-rider deploy) && sh -c "$cmd" sh`) preserve
+failures. `variables` uploads directly; deployment does not upload, and code-only
+deployments need not upload unchanged values again. Explicit script-output
+redirection and pipelines mentioning `pipefail` are outside the execution checks.
+
+These are workflow conventions, not proof of credential isolation: the whole
+profile is resolved, Forge output is not redacted, and upload values still appear
+in Forge's process arguments. Checks inspect literal command text, not arbitrary
+shell semantics or external helpers. SecretSpec profile/scope inheritance and
+cross-file manifest consistency remain SecretSpec and Fence Rider checks.
 
 Rules live under `rules/ecosol/secrets/`, with matching tests under
 `rule-tests/ecosol/secrets/`. The rationale follows

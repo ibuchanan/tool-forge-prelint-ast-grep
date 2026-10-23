@@ -1,0 +1,250 @@
+id: no-unguarded-fence-rider-evaluation
+snapshots:
+  "{\"scripts\": {\"deploy\": \"bun run build && fence-rider deploy -- --non-interactive | bash -s\"}}\n":
+    labels:
+    - source: "\"deploy\": \"bun run build && fence-rider deploy -- --non-interactive | bash -s\""
+      style: primary
+      start: 13
+      end: 91
+    - source: |
+        {"scripts": {"deploy": "bun run build && fence-rider deploy -- --non-interactive | bash -s"}}
+      style: secondary
+      start: 0
+      end: 94
+    - source: "{\"scripts\": {\"deploy\": \"bun run build && fence-rider deploy -- --non-interactive | bash -s\"}}"
+      style: secondary
+      start: 0
+      end: 93
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"bun run build && fence-rider deploy -- --non-interactive | bash -s\"}"
+      style: secondary
+      start: 1
+      end: 92
+    - source: "{\"deploy\": \"bun run build && fence-rider deploy -- --non-interactive | bash -s\"}"
+      style: secondary
+      start: 12
+      end: 92
+    - source: "\"bun run build && fence-rider deploy -- --non-interactive | bash -s\""
+      style: secondary
+      start: 23
+      end: 91
+  "{\"scripts\": {\"deploy\": \"eval \\\"$(fence-rider deploy)\\\"\"}}\n":
+    labels:
+    - source: "\"deploy\": \"eval \\\"$(fence-rider deploy)\\\"\""
+      style: primary
+      start: 13
+      end: 55
+    - source: |
+        {"scripts": {"deploy": "eval \"$(fence-rider deploy)\""}}
+      style: secondary
+      start: 0
+      end: 58
+    - source: "{\"scripts\": {\"deploy\": \"eval \\\"$(fence-rider deploy)\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 57
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"eval \\\"$(fence-rider deploy)\\\"\"}"
+      style: secondary
+      start: 1
+      end: 56
+    - source: "{\"deploy\": \"eval \\\"$(fence-rider deploy)\\\"\"}"
+      style: secondary
+      start: 12
+      end: 56
+    - source: "\"eval \\\"$(fence-rider deploy)\\\"\""
+      style: secondary
+      start: 23
+      end: 55
+  "{\"scripts\": {\"deploy\": \"fence-rider deploy | sh\"}}\n":
+    labels:
+    - source: "\"deploy\": \"fence-rider deploy | sh\""
+      style: primary
+      start: 13
+      end: 48
+    - source: |
+        {"scripts": {"deploy": "fence-rider deploy | sh"}}
+      style: secondary
+      start: 0
+      end: 51
+    - source: "{\"scripts\": {\"deploy\": \"fence-rider deploy | sh\"}}"
+      style: secondary
+      start: 0
+      end: 50
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"deploy\": \"fence-rider deploy | sh\"}"
+      style: secondary
+      start: 1
+      end: 49
+    - source: "{\"deploy\": \"fence-rider deploy | sh\"}"
+      style: secondary
+      start: 12
+      end: 49
+    - source: "\"fence-rider deploy | sh\""
+      style: secondary
+      start: 23
+      end: 48
+  "{\"scripts\": {\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\"}}\n":
+    labels:
+    - source: "\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\""
+      style: primary
+      start: 13
+      end: 81
+    - source: |
+        {"scripts": {"install": "bash -c \"$(fence-rider install -- --non-interactive)\""}}
+      style: secondary
+      start: 0
+      end: 84
+    - source: "{\"scripts\": {\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 83
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\"}"
+      style: secondary
+      start: 1
+      end: 82
+    - source: "{\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\"}"
+      style: secondary
+      start: 12
+      end: 82
+    - source: "\"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\""
+      style: secondary
+      start: 24
+      end: 81
+  "{\"scripts\": {\"lint\": \"bun run build && sh -c \\\"$(fence-rider lint)\\\"\"}}\n":
+    labels:
+    - source: "\"lint\": \"bun run build && sh -c \\\"$(fence-rider lint)\\\"\""
+      style: primary
+      start: 13
+      end: 69
+    - source: |
+        {"scripts": {"lint": "bun run build && sh -c \"$(fence-rider lint)\""}}
+      style: secondary
+      start: 0
+      end: 72
+    - source: "{\"scripts\": {\"lint\": \"bun run build && sh -c \\\"$(fence-rider lint)\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 71
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"lint\": \"bun run build && sh -c \\\"$(fence-rider lint)\\\"\"}"
+      style: secondary
+      start: 1
+      end: 70
+    - source: "{\"lint\": \"bun run build && sh -c \\\"$(fence-rider lint)\\\"\"}"
+      style: secondary
+      start: 12
+      end: 70
+    - source: "\"bun run build && sh -c \\\"$(fence-rider lint)\\\"\""
+      style: secondary
+      start: 21
+      end: 69
+  "{\"scripts\": {\"tunnel\": \"eval $(fence-rider tunnel)\"}}\n":
+    labels:
+    - source: "\"tunnel\": \"eval $(fence-rider tunnel)\""
+      style: primary
+      start: 13
+      end: 51
+    - source: |
+        {"scripts": {"tunnel": "eval $(fence-rider tunnel)"}}
+      style: secondary
+      start: 0
+      end: 54
+    - source: "{\"scripts\": {\"tunnel\": \"eval $(fence-rider tunnel)\"}}"
+      style: secondary
+      start: 0
+      end: 53
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"eval $(fence-rider tunnel)\"}"
+      style: secondary
+      start: 1
+      end: 52
+    - source: "{\"tunnel\": \"eval $(fence-rider tunnel)\"}"
+      style: secondary
+      start: 12
+      end: 52
+    - source: "\"eval $(fence-rider tunnel)\""
+      style: secondary
+      start: 23
+      end: 51
+  "{\"scripts\": {\"tunnel\": \"fence-rider tunnel | zsh; echo finished\"}}\n":
+    labels:
+    - source: "\"tunnel\": \"fence-rider tunnel | zsh; echo finished\""
+      style: primary
+      start: 13
+      end: 64
+    - source: |
+        {"scripts": {"tunnel": "fence-rider tunnel | zsh; echo finished"}}
+      style: secondary
+      start: 0
+      end: 67
+    - source: "{\"scripts\": {\"tunnel\": \"fence-rider tunnel | zsh; echo finished\"}}"
+      style: secondary
+      start: 0
+      end: 66
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"fence-rider tunnel | zsh; echo finished\"}"
+      style: secondary
+      start: 1
+      end: 65
+    - source: "{\"tunnel\": \"fence-rider tunnel | zsh; echo finished\"}"
+      style: secondary
+      start: 12
+      end: 65
+    - source: "\"fence-rider tunnel | zsh; echo finished\""
+      style: secondary
+      start: 23
+      end: 64
+  "{\"scripts\": {\"uninstall\": \"zsh -c \\\"$(fence-rider uninstall)\\\"\"}}\n":
+    labels:
+    - source: "\"uninstall\": \"zsh -c \\\"$(fence-rider uninstall)\\\"\""
+      style: primary
+      start: 13
+      end: 63
+    - source: |
+        {"scripts": {"uninstall": "zsh -c \"$(fence-rider uninstall)\""}}
+      style: secondary
+      start: 0
+      end: 66
+    - source: "{\"scripts\": {\"uninstall\": \"zsh -c \\\"$(fence-rider uninstall)\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 65
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"uninstall\": \"zsh -c \\\"$(fence-rider uninstall)\\\"\"}"
+      style: secondary
+      start: 1
+      end: 64
+    - source: "{\"uninstall\": \"zsh -c \\\"$(fence-rider uninstall)\\\"\"}"
+      style: secondary
+      start: 12
+      end: 64
+    - source: "\"zsh -c \\\"$(fence-rider uninstall)\\\"\""
+      style: secondary
+      start: 26
+      end: 63

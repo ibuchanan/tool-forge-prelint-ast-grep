@@ -1,0 +1,157 @@
+id: use-fence-rider-for-forge-variables
+snapshots:
+  "{\"scripts\": {\"forge:variables:set\": \"forge variables set API_TOKEN value --encrypt\"}}\n":
+    labels:
+    - source: "\"forge:variables:set\": \"forge variables set API_TOKEN value --encrypt\""
+      style: primary
+      start: 13
+      end: 83
+    - source: |
+        {"scripts": {"forge:variables:set": "forge variables set API_TOKEN value --encrypt"}}
+      style: secondary
+      start: 0
+      end: 86
+    - source: "{\"scripts\": {\"forge:variables:set\": \"forge variables set API_TOKEN value --encrypt\"}}"
+      style: secondary
+      start: 0
+      end: 85
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:variables:set\": \"forge variables set API_TOKEN value --encrypt\"}"
+      style: secondary
+      start: 1
+      end: 84
+    - source: "{\"forge:variables:set\": \"forge variables set API_TOKEN value --encrypt\"}"
+      style: secondary
+      start: 12
+      end: 84
+    - source: "\"forge variables set API_TOKEN value --encrypt\""
+      style: secondary
+      start: 36
+      end: 83
+  "{\"scripts\": {\"variables\": \"bun run ./scripts/forge-vars-from-secretspec.js\"}}\n":
+    labels:
+    - source: "\"variables\": \"bun run ./scripts/forge-vars-from-secretspec.js\""
+      style: primary
+      start: 13
+      end: 75
+    - source: |
+        {"scripts": {"variables": "bun run ./scripts/forge-vars-from-secretspec.js"}}
+      style: secondary
+      start: 0
+      end: 78
+    - source: "{\"scripts\": {\"variables\": \"bun run ./scripts/forge-vars-from-secretspec.js\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"variables\": \"bun run ./scripts/forge-vars-from-secretspec.js\"}"
+      style: secondary
+      start: 1
+      end: 76
+    - source: "{\"variables\": \"bun run ./scripts/forge-vars-from-secretspec.js\"}"
+      style: secondary
+      start: 12
+      end: 76
+    - source: "\"bun run ./scripts/forge-vars-from-secretspec.js\""
+      style: secondary
+      start: 26
+      end: 75
+  "{\"scripts\": {\"variables\": \"bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy\"}}\n":
+    labels:
+    - source: "\"variables\": \"bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy\""
+      style: primary
+      start: 13
+      end: 93
+    - source: |
+        {"scripts": {"variables": "bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy"}}
+      style: secondary
+      start: 0
+      end: 96
+    - source: "{\"scripts\": {\"variables\": \"bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy\"}}"
+      style: secondary
+      start: 0
+      end: 95
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"variables\": \"bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy\"}"
+      style: secondary
+      start: 1
+      end: 94
+    - source: "{\"variables\": \"bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy\"}"
+      style: secondary
+      start: 12
+      end: 94
+    - source: "\"bun scripts/forge-vars-from-secretspec.js && bun run forge:deploy\""
+      style: secondary
+      start: 26
+      end: 93
+  "{\"scripts\": {\"variables\": \"node scripts/forge-vars-from-secretspec.js\"}}\n":
+    labels:
+    - source: "\"variables\": \"node scripts/forge-vars-from-secretspec.js\""
+      style: primary
+      start: 13
+      end: 70
+    - source: |
+        {"scripts": {"variables": "node scripts/forge-vars-from-secretspec.js"}}
+      style: secondary
+      start: 0
+      end: 73
+    - source: "{\"scripts\": {\"variables\": \"node scripts/forge-vars-from-secretspec.js\"}}"
+      style: secondary
+      start: 0
+      end: 72
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"variables\": \"node scripts/forge-vars-from-secretspec.js\"}"
+      style: secondary
+      start: 1
+      end: 71
+    - source: "{\"variables\": \"node scripts/forge-vars-from-secretspec.js\"}"
+      style: secondary
+      start: 12
+      end: 71
+    - source: "\"node scripts/forge-vars-from-secretspec.js\""
+      style: secondary
+      start: 26
+      end: 70
+  "{\"scripts\": {\"variables\": \"secretspec run -- forge   variables  set API_TOKEN \\\"$API_TOKEN\\\"\"}}\n":
+    labels:
+    - source: "\"variables\": \"secretspec run -- forge   variables  set API_TOKEN \\\"$API_TOKEN\\\"\""
+      style: primary
+      start: 13
+      end: 93
+    - source: |
+        {"scripts": {"variables": "secretspec run -- forge   variables  set API_TOKEN \"$API_TOKEN\""}}
+      style: secondary
+      start: 0
+      end: 96
+    - source: "{\"scripts\": {\"variables\": \"secretspec run -- forge   variables  set API_TOKEN \\\"$API_TOKEN\\\"\"}}"
+      style: secondary
+      start: 0
+      end: 95
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"variables\": \"secretspec run -- forge   variables  set API_TOKEN \\\"$API_TOKEN\\\"\"}"
+      style: secondary
+      start: 1
+      end: 94
+    - source: "{\"variables\": \"secretspec run -- forge   variables  set API_TOKEN \\\"$API_TOKEN\\\"\"}"
+      style: secondary
+      start: 12
+      end: 94
+    - source: "\"secretspec run -- forge   variables  set API_TOKEN \\\"$API_TOKEN\\\"\""
+      style: secondary
+      start: 26
+      end: 93

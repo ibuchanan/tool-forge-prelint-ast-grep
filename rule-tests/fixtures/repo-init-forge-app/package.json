@@ -14,7 +14,7 @@
     "forge:register": "forge register",
     "forge:uninstall": "cmd=$(fence-rider uninstall) && sh -c \"$cmd\" sh",
     "forge:upgrade": "cmd=$(fence-rider install -- --upgrade --non-interactive) && sh -c \"$cmd\" sh",
-    "forge:variables:set": "node scripts/forge-vars-from-secretspec.js",
+    "forge:variables:set": "fence-rider variables",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "lint": "lefthook run lint",

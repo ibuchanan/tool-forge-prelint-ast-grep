@@ -1,0 +1,157 @@
+id: use-fence-rider-for-forge-tunnel
+snapshots:
+  "{\"scripts\": {\"forge:tunnel\": \"secretspec run -- forge tunnel\"}}\n":
+    labels:
+    - source: "\"forge:tunnel\": \"secretspec run -- forge tunnel\""
+      style: primary
+      start: 13
+      end: 61
+    - source: |
+        {"scripts": {"forge:tunnel": "secretspec run -- forge tunnel"}}
+      style: secondary
+      start: 0
+      end: 64
+    - source: "{\"scripts\": {\"forge:tunnel\": \"secretspec run -- forge tunnel\"}}"
+      style: secondary
+      start: 0
+      end: 63
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:tunnel\": \"secretspec run -- forge tunnel\"}"
+      style: secondary
+      start: 1
+      end: 62
+    - source: "{\"forge:tunnel\": \"secretspec run -- forge tunnel\"}"
+      style: secondary
+      start: 12
+      end: 62
+    - source: "\"secretspec run -- forge tunnel\""
+      style: secondary
+      start: 29
+      end: 61
+  "{\"scripts\": {\"tunnel\": \"FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel\"}}\n":
+    labels:
+    - source: "\"tunnel\": \"FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel\""
+      style: primary
+      start: 13
+      end: 75
+    - source: |
+        {"scripts": {"tunnel": "FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel"}}
+      style: secondary
+      start: 0
+      end: 78
+    - source: "{\"scripts\": {\"tunnel\": \"FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel\"}"
+      style: secondary
+      start: 1
+      end: 76
+    - source: "{\"tunnel\": \"FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel\"}"
+      style: secondary
+      start: 12
+      end: 76
+    - source: "\"FORGE_USER_VAR_API_TOKEN=$API_TOKEN forge   tunnel\""
+      style: secondary
+      start: 23
+      end: 75
+  "{\"scripts\": {\"tunnel\": \"bash scripts/env-var.sh 'forge tunnel --environment development'\"}}\n":
+    labels:
+    - source: "\"tunnel\": \"bash scripts/env-var.sh 'forge tunnel --environment development'\""
+      style: primary
+      start: 13
+      end: 89
+    - source: |
+        {"scripts": {"tunnel": "bash scripts/env-var.sh 'forge tunnel --environment development'"}}
+      style: secondary
+      start: 0
+      end: 92
+    - source: "{\"scripts\": {\"tunnel\": \"bash scripts/env-var.sh 'forge tunnel --environment development'\"}}"
+      style: secondary
+      start: 0
+      end: 91
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"bash scripts/env-var.sh 'forge tunnel --environment development'\"}"
+      style: secondary
+      start: 1
+      end: 90
+    - source: "{\"tunnel\": \"bash scripts/env-var.sh 'forge tunnel --environment development'\"}"
+      style: secondary
+      start: 12
+      end: 90
+    - source: "\"bash scripts/env-var.sh 'forge tunnel --environment development'\""
+      style: secondary
+      start: 23
+      end: 89
+  "{\"scripts\": {\"tunnel\": \"cmd=$(fence-rider tunnel) && sh -c \\\"$cmd\\\" sh && forge tunnel\"}}\n":
+    labels:
+    - source: "\"tunnel\": \"cmd=$(fence-rider tunnel) && sh -c \\\"$cmd\\\" sh && forge tunnel\""
+      style: primary
+      start: 13
+      end: 87
+    - source: |
+        {"scripts": {"tunnel": "cmd=$(fence-rider tunnel) && sh -c \"$cmd\" sh && forge tunnel"}}
+      style: secondary
+      start: 0
+      end: 90
+    - source: "{\"scripts\": {\"tunnel\": \"cmd=$(fence-rider tunnel) && sh -c \\\"$cmd\\\" sh && forge tunnel\"}}"
+      style: secondary
+      start: 0
+      end: 89
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"cmd=$(fence-rider tunnel) && sh -c \\\"$cmd\\\" sh && forge tunnel\"}"
+      style: secondary
+      start: 1
+      end: 88
+    - source: "{\"tunnel\": \"cmd=$(fence-rider tunnel) && sh -c \\\"$cmd\\\" sh && forge tunnel\"}"
+      style: secondary
+      start: 12
+      end: 88
+    - source: "\"cmd=$(fence-rider tunnel) && sh -c \\\"$cmd\\\" sh && forge tunnel\""
+      style: secondary
+      start: 23
+      end: 87
+  "{\"scripts\": {\"tunnel\": \"forge tunnel\"}}\n":
+    labels:
+    - source: "\"tunnel\": \"forge tunnel\""
+      style: primary
+      start: 13
+      end: 37
+    - source: |
+        {"scripts": {"tunnel": "forge tunnel"}}
+      style: secondary
+      start: 0
+      end: 40
+    - source: "{\"scripts\": {\"tunnel\": \"forge tunnel\"}}"
+      style: secondary
+      start: 0
+      end: 39
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"tunnel\": \"forge tunnel\"}"
+      style: secondary
+      start: 1
+      end: 38
+    - source: "{\"tunnel\": \"forge tunnel\"}"
+      style: secondary
+      start: 12
+      end: 38
+    - source: "\"forge tunnel\""
+      style: secondary
+      start: 23
+      end: 37
