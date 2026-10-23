@@ -78,6 +78,14 @@ npm run test:interactive
 
 ## Adding or changing a rule
 
+The [rule-authoring policy](docs/reference/rule-authoring-policy.md) specifies
+metadata, inline rating rationale, composable scope profiles, and the reviewed
+severity matrix. The [glossary](GLOSSARY.md) distinguishes categories, tiers,
+profiles, and ratings. New and migrated rules follow that contract; existing
+unmigrated rules remain compatible during the documented rollout. Ticket 01
+introduces the policy and a metadata-only pilot, not a new validation command.
+Scope normalization and severity changes require their later, explicit reviews.
+
 1. Add or edit the `.yml` rule file under `rules/<tier>/<category>/`.
 2. Add or update the matching test file under
    `rule-tests/<tier>/<category>/`. Every rule change needs a matching test —

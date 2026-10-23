@@ -9,6 +9,31 @@ note: >
   Move secret usage into a resolver and call it from the frontend via invoke()
   from '@forge/bridge'. See the Forge resolver docs:
   https://developer.atlassian.com/platform/forge/runtime-reference/forge-resolver/
+metadata:
+  category: security
+  precision: medium
+  precision-rationale: >
+    The string matcher recognizes an Atlassian-token prefix and at least 20
+    following characters. rule-tests/strict/security/no-hardcoded-atlassian-token-tsx.test.yml
+    covers assignments, arguments, object values, ordinary placeholders, and short
+    prefixes. It does not distinguish genuine credentials from realistic fabricated
+    strings; that identity distinction is an assessment gap, not live-token validation.
+  impact: high
+  impact-rationale: >
+    A genuine API token committed to source can expose authenticated access to
+    anyone who obtains it, requiring revocation and rotation. Secret use belongs
+    behind a resolver rather than in client code; the consequence assumes a real
+    credential, not every matching synthetic string.
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/forge-resolver/
+    - https://cwe.mitre.org/data/definitions/798.html
+  scope-profile: [unique]
+  scope-rationale: >
+    Preserve legacy unrestricted positive scope, node_modules exclusion, and
+    only .test.tsx/.spec.tsx test exclusions for this metadata-only pilot. dist,
+    coverage, specs, other test suffixes, and test directories remain scanned.
+    This differs from the shared sets and the TypeScript companion's suffixes;
+    ticket 08 must review normalization rather than treating this as permanent approval.
 rule:
   kind: string
   regex: '\b(ATATT3xFfG[a-zA-Z0-9_\-=]{20,})\b'

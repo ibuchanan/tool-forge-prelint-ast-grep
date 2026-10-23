@@ -9,6 +9,29 @@ note: >
   that was never meant to be a package.
   npm package.json fields reference:
   https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private
+metadata:
+  category: package-json
+  precision: high
+  precision-rationale: >
+    The root-object matcher reports package files lacking a private: true pair.
+    rule-tests/recommended/package-json/require-package-private-true.test.yml
+    covers an explicit true value and missing values with Forge and non-Forge
+    dependencies. Nested private pairs can suppress findings because has searches
+    descendants; that false-negative limitation does not establish compliant matches.
+    The intended scope is non-published Forge apps, not public library packages.
+  impact: medium
+  impact-rationale: >
+    npm refuses to publish a package marked private: true. Omitting that safeguard
+    permits accidental publication of an app, creating a bounded distribution
+    and recovery problem. Sensitive-data exposure is not assumed for every app.
+  references:
+    - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private
+  scope-profile: [unique]
+  scope-rationale: >
+    Preserve **/package.json selection and only the node_modules exclusion for
+    this metadata-only pilot. The standard subject is package-json, but dist,
+    coverage, specs, and test-local package files remain scanned. Ticket 08 must
+    review normalization before replacing this legacy scope with a standard profile.
 rule:
   kind: object
   inside:
