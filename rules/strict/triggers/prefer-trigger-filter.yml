@@ -29,10 +29,13 @@ rule:
         kind: block_mapping_pair
         regex: 'trigger\s*:'
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: triggers
   references:
@@ -44,6 +47,5 @@ metadata:
   impact-rationale: >-
     Product-event documentation explains manifest filtering before invocation. Genuinely avoidable invocations can add compute cost and operational load, a bounded consumption consequence; not every unfiltered trigger has irrelevant events or warrants a filter.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve manifest.yml/manifest.yaml selection with only node_modules ignored and tests included. Dist, coverage and specs exclusions required by [manifest, tests] are absent. Ticket 08 owns the reviewed native-scope change; this exception does not change trigger behavior.
+    - manifest
+    - tests
