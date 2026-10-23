@@ -1,6 +1,6 @@
 id: use-forge-ahead-errors
 language: Json
-severity: hint
+severity: info
 message: >
   Add `@forge-ahead/errors` to keep Forge error handling consistent.
 note: >

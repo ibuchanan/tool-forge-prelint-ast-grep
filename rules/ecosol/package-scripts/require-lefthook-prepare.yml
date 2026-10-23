@@ -1,6 +1,6 @@
 id: require-lefthook-prepare
 language: Json
-severity: warning
+severity: info
 message: >
   Add a `prepare` script that runs `lefthook install` so Git hooks are set up on install.
 note: >

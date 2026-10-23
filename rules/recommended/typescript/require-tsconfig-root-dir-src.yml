@@ -1,6 +1,6 @@
 id: require-tsconfig-root-dir-src
 language: Json
-severity: warning
+severity: info
 message: >
   Bring tsconfig.json's compilerOptions.rootDir back in line with the
   repo-init baseline: "src".

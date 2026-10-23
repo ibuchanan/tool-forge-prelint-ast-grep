@@ -1,6 +1,6 @@
 id: no-deprecated-storage-import
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not import 'storage' from '@forge/api' — it is deprecated.
   Use '@forge/kvs' instead.

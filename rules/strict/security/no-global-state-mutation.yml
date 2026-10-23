@@ -1,6 +1,6 @@
 id: no-global-state-mutation
 language: TypeScript
-severity: warning
+severity: error
 message: >
   Avoid mutating `global` or `globalThis`.
   Keep Forge tenant data per invocation or tenant-keyed.

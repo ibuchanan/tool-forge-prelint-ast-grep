@@ -1,6 +1,6 @@
 id: no-disallowed-fetch-port
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Fetch URL uses a port that Forge's egress proxy does not allow. Use one of the ten allowed destination ports instead.
 note: >

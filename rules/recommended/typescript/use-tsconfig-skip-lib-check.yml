@@ -1,6 +1,6 @@
 id: use-tsconfig-skip-lib-check
 language: Json
-severity: info
+severity: hint
 message: >
   Consider setting tsconfig.json compilerOptions.skipLibCheck to true.
 note: >

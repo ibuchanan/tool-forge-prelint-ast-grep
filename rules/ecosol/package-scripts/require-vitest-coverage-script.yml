@@ -1,6 +1,6 @@
 id: require-vitest-coverage-script
 language: Json
-severity: warning
+severity: info
 message: >
   Add a `test:coverage` script that runs `vitest run --coverage`.
 note: >

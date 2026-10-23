@@ -1,6 +1,6 @@
 id: require-tsconfig-out-dir-dist
 language: Json
-severity: error
+severity: info
 message: >
   compilerOptions.outDir should be "dist",
   the standard local build output location.

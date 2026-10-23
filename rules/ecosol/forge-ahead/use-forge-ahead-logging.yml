@@ -1,6 +1,6 @@
 id: use-forge-ahead-logging
 language: Json
-severity: hint
+severity: info
 message: >
   Add `@forge-ahead/logging` for structured & redacted Forge logging.
 note: >

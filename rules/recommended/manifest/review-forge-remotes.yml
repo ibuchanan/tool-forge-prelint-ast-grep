@@ -1,6 +1,6 @@
 id: review-forge-remotes
 language: Yaml
-severity: hint
+severity: warning
 message: >
   Forge Remote declarations need explicit eligibility, residency, and auth review.
 note: >

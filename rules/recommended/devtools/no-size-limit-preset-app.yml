@@ -1,6 +1,6 @@
 id: no-size-limit-preset-app
 language: Json
-severity: warning
+severity: info
 message: >
   Don't use @size-limit/preset-app to measure a Forge app's bundle size.
 note: >

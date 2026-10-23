@@ -1,6 +1,6 @@
 id: avoid-life-cycle-scripts
 language: Json
-severity: hint
+severity: warning
 message: >
   Review npm lifecycle scripts; package managers run them automatically on every install
 note: >

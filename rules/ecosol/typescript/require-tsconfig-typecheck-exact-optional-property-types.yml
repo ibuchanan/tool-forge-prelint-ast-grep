@@ -1,6 +1,6 @@
 id: require-tsconfig-typecheck-exact-optional-property-types
 language: Json
-severity: hint
+severity: warning
 message: >
   compilerOptions.exactOptionalPropertyTypes
   distinguishes an optional property

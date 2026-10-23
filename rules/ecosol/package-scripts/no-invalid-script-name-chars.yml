@@ -1,6 +1,6 @@
 id: no-invalid-script-name-chars
 language: Json
-severity: hint
+severity: info
 message: >
   Use the colon-namespaced script name instead of a hyphenated or mixed-case variant.
 note: >

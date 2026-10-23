@@ -1,6 +1,6 @@
 id: require-biome-formatter-indent-style
 language: Json
-severity: warning
+severity: info
 message: >
   Set the Biome config's formatter.indentStyle to "space".
 note: >

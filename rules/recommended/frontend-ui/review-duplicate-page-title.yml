@@ -1,6 +1,6 @@
 id: review-duplicate-page-title
 language: Tsx
-severity: warning
+severity: hint
 message: >
   This heading duplicates the page title Forge already renders from the module's
   `title` in manifest.yml.

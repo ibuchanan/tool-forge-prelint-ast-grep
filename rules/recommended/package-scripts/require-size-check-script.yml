@@ -1,6 +1,6 @@
 id: require-size-check-script
 language: Json
-severity: hint
+severity: info
 message: >
   Add `size:check` to build before running size-limit.
 note: >

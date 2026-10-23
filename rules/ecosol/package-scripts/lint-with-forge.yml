@@ -1,6 +1,6 @@
 id: lint-with-forge
 language: Json
-severity: info
+severity: warning
 message: >
   Analyze Forge app code for platform-specific errors and rule violations.
 

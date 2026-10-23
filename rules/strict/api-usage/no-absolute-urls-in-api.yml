@@ -1,6 +1,6 @@
 id: no-absolute-urls-in-api
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not pass absolute URLs to Forge API request functions.
   Use relative paths with the route`` template tag instead.

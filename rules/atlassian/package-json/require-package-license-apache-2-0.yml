@@ -1,6 +1,6 @@
 id: require-package-license-apache-2-0
 language: Json
-severity: error
+severity: warning
 message: >
   package.json's license field should be "Apache-2.0",
   matching Atlassian's OSS credo.

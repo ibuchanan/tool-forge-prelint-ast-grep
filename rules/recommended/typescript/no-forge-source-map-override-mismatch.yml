@@ -1,6 +1,6 @@
 id: no-forge-source-map-override-mismatch
 language: Json
-severity: error
+severity: info
 message: >
   tsconfig.json compilerOptions.sourceMap must be true
   to match what the Forge bundler hardcodes.

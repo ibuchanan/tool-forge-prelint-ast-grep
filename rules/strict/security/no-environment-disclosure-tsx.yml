@@ -1,6 +1,6 @@
 id: no-environment-disclosure-tsx
 language: Tsx
-severity: error
+severity: warning
 message: >
   Do not expose the whole environment. Select only the non-sensitive fields this operation
   needs.

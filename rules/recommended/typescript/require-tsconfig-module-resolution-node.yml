@@ -1,6 +1,6 @@
 id: require-tsconfig-module-resolution-node
 language: Json
-severity: error
+severity: warning
 message: >
   tsconfig.json compilerOptions.moduleResolution must be "Node" to match how
   Forge's Node 18 runtime and webpack actually resolve packages.

@@ -1,6 +1,6 @@
 id: use-forge-ahead-api-types
 language: Json
-severity: hint
+severity: info
 message: >
   Add `@forge-ahead/atlassian-api-types` when this Forge app uses `@forge/api`.
 note: >

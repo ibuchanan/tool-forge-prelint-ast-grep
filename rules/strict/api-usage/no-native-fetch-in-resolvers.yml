@@ -1,6 +1,6 @@
 id: no-native-fetch-in-resolvers
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not use native fetch() in Forge backend code.
   Use api.fetch() from '@forge/api' instead.

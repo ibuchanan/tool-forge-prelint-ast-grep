@@ -1,6 +1,6 @@
 id: require-as-user-or-as-app
 language: TypeScript
-severity: error
+severity: warning
 message: >
   API requests must be authorized via api.asUser() or api.asApp().
   Do not call requestJira() or requestConfluence() directly on 'api'.

@@ -1,6 +1,6 @@
 id: require-lefthook-pre-commit-format
 language: Yaml
-severity: warning
+severity: info
 message: >
   Add a pre-commit format guard to lefthook.yml.
 note: >

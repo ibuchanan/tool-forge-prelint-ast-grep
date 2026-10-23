@@ -1,6 +1,6 @@
 id: no-jwt-none-algorithm-tsx
 language: Tsx
-severity: error
+severity: warning
 message: Remove the JWT `none` algorithm. Configure an explicit allowed signing algorithm.
 note: >
   Matches object pairs with an algorithm/algorithms key and a literal none value or

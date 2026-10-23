@@ -1,6 +1,6 @@
 id: no-forge-bridge-in-backend
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not import '@forge/bridge' in Forge backend runtime code.
   Bridge APIs are browser/frontend-only; backend functions should use '@forge/api'

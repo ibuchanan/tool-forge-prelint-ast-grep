@@ -1,6 +1,6 @@
 id: prefer-trigger-filter
 language: Yaml
-severity: warning
+severity: info
 message: >
   Product event triggers should use manifest-level filtering where possible
 note: >

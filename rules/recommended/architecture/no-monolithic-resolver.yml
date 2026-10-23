@@ -1,6 +1,6 @@
 id: no-monolithic-resolver
 language: TypeScript
-severity: warning
+severity: hint
 message: >
   A resolver file with five or more resolver.define() actions is likely too broad.
 note: >

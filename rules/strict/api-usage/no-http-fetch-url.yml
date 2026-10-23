@@ -1,6 +1,6 @@
 id: no-http-fetch-url
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not use `http://` in fetch URLs. Forge's egress proxy is HTTPS-only; use `https://` (or `wss://`) instead.
 note: >

@@ -1,6 +1,6 @@
 id: no-forge-jsx-override-mismatch
 language: Json
-severity: error
+severity: warning
 message: >
   tsconfig.json compilerOptions.jsx should be "react-jsx"
   for UI Kit 2 apps using @forge/react.

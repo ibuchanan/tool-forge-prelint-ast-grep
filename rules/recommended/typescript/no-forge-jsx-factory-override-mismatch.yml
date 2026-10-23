@@ -1,6 +1,6 @@
 id: no-forge-jsx-factory-override-mismatch
 language: Json
-severity: error
+severity: warning
 message: >
   tsconfig.json compilerOptions.jsxFactory (and jsxFragmentFactory) should be
   removed; UI Kit 2 apps don't use a custom JSX pragma.

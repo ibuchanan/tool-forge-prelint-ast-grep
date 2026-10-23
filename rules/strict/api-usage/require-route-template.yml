@@ -1,6 +1,6 @@
 id: require-route-template
 language: TypeScript
-severity: error
+severity: warning
 message: >
   API request paths must use the route`` template tag or assumeTrustedRoute().
   Passing raw strings directly is unsafe and bypasses Forge's URL validation.

@@ -1,6 +1,6 @@
 id: no-disabled-tls-verification-package-script
 language: Json
-severity: error
+severity: warning
 message: >
   TLS certificate verification is disabled in this script. Remove the bypass or configure a
   trusted CA.

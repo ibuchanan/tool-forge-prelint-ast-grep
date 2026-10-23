@@ -1,6 +1,6 @@
 id: require-tsconfig-typecheck-no-implicit-returns
 language: Json
-severity: info
+severity: warning
 message: >
   compilerOptions.noImplicitReturns
   requires every code path in a function

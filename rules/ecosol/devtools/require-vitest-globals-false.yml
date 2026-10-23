@@ -1,6 +1,6 @@
 id: require-vitest-globals-false
 language: TypeScript
-severity: warning
+severity: info
 message: >
   Set test.globals to false in vitest.config.ts; import test APIs explicitly.
 note: >

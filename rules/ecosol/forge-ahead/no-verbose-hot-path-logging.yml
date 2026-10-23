@@ -1,6 +1,6 @@
 id: no-verbose-hot-path-logging
 language: TypeScript
-severity: warning
+severity: info
 message: >
   Use @forge-ahead/logging's createForgeLogger instead of console.log,
   console.warn, console.error, console.info, or console.debug in Forge

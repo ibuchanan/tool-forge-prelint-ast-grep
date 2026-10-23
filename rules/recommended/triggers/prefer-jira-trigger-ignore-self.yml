@@ -1,6 +1,6 @@
 id: prefer-jira-trigger-ignore-self
 language: Yaml
-severity: info
+severity: warning
 message: >
   Jira product triggers should review filter.ignoreSelf.
 note: >

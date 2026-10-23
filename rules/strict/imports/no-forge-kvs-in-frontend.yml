@@ -1,6 +1,6 @@
 id: no-forge-kvs-in-frontend
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not import '@forge/kvs' in frontend files (src/frontend/**).
   Storage APIs are backend-only and not available in the browser runtime.

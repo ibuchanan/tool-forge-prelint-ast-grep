@@ -1,6 +1,6 @@
 id: review-privileged-manifest-capabilities
 language: Yaml
-severity: hint
+severity: warning
 message: >
   Review impersonation or system-token forwarding. Confirm least privilege and independent
   caller authorization.

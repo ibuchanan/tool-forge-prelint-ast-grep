@@ -1,6 +1,6 @@
 id: no-package-exports
 language: Json
-severity: warning
+severity: info
 message: >
   package.json shouldn't declare exports. Forge apps are deployables, not
   libraries, and nothing in the Forge pipeline reads this field.

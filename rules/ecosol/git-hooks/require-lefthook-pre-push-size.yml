@@ -1,6 +1,6 @@
 id: require-lefthook-pre-push-size
 language: Yaml
-severity: warning
+severity: info
 message: >
   Run `size:check` from a pre-push command in lefthook.yml to guard bundle size.
 note: >

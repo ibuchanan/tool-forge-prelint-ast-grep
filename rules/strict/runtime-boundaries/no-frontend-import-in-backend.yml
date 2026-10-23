@@ -1,6 +1,6 @@
 id: no-frontend-import-in-backend
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Forge backend runtime code must not import frontend modules.
   Frontend code may depend on browser-only packages such as '@forge/bridge'.

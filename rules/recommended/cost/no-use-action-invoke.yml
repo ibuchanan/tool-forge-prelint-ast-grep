@@ -1,6 +1,6 @@
 id: no-use-action-invoke
 language: Tsx
-severity: warning
+severity: info
 message: >
   Avoid invoking Forge resolvers from useAction().
 note: >

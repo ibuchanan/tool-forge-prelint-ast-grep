@@ -1,6 +1,6 @@
 id: no-classic-product-scopes
 language: Yaml
-severity: hint
+severity: info
 message: >
   Prefer granular Forge scopes over classic product scopes when available.
 note: >

@@ -1,6 +1,6 @@
 id: no-deprecated-table
 language: Tsx
-severity: error
+severity: warning
 message: >
   Do not use <Table> in UI Kit; use <DynamicTable> instead
 note: >

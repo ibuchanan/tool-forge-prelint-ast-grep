@@ -1,6 +1,6 @@
 id: require-lefthook-pre-push-format
 language: Yaml
-severity: warning
+severity: info
 message: >
   Add a pre-push format guard to lefthook.yml.
 note: >

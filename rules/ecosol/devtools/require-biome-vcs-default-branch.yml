@@ -1,6 +1,6 @@
 id: require-biome-vcs-default-branch
 language: Json
-severity: warning
+severity: info
 message: >
   Set the Biome config's vcs.defaultBranch to "main".
 note: >

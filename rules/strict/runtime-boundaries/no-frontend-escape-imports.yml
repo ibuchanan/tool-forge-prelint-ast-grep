@@ -1,6 +1,6 @@
 id: no-frontend-escape-imports
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Frontend files must not import backend runtime modules.
   Keep frontend code self-contained; use @forge/bridge to call backend code.

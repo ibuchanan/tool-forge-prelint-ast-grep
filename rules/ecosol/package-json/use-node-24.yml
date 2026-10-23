@@ -1,6 +1,6 @@
 id: use-node-24
 language: Json
-severity: hint
+severity: info
 message: >
   Pin `@types/node` to 24 in devDependencies and omit package.json `engines`.
 note: >

@@ -1,6 +1,6 @@
 id: require-biome-vcs-use-ignore-file
 language: Json
-severity: warning
+severity: info
 message: >
   Set the Biome config's vcs.useIgnoreFile to true.
 note: >

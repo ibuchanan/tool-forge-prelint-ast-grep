@@ -1,6 +1,6 @@
 id: no-resolver-import-in-frontend-tsx
 language: Tsx
-severity: error
+severity: warning
 message: >
   Frontend files must not import from 'src/resolvers/'.
   Resolvers are backend-only. Use '@forge/bridge' invoke() to call them.

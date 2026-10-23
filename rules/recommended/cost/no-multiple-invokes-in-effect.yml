@@ -1,6 +1,6 @@
 id: no-multiple-invokes-in-effect
 language: Tsx
-severity: warning
+severity: info
 message: >
   Multiple invoke() calls in one loading effect can often be batched.
 note: >

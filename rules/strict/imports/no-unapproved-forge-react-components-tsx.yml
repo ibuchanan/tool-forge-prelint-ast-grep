@@ -1,6 +1,6 @@
 id: no-unapproved-forge-react-components-tsx
 language: Tsx
-severity: error
+severity: warning
 message: >
   Import from '@forge/react' is not in the approved UI Kit export list.
   Only use components documented at https://developer.atlassian.com/platform/forge/ui-kit/components/

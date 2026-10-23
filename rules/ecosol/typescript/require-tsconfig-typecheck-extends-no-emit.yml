@@ -1,6 +1,6 @@
 id: require-tsconfig-typecheck-extends-no-emit
 language: Json
-severity: error
+severity: warning
 message: >
   tsconfig.typecheck.json should extend tsconfig.json
   and set compilerOptions.noEmit to true,

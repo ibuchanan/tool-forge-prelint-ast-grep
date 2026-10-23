@@ -1,6 +1,6 @@
 id: review-broad-manifest-scopes
 language: Yaml
-severity: hint
+severity: warning
 message: >
   Review this admin-level scope against the principle of least privilege.
 note: >

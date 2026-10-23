@@ -1,6 +1,6 @@
 id: require-static-queue-key
 language: TypeScript
-severity: hint
+severity: warning
 message: >
   Queue keys must be string literals when constructing @forge/events Queue objects.
   Static keys can be validated against manifest consumer queue declarations.

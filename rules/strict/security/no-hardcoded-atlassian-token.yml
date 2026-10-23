@@ -1,6 +1,6 @@
 id: no-hardcoded-atlassian-token
 language: TypeScript
-severity: error
+severity: warning
 message: >
   Do not commit Atlassian API tokens in source
 note: >

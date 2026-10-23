@@ -1,6 +1,6 @@
 id: require-tsconfig-typecheck-no-unchecked-side-effect-imports
 language: Json
-severity: info
+severity: warning
 message: >
   compilerOptions.noUncheckedSideEffectImports
   flags side-effect-only imports of modules

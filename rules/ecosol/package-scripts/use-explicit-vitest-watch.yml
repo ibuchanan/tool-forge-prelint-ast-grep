@@ -1,6 +1,6 @@
 id: use-explicit-vitest-watch
 language: Json
-severity: hint
+severity: info
 message: >
   Use an explicit watch invocation for test:watch instead of bare `vitest`
 note: >

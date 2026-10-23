@@ -1,6 +1,6 @@
 id: require-prelint-node-modules-glob
 language: Json
-severity: hint
+severity: info
 message: >
   `lint:prelint` should exclude node_modules with a `--globs` flag.
 note: >

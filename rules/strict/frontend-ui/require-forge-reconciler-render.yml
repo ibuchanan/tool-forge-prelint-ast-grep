@@ -1,6 +1,6 @@
 id: require-forge-reconciler-render
 language: Tsx
-severity: error
+severity: warning
 message: >
   Frontend entrypoints must call ForgeReconciler.render() to register the UI Kit app.
 note: >

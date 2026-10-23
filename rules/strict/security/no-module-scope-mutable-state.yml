@@ -1,6 +1,6 @@
 id: no-module-scope-mutable-state
 language: TypeScript
-severity: warning
+severity: error
 message: >
   Avoid module-scope `let` or `var`.
   Keep tenant data per invocation or use Forge Storage.

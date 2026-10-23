@@ -1,6 +1,6 @@
 id: no-sensitive-data-logging-js
 language: JavaScript
-severity: error
+severity: warning
 message: >
   Do not log credential values or authorization headers. Redact or omit sensitive data.
 note: >

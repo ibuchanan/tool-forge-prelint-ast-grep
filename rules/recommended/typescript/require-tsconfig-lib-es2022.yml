@@ -1,6 +1,6 @@
 id: require-tsconfig-lib-es2022
 language: Json
-severity: error
+severity: warning
 message: >
   tsconfig.json compilerOptions.lib must include "ES2022" to match the
   global APIs available on Forge's Node 18 runtime.

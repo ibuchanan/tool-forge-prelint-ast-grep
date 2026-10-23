@@ -1,6 +1,6 @@
 id: require-biome-files-exclude-dist
 language: Json
-severity: warning
+severity: info
 message: >
   Exclude dist from the Biome config's files.includes.
 note: >

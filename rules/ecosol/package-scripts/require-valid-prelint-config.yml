@@ -1,6 +1,6 @@
 id: require-valid-prelint-config
 language: Json
-severity: warning
+severity: info
 message: >
   `lint:prelint` should point `--config` at one of this package's shipped sgconfig files.
 note: >
