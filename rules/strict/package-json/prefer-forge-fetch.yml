@@ -23,6 +23,9 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: package-json
   references:
@@ -34,6 +37,5 @@ metadata:
   impact-rationale: >-
     The Forge Fetch API reference supplies built-in HTTP/product request capabilities. A genuinely unnecessary or incompatible third-party client can add bundle weight or break affected backend HTTP integration, a bounded delivery/reliability cost. Package presence proves neither missing authorization nor bypass of network policy.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve **/package.json selection with only node_modules ignored. Tests are intentionally included, but dist, coverage and specs exclusions are missing versus [package-json, tests]. This reviewed unique legacy scope remains unchanged pending ticket 08.
+    - package-json
+    - tests
