@@ -53,6 +53,8 @@ native structural checks alone do not establish string-element validity.
 
 - Known tier/category layout and filename/ID/category agreement.
 - Supported precision/impact ratings and nonempty inline rationale strings.
+- Supported native severity and agreement with the shared precision/impact matrix;
+  `off` is preserved, not activated. Stale enabled severity is a `severity` finding.
 - Optional nonempty string OWASP/CWE classifications.
 - Nonempty, distinct references and optional distinct module tags.
 - Explicit, distinct, nonempty string native globs; ignores may be empty and
@@ -127,9 +129,10 @@ finding. Integration tests demonstrate a missing category finding, explicit
 
 Companion equivalence, evidence adequacy, rationale truth, classification
 relevance, exact module identities, arbitrary scope, and ratings require
-maintainer review. Severity candidates remain advisory until ticket 09;
-consumer severities, including disabled rules, are unchanged. Native-scope edits
-belong to ticket 08.
+maintainer review. Ticket 09 enforces the reviewed matrix for enabled rules;
+its [severity reference](rule-severity.md) documents the non-mutating report,
+explicit edit recipe, approved gate changes and exit-status regressions.
+Disabled definitions stay disabled. Native-scope decisions are recorded by ticket 08.
 
 Actual package-archive verification excludes `authoring/`, `scripts/`, tests,
 scratch records, documentation, and vendor content from the distributed artifact.

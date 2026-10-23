@@ -1,0 +1,8 @@
+# Returns one expected severity; invalid inputs fail even for disabled rules.
+load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $policy |
+select(.metadata | tag == "!!map") // error("severity: metadata must be a mapping") |
+.metadata.precision as $precision | .metadata.impact as $impact | .severity as $severity |
+select(($precision | tag) == "!!str" and ($precision | test("^(low|medium|high)$"))) // error("severity: precision requires low, medium, or high") |
+select(($impact | tag) == "!!str" and ($impact | test("^(low|medium|high)$"))) // error("severity: impact requires low, medium, or high") |
+select(($severity | tag) == "!!str" and ($severity | test("^(off|hint|info|warning|error)$"))) // error("severity: declare off, hint, info, warning, or error") |
+if $severity == "off" then "off" else $policy.severity[$precision][$impact] end

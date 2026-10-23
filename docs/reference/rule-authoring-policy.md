@@ -166,8 +166,10 @@ severity exactly:
 `off` is an explicit disabled state, not an impact rating or a matrix result.
 Calculation preserves `off` rather than activating the rule. Missing or invalid
 ratings are errors, not grounds for guessing. Unexplained severity overrides are
-not part of this policy. Candidate differences remain advisory until ticket 09;
-changes affecting a gate, including demotions, require explicit review.
+not part of this policy. Ticket 09 applies the explicitly reviewed differences
+and enforces enabled-rule agreement with this matrix. Changes affecting a gate,
+including demotions, require explicit review. The [severity reference](rule-severity.md)
+describes the report, recipe, approved rollout and actual consumer exit behavior.
 
 ## Scope profiles
 
@@ -366,10 +368,10 @@ identity distinction supports medium precision, independently of whether a
 credential is live. The name-only secret heuristic is lower precision because
 ordinary labels, placeholders, and empty strings can match.
 
-The token family's `error` versus candidate `warning` discrepancy is intentional
-and remains blocking today. Ticket 09 reviews that demotion explicitly. Pilot
-notes and messages remain unchanged; documenting their precision limits is not
-a license to silently strengthen the detection claim.
+The token family's `error` versus candidate `warning` discrepancy was retained
+through the metadata-only stages. Ticket 09 explicitly approves and applies that
+demotion. Pilot notes and messages remain unchanged; documenting their precision
+limits is not a license to silently strengthen the detection claim.
 
 ## Verification contract
 
@@ -859,6 +861,30 @@ The [native scope routing reference](rule-scope-routing.md) records approved
 coverage changes, permanent custom boundaries, category progress and real-file
 scanner evidence. Historical legacy-scope descriptions above describe their
 metadata-only stages, not permanent exceptions to the shared baseline.
+
+## Ticket 09 severity enforcement
+
+On 2026-10-23 the maintainer approved all 93 differences in the complete
+206-definition preview: two warning-to-error promotions, 44 error demotions and
+47 nonblocking changes. The [severity reference](rule-severity.md) records the
+transition counts, approval basis, native report/edit/checker contracts and
+actual blocking/all-severity scanner behavior. Earlier advisory tables are
+historical migration-stage evidence, not unresolved severity overrides.
+
+The shared matrix, explicit idempotent yq recipe and repository enforcement were
+developed test-first at approved public seams. All nine matrix cells, disabled
+preservation, malformed rating rejection, non-mutating complete reports,
+stale-declaration failure/repair and real gate outcomes have retained regressions.
+Only severity changes in shipped definitions; scope, ratings, matchers, fixes,
+prose, snapshots, configurations and dependencies remain unchanged. The
+empty allowance ledger and its compatibility machinery remain ticket 10 work.
+
+Verification passed: all 206 consumer tests, 206-definition routing across four
+shipped tiers, scaffold/Biome/security fixtures, six native authoring tests,
+value/orchestration/metadata-recipe/scope-composition/severity suites, and the
+repository checker with zero frozen findings. Prettier, ShellCheck, changed-shell
+shfmt and `git diff --check` pass. Parsed non-severity documents equal their
+pre-rollout versions; the final rule diff is 93 one-line severity replacements.
 
 ## Model references
 

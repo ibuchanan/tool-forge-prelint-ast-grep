@@ -1,0 +1,8 @@
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/recipes/validate.yq")) |
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/checks/severity.yq")) as $expected |
+[filename, .id, .metadata.precision, .metadata.impact, .severity, $expected,
+ (if .severity == "off" then "disabled"
+  elif .severity == $expected then "unchanged"
+  elif $expected == "error" then "promote-to-error"
+  elif .severity == "error" then "demote-from-error"
+  else "nonblocking-change" end)] | @tsv

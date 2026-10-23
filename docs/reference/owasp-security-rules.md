@@ -20,7 +20,7 @@ installed.
 | A01 Broken Access Control                      | `review-input-redirect`        | warning  | Direct input syntax in the first redirect argument; status-code-first signatures are not covered.                                                                                                                   |
 | A02 Cryptographic Failures                     | `no-weak-hash`                 | warning  | Literal MD5/SHA-1 first arguments to `createHash` calls or methods, case-insensitively; imports and purpose are not resolved.                                                                                       |
 | A02 Cryptographic Failures                     | `no-insecure-randomness`       | warning  | `Math.random()` inside declaration, assignment, or object-property values with security-sensitive name suffixes.                                                                                                    |
-| A02 Cryptographic Failures                     | `no-jwt-none-algorithm`        | error    | Object pairs with `algorithm`/`algorithms` and literal `none`, including array entries; assumes JWT configuration.                                                                                                  |
+| A02 Cryptographic Failures                     | `no-jwt-none-algorithm`        | warning  | Object pairs with `algorithm`/`algorithms` and literal `none`, including array entries; assumes JWT configuration.                                                                                                  |
 | A03 Injection                                  | `review-input-sql`             | warning  | Direct input syntax in the first argument of `.query`, `.execute`, or `.raw`; bound values in later arguments are not matched.                                                                                      |
 | A03 Injection                                  | `review-input-shell-command`   | warning  | Direct input syntax in the first argument of `.exec`, `.execSync`, `.spawn`, `.spawnSync`, or bare `exec`/`execSync`; argument arrays and `shell: true` are not analyzed.                                           |
 | A03 Injection                                  | `no-dynamic-code-evaluation`   | error    | Direct `eval`/`Function` calls and literal string timer callbacks; visible shadowing is conservatively excluded.                                                                                                    |
@@ -33,8 +33,9 @@ installed.
 
 The `review-dynamic-forge-sql` family separately checks interpolated or
 concatenated `prepare`/`executeRaw` calls on imported `@forge/sql` clients.
-The Atlassian-token detector is a separate blocking check; the name-only
-hardcoded-secret heuristic is advisory.
+The Atlassian-token detector and the name-only hardcoded-secret heuristic are
+separate advisory warning checks. Their precision differs; neither reaches the
+reviewed matrix's high/high blocking threshold.
 
 ## Input model and analysis limits
 
@@ -68,9 +69,12 @@ branch.
 ## Severity and scanning
 
 Direct-input, raw-HTML and name-only secret findings are advisory warnings:
-syntactic containment alone does not prove exploitability. JWT `none`, dynamic
-code evaluation and explicit TLS bypasses are errors. The JWT matcher is a
-configuration-shape policy, not library-aware verification analysis.
+syntactic containment alone does not prove exploitability. JWT `none` is also a
+warning: its configuration-shape matcher does not resolve library identity.
+Dynamic code evaluation and explicit source-level TLS bypasses remain errors;
+the package-script TLS check is a warning. Global-mutation and module-scope
+mutable-state conventions now produce errors. These levels follow the explicitly
+[reviewed severity rollout](rule-severity.md), not a claim of proven exploitation.
 
 With ast-grep 0.51, a blocking pass over the **whole strict tier** is:
 
@@ -90,9 +94,10 @@ failures; it must not indiscriminately ignore all exit statuses. `--error`
 promotes rules to errors; `--min-severity error` filters the scan to errors.
 The strict tier also includes other Forge policies, not only these families.
 
-Source rules exclude dependency directories, `dist`/`build`, `*.test.*`,
-`*.spec.*`, and `__tests__`. Security scanning of test code needs a separate
-policy. Unit tests exercise matching even in these excluded paths;
+Source rules exclude `node_modules`, `dist`, `coverage`, `specs`, `*.test.*`,
+`*.spec.*`, `__tests__`, `test` and `tests`; `build` remains included after the
+[scope normalization](rule-scope-routing.md). Security scanning of test code
+needs a separate policy. Unit tests exercise matching even in excluded paths;
 real-scanner fixtures cover routing. No security-boundary autofixes are
 provided.
 

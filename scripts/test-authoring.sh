@@ -22,4 +22,5 @@ bash scripts/test-authoring-values.sh
 bash scripts/test-authoring-checks.sh
 bash scripts/test-rule-metadata.sh
 bash scripts/test-scope-composition.sh
+bash scripts/test-rule-severity.sh
 bash scripts/check-authoring.sh

@@ -28,6 +28,10 @@ load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $p |
 (if ($expected | length) == 0 then ["**/*"] else $expected end) as $expected |
 (if ($m | has("references")) then $m.references else null end) as $refs |
 (if ($m | has("tags")) then $m.tags else [] end) as $tags |
+(($m.precision | tag) == "!!str" and ($m.precision | test("^(low|medium|high)$")) and
+ ($m.impact | tag) == "!!str" and ($m.impact | test("^(low|medium|high)$"))) as $ratings_valid |
+(($r.severity | tag) == "!!str" and ($r.severity | test("^(off|hint|info|warning|error)$"))) as $severity_valid |
+(if $ratings_valid and $severity_valid then ($r | eval(load_str(strenv(RULE_AUTHORING_DIR) + "/checks/severity.yq"))) else null end) as $severity |
 (if (filename | test("(^|/)rules/[^/]+/[^/]+/[^/]+\\.yml$") | not) or
     ($p.tiers | contains([$parts[-3]]) | not) or
     ($p.categories | contains([$parts[-2]]) | not) or
@@ -35,8 +39,10 @@ load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $p |
  then ["layout: use rules/<tier>/<category>/<id>.yml with a matching id"] else [] end) +
 (if ($r.metadata | tag) != "!!map" then ["metadata: declare a top-level mapping"] else [] end) +
 (if $m.category != $parts[-2] then ["category: match the containing category; preview category.yq"] else [] end) +
-(if (["low", "medium", "high"] | contains([($m.precision // null)])) and (["low", "medium", "high"] | contains([($m.impact // null)]))
- then [] else ["ratings: declare precision and impact as low, medium, or high; review judgments"] end) +
+(if $ratings_valid then [] else ["ratings: declare precision and impact as low, medium, or high; review judgments"] end) +
+(if ($severity_valid | not) then ["severity: declare off, hint, info, warning, or error"]
+ elif $ratings_valid and $r.severity != $severity
+ then ["severity: expected " + $severity + "; review report-rule-severity.sh before applying severity.yq"] else [] end) +
 (if ([($m."precision-rationale" // null), ($m."impact-rationale" // null)] | map(select(tag != "!!str" or (test("\\S") | not))) | length) > 0
  then ["rationales: supply nonempty inline precision-rationale and impact-rationale; review evidence"] else [] end) +
 (if (($m | to_entries | map(select(.key == "owasp" or .key == "cwe") | .value | select(tag != "!!str" or (test("\\S") | not))) | length) > 0)

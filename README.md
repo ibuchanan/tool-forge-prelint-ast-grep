@@ -114,6 +114,9 @@ Start with `sgconfig.recommended.yml`.
 Move to `sgconfig.strict.yml`
 when you want production-oriented API, import, performance, and runtime-boundary checks.
 Rule IDs with file locations appear for anything that needs attention.
+Error findings make the scan fail; warning/info/hint findings remain nonblocking.
+The [severity reference](docs/reference/rule-severity.md) documents blocking-only
+scans, the reviewed matrix, and the ticket 09 gate changes.
 
 ## Tiers
 

@@ -108,8 +108,12 @@ bash scripts/check-authoring.sh rules/recommended/package-json/require-package-p
 The [self-evaluation reference](docs/reference/rule-authoring-checks.md) lists
 checked invariants, exit statuses, supported scope comparisons, migration
 allowances, and remaining review responsibilities. A `REVIEW:` line is not
-validated scope compliance. Scope normalization and severity changes require
-their later, explicit reviews.
+validated scope compliance. Ticket 08 records reviewed scope normalization;
+ticket 09 enforces the [reviewed severity matrix](docs/reference/rule-severity.md).
+The read-only `bash scripts/report-rule-severity.sh` reports current/expected
+severity and blocking effects before an explicit, reviewed severity recipe edit.
+`bash scripts/test-rule-severity.sh` exercises matrix, edit/report/checker and
+real consumer gate behavior as part of the standard authoring suite.
 
 1. Add or edit the `.yml` rule file under `rules/<tier>/<category>/`.
 2. Add or update the matching test file under

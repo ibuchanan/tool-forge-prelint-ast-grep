@@ -1,0 +1,3 @@
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/recipes/validate.yq")) |
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/checks/severity.yq")) as $expected |
+.severity = $expected

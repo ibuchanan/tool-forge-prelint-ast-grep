@@ -19,6 +19,11 @@ categories:
   - security
   - triggers
   - typescript
+# Reviewed precision rows and impact columns; off is preserved outside the matrix.
+severity:
+  low: { low: hint, medium: info, high: warning }
+  medium: { low: info, medium: warning, high: warning }
+  high: { low: info, medium: warning, high: error }
 # Conservative offline screen, not a full URL parser or authority approval.
 reference-pattern: '^https?://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(:[0-9]+)?([/?#][^\s<>"\\]*)?$'
 # Within-kind union; between-kind intersection. Both runtimes remove runtime
