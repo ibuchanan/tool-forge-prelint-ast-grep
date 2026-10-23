@@ -25,18 +25,21 @@ rule:
         kind: block_mapping_pair
         regex: 'trigger\s*:'
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "Tests compare a Jira trigger without ignoreSelf against explicit true. The matcher checks only key presence, so false also suppresses; it cannot see writes to subscribed entities, equivalent handler guards or intentional self-processing. These are untested contextual gaps. Evidence: rule-tests/recommended/triggers/prefer-jira-trigger-ignore-self.test.yml (valid/invalid cases) and rule-tests/__snapshots__/prefer-jira-trigger-ignore-self-snapshot.yml."
   impact: high
   impact-rationale: A handler that repeatedly writes subscribed Jira entities without a stopping guard can create a self-sustaining invocation loop, consuming substantial resources and disrupting event processing. Product-event filtering documents ignoreSelf; absence alone proves neither writes nor an unguarded cycle.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+    - manifest
+    - tests
   category: triggers
   references:
     - https://developer.atlassian.com/platform/forge/events-reference/product-events/
