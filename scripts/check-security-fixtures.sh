@@ -3,7 +3,8 @@
 set -eu
 ROOT=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$ROOT"
-TMP=$(mktemp -d tmp_rovo_security.XXXXXX)
+mkdir -p .scratch
+TMP=$(mktemp -d .scratch/tmp_rovo_security.XXXXXX)
 trap 'rm -rf "$TMP"' EXIT HUP INT TERM
 AST_GREP=${AST_GREP:-ast-grep}
 

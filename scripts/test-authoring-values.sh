@@ -3,7 +3,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/rule-metadata-env.sh
-work=$(mktemp -d "$PWD/tmp_rovo_authoring_values.XXXXXX")
+mkdir -p "$PWD/.scratch"
+work=$(mktemp -d "$PWD/.scratch/tmp_rovo_authoring_values.XXXXXX")
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work/rules/recommended/security"
 file="$work/rules/recommended/security/example.yml"

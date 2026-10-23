@@ -43,9 +43,9 @@ so it has no manifest, source, or registered app identity. To refresh it, use
 a fresh empty input directory (outside the fixture), then export locally:
 
 ```sh
-mkdir -p tmp_rovo_drop_calf_input
+mkdir -p .scratch/tmp_rovo_drop_calf_input
 dagger call -m ./vendor/ranch-rig-drop-calf init-changes \
-  --directory ./tmp_rovo_drop_calf_input \
+  --directory ./.scratch/tmp_rovo_drop_calf_input \
   --profile forge-app --owner tester --package-name sample \
   export --path ./fixtures/drop-calf-forge-app
 ```
@@ -126,8 +126,9 @@ their later, explicit reviews.
 text fixtures from `rule-tests/fixtures/security/` into a temporary app and checks
 TS/TSX/JS/JSX and module-extension routing, tier inclusion, Custom UI outside
 `frontend`, source exclusions, and manifest/package filename restrictions.
-The temporary app is removed on exit; the `.txt` sources keep YAML fixtures out
-of the rule-test discovery path.
+The temporary app is created under `.scratch/` and removed on exit; the `.txt`
+sources keep YAML fixtures out of the rule-test discovery path. Authoring checks
+and metadata tests also use `.scratch/tmp_rovo_*` directories with exit cleanup.
 
 `ast-grep test` has a few sharp edges worth knowing before you hit them:
 

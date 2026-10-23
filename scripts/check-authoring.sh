@@ -9,7 +9,8 @@ for tool in ast-grep jq shasum; do
     exit 2
   }
 done
-work=$(mktemp -d "$PWD/tmp_rovo_authoring.XXXXXX")
+mkdir -p "$PWD/.scratch"
+work=$(mktemp -d "$PWD/.scratch/tmp_rovo_authoring.XXXXXX")
 trap 'rm -rf "$work"' EXIT
 if [[ $# == 0 ]]; then
   set -- rules/*/*/*.yml

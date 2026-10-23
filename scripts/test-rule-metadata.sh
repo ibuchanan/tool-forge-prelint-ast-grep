@@ -5,7 +5,8 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$ROOT"
 # shellcheck source=scripts/rule-metadata-env.sh
 source scripts/rule-metadata-env.sh
-WORK=$(mktemp -d "$ROOT/tmp_rovo_metadata.XXXXXX")
+mkdir -p "$ROOT/.scratch"
+WORK=$(mktemp -d "$ROOT/.scratch/tmp_rovo_metadata.XXXXXX")
 trap 'rm -rf "$WORK"' EXIT
 mkdir -p "$WORK/a quoted ' workspace/rules/recommended/package-json"
 RULE="$WORK/a quoted ' workspace/rules/recommended/package-json/example.yml"

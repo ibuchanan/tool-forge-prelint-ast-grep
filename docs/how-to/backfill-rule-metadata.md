@@ -26,7 +26,8 @@ rules=(
   'rules/recommended/package-json/no-package-main.yml'
   'rules/ecosol/package-scripts/lint-with-forge.yml'
 )
-work=$(mktemp -d "$PWD/tmp_rovo_metadata_preview.XXXXXX")
+mkdir -p "$PWD/.scratch"
+work=$(mktemp -d "$PWD/.scratch/tmp_rovo_metadata_preview.XXXXXX")
 trap 'rm -rf "$work"' EXIT
 
 for i in "${!rules[@]}"; do
