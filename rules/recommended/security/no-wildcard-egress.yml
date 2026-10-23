@@ -121,3 +121,16 @@ files:
   - "**/manifest.yaml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Exact wildcard fetch scalars and address objects are distinguished from domain wildcards, unrelated locations and nested metadata in block/flow YAML. The note permits intentional wildcard workflows, so narrowing feasibility needs review. Alias/merge expansion and remote-reference resolution remain gaps. Evidence: rule-tests/recommended/security/no-wildcard-egress.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-wildcard-egress-snapshot.yml."
+  impact: high
+  impact-rationale: An unrestricted fetch destination removes a destination allowlist barrier; if compromised code or untrusted destinations are used, sensitive data can be sent to arbitrary hosts. Supported wildcard workflows and a declaration alone do not prove exfiltration.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+  category: security
+  references:
+    - https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+    - https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/
+  owasp: A02:2025

@@ -28,3 +28,15 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests distinguish simple 5.x dependency strings from 4.x/6.x and no declaration. The pair matcher is not restricted to devDependencies and the regex is not a semver resolver; compatible compound ranges, prereleases and lockfile resolutions are untested gaps. Evidence: rule-tests/recommended/typescript/use-typescript-5.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-typescript-5-snapshot.yml."
+  impact: medium
+  impact-rationale: An actually incompatible compiler or syntax release can stop metadata parsing or bundling, delaying delivery. npm documents dependency ranges, but the matcher does not inspect the installed Forge Babel parser or ts-loader; claims about their exact pinned support remain source assertions, not test evidence.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#dependencies
+    - https://www.typescriptlang.org/tsconfig/

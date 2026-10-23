@@ -36,3 +36,14 @@ rule:
               selector: pair
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: high
+  precision-rationale: "Tests show an imported Queue with a literal key versus a variable key. The explicit literal-key convention is directly checked for visible named imports. Import aliases, lexical shadowing and whether the value matches a manifest consumer are untested gaps; correctness of the route is not established. Evidence: rule-tests/recommended/architecture/require-static-queue-key.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-static-queue-key-snapshot.yml."
+  impact: medium
+  impact-rationale: A wrong queue key can prevent intended async consumer processing. Async Events documents queue-to-consumer matching; nonliteral keys impede static review but a controlled variable is not inherently misrouted, and literals can still be wrong.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve unrestricted TypeScript source selection and only node_modules exclusion. No backend narrowing or shared dist/coverage/specs/test exclusions are applied; ticket 08 owns normalization.
+  category: architecture
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/async-events-api/

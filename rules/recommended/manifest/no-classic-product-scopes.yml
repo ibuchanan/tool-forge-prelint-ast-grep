@@ -17,3 +17,14 @@ files:
   - "**/manifest.yaml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Classic-looking sequence entries are detected without proving they are under permissions.scopes or that granular replacements exist. The native comment explicitly records public guidance preferring classic scopes; compatibility and that authority conflict remain assessment gaps, not proven violations. Evidence: rule-tests/recommended/manifest/no-classic-product-scopes.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-classic-product-scopes-snapshot.yml."
+  impact: medium
+  impact-rationale: Unnecessarily broad granted scopes enlarge the accessible resource set if misused. Classic scopes can be the documented correct choice; granular migration is not universally safer and the missing authoritative support for the preferred direction remains a review gap.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+  category: manifest
+  references:
+    - https://developer.atlassian.com/platform/forge/manifest-reference/permissions/

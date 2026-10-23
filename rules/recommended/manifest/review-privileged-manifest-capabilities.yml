@@ -219,3 +219,17 @@ files:
   - "**/manifest.yaml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Path-aware block/flow matchers distinguish literal enabled booleans from false, quoted true and unrelated keys. Supported impersonation and system-token forwarding routinely match after proper review. Tests establish syntax boundaries, not independent authorization; aliases and merge expansion remain unresolved gaps. Evidence: rule-tests/recommended/manifest/review-privileged-manifest-capabilities.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-privileged-manifest-capabilities-snapshot.yml."
+  impact: high
+  impact-rationale: Misusing impersonation or forwarding a system token to an insufficiently protected remote can allow unauthorized product API access with granted scopes. Correct least-privilege workflows are supported; capability presence does not prove privilege escalation.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+  category: manifest
+  references:
+    - https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+    - https://developer.atlassian.com/platform/forge/manifest-reference/endpoint/
+    - https://developer.atlassian.com/platform/forge/remote/calling-product-apis/
+    - https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/

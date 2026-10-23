@@ -18,3 +18,15 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests compare a direct React.StrictMode wrapper with an unwrapped App. Aliased StrictMode and wrappers supplied by another component are untested gaps; the matcher accepts any nested matching element, not exclusively the top-level wrapper claimed in the message. Evidence: rule-tests/recommended/frontend-ui/require-strict-mode.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-strict-mode-snapshot.yml."
+  impact: low
+  impact-rationale: Omitting StrictMode loses optional development-time diagnostics for render/effect issues. React documents these checks as development-only, so omission alone does not establish production failure or a leak.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+  category: frontend-ui
+  references:
+    - https://react.dev/reference/react/StrictMode
+    - https://developer.atlassian.com/platform/forge/ui-kit/use-ui-kit/

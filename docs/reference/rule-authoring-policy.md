@@ -591,6 +591,130 @@ unchanged. All 206 consumer tests, real-file tooling/security fixtures, native
 self-checks, value/orchestration/recipe suites, formatting and shell checks pass.
 No companion subsystem, scope inference or parallel assessment store is added.
 
+## Ticket 06 recommended migration
+
+As of 2026-10-23, all 54 recommended definitions satisfy the metadata contract
+without migration allowances. The existing private-package pilot is unchanged;
+53 migrated definitions retire 452 frozen diagnostics. Remaining migration debt
+is 491 diagnostics across 57 ecosol/atlassian definitions. The orchestration
+regression requires zero findings and zero allowance rows for recommended rules,
+including future additions.
+
+### Assessment and companion review
+
+Each migrated definition cites its existing positive/negative test and match
+snapshot. Categories and explicitly selected references use ticket 02's yq
+recipes with previews. URL validation is offline, not current reachability
+verification. No assessment store, scope inference or companion subsystem is added.
+
+- The static-invoke TS/TSX pair has identical parsed native policy after removing
+  IDs/parsers. Three cost TS/TSX pairs (fields, product loops and pagination)
+  share matchers and judgments but retain language-specific test exclusions.
+  In particular, TS pagination excludes `.test.ts` and `.test.tsx`, not `.spec.ts`.
+  The LLM TS/TSX/JS definitions have identical parsed native policy after removing
+  IDs/parsers; all companion judgments agree, with individual evidence paths.
+- A five-action resolver threshold does not prove unrelated domains. Multiple
+  invokes may represent separate contracts; `useAction` can legitimately invoke
+  an action mutation. Frequent schedules may meet freshness requirements. These
+  remain low-precision recommendations, not established waste or runtime errors.
+- API/storage loop matchers do not resolve imports, bounds, batching feasibility
+  or deferred execution. Field/pagination token checks cannot follow options
+  variables or endpoint defaults. Joined JQL lists are not counted. Memory and
+  timeout declarations are not observed consumption, and larger allocations or
+  longer deadlines can be necessary. These limitations are not new test coverage.
+- LLM tests explicitly include a bounded three-iteration loop. Import aliases and
+  deferred-function exclusions are tested; application-wide quotas, retries and
+  lexical shadowing remain assessment gaps. Low precision coexists with high
+  impact for genuinely uncontrolled repeated inference, not for every loop.
+  These three definitions receive `LLM10:2025` and `CWE-400` classifications.
+- CSP and wildcard egress have path-aware block/flow tests, including inline
+  anchors, and exclude styles, hashes, unrelated keys and host-specific wildcards
+  as appropriate. Supported reviewed exceptions remain possible; aliases/merges
+  are not expanded. Both receive `A02:2025`, not a claim of actual exploitation.
+- Admin scopes, remotes and enabled impersonation/system-token forwarding are
+  supported capabilities, not proof of missing review or privilege escalation.
+  High impact describes actual misuse with weak authorization/data handling.
+  Their mere presence is a low-precision review signal. No exact module tags are
+  warranted for these cross-cutting policies.
+- The classic-scope rule's native comment records a conflict with public guidance
+  preferring classic scopes. The permissions reference supplies context, not
+  authoritative support for a blanket granular-scope preference. That authority
+  gap is explicit in metadata; no unsupported endorsement or behavior fix is made.
+- Lifecycle names identify different package-manager events, not execution on
+  every install. Download-and-execute detection is command text, not shell parsing
+  or provenance verification; quoted examples can match. Only the latter gains
+  `A03:2025; A08:2025` and `CWE-494`. Legitimate lifecycle hooks still need review.
+- Package library fields do not establish deployable identity. Size-limit checks
+  do not prove bundle bloat or exclude equivalent orchestration. TypeScript exact
+  settings do not resolve effective defaults, alternate valid layouts, semver or
+  installed Forge bundler versions. The inherited-config backoff is retained;
+  the factory-override rule, unlike sibling setting checks, does not back off.
+  Historical Node 18 and pinned-parser assertions remain native text, not facts
+  newly established by this metadata migration.
+- Frontend paths do not distinguish UI Kit from Custom UI. StrictMode aliases or
+  delegated wrappers are unresolved; its matcher accepts nested wrappers despite
+  the message's top-level wording. Heading size alone cannot establish duplicate
+  module titles. Trigger `ignoreSelf` checks presence, not the boolean value or
+  whether handlers write subscribed entities; genuine unguarded write cycles can
+  consume substantial resources. Untested distinctions remain assessment gaps.
+
+### Reviewed legacy scope
+
+All 54 deliberately retain reviewed `[unique]` scope; ticket 08 owns changes:
+
+- Manifest/package selections exclude only node_modules, leaving test-local
+  artifacts and dist/coverage/specs included rather than the shared baseline.
+- The twelve tsconfig rules select only `**/tsconfig.json`, an artifact without a
+  standard selector, and exclude only node_modules. The compiler-version rule
+  instead selects package.json.
+- Frontend rules select `**/frontend/**` but exclude only node_modules. The
+  resolver-size rule selects only resolvers, not every standard backend directory;
+  the queue-key convention has no positive runtime narrowing.
+- Most cost source rules have unrestricted positive scope and partial test suffix
+  exclusions, not complete baseline/test sets. LLM rules additionally exclude
+  dist/build and `__tests__`, but not coverage/specs or test/tests directories.
+
+Inline scope rationale describes these exact deviations, not parser identity or
+an inferred standard profile. The original private-package pilot is untouched.
+
+### Advisory severity differences
+
+No severity changes are applied. Ticket 09 owns these 27 differences; the other
+27 definitions already agree with the candidate matrix:
+
+| Definitions                                                             | Precision | Impact | Current | Candidate |
+| ----------------------------------------------------------------------- | --------- | ------ | ------- | --------- |
+| Resolver-size and duplicate-title heuristics (2)                        | low       | low    | warning | hint      |
+| Static queue key (1)                                                    | high      | medium | hint    | warning   |
+| Multiple invokes, useAction invoke, memory and timeout reviews (4)      | low       | medium | warning | info      |
+| Browser size preset, StrictMode, library package fields and rootDir (6) | medium    | low    | warning | info      |
+| Classic scopes (1)                                                      | low       | medium | hint    | info      |
+| Admin scopes, remotes, privileged capabilities and lifecycle hooks (4)  | low       | high   | hint    | warning   |
+| Size-check command (1)                                                  | medium    | low    | hint    | info      |
+| Jira ignoreSelf review (1)                                              | low       | high   | info    | warning   |
+| JSX settings (2)                                                        | medium    | high   | error   | warning   |
+| Source-map setting (1)                                                  | medium    | low    | error   | info      |
+| ES2022 lib/target and Node module resolution (3)                        | medium    | medium | error   | warning   |
+| skipLibCheck advice (1)                                                 | low       | low    | info    | hint      |
+
+### Verification
+
+The user confirmed authoring output/exit status, metadata-document contracts and
+unchanged consumer behavior as public test seams. The retained regression failed
+on 452 frozen findings, then on stale allowance rows, then passed after removal.
+Ten category baselines failed on copied, unallowlisted pre-migration definitions;
+each category passed with zero frozen findings after complete metadata edits.
+
+All 54 parsed documents excluding metadata equal their pre-migration versions.
+Native YAML presentation is retained; IDs, parsers, matchers, utilities, fixes,
+messages, notes, files/ignores and severities remain unchanged. Consumer tests,
+snapshots, tier configurations, dependencies and lockfile are unchanged. All 206
+consumer tests, real-file tooling/security fixtures and integrated authoring,
+value, orchestration and recipe suites pass. Formatting, ShellCheck and the
+changed shell file's shfmt check pass. Whole-script shfmt also reports existing
+redirection-spacing differences in the untouched security-fixture script; those
+are outside this metadata-only commit.
+
 ## Model references
 
 - [ast-grep rule configuration](https://ast-grep.github.io/reference/yaml.html)

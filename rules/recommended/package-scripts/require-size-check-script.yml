@@ -31,3 +31,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests distinguish configured size-limit tooling with the exact required command from missing, legacy or different scripts. Equivalent build/check orchestration and external size-limit configuration are untested gaps; textual command inequality is not proof that size checking is absent. Evidence: rule-tests/recommended/package-scripts/require-size-check-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-size-check-script-snapshot.yml."
+  impact: low
+  impact-rationale: Missing build-before-measure orchestration can leave stale size measurements or a failing size:check hook. Size Limit supports build-time budgets; the direct consequence here is local tooling friction, not proven excessive spend.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+  category: package-scripts
+  references:
+    - https://github.com/ai/size-limit

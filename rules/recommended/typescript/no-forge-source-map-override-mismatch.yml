@@ -33,3 +33,14 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests check sourceMap true versus false/absent and skip extends. The matcher does not inspect the installed Forge bundler; its hardcoded override is an unchanged source claim, not demonstrated by these tests. Nested property text and alternate build paths remain untested gaps. Evidence: rule-tests/recommended/typescript/no-forge-source-map-override-mismatch.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-forge-source-map-override-mismatch-snapshot.yml."
+  impact: low
+  impact-rationale: A local config that misrepresents generated source maps can confuse debugging and tooling expectations. TypeScript documents sourceMap output; the retained note says Forge overrides it, so omission alone is not a build or runtime failure.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://www.typescriptlang.org/tsconfig/#sourceMap

@@ -31,3 +31,14 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Tests compare explicit true with false/absence and skip extends. The note permits omission. Projects with no affected imports or intentionally different CJS/ESM conventions routinely match; actual module interoperability is an untested gap. Evidence: rule-tests/recommended/typescript/use-tsconfig-es-module-interop.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-es-module-interop-snapshot.yml."
+  impact: medium
+  impact-rationale: A genuine CommonJS/default-import mismatch can cause compilation or runtime import failures. TypeScript documents interop helpers, but missing this optional setting does not establish any incompatible import.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://www.typescriptlang.org/tsconfig/#esModuleInterop

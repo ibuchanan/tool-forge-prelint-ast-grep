@@ -24,3 +24,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Named lifecycle script pairs are detected with a narrow lefthook prepare exemption. Ordinary legitimate build, release and install hooks still match. Tests establish names/exemption, not malicious content or actual automatic execution for every lifecycle event; shell semantics and necessity remain gaps. Evidence: rule-tests/recommended/package-scripts/avoid-life-cycle-scripts.test.yml (valid/invalid cases) and rule-tests/__snapshots__/avoid-life-cycle-scripts-snapshot.yml."
+  impact: high
+  impact-rationale: An untrusted lifecycle command can run with developer or CI privileges and steal credentials or alter build artifacts when its corresponding package-manager event occurs. Official lifecycle documentation distinguishes install, publish, pack and version events; not every matched script runs on each install.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+  category: package-scripts
+  references:
+    - https://docs.npmjs.com/cli/v10/using-npm/scripts#life-cycle-scripts

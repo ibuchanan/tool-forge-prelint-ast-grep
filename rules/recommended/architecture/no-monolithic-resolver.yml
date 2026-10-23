@@ -15,3 +15,14 @@ files:
   - "**/resolvers/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Tests distinguish four from five resolver.define text occurrences. The whole-program regex does not establish unrelated domains, imported receiver identity or maintainability problems; a cohesive five-action resolver is an untested compliant case. Evidence: rule-tests/recommended/architecture/no-monolithic-resolver.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-monolithic-resolver-snapshot.yml."
+  impact: low
+  impact-rationale: Combining unrelated actions can make validation and error-handling review harder. The resolver reference describes action registration, not a five-action limit; the supported consequence is local maintainability, not proven application failure.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/resolvers/** with only node_modules excluded. Standard backend also includes backend, external and import-lifecycle; tests and dist/coverage/specs remain in scope. Ticket 08 owns normalization.
+  category: architecture
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/forge-resolver/

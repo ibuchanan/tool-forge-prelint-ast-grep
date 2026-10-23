@@ -32,3 +32,15 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests cover react-jsx versus other/missing settings and intentionally skip configs with extends. Neither UI Kit 2 identity nor delegated JSX transformation is established; a backend-only or separately transformed project is an untested contextual gap. Evidence: rule-tests/recommended/typescript/no-forge-jsx-override-mismatch.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-forge-jsx-override-mismatch-snapshot.yml."
+  impact: high
+  impact-rationale: An incompatible JSX transform can break UI Kit rendering with createElement failures in the linked incident. The impact depends on actual UI Kit code and build transformation; a different JSX setting alone does not prove runtime failure.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://community.developer.atlassian.com/t/forgeui-ui-kit-2-with-typescript-runtime-error-i-default-createelement-is-not-a-function/75838
+    - https://www.typescriptlang.org/tsconfig/#jsx

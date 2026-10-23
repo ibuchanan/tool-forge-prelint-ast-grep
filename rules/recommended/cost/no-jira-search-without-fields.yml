@@ -17,3 +17,14 @@ ignores:
   - "**/node_modules/**"
   - "**/*.test.ts"
   - "**/*.spec.ts"
+metadata:
+  precision: medium
+  precision-rationale: "Tests compare a literal Jira search URL with/without fields=. Text matching cannot resolve request identity, options variables, helper-supplied fields or desired response fields. These untested gaps prevent treating every absent token as an oversized response. Evidence: rule-tests/recommended/cost/no-jira-search-without-fields.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-jira-search-without-fields-snapshot.yml."
+  impact: medium
+  impact-rationale: Fetching fields that a screen does not use can increase response payload, transfer work and latency. Cost guidance supports explicit projection; actual impact depends on response size and required data, not merely missing visible fields text.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve unrestricted TypeScript source selection with node_modules and .test.ts/.spec.ts exclusions only. Shared dist/coverage/specs and test-directory exclusions are missing; ticket 08 owns normalization.
+  category: cost
+  references:
+    - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

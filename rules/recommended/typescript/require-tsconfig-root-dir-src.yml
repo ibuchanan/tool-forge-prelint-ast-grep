@@ -32,3 +32,14 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests compare exact src with other/missing rootDir and skip extends. Equivalent paths, inferred rootDir and alternate source layouts remain untested gaps; an exact baseline mismatch does not prove broken output. Evidence: rule-tests/recommended/typescript/require-tsconfig-root-dir-src.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-root-dir-src-snapshot.yml."
+  impact: low
+  impact-rationale: An unsuitable local source root can produce unexpected emission layout or compiler diagnostics, creating recoverable tooling friction. TypeScript documents rootDir behavior; the retained note says Forge manages its own temporary build directory.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://www.typescriptlang.org/tsconfig/#rootDir

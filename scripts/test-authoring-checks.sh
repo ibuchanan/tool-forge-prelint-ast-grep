@@ -108,4 +108,10 @@ if awk -F '\t' '$1 ~ /^rules\/strict\// && $1 !~ /^rules\/strict\/security\// { 
   printf 'Migrated non-security strict rules still have legacy allowances.\n' >&2
   exit 1
 fi
+# Recommended definitions must also pass without frozen metadata debt.
+run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/recommended/*/*.yml
+if grep -q '^rules/recommended/' authoring/legacy-allowances.tsv; then
+  printf 'Migrated recommended rules still have legacy allowances.\n' >&2
+  exit 1
+fi
 printf 'Authoring orchestration checks passed.\n'

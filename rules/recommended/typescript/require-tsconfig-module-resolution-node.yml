@@ -35,3 +35,14 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests distinguish exact Node text from bundler/missing settings and skip extends. Case-equivalent accepted values, compatible defaults and alternate frontend configurations are untested gaps. No actual import or installed Forge bundler is inspected; Node 18 scope is an unchanged historical assumption. Evidence: rule-tests/recommended/typescript/require-tsconfig-module-resolution-node.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-module-resolution-node-snapshot.yml."
+  impact: medium
+  impact-rationale: A genuine local-versus-build resolver mismatch can accept imports that later fail to bundle. TypeScript documents resolver modes; a different mode is not proof that any import is incompatible.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://www.typescriptlang.org/tsconfig/#moduleResolution

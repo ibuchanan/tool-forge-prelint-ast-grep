@@ -23,3 +23,14 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: medium
+  precision-rationale: "Tests distinguish literal keys from variables with and without payload. A nonliteral directly violates the literal-key convention when this is Forge invoke, but import identity and value propagation are unresolved; local functions and controlled constants are untested gaps. No resolver/manifest contract is cross-checked. Evidence: rule-tests/recommended/architecture/require-static-invoke-key.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-static-invoke-key-snapshot.yml."
+  impact: medium
+  impact-rationale: An incorrect resolver key can prevent a frontend request from reaching its intended action. Official invoke documentation requires matching the resolver definition; static literals improve reviewability but do not themselves guarantee correct routing, and controlled variables can work.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+  category: architecture
+  references:
+    - https://developer.atlassian.com/platform/forge/custom-ui-bridge/invoke/

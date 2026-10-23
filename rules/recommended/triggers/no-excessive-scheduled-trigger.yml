@@ -22,3 +22,14 @@ files:
   - "**/manifest.yaml"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Tests distinguish fiveMinutes/hour from day/week schedules. The block regex does not observe data-change rate, invocation volume or required freshness; legitimate frequent polling routinely matches. Flow YAML and workload justification remain assessment gaps. Evidence: rule-tests/recommended/triggers/no-excessive-scheduled-trigger.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-excessive-scheduled-trigger-snapshot.yml."
+  impact: medium
+  impact-rationale: Unnecessarily frequent polling repeats invocations and product calls, increasing bounded operational cost. Cost guidance recommends suitable intervals; a frequent schedule alone does not prove waste or a runaway loop.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+  category: triggers
+  references:
+    - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

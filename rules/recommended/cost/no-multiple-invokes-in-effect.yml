@@ -15,3 +15,14 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Tests contrast one versus two invoke text occurrences inside a useEffect call. It neither resolves imports nor proves independent calls are batchable or executed on every run. Legitimate separate actions routinely match; nested/deferred calls and control flow remain untested gaps. Evidence: rule-tests/recommended/cost/no-multiple-invokes-in-effect.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-multiple-invokes-in-effect-snapshot.yml."
+  impact: medium
+  impact-rationale: Genuinely redundant screen-loading calls add resolver overhead and latency. Cost guidance supports batching related work, but separate contracts, permissions or caching can justify multiple requests; their count alone does not demonstrate waste.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/frontend/** with only **/node_modules/** excluded. Tests, dist, coverage and specs remain scanned rather than applying the shared frontend baseline/test exclusions. Ticket 08 owns normalization.
+  category: cost
+  references:
+    - https://developer.atlassian.com/platform/forge/optimise-forge-costs/

@@ -32,3 +32,14 @@ files:
   - "**/tsconfig.json"
 ignores:
   - "**/node_modules/**"
+metadata:
+  precision: low
+  precision-rationale: "Tests compare explicit strict true with false/absence and skip extends. Individual strict suboptions or deliberate staged adoption are untested gaps; omission is explicitly permitted by the note, so it is conditional advice. Evidence: rule-tests/recommended/typescript/use-tsconfig-strict-mode.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-strict-mode-snapshot.yml."
+  impact: medium
+  impact-rationale: Genuinely unchecked type mistakes can cause bounded application defects that stricter static checking may catch earlier. TypeScript documents strictness options; missing the umbrella flag does not prove a runtime defect or absence of all strict checks.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve **/tsconfig.json with only **/node_modules/** excluded, including test-local and generated configurations. This artifact has no standard selector and lacks the dist/coverage/specs baseline. Ticket 08 owns normalization.
+  category: typescript
+  references:
+    - https://www.typescriptlang.org/tsconfig/#strict

@@ -32,3 +32,14 @@ ignores:
   - "**/node_modules/**"
   - "**/*.test.tsx"
   - "**/*.spec.tsx"
+metadata:
+  precision: medium
+  precision-rationale: "Tests contrast a standalone request with a forEach request. Recognized call names under ancestor loops/callbacks do not establish imported client identity, iteration bounds, immediate execution or availability of bulk alternatives. Bounded pagination and deferred nested functions remain untested contextual gaps. Evidence: rule-tests/recommended/cost/no-product-request-in-loop-tsx.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-product-request-in-loop-tsx-snapshot.yml."
+  impact: medium
+  impact-rationale: A genuine avoidable N+1 request sequence increases API traffic, latency and rate-limit pressure. Cost guidance supports bulk/bounded access, but not every loop is excessive; existing pagination can require repeated calls.
+  scope-profile:
+    - unique
+  scope-rationale: Preserve unrestricted TSX source selection with node_modules and .test.tsx/.spec.tsx exclusions only. Shared dist/coverage/specs and test-directory exclusions are missing; ticket 08 owns normalization.
+  category: cost
+  references:
+    - https://developer.atlassian.com/platform/forge/optimise-forge-costs/
