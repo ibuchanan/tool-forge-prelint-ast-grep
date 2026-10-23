@@ -51,7 +51,55 @@ change; parsed IDs, matchers, utilities, fixes, messages, notes, ratings and
 severities are preserved. Scope changes do not implement ticket 09's severity
 matrix or ticket 10's compatibility removal.
 
-## Migration progress
+## Completed category slices
 
-- Atlassian package JSON: verified red/green; generated/specification packages
-  excluded, test-local packages retained.
+All 206 definitions were migrated in 27 category-sized red/green slices:
+
+| Tier        | Categories                                                                                                         | Definitions |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ | ----------- |
+| Atlassian   | package-json                                                                                                       | 1           |
+| Ecosol      | devtools, forge-ahead, forge-scripts, git-hooks, package-json, package-scripts, secrets, typescript                | 56          |
+| Recommended | architecture, cost, devtools, frontend-ui, manifest, package-json, package-scripts, security, triggers, typescript | 54          |
+| Strict      | api-usage, frontend-ui, imports, package-json, performance, runtime-boundaries, security, triggers                 | 95          |
+
+159 definitions now use standard profiles; 47 keep justified unique boundaries.
+The final shared lists are deduplicated and canonically ordered. All original
+positive path membership is retained. The migration allowance file was already
+empty after ticket 07 and remains empty.
+
+## Effective coverage changes
+
+| Original native scope                                                        | Approved change                                                                                                               |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Dependency-only package, manifest, config, frontend and unrestricted lists   | Exclude dist, coverage and root/nested specs; keep tests eligible within the original positive selection.                     |
+| Source lists excluding node_modules/dist plus only `*.test.*` and `*.spec.*` | Add coverage/specs and complete test-directory exclusions, including helpers/configuration; retain the existing test opt-out. |
+| Source lists also excluding build                                            | Remove build exclusion, deliberately adding build findings; add coverage/specs and complete test-directory exclusions.        |
+| Negative frontend boundary                                                   | Retain that exact boundary and root/shared/unconventional server layouts; apply baseline and complete test exclusions.        |
+| Custom config names and runtime/entrypoint selections                        | Retain exact filenames/directories/extensions. Apply baseline and keep the original include/exclude test decision.            |
+| Already-normalized pilot default                                             | No native membership change; retain explicit full default and verify routing.                                                 |
+
+No vendor or fixture exclusion is added. Singular `spec` directories remain
+eligible unless another native boundary excludes them; plural `specs` are in the
+baseline even when tests are included.
+
+## Verification
+
+- All 27 categories failed their new routing assertions before edits and passed
+  after reviewed yq previews/application. Per-file application idempotency was
+  checked; normal metadata recipes and their rejection/idempotency tests pass.
+- All 206 parsed definitions match the saved originals after removing only
+  `files`, `ignores`, `metadata.scope-profile` and `metadata.scope-rationale`.
+  Existing consumer snapshots, dependencies, shipped configs and severity
+  judgments are unchanged.
+- All 206 consumer tests pass. Integrated authoring tests and checks pass with
+  zero frozen findings; unsupported positive relationships still report REVIEW
+  rather than being asserted mechanically compliant.
+- Security fixture assertions now include the approved build findings in 63
+  source definitions. The full fixture run passed: 206 definitions across all
+  four shipped tiers, plus scaffold, Biome and security fixtures.
+- Composition regression fixtures scan explicit conventional intersections,
+  runtime/artifact unions, additive tests, parser boundaries and reviewed native
+  narrowing through all four configs. Narrowing beyond comparable conventional
+  shapes is explicitly expected to produce a REVIEW diagnostic.
+- Repository Prettier, changed-shell ShellCheck/shfmt and `git diff --check` pass.
+  The exhaustive fixture run is recorded in the local ticket completion entry.

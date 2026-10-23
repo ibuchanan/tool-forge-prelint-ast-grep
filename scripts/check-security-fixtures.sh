@@ -48,6 +48,7 @@ for rule in no-environment-disclosure no-dynamic-code-evaluation review-raw-html
   for ext in ts tsx js jsx mjs cjs mts cts; do
     printf '%s/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
   done
+  printf '%s/build/source.ts\n' "$TMP" >> "$TMP/expected"
   if [ "$rule" = review-raw-html-sink ]; then
     printf '%s/static/custom-ui/widget.jsx\n' "$TMP" >> "$TMP/expected"
   fi
@@ -83,6 +84,7 @@ for rule in review-untrusted-authorization-identity review-fail-open-authorizati
       for ext in ts tsx js jsx mjs cjs mts cts; do
         printf '%s/review/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
       done
+      printf '%s/review/build/source.ts\n' "$TMP" >> "$TMP/expected"
     fi
     scan "$config" "^($rule(-tsx|-js)?|no-package-main)$"
   done
@@ -117,6 +119,7 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
     for ext in ts tsx js jsx mjs cjs mts cts; do
       printf '%s/logging/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
     done
+    printf '%s/logging/build/source.ts\n' "$TMP" >> "$TMP/expected"
     printf '%s/logging/static/custom-ui/widget.jsx\n' "$TMP" >> "$TMP/expected"
   fi
   scan "$config" '^(review-personal-data-logging(-tsx|-js)?|no-package-main)$'
@@ -139,6 +142,7 @@ for rule in review-input-filesystem-path review-input-redirect no-weak-hash no-i
       for ext in ts tsx js jsx mjs cjs mts cts; do
         printf '%s/owasp/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
       done
+      printf '%s/owasp/build/source.ts\n' "$TMP" >> "$TMP/expected"
     fi
     # Earlier fixture groups may also contain this family; isolate the new group.
     scan "$config" "^($rule(-tsx|-js)?|no-package-main)$" "$TMP/owasp"

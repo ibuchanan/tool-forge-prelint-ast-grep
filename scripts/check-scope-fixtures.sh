@@ -10,6 +10,17 @@ count=0
 while IFS=$'\t' read -r rule scope tests; do
   [[ $rule != \#* && -n $rule ]] || continue
   [[ $# == 0 || $rule == "$1/"* || $rule == "$1" ]] || continue
+  case $scope in
+  all | non-frontend | frontend | frontend-index | resolvers | backend | entry | package | manifest | biome | hooks | tsconfig | typecheck | vitest) ;;
+  *)
+    printf 'Unknown routing case: %s\n' "$scope" >&2
+    exit 1
+    ;;
+  esac
+  [[ $tests == include || $tests == exclude ]] || {
+    printf 'Unknown test policy: %s\n' "$tests" >&2
+    exit 1
+  }
   id=$(yq '.id' "$rule")
   tier=${rule#rules/}
   tier=${tier%%/*}
@@ -26,7 +37,9 @@ while IFS=$'\t' read -r rule scope tests; do
   TypeScript) extensions='ts mts cts' ;;
   Tsx) extensions=tsx ;;
   JavaScript) extensions='js jsx mjs cjs' ;;
-  Json) extensions=json ;;
+  Json)
+    if [[ $scope == biome ]]; then extensions='json jsonc'; else extensions=json; fi
+    ;;
   Yaml) extensions='yml yaml' ;;
   *)
     printf 'Unsupported fixture language: %s\n' "$rule" >&2
@@ -38,7 +51,7 @@ while IFS=$'\t' read -r rule scope tests; do
     case $scope in
     package) name=package.json ;;
     manifest) name=manifest.$ext ;;
-    biome) name=biome.json ;;
+    biome) name=biome.$ext ;;
     hooks) name=lefthook.yml ;;
     tsconfig) name=tsconfig.json ;;
     typecheck) name=tsconfig.typecheck.json ;;
@@ -63,7 +76,7 @@ while IFS=$'\t' read -r rule scope tests; do
       esac
       prefixes=.
       if [[ $directory == "$target" ]]; then
-        prefixes='. nested/dist node_modules dep/node_modules dist coverage specs nested/specs build vendor fixtures test tests __tests__ tests/helpers tests/config'
+        prefixes='. nested/dist node_modules dep/node_modules dist coverage nested/coverage specs nested/specs build vendor fixtures spec test tests __tests__ tests/helpers tests/config'
       fi
       for prefix in $prefixes; do
         path="$prefix/$directory/$name"
@@ -74,7 +87,7 @@ while IFS=$'\t' read -r rule scope tests; do
         cp "$work/payload" "$app/$path"
         expected=$included
         case $prefix in
-        nested/dist | node_modules | dep/node_modules | dist | coverage | specs | nested/specs) expected=false ;;
+        nested/dist | node_modules | dep/node_modules | dist | coverage | nested/coverage | specs | nested/specs) expected=false ;;
         test | tests | __tests__ | tests/helpers | tests/config) [[ $tests == include ]] || expected=false ;;
         esac
         [[ $expected == false ]] || printf '%s\n' "$path" >>"$work/expected"
@@ -88,15 +101,21 @@ while IFS=$'\t' read -r rule scope tests; do
           printf '%s\n' "$path" >>"$work/expected"
         fi
       done
-      if [[ $scope == entry && $directory == src && $ext == ts ]]; then
-        cp "$work/payload" "$app/src/index.$ext"
-        printf 'src/index.%s\n' "$ext" >>"$work/expected"
+      if [[ $scope == entry && $directory == src ]]; then
+        for prefix in . nested build fixtures tests/helpers tests/config dist coverage specs node_modules; do
+          path="$prefix/src/index.$ext"
+          path=${path#./}
+          mkdir -p "$app/$(dirname "$path")"
+          cp "$work/payload" "$app/$path"
+          [[ $ext == ts ]] || continue
+          case $prefix in
+          dist | coverage | specs | node_modules) continue ;;
+          tests/helpers | tests/config) [[ $tests == include ]] || continue ;;
+          esac
+          printf '%s\n' "$path" >>"$work/expected"
+        done
       fi
     done
-    if [[ $scope == biome ]]; then
-      cp "$work/payload" "$app/biome.jsonc"
-      printf 'biome.jsonc\n' >>"$work/expected"
-    fi
     # Similar names must not widen filename-specific policies.
     if [[ $name != source.* ]]; then
       cp "$work/payload" "$app/other.$ext"
@@ -128,6 +147,14 @@ while IFS=$'\t' read -r rule scope tests; do
   done
   count=$((count + 1))
 done <rule-tests/fixtures/scope-routing.tsv
+if [[ $# == 0 ]]; then
+  printf '%s\n' rules/*/*/*.yml | sort >"$work/definitions"
+  awk -F '\t' '!/^#/ && NF { print $1 }' rule-tests/fixtures/scope-routing.tsv | sort >"$work/cases"
+  diff -u "$work/definitions" "$work/cases" || {
+    printf 'Missing, duplicate or stale scope cases\n' >&2
+    exit 1
+  }
+fi
 [[ $count -gt 0 ]] || {
   printf 'No scope cases selected\n' >&2
   exit 1
