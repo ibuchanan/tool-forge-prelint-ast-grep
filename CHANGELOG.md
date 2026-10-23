@@ -1,3 +1,13 @@
+## [0.9.0] - 2026-10-23
+
+### 🚀 Features
+
+- *(ecosol)* Add Fence Rider delivery and execution rules
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Sync lockfile version to 0.8.0
+
 ## [0.8.0] - 2026-10-23
 
 ### 🚀 Features
