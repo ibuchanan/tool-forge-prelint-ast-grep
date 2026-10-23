@@ -28,14 +28,17 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "A build string under scripts without a nearby size-limit pair triggers. Tests cover inline config and non-build scripts, not external configuration, another budget tool or monorepo orchestration. A normal build without this particular tool routinely matches. Evidence: rule-tests/recommended/devtools/use-size-limit.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-size-limit-snapshot.yml."
   impact: low
   impact-rationale: Omitting bundle-budget tooling reduces visibility into byte growth. Size Limit can enforce a chosen threshold, but missing this tool alone proves neither bundle bloat nor material Forge spend; the immediate impact is development feedback.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+    - package-json
+    - tests
   category: devtools
   references:
     - https://github.com/ai/size-limit

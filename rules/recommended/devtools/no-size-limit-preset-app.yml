@@ -22,14 +22,17 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: medium
   precision-rationale: "The matcher finds preset-app string content under devDependencies, not the measured artifact or actual use. Tests compare file versus app presets. A package containing a legitimate Custom UI browser bundle or an unrelated matching string value is an untested assessment gap. Evidence: rule-tests/recommended/devtools/no-size-limit-preset-app.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-size-limit-preset-app-snapshot.yml."
   impact: low
   impact-rationale: Using browser-load measurement for a backend-only artifact adds unnecessary browser tooling and misleading measurements. Size Limit documents different presets; this is recoverable CI/tooling friction, not evidence of application failure.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/package.json and only **/node_modules/** exclusion. Test-local packages, dist, coverage and specs remain scanned; this is not the complete package-json/tests baseline. Ticket 08 owns normalization.
+    - package-json
+    - tests
   category: devtools
   references:
     - https://github.com/ai/size-limit#-presets-app
