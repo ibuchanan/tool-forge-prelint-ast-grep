@@ -25,12 +25,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://github.com/ibuchanan/tool-forge-prelint-ast-grep"]
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests accept all shipped tier filenames and renamed dependency folders, rejecting generic or unrelated configs. The text check cannot verify file existence/content, shell quoting or equivalent custom configs; those are assessment gaps. It does not validate a real scan. Evidence: rule-tests/ecosol/package-scripts/require-valid-prelint-config.test.yml (valid/invalid) and rule-tests/__snapshots__/require-valid-prelint-config-snapshot.yml."
   impact: low
   impact-rationale: The repository ships tier configurations for consumer scans; genuinely pointing to the wrong config creates missing/noisy local feedback and maintenance rework. A custom valid config can be intentional, and no security failure is demonstrated.

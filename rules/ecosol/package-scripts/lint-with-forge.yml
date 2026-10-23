@@ -35,13 +35,15 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: package-scripts
   references:
     ["https://developer.atlassian.com/platform/forge/cli-reference/lint/"]
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests accept direct, SecretSpec and guarded Fence Rider lint wrappers and reject wrong keys, nested scripts and lookalike command names. Command text cannot prove generated-script execution or deployable app identity; separate CI/wrapper workflows remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/lint-with-forge.test.yml (valid/invalid) and rule-tests/__snapshots__/lint-with-forge-snapshot.yml."
   impact: medium
   impact-rationale: Forge lint documents platform validation that can reveal deployment-blocking errors. Genuine absence of the intended local check delays bounded integration/deployment feedback; this does not prove a security defect or that validation never runs elsewhere.

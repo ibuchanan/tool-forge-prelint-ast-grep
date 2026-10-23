@@ -37,12 +37,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://biomejs.dev/"]
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests require four named commands containing biome and reject missing commands or eslint. Descendant regex matches do not establish scripts placement, real invocation or correct flags; equivalent delegated tooling and non-app packages remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/lint-and-format-with-biome.test.yml (valid/invalid) and rule-tests/__snapshots__/lint-and-format-with-biome-snapshot.yml."
   impact: low
   impact-rationale: Biome provides unified formatting/linting; departing from the team's chosen tool adds local workflow and dependency-maintenance friction. Another functioning formatter/linter is not itself unsafe or a runtime defect.

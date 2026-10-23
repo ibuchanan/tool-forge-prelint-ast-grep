@@ -38,14 +38,16 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references:
     - https://lefthook.dev/configuration/
     - https://github.com/ibuchanan/tool-forge-prelint-ast-grep#how-this-fits-with-forge-lint
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests accept lint and per-package lint-github-import groups while flagging sequential commands and wrong groups. Descendant regex matching does not establish scripts placement or group contents; equivalent complete orchestration and deployable app identity remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-lint.test.yml (valid/invalid) and rule-tests/__snapshots__/require-composed-lint-snapshot.yml."
   impact: low
   impact-rationale: The referenced command-group and project guidance support centralized check enumeration. Genuine divergence adds bounded workflow maintenance or runtime overhead; a sequential complete lint suite is not a security or correctness violation by itself.

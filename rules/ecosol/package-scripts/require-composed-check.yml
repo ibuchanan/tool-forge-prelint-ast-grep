@@ -34,12 +34,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://lefthook.dev/configuration/"]
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests accept lefthook run pre-push with optional force and flag sequential or wrong-hook alternatives. The matcher accepts absence of force despite the note recommending it and searches descendant keys without verifying scripts placement or hook contents. Equivalent orchestration and app identity remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-check.test.yml (valid/invalid) and rule-tests/__snapshots__/require-composed-check-snapshot.yml."
   impact: low
   impact-rationale: Lefthook documents reusable command groups; genuine duplication can drift and add local maintenance overhead. Sequential or alternate complete checks are not inherently unsafe, and parallel execution is configuration-dependent rather than guaranteed by this script.

@@ -32,13 +32,15 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references:
     ["https://www.typescriptlang.org/docs/handbook/compiler-options.html"]
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests accept root/build project commands, reject noEmit, lookalike paths, echo and nested scripts. The matcher does not read emit options, resolve configs or permit all equivalent compiler wrappers; those and actual compilation are assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-typescript-build-script.test.yml (valid/invalid) and rule-tests/__snapshots__/require-typescript-build-script-snapshot.yml."
   impact: medium
   impact-rationale: TypeScript project compilation produces the local artifacts consumed by the team's size/build workflow. Genuine lack of output can block that workflow or leave stale measurement inputs; it is not proof that Forge's separate bundler cannot deploy.

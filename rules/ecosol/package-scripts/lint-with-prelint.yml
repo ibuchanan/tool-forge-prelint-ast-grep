@@ -24,12 +24,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://github.com/ibuchanan/tool-forge-prelint-ast-grep"]
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests distinguish a lint:prelint key from its absence, accepting different config text. The matcher searches descendant keys without validating scripts placement, command body or orchestration. Those are assessment gaps; equivalent enforcement can exist outside this wrapper. Evidence: rule-tests/ecosol/package-scripts/lint-with-prelint.test.yml (valid/invalid) and rule-tests/__snapshots__/lint-with-prelint-snapshot.yml."
   impact: low
   impact-rationale: The repository describes Prelint as an additional local/CI check, including advisory findings. Missing its preferred wrapper reduces discoverability and feedback consistency; it does not establish an actual unsafe or broken app.

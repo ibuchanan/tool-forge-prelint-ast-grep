@@ -32,14 +32,16 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references:
     - https://www.typescriptlang.org/docs/handbook/compiler-options.html
     - https://www.typescriptlang.org/tsconfig/#noEmit
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests require both noEmit and the typecheck project with either supported project flag/order, rejecting missing or default configs. The matcher is descendant text, not scripts placement or effective compiler options; equivalent inherited noEmit, wrappers and config existence remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/typecheck-with-typescript.test.yml (valid/invalid) and rule-tests/__snapshots__/typecheck-with-typescript-snapshot.yml."
   impact: medium
   impact-rationale: TypeScript documents project selection and noEmit. Genuine omission of the intended strict check can let actionable type errors reach integration and cause bounded delivery/runtime rework; missing this literal command does not prove crashes or absent validation elsewhere.

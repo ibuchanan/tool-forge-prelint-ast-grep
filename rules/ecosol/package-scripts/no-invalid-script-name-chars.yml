@@ -27,12 +27,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://docs.npmjs.com/cli/v10/using-npm/scripts"]
   category: package-scripts
   precision: high
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests flag the enumerated hyphenated variants and uppercase, spaces or underscores within scripts while accepting colon namespaces and unrelated db-migrate. This directly detects the team's naming convention, not npm-invalid characters; deeper non-string script structures remain an assessment gap. Evidence: rule-tests/ecosol/package-scripts/no-invalid-script-name-chars.test.yml (valid/invalid) and rule-tests/__snapshots__/no-invalid-script-name-chars-snapshot.yml."
   impact: low
   impact-rationale: npm supports named package scripts; consistent colon namespaces improve local discovery and composition. Departures cause bounded maintenance friction, not invalid npm syntax, deployment failure or security impact.

@@ -31,12 +31,14 @@ files:
   - "**/package.json"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   references: ["https://docs.npmjs.com/cli/v11/using-npm/scripts"]
   category: package-scripts
   precision: medium
-  scope-profile: [unique]
-  scope-rationale: Preserve package.json files with only node_modules excluded; dist, coverage, specs and test-local package scripts stay included unlike the shared baseline. App/workspace identity is unresolved; ticket 08 owns scope normalization.
+  scope-profile: [package-json, tests]
   precision-rationale: "Tests flag selected placeholder values with @forge dependencies but exempt bootstrap packages and reserved generate/preview/start names. Dependencies do not prove implementation readiness or app identity; intentional failing sentinels and echoed documentation are assessment gaps. Evidence: rule-tests/ecosol/package-scripts/no-stale-placeholder.test.yml (valid/invalid) and rule-tests/__snapshots__/no-stale-placeholder-snapshot.yml."
   impact: medium
   impact-rationale: Package scripts are runnable workflow contracts; a genuinely stale build/test/typecheck placeholder can skip required work or block delivery. Consequences are bounded workflow/reliability failures, not proof that every placeholder hides a vulnerability.
