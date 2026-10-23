@@ -12,18 +12,21 @@ rule:
   kind: block_sequence_item
   regex: '^\s*-\s*["'']?admin:'
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "An admin:-prefixed block sequence item is a review signal, not proof that it is a scope, unnecessary or unreviewed. Legitimate required administration and flow YAML coverage remain assessment gaps. Evidence: rule-tests/recommended/manifest/review-broad-manifest-scopes.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-broad-manifest-scopes-snapshot.yml."
   impact: high
   impact-rationale: Unnecessarily granting administrative access can enable unauthorized product-wide configuration changes or sensitive-data access if application credentials or authorization are compromised. A required admin scope is not itself a vulnerability.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+    - manifest
+    - tests
   category: manifest
   references:
     - https://developer.atlassian.com/platform/forge/manifest-reference/permissions/

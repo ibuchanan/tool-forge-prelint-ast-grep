@@ -13,18 +13,21 @@ rule:
   kind: block_mapping_pair
   regex: '^remotes\s*:'
 files:
-  - "**/manifest.yml"
   - "**/manifest.yaml"
+  - "**/manifest.yml"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   precision: low
   precision-rationale: "A block remotes key establishes a declaration, not missing review, incorrect residency or unsafe authentication. Legitimate reviewed remotes routinely match; tests cover presence/absence, not eligibility or remote security. Evidence: rule-tests/recommended/manifest/review-forge-remotes.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-forge-remotes-snapshot.yml."
   impact: high
   impact-rationale: An incorrectly secured remote processing end-user data can expose that data outside Atlassian or violate residency expectations. The remotes reference describes these boundaries; declaration alone proves neither loss of eligibility nor a security defect.
   scope-profile:
-    - unique
-  scope-rationale: Preserve **/manifest.yml and **/manifest.yaml with only **/node_modules/** excluded. Test-local manifests, dist, coverage and specs remain scanned, unlike the shared manifest/tests baseline. Ticket 08 owns normalization.
+    - manifest
+    - tests
   category: manifest
   references:
     - https://developer.atlassian.com/platform/forge/manifest-reference/remotes/
