@@ -1,0 +1,172 @@
+id: review-personal-data-logging-js
+language: JavaScript
+severity: warning
+message: >
+  Review personal data in logs. Omit direct identifiers and content; minimize or de-identify necessary metadata.
+note: >
+  Forge recommends not logging names, email addresses, usernames, session IDs or user-generated
+  content. Account/user/member IDs, IP addresses, forwarded headers, user agents, URL paths and
+  queries, nicknames and site/cloud/tenant identifiers require caution, not an unconditional ban.
+  This review warning recognizes explicitly named values, user/profile name properties,
+  issue.fields summary/description/comment, comment.body, page.body, and request/req URL fields
+  at console/logger/log methods. Inline objects, arrays, interpolation, concatenation and
+  JSON.stringify without a custom replacer are inspected. Generic name/body/content/url fields,
+  arbitrary payloads, aliases, computed flows, other logger names and string literal contents
+  are not classified. Calls (including masking/hashing helpers), metadata properties such as
+  email.length, custom JSON replacers and deferred function bodies are not inspected; their
+  presence does not prove effective de-identification. Necessity, retention, privacy policies
+  and sensitive data in page URLs still require review. No taint tracking or legal compliance
+  assessment is performed. See https://developer.atlassian.com/platform/forge/logging-guidelines/
+utils:
+  identifying-name:
+    regex: (?i)^(email|email_?address|user_?email|user_?name|full_?name|first_?name|last_?name|display_?name|session_?id|aaid|account_?id|user_?id|member_?id|site_?id|cloud_?id|tenant_?id|tenant_?name|nickname|source_?ip|dest_?ip|destination_?ip|ip_?address|user_?agent|x_?forwarded_?for|forwarded_?for|request_?url|url_?path|url_?query|query_?string)$
+  identifying-value:
+    any:
+      - any:
+          - kind: identifier
+          - kind: shorthand_property_identifier
+        matches: identifying-name
+      - kind: member_expression
+        has:
+          field: property
+          matches: identifying-name
+      - kind: subscript_expression
+        has:
+          field: index
+          kind: string
+          has:
+            kind: string_fragment
+            matches: identifying-name
+      - kind: member_expression
+        all:
+          - has:
+              field: object
+              regex: (?i)^(user|profile|customer|account)$
+          - has:
+              field: property
+              regex: ^name$
+      - any:
+          - pattern: issue.fields.summary
+          - pattern: issue.fields.description
+          - pattern: issue.fields.comment
+      - kind: member_expression
+        all:
+          - has:
+              field: object
+              kind: identifier
+              regex: (?i)^(comment|page)$
+          - has:
+              field: property
+              regex: ^body$
+      - kind: member_expression
+        all:
+          - has:
+              field: object
+              kind: identifier
+              regex: ^(request|req)$
+          - has:
+              field: property
+              regex: ^(url|originalUrl|path|query)$
+      - kind: call_expression
+        all:
+          - has:
+              field: function
+              kind: member_expression
+              all:
+                - has:
+                    field: object
+                    regex: (?i)(^|\.)headers$
+                - has:
+                    field: property
+                    regex: ^get$
+          - has:
+              field: arguments
+              has:
+                kind: string
+                regex: '(?i)^["''](x-forwarded-for|user-agent)["'']$'
+      - kind: subscript_expression
+        all:
+          - has:
+              field: object
+              regex: (?i)(^|\.)headers$
+          - has:
+              field: index
+              kind: string
+              regex: '(?i)^["''](x-forwarded-for|user-agent)["'']$'
+  inline-identifying-value:
+    any:
+      - matches: identifying-value
+      - any:
+          - kind: object
+          - kind: array
+          - kind: template_string
+          - kind: binary_expression
+            has:
+              field: operator
+              regex: ^\+$
+        has:
+          stopBy:
+            any:
+              - kind: call_expression
+              - kind: arrow_function
+              - kind: function_expression
+              - kind: method_definition
+              - kind: member_expression
+              - kind: subscript_expression
+          matches: identifying-value
+  serialized-identifying-value:
+    all:
+      - any:
+          - pattern: JSON.stringify($VALUE)
+          - pattern: "JSON.stringify($VALUE, null)"
+          - pattern: "JSON.stringify($VALUE, null, $SPACE)"
+      - has:
+          field: arguments
+          has:
+            nthChild: 1
+            matches: inline-identifying-value
+rule:
+  all:
+    - kind: call_expression
+      has:
+        field: function
+        kind: member_expression
+        all:
+          - has:
+              field: object
+              kind: identifier
+              regex: ^(console|logger|log)$
+          - has:
+              field: property
+              regex: ^(log|warn|error|info|debug|trace|fatal)$
+    - has:
+        field: arguments
+        has:
+          any:
+            - matches: inline-identifying-value
+            - matches: serialized-identifying-value
+            - any:
+                - kind: object
+                - kind: array
+                - kind: template_string
+                - kind: binary_expression
+                  has:
+                    field: operator
+                    regex: ^\+$
+              has:
+                stopBy:
+                  any:
+                    - kind: call_expression
+                    - kind: arrow_function
+                    - kind: function_expression
+                    - kind: method_definition
+                    - kind: member_expression
+                    - kind: subscript_expression
+                matches: serialized-identifying-value
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

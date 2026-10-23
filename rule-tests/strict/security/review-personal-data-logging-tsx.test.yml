@@ -1,0 +1,127 @@
+id: review-personal-data-logging-tsx
+valid:
+  - |
+    console.info('request completed', { status: 200, durationMs: 42 })
+  - |
+    console.log('email address unavailable')
+  - |
+    console.log({ name: 'my-app', version: '1.0' })
+  - |
+    console.error(error.name, error.message)
+  - |
+    console.info({ emailCount, userCount, tenantCount })
+  - |
+    console.log(email.length, user.email.length)
+  - |
+    console.log({ count: accountId.length })
+  - |
+    console.log(() => email)
+  - |
+    console.log({ get value() { return email } })
+  - |
+    console.log({ value() { return email } })
+  - |
+    console.log(mask(email))
+  - |
+    logger.info({ email: mask(user.emailAddress) }, 'user lookup')
+  - |
+    console.log(JSON.stringify({ email: mask(email) }))
+  - |
+    console.log(JSON.stringify({ email }, redact))
+  - |
+    console.log(JSON.stringify({ email }, ['status']))
+  - |
+    console.log(JSON.stringify({ length: email.length }, null, 2))
+  - |
+    console.log({ value: records[email] })
+  - |
+    console.log({ userId: 'redacted', sessionId: '[omitted]' })
+  - |
+    console.log(config.name, response.body, document.content, url)
+  - |
+    console.log(request.url.length)
+  - |
+    console.log(headers.get('content-type'))
+  - |
+    console.log(otherheaders.get('user-agent'))
+  - |
+    audit.info(email)
+  - |
+    logger.metric(userId)
+invalid:
+  - |
+    console.log(email)
+  - |
+    console.info('user', user.emailAddress)
+  - |
+    logger.info({ userEmail }, 'lookup failed')
+  - |
+    console.log(profile.name)
+  - |
+    console.log(user.displayName)
+  - |
+    console.log(firstName, last_name)
+  - |
+    console.log({ nested: { fullName } })
+  - |
+    console.warn(user['emailAddress'])
+  - |
+    console.log(username)
+  - |
+    console.log(sessionId)
+  - |
+    console.log([session_id])
+  - |
+    console.log(`email: ${email}`)
+  - |
+    console.log('user ' + user.email)
+  - |
+    console.log(JSON.stringify({ user: { emailAddress } }))
+  - |
+    console.log(JSON.stringify({ email }, null))
+  - |
+    console.log(JSON.stringify({ email }, null, 2))
+  - |
+    console.log({ serialized: JSON.stringify({ email }) })
+  - |
+    logger.warn({ accountId }, 'retrying')
+  - |
+    console.log(context.cloudId)
+  - |
+    console.log({ tenantId, tenantName })
+  - |
+    log.debug({ userId, memberId, siteId })
+  - |
+    console.log(aaid)
+  - |
+    console.log(nickname)
+  - |
+    console.log(sourceIp, destIp, ipAddress)
+  - |
+    console.log(userAgent)
+  - |
+    console.log(request.headers.get('X-Forwarded-For'))
+  - |
+    console.log(headers['User-Agent'])
+  - |
+    console.log({ client: headers.get('user-agent') })
+  - |
+    console.log(`client: ${headers.get('x-forwarded-for')}`)
+  - |
+    console.log(request.url)
+  - |
+    console.log(req.originalUrl)
+  - |
+    console.log(request.path, request.query)
+  - |
+    console.log(queryString, urlPath, urlQuery)
+  - |
+    console.log(issue.fields.summary)
+  - |
+    console.log(issue.fields.description)
+  - |
+    console.log(issue.fields.comment)
+  - |
+    console.log(comment.body)
+  - |
+    logger.info({ body: page.body }, 'page fetched')

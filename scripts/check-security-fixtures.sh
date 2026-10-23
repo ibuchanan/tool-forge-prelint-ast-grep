@@ -99,4 +99,25 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml; do
   printf '%s/review/package.json\n' "$TMP" > "$TMP/expected"
   scan "$config" '^review-download-and-execute-script$'
 done
+mkdir -p "$TMP/logging/tests" "$TMP/logging/__tests__" "$TMP/logging/dist" "$TMP/logging/build" "$TMP/logging/node_modules/example" "$TMP/logging/static/custom-ui"
+for ext in ts tsx js jsx mjs cjs mts cts; do
+  cp rule-tests/fixtures/security/personal-data-logging.txt "$TMP/logging/source.$ext"
+  cp rule-tests/fixtures/security/safe-personal-data-logging.txt "$TMP/logging/safe.$ext"
+done
+cp rule-tests/fixtures/security/personal-data-logging.txt "$TMP/logging/static/custom-ui/widget.jsx"
+cp rule-tests/fixtures/security/personal-data-logging.txt "$TMP/logging/tests/source.test.ts"
+cp rule-tests/fixtures/security/personal-data-logging.txt "$TMP/logging/tests/source.spec.js"
+for dir in __tests__ dist build node_modules/example; do
+  cp rule-tests/fixtures/security/personal-data-logging.txt "$TMP/logging/$dir/source.ts"
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  : > "$TMP/expected"
+  if [ "$config" != sgconfig.recommended.yml ]; then
+    for ext in ts tsx js jsx mjs cjs mts cts; do
+      printf '%s/logging/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+    done
+    printf '%s/logging/static/custom-ui/widget.jsx\n' "$TMP" >> "$TMP/expected"
+  fi
+  scan "$config" '^(review-personal-data-logging(-tsx|-js)?|no-package-main)$'
+done
 echo 'Security fixtures: language variants, tier inclusion, manifest/package paths, and source exclusions passed.'

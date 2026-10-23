@@ -1,0 +1,7 @@
+console.info('request complete', { status: 200 });
+console.log({ name: 'my-app' });
+console.error(error.name, error.message);
+console.log({ email: mask(user.emailAddress) });
+console.log(JSON.stringify({ accountId }, redact));
+console.log(email.length);
+console.log({ get value() { return email } });

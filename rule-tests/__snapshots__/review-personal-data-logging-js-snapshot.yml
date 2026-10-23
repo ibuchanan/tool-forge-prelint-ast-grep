@@ -1,0 +1,1230 @@
+id: review-personal-data-logging-js
+snapshots:
+  "console.info('user', user.emailAddress)\n":
+    labels:
+    - source: console.info('user', user.emailAddress)
+      style: primary
+      start: 0
+      end: 39
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: info
+      style: secondary
+      start: 8
+      end: 12
+    - source: console.info
+      style: secondary
+      start: 0
+      end: 12
+    - source: emailAddress
+      style: secondary
+      start: 26
+      end: 38
+    - source: user.emailAddress
+      style: secondary
+      start: 21
+      end: 38
+    - source: user.emailAddress
+      style: secondary
+      start: 21
+      end: 38
+  "console.log('user ' + user.email)\n":
+    labels:
+    - source: console.log('user ' + user.email)
+      style: primary
+      start: 0
+      end: 33
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: +
+      style: secondary
+      start: 20
+      end: 21
+    - source: email
+      style: secondary
+      start: 27
+      end: 32
+    - source: user.email
+      style: secondary
+      start: 22
+      end: 32
+    - source: "'user ' + user.email"
+      style: secondary
+      start: 12
+      end: 32
+    - source: "'user ' + user.email"
+      style: secondary
+      start: 12
+      end: 32
+  "console.log(JSON.stringify({ email }, null))\n":
+    labels:
+    - source: console.log(JSON.stringify({ email }, null))
+      style: primary
+      start: 0
+      end: 44
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: email
+      style: secondary
+      start: 29
+      end: 34
+    - source: "{ email }"
+      style: secondary
+      start: 27
+      end: 36
+    - source: "{ email }"
+      style: secondary
+      start: 27
+      end: 36
+    - source: JSON.stringify({ email }, null)
+      style: secondary
+      start: 12
+      end: 43
+    - source: JSON.stringify({ email }, null)
+      style: secondary
+      start: 12
+      end: 43
+  "console.log(JSON.stringify({ email }, null, 2))\n":
+    labels:
+    - source: console.log(JSON.stringify({ email }, null, 2))
+      style: primary
+      start: 0
+      end: 47
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: email
+      style: secondary
+      start: 29
+      end: 34
+    - source: "{ email }"
+      style: secondary
+      start: 27
+      end: 36
+    - source: "{ email }"
+      style: secondary
+      start: 27
+      end: 36
+    - source: JSON.stringify({ email }, null, 2)
+      style: secondary
+      start: 12
+      end: 46
+    - source: JSON.stringify({ email }, null, 2)
+      style: secondary
+      start: 12
+      end: 46
+  "console.log(JSON.stringify({ user: { emailAddress } }))\n":
+    labels:
+    - source: "console.log(JSON.stringify({ user: { emailAddress } }))"
+      style: primary
+      start: 0
+      end: 55
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: emailAddress
+      style: secondary
+      start: 37
+      end: 49
+    - source: "{ user: { emailAddress } }"
+      style: secondary
+      start: 27
+      end: 53
+    - source: "{ user: { emailAddress } }"
+      style: secondary
+      start: 27
+      end: 53
+    - source: "JSON.stringify({ user: { emailAddress } })"
+      style: secondary
+      start: 12
+      end: 54
+    - source: "JSON.stringify({ user: { emailAddress } })"
+      style: secondary
+      start: 12
+      end: 54
+  "console.log([session_id])\n":
+    labels:
+    - source: console.log([session_id])
+      style: primary
+      start: 0
+      end: 25
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: session_id
+      style: secondary
+      start: 13
+      end: 23
+    - source: "[session_id]"
+      style: secondary
+      start: 12
+      end: 24
+    - source: "[session_id]"
+      style: secondary
+      start: 12
+      end: 24
+  "console.log(`client: ${headers.get('x-forwarded-for')}`)\n":
+    labels:
+    - source: "console.log(`client: ${headers.get('x-forwarded-for')}`)"
+      style: primary
+      start: 0
+      end: 56
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: headers
+      style: secondary
+      start: 23
+      end: 30
+    - source: get
+      style: secondary
+      start: 31
+      end: 34
+    - source: headers.get
+      style: secondary
+      start: 23
+      end: 34
+    - source: "'x-forwarded-for'"
+      style: secondary
+      start: 35
+      end: 52
+    - source: "'x-forwarded-for'"
+      style: secondary
+      start: 35
+      end: 52
+    - source: headers.get('x-forwarded-for')
+      style: secondary
+      start: 23
+      end: 53
+    - source: "`client: ${headers.get('x-forwarded-for')}`"
+      style: secondary
+      start: 12
+      end: 55
+    - source: "`client: ${headers.get('x-forwarded-for')}`"
+      style: secondary
+      start: 12
+      end: 55
+  "console.log(`email: ${email}`)\n":
+    labels:
+    - source: "console.log(`email: ${email}`)"
+      style: primary
+      start: 0
+      end: 30
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: email
+      style: secondary
+      start: 22
+      end: 27
+    - source: "`email: ${email}`"
+      style: secondary
+      start: 12
+      end: 29
+    - source: "`email: ${email}`"
+      style: secondary
+      start: 12
+      end: 29
+  "console.log(aaid)\n":
+    labels:
+    - source: console.log(aaid)
+      style: primary
+      start: 0
+      end: 17
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: aaid
+      style: secondary
+      start: 12
+      end: 16
+    - source: aaid
+      style: secondary
+      start: 12
+      end: 16
+  "console.log(comment.body)\n":
+    labels:
+    - source: console.log(comment.body)
+      style: primary
+      start: 0
+      end: 25
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: comment
+      style: secondary
+      start: 12
+      end: 19
+    - source: body
+      style: secondary
+      start: 20
+      end: 24
+    - source: comment.body
+      style: secondary
+      start: 12
+      end: 24
+    - source: comment.body
+      style: secondary
+      start: 12
+      end: 24
+  "console.log(context.cloudId)\n":
+    labels:
+    - source: console.log(context.cloudId)
+      style: primary
+      start: 0
+      end: 28
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: cloudId
+      style: secondary
+      start: 20
+      end: 27
+    - source: context.cloudId
+      style: secondary
+      start: 12
+      end: 27
+    - source: context.cloudId
+      style: secondary
+      start: 12
+      end: 27
+  "console.log(email)\n":
+    labels:
+    - source: console.log(email)
+      style: primary
+      start: 0
+      end: 18
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: email
+      style: secondary
+      start: 12
+      end: 17
+    - source: email
+      style: secondary
+      start: 12
+      end: 17
+  "console.log(firstName, last_name)\n":
+    labels:
+    - source: console.log(firstName, last_name)
+      style: primary
+      start: 0
+      end: 33
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: firstName
+      style: secondary
+      start: 12
+      end: 21
+    - source: firstName
+      style: secondary
+      start: 12
+      end: 21
+  "console.log(headers['User-Agent'])\n":
+    labels:
+    - source: console.log(headers['User-Agent'])
+      style: primary
+      start: 0
+      end: 34
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: headers
+      style: secondary
+      start: 12
+      end: 19
+    - source: "'User-Agent'"
+      style: secondary
+      start: 20
+      end: 32
+    - source: headers['User-Agent']
+      style: secondary
+      start: 12
+      end: 33
+    - source: headers['User-Agent']
+      style: secondary
+      start: 12
+      end: 33
+  "console.log(issue.fields.comment)\n":
+    labels:
+    - source: console.log(issue.fields.comment)
+      style: primary
+      start: 0
+      end: 33
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: issue.fields.comment
+      style: secondary
+      start: 12
+      end: 32
+    - source: issue.fields.comment
+      style: secondary
+      start: 12
+      end: 32
+  "console.log(issue.fields.description)\n":
+    labels:
+    - source: console.log(issue.fields.description)
+      style: primary
+      start: 0
+      end: 37
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: issue.fields.description
+      style: secondary
+      start: 12
+      end: 36
+    - source: issue.fields.description
+      style: secondary
+      start: 12
+      end: 36
+  "console.log(issue.fields.summary)\n":
+    labels:
+    - source: console.log(issue.fields.summary)
+      style: primary
+      start: 0
+      end: 33
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: issue.fields.summary
+      style: secondary
+      start: 12
+      end: 32
+    - source: issue.fields.summary
+      style: secondary
+      start: 12
+      end: 32
+  "console.log(nickname)\n":
+    labels:
+    - source: console.log(nickname)
+      style: primary
+      start: 0
+      end: 21
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: nickname
+      style: secondary
+      start: 12
+      end: 20
+    - source: nickname
+      style: secondary
+      start: 12
+      end: 20
+  "console.log(profile.name)\n":
+    labels:
+    - source: console.log(profile.name)
+      style: primary
+      start: 0
+      end: 25
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: profile
+      style: secondary
+      start: 12
+      end: 19
+    - source: name
+      style: secondary
+      start: 20
+      end: 24
+    - source: profile.name
+      style: secondary
+      start: 12
+      end: 24
+    - source: profile.name
+      style: secondary
+      start: 12
+      end: 24
+  "console.log(queryString, urlPath, urlQuery)\n":
+    labels:
+    - source: console.log(queryString, urlPath, urlQuery)
+      style: primary
+      start: 0
+      end: 43
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: queryString
+      style: secondary
+      start: 12
+      end: 23
+    - source: queryString
+      style: secondary
+      start: 12
+      end: 23
+  "console.log(req.originalUrl)\n":
+    labels:
+    - source: console.log(req.originalUrl)
+      style: primary
+      start: 0
+      end: 28
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: req
+      style: secondary
+      start: 12
+      end: 15
+    - source: originalUrl
+      style: secondary
+      start: 16
+      end: 27
+    - source: req.originalUrl
+      style: secondary
+      start: 12
+      end: 27
+    - source: req.originalUrl
+      style: secondary
+      start: 12
+      end: 27
+  "console.log(request.headers.get('X-Forwarded-For'))\n":
+    labels:
+    - source: console.log(request.headers.get('X-Forwarded-For'))
+      style: primary
+      start: 0
+      end: 51
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: request.headers
+      style: secondary
+      start: 12
+      end: 27
+    - source: get
+      style: secondary
+      start: 28
+      end: 31
+    - source: request.headers.get
+      style: secondary
+      start: 12
+      end: 31
+    - source: "'X-Forwarded-For'"
+      style: secondary
+      start: 32
+      end: 49
+    - source: "'X-Forwarded-For'"
+      style: secondary
+      start: 32
+      end: 49
+    - source: request.headers.get('X-Forwarded-For')
+      style: secondary
+      start: 12
+      end: 50
+    - source: request.headers.get('X-Forwarded-For')
+      style: secondary
+      start: 12
+      end: 50
+  "console.log(request.path, request.query)\n":
+    labels:
+    - source: console.log(request.path, request.query)
+      style: primary
+      start: 0
+      end: 40
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: request
+      style: secondary
+      start: 12
+      end: 19
+    - source: path
+      style: secondary
+      start: 20
+      end: 24
+    - source: request.path
+      style: secondary
+      start: 12
+      end: 24
+    - source: request.path
+      style: secondary
+      start: 12
+      end: 24
+  "console.log(request.url)\n":
+    labels:
+    - source: console.log(request.url)
+      style: primary
+      start: 0
+      end: 24
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: request
+      style: secondary
+      start: 12
+      end: 19
+    - source: url
+      style: secondary
+      start: 20
+      end: 23
+    - source: request.url
+      style: secondary
+      start: 12
+      end: 23
+    - source: request.url
+      style: secondary
+      start: 12
+      end: 23
+  "console.log(sessionId)\n":
+    labels:
+    - source: console.log(sessionId)
+      style: primary
+      start: 0
+      end: 22
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: sessionId
+      style: secondary
+      start: 12
+      end: 21
+    - source: sessionId
+      style: secondary
+      start: 12
+      end: 21
+  "console.log(sourceIp, destIp, ipAddress)\n":
+    labels:
+    - source: console.log(sourceIp, destIp, ipAddress)
+      style: primary
+      start: 0
+      end: 40
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: sourceIp
+      style: secondary
+      start: 12
+      end: 20
+    - source: sourceIp
+      style: secondary
+      start: 12
+      end: 20
+  "console.log(user.displayName)\n":
+    labels:
+    - source: console.log(user.displayName)
+      style: primary
+      start: 0
+      end: 29
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: displayName
+      style: secondary
+      start: 17
+      end: 28
+    - source: user.displayName
+      style: secondary
+      start: 12
+      end: 28
+    - source: user.displayName
+      style: secondary
+      start: 12
+      end: 28
+  "console.log(userAgent)\n":
+    labels:
+    - source: console.log(userAgent)
+      style: primary
+      start: 0
+      end: 22
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: userAgent
+      style: secondary
+      start: 12
+      end: 21
+    - source: userAgent
+      style: secondary
+      start: 12
+      end: 21
+  "console.log(username)\n":
+    labels:
+    - source: console.log(username)
+      style: primary
+      start: 0
+      end: 21
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: username
+      style: secondary
+      start: 12
+      end: 20
+    - source: username
+      style: secondary
+      start: 12
+      end: 20
+  "console.log({ client: headers.get('user-agent') })\n":
+    labels:
+    - source: "console.log({ client: headers.get('user-agent') })"
+      style: primary
+      start: 0
+      end: 50
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: headers
+      style: secondary
+      start: 22
+      end: 29
+    - source: get
+      style: secondary
+      start: 30
+      end: 33
+    - source: headers.get
+      style: secondary
+      start: 22
+      end: 33
+    - source: "'user-agent'"
+      style: secondary
+      start: 34
+      end: 46
+    - source: "'user-agent'"
+      style: secondary
+      start: 34
+      end: 46
+    - source: headers.get('user-agent')
+      style: secondary
+      start: 22
+      end: 47
+    - source: "{ client: headers.get('user-agent') }"
+      style: secondary
+      start: 12
+      end: 49
+    - source: "{ client: headers.get('user-agent') }"
+      style: secondary
+      start: 12
+      end: 49
+  "console.log({ nested: { fullName } })\n":
+    labels:
+    - source: "console.log({ nested: { fullName } })"
+      style: primary
+      start: 0
+      end: 37
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: fullName
+      style: secondary
+      start: 24
+      end: 32
+    - source: "{ nested: { fullName } }"
+      style: secondary
+      start: 12
+      end: 36
+    - source: "{ nested: { fullName } }"
+      style: secondary
+      start: 12
+      end: 36
+  "console.log({ serialized: JSON.stringify({ email }) })\n":
+    labels:
+    - source: "console.log({ serialized: JSON.stringify({ email }) })"
+      style: primary
+      start: 0
+      end: 54
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: email
+      style: secondary
+      start: 43
+      end: 48
+    - source: "{ email }"
+      style: secondary
+      start: 41
+      end: 50
+    - source: "{ email }"
+      style: secondary
+      start: 41
+      end: 50
+    - source: JSON.stringify({ email })
+      style: secondary
+      start: 26
+      end: 51
+    - source: "{ serialized: JSON.stringify({ email }) }"
+      style: secondary
+      start: 12
+      end: 53
+    - source: "{ serialized: JSON.stringify({ email }) }"
+      style: secondary
+      start: 12
+      end: 53
+  "console.log({ tenantId, tenantName })\n":
+    labels:
+    - source: console.log({ tenantId, tenantName })
+      style: primary
+      start: 0
+      end: 37
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: tenantId
+      style: secondary
+      start: 14
+      end: 22
+    - source: "{ tenantId, tenantName }"
+      style: secondary
+      start: 12
+      end: 36
+    - source: "{ tenantId, tenantName }"
+      style: secondary
+      start: 12
+      end: 36
+  "console.warn(user['emailAddress'])\n":
+    labels:
+    - source: console.warn(user['emailAddress'])
+      style: primary
+      start: 0
+      end: 34
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: warn
+      style: secondary
+      start: 8
+      end: 12
+    - source: console.warn
+      style: secondary
+      start: 0
+      end: 12
+    - source: emailAddress
+      style: secondary
+      start: 19
+      end: 31
+    - source: "'emailAddress'"
+      style: secondary
+      start: 18
+      end: 32
+    - source: user['emailAddress']
+      style: secondary
+      start: 13
+      end: 33
+    - source: user['emailAddress']
+      style: secondary
+      start: 13
+      end: 33
+  "log.debug({ userId, memberId, siteId })\n":
+    labels:
+    - source: log.debug({ userId, memberId, siteId })
+      style: primary
+      start: 0
+      end: 39
+    - source: log
+      style: secondary
+      start: 0
+      end: 3
+    - source: debug
+      style: secondary
+      start: 4
+      end: 9
+    - source: log.debug
+      style: secondary
+      start: 0
+      end: 9
+    - source: userId
+      style: secondary
+      start: 12
+      end: 18
+    - source: "{ userId, memberId, siteId }"
+      style: secondary
+      start: 10
+      end: 38
+    - source: "{ userId, memberId, siteId }"
+      style: secondary
+      start: 10
+      end: 38
+  "logger.info({ body: page.body }, 'page fetched')\n":
+    labels:
+    - source: "logger.info({ body: page.body }, 'page fetched')"
+      style: primary
+      start: 0
+      end: 48
+    - source: logger
+      style: secondary
+      start: 0
+      end: 6
+    - source: info
+      style: secondary
+      start: 7
+      end: 11
+    - source: logger.info
+      style: secondary
+      start: 0
+      end: 11
+    - source: page
+      style: secondary
+      start: 20
+      end: 24
+    - source: body
+      style: secondary
+      start: 25
+      end: 29
+    - source: page.body
+      style: secondary
+      start: 20
+      end: 29
+    - source: "{ body: page.body }"
+      style: secondary
+      start: 12
+      end: 31
+    - source: "{ body: page.body }"
+      style: secondary
+      start: 12
+      end: 31
+  "logger.info({ userEmail }, 'lookup failed')\n":
+    labels:
+    - source: logger.info({ userEmail }, 'lookup failed')
+      style: primary
+      start: 0
+      end: 43
+    - source: logger
+      style: secondary
+      start: 0
+      end: 6
+    - source: info
+      style: secondary
+      start: 7
+      end: 11
+    - source: logger.info
+      style: secondary
+      start: 0
+      end: 11
+    - source: userEmail
+      style: secondary
+      start: 14
+      end: 23
+    - source: "{ userEmail }"
+      style: secondary
+      start: 12
+      end: 25
+    - source: "{ userEmail }"
+      style: secondary
+      start: 12
+      end: 25
+  "logger.warn({ accountId }, 'retrying')\n":
+    labels:
+    - source: logger.warn({ accountId }, 'retrying')
+      style: primary
+      start: 0
+      end: 38
+    - source: logger
+      style: secondary
+      start: 0
+      end: 6
+    - source: warn
+      style: secondary
+      start: 7
+      end: 11
+    - source: logger.warn
+      style: secondary
+      start: 0
+      end: 11
+    - source: accountId
+      style: secondary
+      start: 14
+      end: 23
+    - source: "{ accountId }"
+      style: secondary
+      start: 12
+      end: 25
+    - source: "{ accountId }"
+      style: secondary
+      start: 12
+      end: 25

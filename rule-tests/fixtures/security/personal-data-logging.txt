@@ -1,0 +1,5 @@
+console.log(user.emailAddress);
+console.log(issue.fields.description);
+logger.info({ accountId }, 'request');
+console.log(request.headers.get('X-Forwarded-For'));
+console.log(request.url);

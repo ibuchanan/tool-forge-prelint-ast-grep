@@ -356,6 +356,12 @@ conventions:
   Ordinary target IDs are not authorization decisions; provenance, validation,
   custom wrappers, and full control flow are not inferred.
 
+`review-personal-data-logging` adds review warnings for explicitly named personal data,
+selected issue/page content, request URLs, and indirect identifiers such as account and
+cloud IDs. It follows the [Forge logging guidelines](https://developer.atlassian.com/platform/forge/logging-guidelines/):
+indirect identifiers warrant caution, not an unconditional ban. Generic payloads, legal
+obligations, retention, and whether logging is necessary remain outside static analysis.
+
 The source families inspect local syntax, not taint flows. Logging checks recognize
 `console`, `logger`, and `log`; SQL/TLS client checks recognize imports in the same
 file. Raw HTML findings are review warnings even when a sanitizer is present, and
