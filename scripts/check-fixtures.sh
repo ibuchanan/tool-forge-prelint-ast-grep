@@ -46,3 +46,5 @@ for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/bio
 done
 
 echo "Both Biome config formats produced the expected finding."
+
+sh scripts/check-security-fixtures.sh

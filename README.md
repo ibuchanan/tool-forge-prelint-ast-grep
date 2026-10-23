@@ -119,8 +119,9 @@ Rule IDs with file locations appear for anything that needs attention.
 
 Rules are organized into composing tiers.
 Each tier includes all rules from tiers below it.
-Some frontend checks have a `-tsx` companion rule file
-so the same policy applies to both `.ts` and `.tsx` sources.
+Some frontend checks have a `-tsx` companion rule file.
+The OWASP-derived security families also have `-js` companions for JavaScript/JSX;
+their base rules cover TypeScript and their `-tsx` companions cover TSX.
 
 | Tier          | Audience                                 | Config                     |
 | ------------- | ---------------------------------------- | -------------------------- |
@@ -178,7 +179,9 @@ or run a scan and read the output directly.
 
 Safe patterns for calling Jira/Confluence product APIs — explicit
 `asUser()`/`asApp()`, route templates over absolute URLs, and no native
-`fetch()` in backend runtime code. _(strict)_
+`fetch()` in backend runtime code. Also reviews direct interpolation or
+concatenation in imported Forge SQL `prepare`/`executeRaw` calls; fixed SQL with
+bound values is allowed. This does not trace query variables or prove injection. _(strict)_
 
 ### architecture
 
@@ -316,11 +319,22 @@ such as hardcoded tokens, sensitive logging, and insecure transport, belong in
 Exposure and unsafe-behavior checks, rather than secret-management workflow
 conventions:
 
-- **recommended** — manifest-level security: no wildcard egress, no unsafe
-  Custom UI CSP entries.
+- **recommended** — manifest-level security: wildcard fetch egress (scalar or
+  `address` object) and unsafe script CSP review, including block/flow YAML.
+  Style `unsafe-inline` is not treated as script execution.
 - **strict** — source-level security hygiene: no committed Atlassian API
   tokens, no wildcard CORS origins, no logging of credential-shaped values,
-  and no cross-tenant-prone module/global runtime state.
+  and no cross-tenant-prone module/global runtime state. Additional families flag
+  whole-environment disclosure, direct dynamic code evaluation, raw HTML sinks,
+  and explicit TLS-verification bypasses (including package scripts).
+
+The source families inspect local syntax, not taint flows. Logging checks recognize
+`console`, `logger`, and `log`; SQL/TLS client checks recognize imports in the same
+file. Raw HTML findings are review warnings even when a sanitizer is present, and
+apply outside UI Kit frontend paths. Source test/spec files, dependencies, and
+`dist`/`build` output are excluded. No security-boundary autofixes are supplied.
+Rule notes link to the OWASP 2025 categories and describe individual limitations;
+a clean scan is not OWASP compliance or proof of authorization, redaction, or AI safety.
 
 ### triggers
 

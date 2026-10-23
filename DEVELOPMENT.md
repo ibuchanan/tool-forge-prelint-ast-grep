@@ -89,6 +89,13 @@ npm run test:interactive
    is updated to satisfy it — that fixture must stay a zero-findings example
    of full compliance.
 
+`scripts/check-security-fixtures.sh` runs as part of the fixture suite. It copies
+text fixtures from `rule-tests/fixtures/security/` into a temporary app and checks
+TS/TSX/JS/JSX and module-extension routing, tier inclusion, Custom UI outside
+`frontend`, source exclusions, and manifest/package filename restrictions.
+The temporary app is removed on exit; the `.txt` sources keep YAML fixtures out
+of the rule-test discovery path.
+
 `ast-grep test` has a few sharp edges worth knowing before you hit them:
 
 - `valid`/`invalid` entries must be plain strings — there's no way to give a

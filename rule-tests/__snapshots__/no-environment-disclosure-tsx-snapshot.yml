@@ -1,0 +1,240 @@
+id: no-environment-disclosure-tsx
+snapshots:
+  console.log(process.env):
+    labels:
+    - source: console.log(process.env)
+      style: primary
+      start: 0
+      end: 24
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: process.env
+      style: secondary
+      start: 12
+      end: 23
+    - source: process.env
+      style: secondary
+      start: 12
+      end: 23
+  "console.log({env: process.env})":
+    labels:
+    - source: "console.log({env: process.env})"
+      style: primary
+      start: 0
+      end: 31
+    - source: console
+      style: secondary
+      start: 0
+      end: 7
+    - source: log
+      style: secondary
+      start: 8
+      end: 11
+    - source: console.log
+      style: secondary
+      start: 0
+      end: 11
+    - source: process.env
+      style: secondary
+      start: 18
+      end: 29
+    - source: "{env: process.env}"
+      style: secondary
+      start: 12
+      end: 30
+    - source: "{env: process.env}"
+      style: secondary
+      start: 12
+      end: 30
+  export const handler = () => process.env:
+    labels:
+    - source: () => process.env
+      style: primary
+      start: 23
+      end: 40
+    - source: export const handler = () => process.env
+      style: secondary
+      start: 0
+      end: 40
+    - source: process.env
+      style: secondary
+      start: 29
+      end: 40
+  "export function handler(){ return process.env }":
+    labels:
+    - source: return process.env
+      style: primary
+      start: 27
+      end: 45
+    - source: export function handler(){ return process.env }
+      style: secondary
+      start: 0
+      end: 47
+    - source: process.env
+      style: secondary
+      start: 34
+      end: 45
+  "llm.chat({messages: [{role: 'user', content: JSON.stringify(process.env)}]})":
+    labels:
+    - source: "llm.chat({messages: [{role: 'user', content: JSON.stringify(process.env)}]})"
+      style: primary
+      start: 0
+      end: 76
+    - source: chat
+      style: secondary
+      start: 4
+      end: 8
+    - source: llm.chat
+      style: secondary
+      start: 0
+      end: 8
+    - source: messages
+      style: secondary
+      start: 10
+      end: 18
+    - source: JSON.stringify(process.env)
+      style: secondary
+      start: 45
+      end: 72
+    - source: JSON.stringify(process.env)
+      style: secondary
+      start: 45
+      end: 72
+    - source: "messages: [{role: 'user', content: JSON.stringify(process.env)}]"
+      style: secondary
+      start: 10
+      end: 74
+    - source: "{messages: [{role: 'user', content: JSON.stringify(process.env)}]}"
+      style: secondary
+      start: 9
+      end: 75
+    - source: "{messages: [{role: 'user', content: JSON.stringify(process.env)}]}"
+      style: secondary
+      start: 9
+      end: 75
+  "log.error({...process.env})":
+    labels:
+    - source: log.error({...process.env})
+      style: primary
+      start: 0
+      end: 27
+    - source: log
+      style: secondary
+      start: 0
+      end: 3
+    - source: error
+      style: secondary
+      start: 4
+      end: 9
+    - source: log.error
+      style: secondary
+      start: 0
+      end: 9
+    - source: process.env
+      style: secondary
+      start: 14
+      end: 25
+    - source: ...process.env
+      style: secondary
+      start: 11
+      end: 25
+    - source: "{...process.env}"
+      style: secondary
+      start: 10
+      end: 26
+    - source: "{...process.env}"
+      style: secondary
+      start: 10
+      end: 26
+  logger.info(JSON.stringify(process.env)):
+    labels:
+    - source: logger.info(JSON.stringify(process.env))
+      style: primary
+      start: 0
+      end: 40
+    - source: logger
+      style: secondary
+      start: 0
+      end: 6
+    - source: info
+      style: secondary
+      start: 7
+      end: 11
+    - source: logger.info
+      style: secondary
+      start: 0
+      end: 11
+    - source: JSON.stringify(process.env)
+      style: secondary
+      start: 12
+      end: 39
+    - source: JSON.stringify(process.env)
+      style: secondary
+      start: 12
+      end: 39
+  "resolver.define('debug', () => process.env)":
+    labels:
+    - source: () => process.env
+      style: primary
+      start: 25
+      end: 42
+    - source: define
+      style: secondary
+      start: 9
+      end: 15
+    - source: resolver.define
+      style: secondary
+      start: 0
+      end: 15
+    - source: resolver.define('debug', () => process.env)
+      style: secondary
+      start: 0
+      end: 43
+    - source: process.env
+      style: secondary
+      start: 31
+      end: 42
+  "resolver.define('debug', () => { return {config: {...process.env}} })":
+    labels:
+    - source: "return {config: {...process.env}}"
+      style: primary
+      start: 33
+      end: 66
+    - source: define
+      style: secondary
+      start: 9
+      end: 15
+    - source: resolver.define
+      style: secondary
+      start: 0
+      end: 15
+    - source: "resolver.define('debug', () => { return {config: {...process.env}} })"
+      style: secondary
+      start: 0
+      end: 69
+    - source: process.env
+      style: secondary
+      start: 53
+      end: 64
+    - source: ...process.env
+      style: secondary
+      start: 50
+      end: 64
+    - source: "{...process.env}"
+      style: secondary
+      start: 49
+      end: 65
+    - source: "{config: {...process.env}}"
+      style: secondary
+      start: 40
+      end: 66

@@ -1,0 +1,18 @@
+id: no-disabled-tls-verification-js
+valid:
+  - "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1'"
+  - "const options = {rejectUnauthorized: false}"
+  - "other({rejectUnauthorized: false})"
+  - const insecure = true
+  - "import https from 'node:https'; https.request({rejectUnauthorized: true})"
+  - "import {request} from 'node:https'; request({rejectUnauthorized:true})"
+  - "import {Agent as MyAgent} from 'other'; new MyAgent({rejectUnauthorized:false})"
+  - "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '10'"
+invalid:
+  - "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'"
+  - "process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'"
+  - "import https from 'node:https'; https.request(url, {rejectUnauthorized: false})"
+  - "import transport from 'https'; new transport.Agent({keepAlive: true, rejectUnauthorized: false})"
+  - "import {Agent as UnsafeAgent} from 'undici'; new UnsafeAgent({connect: {rejectUnauthorized: false}})"
+  - "import {connect} from 'node:tls'; connect({rejectUnauthorized: false})"
+  - "import * as tls from 'node:tls'; tls.connect({rejectUnauthorized: false})"

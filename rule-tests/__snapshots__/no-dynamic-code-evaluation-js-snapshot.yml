@@ -1,0 +1,72 @@
+id: no-dynamic-code-evaluation-js
+snapshots:
+  "Function('a', 'b', code)":
+    labels:
+    - source: Function('a', 'b', code)
+      style: primary
+      start: 0
+      end: 24
+    - source: Function
+      style: secondary
+      start: 0
+      end: 8
+  eval():
+    labels:
+    - source: eval()
+      style: primary
+      start: 0
+      end: 6
+    - source: eval
+      style: secondary
+      start: 0
+      end: 4
+  eval(code):
+    labels:
+    - source: eval(code)
+      style: primary
+      start: 0
+      end: 10
+    - source: eval
+      style: secondary
+      start: 0
+      end: 4
+  "function other() { const eval = safe; eval(text) } eval(untrusted)":
+    labels:
+    - source: eval(untrusted)
+      style: primary
+      start: 51
+      end: 66
+    - source: eval
+      style: secondary
+      start: 51
+      end: 55
+  "import {eval as safeEval} from 'safe'; eval(untrusted)":
+    labels:
+    - source: eval(untrusted)
+      style: primary
+      start: 39
+      end: 54
+    - source: eval
+      style: secondary
+      start: 39
+      end: 43
+  "new Function('a', code)":
+    labels:
+    - source: new Function('a', code)
+      style: primary
+      start: 0
+      end: 23
+    - source: Function
+      style: secondary
+      start: 4
+      end: 12
+  new Function():
+    labels:
+    - source: new Function()
+      style: primary
+      start: 0
+      end: 14
+    - source: Function
+      style: secondary
+      start: 4
+      end: 12

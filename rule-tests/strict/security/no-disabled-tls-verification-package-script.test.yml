@@ -1,0 +1,9 @@
+id: no-disabled-tls-verification-package-script
+valid:
+  - '{"scripts":{"start":"NODE_TLS_REJECT_UNAUTHORIZED=1 bun app.ts"}}'
+  - '{"description":" NODE_TLS_REJECT_UNAUTHORIZED=0 example"}'
+  - '{"scripts":{"start":"SOME_NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts"}}'
+invalid:
+  - '{"scripts":{"start":"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts"}}'
+  - '{"scripts":{"start":"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts"}}'
+  - '{"scripts":{"start":"NODE_TLS_REJECT_UNAUTHORIZED=''0'' bun app.ts"}}'

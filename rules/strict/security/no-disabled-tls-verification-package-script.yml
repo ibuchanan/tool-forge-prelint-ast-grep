@@ -1,0 +1,34 @@
+id: no-disabled-tls-verification-package-script
+language: Json
+severity: error
+message: >
+  TLS certificate verification is disabled in this script. Remove the bypass or configure a
+  trusted CA.
+note: >
+  Detects literal NODE_TLS_REJECT_UNAUTHORIZED=0 assignments in package.json scripts, including
+  quoted zero values. This is a narrow shell-text check, not a shell parser; indirect wrappers
+  and computed commands need review. See
+  https://nodejs.org/api/cli.html#node_tls_reject_unauthorizedvalue and
+  https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/
+rule:
+  kind: string
+  regex: "(^|[\\s;|&\"])NODE_TLS_REJECT_UNAUTHORIZED=[\"'\\\\]*0[\"'\\\\]*([\\s;|&]|$)"
+  inside:
+    field: value
+    kind: pair
+    inside:
+      kind: object
+      inside:
+        field: value
+        kind: pair
+        has:
+          field: key
+          regex: '^"scripts"$'
+        inside:
+          kind: object
+          inside:
+            kind: document
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"

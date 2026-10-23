@@ -1,17 +1,16 @@
 id: no-wildcard-egress
 valid:
-  # specific domain — safe
-  - |
-    permissions:
-      external:
-        fetch:
-          backend:
-            - "https://api.example.com"
+  - "permissions:\n  external:\n    fetch:\n      backend:\n        - \"https://api.example.com\""
+  - 'permissions: {external: {fetch: {backend: [{address: "https://api.example.com"}, {remote: backend}]}}}'
+  - 'other: {external: {fetch: {backend: ["*"]}}}'
+  - 'permissions: {content: {styles: ["*"]}}'
+  - 'permissions: {external: {images: ["*"]}}'
+  - 'backend: ["*"]'
+  - 'permissions: {external: {fetch: {backend: [{metadata: {address: "*"}}]}}}'
+  - 'permissions: {external: {fetch: {backend: ["https://*.example.com"]}}}'
 invalid:
-  # wildcard backend egress
-  - |
-    permissions:
-      external:
-        fetch:
-          backend:
-            - "*"
+  - "permissions:\n  external:\n    fetch:\n      backend:\n        - \"*\""
+  - "permissions:\n  external:\n    fetch:\n      client:\n        - address: \"*\"\n          category: analytics"
+  - 'permissions: {external: {fetch: {backend: ["*", {address: "*"}]}}}'
+  - "permissions:\n  external:\n    fetch:\n      client: [\"*\"]"
+  - '"permissions": {"external": {"fetch": {"backend": [{"address": "*"}]}}}'

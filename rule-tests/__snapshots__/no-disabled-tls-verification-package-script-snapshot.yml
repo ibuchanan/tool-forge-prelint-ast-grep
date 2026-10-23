@@ -1,0 +1,92 @@
+id: no-disabled-tls-verification-package-script
+snapshots:
+  "{\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\"}}":
+    labels:
+    - source: "\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\""
+      style: primary
+      start: 20
+      end: 65
+    - source: "{\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\"}}"
+      style: secondary
+      start: 0
+      end: 67
+    - source: "{\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\"}}"
+      style: secondary
+      start: 0
+      end: 67
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\"}"
+      style: secondary
+      start: 1
+      end: 66
+    - source: "{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\"}"
+      style: secondary
+      start: 11
+      end: 66
+    - source: "\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED='0' bun app.ts\""
+      style: secondary
+      start: 12
+      end: 65
+  "{\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}}":
+    labels:
+    - source: "\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\""
+      style: primary
+      start: 20
+      end: 63
+    - source: "{\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}}"
+      style: secondary
+      start: 0
+      end: 65
+    - source: "{\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}}"
+      style: secondary
+      start: 0
+      end: 65
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}"
+      style: secondary
+      start: 1
+      end: 64
+    - source: "{\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}"
+      style: secondary
+      start: 11
+      end: 64
+    - source: "\"start\":\"NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\""
+      style: secondary
+      start: 12
+      end: 63
+  "{\"scripts\":{\"start\":\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}}":
+    labels:
+    - source: "\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\""
+      style: primary
+      start: 20
+      end: 73
+    - source: "{\"scripts\":{\"start\":\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}}"
+      style: secondary
+      start: 0
+      end: 75
+    - source: "{\"scripts\":{\"start\":\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}}"
+      style: secondary
+      start: 0
+      end: 75
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\":{\"start\":\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}"
+      style: secondary
+      start: 1
+      end: 74
+    - source: "{\"start\":\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\"}"
+      style: secondary
+      start: 11
+      end: 74
+    - source: "\"start\":\"cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 bun app.ts\""
+      style: secondary
+      start: 12
+      end: 73

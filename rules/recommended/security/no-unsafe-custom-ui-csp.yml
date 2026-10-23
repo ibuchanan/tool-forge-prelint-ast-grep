@@ -2,15 +2,55 @@ id: no-unsafe-custom-ui-csp
 language: Yaml
 severity: warning
 message: >
-  Custom UI CSP must not allow unsafe inline scripts, eval, or wildcard content sources.
+  Unsafe script CSP weakens execution restrictions. Prefer bundled scripts or hash-pinned
+  sources.
 note: >
-  Inline scripts, dynamic evaluation, and wildcard content sources weaken the
-  browser sandbox. Use explicit static sources in permissions.content.
-  See the Forge permissions manifest reference for safe CSP source options:
+  Reviews unsafe-inline, unsafe-eval and exact wildcard entries only under
+  permissions.content.scripts, including flow YAML. Style unsafe-inline has different
+  implications and is not matched; hash-pinned script entries are not unrestricted inline
+  execution. Supported CSP exceptions require review, not automatic removal. See
+  https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
   https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+utils:
+  mapping-pair:
+    any:
+      - kind: block_mapping_pair
+      - kind: flow_pair
 rule:
-  kind: block_sequence_item
-  regex: "(unsafe-inline|unsafe-eval)"
+  all:
+    - kind: flow_node
+      regex: "^[\"']*(unsafe-inline|unsafe-eval|\\*)[\"']*$"
+    - inside:
+        stopBy:
+          matches: mapping-pair
+        any:
+          - kind: block_mapping_pair
+          - kind: flow_pair
+        has:
+          field: key
+          regex: '^["'']?(?:scripts)["'']?$'
+        inside:
+          stopBy:
+            matches: mapping-pair
+          any:
+            - kind: block_mapping_pair
+            - kind: flow_pair
+          has:
+            field: key
+            regex: '^["'']?(?:content)["'']?$'
+          inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:permissions)["'']?$'
+            not:
+              inside:
+                stopBy: end
+                matches: mapping-pair
 files:
   - "**/manifest.yml"
   - "**/manifest.yaml"

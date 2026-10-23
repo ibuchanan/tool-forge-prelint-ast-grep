@@ -1,0 +1,208 @@
+id: review-dynamic-forge-sql-js
+snapshots:
+  import db from '@forge/sql'; db.executeRaw('SELECT ' + field):
+    labels:
+    - source: db.executeRaw('SELECT ' + field)
+      style: primary
+      start: 29
+      end: 61
+    - source: db
+      style: secondary
+      start: 29
+      end: 31
+    - source: executeRaw
+      style: secondary
+      start: 32
+      end: 42
+    - source: db.executeRaw
+      style: secondary
+      start: 29
+      end: 42
+    - source: "'@forge/sql'"
+      style: secondary
+      start: 15
+      end: 27
+    - source: db
+      style: secondary
+      start: 7
+      end: 9
+    - source: db
+      style: secondary
+      start: 7
+      end: 9
+    - source: import db from '@forge/sql';
+      style: secondary
+      start: 0
+      end: 28
+    - source: import db from '@forge/sql'; db.executeRaw('SELECT ' + field)
+      style: secondary
+      start: 0
+      end: 61
+    - source: +
+      style: secondary
+      start: 53
+      end: 54
+    - source: "'SELECT ' + field"
+      style: secondary
+      start: 43
+      end: 60
+    - source: "'SELECT ' + field"
+      style: secondary
+      start: 43
+      end: 60
+  "import sql from '@forge/sql'; sql.prepare(`SELECT * FROM t WHERE id = ${id}`)":
+    labels:
+    - source: sql.prepare(`SELECT * FROM t WHERE id = ${id}`)
+      style: primary
+      start: 30
+      end: 77
+    - source: sql
+      style: secondary
+      start: 30
+      end: 33
+    - source: prepare
+      style: secondary
+      start: 34
+      end: 41
+    - source: sql.prepare
+      style: secondary
+      start: 30
+      end: 41
+    - source: "'@forge/sql'"
+      style: secondary
+      start: 16
+      end: 28
+    - source: sql
+      style: secondary
+      start: 7
+      end: 10
+    - source: sql
+      style: secondary
+      start: 7
+      end: 10
+    - source: import sql from '@forge/sql';
+      style: secondary
+      start: 0
+      end: 29
+    - source: import sql from '@forge/sql'; sql.prepare(`SELECT * FROM t WHERE id = ${id}`)
+      style: secondary
+      start: 0
+      end: 77
+    - source: ${id}
+      style: secondary
+      start: 70
+      end: 75
+    - source: "`SELECT * FROM t WHERE id = ${id}`"
+      style: secondary
+      start: 42
+      end: 76
+    - source: "`SELECT * FROM t WHERE id = ${id}`"
+      style: secondary
+      start: 42
+      end: 76
+  "import {sql as db} from '@forge/sql'; db.prepare(`SELECT ${field}`)":
+    labels:
+    - source: db.prepare(`SELECT ${field}`)
+      style: primary
+      start: 38
+      end: 67
+    - source: db
+      style: secondary
+      start: 38
+      end: 40
+    - source: prepare
+      style: secondary
+      start: 41
+      end: 48
+    - source: db.prepare
+      style: secondary
+      start: 38
+      end: 48
+    - source: "'@forge/sql'"
+      style: secondary
+      start: 24
+      end: 36
+    - source: sql
+      style: secondary
+      start: 8
+      end: 11
+    - source: db
+      style: secondary
+      start: 15
+      end: 17
+    - source: sql as db
+      style: secondary
+      start: 8
+      end: 17
+    - source: import {sql as db} from '@forge/sql';
+      style: secondary
+      start: 0
+      end: 37
+    - source: import {sql as db} from '@forge/sql'; db.prepare(`SELECT ${field}`)
+      style: secondary
+      start: 0
+      end: 67
+    - source: ${field}
+      style: secondary
+      start: 57
+      end: 65
+    - source: "`SELECT ${field}`"
+      style: secondary
+      start: 49
+      end: 66
+    - source: "`SELECT ${field}`"
+      style: secondary
+      start: 49
+      end: 66
+  "import {sql} from '@forge/sql'; sql.prepare(`SELECT ${field} WHERE id = ?`).bindParams(id)":
+    labels:
+    - source: sql.prepare(`SELECT ${field} WHERE id = ?`)
+      style: primary
+      start: 32
+      end: 75
+    - source: sql
+      style: secondary
+      start: 32
+      end: 35
+    - source: prepare
+      style: secondary
+      start: 36
+      end: 43
+    - source: sql.prepare
+      style: secondary
+      start: 32
+      end: 43
+    - source: "'@forge/sql'"
+      style: secondary
+      start: 18
+      end: 30
+    - source: sql
+      style: secondary
+      start: 8
+      end: 11
+    - source: sql
+      style: secondary
+      start: 8
+      end: 11
+    - source: import {sql} from '@forge/sql';
+      style: secondary
+      start: 0
+      end: 31
+    - source: >-
+        import {sql} from '@forge/sql'; sql.prepare(`SELECT ${field} WHERE id =
+        ?`).bindParams(id)
+      style: secondary
+      start: 0
+      end: 90
+    - source: ${field}
+      style: secondary
+      start: 52
+      end: 60
+    - source: "`SELECT ${field} WHERE id = ?`"
+      style: secondary
+      start: 44
+      end: 74
+    - source: "`SELECT ${field} WHERE id = ?`"
+      style: secondary
+      start: 44
+      end: 74

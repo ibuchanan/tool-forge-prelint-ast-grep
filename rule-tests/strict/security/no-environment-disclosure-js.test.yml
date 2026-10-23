@@ -1,0 +1,20 @@
+id: no-environment-disclosure-js
+valid:
+  - console.log(process.env.PUBLIC_NAME)
+  - const port = process.env.PORT
+  - "console.log({publicName: process.env.PUBLIC_NAME})"
+  - "const config = {...process.env}"
+  - "function inspect(){ return process.env }"
+  - "llm.chat({messages: [{role:'user', content: process.env.PUBLIC_NAME}]})"
+  - "console.log({nested:{public: process.env.PUBLIC_NAME}})"
+  - "export function handler(){ return {public:process.env.PUBLIC_NAME} }"
+invalid:
+  - console.log(process.env)
+  - logger.info(JSON.stringify(process.env))
+  - "log.error({...process.env})"
+  - "export function handler(){ return process.env }"
+  - "resolver.define('debug', () => { return {config: {...process.env}} })"
+  - "llm.chat({messages: [{role: 'user', content: JSON.stringify(process.env)}]})"
+  - "console.log({env: process.env})"
+  - export const handler = () => process.env
+  - "resolver.define('debug', () => process.env)"

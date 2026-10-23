@@ -1,0 +1,50 @@
+id: review-raw-html-sink-js
+language: JavaScript
+severity: warning
+message: >
+  Raw HTML rendering can execute untrusted content. Prefer text rendering or review
+  sanitization.
+note: >
+  Reports raw HTML sinks, including sanitized or literal values, for review. Ordinary text
+  rendering and HTML-shaped strings alone are not sinks. This does not determine DOM types,
+  source trust or sanitizer correctness. Applies outside UI Kit frontend paths because Custom UI
+  can live elsewhere. See https://top10.owasp.org/2025/A05_2025-Injection/,
+  https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/ and
+  https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+rule:
+  any:
+    - pattern: $NODE.innerHTML = $VALUE
+    - pattern: $NODE.outerHTML = $VALUE
+    - kind: assignment_expression
+      has:
+        field: left
+        kind: subscript_expression
+        has:
+          field: index
+          kind: string
+          regex: '^["''](innerHTML|outerHTML)["'']$'
+    - pattern: $NODE.insertAdjacentHTML($$$ARGS)
+    - pattern: document.write($$$ARGS)
+    - pattern: document.writeln($$$ARGS)
+    - kind: pair
+      has:
+        field: key
+        regex: '^["'']?dangerouslySetInnerHTML["'']?$'
+    - kind: assignment_expression
+      has:
+        field: left
+        kind: member_expression
+        has:
+          field: property
+          regex: ^dangerouslySetInnerHTML$
+    - kind: jsx_attribute
+      has:
+        kind: property_identifier
+        regex: ^dangerouslySetInnerHTML$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

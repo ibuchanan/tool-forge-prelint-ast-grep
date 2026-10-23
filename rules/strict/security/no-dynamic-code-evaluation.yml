@@ -1,0 +1,102 @@
+id: no-dynamic-code-evaluation
+language: TypeScript
+severity: error
+message: >
+  Avoid dynamic code evaluation. Use fixed operations and validated data instead.
+note: >
+  Flags direct eval and Function calls/constructors, not object methods. Visible declarations
+  and parameters of the same name in enclosing scopes are excluded conservatively; this is not a
+  JavaScript name resolver and aliases/indirect evaluation need separate analysis. A match
+  identifies an execution sink, not proven exploitability. See
+  https://top10.owasp.org/2025/A05_2025-Injection/,
+  https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/ and
+  https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+rule:
+  all:
+    - any:
+        - kind: call_expression
+          has:
+            field: function
+            kind: identifier
+            pattern: $NAME
+            regex: ^(eval|Function)$
+        - kind: new_expression
+          has:
+            field: constructor
+            kind: identifier
+            pattern: $NAME
+            regex: ^Function$
+    - not:
+        inside:
+          stopBy: end
+          all:
+            - any:
+                - kind: program
+                - kind: statement_block
+                - kind: function_declaration
+                - kind: function_expression
+                - kind: arrow_function
+            - any:
+                - has:
+                    stopBy:
+                      any:
+                        - kind: program
+                        - kind: statement_block
+                        - kind: function_declaration
+                        - kind: function_expression
+                        - kind: arrow_function
+                    any:
+                      - kind: variable_declarator
+                        has:
+                          field: name
+                          pattern: $NAME
+                      - kind: function_declaration
+                        has:
+                          field: name
+                          pattern: $NAME
+                      - kind: class_declaration
+                        has:
+                          field: name
+                          pattern: $NAME
+                      - kind: import_clause
+                        has:
+                          kind: identifier
+                          pattern: $NAME
+                      - kind: import_specifier
+                        any:
+                          - has:
+                              field: alias
+                              pattern: $NAME
+                          - all:
+                              - has:
+                                  field: name
+                                  pattern: $NAME
+                              - not:
+                                  has:
+                                    field: alias
+                                    kind: identifier
+                - has:
+                    field: parameters
+                    has:
+                      stopBy: end
+                      any:
+                        - kind: identifier
+                          pattern: $NAME
+                        - kind: required_parameter
+                          has:
+                            field: pattern
+                            pattern: $NAME
+                        - kind: optional_parameter
+                          has:
+                            field: pattern
+                            pattern: $NAME
+                - has:
+                    field: parameter
+                    pattern: $NAME
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

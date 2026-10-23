@@ -1,0 +1,146 @@
+id: no-disabled-tls-verification-tsx
+language: Tsx
+severity: error
+message: >
+  TLS certificate verification is disabled. Restore verification or configure a trusted CA.
+note: >
+  Flags the literal global TLS bypass and inline rejectUnauthorized: false options at imported
+  Node https/tls and undici clients. Ordinary similarly named objects are not matched. Import
+  aliases are supported; options stored elsewhere, CommonJS client imports and other TLS
+  libraries require separate review. Remotes and tooling differ from managed Forge HTTPS egress.
+  No universal certificate-pinning requirement is implied. See
+  https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/, https://nodejs.org/api/tls.html
+  and https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+rule:
+  any:
+    - kind: assignment_expression
+      all:
+        - has:
+            field: left
+            any:
+              - pattern: process.env.NODE_TLS_REJECT_UNAUTHORIZED
+              - kind: subscript_expression
+                all:
+                  - has:
+                      field: object
+                      pattern: process.env
+                  - has:
+                      field: index
+                      kind: string
+                      regex: '^["'']NODE_TLS_REJECT_UNAUTHORIZED["'']$'
+        - has:
+            field: right
+            kind: string
+            regex: '^["'']0["'']$'
+    - all:
+        - any:
+            - all:
+                - any:
+                    - kind: call_expression
+                      has:
+                        field: function
+                        kind: member_expression
+                        all:
+                          - has:
+                              field: object
+                              pattern: $CLIENT
+                          - has:
+                              field: property
+                              regex: ^(request|get|connect|Agent|TLSSocket)$
+                    - kind: new_expression
+                      has:
+                        field: constructor
+                        kind: member_expression
+                        all:
+                          - has:
+                              field: object
+                              pattern: $CLIENT
+                          - has:
+                              field: property
+                              regex: ^(Agent|TLSSocket)$
+                - inside:
+                    stopBy: end
+                    kind: program
+                    has:
+                      kind: import_statement
+                      all:
+                        - has:
+                            field: source
+                            regex: '^["''](node:)?(https|tls)["'']$'
+                        - has:
+                            kind: import_clause
+                            any:
+                              - has:
+                                  kind: identifier
+                                  pattern: $CLIENT
+                              - has:
+                                  kind: namespace_import
+                                  has:
+                                    kind: identifier
+                                    pattern: $CLIENT
+            - all:
+                - any:
+                    - kind: call_expression
+                      has:
+                        field: function
+                        kind: identifier
+                        pattern: $CLIENT
+                    - kind: new_expression
+                      has:
+                        field: constructor
+                        kind: identifier
+                        pattern: $CLIENT
+                - inside:
+                    stopBy: end
+                    kind: program
+                    has:
+                      kind: import_statement
+                      all:
+                        - has:
+                            field: source
+                            regex: '^["'']((node:)?(https|tls)|undici)["'']$'
+                        - has:
+                            stopBy: end
+                            kind: import_specifier
+                            any:
+                              - all:
+                                  - has:
+                                      field: name
+                                      pattern: $CLIENT
+                                      regex: ^(Agent|Client|Pool|request|get|connect|TLSSocket)$
+                                  - not:
+                                      has:
+                                        field: alias
+                                        kind: identifier
+                              - all:
+                                  - has:
+                                      field: name
+                                      regex: ^(Agent|Client|Pool|request|get|connect|TLSSocket)$
+                                  - has:
+                                      field: alias
+                                      pattern: $CLIENT
+        - has:
+            field: arguments
+            has:
+              kind: object
+              has:
+                stopBy:
+                  any:
+                    - kind: call_expression
+                    - kind: arrow_function
+                    - kind: function_expression
+                kind: pair
+                all:
+                  - has:
+                      field: key
+                      regex: '^["'']?rejectUnauthorized["'']?$'
+                  - has:
+                      field: value
+                      pattern: "false"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

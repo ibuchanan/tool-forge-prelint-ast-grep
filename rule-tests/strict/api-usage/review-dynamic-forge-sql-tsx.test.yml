@@ -1,0 +1,12 @@
+id: review-dynamic-forge-sql-tsx
+valid:
+  - "import sql from '@forge/sql'; sql.prepare('SELECT * FROM t WHERE id = ?').bindParams(id).execute()"
+  - "import {sql} from '@forge/sql'; sql.executeRaw(`CREATE TABLE t (id INT)`)"
+  - "other.prepare(`SELECT ${id}`)"
+  - "import {errorCodes as sql} from '@forge/sql'; sql.prepare(`SELECT ${id}`)"
+  - "import sql from '@forge/sql'; sql.prepare(query)"
+invalid:
+  - "import sql from '@forge/sql'; sql.prepare(`SELECT * FROM t WHERE id = ${id}`)"
+  - "import db from '@forge/sql'; db.executeRaw('SELECT ' + field)"
+  - "import {sql as db} from '@forge/sql'; db.prepare<Row>(`SELECT ${field}`)"
+  - "import {sql} from '@forge/sql'; sql.prepare(`SELECT ${field} WHERE id = ?`).bindParams(id)"

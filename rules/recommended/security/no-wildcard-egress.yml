@@ -2,22 +2,113 @@ id: no-wildcard-egress
 language: Yaml
 severity: warning
 message: >
-  Do not use wildcard external egress in Forge manifests.
-  Declare the specific backend or client domains the app needs.
+  Wildcard fetch egress permits every destination. Prefer an explicit domain allowlist.
 note: >
-  Wildcard egress makes data movement harder to audit
-  and can block security review.
-  Prefer a narrow permissions.external.fetch allowlist.
-  See the Forge runtime egress permissions reference for declaring specific domains:
-  https://developer.atlassian.com/platform/forge/runtime-egress-permissions/
+  Reviews exact wildcard fetch entries under permissions.external.fetch.backend/client, in
+  scalar or address-object form, including flow YAML. Wildcards are supported and may be
+  intentional (for example client popup workflows); a match is not an invalid manifest or proof
+  of exfiltration. Specific host wildcards and remote-reference resolution are outside this
+  check. See https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
+  https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+utils:
+  mapping-pair:
+    any:
+      - kind: block_mapping_pair
+      - kind: flow_pair
 rule:
   all:
-    - kind: block_sequence_item
-      regex: '^\s*-\s*["'']?\*["'']?\s*$'
-    - inside:
-        stopBy: end
-        kind: block_mapping_pair
-        regex: 'external\s*:'
+    - kind: flow_node
+      regex: "^[\"']\\*[\"']$"
+    - any:
+        - inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:backend|client)["'']?$'
+            inside:
+              stopBy:
+                matches: mapping-pair
+              any:
+                - kind: block_mapping_pair
+                - kind: flow_pair
+              has:
+                field: key
+                regex: '^["'']?(?:fetch)["'']?$'
+              inside:
+                stopBy:
+                  matches: mapping-pair
+                any:
+                  - kind: block_mapping_pair
+                  - kind: flow_pair
+                has:
+                  field: key
+                  regex: '^["'']?(?:external)["'']?$'
+                inside:
+                  stopBy:
+                    matches: mapping-pair
+                  any:
+                    - kind: block_mapping_pair
+                    - kind: flow_pair
+                  has:
+                    field: key
+                    regex: '^["'']?(?:permissions)["'']?$'
+                  not:
+                    inside:
+                      stopBy: end
+                      matches: mapping-pair
+        - inside:
+            stopBy:
+              matches: mapping-pair
+            any:
+              - kind: block_mapping_pair
+              - kind: flow_pair
+            has:
+              field: key
+              regex: '^["'']?(?:address)["'']?$'
+            inside:
+              stopBy:
+                matches: mapping-pair
+              any:
+                - kind: block_mapping_pair
+                - kind: flow_pair
+              has:
+                field: key
+                regex: '^["'']?(?:backend|client)["'']?$'
+              inside:
+                stopBy:
+                  matches: mapping-pair
+                any:
+                  - kind: block_mapping_pair
+                  - kind: flow_pair
+                has:
+                  field: key
+                  regex: '^["'']?(?:fetch)["'']?$'
+                inside:
+                  stopBy:
+                    matches: mapping-pair
+                  any:
+                    - kind: block_mapping_pair
+                    - kind: flow_pair
+                  has:
+                    field: key
+                    regex: '^["'']?(?:external)["'']?$'
+                  inside:
+                    stopBy:
+                      matches: mapping-pair
+                    any:
+                      - kind: block_mapping_pair
+                      - kind: flow_pair
+                    has:
+                      field: key
+                      regex: '^["'']?(?:permissions)["'']?$'
+                    not:
+                      inside:
+                        stopBy: end
+                        matches: mapping-pair
 files:
   - "**/manifest.yml"
   - "**/manifest.yaml"

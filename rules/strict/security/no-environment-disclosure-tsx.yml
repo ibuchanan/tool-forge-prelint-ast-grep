@@ -1,0 +1,149 @@
+id: no-environment-disclosure-tsx
+language: Tsx
+severity: error
+message: >
+  Do not expose the whole environment. Select only the non-sensitive fields this operation
+  needs.
+note: >
+  Detects direct whole-environment logging, handler return values and inline LLM messages,
+  including immediate spread/stringification. Backend handler contexts recognized here are
+  resolver.define callbacks and exported functions; model sinks are chat/stream/create calls
+  with an inline messages property. Ordinary environment reads and indirect aliases are not
+  traced. Unknown logger/model wrappers and non-exported handler helpers require review. See
+  https://top10.owasp.org/2025/A09_2025-Security_Logging_and_Alerting_Failures/,
+  https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/ and
+  https://developer.atlassian.com/platform/forge/shared-responsibility-model/
+utils:
+  environment-value:
+    any:
+      - all:
+          - any:
+              - pattern: process.env
+              - kind: subscript_expression
+                all:
+                  - has:
+                      field: object
+                      pattern: process
+                  - has:
+                      field: index
+                      kind: string
+                      regex: '^["'']env["'']$'
+          - not:
+              inside:
+                field: object
+                any:
+                  - kind: member_expression
+                  - kind: subscript_expression
+      - pattern: JSON.stringify(process.env)
+      - kind: object
+        has:
+          kind: spread_element
+          has:
+            any:
+              - pattern: process.env
+              - pattern: 'process["env"]'
+      - kind: array
+        has:
+          any:
+            - pattern: process.env
+            - pattern: 'process["env"]'
+rule:
+  any:
+    - all:
+        - kind: call_expression
+          has:
+            field: function
+            kind: member_expression
+            all:
+              - has:
+                  field: object
+                  kind: identifier
+                  regex: ^(console|logger|log)$
+              - has:
+                  field: property
+                  regex: ^(log|warn|error|info|debug|trace|fatal)$
+        - has:
+            field: arguments
+            has:
+              any:
+                - matches: environment-value
+                - any:
+                    - kind: object
+                    - kind: array
+                  has:
+                    stopBy:
+                      any:
+                        - kind: call_expression
+                        - kind: arrow_function
+                        - kind: function_expression
+                    matches: environment-value
+    - kind: return_statement
+      has:
+        any:
+          - matches: environment-value
+          - any:
+              - kind: object
+              - kind: array
+            has:
+              stopBy:
+                any:
+                  - kind: call_expression
+                  - kind: arrow_function
+                  - kind: function_expression
+              matches: environment-value
+      inside:
+        stopBy: end
+        any:
+          - kind: export_statement
+          - kind: call_expression
+            has:
+              field: function
+              kind: member_expression
+              has:
+                field: property
+                regex: ^define$
+    - kind: call_expression
+      all:
+        - has:
+            field: function
+            kind: member_expression
+            has:
+              field: property
+              regex: ^(chat|stream|create)$
+        - has:
+            field: arguments
+            has:
+              kind: object
+              has:
+                kind: pair
+                all:
+                  - has:
+                      field: key
+                      regex: ^messages$
+                  - has:
+                      field: value
+                      has:
+                        stopBy: end
+                        matches: environment-value
+    - kind: arrow_function
+      has:
+        field: body
+        matches: environment-value
+      inside:
+        stopBy: end
+        any:
+          - kind: export_statement
+          - kind: call_expression
+            has:
+              field: function
+              kind: member_expression
+              has:
+                field: property
+                regex: ^define$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

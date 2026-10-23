@@ -1,0 +1,8 @@
+import sql from '@forge/sql';
+import https from 'node:https';
+console.log(process.env);
+console.log(accessToken);
+eval(code);
+node.innerHTML = data;
+sql.prepare(`SELECT ${field}`);
+https.request(url, {rejectUnauthorized: false});

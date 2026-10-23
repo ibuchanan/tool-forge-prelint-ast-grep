@@ -1,19 +1,15 @@
 id: no-unsafe-custom-ui-csp
 valid:
-  # explicit static source — safe
-  - |
-    permissions:
-      content:
-        scripts:
-          - "https://cdn.example.com"
+  - "permissions: {content: {styles: [unsafe-inline]}}"
+  - 'permissions: {content: {scripts: ["sha256-abc123"]}}'
+  - "permissions:\n  content:\n    styles:\n      - unsafe-inline"
+  - 'permissions: {external: {scripts: ["https://cdn.example.com"]}}'
+  - "other: {content: {scripts: [unsafe-eval]}}"
+  - 'permissions: {content: {scripts: ["https://cdn.example.com/unsafe-eval.js"]}}'
+  - "scripts: [unsafe-eval]"
 invalid:
-  - |
-    permissions:
-      content:
-        scripts:
-          - "'unsafe-inline'"
-  - |
-    permissions:
-      content:
-        scripts:
-          - "'unsafe-eval'"
+  - "permissions:\n  content:\n    scripts:\n      - \"'unsafe-inline'\""
+  - "permissions:\n  content:\n    scripts:\n      - unsafe-eval"
+  - 'permissions: {content: {scripts: [unsafe-eval, "*"]}}'
+  - "permissions:\n  content:\n    scripts: [\"unsafe-inline\"]"
+  - '"permissions": {"content": {"scripts": ["''unsafe-eval''"]}}'

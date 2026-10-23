@@ -1,0 +1,320 @@
+id: no-disabled-tls-verification-js
+snapshots:
+  "import * as tls from 'node:tls'; tls.connect({rejectUnauthorized: false})":
+    labels:
+    - source: "tls.connect({rejectUnauthorized: false})"
+      style: primary
+      start: 33
+      end: 73
+    - source: tls
+      style: secondary
+      start: 33
+      end: 36
+    - source: connect
+      style: secondary
+      start: 37
+      end: 44
+    - source: tls.connect
+      style: secondary
+      start: 33
+      end: 44
+    - source: "'node:tls'"
+      style: secondary
+      start: 21
+      end: 31
+    - source: tls
+      style: secondary
+      start: 12
+      end: 15
+    - source: "* as tls"
+      style: secondary
+      start: 7
+      end: 15
+    - source: "* as tls"
+      style: secondary
+      start: 7
+      end: 15
+    - source: import * as tls from 'node:tls';
+      style: secondary
+      start: 0
+      end: 32
+    - source: "import * as tls from 'node:tls'; tls.connect({rejectUnauthorized: false})"
+      style: secondary
+      start: 0
+      end: 73
+    - source: rejectUnauthorized
+      style: secondary
+      start: 46
+      end: 64
+    - source: "false"
+      style: secondary
+      start: 66
+      end: 71
+    - source: "rejectUnauthorized: false"
+      style: secondary
+      start: 46
+      end: 71
+    - source: "{rejectUnauthorized: false}"
+      style: secondary
+      start: 45
+      end: 72
+    - source: "{rejectUnauthorized: false}"
+      style: secondary
+      start: 45
+      end: 72
+  "import https from 'node:https'; https.request(url, {rejectUnauthorized: false})":
+    labels:
+    - source: "https.request(url, {rejectUnauthorized: false})"
+      style: primary
+      start: 32
+      end: 79
+    - source: https
+      style: secondary
+      start: 32
+      end: 37
+    - source: request
+      style: secondary
+      start: 38
+      end: 45
+    - source: https.request
+      style: secondary
+      start: 32
+      end: 45
+    - source: "'node:https'"
+      style: secondary
+      start: 18
+      end: 30
+    - source: https
+      style: secondary
+      start: 7
+      end: 12
+    - source: https
+      style: secondary
+      start: 7
+      end: 12
+    - source: import https from 'node:https';
+      style: secondary
+      start: 0
+      end: 31
+    - source: "import https from 'node:https'; https.request(url, {rejectUnauthorized: false})"
+      style: secondary
+      start: 0
+      end: 79
+    - source: rejectUnauthorized
+      style: secondary
+      start: 52
+      end: 70
+    - source: "false"
+      style: secondary
+      start: 72
+      end: 77
+    - source: "rejectUnauthorized: false"
+      style: secondary
+      start: 52
+      end: 77
+    - source: "{rejectUnauthorized: false}"
+      style: secondary
+      start: 51
+      end: 78
+    - source: "{rejectUnauthorized: false}"
+      style: secondary
+      start: 51
+      end: 78
+  "import transport from 'https'; new transport.Agent({keepAlive: true, rejectUnauthorized: false})":
+    labels:
+    - source: "new transport.Agent({keepAlive: true, rejectUnauthorized: false})"
+      style: primary
+      start: 31
+      end: 96
+    - source: transport
+      style: secondary
+      start: 35
+      end: 44
+    - source: Agent
+      style: secondary
+      start: 45
+      end: 50
+    - source: transport.Agent
+      style: secondary
+      start: 35
+      end: 50
+    - source: "'https'"
+      style: secondary
+      start: 22
+      end: 29
+    - source: transport
+      style: secondary
+      start: 7
+      end: 16
+    - source: transport
+      style: secondary
+      start: 7
+      end: 16
+    - source: import transport from 'https';
+      style: secondary
+      start: 0
+      end: 30
+    - source: "import transport from 'https'; new transport.Agent({keepAlive: true, rejectUnauthorized: false})"
+      style: secondary
+      start: 0
+      end: 96
+    - source: rejectUnauthorized
+      style: secondary
+      start: 69
+      end: 87
+    - source: "false"
+      style: secondary
+      start: 89
+      end: 94
+    - source: "rejectUnauthorized: false"
+      style: secondary
+      start: 69
+      end: 94
+    - source: "{keepAlive: true, rejectUnauthorized: false}"
+      style: secondary
+      start: 51
+      end: 95
+    - source: "{keepAlive: true, rejectUnauthorized: false}"
+      style: secondary
+      start: 51
+      end: 95
+  "import {Agent as UnsafeAgent} from 'undici'; new UnsafeAgent({connect: {rejectUnauthorized: false}})":
+    labels:
+    - source: "new UnsafeAgent({connect: {rejectUnauthorized: false}})"
+      style: primary
+      start: 45
+      end: 100
+    - source: UnsafeAgent
+      style: secondary
+      start: 49
+      end: 60
+    - source: "'undici'"
+      style: secondary
+      start: 35
+      end: 43
+    - source: Agent
+      style: secondary
+      start: 8
+      end: 13
+    - source: UnsafeAgent
+      style: secondary
+      start: 17
+      end: 28
+    - source: Agent as UnsafeAgent
+      style: secondary
+      start: 8
+      end: 28
+    - source: import {Agent as UnsafeAgent} from 'undici';
+      style: secondary
+      start: 0
+      end: 44
+    - source: "import {Agent as UnsafeAgent} from 'undici'; new UnsafeAgent({connect: {rejectUnauthorized: false}})"
+      style: secondary
+      start: 0
+      end: 100
+    - source: rejectUnauthorized
+      style: secondary
+      start: 72
+      end: 90
+    - source: "false"
+      style: secondary
+      start: 92
+      end: 97
+    - source: "rejectUnauthorized: false"
+      style: secondary
+      start: 72
+      end: 97
+    - source: "{connect: {rejectUnauthorized: false}}"
+      style: secondary
+      start: 61
+      end: 99
+    - source: "{connect: {rejectUnauthorized: false}}"
+      style: secondary
+      start: 61
+      end: 99
+  "import {connect} from 'node:tls'; connect({rejectUnauthorized: false})":
+    labels:
+    - source: "connect({rejectUnauthorized: false})"
+      style: primary
+      start: 34
+      end: 70
+    - source: connect
+      style: secondary
+      start: 34
+      end: 41
+    - source: "'node:tls'"
+      style: secondary
+      start: 22
+      end: 32
+    - source: connect
+      style: secondary
+      start: 8
+      end: 15
+    - source: connect
+      style: secondary
+      start: 8
+      end: 15
+    - source: import {connect} from 'node:tls';
+      style: secondary
+      start: 0
+      end: 33
+    - source: "import {connect} from 'node:tls'; connect({rejectUnauthorized: false})"
+      style: secondary
+      start: 0
+      end: 70
+    - source: rejectUnauthorized
+      style: secondary
+      start: 43
+      end: 61
+    - source: "false"
+      style: secondary
+      start: 63
+      end: 68
+    - source: "rejectUnauthorized: false"
+      style: secondary
+      start: 43
+      end: 68
+    - source: "{rejectUnauthorized: false}"
+      style: secondary
+      start: 42
+      end: 69
+    - source: "{rejectUnauthorized: false}"
+      style: secondary
+      start: 42
+      end: 69
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0':
+    labels:
+    - source: process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+      style: primary
+      start: 0
+      end: 46
+    - source: process.env.NODE_TLS_REJECT_UNAUTHORIZED
+      style: secondary
+      start: 0
+      end: 40
+    - source: "'0'"
+      style: secondary
+      start: 43
+      end: 46
+  "process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'":
+    labels:
+    - source: process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
+      style: primary
+      start: 0
+      end: 49
+    - source: process.env
+      style: secondary
+      start: 0
+      end: 11
+    - source: "'NODE_TLS_REJECT_UNAUTHORIZED'"
+      style: secondary
+      start: 12
+      end: 42
+    - source: process.env['NODE_TLS_REJECT_UNAUTHORIZED']
+      style: secondary
+      start: 0
+      end: 43
+    - source: "'0'"
+      style: secondary
+      start: 46
+      end: 49

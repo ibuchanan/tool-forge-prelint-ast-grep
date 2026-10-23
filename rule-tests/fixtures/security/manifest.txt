@@ -1,0 +1,1 @@
+permissions: {external: {fetch: {backend: [{address: "*"}]}}, content: {scripts: [unsafe-eval]}}

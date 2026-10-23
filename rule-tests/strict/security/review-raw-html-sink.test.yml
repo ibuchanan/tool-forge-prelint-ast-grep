@@ -1,0 +1,12 @@
+id: review-raw-html-sink
+valid:
+  - node.textContent = text
+  - "const html = '<b>text</b>'"
+  - "const props = {children: text}"
+invalid:
+  - node.innerHTML = data
+  - node.outerHTML = sanitize(data)
+  - "node['innerHTML'] = data"
+  - "node.insertAdjacentHTML('beforeend', text)"
+  - "document.write(a,b)"
+  - "const props = {dangerouslySetInnerHTML: {__html: data}}"

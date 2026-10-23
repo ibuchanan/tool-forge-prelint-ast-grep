@@ -1,0 +1,19 @@
+id: no-dynamic-code-evaluation-tsx
+valid:
+  - JSON.parse(text)
+  - obj.eval(text)
+  - obj.Function(text)
+  - "function run(eval) { return eval(text) }"
+  - const Function = factory; Function(text)
+  - "import { evaluate as eval } from 'safe'; eval(text)"
+  - "const x = 'eval(code)'"
+  - "function eval(code) { return code }; eval(text)"
+  - const run = eval => eval(text)
+invalid:
+  - eval(code)
+  - eval()
+  - "Function('a', 'b', code)"
+  - "new Function('a', code)"
+  - new Function()
+  - "function other() { const eval = safe; eval(text) } eval(untrusted)"
+  - "import {eval as safeEval} from 'safe'; eval(untrusted)"

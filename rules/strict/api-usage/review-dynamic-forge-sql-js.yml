@@ -1,0 +1,82 @@
+id: review-dynamic-forge-sql-js
+language: JavaScript
+severity: warning
+message: >
+  Dynamic SQL can alter query structure. Bind values and allowlist dynamic identifiers.
+note: >
+  Flags direct interpolated templates and concatenated expressions in prepare/executeRaw calls
+  on imported @forge/sql clients, including default and named aliases. Fixed SQL and bound
+  values are allowed; binding after interpolation does not sanitize the interpolated text.
+  Controlled identifiers may be legitimate. Query variables, aliases created after import and
+  cross-file flows are not traced. See https://top10.owasp.org/2025/A05_2025-Injection/,
+  https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/ and
+  https://developer.atlassian.com/platform/forge/storage-reference/sql-api/
+rule:
+  all:
+    - kind: call_expression
+      has:
+        field: function
+        kind: member_expression
+        all:
+          - has:
+              field: object
+              kind: identifier
+              pattern: $SQL
+          - has:
+              field: property
+              regex: ^(prepare|executeRaw)$
+    - inside:
+        stopBy: end
+        kind: program
+        has:
+          kind: import_statement
+          all:
+            - has:
+                field: source
+                regex: '^["'']@forge/sql["'']$'
+            - any:
+                - has:
+                    kind: import_clause
+                    has:
+                      kind: identifier
+                      pattern: $SQL
+                - has:
+                    stopBy: end
+                    kind: import_specifier
+                    all:
+                      - has:
+                          field: name
+                          pattern: $SQL
+                          regex: ^sql$
+                      - not:
+                          has:
+                            field: alias
+                            kind: identifier
+                - has:
+                    stopBy: end
+                    kind: import_specifier
+                    all:
+                      - has:
+                          field: name
+                          regex: ^sql$
+                      - has:
+                          field: alias
+                          pattern: $SQL
+    - has:
+        field: arguments
+        has:
+          any:
+            - kind: template_string
+              has:
+                kind: template_substitution
+            - kind: binary_expression
+              has:
+                field: operator
+                regex: ^\+$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"

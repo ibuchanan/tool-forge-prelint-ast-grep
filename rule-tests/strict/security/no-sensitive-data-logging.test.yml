@@ -1,10 +1,27 @@
 id: no-sensitive-data-logging
 valid:
-  - "console.log('user signed in', userId)"
-  - "console.error('request failed', error.message)"
+  - "console.log('token count:', count)"
+  - "console.info('metadata', { tokenCount: 1 })"
+  - "logger.info('secret redacted', redact(token))"
+  - "console.log({token: redact(token)})"
+  - console.log(() => token)
+  - console.log(user.tokenCount)
+  - audit.info(token)
+  - "console.log('password')"
+  - "console.log({tokenCount:1, status:'token expired'})"
+  - "console.log(otherheaders.get('authorization'))"
 invalid:
   - "console.log('password:', password)"
   - "console.log('token', accessToken)"
   - "console.warn('api key is', apiKey)"
   - "console.error('secret value', secretValue)"
   - "console.debug('credentials', credentials)"
+  - "logger.info('request', request.headers.authorization)"
+  - "log.warn(headers['Authorization'])"
+  - "logger.error(headers.get('authorization'))"
+  - console.log(user.accessToken)
+  - "console.log({key: token})"
+  - "console.log({token})"
+  - "console.log([password])"
+  - console.error(JSON.stringify(credentials))
+  - "logger.info(request.headers.get('Authorization'))"
