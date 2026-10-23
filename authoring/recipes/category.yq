@@ -1,0 +1,2 @@
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/recipes/validate.yq")) |
+.metadata.category = (filename | split("/") | .[-2])

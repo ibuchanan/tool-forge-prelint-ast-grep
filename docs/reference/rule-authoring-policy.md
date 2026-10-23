@@ -15,7 +15,7 @@ rollout; this document does not claim that the whole repository already conforms
 | Stage | Boundary                                                                                                                            |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | 01    | Policy and metadata-only pilot; no executable policy checker.                                                                       |
-| 02    | Mechanical metadata backfills, scope/evidence analysis, and shared policy data; explicit check/apply, no native-scope changes.      |
+| 02    | Explicit yq metadata-edit recipes and shared policy data; no scope inference, native-scope changes, or custom CLI.                  |
 | 03    | Repository-only validation, with an explicit, non-growing allowance for existing unmigrated rules. Calculated severity is advisory. |
 | 04–07 | Reviewed metadata migration by tier/category, including inline rationale and scope declarations.                                    |
 | 08    | Reviewed materialization/normalization of scope profiles, including every coverage change.                                          |
@@ -288,23 +288,35 @@ There is no separate add/remove deviation structure or assessment file tree.
 
 ### Materialization and review boundary
 
-Repository-only authoring tooling is responsible for materializing native scope
-and checking its agreement with the declared profile. Consumers need no custom
-preprocessor. Ticket 02 establishes shared policy data and supported scope
-analysis for mechanical backfills and assessment preparation. Ticket 03 reuses
-that foundation for validation and actionable repairs; ticket 08 reuses it for
-reviewed normalization. No such new tooling is introduced by ticket 01. The
-shared sets and composition rules have one policy source, not competing lists
-or semantics embedded in separate checks.
+Consumers need no custom preprocessor. Repository-only authoring uses ast-grep
+self-checks, explicit Mike Farah yq v4 edit recipes, and minimal Bash coordination
+where needed. Ticket 02 supplies the [metadata recipes](../how-to/backfill-rule-metadata.md)
+and a single shared policy data file, `authoring/policy.yml`. It does not introduce
+a custom CLI, scope-analysis API, general glob engine, automatic prose URL
+extractor, companion analyzer, or assessment-report store. Ticket 03 owns
+self-evaluation and CI integration; ticket 08 owns reviewed native-scope changes.
+The shared vocabulary, conventions, canonical order, and exclusion sets have one
+executable data source, aligned with this specification, not competing lists.
 
-Ticket 02 can backfill standard scope metadata only when existing native scope
-is demonstrably conformant, including permitted positive narrowing. Partial
-matches are review proposals with explicit differences, not declarations of
-compliance. Existing reviewed metadata is preserved. No automatic `[unique]`
-assignment or fabricated rationale substitutes for a scope decision. Evidence
-and companion discovery prepare review without inferring ratings or copying
-judgments. Such reports are not a permanent parallel assessment store. Native
-scope remains unchanged until separately reviewed normalization.
+Ticket 02 does not assign or infer scope profiles. Maintainers select scope
+intent during metadata migration; existing reviewed metadata is preserved.
+Legacy package rules excluding only node_modules do not satisfy the standard
+`[package-json, tests]` exclusions: dist, coverage, and specs are still missing.
+No automatic `[unique]` assignment or fabricated rationale substitutes for a
+scope decision. Repository searches and ordinary diffs locate test/snapshot
+evidence and likely companions for review, not proof of policy equivalence or
+assessment coverage. Native scope remains unchanged until reviewed normalization.
+
+Automated scope agreement checks are limited to directly comparable documented
+conventional shapes and exact baseline/test-set comparisons. Unsupported positive
+narrowing or glob relationships are visibly review-required, not a validated
+pass. Maintainer review and real-file routing fixtures establish intended scope
+where automation cannot prove it; justified custom scope uses reviewed `[unique]`.
+Within-kind union, between-kind intersection, both-runtime unrestricted scope,
+and the additive test modifier retain their semantics without a general glob
+materialization framework. Reference shape/tag checks are conservative screens;
+exact validity, source authority, module identity, rationale truth, and companion
+consistency remain review responsibilities.
 
 Changes to effective `files` or `ignores` require explicit coverage review and
 real-file scanner evidence, including root/nested paths, supported languages,
@@ -365,6 +377,22 @@ nonzero status on scanner/configuration errors. Validation is offline and
 repository-only. Authoring checks, policy data, tests, and repair tooling stay
 outside shipped rule directories and shipped tier configurations; actual package
 contents, not merely config intent, establish that boundary.
+
+## Ticket 02 verification
+
+On 2026-10-23, the explicit yq recipes were developed in red-green slices and
+verified with Mike Farah yq v4.54.1. The demonstration adds only category and
+reviewed existing-source references to `no-package-main` and `lint-with-forge`;
+it does not complete their assessments or assign scope profiles. Parsed
+non-metadata documents match HEAD, and repeat application after formatting is
+idempotent. yq presentation changes to folded prose preserve its parsed text.
+
+Recipe preservation/rejection tests, ShellCheck, shell formatting, repository
+formatting, all 206 consumer rule tests, and real-file fixtures pass. Snapshots,
+consumer configurations, dependency manifests, native scope, and severity remain
+unchanged. An actual 213-entry package archive excludes authoring data/recipes,
+scripts, tests, docs, scratch tickets, and other repository-only content. These
+are opt-in authoring recipes, not ticket 03's self-evaluation or CI enforcement.
 
 ## Model references
 

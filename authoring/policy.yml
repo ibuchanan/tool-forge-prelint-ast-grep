@@ -1,0 +1,47 @@
+# Repository-only constants; scope semantics are in the rule-authoring policy.
+tiers: [recommended, strict, atlassian, ecosol]
+categories:
+  - api-usage
+  - architecture
+  - cost
+  - devtools
+  - forge-ahead
+  - forge-scripts
+  - frontend-ui
+  - git-hooks
+  - imports
+  - manifest
+  - package-json
+  - package-scripts
+  - performance
+  - runtime-boundaries
+  - secrets
+  - security
+  - triggers
+  - typescript
+# Conservative offline screen, not a full URL parser or authority approval.
+reference-pattern: '^https?://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(:[0-9]+)?([/?#][^\s<>"\\]*)?$'
+# Within-kind union; between-kind intersection. Both runtimes remove runtime
+# restriction; tests only omits test-exclusions; unique is exclusive and reviewed.
+scope-order: [frontend, backend, package-json, manifest, tests, unique]
+runtime:
+  frontend: ["**/frontend/**"]
+  backend:
+    - "**/backend/**"
+    - "**/resolvers/**"
+    - "**/external/**"
+    - "**/import-lifecycle/**"
+artifacts:
+  package-json: ["**/package.json"]
+  manifest: ["**/manifest.yml", "**/manifest.yaml"]
+baseline:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+test-exclusions:
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"

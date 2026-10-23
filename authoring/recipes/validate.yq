@@ -1,0 +1,23 @@
+# Guards for all recipes, not a full authoring-policy validator.
+load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $policy |
+filename as $file | ($file | split("/")) as $parts |
+select($file | test("(^|/)rules/[^/]+/[^/]+/[^/]+\\.yml$")) // error("expected rules/<tier>/<category>/<id>.yml") |
+select($policy.tiers | contains([$parts[-3]])) // error("unknown tier") |
+select($policy.categories | contains([$parts[-2]])) // error("unknown category") |
+select(tag == "!!map") // error("expected one rule mapping") |
+select(.id == ($parts[-1] | sub("\\.yml$"; ""))) // error("filename/id mismatch") |
+select(document_index == 0) // error("expected one YAML document") |
+select((has("metadata") | not) or (.metadata | tag == "!!map")) // error("metadata must be a mapping; explicit null is not missing") |
+select(([.. | select(anchor != "")] | length) == 0) // error("YAML anchors require manual review before metadata edits") |
+select(([.. | select(kind == "map") | keys | select((unique | length) != length)] | length) == 0) // error("duplicate mapping keys require manual review") |
+select(((.metadata // {}) | to_entries | map(select((.key == "precision" or .key == "impact") and (.value as $rating | ["low", "medium", "high"] | contains([$rating]) | not))) | length) == 0) // error("rating classification requires low, medium, or high") |
+select(((.metadata // {}) | to_entries | map(select((.key == "owasp" or .key == "cwe") and (.value | tag != "!!str"))) | length) == 0) // error("OWASP/CWE classification must be a reviewed string") |
+select(((.metadata // {}) | to_entries | map(select(.key == "category" and (.value | tag != "!!str"))) | length) == 0) // error("category must be a string") |
+select(((.metadata // {}) | to_entries | map(select((.key == "references" or .key == "tags" or .key == "scope-profile") and (.value | tag != "!!seq"))) | length) == 0) // error("references, tags, scope-profile must be sequences") |
+select(((.metadata // {}) | to_entries | map(select(.key == "references") | .value[] | select(tag != "!!str" or (test($policy.reference-pattern) | not))) | length) == 0) // error("references contain unsupported URL values; review rather than overwrite") |
+select(((.metadata // {}) | to_entries | map(select(.key == "tags") | .value[] | select(tag != "!!str" or (test("^module:[A-Za-z][A-Za-z0-9-]*:[A-Za-z][A-Za-z0-9]*$") | not))) | length) == 0) // error("tags require module:<exact Forge module identifier>; review unsupported values") |
+((.metadata // {}) | to_entries | map(select(.key == "scope-profile") | .value)) as $profiles |
+select(($profiles | length) == 0 or ($profiles[0] | length > 0)) // error("scope-profile cannot be empty") |
+select(($profiles | map(select((unique | length) != length)) | length) == 0) // error("scope-profile has duplicate selectors") |
+select(($profiles | map(.[] | select(tag != "!!str" or (. as $selector | $policy.scope-order | contains([$selector]) | not))) | length) == 0) // error("scope-profile has unknown selectors") |
+select(($profiles | length) == 0 or (($profiles[0] | contains(["unique"])) and ($profiles[0] | length == 1)) or (($profiles[0] | contains(["unique"]) | not) and ($profiles[0] | map(select(. != "tests")) | length > 0))) // error("scope-profile requires runtime/artifact selectors or exclusive unique")

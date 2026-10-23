@@ -1,0 +1,5 @@
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/recipes/validate.yq")) |
+load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $policy |
+(select(.metadata | has("references")) | .metadata.references) |= unique |
+(select(.metadata | has("tags")) | .metadata.tags) |= unique |
+(select(.metadata | has("scope-profile")) | .metadata.scope-profile) |= sort_by(. as $selector | $policy.scope-order | to_entries | map(select(.value == $selector)) | .[0].key)

@@ -1,0 +1,4 @@
+eval(load_str(strenv(RULE_AUTHORING_DIR) + "/recipes/validate.yq")) |
+load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $policy |
+select(strenv(REFERENCE) | test($policy.reference-pattern)) // error("supply a reviewed HTTP(S) reference URL in REFERENCE") |
+.metadata.references = (((.metadata.references // []) + [strenv(REFERENCE)]) | unique)

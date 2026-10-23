@@ -83,8 +83,20 @@ metadata, inline rating rationale, composable scope profiles, and the reviewed
 severity matrix. The [glossary](GLOSSARY.md) distinguishes categories, tiers,
 profiles, and ratings. New and migrated rules follow that contract; existing
 unmigrated rules remain compatible during the documented rollout. Ticket 01
-introduces the policy and a metadata-only pilot, not a new validation command.
-Scope normalization and severity changes require their later, explicit reviews.
+introduces the policy and a metadata-only pilot. Ticket 02 provides explicit
+[yq metadata recipes](docs/how-to/backfill-rule-metadata.md), shared constants in
+`authoring/policy.yml`, and opt-in preservation tests:
+
+```sh
+bash scripts/test-rule-metadata.sh
+```
+
+These need Bash and Mike Farah yq v4 (tested with v4.54.1), not a custom CLI or
+JavaScript/TypeScript runtime. The small sourced tool guard does not edit files.
+Automatic scope inference, prose URL extraction, and assessment/companion reports
+are deliberately out of scope. Ticket 03 owns repository-only ast-grep self-checks
+and minimal Bash/yq supplements, including CI integration. Scope normalization
+and severity changes require their later, explicit reviews.
 
 1. Add or edit the `.yml` rule file under `rules/<tier>/<category>/`.
 2. Add or update the matching test file under
