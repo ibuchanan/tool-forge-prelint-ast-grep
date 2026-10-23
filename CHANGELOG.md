@@ -1,3 +1,13 @@
+## [0.10.0] - 2026-10-23
+
+### 🚀 Features
+
+- *(security)* Add personal-data logging review rules
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Sync lockfile version to 0.9.0
+
 ## [0.9.0] - 2026-10-23
 
 ### 🚀 Features
