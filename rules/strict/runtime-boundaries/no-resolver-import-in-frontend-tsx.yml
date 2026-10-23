@@ -15,6 +15,9 @@ files:
   - "**/frontend/**"
 ignores:
   - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
 metadata:
   category: runtime-boundaries
   references:
@@ -26,6 +29,5 @@ metadata:
   impact-rationale: >-
     UI Kit guidance routes frontend calls to backend resolvers through bridge. Actually bundling resolver runtime APIs into the frontend can break the entire app UI at build/startup. A path-name match does not establish execution, privileged access or sensitive-data exposure.
   scope-profile:
-    - unique
-  scope-rationale: >-
-    Preserve **/frontend/** selection with node_modules as the only exclusion. Test sources are intentionally still scanned, but dist, coverage and specs exclusions are absent versus the standard [frontend, tests] profile. Directory naming does not prove runtime identity; ticket 08 owns reviewed routing normalization.
+    - frontend
+    - tests
