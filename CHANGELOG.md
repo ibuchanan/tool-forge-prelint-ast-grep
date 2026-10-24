@@ -1,3 +1,64 @@
+## [0.11.0] - 2026-10-24
+
+### 🚀 Features
+
+- *(security)* Add OWASP direct-input and crypto rules
+- *(authoring)* Add ticket 03 native self-evaluation
+- *(authoring)* Enforce ticket 09 severity matrix
+- *(authoring)* Complete ticket 10 enforcement
+
+### 🐛 Bug Fixes
+
+- *(release)* Include lockfile in release commits
+- *(scope)* Normalize ticket 08 Atlassian packages
+- *(scope)* Normalize ticket 08 Ecosol devtools
+- *(scope)* Normalize ticket 08 Ecosol Forge Ahead
+- *(scope)* Normalize ticket 08 Ecosol Forge scripts
+- *(scope)* Normalize ticket 08 Ecosol git-hooks
+- *(scope)* Normalize ticket 08 Ecosol package-json
+- *(scope)* Normalize ticket 08 Ecosol package-scripts
+- *(scope)* Normalize ticket 08 Ecosol secrets
+- *(scope)* Normalize ticket 08 Ecosol typescript
+- *(scope)* Normalize ticket 08 architecture routing
+- *(scope)* Normalize ticket 08 cost routing
+- *(scope)* Normalize ticket 08 recommended devtools
+- *(scope)* Normalize ticket 08 recommended frontend-ui
+- *(scope)* Normalize ticket 08 recommended manifest
+- *(scope)* Normalize ticket 08 recommended package-json
+- *(scope)* Normalize ticket 08 recommended package-scripts
+- *(scope)* Normalize ticket 08 recommended security
+- *(scope)* Normalize ticket 08 recommended triggers
+- *(scope)* Normalize ticket 08 recommended typescript
+- *(scope)* Normalize ticket 08 API usage
+- *(scope)* Normalize ticket 08 strict frontend-ui
+- *(scope)* Normalize ticket 08 strict imports
+- *(scope)* Normalize ticket 08 strict package-json
+- *(scope)* Normalize ticket 08 strict performance
+- *(scope)* Normalize ticket 08 strict runtime-boundaries
+- *(scope)* Normalize ticket 08 strict security
+- *(scope)* Normalize ticket 08 strict triggers
+- *(severity)* Apply ticket 09 reviewed gate changes
+
+### 📚 Documentation
+
+- *(policy)* Broaden mechanical backfill scope
+
+### 🧪 Testing
+
+- *(scope)* Complete ticket 08 routing verification
+
+### ⚙️ Miscellaneous Tasks
+
+- *(rules)* Define and pilot rule-authoring policy
+- *(authoring)* Add explicit yq metadata recipes
+- *(editorconfig)* Cover JSONC, TOML, and Markdown breaks
+- *(authoring)* Complete ticket 04 security metadata
+- *(authoring)* Complete ticket 05 strict metadata
+- *(authoring)* Complete ticket 06 recommended metadata
+- *(authoring)* Complete ticket 07 convention metadata
+- *(scripts)* Keep temporary workspaces under .scratch
+- *(scripts)* Fix permissions
+
 ## [0.10.0] - 2026-10-23
 
 ### 🚀 Features
