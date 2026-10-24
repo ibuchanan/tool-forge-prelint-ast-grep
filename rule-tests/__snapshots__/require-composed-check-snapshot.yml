@@ -1,12 +1,7 @@
 id: require-composed-check
 snapshots:
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -25,13 +20,8 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "check": "lefthook run pre-commit"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"check\": \"lefthook run pre-commit\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -50,13 +40,8 @@ snapshots:
       style: secondary
       start: 0
       end: 62
-  ? |
-    {
-      "scripts": {
-        "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"check\": \"npm run format:check && npm run typecheck && npm run lint && npm run test\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -75,3 +60,157 @@ snapshots:
       style: secondary
       start: 0
       end: 112
+  "{\"check\":\"run-p 'check:*'\"}\n":
+    labels:
+    - source: "{\"check\":\"run-p 'check:*'\"}"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        {"check":"run-p 'check:*'"}
+      style: secondary
+      start: 0
+      end: 28
+  "{\"config\":{\"scripts\":{\"check\":\"run-p 'check:*'\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"scripts\":{\"check\":\"run-p 'check:*'\"}}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        {"config":{"scripts":{"check":"run-p 'check:*'"}}}
+      style: secondary
+      start: 0
+      end: 51
+  "{\"scripts\":{\"build\":\"tsc\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"build\":\"tsc\"}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        {"scripts":{"build":"tsc"}}
+      style: secondary
+      start: 0
+      end: 28
+  "{\"scripts\":{\"check\":\"echo run-p 'check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"echo run-p 'check:*'\"}}"
+      style: primary
+      start: 0
+      end: 44
+    - source: |
+        {"scripts":{"check":"echo run-p 'check:*'"}}
+      style: secondary
+      start: 0
+      end: 45
+  "{\"scripts\":{\"check\":\"lefthook run pre-push --force\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"lefthook run pre-push --force\"}}"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {"scripts":{"check":"lefthook run pre-push --force"}}
+      style: secondary
+      start: 0
+      end: 54
+  "{\"scripts\":{\"check\":\"lefthook run pre-push -f\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"lefthook run pre-push -f\"}}"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        {"scripts":{"check":"lefthook run pre-push -f"}}
+      style: secondary
+      start: 0
+      end: 49
+  "{\"scripts\":{\"check\":\"lefthook run pre-push\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"lefthook run pre-push\"}}"
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {"scripts":{"check":"lefthook run pre-push"}}
+      style: secondary
+      start: 0
+      end: 46
+  "{\"scripts\":{\"check\":\"npm run format:check && npm run typecheck && npm run lint && npm run test\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"npm run format:check && npm run typecheck && npm run lint && npm run test\"}}"
+      style: primary
+      start: 0
+      end: 97
+    - source: |
+        {"scripts":{"check":"npm run format:check && npm run typecheck && npm run lint && npm run test"}}
+      style: secondary
+      start: 0
+      end: 98
+  "{\"scripts\":{\"check\":\"run-p   \"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p   \"}}"
+      style: primary
+      start: 0
+      end: 32
+    - source: |
+        {"scripts":{"check":"run-p   "}}
+      style: secondary
+      start: 0
+      end: 33
+  "{\"scripts\":{\"check\":\"run-p\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p\"}}"
+      style: primary
+      start: 0
+      end: 29
+    - source: |
+        {"scripts":{"check":"run-p"}}
+      style: secondary
+      start: 0
+      end: 30
+  "{\"scripts\":{\"check\":\"run-parallel 'check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-parallel 'check:*'\"}}"
+      style: primary
+      start: 0
+      end: 46
+    - source: |
+        {"scripts":{"check":"run-parallel 'check:*'"}}
+      style: secondary
+      start: 0
+      end: 47
+  "{\"scripts\":{\"check\":\"run-s 'check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-s 'check:*'\"}}"
+      style: primary
+      start: 0
+      end: 39
+    - source: |
+        {"scripts":{"check":"run-s 'check:*'"}}
+      style: secondary
+      start: 0
+      end: 40
+  "{\"scripts\":{\"check\":\"tsc --noEmit\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"tsc --noEmit\"}}"
+      style: primary
+      start: 0
+      end: 36
+    - source: |
+        {"scripts":{"check":"tsc --noEmit"}}
+      style: secondary
+      start: 0
+      end: 37
+  "{\"scripts\":{\"other\":{\"check\":\"run-p 'check:*'\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"other\":{\"check\":\"run-p 'check:*'\"}}}"
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {"scripts":{"other":{"check":"run-p 'check:*'"}}}
+      style: secondary
+      start: 0
+      end: 50

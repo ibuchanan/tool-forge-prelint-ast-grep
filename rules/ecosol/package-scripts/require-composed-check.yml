@@ -2,34 +2,34 @@ id: require-composed-check
 language: Json
 severity: info
 message: >
-  Delegate the `check` script to `lefthook run pre-push`
-  as a broad guardrail for AI coding agents (if not humans).
+  Compose the `check` script with `run-p` from `npm-run-all2` to run independent checks in parallel.
 note: >
-  lefthook.yml's pre-push hook is already the single source of truth
-  for which checks must pass and runs them in parallel;
-  `npm run check` should reuse it via `lefthook run pre-push`
-  instead of re-enumerating the same checks a second time
-  (which drifts silently when one list is updated and the other isn't)
-  or falling back to a slower sequential `&&` chain.
-  Add --force (or -f) so it doesn't skip commands whose file filters don't
-  match anything when check runs outside an actual git push, since pre-push
-  otherwise skips any command with no matching push files.
-  This rule assumes package.json belongs to a Forge app: in a monorepo, a
-  workspace root or an internal shared library's package.json will also
-  match — even one that imports @forge packages without being deployable
-  itself. manifest.yml is the real signal for "is this a Forge app," and
-  ast-grep can't check whether that file exists, so scope the scan to your
-  Forge app directories rather than the whole monorepo.
-  https://lefthook.dev/configuration/
+  Compose independent read-only validation scripts with `run-p` from npm-run-all2
+  instead of delegating to Lefthook's pre-push hook or repeating a sequential
+  `&&` chain. Select scripts explicitly or with a quoted glob such as `check:*`;
+  ensure that namespace includes every intended check without selecting `check`
+  itself or write-back tasks. Use `--npm-path npm` to select npm explicitly and
+  `--print-label` to identify each task's output. Keep dependent build steps
+  ordered within their own scripts. Local and CI checks should not depend on
+  Git hook file filters or require Lefthook's `--force` flag.
+  This rule checks a direct `run-p` command in the root `scripts.check` field,
+  not the runner dependency, option validity, task coverage, or shell semantics.
+  Scope the scan to Forge app directories: ast-grep cannot establish deployable
+  app identity by checking whether manifest.yml exists in another file.
+  https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-p.md
 rule:
   kind: object
   inside:
     kind: document
   not:
     has:
-      stopBy: end
       kind: pair
-      regex: '"check"\s*:\s*"lefthook run pre-push(\s+(--force|-f))?"'
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        has:
+          kind: pair
+          regex: '^"check"\s*:\s*"\s*run-p\s+[^\s"]'
 files:
   - "**/package.json"
 ignores:
@@ -38,10 +38,11 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
-  references: ["https://lefthook.dev/configuration/"]
+  references:
+    - https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-p.md
   category: package-scripts
   precision: medium
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests accept lefthook run pre-push with optional force and flag sequential or wrong-hook alternatives. The matcher accepts absence of force despite the note recommending it and searches descendant keys without verifying scripts placement or hook contents. Equivalent orchestration and app identity remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-check.test.yml (valid/invalid) and rule-tests/__snapshots__/require-composed-check-snapshot.yml."
+  precision-rationale: "Tests accept direct run-p commands with quoted globs, explicit tasks, whitespace and varying flags; they reject Lefthook delegation with or without force, sequential chains, lookalikes, bare run-p and misplaced keys. The matcher does not validate runner options, task coverage, dependencies or shell semantics; equivalent orchestration and deployable app identity remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-check.test.yml (valid/invalid) and rule-tests/__snapshots__/require-composed-check-snapshot.yml."
   impact: low
-  impact-rationale: Lefthook documents reusable command groups; genuine duplication can drift and add local maintenance overhead. Sequential or alternate complete checks are not inherently unsafe, and parallel execution is configuration-dependent rather than guaranteed by this script.
+  impact-rationale: npm-run-all2 documents parallel npm-script composition. Genuine duplication can drift and add local maintenance overhead. Sequential or alternate complete checks are not inherently unsafe, and the script text alone does not guarantee task independence or complete validation.

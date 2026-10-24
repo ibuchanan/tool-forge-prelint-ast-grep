@@ -1,56 +1,47 @@
 id: require-composed-check
 valid:
+  # Read-only check tasks can be selected by a quoted glob.
   - |
-    {
-      "scripts": {
-        "check": "lefthook run pre-push"
-      }
-    }
-  # --force is needed so check doesn't skip commands when run outside an
-  # actual git push (no push-file diff to match filters against)
+    {"scripts":{"check":"run-p --npm-path npm --print-label \"check:*\""}}
   - |
-    {
-      "scripts": {
-        "check": "lefthook run pre-push --force"
-      }
-    }
-  # -f is the short form of --force
+    {"scripts":{"check":"run-p --print-label --npm-path npm '*:check'"}}
+  # Explicit task lists and optional runner flags are supported too.
   - |
-    {
-      "scripts": {
-        "check": "lefthook run pre-push -f"
-      }
-    }
-  # Dependencies are irrelevant — this ruleset assumes it only ever runs
-  # against a Forge app
+    {"scripts":{"check":"run-p format:check typecheck lint test"}}
   - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "check": "lefthook run pre-push"
-      }
-    }
+    {"scripts":{"check":"run-p 'check:*' --print-label"}}
+  - |
+    {"scripts":{"check":"  run-p   'check:*'"}}
+  # Dependencies do not determine whether the package is a Forge app.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"scripts":{"check":"run-p 'check:*'"}}
 invalid:
-  # Missing entirely
   - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  # The old sequential chain is no longer the expected form
+    {"scripts":{"build":"tsc"}}
   - |
-    {
-      "scripts": {
-        "check": "npm run format:check && npm run typecheck && npm run lint && npm run test"
-      }
-    }
-  # Wrong hook name
+    {"scripts":{"check":"lefthook run pre-push"}}
   - |
-    {
-      "scripts": {
-        "check": "lefthook run pre-commit"
-      }
-    }
+    {"scripts":{"check":"lefthook run pre-push --force"}}
+  - |
+    {"scripts":{"check":"lefthook run pre-push -f"}}
+  - |
+    {"scripts":{"check":"npm run format:check && npm run typecheck && npm run lint && npm run test"}}
+  - |
+    {"scripts":{"check":"tsc --noEmit"}}
+  - |
+    {"scripts":{"check":"run-s 'check:*'"}}
+  - |
+    {"scripts":{"check":"echo run-p 'check:*'"}}
+  - |
+    {"scripts":{"check":"run-parallel 'check:*'"}}
+  - |
+    {"scripts":{"check":"run-p"}}
+  - |
+    {"scripts":{"check":"run-p   "}}
+  # Only the root scripts object may satisfy the rule.
+  - |
+    {"check":"run-p 'check:*'"}
+  - |
+    {"config":{"scripts":{"check":"run-p 'check:*'"}}}
+  - |
+    {"scripts":{"other":{"check":"run-p 'check:*'"}}}

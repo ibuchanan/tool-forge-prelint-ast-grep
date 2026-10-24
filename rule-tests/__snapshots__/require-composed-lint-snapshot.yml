@@ -1,13 +1,8 @@
 id: require-composed-lint
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -18,17 +13,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "lefthook run pre-push"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"lint\": \"lefthook run pre-push\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -39,17 +26,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "npm run lint:prelint && forge lint"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"lint\": \"npm run lint:prelint && forge lint\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -60,17 +39,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"lint\": \"npm run lint:prelint && npm run lint:check && npm run lint:forge\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -81,17 +52,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "npm run lint:prelint && npm run lint:check"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"lint\": \"npm run lint:prelint && npm run lint:check\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -102,14 +65,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/bridge": "^4.0.0"
-      }
-    }
-  : labels:
-    - source: '@forge/bridge'
+  "{\n  \"dependencies\": {\n    \"@forge/bridge\": \"^4.0.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/bridge"
       style: primary
       start: 27
       end: 40
@@ -120,13 +78,8 @@ snapshots:
       style: secondary
       start: 4
       end: 55
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -145,13 +98,8 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "lint": "lefthook run pre-push"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"lint\": \"lefthook run pre-push\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -170,13 +118,8 @@ snapshots:
       style: secondary
       start: 0
       end: 59
-  ? |
-    {
-      "scripts": {
-        "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"lint\": \"npm run lint:prelint && npm run lint:check && npm run lint:forge\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -195,3 +138,146 @@ snapshots:
       style: secondary
       start: 0
       end: 102
+  "{\"config\":{\"scripts\":{\"lint\":\"run-p 'lint:check:*'\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"scripts\":{\"lint\":\"run-p 'lint:check:*'\"}}}"
+      style: primary
+      start: 0
+      end: 54
+    - source: |
+        {"config":{"scripts":{"lint":"run-p 'lint:check:*'"}}}
+      style: secondary
+      start: 0
+      end: 55
+  "{\"lint\":\"run-p 'lint:check:*'\"}\n":
+    labels:
+    - source: "{\"lint\":\"run-p 'lint:check:*'\"}"
+      style: primary
+      start: 0
+      end: 31
+    - source: |
+        {"lint":"run-p 'lint:check:*'"}
+      style: secondary
+      start: 0
+      end: 32
+  "{\"scripts\":{\"build\":\"tsc\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"build\":\"tsc\"}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        {"scripts":{"build":"tsc"}}
+      style: secondary
+      start: 0
+      end: 28
+  "{\"scripts\":{\"lint\":\"biome lint .\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"biome lint .\"}}"
+      style: primary
+      start: 0
+      end: 35
+    - source: |
+        {"scripts":{"lint":"biome lint ."}}
+      style: secondary
+      start: 0
+      end: 36
+  "{\"scripts\":{\"lint\":\"echo run-p 'lint:check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"echo run-p 'lint:check:*'\"}}"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        {"scripts":{"lint":"echo run-p 'lint:check:*'"}}
+      style: secondary
+      start: 0
+      end: 49
+  "{\"scripts\":{\"lint\":\"lefthook run lint\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"lefthook run lint\"}}"
+      style: primary
+      start: 0
+      end: 40
+    - source: |
+        {"scripts":{"lint":"lefthook run lint"}}
+      style: secondary
+      start: 0
+      end: 41
+  "{\"scripts\":{\"lint\":\"lefthook run lint-github-import\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"lefthook run lint-github-import\"}}"
+      style: primary
+      start: 0
+      end: 54
+    - source: |
+        {"scripts":{"lint":"lefthook run lint-github-import"}}
+      style: secondary
+      start: 0
+      end: 55
+  "{\"scripts\":{\"lint\":\"npm run lint:prelint && npm run lint:check && npm run lint:forge\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"npm run lint:prelint && npm run lint:check && npm run lint:forge\"}}"
+      style: primary
+      start: 0
+      end: 87
+    - source: |
+        {"scripts":{"lint":"npm run lint:prelint && npm run lint:check && npm run lint:forge"}}
+      style: secondary
+      start: 0
+      end: 88
+  "{\"scripts\":{\"lint\":\"run-p   \"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p   \"}}"
+      style: primary
+      start: 0
+      end: 31
+    - source: |
+        {"scripts":{"lint":"run-p   "}}
+      style: secondary
+      start: 0
+      end: 32
+  "{\"scripts\":{\"lint\":\"run-p\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p\"}}"
+      style: primary
+      start: 0
+      end: 28
+    - source: |
+        {"scripts":{"lint":"run-p"}}
+      style: secondary
+      start: 0
+      end: 29
+  "{\"scripts\":{\"lint\":\"run-parallel 'lint:check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-parallel 'lint:check:*'\"}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        {"scripts":{"lint":"run-parallel 'lint:check:*'"}}
+      style: secondary
+      start: 0
+      end: 51
+  "{\"scripts\":{\"lint\":\"run-s 'lint:check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-s 'lint:check:*'\"}}"
+      style: primary
+      start: 0
+      end: 43
+    - source: |
+        {"scripts":{"lint":"run-s 'lint:check:*'"}}
+      style: secondary
+      start: 0
+      end: 44
+  "{\"scripts\":{\"other\":{\"lint\":\"run-p 'lint:check:*'\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"other\":{\"lint\":\"run-p 'lint:check:*'\"}}}"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {"scripts":{"other":{"lint":"run-p 'lint:check:*'"}}}
+      style: secondary
+      start: 0
+      end: 54

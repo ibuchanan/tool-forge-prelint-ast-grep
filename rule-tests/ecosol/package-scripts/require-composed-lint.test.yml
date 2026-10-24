@@ -1,48 +1,45 @@
 id: require-composed-lint
 valid:
+  # Quoted globs keep expansion in npm-run-all2 rather than the shell.
   - |
-    {
-      "scripts": {
-        "lint": "lefthook run lint"
-      }
-    }
-  # Dependencies are irrelevant — this ruleset assumes it only ever runs
-  # against a Forge app
+    {"scripts":{"lint":"run-p --npm-path npm --print-label \"lint:check:*\""}}
   - |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "lint": "lefthook run lint"
-      }
-    }
-  # Monorepo: package delegates to its own lefthook.yml group
+    {"scripts":{"lint":"run-p --print-label --npm-path npm 'lint:check:*'"}}
+  # Explicit task lists and optional runner flags are supported too.
   - |
-    {
-      "scripts": {
-        "lint": "lefthook run lint-github-import"
-      }
-    }
+    {"scripts":{"lint":"run-p lint:prelint lint:check lint:forge"}}
+  - |
+    {"scripts":{"lint":"run-p lint:check:biome lint:check:forge --print-label"}}
+  - |
+    {"scripts":{"lint":"  run-p   'lint:check:*'"}}
+  # Dependencies do not determine whether the package is a Forge app.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"scripts":{"lint":"run-p 'lint:check:*'"}}
 invalid:
-  # Missing entirely
   - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  # The old sequential chain is no longer the expected form
+    {"scripts":{"build":"tsc"}}
   - |
-    {
-      "scripts": {
-        "lint": "npm run lint:prelint && npm run lint:check && npm run lint:forge"
-      }
-    }
-  # Wrong lefthook group name
+    {"scripts":{"lint":"lefthook run lint"}}
   - |
-    {
-      "scripts": {
-        "lint": "lefthook run pre-push"
-      }
-    }
+    {"scripts":{"lint":"lefthook run lint-github-import"}}
+  - |
+    {"scripts":{"lint":"npm run lint:prelint && npm run lint:check && npm run lint:forge"}}
+  - |
+    {"scripts":{"lint":"biome lint ."}}
+  - |
+    {"scripts":{"lint":"run-s 'lint:check:*'"}}
+  - |
+    {"scripts":{"lint":"echo run-p 'lint:check:*'"}}
+  - |
+    {"scripts":{"lint":"run-parallel 'lint:check:*'"}}
+  - |
+    {"scripts":{"lint":"run-p"}}
+  - |
+    {"scripts":{"lint":"run-p   "}}
+  # Only the root scripts object may satisfy the rule.
+  - |
+    {"lint":"run-p 'lint:check:*'"}
+  - |
+    {"config":{"scripts":{"lint":"run-p 'lint:check:*'"}}}
+  - |
+    {"scripts":{"other":{"lint":"run-p 'lint:check:*'"}}}

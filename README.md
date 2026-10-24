@@ -239,13 +239,10 @@ UI Kit and Custom UI correctness:
 
 ### git-hooks
 
-lefthook.yml guard coverage — a lightweight pre-commit gitleaks and format
-guard (lint/typecheck are too heavy-handed for every commit), and a
-comprehensive pre-push guard covering format, typecheck, lint, and test, so
-CI and `npm run check` can both reuse `lefthook run pre-push` as the single
-source of truth. Each guard is its own rule so a missing one is named
-specifically instead of bundled into one generic "hooks are incomplete"
-finding. _(ecosol)_
+lefthook.yml guard coverage — lightweight pre-commit gitleaks and format
+guards. Full lint, typecheck, test, format, and size checks no longer require
+individual pre-push entries. Compose `npm run check` and `npm run lint` with
+`run-p` from `npm-run-all2`, independently of Git hook file filters. _(ecosol)_
 
 ### imports
 
@@ -294,7 +291,10 @@ npm script hygiene for the `scripts` block:
   require suppression.
 - **ecosol** — which scripts should exist, what they should compose, and
   naming/behavior hygiene for the ecosol repo-init template's `scripts`
-  block as a whole.
+  block as a whole. Compose `lint` and `check` with `run-p` from `npm-run-all2`,
+  using explicit task lists or quoted globs. For example,
+  `run-p --npm-path npm --print-label "lint:check:*"` runs the tasks in that
+  namespace in parallel; ensure it includes all intended read-only lint tasks.
 
 ### performance
 

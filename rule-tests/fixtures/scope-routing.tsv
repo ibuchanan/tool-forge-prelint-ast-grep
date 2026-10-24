@@ -17,11 +17,6 @@ rules/ecosol/forge-scripts/use-forge-upgrade.yml	package	include
 rules/ecosol/forge-scripts/use-forge-variables-set.yml	package	include
 rules/ecosol/git-hooks/require-lefthook-pre-commit-format.yml	hooks	include
 rules/ecosol/git-hooks/require-lefthook-pre-commit-gitleaks.yml	hooks	include
-rules/ecosol/git-hooks/require-lefthook-pre-push-format.yml	hooks	include
-rules/ecosol/git-hooks/require-lefthook-pre-push-lint.yml	hooks	include
-rules/ecosol/git-hooks/require-lefthook-pre-push-size.yml	hooks	include
-rules/ecosol/git-hooks/require-lefthook-pre-push-test.yml	hooks	include
-rules/ecosol/git-hooks/require-lefthook-pre-push-typecheck.yml	hooks	include
 rules/ecosol/package-json/require-package-type-module.yml	package	include
 rules/ecosol/package-json/use-node-24.yml	package	include
 rules/ecosol/package-scripts/lint-and-format-with-biome.yml	package	include
