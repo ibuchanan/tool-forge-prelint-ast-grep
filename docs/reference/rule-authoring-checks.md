@@ -1,9 +1,10 @@
 # Rule-authoring self-evaluation reference
 
-Ticket 03 implements repository-only checks for the
-[rule-authoring policy](rule-authoring-policy.md). The native tool seams were
-approved before test-first implementation. These checks establish structural
-invariants, not assessment approval.
+Repository-only checks enforce the [rule-authoring policy](rule-authoring-policy.md)
+for every current and new definition, including language companions and disabled
+placeholders. There is no migration ledger or suppression path. The public tool
+seams were approved before test-first implementation. These checks establish
+structural invariants, not assessment approval.
 
 ## Entry points
 
@@ -13,19 +14,21 @@ invariants, not assessment approval.
 | `bash scripts/check-authoring.sh`                                                                | All shipped `rules/*/*/*.yml`, read-only                                                                 |
 | `bash scripts/check-authoring.sh rules/<tier>/<category>/<id>.yml`                               | Explicit selected documents, read-only                                                                   |
 | `ast-grep test --config authoring/sgconfig.yml --test-dir authoring/tests --skip-snapshot-tests` | Native authoring matcher cases only                                                                      |
+| `bash scripts/check-package.sh`                                                                  | Actual archive membership and loading of all four packed consumer configurations                         |
 
 `npm test` composes consumer tests, real-file fixtures, and `test:authoring`.
 The existing Lefthook pre-push command and any CI running `npm test` therefore
 include enforcement; this repository has no separate hosted CI configuration.
 `npm run check` retains its existing Lefthook delegation. Authoring tooling
-requires Bash, Mike Farah yq v4 (tested with v4.54.1), jq, shasum, and the existing
-ast-grep CLI (tested with 0.51.0). No dependencies were added.
+requires Bash, Mike Farah yq v4 (tested with v4.54.1), jq, and the existing
+ast-grep CLI (tested with 0.51.0). Preservation tests use shasum; the archive check
+also uses Bun and tar. No dependencies were added.
 
-| Exit status | Meaning                                                                        |
-| ----------- | ------------------------------------------------------------------------------ |
-| `0`         | No unallowlisted violations; any `REVIEW:` lines remain unresolved comparisons |
-| `1`         | Unallowlisted authoring violation                                              |
-| `2`         | Tool, parser, unsafe YAML, or scanner failure; never migratable debt           |
+| Checker exit status | Meaning                                                                   |
+| ------------------- | ------------------------------------------------------------------------- |
+| `0`                 | No detected violations; any `REVIEW:` lines remain unresolved comparisons |
+| `1`                 | Authoring violation; every finding is enforced                            |
+| `2`                 | Tool, parser, unsafe YAML, or scanner failure; never a policy exception   |
 
 ## Native diagnostics
 
@@ -82,8 +85,8 @@ The comparison handles only exact sets constructed from shared policy constants:
 
 Within-kind selectors union; different kinds intersect. `tests` adds no positive
 paths. A different known conventional set is `positive-scope`, a violation.
-Other positive patterns produce visible `REVIEW:` output even for allowlisted
-legacy files. Unique scope is explicitly reviewed, not machine-proven.
+Other positive patterns produce visible `REVIEW:` output for every definition.
+Unique scope is explicitly reviewed, not machine-proven.
 Unsupported narrowing must retain maintainer review and routing fixtures; it is
 not converted to `unique`, silently accepted as equivalent, or auto-repaired.
 
@@ -102,22 +105,20 @@ preserved. It does not establish complete URL validity, authority, relevance,
 reachability, or authenticity. Tags require `module:<namespace>:<identifier>`
 shape; exact Forge module identity remains review work.
 
-## Migration allowances
+## Enforcement and exceptions
 
-`authoring/legacy-allowances.tsv` freezes existing unmigrated findings at ticket
-03's baseline: 1,718 diagnostic allowances across 200 unchanged legacy files.
-Each row contains a repository-relative path, SHA-256 of exact
-source bytes, and explicitly enumerated diagnostic IDs (space-delimited).
-There is no regeneration command or wildcard exemption. The six migrated pilot
-files have no allowances.
+Every detected violation is an error. The migration ledger, source-hash lookup
+and compatibility-only tests have been removed; recreating the old ledger cannot
+suppress findings. A retained integration regression demonstrates default discovery
+of a new malformed disabled rule, rejection despite a former exact ledger entry,
+explicit repair and a successful recheck without activating it. Enabled rules are
+enforced through the same path.
 
-An unchanged legacy source may retain only its enumerated debt. A new rule, a
-changed legacy source, or a new diagnostic is enforced immediately. Migration
-therefore removes obsolete rows after resolving a file's debt; incidental source
-edits also invalidate the hash. Do not grow or refresh allowances to hide new
-violations. Ticket 10 removes the table. Review warnings and input/tool failures
-are never allowlisted. The summary reports the frozen diagnostic count, not
-policy approval.
+The only custom scope mechanism is exclusive `[unique]` with nonempty inline
+`scope-rationale` and maintainer-reviewed routing evidence. It does not bypass
+metadata, native-glob shape or severity checks. A visible `REVIEW:` comparison
+remains unvalidated even at status 0; it requires review and real-file fixtures,
+not a blanket suppression. No arbitrary glob-equivalence claim is made.
 
 ## Repairs and remaining review
 
@@ -134,6 +135,12 @@ its [severity reference](rule-severity.md) documents the non-mutating report,
 explicit edit recipe, approved gate changes and exit-status regressions.
 Disabled definitions stay disabled. Native-scope decisions are recorded by ticket 08.
 
-Actual package-archive verification excludes `authoring/`, `scripts/`, tests,
-scratch records, documentation, and vendor content from the distributed artifact.
-Only the original consumer rules/configurations and package metadata remain.
+`scripts/check-package.sh` uses `bun pm pack --ignore-scripts`, compares the
+complete tar membership against discovered rule files, four tier configs,
+package.json, LICENSE and README.md, then loads each extracted config against an
+empty input directory with ast-grep. Configs permit only consumer rule directories
+and optional language globs, never repository-only test/utility directories.
+Unexpected archive entries, missing files, invalid configs and scanner failures
+fail validation. The actual archive excludes authoring tooling, tests, scratch
+records, other documentation and vendor content; no lifecycle scripts run and
+nothing is published. Evidence remains under `.scratch/tmp_rovo_package.*`.

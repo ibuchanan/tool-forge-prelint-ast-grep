@@ -1,6 +1,16 @@
 # Backfill rule metadata with yq
 
-Use these repository-only recipes for explicit metadata maintenance, not assessment approval. Scope intent, source authority, module identity, ratings, and rationale need review under the [rule-authoring policy](../reference/rule-authoring-policy.md). These recipes do not infer scope profiles, extract URLs from prose, or change native scope/severity.
+Use these repository-only recipes for explicit metadata maintenance, not assessment approval. Scope intent, source authority, module identity, ratings, and rationale need review under the [rule-authoring policy](../reference/rule-authoring-policy.md). Metadata recipes do not infer scope profiles, extract URLs from prose, or change native scope. The separate severity recipe requires explicit gate review.
+
+## Check and review a rule
+
+1. Run `bash scripts/check-authoring.sh` for all definitions, or pass explicit rule paths for a focused read-only check. There are no migration allowances, including for new rules, companions, and disabled placeholders. Status 1 means violations; status 2 means a tool/input failure that must be fixed, not suppressed. Treat `REVIEW:` as unresolved scope review even with status 0.
+2. Match `metadata.category` to the containing directory. Supply nonempty inline precision and impact rationales citing actual test/snapshot evidence; mark untested limitations as gaps. Review precision against the stated policy, and impact against the consequences of genuine non-compliance, independently. Compare equivalent language companions without copying language-specific evidence blindly.
+3. Select exact authoritative HTTP(S) references, preserving meaningful queries/fragments. Optional tags use `module:<namespace>:<identifier>` for a documented exact Forge module, supported by a reference. Omit uncertain tags. Neither a shape check nor a classification proves authority, module identity, or exploitability.
+4. Review native scope and real-file routing. Use standard selectors where they express the intended boundary. For a justified permanent exception, select only `[unique]`, document exact positive boundaries, exclusions and test policy in `scope-rationale`, and add or update `rule-tests/fixtures/scope-routing.tsv` and scanner fixtures. Never use `unique`, `off`, or a suppression to hide malformed metadata or avoid a policy decision. Unsupported positive comparisons require explicit maintainer review and routing evidence; do not infer arbitrary glob equivalence.
+5. Preview mechanical repairs below. For rating/severity changes, run `bash scripts/report-rule-severity.sh` on the same selection, review promotions to blocking `error` and demotions with a maintainer, then preview `yq -e --from-file "$RULE_AUTHORING_DIR/recipes/severity.yq" "$rule"` before adding `-i`. Do not invent severity overrides or activate `off` placeholders; see the [severity reference](../reference/rule-severity.md).
+
+Keep durable decisions in each rule's metadata and routing tests, not a parallel assessment store. A clean checker does not replace maintainer review of evidence adequacy, rationale truth, companion consistency, reference/tag validity, or unsupported scope relationships.
 
 ## Prerequisites
 
@@ -73,20 +83,20 @@ yq -e -i --from-file "$RULE_AUTHORING_DIR/recipes/normalize.yq" "$rule"
 
 Normalization removes exact duplicate references/tags and orders existing scope selectors according to `authoring/policy.yml`. It does not create absent fields, deduplicate invalid selectors, assign a standard/unique profile, invent rationale, repair classifications, or reorder/deduplicate native `files`/`ignores`. Tag screening checks `module:<product>:<module>` shape only; it does not establish an exact supported Forge module or a supporting reference.
 
-All three recipes share `validate.yq` guards, not a full policy validator. They reject unsupported layouts, unknown tiers/categories, ID/filename mismatch, explicit null/non-mapping metadata, malformed touched values, invalid known ratings, unsupported tag shapes, unknown/duplicate selectors, multiple documents, YAML anchors, and duplicate mapping keys. Existing unrelated metadata is preserved; OWASP/CWE string content and rationale truth still require review. Missing required assessment fields are not filled in automatically. Ticket 03 owns authoring diagnostics and migration enforcement.
+All three recipes share `validate.yq` guards, not a full policy validator. They reject unsupported layouts, unknown tiers/categories, ID/filename mismatch, explicit null/non-mapping metadata, malformed touched values, invalid known ratings, unsupported tag shapes, unknown/duplicate selectors, multiple documents, YAML anchors, and duplicate mapping keys. Existing unrelated metadata is preserved; OWASP/CWE string content and rationale truth still require review. Missing required assessment fields are not filled in automatically. Run the mandatory authoring checker after any edit.
 
 ## Verify the edit
 
 Run the recipe tests, consumer suites, and formatter:
 
 ```bash
-bash scripts/test-rule-metadata.sh
+bash scripts/check-authoring.sh "${rules[@]}"
 bun run test
 bun run format:check
 git diff --check
 ```
 
-The new recipe test is opt-in in ticket 02; CI/check integration belongs to ticket 03. It needs no JavaScript/TypeScript runtime. Existing consumer tests continue using the repository's established runtime/dependencies.
+`bun run test` includes consumer tests, real-file routing fixtures, all authoring and recipe regressions, the whole-repository check and `bash scripts/check-package.sh`. The latter creates a real archive without lifecycle scripts, compares its complete membership and loads all four packed consumer configs. The saved archive and lists remain under `.scratch/tmp_rovo_package.*` for inspection; no package is published.
 
 For each edited rule, compare parsed documents with `metadata` removed against a saved before-copy or HEAD. For a tracked rule:
 
@@ -106,4 +116,4 @@ Review `git diff` for all changes, including YAML presentation. yq can change pr
 - `diff` returns **0** for equal output, **1** for changes, and greater than **1** for errors.
 - Successful edits are mechanical success only, not proof of full metadata or scope compliance. The recipes never approve a legacy package rule's incomplete exclusions as `[package-json, tests]`.
 
-Use repository searches and ordinary diffs to discover test/snapshot evidence and likely companions during tickets 04–07. Maintainers review equivalence, evidence gaps, scope intent, reference authority, and judgments; no report store or companion analyzer is needed. Scope changes belong to ticket 08 and severity changes to ticket 09.
+Use repository searches and ordinary diffs to discover test/snapshot evidence and likely companions. Maintainers review equivalence, evidence gaps, scope intent, reference authority, and judgments; no report store or companion analyzer is needed. Scope and severity changes are behavior changes requiring review and scanner evidence, not metadata formatting.

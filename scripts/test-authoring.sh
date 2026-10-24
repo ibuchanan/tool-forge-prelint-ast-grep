@@ -24,3 +24,4 @@ bash scripts/test-rule-metadata.sh
 bash scripts/test-scope-composition.sh
 bash scripts/test-rule-severity.sh
 bash scripts/check-authoring.sh
+bash scripts/check-package.sh

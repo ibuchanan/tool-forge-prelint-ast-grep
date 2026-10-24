@@ -82,11 +82,12 @@ npm run test:interactive
 The [rule-authoring policy](docs/reference/rule-authoring-policy.md) specifies
 metadata, inline rating rationale, composable scope profiles, and the reviewed
 severity matrix. The [glossary](GLOSSARY.md) distinguishes categories, tiers,
-profiles, and ratings. New and migrated rules follow that contract; existing
-unmigrated rules remain compatible during the documented rollout. Ticket 01
-introduces the policy and a metadata-only pilot. Ticket 02 provides explicit
-[yq metadata recipes](docs/how-to/backfill-rule-metadata.md), shared constants in
-`authoring/policy.yml`, and opt-in preservation tests:
+profiles, and ratings. Every definition, including new rules, companions and
+`off` placeholders, is checked without migration allowances. The
+[contributor check/apply workflow](docs/how-to/backfill-rule-metadata.md) covers
+review expectations, permanent justified scope exceptions and safe explicit yq
+repairs. Shared constants live in `authoring/policy.yml`; recipe preservation
+tests run in the mandatory authoring suite and can also be run directly:
 
 ```sh
 bash scripts/test-rule-metadata.sh
@@ -95,9 +96,10 @@ bash scripts/test-rule-metadata.sh
 These need Bash and Mike Farah yq v4 (tested with v4.54.1), not a custom CLI or
 JavaScript/TypeScript runtime. The small sourced tool guard does not edit files.
 Automatic scope inference, prose URL extraction, and assessment/companion reports
-are deliberately out of scope. Ticket 03 adds repository-only native self-checks
-and a frozen legacy allowance. `npm test` (also the existing pre-push/CI entry
-point) runs them after consumer tests and fixtures. Run them independently with:
+are deliberately out of scope. Repository-only native self-checks reject every
+detected violation; no ledger, source hash or broad suppression can exempt one.
+`npm test` (also the existing pre-push/CI entry point) runs them and the actual
+package boundary check after consumer tests and fixtures. Run them independently with:
 
 ```sh
 bun run test:authoring
@@ -106,8 +108,8 @@ bash scripts/check-authoring.sh rules/recommended/package-json/require-package-p
 ```
 
 The [self-evaluation reference](docs/reference/rule-authoring-checks.md) lists
-checked invariants, exit statuses, supported scope comparisons, migration
-allowances, and remaining review responsibilities. A `REVIEW:` line is not
+checked invariants, exit statuses, supported scope comparisons, package boundaries,
+and remaining review responsibilities. A `REVIEW:` line is not
 validated scope compliance. Ticket 08 records reviewed scope normalization;
 ticket 09 enforces the [reviewed severity matrix](docs/reference/rule-severity.md).
 The read-only `bash scripts/report-rule-severity.sh` reports current/expected

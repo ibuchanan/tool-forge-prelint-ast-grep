@@ -70,7 +70,7 @@ load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $p |
     (($unique | not) and ($runtimes + $artifacts | length) == 0)
  then ["scope-selectors: use distinct known selectors, runtime/artifact or exclusive unique with an inline rationale"] else [] end) +
 (if ($unique | not) and ($r.ignores | tag) == "!!seq" and ($r.ignores | sort | to_json | @base64) != ($ignores | to_json | @base64)
- then ["scope-ignores: standard scope must match shared baseline/test sets; native edits belong to ticket 08"] else [] end) +
+ then ["scope-ignores: standard scope must match shared baseline/test sets; review native edits with routing fixtures"] else [] end) +
 (if ($unique | not) and ($actual | length) > 0 and ($actual | to_json | @base64) != ($expected | to_json | @base64) then
    (if ($conventional | map(sort | to_json | @base64) | contains([($actual | to_json | @base64)]))
     then ["positive-scope: known native set disagrees with runtime/artifact union and intersection; review, do not infer"]

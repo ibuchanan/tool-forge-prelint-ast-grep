@@ -4,13 +4,18 @@ This reference specifies the authoring contract for Forge Prelint rules. It is
 repository-only documentation, not a consumer rule tier or an ast-grep extension.
 The [glossary](../../GLOSSARY.md) defines the domain terms.
 
-## Rollout status
+## Enforcement status
 
-Ticket 01 establishes this contract and demonstrates it on six rule files in
-three families. Only metadata changes in the pilot: IDs, languages, matchers,
-utilities, fixes, messages, notes, native scope, and current severity are preserved.
-Existing unmigrated rules remain compatible during the expand–migrate–enforce
-rollout; this document does not claim that the whole repository already conforms.
+The expand–migrate–enforce rollout is complete. The mandatory default test and
+pre-push path checks every shipped definition without migration allowances.
+Explicit `off` remains disabled but must satisfy metadata and scope checks;
+reviewed `[unique]` boundaries require inline rationale and routing evidence.
+Unsupported comparisons remain `REVIEW`, not a proof of compliance.
+
+The stage table and ticket verification sections below retain historical evidence,
+not compatibility instructions or current exemptions. The self-evaluation
+[reference](rule-authoring-checks.md) defines the current automated boundary;
+the contributor [how-to](../how-to/backfill-rule-metadata.md) defines safe repairs.
 
 | Stage | Boundary                                                                                                                            |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -22,9 +27,9 @@ rollout; this document does not claim that the whole repository already conforms
 | 09    | Reviewed severity calculation and application; enabled-rule severity becomes enforceable.                                           |
 | 10    | Complete enforcement and removal of migration-only allowances.                                                                      |
 
-Until ticket 03, compliance is established by contributor review and the existing
-checks, not an unimplemented validation command. Scope changes and severity
-changes are separate behavior changes, not metadata maintenance.
+Scope and severity changes remain separately reviewed behavior changes, not
+metadata maintenance. The historical migration stages do not authorize new
+allowances, severity overrides or broad suppressions.
 
 ## Metadata schema
 
@@ -341,9 +346,9 @@ Disputed differences require review, not blind copying of metadata.
 Repository-only checks are implemented through native ast-grep diagnostics and
 small Bash/yq supplements. The [self-evaluation reference](rule-authoring-checks.md)
 records checked invariants, exact conventional scope comparisons, status codes,
-frozen source-bound legacy allowances, and remaining review responsibilities.
-Consumer tests and configurations are unchanged; the default test/pre-push path
-also runs authoring checks. Tool/input failures cannot become migration debt,
+package boundaries, and remaining review responsibilities. The default
+test/pre-push path runs authoring checks and real package verification without
+migration allowances. Tool/input failures cannot become policy exceptions,
 and visible `REVIEW:` comparisons do not establish compliant scope.
 
 ## Ticket 01 pilot
@@ -383,7 +388,7 @@ types, directory categories, companion judgments, reference shape, and the
 pilot's advisory severity differences. This verifies the pilot, not a completed
 repository-wide enforcement implementation.
 
-Future self-evaluation checks inspect top-level declarations, handle block and
+Self-evaluation checks inspect top-level declarations, handle block and
 flow YAML, reject duplicates and malformed values, preserve `off`, and fail with
 nonzero status on scanner/configuration errors. Validation is offline and
 repository-only. Authoring checks, policy data, tests, and repair tooling stay
@@ -723,9 +728,10 @@ As of 2026-10-23, all 57 definitions in this batch satisfy the metadata contract
 Ecosol devtools (5), Forge Ahead (4), Forge scripts (6), Git hooks (7), package
 JSON (2), package scripts (15), secrets (8), TypeScript (9), and Atlassian package
 JSON (1). Their 491 frozen diagnostics and 57 allowance rows are retired. The
-allowance file is now empty; its compatibility machinery remains until ticket 10.
-The orchestration regression requires zero findings and zero allowance rows for
-both tiers, including future definitions.
+allowance file was empty at this stage; ticket 10 removes it and its compatibility machinery.
+The migration-stage orchestration regression required zero findings and zero
+allowance rows for both tiers; ticket 10 replaces it with default whole-repository
+validation, including future definitions.
 
 ### Assessment and evidence review
 
@@ -877,7 +883,7 @@ preservation, malformed rating rejection, non-mutating complete reports,
 stale-declaration failure/repair and real gate outcomes have retained regressions.
 Only severity changes in shipped definitions; scope, ratings, matchers, fixes,
 prose, snapshots, configurations and dependencies remain unchanged. The
-empty allowance ledger and its compatibility machinery remain ticket 10 work.
+empty allowance ledger and its compatibility machinery were removed in ticket 10.
 
 Verification passed: all 206 consumer tests, 206-definition routing across four
 shipped tiers, scaffold/Biome/security fixtures, six native authoring tests,
@@ -885,6 +891,55 @@ value/orchestration/metadata-recipe/scope-composition/severity suites, and the
 repository checker with zero frozen findings. Prettier, ShellCheck, changed-shell
 shfmt and `git diff --check` pass. Parsed non-severity documents equal their
 pre-rollout versions; the final rule diff is 93 one-line severity replacements.
+
+## Ticket 10 final enforcement
+
+The migration ledger and source-hash suppression path are removed. The checker
+rejects every detected violation for existing/new, enabled/disabled definitions.
+Compatibility-only cases and per-tier debt assertions are replaced by a default
+repository-discovery regression: a new malformed disabled rule fails even beside
+an exact former ledger entry, then passes after explicit repair without activation.
+Standard scope drift, malformed values, scanner failures, supported severity
+calculation and visible unsupported-scope review retain their existing contracts.
+
+Fresh discovery at completion found 206 definitions: 95 strict, 54 recommended,
+56 Ecosol and one Atlassian. There are 159 standard profiles and 47 permanent
+unique boundaries, with no shipped disabled placeholders. Disabled validation and
+preservation remain exercised by isolated public-seam regressions. All shipped
+rule bytes, consumer tests/snapshots, tier configurations and dependencies are
+unchanged by this cleanup.
+
+Review of the 32 named language-companion families (85 definitions) found matching
+category, precision, impact, tags and scope intent. All share references except
+the previously reviewed token pair's intentional resolver/variable-source
+variation. No module tags are currently declared, so exact module-identity review
+is vacuous for this inventory, not a promise to validate future module names.
+All 47 custom boundaries retain inline justification and real-file routing cases.
+Existing inline test/snapshot evidence, assessment gaps and source-authority
+limitations remain explicit: in particular, the classic-scope authority conflict,
+Node convention limitation and team-policy sources are not newly endorsed as
+platform mandates. No URL reachability, authority, rationale truth or arbitrary
+glob relationship is claimed mechanically proven. New disputed judgments still
+require maintainer review; no automatic companion analyzer or assessment store is
+introduced.
+
+The contributor [how-to](../how-to/backfill-rule-metadata.md) specifies checking,
+reviewing, previewing/applying explicit yq recipes, retaining off, reviewing new
+blocking findings and documenting permanent scope exceptions. The
+[self-evaluation reference](rule-authoring-checks.md) defines exact limits.
+`test:authoring` also verifies actual package contents and loads all four packed
+consumer configs. At completion the archive contains 213 files: 206 rule files,
+four configs, package.json, LICENSE and README.md; repository-only tooling, tests
+and local tickets are absent. Intentional policy-file leaks, self-evaluation config
+paths and malformed packed rules fail the boundary check; lifecycle scripts are
+not executed and no package is published.
+
+Final verification passed: 206 consumer tests, all 206 real-file routing cases
+across four shipped tiers, scaffold/Biome/security fixtures, six native authoring
+tests, all value/orchestration/recipe/composition/severity regressions and the
+whole-repository and actual-archive checks. All 406 cited test/snapshot paths
+exist. Repository Prettier, ShellCheck across scripts, changed-shell shfmt and
+`git diff --check` pass. The cleanup is one independently reviewable commit.
 
 ## Model references
 

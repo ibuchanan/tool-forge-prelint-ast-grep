@@ -38,7 +38,7 @@ run_check 1 'category:' "$file"
 yq --from-file authoring/recipes/category.yq "$file" >"$work/repaired.yml"
 cp "$work/repaired.yml" "$file"
 run_check 0 'Authoring checks passed' "$file"
-# Unsupported scope is visible, never allowlisted as an established comparison.
+# Unsupported scope is visible, never asserted as an established comparison.
 yq '.metadata.scope-profile = ["frontend"] | .files = ["src/frontend/specific.ts"] | .ignores = (load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") | .baseline + .test-exclusions)' "$base" >"$file"
 run_check 0 'REVIEW:' "$file"
 # Source bytes remain untouched by the check.
@@ -69,30 +69,33 @@ PATH="$work/bin:$PATH" run_check 2 'scanner failed' "$file"
 # Even a misleading findings status without a valid result must fail as a tool error.
 printf '#!/usr/bin/env bash\nprintf "[]\\n"\nexit 1\n' >"$work/bin/ast-grep"
 PATH="$work/bin:$PATH" run_check 2 'scanner failed' "$file"
-# Exercise frozen-debt compatibility without keeping a real rule unmigrated.
-# The checker runs unchanged in an isolated repository with one explicit allowance.
+# A new disabled definition cannot opt out, even with an exact former ledger entry.
+# Exercise default repository discovery and explicit repair in an isolated checkout.
 sandbox="$work/repository"
 mkdir -p "$sandbox/scripts" "$sandbox/rules/recommended/security"
 cp scripts/check-authoring.sh scripts/rule-metadata-env.sh "$sandbox/scripts/"
 cp -R authoring "$sandbox/authoring"
-legacy=rules/recommended/security/example.yml
-yq 'del(.metadata)' "$base" >"$sandbox/$legacy"
-digest=$(shasum -a 256 "$sandbox/$legacy")
-printf '%s\t%s\t%s\n' "$legacy" "${digest%% *}" ' category metadata ratings rationales references require-authoring-metadata scope-ignores scope-selectors' >"$sandbox/authoring/legacy-allowances.tsv"
+candidate=rules/recommended/security/example.yml
+yq 'del(.metadata)' "$base" >"$sandbox/$candidate"
+digest=$(shasum -a 256 "$sandbox/$candidate")
+printf '%s\t%s\t%s\n' "$candidate" "${digest%% *}" ' category metadata ratings rationales references require-authoring-metadata scope-ignores scope-selectors' >"$sandbox/authoring/legacy-allowances.tsv"
 check_script="$sandbox/scripts/check-authoring.sh"
-run_check 0 'Authoring checks passed (8 frozen legacy findings' "$legacy"
-copy="$work/rules/recommended/security/example.yml"
-cp "$sandbox/$legacy" "$copy"
-run_check 1 'unallowlisted findings' "$copy"
-rm "$work/bin/ast-grep"
-printf '#!/usr/bin/env bash\nprintf "changed-digest\\n"\n' >"$work/bin/shasum"
-chmod +x "$work/bin/shasum"
-PATH="$work/bin:$PATH" run_check 1 'unallowlisted findings' "$legacy"
-rm "$work/bin/shasum"
-# An unrelated scanner diagnostic cannot inherit existing per-file debt.
-printf '#!/usr/bin/env bash\nprintf '\''[{"file":"rules/recommended/security/example.yml","ruleId":"new-diagnostic","message":"New defect","severity":"error"}]\\n'\''\nexit 1\n' >"$work/bin/ast-grep"
-chmod +x "$work/bin/ast-grep"
-PATH="$work/bin:$PATH" run_check 1 'new-diagnostic' "$legacy"
+run_check 1 'require-authoring-metadata'
+cp "$base" "$sandbox/$candidate"
+run_check 0 'Authoring checks passed'
+[[ $(yq '.severity' "$sandbox/$candidate") == off ]]
+yq 'del(.metadata.category)' "$base" >"$sandbox/$candidate"
+run_check 1 'category:'
+yq --from-file authoring/recipes/category.yq "$sandbox/$candidate" >"$work/repaired.yml"
+cp "$work/repaired.yml" "$sandbox/$candidate"
+run_check 0 'Authoring checks passed'
+[[ $(yq '.severity' "$sandbox/$candidate") == off ]]
+# The same definition is enforced when enabled; the matrix is not an override.
+yq '.severity = "info"' "$base" >"$sandbox/$candidate"
+run_check 0 'Authoring checks passed'
+yq 'del(.metadata.impact-rationale)' "$sandbox/$candidate" >"$work/invalid.yml"
+cp "$work/invalid.yml" "$sandbox/$candidate"
+run_check 1 'rationales:'
 # Wrong yq implementations and failing parsers are execution failures, not findings.
 printf '#!/usr/bin/env bash\nprintf "yq incompatible\\n"\n' >"$work/bin/yq"
 chmod +x "$work/bin/yq"
@@ -102,32 +105,6 @@ PATH="$work/bin:$PATH" run_check 2 'Expected Mike Farah yq'
 printf '#!/usr/bin/env bash\nif [[ $1 == --version ]]; then printf "yq (https://github.com/mikefarah/yq/) version v4.54.1\\n"; else exit 7; fi\n' >"$work/bin/yq"
 PATH="$work/bin:$PATH" run_check 2 'parse/structure' "$file"
 unset check_script
-# Migrated strict security definitions must pass without inheriting legacy debt.
-run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/strict/security/*.yml
-if grep -q '^rules/strict/security/' authoring/legacy-allowances.tsv; then
-  printf 'Migrated strict security rules still have legacy allowances.\n' >&2
-  exit 1
-fi
-# The remaining strict categories are migrated too, including future definitions.
-strict_rules=()
-for rule in rules/strict/*/*.yml; do
-  [[ $rule == rules/strict/security/* ]] || strict_rules+=("$rule")
-done
-run_check 0 'Authoring checks passed (0 frozen legacy findings' "${strict_rules[@]}"
-if awk -F '\t' '$1 ~ /^rules\/strict\// && $1 !~ /^rules\/strict\/security\// { found = 1 } END { exit !found }' authoring/legacy-allowances.tsv; then
-  printf 'Migrated non-security strict rules still have legacy allowances.\n' >&2
-  exit 1
-fi
-# Recommended definitions must also pass without frozen metadata debt.
-run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/recommended/*/*.yml
-if grep -q '^rules/recommended/' authoring/legacy-allowances.tsv; then
-  printf 'Migrated recommended rules still have legacy allowances.\n' >&2
-  exit 1
-fi
-# Ecosol and Atlassian definitions must pass without frozen metadata debt.
-run_check 0 'Authoring checks passed (0 frozen legacy findings' rules/ecosol/*/*.yml rules/atlassian/*/*.yml
-if awk -F '\t' '$1 ~ /^rules\/(ecosol|atlassian)\// { found = 1 } END { exit !found }' authoring/legacy-allowances.tsv; then
-  printf 'Migrated Ecosol/Atlassian rules still have legacy allowances.\n' >&2
-  exit 1
-fi
+# Discover all current definitions, including future files and language companions.
+run_check 0 'Authoring checks passed'
 printf 'Authoring orchestration checks passed.\n'
