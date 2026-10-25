@@ -1,0 +1,343 @@
+id: prefer-todo-script
+snapshots:
+  "{ \"metadata\": { \"scripts\": { \"todo\": \"owner-todo\" } } }\n":
+    labels:
+    - source: "{ \"metadata\": { \"scripts\": { \"todo\": \"owner-todo\" } } }"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        { "metadata": { "scripts": { "todo": "owner-todo" } } }
+      style: secondary
+      start: 0
+      end: 56
+  "{ \"name\": \"forge-app\" }\n":
+    labels:
+    - source: "{ \"name\": \"forge-app\" }"
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  "{ \"scripts\": \"owner-todo\" }\n":
+    labels:
+    - source: "{ \"scripts\": \"owner-todo\" }"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        { "scripts": "owner-todo" }
+      style: secondary
+      start: 0
+      end: 28
+  "{ \"scripts\": [{ \"todo\": \"owner-todo\" }] }\n":
+    labels:
+    - source: "{ \"scripts\": [{ \"todo\": \"owner-todo\" }] }"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        { "scripts": [{ "todo": "owner-todo" }] }
+      style: secondary
+      start: 0
+      end: 42
+  "{ \"scripts\": null }\n":
+    labels:
+    - source: "{ \"scripts\": null }"
+      style: primary
+      start: 0
+      end: 19
+    - source: |
+        { "scripts": null }
+      style: secondary
+      start: 0
+      end: 20
+  "{ \"scripts\": { \"metadata\": { \"todo\": \"owner-todo\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"metadata\": { \"todo\": \"owner-todo\" } } }"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        { "scripts": { "metadata": { "todo": "owner-todo" } } }
+      style: secondary
+      start: 0
+      end: 56
+  "{ \"scripts\": { \"todo\": \"   \" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"   \" } }"
+      style: primary
+      start: 0
+      end: 32
+    - source: |
+        { "scripts": { "todo": "   " } }
+      style: secondary
+      start: 0
+      end: 33
+  "{ \"scripts\": { \"todo\": \" \\t\\n\\r \" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \" \\t\\n\\r \" } }"
+      style: primary
+      start: 0
+      end: 37
+    - source: |
+        { "scripts": { "todo": " \t\n\r " } }
+      style: secondary
+      start: 0
+      end: 38
+  "{ \"scripts\": { \"todo\": \" echo TODO \" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \" echo TODO \" } }"
+      style: primary
+      start: 0
+      end: 40
+    - source: |
+        { "scripts": { "todo": " echo TODO " } }
+      style: secondary
+      start: 0
+      end: 41
+  "{ \"scripts\": { \"todo\": \"\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"\" } }"
+      style: primary
+      start: 0
+      end: 29
+    - source: |
+        { "scripts": { "todo": "" } }
+      style: secondary
+      start: 0
+      end: 30
+  "{ \"scripts\": { \"todo\": \"# owner-todo\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"# owner-todo\" } }"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        { "scripts": { "todo": "# owner-todo" } }
+      style: secondary
+      start: 0
+      end: 42
+  "{ \"scripts\": { \"todo\": \":\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \":\" } }"
+      style: primary
+      start: 0
+      end: 30
+    - source: |
+        { "scripts": { "todo": ":" } }
+      style: secondary
+      start: 0
+      end: 31
+  "{ \"scripts\": { \"todo\": \"Not yet implemented\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"Not yet implemented\" } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "todo": "Not yet implemented" } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"todo\": \"TODO\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"TODO\" } }"
+      style: primary
+      start: 0
+      end: 33
+    - source: |
+        { "scripts": { "todo": "TODO" } }
+      style: secondary
+      start: 0
+      end: 34
+  "{ \"scripts\": { \"todo\": \"echo 'No TODOs found'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"echo 'No TODOs found'\" } }"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        { "scripts": { "todo": "echo 'No TODOs found'" } }
+      style: secondary
+      start: 0
+      end: 51
+  "{ \"scripts\": { \"todo\": \"exit 0\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"exit 0\" } }"
+      style: primary
+      start: 0
+      end: 35
+    - source: |
+        { "scripts": { "todo": "exit 0" } }
+      style: secondary
+      start: 0
+      end: 36
+  "{ \"scripts\": { \"todo\": \"exit 1\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"exit 1\" } }"
+      style: primary
+      start: 0
+      end: 35
+    - source: |
+        { "scripts": { "todo": "exit 1" } }
+      style: secondary
+      start: 0
+      end: 36
+  "{ \"scripts\": { \"todo\": \"false\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"false\" } }"
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        { "scripts": { "todo": "false" } }
+      style: secondary
+      start: 0
+      end: 35
+  "{ \"scripts\": { \"todo\": \"placeholder\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"placeholder\" } }"
+      style: primary
+      start: 0
+      end: 40
+    - source: |
+        { "scripts": { "todo": "placeholder" } }
+      style: secondary
+      start: 0
+      end: 41
+  "{ \"scripts\": { \"todo\": \"printf 'No TODOs found'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"printf 'No TODOs found'\" } }"
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        { "scripts": { "todo": "printf 'No TODOs found'" } }
+      style: secondary
+      start: 0
+      end: 53
+  "{ \"scripts\": { \"todo\": \"true\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": \"true\" } }"
+      style: primary
+      start: 0
+      end: 33
+    - source: |
+        { "scripts": { "todo": "true" } }
+      style: secondary
+      start: 0
+      end: 34
+  "{ \"scripts\": { \"todo\": 42 } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": 42 } }"
+      style: primary
+      start: 0
+      end: 29
+    - source: |
+        { "scripts": { "todo": 42 } }
+      style: secondary
+      start: 0
+      end: 30
+  "{ \"scripts\": { \"todo\": [\"owner-todo\"] } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": [\"owner-todo\"] } }"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        { "scripts": { "todo": ["owner-todo"] } }
+      style: secondary
+      start: 0
+      end: 42
+  "{ \"scripts\": { \"todo\": false } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": false } }"
+      style: primary
+      start: 0
+      end: 32
+    - source: |
+        { "scripts": { "todo": false } }
+      style: secondary
+      start: 0
+      end: 33
+  "{ \"scripts\": { \"todo\": null } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": null } }"
+      style: primary
+      start: 0
+      end: 31
+    - source: |
+        { "scripts": { "todo": null } }
+      style: secondary
+      start: 0
+      end: 32
+  "{ \"scripts\": { \"todo\": { \"command\": \"owner-todo\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo\": { \"command\": \"owner-todo\" } } }"
+      style: primary
+      start: 0
+      end: 54
+    - source: |
+        { "scripts": { "todo": { "command": "owner-todo" } } }
+      style: secondary
+      start: 0
+      end: 55
+  "{ \"scripts\": { \"todo:check\": \"owner-todo\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todo:check\": \"owner-todo\" } }"
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        { "scripts": { "todo:check": "owner-todo" } }
+      style: secondary
+      start: 0
+      end: 46
+  "{ \"scripts\": { \"todos\": \"owner-todo\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"todos\": \"owner-todo\" } }"
+      style: primary
+      start: 0
+      end: 40
+    - source: |
+        { "scripts": { "todos": "owner-todo" } }
+      style: secondary
+      start: 0
+      end: 41
+  "{ \"scripts\": {} }\n":
+    labels:
+    - source: "{ \"scripts\": {} }"
+      style: primary
+      start: 0
+      end: 17
+    - source: |
+        { "scripts": {} }
+      style: secondary
+      start: 0
+      end: 18
+  "{ \"todo\": \"owner-todo\", \"scripts\": { \"check\": \"owner-todo\" } }\n":
+    labels:
+    - source: "{ \"todo\": \"owner-todo\", \"scripts\": { \"check\": \"owner-todo\" } }"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "todo": "owner-todo", "scripts": { "check": "owner-todo" } }
+      style: secondary
+      start: 0
+      end: 63
+  "{}\n":
+    labels:
+    - source: "{}"
+      style: primary
+      start: 0
+      end: 2
+    - source: |
+        {}
+      style: secondary
+      start: 0
+      end: 3

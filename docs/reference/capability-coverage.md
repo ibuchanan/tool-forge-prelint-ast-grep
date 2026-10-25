@@ -518,6 +518,41 @@ build, dependency installation or output deletion is performed. The stored
 Drop Calf snapshot is unchanged; the legacy zero-findings fixture gains only
 the maintained clean declaration.
 
+## TODO: optional seeded entrypoint advice
+
+`prefer-todo-script` is an ecosol hint tagged `capability:todo`. It checks a direct
+root `scripts.todo` string in an existing `package.json`. Low precision and low
+impact reflect optional seed advice: intentional removal is indistinguishable
+from missing tooling and is not a broken Drop Calf installation or deployment
+blocker. Intentional removal warrants suppression with
+`--off=prefer-todo-script` rather than restoration of the script.
+
+The reviewed source is the
+[TODO capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/todo.ts).
+It seeds tracked-file `git grep` with line numbers, literal matching, split-token
+quoting to avoid matching itself, successful no-match handling and preserved Git
+error status. Update deliberately neither replaces nor re-adds the owner-managed
+script. The rule accepts that exact seed without requiring its text or semantics.
+
+Missing, non-string, empty/whitespace-only and bounded standalone inert commands
+receive one hint. Recognized inert forms are echo/printf without shell separators,
+true/false, colon, exit with an optional numeric status, comment-only strings and
+literal TODO/not-implemented/placeholder text. Other nonempty owner strings are
+accepted, including custom tools, quote styles, environment assignments and
+logging-first chains. The screen is not a shell parser: escaped JSON spellings,
+disguised no-ops and quoted shell punctuation can escape detection. Acceptance
+does not establish equivalent grep behavior or successful command execution.
+
+Tracked-file membership, marker presence, self-match avoidance, no-match success,
+Git errors, tool installation and helper existence remain native-tool/review
+responsibilities. No TODO-comment ban, fixed quote style, automatic ticket creation
+or generic todo matching is introduced. Native routing covers caller-selected
+Forge-app `package.json` files, including test-local examples, excluding
+node_modules, dist, coverage and specs. Tags do not detect apps; missing files
+cannot be diagnosed. Static tests never execute the generated or owner commands.
+The stored generated snapshot is unchanged; the legacy zero-findings fixture gains
+only the seeded TODO declaration.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

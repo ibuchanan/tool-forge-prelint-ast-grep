@@ -1,0 +1,67 @@
+id: prefer-todo-script
+language: Json
+severity: hint
+message: >
+  Consider a usable `scripts.todo` convenience command; suppress this hint if its removal is intentional.
+note: >
+  Drop Calf seeds TODO tooling once; update neither replaces nor re-adds it.
+  This optional convenience is not an enforced update policy or evidence of a
+  broken installation. Checks only a direct root scripts.todo string; nonempty
+  owner-authored commands are accepted without requiring the generated Git grep
+  command, quote style, split TODO token or particular no-match/error handling.
+  Empty/whitespace-only strings and standalone echo/printf, true/false, colon,
+  exit, comment or placeholder forms receive advice. Logging-first chains are
+  accepted; this bounded text screen does not interpret shell syntax or escaped
+  JSON, so disguised no-ops and quoted shell punctuation can escape detection.
+  Intentional removal or an equivalent owner workflow warrants suppression of
+  the rule with --off=prefer-todo-script, not restoration of the script.
+  Tracked-file membership, actual markers, shell behavior, tool availability,
+  no-match success and preservation of Git error status are not established.
+  Scope this ecosol advice to caller-selected Forge-app package.json directories.
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/todo.ts
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      has:
+        field: key
+        regex: '^"scripts"$'
+      all:
+        - has:
+            field: value
+            kind: object
+            has:
+              kind: pair
+              has:
+                field: key
+                regex: '^"todo"$'
+              all:
+                - has:
+                    field: value
+                    kind: string
+                    all:
+                      - not:
+                          regex: '^"(?:[ \t]|\\[nrt])*"$'
+                      - not:
+                          regex: '^"[ \t]*(?:(?:echo|printf)(?:[ \t][^;&|]*)?|true|false|:|exit(?:[ \t]+[0-9]+)?|#[^\r\n]*|(?i:todo|not[ \t]+(?:yet[ \t]+)?implemented|placeholder))[ \t]*"$'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  references:
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/todo.ts
+    - https://git-scm.com/docs/git-grep
+  tags: [capability:todo]
+  category: package-scripts
+  precision: low
+  precision-rationale: "Seed-only preference cannot distinguish intentional removal from missing tooling or prove owner command semantics; review and suppression are expected. Evidence: rule-tests/ecosol/package-scripts/prefer-todo-script.test.yml and rule-tests/__snapshots__/prefer-todo-script-snapshot.yml."
+  impact: low
+  impact-rationale: Optional TODO discovery is bounded developer convenience; absence does not establish a broken installation, skipped required validation or deployment risk.
+  scope-profile: [package-json, tests]

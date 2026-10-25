@@ -32,6 +32,7 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
+    "todo": "git grep -n -I -F TO\"DO\" -- .; status=$?; if [ \"$status\" -eq 1 ]; then echo \"No TO\"\"DO markers found.\"; elif [ \"$status\" -ne 0 ]; then exit \"$status\"; fi",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
   },
   "dependencies": {

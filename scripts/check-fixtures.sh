@@ -132,6 +132,56 @@ gate=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
 printf '%s\n' "$gate" | jq -e 'type == "array" and length == 0' >/dev/null
 echo 'Generated Forge Ahead declarations, owner references and placement mutations produced expected advisory findings.'
 
+# TODO tooling is optional seed advice; scan text without running owner commands.
+todo_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_todo.XXXXXX")
+for variant in generated custom logging-first no-markers missing non-string nested inert empty noop lookalike; do
+  expected=1
+  case "$variant" in
+  generated)
+    edit='.'
+    expected=0
+    ;;
+  custom)
+    edit='.scripts.todo = "bash scripts/owner-tasks.sh"'
+    expected=0
+    ;;
+  logging-first)
+    edit='.scripts.todo = "echo Scanning && owner-todo"'
+    expected=0
+    ;;
+  no-markers)
+    edit='.scripts.todo = "owner-task-list"'
+    expected=0
+    ;;
+  missing) edit='del(.scripts.todo)' ;;
+  non-string) edit='.scripts.todo = ["owner-todo"]' ;;
+  nested) edit='.metadata.scripts.todo = .scripts.todo | del(.scripts.todo)' ;;
+  inert) edit='.scripts.todo = "echo No markers found"' ;;
+  empty) edit='.scripts.todo = "  "' ;;
+  noop) edit='.scripts.todo = "exit 0"' ;;
+  lookalike) edit='.scripts.todos = .scripts.todo | del(.scripts.todo)' ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$todo_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^prefer-todo-script$' \
+    --include-metadata --json=compact "$todo_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --argjson count "$expected" '
+    type == "array" and length == $count and
+    all(.[]; .ruleId == "prefer-todo-script" and .severity == "hint" and
+      (.metadata.tags | index("capability:todo") != null))
+  ' >/dev/null; then
+    printf 'Unexpected TODO entrypoint findings for %s: expected %s, got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+# Intentional removal stays nonblocking and supports explicit owner opt-out.
+for mode in --min-severity=error --off=prefer-todo-script; do
+  advice=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^prefer-todo-script$' \
+    "$mode" --json=compact "$todo_work/package.json")
+  printf '%s\n' "$advice" | jq -e 'type == "array" and length == 0' >/dev/null
+done
+echo 'Generated TODO command, optional mutations and owner opt-out produced expected advice.'
+
 # Clean command checks inspect text only; never invoke cleanup on these fixtures.
 clean_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_clean_build.XXXXXX")
 for variant in generated relative missing non-string nested inert lookalike source root reinstall lockfile chain; do

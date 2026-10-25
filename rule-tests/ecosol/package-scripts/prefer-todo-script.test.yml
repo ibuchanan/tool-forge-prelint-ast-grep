@@ -1,0 +1,87 @@
+id: prefer-todo-script
+valid:
+  # Exact pinned seed: split token quoting and no-match/error branches are accepted.
+  - |
+    { "scripts": { "todo": "git grep -n -I -F TO\"DO\" -- .; status=$?; if [ \"$status\" -eq 1 ]; then echo \"No TO\"\"DO markers found.\"; elif [ \"$status\" -ne 0 ]; then exit \"$status\"; fi" } }
+  # Owner commands are not required to reproduce the seed's semantics.
+  - |
+    { "scripts": { "todo": "bash scripts/owner-tasks.sh" } }
+  - |
+    { "scripts": { "todo": "rg -n 'TODO|FIXME' src" } }
+  - |
+    { "scripts": { "todo": "git grep -n -F 'TODO' -- . || true" } }
+  - |
+    { "scripts": { "todo": "bun run scripts/todo.ts" } }
+  - |
+    { "scripts": { "todo": "TODO_MODE=tracked ./owner-todo" } }
+  - |
+    { "scripts": { "todo": "\"./scripts/owner tasks\" --all" } }
+  - |
+    { "scripts": { "todo": "echo 'Scanning TODOs' && owner-todo" } }
+  - |
+    { "scripts": { "todo": "todo-check" }, "metadata": { "todo": "owner data" } }
+invalid:
+  # Only a direct string in the root scripts object satisfies the preference.
+  - |
+    {}
+  - |
+    { "scripts": {} }
+  - |
+    { "scripts": null }
+  - |
+    { "scripts": "owner-todo" }
+  - |
+    { "scripts": [{ "todo": "owner-todo" }] }
+  - |
+    { "scripts": { "todo": null } }
+  - |
+    { "scripts": { "todo": false } }
+  - |
+    { "scripts": { "todo": 42 } }
+  - |
+    { "scripts": { "todo": ["owner-todo"] } }
+  - |
+    { "scripts": { "todo": { "command": "owner-todo" } } }
+  - |
+    { "metadata": { "scripts": { "todo": "owner-todo" } } }
+  - |
+    { "scripts": { "metadata": { "todo": "owner-todo" } } }
+  - |
+    { "scripts": { "todo:check": "owner-todo" } }
+  - |
+    { "scripts": { "todos": "owner-todo" } }
+  - |
+    { "todo": "owner-todo", "scripts": { "check": "owner-todo" } }
+  - |
+    { "scripts": { "todo": "" } }
+  - |
+    { "scripts": { "todo": "   " } }
+  - |
+    { "scripts": { "todo": " \t\n\r " } }
+  # Bounded whole-command no-op/placeholder forms, not arbitrary shell analysis.
+  - |
+    { "scripts": { "todo": "printf 'No TODOs found'" } }
+  - |
+    { "scripts": { "todo": " echo TODO " } }
+  - |
+    { "scripts": { "todo": "true" } }
+  - |
+    { "scripts": { "todo": "false" } }
+  - |
+    { "scripts": { "todo": "exit 0" } }
+  - |
+    { "scripts": { "todo": "exit 1" } }
+  - |
+    { "scripts": { "todo": ":" } }
+  - |
+    { "scripts": { "todo": "# owner-todo" } }
+  - |
+    { "scripts": { "todo": "TODO" } }
+  - |
+    { "scripts": { "todo": "Not yet implemented" } }
+  - |
+    { "scripts": { "todo": "placeholder" } }
+  - |
+    { "name": "forge-app" }
+  - |
+    { "scripts": { "todo": "echo 'No TODOs found'" } }
