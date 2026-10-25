@@ -173,6 +173,46 @@ manifest/security rules.
 Tests use static YAML examples, real-file scans and capability reporting only.
 No credentials are resolved and no Forge lint, deployment or installation is run.
 
+## Prelint: task, configuration and exclusion text
+
+Five ecosol rules map to `capability:prelint`:
+
+| Rule                                | Coverage                                                                                                                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lint-with-prelint`                 | Direct root `scripts.lint:check:prelint` string presence; no command execution.                                                             |
+| `lint-with-forge`                   | Recognizable root `lint:check:forge` command text; retains the separate `capability:forge-manifest` mapping.                                |
+| `require-valid-prelint-config`      | A literal `--config` reference to a shipped recommended, strict, atlassian or ecosol sgconfig filename; dependency aliases remain accepted. |
+| `require-prelint-node-modules-glob` | Existing bounded single-quoted dependency exclusion convention.                                                                             |
+| `require-prelint-specs-glob`        | Independent advisory for a missing single-quoted specifications exclusion in a direct root Prelint task.                                    |
+
+The reviewed source is the
+[Prelint capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/prelint.ts).
+It maintains `lint:check:prelint` as `ast-grep scan --globs '!specs/**' --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml`
+and `lint:check:forge` as `forge lint`. The lint capability owns orchestration;
+Prelint tags do not establish inclusion in an aggregate or app identity.
+
+The new specs check accepts `!specs`, `!specs/` and `!specs/**`, optionally
+prefixed with `**/`, as standalone single-quoted `--globs` arguments. Positive
+globs, single-star patterns, directory lookalikes and flag/argument suffixes do
+not satisfy it. Config and both exclusion checks retain legacy `lint:prelint`
+validation; only the current name satisfies task presence. Unrelated task names
+are not required to carry these flags. The specs advisory is informational, with
+medium precision and low impact: effective equivalent workflows require review and
+possible suppression, not an inference that all excluded files are being scanned.
+
+Command text does not prove config existence or contents, tool installation,
+current dependency versions, shell evaluation, successful scanning or project-wide
+coverage. Ignore files, source-only scans, external helpers, alternative quoting,
+escaped JSON spellings and later overriding flags are not resolved. Scope remains
+existing `package.json` files in caller-selected app directories, excluding
+node_modules, dist, coverage and specs. Missing files cannot be diagnosed.
+
+Static tests apply the two pinned task literals to a temporary copy of the older
+generated fixture and mutate config, exclusion, alias and task names. The stored
+generated fixture is unchanged; the legacy zero-findings fixture gains only the
+specs exclusion. No package task, Forge lint, secret resolution or deployment is
+executed, and the separate Fence Rider policy from the secrets slice is unchanged.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

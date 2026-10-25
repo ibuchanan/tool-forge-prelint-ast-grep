@@ -30,6 +30,7 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:prelint]
   references: ["https://ast-grep.github.io/reference/cli/scan.html#globs-globs"]
   category: package-scripts
   precision: medium

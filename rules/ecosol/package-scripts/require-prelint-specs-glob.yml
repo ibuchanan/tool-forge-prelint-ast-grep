@@ -1,0 +1,48 @@
+id: require-prelint-specs-glob
+language: Json
+severity: info
+message: >
+  `lint:check:prelint` is missing a specs exclusion; add `--globs '!specs/**'`.
+note: >
+  Drop Calf's Prelint task excludes specifications as well as dependencies.
+  This bounded command-text check accepts single-quoted --globs negations of
+  specs, specs/ or specs/**, optionally prefixed with **/. Legacy lint:prelint
+  tasks are also checked; dependency exclusion has its own diagnostic.
+  It does not execute the scan, interpret shell quoting or prove effective
+  coverage. Source-only scans, ignore files and external helpers may provide
+  equivalent exclusions; review and suppress this advisory when appropriate.
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/prelint.ts
+  https://ast-grep.github.io/reference/cli/scan.html#globs-globs
+rule:
+  all:
+    - kind: pair
+      regex: '^"lint:(?:check:)?prelint"\s*:\s*"'
+      inside:
+        kind: object
+        inside:
+          kind: pair
+          regex: '^"scripts"\s*:'
+          inside:
+            kind: object
+            inside:
+              kind: document
+    - not:
+        regex: '(^|[ \t])--globs[ \t]+''!(?:\*\*/)?specs(?:/\*\*|/)?''([ \t;&|"]|$)'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  tags: [capability:prelint]
+  references:
+    - "https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/prelint.ts"
+    - "https://ast-grep.github.io/reference/cli/scan.html#globs-globs"
+  category: package-scripts
+  precision: medium
+  scope-profile: [package-json, tests]
+  precision-rationale: "Direct root Prelint task strings are checked for a bounded single-quoted specs exclusion. Shell quoting, ignore files, source-only scans and external helpers may provide equivalent exclusions, so absent literal flags do not prove specifications are scanned. Evidence: rule-tests/ecosol/package-scripts/require-prelint-specs-glob.test.yml, rule-tests/__snapshots__/require-prelint-specs-glob-snapshot.yml and scripts/check-fixtures.sh."
+  impact: low
+  impact-rationale: "The maintained Drop Calf task excludes specifications; genuinely scanning unrelated examples adds local feedback noise and processing time. This is a team workflow convention, not evidence of a security defect or measured resource consumption."

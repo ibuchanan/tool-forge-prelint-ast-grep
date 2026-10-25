@@ -1,0 +1,43 @@
+id: require-prelint-specs-glob
+valid:
+  # Task absence and value types belong to lint-with-prelint.
+  - "{}"
+  - '{"scripts":{"lint:check:prelint":false}}'
+  - '{"scripts":{"lint:check:prelint":{"command":"ast-grep scan"}}}'
+  # Only direct root Prelint tasks are subject to this command convention.
+  - '{"scripts":{"lint:check:other":"ast-grep scan"}}'
+  - '{"lint:check:prelint":"ast-grep scan"}'
+  - '{"config":{"scripts":{"lint:check:prelint":"ast-grep scan"}}}'
+  - '{"scripts":{"other":{"lint:check:prelint":"ast-grep scan"}}}'
+  # Legacy task names and equivalent directory negations remain accepted.
+  - |
+    {"scripts":{"lint:prelint":"ast-grep scan --globs '!specs'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!**/specs/**'"}}
+  # Dependency exclusion is independently diagnosed.
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/**'"}}
+  # Pinned generated command.
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/**' --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"}}
+invalid:
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"}}
+  - |
+    {"scripts":{"lint:prelint":"ast-grep scan"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/*'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs**'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs-examples/**'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs 'specs/**'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --other-globs '!specs/**'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --extra--globs '!specs/**'"}}
+  - |
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/**'suffix"}}

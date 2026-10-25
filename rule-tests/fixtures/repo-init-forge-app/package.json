@@ -21,7 +21,7 @@
     "lint:check:biome": "biome lint .",
     "lint:check:forge": "cmd=$(fence-rider lint) && sh -c \"$cmd\" sh",
     "lint:check:format": "npm run format:check",
-    "lint:check:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!node_modules/**'",
+    "lint:check:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!specs/**' --globs '!node_modules/**'",
     "lint:check:typecheck": "npm run typecheck",
     "lint:fix": "biome lint --write .",
     "prepare": "lefthook install",

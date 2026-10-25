@@ -64,6 +64,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "secrets"')
 }
 printf 'PASS: secrets lifecycle conventions are discoverable without optional lint/tunnel preferences\n'
 
+expected=$'prelint\timplemented\tlint-with-forge,lint-with-prelint,require-prelint-node-modules-glob,require-prelint-specs-glob,require-valid-prelint-config'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "prelint"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: Prelint tasks, config and both exclusion checks must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: Prelint tasks, config and both exclusions are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

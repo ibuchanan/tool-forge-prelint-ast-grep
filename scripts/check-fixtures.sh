@@ -87,6 +87,56 @@ for variant in generated commonjs missing-type public missing-private owner-meta
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
 
+# Prelint checks command text only; never execute these package tasks.
+prelint_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_prelint.XXXXXX")
+jq '.scripts = {
+  "lint:check:prelint": "ast-grep scan --globs '\''!specs/**'\'' --globs '\''!node_modules/**'\'' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml",
+  "lint:check:forge": "forge lint"
+}' "$DROP_CALF_PACKAGE" >"$prelint_work/generated.json"
+for variant in generated missing-config wrong-config missing-node-modules missing-specs alias legacy unrelated; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  missing-config)
+    edit='.scripts["lint:check:prelint"] |= sub(" --config .*"; "")'
+    expected='require-valid-prelint-config'
+    ;;
+  wrong-config)
+    edit='.scripts["lint:check:prelint"] |= sub("sgconfig.ecosol.yml"; "biome.json")'
+    expected='require-valid-prelint-config'
+    ;;
+  missing-node-modules)
+    edit='.scripts["lint:check:prelint"] |= sub("--globs '\''!node_modules/\\*\\*'\'' "; "")'
+    expected='require-prelint-node-modules-glob'
+    ;;
+  missing-specs)
+    edit='.scripts["lint:check:prelint"] |= sub("--globs '\''!specs/\\*\\*'\'' "; "")'
+    expected='require-prelint-specs-glob'
+    ;;
+  alias)
+    edit='.scripts["lint:check:prelint"] |= sub("@forge-ahead/prelint/sgconfig.ecosol.yml"; "owner-prelint/sgconfig.strict.yml")'
+    ;;
+  legacy)
+    edit='.scripts["lint:prelint"] = .scripts["lint:check:prelint"] | del(.scripts["lint:check:prelint"])'
+    expected='lint-with-prelint'
+    ;;
+  unrelated) edit='.scripts["lint:check:other"] = "ast-grep scan"' ;;
+  esac
+  jq "$edit" "$prelint_work/generated.json" >"$prelint_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^(lint-with-(prelint|forge)|require-valid-prelint-config|require-prelint-(node-modules|specs)-glob|use-fence-rider-for-forge-lint)$' \
+    --include-metadata --json=compact "$prelint_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    map(.ruleId) == (if $expected == "" then [] else [$expected] end) and
+    all(.[]; .severity == "info" and (.metadata.tags | index("capability:prelint") != null))
+  ' >/dev/null; then
+    printf 'Unexpected Prelint findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo "Pinned Prelint tasks and static mutations produced the expected findings."
+
 # Changelog command checks are static; never run regeneration on these fixtures.
 changelog_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_changelog.XXXXXX")
 for variant in generated missing legacy; do

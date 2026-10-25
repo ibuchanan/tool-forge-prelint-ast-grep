@@ -1,0 +1,209 @@
+id: require-prelint-specs-glob
+snapshots:
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --extra--globs '!specs/**'\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --extra--globs '!specs/**'\""
+      style: primary
+      start: 12
+      end: 75
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --extra--globs '!specs/**'"}}
+      style: secondary
+      start: 0
+      end: 78
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --extra--globs '!specs/**'\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --extra--globs '!specs/**'\"}"
+      style: secondary
+      start: 1
+      end: 76
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --extra--globs '!specs/**'\"}"
+      style: secondary
+      start: 11
+      end: 76
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml\""
+      style: primary
+      start: 12
+      end: 140
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"}}
+      style: secondary
+      start: 0
+      end: 143
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml\"}}"
+      style: secondary
+      start: 0
+      end: 142
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml\"}"
+      style: secondary
+      start: 1
+      end: 141
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml\"}"
+      style: secondary
+      start: 11
+      end: 141
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs**'\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --globs '!specs**'\""
+      style: primary
+      start: 12
+      end: 67
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs**'"}}
+      style: secondary
+      start: 0
+      end: 70
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs**'\"}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs**'\"}"
+      style: secondary
+      start: 1
+      end: 68
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --globs '!specs**'\"}"
+      style: secondary
+      start: 11
+      end: 68
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs-examples/**'\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --globs '!specs-examples/**'\""
+      style: primary
+      start: 12
+      end: 77
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs-examples/**'"}}
+      style: secondary
+      start: 0
+      end: 80
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs-examples/**'\"}}"
+      style: secondary
+      start: 0
+      end: 79
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs-examples/**'\"}"
+      style: secondary
+      start: 1
+      end: 78
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --globs '!specs-examples/**'\"}"
+      style: secondary
+      start: 11
+      end: 78
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/*'\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --globs '!specs/*'\""
+      style: primary
+      start: 12
+      end: 67
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/*'"}}
+      style: secondary
+      start: 0
+      end: 70
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/*'\"}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/*'\"}"
+      style: secondary
+      start: 1
+      end: 68
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/*'\"}"
+      style: secondary
+      start: 11
+      end: 68
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/**'suffix\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --globs '!specs/**'suffix\""
+      style: primary
+      start: 12
+      end: 74
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/**'suffix"}}
+      style: secondary
+      start: 0
+      end: 77
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/**'suffix\"}}"
+      style: secondary
+      start: 0
+      end: 76
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/**'suffix\"}"
+      style: secondary
+      start: 1
+      end: 75
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --globs '!specs/**'suffix\"}"
+      style: secondary
+      start: 11
+      end: 75
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs 'specs/**'\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --globs 'specs/**'\""
+      style: primary
+      start: 12
+      end: 67
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --globs 'specs/**'"}}
+      style: secondary
+      start: 0
+      end: 70
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs 'specs/**'\"}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --globs 'specs/**'\"}"
+      style: secondary
+      start: 1
+      end: 68
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --globs 'specs/**'\"}"
+      style: secondary
+      start: 11
+      end: 68
+  "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --other-globs '!specs/**'\"}}\n":
+    labels:
+    - source: "\"lint:check:prelint\":\"ast-grep scan --other-globs '!specs/**'\""
+      style: primary
+      start: 12
+      end: 74
+    - source: |
+        {"scripts":{"lint:check:prelint":"ast-grep scan --other-globs '!specs/**'"}}
+      style: secondary
+      start: 0
+      end: 77
+    - source: "{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --other-globs '!specs/**'\"}}"
+      style: secondary
+      start: 0
+      end: 76
+    - source: "\"scripts\":{\"lint:check:prelint\":\"ast-grep scan --other-globs '!specs/**'\"}"
+      style: secondary
+      start: 1
+      end: 75
+    - source: "{\"lint:check:prelint\":\"ast-grep scan --other-globs '!specs/**'\"}"
+      style: secondary
+      start: 11
+      end: 75
+  "{\"scripts\":{\"lint:prelint\":\"ast-grep scan\"}}\n":
+    labels:
+    - source: "\"lint:prelint\":\"ast-grep scan\""
+      style: primary
+      start: 12
+      end: 42
+    - source: |
+        {"scripts":{"lint:prelint":"ast-grep scan"}}
+      style: secondary
+      start: 0
+      end: 45
+    - source: "{\"scripts\":{\"lint:prelint\":\"ast-grep scan\"}}"
+      style: secondary
+      start: 0
+      end: 44
+    - source: "\"scripts\":{\"lint:prelint\":\"ast-grep scan\"}"
+      style: secondary
+      start: 1
+      end: 43
+    - source: "{\"lint:prelint\":\"ast-grep scan\"}"
+      style: secondary
+      start: 11
+      end: 43
