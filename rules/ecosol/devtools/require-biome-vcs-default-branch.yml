@@ -4,7 +4,10 @@ severity: info
 message: >
   Set the Biome config's vcs.defaultBranch to "main".
 note: >
-  vcs.defaultBranch pinned to "main" is needed for correct changed-file detection.
+  vcs.defaultBranch: "main" is the reviewed team default for changed-file comparisons,
+  not a universal requirement. Configuration is owner-managed after init; Drop Calf
+  update lets Biome migrate it, not restore seed values. Suppress this advice when
+  the repository uses another default branch or inherits the correct setting.
   Biome configuration reference:
   https://biomejs.dev/reference/configuration/
 rule:
@@ -24,6 +27,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:biome]
   references: ["https://biomejs.dev/reference/configuration/"]
   category: devtools
   scope-profile: [unique]

@@ -4,7 +4,10 @@ severity: info
 message: >
   Set the Biome config's vcs.useIgnoreFile to true.
 note: >
-  vcs.useIgnoreFile makes Biome respect .gitignore instead of scanning ignored files.
+  vcs.useIgnoreFile: true is the reviewed team default for VCS ignore integration
+  when VCS support is enabled. Configuration is owner-managed after init; Drop Calf
+  update lets Biome migrate it, not restore seed values. Suppress this advice for
+  inherited settings or intentional equivalent file exclusions.
   Biome configuration reference:
   https://biomejs.dev/reference/configuration/
 rule:
@@ -24,6 +27,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:biome]
   references: ["https://biomejs.dev/reference/configuration/"]
   category: devtools
   scope-profile: [unique]

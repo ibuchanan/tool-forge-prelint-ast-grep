@@ -46,6 +46,7 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:biome]
   references: ["https://biomejs.dev/"]
   category: package-scripts
   precision: medium

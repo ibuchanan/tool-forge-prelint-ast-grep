@@ -213,6 +213,46 @@ generated fixture is unchanged; the legacy zero-findings fixture gains only the
 specs exclusion. No package task, Forge lint, secret resolution or deployment is
 executed, and the separate Fence Rider policy from the secrets slice is unchanged.
 
+## Biome: maintained tasks and owner-managed configuration
+
+Six existing rules map to `capability:biome`; this mapping changes no matcher,
+ID, native scope, tier, precision/impact rating, severity or consumer snapshot.
+
+| Rule                                   | Coverage                                                        |
+| -------------------------------------- | --------------------------------------------------------------- |
+| `lint-and-format-with-biome`           | Named Biome tasks and npm/Bun `format:check` delegation.        |
+| `no-write-flags-in-readonly-script`    | Shared guard against write-back flags in read-only check tasks. |
+| `require-biome-files-exclude-dist`     | Reviewed default exclusion spellings in `files.includes`.       |
+| `require-biome-formatter-indent-style` | Reviewed `space` indentation default.                           |
+| `require-biome-vcs-default-branch`     | Reviewed `main` comparison baseline default.                    |
+| `require-biome-vcs-use-ignore-file`    | Reviewed VCS ignore integration default.                        |
+
+The reviewed source is the
+[Biome capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/biome.ts).
+It maintains `format`, `format:check`, `lint:check:biome`, `lint:check:format` and
+`lint:fix`. The shared read-only guard materially checks Biome's formatting/lint
+task convention without claiming exclusive ownership: it also checks other tools
+and aggregate gates. The lint capability owns orchestration; this slice does not
+change its mapping.
+
+Configuration and EditorConfig are seeded, then owner-managed. Drop Calf update
+lets Biome migrate an existing root config rather than restoring template values;
+native validation loads the config and references, not source quality. The four
+config checks are informational team-default advice, not immutable Drop Calf or
+Biome requirements. Intentional tabs, another real default branch, inherited
+settings or equivalent source-only/exclusion policies warrant review and
+suppression of the corresponding rule, not overwriting owner configuration.
+No new rule freezes a schema version, dependency pin, recommended preset,
+overrides, vendor/specs exclusion or EditorConfig contents.
+
+Both `biome.json` and `biome.jsonc` use the existing native filename routes.
+Static fixtures verify the generated task family, npm/Bun delegation, separate
+write-back commands, both config routes, schema-version independence and isolated
+mutations. Command text does not prove shell behavior, tool installation or task
+success. Effective inherited configuration, schema validity and tool acceptance
+remain Biome responsibilities; missing files cannot be reported. No formatter,
+linter, migration or generated package task is executed by these checks.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

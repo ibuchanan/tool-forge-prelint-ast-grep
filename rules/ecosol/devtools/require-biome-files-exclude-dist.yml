@@ -7,6 +7,9 @@ note: >
   dist holds generated build output that shouldn't be linted or formatted.
   A single ! excludes it from linting and formatting; !! also prevents scanner
   indexing and is preferred for build output.
+  This is reviewed team-default advice, not an immutable Drop Calf requirement.
+  Configuration is owner-managed after init; update lets Biome migrate it.
+  Suppress this rule when inherited settings or a source-only scan already exclude dist.
   Biome configuration reference:
   https://biomejs.dev/reference/configuration/
 rule:
@@ -36,6 +39,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:biome]
   references: ["https://biomejs.dev/reference/configuration/"]
   category: devtools
   scope-profile: [unique]

@@ -137,6 +137,95 @@ for variant in generated missing-config wrong-config missing-node-modules missin
 done
 echo "Pinned Prelint tasks and static mutations produced the expected findings."
 
+# Biome owns package tasks, but its config is seeded then owner-managed.
+# Scan command text only; never execute formatting or write-back tasks.
+biome_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_biome.XXXXXX")
+jq '.scripts |= (del(.["lint:check"]) + {
+  "format": "biome format --write",
+  "format:check": "biome format",
+  "lint:check:biome": "biome lint",
+  "lint:check:format": "npm run format:check",
+  "lint:fix": "biome lint --write"
+})' "$DROP_CALF_PACKAGE" >"$biome_work/generated.json"
+for variant in generated bun missing-task write-lint write-format; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  bun) edit='.scripts["lint:check:format"] = "bun run format:check"' ;;
+  missing-task)
+    edit='del(.scripts["lint:check:format"])'
+    expected='lint-and-format-with-biome'
+    ;;
+  write-lint)
+    edit='.scripts["lint:check:biome"] += " --write"'
+    expected='no-write-flags-in-readonly-script'
+    ;;
+  write-format)
+    edit='.scripts["format:check"] += " --write"'
+    expected='no-write-flags-in-readonly-script'
+    ;;
+  esac
+  jq "$edit" "$biome_work/generated.json" >"$biome_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^(lint-and-format-with-biome|no-write-flags-in-readonly-script)$' \
+    --include-metadata --json=compact "$biome_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    map(.ruleId) == (if $expected == "" then [] else [$expected] end) and
+    all(.[]; .metadata.tags | index("capability:biome") != null)
+  ' >/dev/null; then
+    printf 'Unexpected Biome task findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo "Pinned Biome tasks, npm/Bun delegates and read-only mutations produced the expected findings."
+
+for extension in json jsonc; do
+  for variant in generated schema owner-options dist indent branch ignore; do
+    expected=''
+    case "$variant" in
+    generated) edit='.' ;;
+    schema)
+      # Literal JSON key, not a shell variable.
+      # shellcheck disable=SC2016
+      edit='.["$schema"] = "https://biomejs.dev/schemas/999.0.0/schema.json"'
+      ;;
+    owner-options) edit='.linter.enabled = false | .javascript.formatter.quoteStyle = "single"' ;;
+    dist)
+      edit='.files.includes = ["**"]'
+      expected='require-biome-files-exclude-dist'
+      ;;
+    indent)
+      edit='.formatter.indentStyle = "tab"'
+      expected='require-biome-formatter-indent-style'
+      ;;
+    branch)
+      edit='.vcs.defaultBranch = "owner-branch"'
+      expected='require-biome-vcs-default-branch'
+      ;;
+    ignore)
+      edit='.vcs.useIgnoreFile = false'
+      expected='require-biome-vcs-use-ignore-file'
+      ;;
+    esac
+    {
+      if [ "$extension" = jsonc ]; then printf '// Owner-managed Biome configuration\n'; fi
+      jq "$edit" "$DROP_CALF_BIOME"
+    } >"$biome_work/biome.$extension"
+    findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^require-biome-' \
+      --include-metadata --json=compact "$biome_work/biome.$extension")
+    if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+      map(.ruleId) == (if $expected == "" then [] else [$expected] end) and
+      all(.[]; .severity == "info" and (.metadata.tags | index("capability:biome") != null))
+    ' >/dev/null; then
+      printf 'Unexpected Biome %s findings for %s: expected "%s", got %s\n' \
+        "$extension" "$variant" "$expected" "$findings" >&2
+      exit 1
+    fi
+  done
+done
+echo "Biome JSON/JSONC defaults, owner options and advisory mutations produced the expected findings."
+
 # Changelog command checks are static; never run regeneration on these fixtures.
 changelog_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_changelog.XXXXXX")
 for variant in generated missing legacy; do

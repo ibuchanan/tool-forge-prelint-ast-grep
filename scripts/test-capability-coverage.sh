@@ -72,6 +72,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "prelint"')
 }
 printf 'PASS: Prelint tasks, config and both exclusions are discoverable\n'
 
+expected=$'biome\timplemented\tlint-and-format-with-biome,no-write-flags-in-readonly-script,require-biome-files-exclude-dist,require-biome-formatter-indent-style,require-biome-vcs-default-branch,require-biome-vcs-use-ignore-file'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "biome"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: Biome scripts and reviewed configuration defaults must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: Biome scripts and reviewed configuration defaults are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

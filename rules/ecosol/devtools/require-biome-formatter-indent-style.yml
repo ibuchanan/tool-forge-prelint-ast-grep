@@ -4,7 +4,9 @@ severity: info
 message: >
   Set the Biome config's formatter.indentStyle to "space".
 note: >
-  formatter.indentStyle: "space" keeps formatting consistent across editors and CI.
+  formatter.indentStyle: "space" is the reviewed team default for consistent formatting.
+  Configuration is owner-managed after init; Drop Calf update lets Biome migrate it,
+  not restore seed values. Suppress this advice for intentional tabs or inherited settings.
   Biome configuration reference:
   https://biomejs.dev/reference/configuration/
 rule:
@@ -24,6 +26,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:biome]
   references: ["https://biomejs.dev/reference/configuration/"]
   category: devtools
   scope-profile: [unique]
