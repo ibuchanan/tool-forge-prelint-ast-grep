@@ -53,8 +53,8 @@ load(strenv(RULE_AUTHORING_DIR) + "/policy.yml") as $p |
  then ["references: require distinct explicit HTTP(S) URLs with host text and no whitespace"] else [] end) +
 (if ($tags | tag) != "!!seq" then ["tags: optional tags must be a sequence"]
  elif ($tags | unique | length) != ($tags | length) or
-      ($tags | map(select(tag != "!!str" or (test("^module:[A-Za-z][A-Za-z0-9-]*:[A-Za-z][A-Za-z0-9]*$") | not))) | length) > 0
- then ["tags: require distinct module:<namespace>:<identifier> strings; exact identity needs review"] else [] end) +
+      ($tags | map(select(tag != "!!str" or ((test($p.module-tag-pattern) or test("^capability:(" + ($p.capabilities | join("|")) + ")$")) | not))) | length) > 0
+ then ["tags: require distinct module:<namespace>:<identifier> or known capability:<name> strings; module identity needs review"] else [] end) +
 (if ($r.ignores | tag) != "!!seq" or ($r | has("ignores") | not)
  then ["native-globs: declare an explicit ignores string sequence"]
  elif ($r.ignores | unique | length) != ($r.ignores | length) or ($r.ignores | map(select(tag != "!!str" or (test("\\S") | not))) | length) > 0

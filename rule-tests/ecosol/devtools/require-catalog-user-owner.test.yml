@@ -1,0 +1,34 @@
+id: require-catalog-user-owner
+valid:
+  - "spec: {owner: user:tester}"
+  - "spec: {owner: user:custom/tester}"
+  - '{"spec": {"owner": "USER:Team-One/A.B_2"}}'
+  - "'spec': {'owner': 'user:a/b'}"
+  - |
+    kind: Component
+    spec:
+      lifecycle: production
+      owner: user:owner # preserved comment
+  - "spec: {owner: user:a}"
+invalid:
+  - "spec: {owner: group:default/team}"
+  - "{}"
+  - "{spec: {}}"
+  - "{spec: null}"
+  - "{spec: {owner: null}}"
+  - "{spec: {owner: 2026}}"
+  - '{spec: {owner: ["user:a"]}}'
+  - "{spec: {owner: {owner: user:a}}}"
+  - "{spec: {nested: {owner: user:a}}}"
+  - "{metadata: {spec: {owner: user:a}}}"
+  - "{owner: user:a}"
+  - '{spec: {owner: "user:"}}'
+  - '{spec: {owner: "user:/a"}}'
+  - '{spec: {owner: "user:a/"}}'
+  - '{spec: {owner: "user:a/b/c"}}'
+  - '{spec: {owner: "user:-a"}}'
+  - '{spec: {owner: "user:a-"}}'
+  - '{spec: {owner: "user:a_/b"}}'
+  - '{spec: {owner: "user:a b"}}'
+  - '{spec: {owner: " user:a"}}'
+  - '{spec: {owner: "user:a "}}'

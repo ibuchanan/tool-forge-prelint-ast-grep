@@ -1,0 +1,83 @@
+id: require-catalog-copyright-date
+language: Yaml
+severity: info
+message: Use a quoted YYYY or YYYY-YYYY string for the catalog copyright-date annotation.
+note: >
+  The forge-ranch/copyright-date annotation is optional; when declared, Drop Calf
+  expects a string year or year range. Keep owner-selected years, not a fixed seed year.
+  This checks shape only: native validation must check chronological ordering and
+  full Backstage schema validity. Aliases, tags, block and escape-encoded scalars
+  require native validation. This does not require other annotations.
+  https://backstage.io/docs/features/software-catalog/descriptor-format/#annotations-optional
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/catalog.ts
+utils:
+  mapping:
+    any:
+      - kind: block_mapping
+      - kind: flow_mapping
+  node:
+    any:
+      - kind: block_node
+      - kind: flow_node
+rule:
+  any:
+    - kind: block_mapping_pair
+    - kind: flow_pair
+  has:
+    field: key
+    regex: '^(forge-ranch/copyright-date|"forge-ranch/copyright-date"|''forge-ranch/copyright-date'')$'
+  inside:
+    matches: mapping
+    inside:
+      matches: node
+      inside:
+        has:
+          field: key
+          regex: '^(annotations|"annotations"|''annotations'')$'
+        inside:
+          matches: mapping
+          inside:
+            matches: node
+            inside:
+              has:
+                field: key
+                regex: '^(metadata|"metadata"|''metadata'')$'
+              inside:
+                matches: mapping
+                inside:
+                  matches: node
+                  inside:
+                    kind: document
+  not:
+    has:
+      field: value
+      regex: '^("[0-9]{4}(-[0-9]{4})?"|''[0-9]{4}(-[0-9]{4})?''|[0-9]{4}-[0-9]{4})$'
+files:
+  - "**/catalog-info.yaml"
+ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
+  - "**/node_modules/**"
+  - "**/specs/**"
+metadata:
+  category: devtools
+  precision: high
+  precision-rationale: >
+    Direct metadata.annotations pairs check only an explicitly declared date with
+    string year or year-range shape. A bare single year is a YAML number, not a string.
+    Evidence: rule-tests/ecosol/devtools/require-catalog-copyright-date.test.yml.
+    This intentionally does not prove range ordering; aliases, tags, block and escaped scalars need native validation.
+  impact: low
+  impact-rationale: >
+    Malformed copyright metadata prevents local Drop Calf validation and derived
+    document workflows; this is recoverable convention drift, not proof of a legal or runtime failure.
+  scope-profile: [unique]
+  scope-rationale: >
+    Only catalog-info.yaml is owned by the pinned catalog capability; catalog-info.yml
+    and other YAML filenames are excluded. No standard artifact selector names it.
+    Apply the shared baseline, retain test-local catalogs and build/vendor/fixture
+    directories, and scope caller scans to app roots. Filename routing does not prove app identity.
+  tags: [capability:catalog]
+  references:
+    - https://backstage.io/docs/features/software-catalog/descriptor-format/#annotations-optional
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/catalog.ts

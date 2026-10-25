@@ -35,8 +35,9 @@ active diagnostic level.
 
 ## Tag
 
-A descriptive classification of a rule's relevance to a Forge module. A tag
-does not determine where the rule executes.
+A descriptive classification of a rule's relevance to a Forge module or ownership
+by a Drop Calf capability convention. A tag does not determine where the rule
+executes or establish that a capability is installed.
 
 ## Tier
 

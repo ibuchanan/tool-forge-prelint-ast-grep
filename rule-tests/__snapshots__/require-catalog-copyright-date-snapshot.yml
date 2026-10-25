@@ -1,0 +1,670 @@
+id: require-catalog-copyright-date
+snapshots:
+  "metadata:\n  annotations:\n    forge-ranch/copyright-date:\n":
+    labels:
+    - source: "forge-ranch/copyright-date:"
+      style: primary
+      start: 29
+      end: 56
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 0
+      end: 57
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 0
+      end: 57
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 0
+      end: 57
+    - source: metadata
+      style: secondary
+      start: 0
+      end: 8
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 0
+      end: 57
+    - source: |
+        annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 12
+      end: 57
+    - source: |
+        annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 12
+      end: 57
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: |
+        annotations:
+            forge-ranch/copyright-date:
+      style: secondary
+      start: 12
+      end: 57
+    - source: |
+        forge-ranch/copyright-date:
+      style: secondary
+      start: 29
+      end: 57
+    - source: |
+        forge-ranch/copyright-date:
+      style: secondary
+      start: 29
+      end: 57
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 29
+      end: 55
+  "metadata: {annotations: {forge-ranch/copyright-date: \"202\"}}":
+    labels:
+    - source: "forge-ranch/copyright-date: \"202\""
+      style: primary
+      start: 25
+      end: 58
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"202\"}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"202\"}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"202\"}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: metadata
+      style: secondary
+      start: 0
+      end: 8
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"202\"}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: \"202\"}}"
+      style: secondary
+      start: 10
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: \"202\"}}"
+      style: secondary
+      start: 10
+      end: 60
+    - source: annotations
+      style: secondary
+      start: 11
+      end: 22
+    - source: "annotations: {forge-ranch/copyright-date: \"202\"}"
+      style: secondary
+      start: 11
+      end: 59
+    - source: "{forge-ranch/copyright-date: \"202\"}"
+      style: secondary
+      start: 24
+      end: 59
+    - source: "{forge-ranch/copyright-date: \"202\"}"
+      style: secondary
+      start: 24
+      end: 59
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 25
+      end: 51
+  "{metadata: {annotations: {forge-ranch/copyright-date: \" 2026\"}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: \" 2026\""
+      style: primary
+      start: 26
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \" 2026\"}}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \" 2026\"}}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \" 2026\"}}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \" 2026\"}}"
+      style: secondary
+      start: 1
+      end: 63
+    - source: "{annotations: {forge-ranch/copyright-date: \" 2026\"}}"
+      style: secondary
+      start: 11
+      end: 63
+    - source: "{annotations: {forge-ranch/copyright-date: \" 2026\"}}"
+      style: secondary
+      start: 11
+      end: 63
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: \" 2026\"}"
+      style: secondary
+      start: 12
+      end: 62
+    - source: "{forge-ranch/copyright-date: \" 2026\"}"
+      style: secondary
+      start: 25
+      end: 62
+    - source: "{forge-ranch/copyright-date: \" 2026\"}"
+      style: secondary
+      start: 25
+      end: 62
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: \"\"}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: \"\""
+      style: primary
+      start: 26
+      end: 56
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"\"}}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"\"}}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"\"}}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"\"}}"
+      style: secondary
+      start: 1
+      end: 58
+    - source: "{annotations: {forge-ranch/copyright-date: \"\"}}"
+      style: secondary
+      start: 11
+      end: 58
+    - source: "{annotations: {forge-ranch/copyright-date: \"\"}}"
+      style: secondary
+      start: 11
+      end: 58
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: \"\"}"
+      style: secondary
+      start: 12
+      end: 57
+    - source: "{forge-ranch/copyright-date: \"\"}"
+      style: secondary
+      start: 25
+      end: 57
+    - source: "{forge-ranch/copyright-date: \"\"}"
+      style: secondary
+      start: 25
+      end: 57
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: \"2026 \"}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: \"2026 \""
+      style: primary
+      start: 26
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026 \"}}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026 \"}}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026 \"}}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"2026 \"}}"
+      style: secondary
+      start: 1
+      end: 63
+    - source: "{annotations: {forge-ranch/copyright-date: \"2026 \"}}"
+      style: secondary
+      start: 11
+      end: 63
+    - source: "{annotations: {forge-ranch/copyright-date: \"2026 \"}}"
+      style: secondary
+      start: 11
+      end: 63
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: \"2026 \"}"
+      style: secondary
+      start: 12
+      end: 62
+    - source: "{forge-ranch/copyright-date: \"2026 \"}"
+      style: secondary
+      start: 25
+      end: 62
+    - source: "{forge-ranch/copyright-date: \"2026 \"}"
+      style: secondary
+      start: 25
+      end: 62
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: \"2026-27\"}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: \"2026-27\""
+      style: primary
+      start: 26
+      end: 63
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026-27\"}}}"
+      style: secondary
+      start: 0
+      end: 66
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026-27\"}}}"
+      style: secondary
+      start: 0
+      end: 66
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026-27\"}}}"
+      style: secondary
+      start: 0
+      end: 66
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"2026-27\"}}"
+      style: secondary
+      start: 1
+      end: 65
+    - source: "{annotations: {forge-ranch/copyright-date: \"2026-27\"}}"
+      style: secondary
+      start: 11
+      end: 65
+    - source: "{annotations: {forge-ranch/copyright-date: \"2026-27\"}}"
+      style: secondary
+      start: 11
+      end: 65
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: \"2026-27\"}"
+      style: secondary
+      start: 12
+      end: 64
+    - source: "{forge-ranch/copyright-date: \"2026-27\"}"
+      style: secondary
+      start: 25
+      end: 64
+    - source: "{forge-ranch/copyright-date: \"2026-27\"}"
+      style: secondary
+      start: 25
+      end: 64
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: \"2026/2027\"}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: \"2026/2027\""
+      style: primary
+      start: 26
+      end: 65
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026/2027\"}}}"
+      style: secondary
+      start: 0
+      end: 68
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026/2027\"}}}"
+      style: secondary
+      start: 0
+      end: 68
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: \"2026/2027\"}}}"
+      style: secondary
+      start: 0
+      end: 68
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: \"2026/2027\"}}"
+      style: secondary
+      start: 1
+      end: 67
+    - source: "{annotations: {forge-ranch/copyright-date: \"2026/2027\"}}"
+      style: secondary
+      start: 11
+      end: 67
+    - source: "{annotations: {forge-ranch/copyright-date: \"2026/2027\"}}"
+      style: secondary
+      start: 11
+      end: 67
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: \"2026/2027\"}"
+      style: secondary
+      start: 12
+      end: 66
+    - source: "{forge-ranch/copyright-date: \"2026/2027\"}"
+      style: secondary
+      start: 25
+      end: 66
+    - source: "{forge-ranch/copyright-date: \"2026/2027\"}"
+      style: secondary
+      start: 25
+      end: 66
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: 2026}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: 2026"
+      style: primary
+      start: 26
+      end: 58
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: 2026}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: 2026}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: 2026}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: 2026}}"
+      style: secondary
+      start: 1
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: 2026}}"
+      style: secondary
+      start: 11
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: 2026}}"
+      style: secondary
+      start: 11
+      end: 60
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: 2026}"
+      style: secondary
+      start: 12
+      end: 59
+    - source: "{forge-ranch/copyright-date: 2026}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: "{forge-ranch/copyright-date: 2026}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: []}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: []"
+      style: primary
+      start: 26
+      end: 56
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: []}}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: []}}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: []}}}"
+      style: secondary
+      start: 0
+      end: 59
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: []}}"
+      style: secondary
+      start: 1
+      end: 58
+    - source: "{annotations: {forge-ranch/copyright-date: []}}"
+      style: secondary
+      start: 11
+      end: 58
+    - source: "{annotations: {forge-ranch/copyright-date: []}}"
+      style: secondary
+      start: 11
+      end: 58
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: []}"
+      style: secondary
+      start: 12
+      end: 57
+    - source: "{forge-ranch/copyright-date: []}"
+      style: secondary
+      start: 25
+      end: 57
+    - source: "{forge-ranch/copyright-date: []}"
+      style: secondary
+      start: 25
+      end: 57
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: null}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: null"
+      style: primary
+      start: 26
+      end: 58
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: null}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: null}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: null}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: null}}"
+      style: secondary
+      start: 1
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: null}}"
+      style: secondary
+      start: 11
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: null}}"
+      style: secondary
+      start: 11
+      end: 60
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: null}"
+      style: secondary
+      start: 12
+      end: 59
+    - source: "{forge-ranch/copyright-date: null}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: "{forge-ranch/copyright-date: null}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: true}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: true"
+      style: primary
+      start: 26
+      end: 58
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: true}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: true}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: true}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: true}}"
+      style: secondary
+      start: 1
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: true}}"
+      style: secondary
+      start: 11
+      end: 60
+    - source: "{annotations: {forge-ranch/copyright-date: true}}"
+      style: secondary
+      start: 11
+      end: 60
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: true}"
+      style: secondary
+      start: 12
+      end: 59
+    - source: "{forge-ranch/copyright-date: true}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: "{forge-ranch/copyright-date: true}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52
+  "{metadata: {annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}}":
+    labels:
+    - source: "forge-ranch/copyright-date: {year: \"2026\"}"
+      style: primary
+      start: 26
+      end: 68
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}}"
+      style: secondary
+      start: 0
+      end: 71
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}}"
+      style: secondary
+      start: 0
+      end: 71
+    - source: "{metadata: {annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}}"
+      style: secondary
+      start: 0
+      end: 71
+    - source: metadata
+      style: secondary
+      start: 1
+      end: 9
+    - source: "metadata: {annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}"
+      style: secondary
+      start: 1
+      end: 70
+    - source: "{annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}"
+      style: secondary
+      start: 11
+      end: 70
+    - source: "{annotations: {forge-ranch/copyright-date: {year: \"2026\"}}}"
+      style: secondary
+      start: 11
+      end: 70
+    - source: annotations
+      style: secondary
+      start: 12
+      end: 23
+    - source: "annotations: {forge-ranch/copyright-date: {year: \"2026\"}}"
+      style: secondary
+      start: 12
+      end: 69
+    - source: "{forge-ranch/copyright-date: {year: \"2026\"}}"
+      style: secondary
+      start: 25
+      end: 69
+    - source: "{forge-ranch/copyright-date: {year: \"2026\"}}"
+      style: secondary
+      start: 25
+      end: 69
+    - source: forge-ranch/copyright-date
+      style: secondary
+      start: 26
+      end: 52

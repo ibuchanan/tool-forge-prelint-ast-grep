@@ -162,6 +162,26 @@ for scope in 'files: ["**/package.json"]\nignores: ["**/node_modules/**"]' 'file
 done
 printf 'PASS: normalization orders valid selectors without inferring scope or ratings\n'
 
+# All public recipes must accept mixed tags and preserve their order/content.
+export REFERENCE='https://example.org/reviewed'
+for recipe in category reference normalize severity; do
+  printf '%s\n' 'id: example' 'severity: off' 'metadata:' '  precision: high' '  impact: low' '  tags: [capability:test, module:jira:issuePanel, capability:catalog]' '  custom: keep' >"$RULE"
+  yq --from-file "$RULE_AUTHORING_DIR/recipes/$recipe.yq" "$RULE" >"$WORK/preview"
+  [[ $(yq -o=json -I=0 '.metadata.tags' "$WORK/preview") == '["capability:test","module:jira:issuePanel","capability:catalog"]' ]]
+  [[ $(yq '.metadata.custom' "$WORK/preview") == keep ]]
+done
+printf 'PASS: every metadata recipe preserves distinct mixed tags\n'
+for recipe in category reference normalize severity; do
+  for tags in '[capability:catlog]' '[capability:vitest]' '[capability:aidev]' '[capability:evals]' '[capability:Catalog]' '[capability:catalog:extra]' '[capability:catalog, 42]' '[true]' '[{}]'; do
+    printf 'id: example\nseverity: off\nmetadata: {tags: %s}\n' "$tags" >"$RULE"
+    expect_rejected "$recipe" "$RULE" 'tags'
+  done
+done
+printf 'id: example\nmetadata: {tags: [capability:test, module:jira:issuePanel, capability:test]}\n' >"$RULE"
+yq -i --from-file "$RULE_AUTHORING_DIR/recipes/normalize.yq" "$RULE"
+[[ $(yq -o=json -I=0 '.metadata.tags' "$RULE") == '["capability:test","module:jira:issuePanel"]' ]]
+printf 'PASS: recipes reject unsupported tags; explicit normalization removes exact duplicates\n'
+
 printf 'id: example\nmetadata: &shared {category: security}\nrule: *shared\n' >"$RULE"
 expect_rejected category "$RULE" 'anchors'
 printf 'id: example\nmetadata: {category: security, category: cost}\n' >"$RULE"

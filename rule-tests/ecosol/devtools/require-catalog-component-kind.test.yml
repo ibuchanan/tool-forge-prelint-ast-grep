@@ -1,0 +1,18 @@
+id: require-catalog-component-kind
+valid:
+  - "kind: Component"
+  - '{"kind": "Component"}'
+  - "'kind': 'Component'"
+  - |
+    kind: Component # owner comment
+    metadata: {title: Owner-selected title}
+    spec: {type: service, lifecycle: production}
+invalid:
+  - "kind: API"
+  - "{}"
+  - "{kind: null}"
+  - "{kind: component}"
+  - "{kind: [Component]}"
+  - "{kind: {kind: Component}}"
+  - "metadata: {kind: Component}"
+  - "{kind: API, metadata: {kind: Component}}"

@@ -1,0 +1,71 @@
+id: require-catalog-user-owner
+language: Yaml
+severity: info
+message: Declare `spec.owner` as a user entity reference in the Drop Calf catalog.
+note: >
+  Use user:id or user:namespace/id; namespaces are not limited to default.
+  Drop Calf requires a user even though Backstage also supports group ownership.
+  This checks literal references only, not remote existence or cross-file identity.
+  Aliases, tags and escape-encoded scalars require native validation.
+  https://backstage.io/docs/features/software-catalog/descriptor-format/#specowner-required
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/catalog.ts
+rule:
+  any:
+    - kind: block_mapping
+    - kind: flow_mapping
+  inside:
+    any:
+      - kind: block_node
+      - kind: flow_node
+    inside:
+      kind: document
+  not:
+    has:
+      all:
+        - has:
+            field: key
+            regex: '^(spec|"spec"|''spec'')$'
+        - has:
+            field: value
+            has:
+              any:
+                - kind: block_mapping
+                - kind: flow_mapping
+              has:
+                all:
+                  - has:
+                      field: key
+                      regex: '^(owner|"owner"|''owner'')$'
+                  - has:
+                      field: value
+                      regex: '^(?i:user:(?:[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?/)?[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?|"user:(?:[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?/)?[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?"|''user:(?:[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?/)?[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?'')$'
+files:
+  - "**/catalog-info.yaml"
+ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
+  - "**/node_modules/**"
+  - "**/specs/**"
+metadata:
+  category: devtools
+  precision: high
+  precision-rationale: >
+    Direct root spec and direct owner pairs require a literal user reference with
+    the pinned optional-namespace syntax, not a nested owner lookalike.
+    Evidence: rule-tests/ecosol/devtools/require-catalog-user-owner.test.yml.
+    Aliases, tags, escaped and block scalars require native validation.
+  impact: low
+  impact-rationale: >
+    Missing or malformed user ownership prevents local Drop Calf catalog validation
+    and derived owner workflows; it is recoverable metadata drift, not proof of authorization failure.
+  scope-profile: [unique]
+  scope-rationale: >
+    Only catalog-info.yaml is owned by the pinned catalog capability; catalog-info.yml
+    and other YAML filenames are excluded. No standard artifact selector names it.
+    Apply the shared baseline, retain test-local catalogs and build/vendor/fixture
+    directories, and scope caller scans to app roots. Filename routing does not prove app identity.
+  tags: [capability:catalog]
+  references:
+    - https://backstage.io/docs/features/software-catalog/descriptor-format/#specowner-required
+    - https://backstage.io/docs/features/software-catalog/references/
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/catalog.ts

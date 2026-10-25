@@ -19,6 +19,29 @@ categories:
   - security
   - triggers
   - typescript
+# Descriptive relevance only; tags never route files or imply installation.
+module-tag-pattern: "^module:[A-Za-z][A-Za-z0-9-]*:[A-Za-z][A-Za-z0-9]*$"
+capabilities:
+  - catalog
+  - package-metadata
+  - oss
+  - gitignore
+  - node
+  - forge-manifest
+  - changelog
+  - release
+  - secrets
+  - prelint
+  - biome
+  - lint
+  - test
+  - typescript
+  - forge-ahead
+  - size-limit
+  - clean-build
+  - todo
+  - docs
+  - git-hooks
 # Reviewed precision rows and impact columns; off is preserved outside the matrix.
 severity:
   low: { low: hint, medium: info, high: warning }

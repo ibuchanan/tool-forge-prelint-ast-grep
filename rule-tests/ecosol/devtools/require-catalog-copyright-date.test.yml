@@ -1,0 +1,32 @@
+id: require-catalog-copyright-date
+valid:
+  - 'metadata: {annotations: {forge-ranch/copyright-date: "2026"}}'
+  - 'metadata: {annotations: {forge-ranch/copyright-date: "2020-2026"}}'
+  - "{}"
+  - "{metadata: {annotations: {}}}"
+  - "'metadata': {'annotations': {'forge-ranch/copyright-date': '1999'}}"
+  - |
+    metadata:
+      annotations:
+        forge-ranch/copyright-date: 1999-2001 # plain range is a string
+  - 'metadata: {annotations: {forge-ranch/copyright-date: "2030-2020"}}'
+  - "metadata: {forge-ranch/copyright-date: invalid}"
+  - "spec: {metadata: {annotations: {forge-ranch/copyright-date: invalid}}}"
+  - "annotations: {forge-ranch/copyright-date: invalid}"
+  - "{metadata: {annotations: {other/copyright-date: invalid}}}"
+invalid:
+  - 'metadata: {annotations: {forge-ranch/copyright-date: "202"}}'
+  - "{metadata: {annotations: {forge-ranch/copyright-date: 2026}}}"
+  - "{metadata: {annotations: {forge-ranch/copyright-date: null}}}"
+  - "{metadata: {annotations: {forge-ranch/copyright-date: true}}}"
+  - "{metadata: {annotations: {forge-ranch/copyright-date: []}}}"
+  - '{metadata: {annotations: {forge-ranch/copyright-date: {year: "2026"}}}}'
+  - '{metadata: {annotations: {forge-ranch/copyright-date: ""}}}'
+  - '{metadata: {annotations: {forge-ranch/copyright-date: "2026-27"}}}'
+  - '{metadata: {annotations: {forge-ranch/copyright-date: "2026/2027"}}}'
+  - '{metadata: {annotations: {forge-ranch/copyright-date: " 2026"}}}'
+  - '{metadata: {annotations: {forge-ranch/copyright-date: "2026 "}}}'
+  - |
+    metadata:
+      annotations:
+        forge-ranch/copyright-date:

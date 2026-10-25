@@ -1,0 +1,296 @@
+id: require-catalog-user-owner
+snapshots:
+  "spec: {owner: group:default/team}":
+    labels:
+    - source: "spec: {owner: group:default/team}"
+      style: primary
+      start: 0
+      end: 33
+    - source: "spec: {owner: group:default/team}"
+      style: secondary
+      start: 0
+      end: 33
+    - source: "spec: {owner: group:default/team}"
+      style: secondary
+      start: 0
+      end: 33
+  "{metadata: {spec: {owner: user:a}}}":
+    labels:
+    - source: "{metadata: {spec: {owner: user:a}}}"
+      style: primary
+      start: 0
+      end: 35
+    - source: "{metadata: {spec: {owner: user:a}}}"
+      style: secondary
+      start: 0
+      end: 35
+    - source: "{metadata: {spec: {owner: user:a}}}"
+      style: secondary
+      start: 0
+      end: 35
+  "{owner: user:a}":
+    labels:
+    - source: "{owner: user:a}"
+      style: primary
+      start: 0
+      end: 15
+    - source: "{owner: user:a}"
+      style: secondary
+      start: 0
+      end: 15
+    - source: "{owner: user:a}"
+      style: secondary
+      start: 0
+      end: 15
+  "{spec: null}":
+    labels:
+    - source: "{spec: null}"
+      style: primary
+      start: 0
+      end: 12
+    - source: "{spec: null}"
+      style: secondary
+      start: 0
+      end: 12
+    - source: "{spec: null}"
+      style: secondary
+      start: 0
+      end: 12
+  "{spec: {nested: {owner: user:a}}}":
+    labels:
+    - source: "{spec: {nested: {owner: user:a}}}"
+      style: primary
+      start: 0
+      end: 33
+    - source: "{spec: {nested: {owner: user:a}}}"
+      style: secondary
+      start: 0
+      end: 33
+    - source: "{spec: {nested: {owner: user:a}}}"
+      style: secondary
+      start: 0
+      end: 33
+  "{spec: {owner: \" user:a\"}}":
+    labels:
+    - source: "{spec: {owner: \" user:a\"}}"
+      style: primary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \" user:a\"}}"
+      style: secondary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \" user:a\"}}"
+      style: secondary
+      start: 0
+      end: 26
+  "{spec: {owner: \"user:\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:\"}}"
+      style: primary
+      start: 0
+      end: 24
+    - source: "{spec: {owner: \"user:\"}}"
+      style: secondary
+      start: 0
+      end: 24
+    - source: "{spec: {owner: \"user:\"}}"
+      style: secondary
+      start: 0
+      end: 24
+  "{spec: {owner: \"user:-a\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:-a\"}}"
+      style: primary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:-a\"}}"
+      style: secondary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:-a\"}}"
+      style: secondary
+      start: 0
+      end: 26
+  "{spec: {owner: \"user:/a\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:/a\"}}"
+      style: primary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:/a\"}}"
+      style: secondary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:/a\"}}"
+      style: secondary
+      start: 0
+      end: 26
+  "{spec: {owner: \"user:a \"}}":
+    labels:
+    - source: "{spec: {owner: \"user:a \"}}"
+      style: primary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:a \"}}"
+      style: secondary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:a \"}}"
+      style: secondary
+      start: 0
+      end: 26
+  "{spec: {owner: \"user:a b\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:a b\"}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: "{spec: {owner: \"user:a b\"}}"
+      style: secondary
+      start: 0
+      end: 27
+    - source: "{spec: {owner: \"user:a b\"}}"
+      style: secondary
+      start: 0
+      end: 27
+  "{spec: {owner: \"user:a-\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:a-\"}}"
+      style: primary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:a-\"}}"
+      style: secondary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:a-\"}}"
+      style: secondary
+      start: 0
+      end: 26
+  "{spec: {owner: \"user:a/\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:a/\"}}"
+      style: primary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:a/\"}}"
+      style: secondary
+      start: 0
+      end: 26
+    - source: "{spec: {owner: \"user:a/\"}}"
+      style: secondary
+      start: 0
+      end: 26
+  "{spec: {owner: \"user:a/b/c\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:a/b/c\"}}"
+      style: primary
+      start: 0
+      end: 29
+    - source: "{spec: {owner: \"user:a/b/c\"}}"
+      style: secondary
+      start: 0
+      end: 29
+    - source: "{spec: {owner: \"user:a/b/c\"}}"
+      style: secondary
+      start: 0
+      end: 29
+  "{spec: {owner: \"user:a_/b\"}}":
+    labels:
+    - source: "{spec: {owner: \"user:a_/b\"}}"
+      style: primary
+      start: 0
+      end: 28
+    - source: "{spec: {owner: \"user:a_/b\"}}"
+      style: secondary
+      start: 0
+      end: 28
+    - source: "{spec: {owner: \"user:a_/b\"}}"
+      style: secondary
+      start: 0
+      end: 28
+  "{spec: {owner: 2026}}":
+    labels:
+    - source: "{spec: {owner: 2026}}"
+      style: primary
+      start: 0
+      end: 21
+    - source: "{spec: {owner: 2026}}"
+      style: secondary
+      start: 0
+      end: 21
+    - source: "{spec: {owner: 2026}}"
+      style: secondary
+      start: 0
+      end: 21
+  "{spec: {owner: [\"user:a\"]}}":
+    labels:
+    - source: "{spec: {owner: [\"user:a\"]}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: "{spec: {owner: [\"user:a\"]}}"
+      style: secondary
+      start: 0
+      end: 27
+    - source: "{spec: {owner: [\"user:a\"]}}"
+      style: secondary
+      start: 0
+      end: 27
+  "{spec: {owner: null}}":
+    labels:
+    - source: "{spec: {owner: null}}"
+      style: primary
+      start: 0
+      end: 21
+    - source: "{spec: {owner: null}}"
+      style: secondary
+      start: 0
+      end: 21
+    - source: "{spec: {owner: null}}"
+      style: secondary
+      start: 0
+      end: 21
+  "{spec: {owner: {owner: user:a}}}":
+    labels:
+    - source: "{spec: {owner: {owner: user:a}}}"
+      style: primary
+      start: 0
+      end: 32
+    - source: "{spec: {owner: {owner: user:a}}}"
+      style: secondary
+      start: 0
+      end: 32
+    - source: "{spec: {owner: {owner: user:a}}}"
+      style: secondary
+      start: 0
+      end: 32
+  "{spec: {}}":
+    labels:
+    - source: "{spec: {}}"
+      style: primary
+      start: 0
+      end: 10
+    - source: "{spec: {}}"
+      style: secondary
+      start: 0
+      end: 10
+    - source: "{spec: {}}"
+      style: secondary
+      start: 0
+      end: 10
+  "{}":
+    labels:
+    - source: "{}"
+      style: primary
+      start: 0
+      end: 2
+    - source: "{}"
+      style: secondary
+      start: 0
+      end: 2
+    - source: "{}"
+      style: secondary
+      start: 0
+      end: 2

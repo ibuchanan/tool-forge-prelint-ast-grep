@@ -34,6 +34,20 @@ if [ -n "$matches" ]; then
 fi
 echo "$DROP_CALF_BIOME hard-excludes dist without a finding."
 
+# Catalog seed values are examples, not a frozen title, lifecycle or year policy.
+DROP_CALF_CATALOG="fixtures/drop-calf-forge-app/catalog-info.yaml"
+if [ ! -f "$DROP_CALF_CATALOG" ]; then
+  echo "Missing Drop Calf fixture: $DROP_CALF_CATALOG" >&2
+  exit 1
+fi
+catalog_findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+  --filter '^require-catalog-' --json=compact "$DROP_CALF_CATALOG")
+if ! printf '%s\n' "$catalog_findings" | jq -e 'type == "array" and length == 0' >/dev/null; then
+  echo "Generated Drop Calf catalog must pass catalog convention checks: $catalog_findings" >&2
+  exit 1
+fi
+echo "$DROP_CALF_CATALOG produced zero catalog convention findings."
+
 # Both Biome filenames must be parsed as JSON and checked by the same rule.
 for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/biome-invalid/biome.jsonc; do
   matches=$(ast-grep scan --config sgconfig.ecosol.yml \

@@ -11,7 +11,7 @@ while IFS=$'\t' read -r rule scope tests; do
   [[ $rule != \#* && -n $rule ]] || continue
   [[ $# == 0 || $rule == "$1/"* || $rule == "$1" ]] || continue
   case $scope in
-  all | non-frontend | frontend | frontend-index | resolvers | backend | entry | package | manifest | biome | hooks | tsconfig | typecheck | vitest) ;;
+  all | non-frontend | frontend | frontend-index | resolvers | backend | entry | package | manifest | catalog | biome | hooks | tsconfig | typecheck | vitest) ;;
   *)
     printf 'Unknown routing case: %s\n' "$scope" >&2
     exit 1
@@ -51,6 +51,7 @@ while IFS=$'\t' read -r rule scope tests; do
     case $scope in
     package) name=package.json ;;
     manifest) name=manifest.$ext ;;
+    catalog) name=catalog-info.$ext ;;
     biome) name=biome.$ext ;;
     hooks) name=lefthook.yml ;;
     tsconfig) name=tsconfig.json ;;
@@ -67,6 +68,7 @@ while IFS=$'\t' read -r rule scope tests; do
     for directory in . nested src frontend nested/frontend backend resolvers external import-lifecycle static/custom-ui lib; do
       included=false
       case $scope:$directory in
+      catalog:*) [[ $ext != yaml ]] || included=true ;;
       all:* | package:* | manifest:* | biome:* | hooks:* | tsconfig:* | typecheck:* | vitest:*) included=true ;;
       non-frontend:frontend | non-frontend:nested/frontend) ;;
       non-frontend:*) included=true ;;

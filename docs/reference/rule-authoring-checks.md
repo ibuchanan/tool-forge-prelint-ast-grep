@@ -59,7 +59,7 @@ native structural checks alone do not establish string-element validity.
 - Supported native severity and agreement with the shared precision/impact matrix;
   `off` is preserved, not activated. Stale enabled severity is a `severity` finding.
 - Optional nonempty string OWASP/CWE classifications.
-- Nonempty, distinct references and optional distinct module tags.
+- Nonempty, distinct references and optional distinct module/capability tags.
 - Explicit, distinct, nonempty string native globs; ignores may be empty and
   optional files may not be empty.
 - Distinct known selectors; standard profiles require a runtime/artifact;
@@ -103,7 +103,10 @@ The reference screen requires explicit HTTP(S) strings, host text, and no
 whitespace, using the shared conservative pattern. Queries and fragments are
 preserved. It does not establish complete URL validity, authority, relevance,
 reachability, or authenticity. Tags require `module:<namespace>:<identifier>`
-shape; exact Forge module identity remains review work.
+shape or `capability:<name>` from the exact 20-name vocabulary in
+`authoring/policy.yml`. Mixed entries are allowed; duplicates, unknown capabilities,
+malformed values and non-strings are rejected. Exact Forge module identity and
+capability relevance remain review work; tags do not route files or prove installation.
 
 ## Enforcement and exceptions
 

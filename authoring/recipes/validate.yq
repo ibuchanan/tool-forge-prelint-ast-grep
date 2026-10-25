@@ -15,7 +15,7 @@ select(((.metadata // {}) | to_entries | map(select((.key == "owasp" or .key == 
 select(((.metadata // {}) | to_entries | map(select(.key == "category" and (.value | tag != "!!str"))) | length) == 0) // error("category must be a string") |
 select(((.metadata // {}) | to_entries | map(select((.key == "references" or .key == "tags" or .key == "scope-profile") and (.value | tag != "!!seq"))) | length) == 0) // error("references, tags, scope-profile must be sequences") |
 select(((.metadata // {}) | to_entries | map(select(.key == "references") | .value[] | select(tag != "!!str" or (test($policy.reference-pattern) | not))) | length) == 0) // error("references contain unsupported URL values; review rather than overwrite") |
-select(((.metadata // {}) | to_entries | map(select(.key == "tags") | .value[] | select(tag != "!!str" or (test("^module:[A-Za-z][A-Za-z0-9-]*:[A-Za-z][A-Za-z0-9]*$") | not))) | length) == 0) // error("tags require module:<exact Forge module identifier>; review unsupported values") |
+select(((.metadata // {}) | to_entries | map(select(.key == "tags") | .value[] | select(tag != "!!str" or ((test($policy.module-tag-pattern) or test("^capability:(" + ($policy.capabilities | join("|")) + ")$")) | not))) | length) == 0) // error("tags require module:<exact Forge module identifier> or known capability:<name>; review unsupported values") |
 ((.metadata // {}) | to_entries | map(select(.key == "scope-profile") | .value)) as $profiles |
 select(($profiles | length) == 0 or ($profiles[0] | length > 0)) // error("scope-profile cannot be empty") |
 select(($profiles | map(select((unique | length) != length)) | length) == 0) // error("scope-profile has duplicate selectors") |

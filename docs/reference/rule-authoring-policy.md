@@ -50,7 +50,7 @@ placeholders alike.
 | `scope-rationale`     | Nonempty string                       | Required for `[unique]`; optional for standard selections.                             |
 | `owasp`               | Nonempty string                       | Optional; edition-specific OWASP classification.                                       |
 | `cwe`                 | Nonempty string                       | Optional; CWE identifier and classification.                                           |
-| `tags`                | Sequence of distinct strings          | Optional; module classification only.                                                  |
+| `tags`                | Sequence of distinct strings          | Optional; module relevance or Drop Calf capability convention ownership.               |
 
 A nonempty string contains non-whitespace text. Rationale is durable metadata,
 not a parallel assessment tree or a review-comment-only artifact. Test paths are
@@ -107,13 +107,32 @@ OWASP classifications include their edition because category numbers change
 between editions. CWE classifications identify the applicable weakness. Neither
 classification alone proves exploitability or determines precision or severity.
 
-The initial tag vocabulary is `module:<exact Forge module identifier>`. The
-identifier must be supported by an authoritative Forge reference in `references`.
-A module tag describes relevance; it does not route files, select a parser, or
-assert that the rule applies exclusively to that module. Uncertain classifications
-are omitted. `target:*` and parser-language tags are not part of this vocabulary;
-frontend/backend selection belongs to `scope-profile`. New tag namespaces require
-a documented vocabulary change.
+The tag vocabulary permits distinct strings in the same optional `metadata.tags`
+sequence:
+
+- `module:<exact Forge module identifier>` describes module relevance. The exact
+  identifier requires an authoritative Forge reference in `references`; automation
+  checks only `module:<namespace>:<identifier>` shape.
+- `capability:<exact Drop Calf capability name>` describes convention ownership or
+  material relevance, supported by the capability implementation in `references`.
+
+The initial capability vocabulary is exactly `catalog`, `package-metadata`, `oss`,
+`gitignore`, `node`, `forge-manifest`, `changelog`, `release`, `secrets`, `prelint`,
+`biome`, `lint`, `test`, `typescript`, `forge-ahead`, `size-limit`, `clean-build`,
+`todo`, `docs`, and `git-hooks`. The executable list is in `authoring/policy.yml`.
+Optional `aidev` and `evals` are excluded; `vitest` is not the `test` capability name.
+New namespaces or capabilities require a reviewed vocabulary expansion.
+
+Mixed module/capability tags preserve existing module entries and ordering on
+unrelated edits. Multiple capability tags require material checks of both
+conventions and an explanation of that relationship. Tags never route files,
+select a parser, set severity, express dependencies, establish app identity, or
+prove that a capability is installed. A module tag does not assert exclusive
+applicability. Uncertain classifications are omitted. Unknown capabilities,
+malformed/non-string entries and duplicate tags are authoring violations.
+`normalize.yq` may explicitly remove exact duplicates while retaining first-seen
+order; unrelated recipes preserve tags. `target:*` and parser-language tags are
+not vocabulary; frontend/backend selection belongs to `scope-profile`.
 
 ## Rating rubric
 

@@ -1,0 +1,114 @@
+id: require-catalog-component-kind
+snapshots:
+  "kind: API":
+    labels:
+    - source: "kind: API"
+      style: primary
+      start: 0
+      end: 9
+    - source: "kind: API"
+      style: secondary
+      start: 0
+      end: 9
+    - source: "kind: API"
+      style: secondary
+      start: 0
+      end: 9
+  "metadata: {kind: Component}":
+    labels:
+    - source: "metadata: {kind: Component}"
+      style: primary
+      start: 0
+      end: 27
+    - source: "metadata: {kind: Component}"
+      style: secondary
+      start: 0
+      end: 27
+    - source: "metadata: {kind: Component}"
+      style: secondary
+      start: 0
+      end: 27
+  "{kind: API, metadata: {kind: Component}}":
+    labels:
+    - source: "{kind: API, metadata: {kind: Component}}"
+      style: primary
+      start: 0
+      end: 40
+    - source: "{kind: API, metadata: {kind: Component}}"
+      style: secondary
+      start: 0
+      end: 40
+    - source: "{kind: API, metadata: {kind: Component}}"
+      style: secondary
+      start: 0
+      end: 40
+  "{kind: [Component]}":
+    labels:
+    - source: "{kind: [Component]}"
+      style: primary
+      start: 0
+      end: 19
+    - source: "{kind: [Component]}"
+      style: secondary
+      start: 0
+      end: 19
+    - source: "{kind: [Component]}"
+      style: secondary
+      start: 0
+      end: 19
+  "{kind: component}":
+    labels:
+    - source: "{kind: component}"
+      style: primary
+      start: 0
+      end: 17
+    - source: "{kind: component}"
+      style: secondary
+      start: 0
+      end: 17
+    - source: "{kind: component}"
+      style: secondary
+      start: 0
+      end: 17
+  "{kind: null}":
+    labels:
+    - source: "{kind: null}"
+      style: primary
+      start: 0
+      end: 12
+    - source: "{kind: null}"
+      style: secondary
+      start: 0
+      end: 12
+    - source: "{kind: null}"
+      style: secondary
+      start: 0
+      end: 12
+  "{kind: {kind: Component}}":
+    labels:
+    - source: "{kind: {kind: Component}}"
+      style: primary
+      start: 0
+      end: 25
+    - source: "{kind: {kind: Component}}"
+      style: secondary
+      start: 0
+      end: 25
+    - source: "{kind: {kind: Component}}"
+      style: secondary
+      start: 0
+      end: 25
+  "{}":
+    labels:
+    - source: "{}"
+      style: primary
+      start: 0
+      end: 2
+    - source: "{}"
+      style: secondary
+      start: 0
+      end: 2
+    - source: "{}"
+      style: secondary
+      start: 0
+      end: 2

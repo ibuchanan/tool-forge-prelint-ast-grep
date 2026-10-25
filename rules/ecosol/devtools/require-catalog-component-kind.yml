@@ -1,0 +1,60 @@
+id: require-catalog-component-kind
+language: Yaml
+severity: info
+message: >
+  Declare `kind: Component` at the catalog root for the Drop Calf catalog convention.
+note: >
+  Drop Calf requires a Backstage Component, not another entity kind.
+  This checks an existing catalog mapping, not missing files or full schema validity.
+  Use literal keys and values; aliases, tags and escape-encoded scalars require native validation.
+  Scope scans to the intended app directories; filenames do not establish app identity.
+  https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-component
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/catalog.ts
+rule:
+  any:
+    - kind: block_mapping
+    - kind: flow_mapping
+  inside:
+    any:
+      - kind: block_node
+      - kind: flow_node
+    inside:
+      kind: document
+  not:
+    has:
+      all:
+        - has:
+            field: key
+            regex: '^(kind|"kind"|''kind'')$'
+        - has:
+            field: value
+            regex: '^(Component|"Component"|''Component'')$'
+files:
+  - "**/catalog-info.yaml"
+ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
+  - "**/node_modules/**"
+  - "**/specs/**"
+metadata:
+  category: devtools
+  precision: high
+  precision-rationale: >
+    Direct root mapping pairs distinguish the required literal Component from other
+    kinds, missing keys and nested lookalikes in block and flow YAML.
+    Evidence: rule-tests/ecosol/devtools/require-catalog-component-kind.test.yml.
+    Alias, tag and escape-encoded spellings are outside this literal check.
+  impact: low
+  impact-rationale: >
+    A non-Component catalog violates Drop Calf validation and can interrupt local
+    metadata workflows; this is recoverable convention drift, not a runtime vulnerability.
+  scope-profile: [unique]
+  scope-rationale: >
+    Only catalog-info.yaml is owned by the pinned catalog capability; catalog-info.yml
+    and other YAML filenames are excluded. No standard artifact selector names it.
+    Apply the shared baseline, retain test-local catalogs and build/vendor/fixture
+    directories, and scope caller scans to app roots. Filename routing does not prove app identity.
+  tags: [capability:catalog]
+  references:
+    - https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-component
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/catalog.ts

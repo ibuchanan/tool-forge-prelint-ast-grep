@@ -200,3 +200,6 @@ rules/strict/security/review-untrusted-authorization-identity-js.yml	all	exclude
 rules/strict/security/review-untrusted-authorization-identity-tsx.yml	all	exclude
 rules/strict/security/review-untrusted-authorization-identity.yml	all	exclude
 rules/strict/triggers/prefer-trigger-filter.yml	manifest	include
+rules/ecosol/devtools/require-catalog-component-kind.yml	catalog	include
+rules/ecosol/devtools/require-catalog-user-owner.yml	catalog	include
+rules/ecosol/devtools/require-catalog-copyright-date.yml	catalog	include

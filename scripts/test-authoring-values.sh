@@ -41,9 +41,15 @@ check '.metadata.references = ["https://example.com/a b"]' references
 check '.metadata.references = ["https://"]' references
 check '.metadata.references = [12]' references
 check '.metadata.tags = ["module:jira:issuePanel"]' clean
+check '.metadata.tags = ["module:jira:issuePanel", "capability:catalog", "capability:test"]' clean
 check '.metadata.tags = ["jira:issuePanel"]' tags
 check '.metadata.tags = ["module:jira:issuePanel", "module:jira:issuePanel"]' tags
 check '.metadata.tags = null' tags
+check '.metadata.tags = ["capability:catalog", "capability:catalog"]' tags
+for tags in '["capability:catlog"]' '["capability:vitest"]' '["capability:aidev"]' '["capability:evals"]' '["capability:unknown"]' '["capability:Catalog"]' '["capability:catalog:extra"]' '["capability:"]' '["module:jira"]' '["capability:catalog", 42]' '[true]' '[{}]'; do
+  check ".metadata.tags = $tags" tags
+done
+check '.metadata.tags = ["capability:catalog", "capability:package-metadata", "capability:oss", "capability:gitignore", "capability:node", "capability:forge-manifest", "capability:changelog", "capability:release", "capability:secrets", "capability:prelint", "capability:biome", "capability:lint", "capability:test", "capability:typescript", "capability:forge-ahead", "capability:size-limit", "capability:clean-build", "capability:todo", "capability:docs", "capability:git-hooks"]' clean
 check '.metadata.owasp = []' classification
 check '.metadata.scope-profile = []' scope-selectors
 check '.metadata.scope-profile = ["tests"]' scope-selectors
