@@ -2,30 +2,23 @@ id: use-node-24
 language: Json
 severity: info
 message: >
-  Pin `@types/node` to 24 in devDependencies and omit package.json `engines`.
+  Remove root package.json `engines` to follow the Drop Calf Forge-app convention.
 note: >
-  Drop Calf pins Node 24 in .nvmrc and @types/node, and derives the Forge
-  manifest runtime from .nvmrc. Forge apps omit package.json engines because
-  it can interfere with deployment. This JSON rule checks only package.json;
-  it cannot verify .nvmrc or manifest.yml.
-  Node version manager file reference:
-  https://github.com/nvm-sh/nvm#nvmrc
+  Drop Calf's Forge-app profile removes the root engines field. It seeds
+  @types/node but does not select an explicit type major; updates refresh existing
+  declarations without restoring owner-removed dependencies. This rule intentionally
+  checks neither type presence nor version. The legacy ID is retained for compatibility;
+  a passing JSON check does not select Node 24 or validate .nvmrc, .npmrc or the
+  Forge runtime. Apply this convention only to Forge-app package directories;
+  other profiles may preserve engines. Source policy:
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/node.ts
 rule:
   kind: object
   inside:
     kind: document
-  any:
-    - not:
-        has:
-          kind: pair
-          regex: '^"devDependencies"\s*:'
-          has:
-            stopBy: end
-            kind: pair
-            regex: '^"@types/node"\s*:\s*"24"$'
-    - has:
-        kind: pair
-        regex: '^"engines"\s*:'
+  has:
+    kind: pair
+    regex: '^"engines"\s*:'
 files:
   - "**/package.json"
 ignores:
@@ -34,12 +27,26 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:node]
   references:
-    - https://github.com/nvm-sh/nvm#nvmrc
-    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/main/src/node.ts
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/node.ts
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/composition/profiles.ts
+    - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#engines
   category: package-json
-  precision: medium
+  precision: high
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests accept literal @types/node 24 without engines, rejecting an older type version, engines and missing devDependencies. This does not read .nvmrc or the runtime, and compatible semver ranges can match. Effective version alignment and the note's engines/deployment claim remain assessment gaps. Evidence: rule-tests/ecosol/package-json/use-node-24.test.yml (valid/invalid) and rule-tests/__snapshots__/use-node-24-snapshot.yml."
+  precision-rationale: >
+    The root object and direct pair matcher reports an engines field of any value,
+    not nested owner data. rule-tests/ecosol/package-json/use-node-24.test.yml covers
+    the current seed, refreshed and older types, removed declarations, nested
+    lookalikes and conflicting root engines. The Forge-app profile explicitly
+    removes engines; caller-selected app directories establish applicability,
+    not a capability tag or same-file dependency heuristic. Escaped JSON key
+    spellings are not decoded by the regex and can be missed.
   impact: low
-  impact-rationale: nvm documents runtime selection through .nvmrc; the team pins matching type declarations for consistency. A different declaration alone causes local type/version friction, not proof of an unsupported runtime or deployment failure. The nvm reference does not substantiate a blanket ban on engines.
+  impact-rationale: >
+    An engines declaration drifts from Drop Calf's enforced Forge-app package policy.
+    npm documents engines as compatibility metadata, normally advisory without
+    engine-strict. Its presence alone does not establish a failed Forge deployment
+    or an unsupported runtime. This is bounded toolchain/convention friction;
+    high precision and low impact retain informational severity.

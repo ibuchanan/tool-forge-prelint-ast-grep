@@ -89,3 +89,41 @@ Effective path ignoring, negation ordering, tracked-file status, missing files,
 and desired policy remain outside ast-grep claims. Git's native behavior is
 described in the [gitignore reference](https://git-scm.com/docs/gitignore).
 No ignore engine, cross-file check, or mandatory-template equality is supplied.
+
+## Node: package policy with artifact gaps
+
+`use-node-24` retains its legacy ID but checks only the absence of a direct root
+`engines` field in an existing `package.json`. It is an informational ecosol
+convention for caller-selected Forge-app directories, not a runtime-version check
+or a policy for library packages. Nested `engines` fields are owner data. Escaped
+JSON key spellings can be missed by the key regex.
+
+The reviewed Drop Calf revision is
+`be86d05309a32f7eef8988205208c17ca94e7a4c`:
+
+- [Node capability](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/node.ts)
+- [Forge-app profile](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/composition/profiles.ts)
+- [Node ownership tests](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/tests/capabilities/node.test.ts)
+
+The Forge-app profile uses `nodeBaseline({ engines: "remove" })` without an
+explicit type major. Initialization seeds `@types/node`; update refreshes existing
+declarations and does not restore owner-removed dependencies. Type presence,
+dependency placement, exact versions and semver compatibility are intentionally
+unchecked. A refreshed declaration or its absence does not select a Node runtime.
+Other profiles can explicitly constrain a major or preserve `engines`; those
+options are not this Forge-app policy.
+
+| Artifact or relationship                      | Coverage boundary                                                                                                                                                                                                           |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `package.json` root `engines`                 | Checked by `use-node-24`; any value is a finding. npm's [engines reference](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#engines) describes compatibility metadata, not a blanket Forge deployment failure. |
+| Numeric `.nvmrc` (seeded at Node 24)          | Separate artifact gap: no supported native version-file parser demonstrated. Parsing a number as JSON would not validate runtime selection. Drop Calf owns its update.                                                      |
+| Public-registry `.npmrc`                      | Separate artifact gap: no supported native npm-configuration parser demonstrated. JSON/YAML coercion is not npm configuration validation. Drop Calf replaces the whole file with its registry convention.                   |
+| `.nvmrc` and Forge manifest runtime agreement | Cross-file reconciliation owned by Drop Calf's Node and Forge-manifest capabilities; not proved by this JSON rule.                                                                                                          |
+| Catalog-derived package licensing             | `require-package-license-apache-2-0` is independently tagged for Node and OSS. Drop Calf derives the package value from the catalog; separate literal checks do not prove equality or derivation across files.              |
+
+Missing files, host Node selection, installation, effective registry resolution,
+and runtime/deployment compatibility remain outside the check. Node remains
+`implemented` in the coverage report because active package checks exist; the
+artifact gaps do not mark the whole capability unsupported. No parser plugin,
+file-existence auditor, semver regex, host version change or Node download is
+introduced.

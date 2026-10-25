@@ -1,24 +1,48 @@
 id: use-node-24
 valid:
-  # The package part of Drop Calf's Node 24 baseline
+  # The current seed remains accepted, without making its type version mandatory.
   - |
     {
       "dependencies": { "@forge/api": "^8.0" },
       "devDependencies": { "@types/node": "24" }
     }
-invalid:
-  # Type definitions missing
+  # Forge-app does not select an explicit major: refreshed types are not drift.
   - |
-    { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
-  # Wrong type definitions, even without engines
+    { "devDependencies": { "@types/node": "^26.1.0" } }
+  # Existing owner ranges and dependency placement are not runtime declarations.
   - |
     { "devDependencies": { "@types/node": "22" } }
-  # Runtime engine declaration conflicts even when type definitions match
+  - |
+    { "dependencies": { "@types/node": "^24.3.0" }, "devDependencies": {} }
+  # Update does not restore an owner-removed type declaration.
+  - |
+    { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
+  - |
+    {}
+  # Only the root package field is owned; nested lookalikes are owner data.
+  - |
+    {
+      "devDependencies": { "@types/node": "^26.1.0" },
+      "config": { "engines": { "node": "24.x" } }
+    }
+  - |
+    { "engines-note": "owner text", "config": { "engines": null } }
+  - |
+    { "packages": [{ "engines": { "node": "22" } }] }
+invalid:
+  # Root engines conflicts even when type definitions match the seed.
   - |
     {
       "devDependencies": { "@types/node": "24" },
       "engines": { "node": "24.x" }
     }
-  # A dependency outside devDependencies does not count
+  # Absence, not a Node-version comparison: any root engines field is drift.
   - |
-    { "dependencies": { "@types/node": "24" }, "devDependencies": {} }
+    { "engines": {} }
+  - |
+    { "engines": null }
+  - |
+    { "engines": { "npm": ">=10" }, "devDependencies": { "@types/node": "^26.1.0" } }
+  # Nested seed-like fields cannot hide a conflicting root declaration.
+  - |
+    { "engines": { "node": "22" }, "config": { "devDependencies": { "@types/node": "24" } } }

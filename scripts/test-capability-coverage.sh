@@ -24,6 +24,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "package-metadata"')
 [[ -z $(yq -N -r 'select((.metadata.tags // []) | contains(["capability:gitignore"])) | .id' rules/*/*/*.yml) ]]
 printf 'PASS: active mappings are discoverable without a gitignore placeholder\n'
 
+expected=$'node\timplemented\trequire-package-license-apache-2-0,use-node-24'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "node"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: node coverage must expose package engines and catalog-derived licensing checks; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: node coverage exposes engines and catalog-derived licensing checks\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

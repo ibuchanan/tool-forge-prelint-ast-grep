@@ -1,70 +1,7 @@
 id: use-node-24
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
-    - source: |-
-        {
-          "dependencies": {
-            "@forge/api": "^4.0.0"
-          }
-        }
-      style: primary
-      start: 0
-      end: 54
-    - source: |
-        {
-          "dependencies": {
-            "@forge/api": "^4.0.0"
-          }
-        }
-      style: secondary
-      start: 0
-      end: 55
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "engines": {
-        "node": "18.x"
-      }
-    }
-  : labels:
-    - source: |-
-        {
-          "dependencies": {
-            "@forge/api": "^4.0.0"
-          },
-          "engines": {
-            "node": "18.x"
-          }
-        }
-      style: primary
-      start: 0
-      end: 93
-    - source: |
-        {
-          "dependencies": {
-            "@forge/api": "^4.0.0"
-          },
-          "engines": {
-            "node": "18.x"
-          }
-        }
-      style: secondary
-      start: 0
-      end: 94
-  ? |
-    {
-      "devDependencies": { "@types/node": "24" },
-      "engines": { "node": "24.x" }
-    }
-  : labels:
+  "{\n  \"devDependencies\": { \"@types/node\": \"24\" },\n  \"engines\": { \"node\": \"24.x\" }\n}\n":
+    labels:
     - source: |-
         {
           "devDependencies": { "@types/node": "24" },
@@ -73,10 +10,6 @@ snapshots:
       style: primary
       start: 0
       end: 81
-    - source: '"engines": { "node": "24.x" }'
-      style: secondary
-      start: 50
-      end: 79
     - source: |
         {
           "devDependencies": { "@types/node": "24" },
@@ -85,39 +18,67 @@ snapshots:
       style: secondary
       start: 0
       end: 82
-  ? |
-    { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
-  : labels:
-    - source: '{ "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }'
+    - source: "\"engines\": { \"node\": \"24.x\" }"
+      style: secondary
+      start: 50
+      end: 79
+  "{ \"engines\": null }\n":
+    labels:
+    - source: "{ \"engines\": null }"
       style: primary
       start: 0
-      end: 67
+      end: 19
     - source: |
-        { "dependencies": { "@forge/api": "^8.0" }, "devDependencies": {} }
+        { "engines": null }
       style: secondary
       start: 0
-      end: 68
-  ? |
-    { "dependencies": { "@types/node": "24" }, "devDependencies": {} }
-  : labels:
-    - source: '{ "dependencies": { "@types/node": "24" }, "devDependencies": {} }'
+      end: 20
+    - source: "\"engines\": null"
+      style: secondary
+      start: 2
+      end: 17
+  "{ \"engines\": { \"node\": \"22\" }, \"config\": { \"devDependencies\": { \"@types/node\": \"24\" } } }\n":
+    labels:
+    - source: "{ \"engines\": { \"node\": \"22\" }, \"config\": { \"devDependencies\": { \"@types/node\": \"24\" } } }"
       style: primary
       start: 0
-      end: 66
+      end: 89
     - source: |
-        { "dependencies": { "@types/node": "24" }, "devDependencies": {} }
+        { "engines": { "node": "22" }, "config": { "devDependencies": { "@types/node": "24" } } }
       style: secondary
       start: 0
-      end: 67
-  ? |
-    { "devDependencies": { "@types/node": "22" } }
-  : labels:
-    - source: '{ "devDependencies": { "@types/node": "22" } }'
+      end: 90
+    - source: "\"engines\": { \"node\": \"22\" }"
+      style: secondary
+      start: 2
+      end: 29
+  "{ \"engines\": { \"npm\": \">=10\" }, \"devDependencies\": { \"@types/node\": \"^26.1.0\" } }\n":
+    labels:
+    - source: "{ \"engines\": { \"npm\": \">=10\" }, \"devDependencies\": { \"@types/node\": \"^26.1.0\" } }"
       style: primary
       start: 0
-      end: 46
+      end: 81
     - source: |
-        { "devDependencies": { "@types/node": "22" } }
+        { "engines": { "npm": ">=10" }, "devDependencies": { "@types/node": "^26.1.0" } }
       style: secondary
       start: 0
-      end: 47
+      end: 82
+    - source: "\"engines\": { \"npm\": \">=10\" }"
+      style: secondary
+      start: 2
+      end: 30
+  "{ \"engines\": {} }\n":
+    labels:
+    - source: "{ \"engines\": {} }"
+      style: primary
+      start: 0
+      end: 17
+    - source: |
+        { "engines": {} }
+      style: secondary
+      start: 0
+      end: 18
+    - source: "\"engines\": {}"
+      style: secondary
+      start: 2
+      end: 15

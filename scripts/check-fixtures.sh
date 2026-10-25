@@ -87,6 +87,35 @@ for variant in generated commonjs missing-type public missing-private owner-meta
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
 
+# Node checks root engines policy, not seeded type versions or runtime selection.
+node_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_node.XXXXXX")
+for variant in generated refreshed-types removed-types nested-engines root-engines; do
+  expected=0
+  case "$variant" in
+  generated) edit='.' ;;
+  refreshed-types) edit='.devDependencies["@types/node"] = "^26.1.0"' ;;
+  removed-types) edit='del(.devDependencies["@types/node"])' ;;
+  nested-engines) edit='.config.engines = {"node": "24.x"}' ;;
+  root-engines)
+    edit='.engines = {"node": "24.x"}'
+    expected=1
+    ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$node_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^use-node-24$' --include-metadata --json=compact "$node_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --argjson count "$expected" '
+    type == "array" and length == $count and
+    all(.[]; .ruleId == "use-node-24" and .severity == "info" and
+      (.metadata.tags | index("capability:node") != null))
+  ' >/dev/null; then
+    printf 'Unexpected Node findings for %s: expected %s informational capability findings, got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo "Generated Node package and type/engines mutations produced the expected findings."
+
 # OSS consumes catalog licensing; Node derives the independently checked package field.
 oss_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_oss.XXXXXX")
 for variant in generated catalog-license package-license; do
