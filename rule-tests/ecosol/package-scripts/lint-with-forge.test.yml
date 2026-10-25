@@ -1,37 +1,30 @@
 id: lint-with-forge
 valid:
   - |
-    {
-      "scripts": {
-        "lint:forge": "forge lint"
-      }
-    }
+    {"scripts":{"lint:check:forge":"forge lint"}}
   - |
-    {"scripts": {"lint:forge": "cmd=$(fence-rider lint) && sh -c \"$cmd\" sh"}}
+    {"scripts":{"lint:check:forge":"cmd=$(fence-rider lint) && sh -c \"$cmd\" sh"}}
   - |
-    {"scripts": {"lint:forge": "secretspec run -- forge lint --verbose"}}
+    {"scripts":{"lint:check:forge":"secretspec run -- forge lint --verbose"}}
+  - |
+    {"scripts":{"lint:check:forge":"bash scripts/env-var.sh 'forge lint'"}}
 invalid:
-  # The named script must still contain a recognizable lint command.
+  # The named task must contain a recognizable lint command.
   - |
-    {"scripts": {"lint:forge": "echo ready"}}
+    {"scripts":{"lint:check:forge":"echo ready"}}
   - |
-    {"scripts": {"lint:forge": "my-forge lint && fence-rider linting"}}
+    {"scripts":{"lint:check:forge":"my-forge lint && fence-rider linting"}}
   # Unrelated metadata cannot satisfy the script requirement.
   - |
-    {"lint:forge": "forge lint", "scripts": {"build": "tsc"}}
+    {"lint:check:forge":"forge lint","scripts":{"build":"tsc"}}
   - |
-    {"config": {"scripts": {"lint:forge": "fence-rider lint"}}}
-  # Missing entirely
+    {"config":{"scripts":{"lint:check:forge":"fence-rider lint"}}}
   - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  # forge lint called directly instead of through the alias
+    {"scripts":{"other":{"lint:check:forge":"forge lint"}}}
   - |
-    {
-      "scripts": {
-        "lint": "forge lint"
-      }
-    }
+    {"scripts":{"build":"tsc"}}
+  # Neither a direct aggregate nor the legacy name is selected by lint:check:*.
+  - |
+    {"scripts":{"lint":"forge lint"}}
+  - |
+    {"scripts":{"lint:forge":"forge lint"}}

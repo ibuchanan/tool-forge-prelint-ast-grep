@@ -2,7 +2,7 @@ id: require-valid-prelint-config
 language: Json
 severity: info
 message: >
-  `lint:prelint` should point `--config` at one of this package's shipped sgconfig files.
+  `lint:check:prelint` should point `--config` at one of this package's shipped sgconfig files.
 note: >
   Forge Prelint ships one sgconfig file per tier:
   sgconfig.recommended.yml, sgconfig.strict.yml, sgconfig.atlassian.yml, sgconfig.ecosol.yml.
@@ -10,11 +10,12 @@ note: >
   so the folder name under node_modules is whatever key you used in your
   dependencies entry, not necessarily tool-forge-prelint-ast-grep.
   Point --config at one of the shipped sgconfig.<tier>.yml files, wherever it landed.
+  Legacy `lint:prelint` scripts are also checked.
   https://github.com/ibuchanan/tool-forge-prelint-ast-grep
 rule:
   all:
     - kind: pair
-      regex: '^"lint:prelint"\s*:\s*"'
+      regex: '^"lint:(?:check:)?prelint"\s*:\s*"'
       inside:
         stopBy: end
         kind: pair

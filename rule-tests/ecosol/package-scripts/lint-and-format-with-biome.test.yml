@@ -1,45 +1,77 @@
 id: lint-and-format-with-biome
 valid:
+  # Drop Calf's generated npm scripts.
   - |
-    {
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "biome lint .",
-        "lint:fix": "biome lint --write ."
-      }
-    }
+    {"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check:biome":"biome lint",
+      "lint:check:format":"npm run format:check",
+      "lint:fix":"biome lint --write"
+    }}
+  # Bun delegation and explicit source paths work too.
+  - |
+    {"scripts":{
+      "format":"biome format --write .",
+      "format:check":"biome format .",
+      "lint:check:biome":"biome lint .",
+      "lint:check:format":"bun run format:check",
+      "lint:fix":"biome lint --write ."
+    }}
 invalid:
-  # Missing entirely
   - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  # Biome installed but no scripts wired up
+    {"scripts":{"build":"tsc"}}
   - |
-    {
-      "devDependencies": {
-        "@biomejs/biome": "^1.9.0"
-      }
-    }
-  # Missing lint:fix script
+    {"devDependencies":{"@biomejs/biome":"^2.5.0"}}
+  # Legacy lint:check is not selected by lint:check:*.
   - |
-    {
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "biome lint ."
-      }
-    }
-  # lint:check script present but does not invoke biome
+    {"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check":"biome lint",
+      "lint:check:format":"npm run format:check",
+      "lint:fix":"biome lint --write"
+    }}
+  # Formatting must also participate in the parallel lint workflow.
   - |
-    {
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "eslint .",
-        "lint:fix": "biome lint --write ."
-      }
-    }
+    {"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check:biome":"biome lint",
+      "lint:fix":"biome lint --write"
+    }}
+  # Missing fix script.
+  - |
+    {"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check:biome":"biome lint",
+      "lint:check:format":"npm run format:check"
+    }}
+  # Another linter cannot satisfy the Biome task.
+  - |
+    {"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check:biome":"eslint .",
+      "lint:check:format":"npm run format:check",
+      "lint:fix":"biome lint --write"
+    }}
+  # The formatting check must delegate to the read-only script, not format.
+  - |
+    {"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check:biome":"biome lint",
+      "lint:check:format":"npm run format",
+      "lint:fix":"biome lint --write"
+    }}
+  # Nested metadata cannot satisfy root scripts requirements.
+  - |
+    {"config":{"scripts":{
+      "format":"biome format --write",
+      "format:check":"biome format",
+      "lint:check:biome":"biome lint",
+      "lint:check:format":"npm run format:check",
+      "lint:fix":"biome lint --write"
+    }}}

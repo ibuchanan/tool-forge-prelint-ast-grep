@@ -2,37 +2,42 @@ id: lint-and-format-with-biome
 language: Json
 severity: info
 message: >
-  Biome is a blazing-fast, Rust-based toolchain that unifies linting and formatting
+  Add Biome scripts for formatting, fixes, and the `lint:check:biome` and `lint:check:format` tasks.
 note: >
-  Biome reduce dev dep bloat
-  and is "batteries included" (zero config) for TypeScript and React.
-  Use @biomejs/biome in package scripts for format, format:check, lint:check, and lint:fix.
+  Biome unifies TypeScript and React linting and formatting with a small toolchain.
+  Define format, format:check, lint:check:biome, and lint:fix with Biome commands.
+  Delegate lint:check:format to format:check with npm run or bun run so Drop Calf's
+  parallel `lint:check:*` workflow includes read-only formatting validation.
+  The legacy lint:check name is not selected by that glob.
+  This rule checks named scripts and command text, not effective shell execution
+  or command flags; keep write-back commands out of read-only check tasks.
   https://biomejs.dev/
 rule:
   kind: object
   inside:
     kind: document
-  any:
-    - not:
-        has:
-          stopBy: end
-          kind: pair
-          regex: '"format"\s*:\s*"[^"]*biome[^"]*"'
-    - not:
-        has:
-          stopBy: end
-          kind: pair
-          regex: '"format:check"\s*:\s*"[^"]*biome[^"]*"'
-    - not:
-        has:
-          stopBy: end
-          kind: pair
-          regex: '"lint:check"\s*:\s*"[^"]*biome[^"]*"'
-    - not:
-        has:
-          stopBy: end
-          kind: pair
-          regex: '"lint:fix"\s*:\s*"[^"]*biome[^"]*"'
+  not:
+    has:
+      kind: pair
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        all:
+          - has:
+              kind: pair
+              regex: '^"format"\s*:\s*"[^"]*biome[^"]*"'
+          - has:
+              kind: pair
+              regex: '^"format:check"\s*:\s*"[^"]*biome[^"]*"'
+          - has:
+              kind: pair
+              regex: '^"lint:check:biome"\s*:\s*"[^"]*biome[^"]*"'
+          - has:
+              kind: pair
+              regex: '^"lint:check:format"\s*:\s*"\s*(npm|bun)\s+run\s+format:check(\s+[^"]*)?"$'
+          - has:
+              kind: pair
+              regex: '^"lint:fix"\s*:\s*"[^"]*biome[^"]*"'
 files:
   - "**/package.json"
 ignores:
@@ -45,6 +50,6 @@ metadata:
   category: package-scripts
   precision: medium
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests require four named commands containing biome and reject missing commands or eslint. Descendant regex matches do not establish scripts placement, real invocation or correct flags; equivalent delegated tooling and non-app packages remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/lint-and-format-with-biome.test.yml (valid/invalid) and rule-tests/__snapshots__/lint-and-format-with-biome-snapshot.yml."
+  precision-rationale: "Tests require four named Biome commands and an npm/Bun format:check delegate in the root scripts object; they reject legacy lint:check, missing tasks, other linters and misplaced keys. Command text does not establish real invocation or correct flags; equivalent delegated tooling and non-app packages remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/lint-and-format-with-biome.test.yml (valid/invalid) and rule-tests/__snapshots__/lint-and-format-with-biome-snapshot.yml."
   impact: low
   impact-rationale: Biome provides unified formatting/linting; departing from the team's chosen tool adds local workflow and dependency-maintenance friction. Another functioning formatter/linter is not itself unsafe or a runtime defect.

@@ -7,11 +7,18 @@ valid:
         "build": "tsc"
       }
     }
-  # Double-star form, as documented in the README
+  # Legacy: Double-star form, as documented in the README
   - |
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
+      }
+    }
+  # New: lint:check:prelint with exact command from spec
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --globs '!specs/**' --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"
       }
     }
   # Trailing slash, no double-star: gitignore semantics still exclude the whole directory
@@ -43,11 +50,18 @@ valid:
       }
     }
 invalid:
-  # No --globs flag at all
+  # No --globs flag at all (legacy)
   - |
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml"
+      }
+    }
+  # No --globs flag at all (new)
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"
       }
     }
   # --globs excludes something else, not node_modules
@@ -62,5 +76,19 @@ invalid:
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/*'"
+      }
+    }
+  # Missing node_modules glob with new script name
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --globs '!specs/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"
+      }
+    }
+  # Wrong glob pattern with new script name
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --globs '!specs/**' --globs '!node_modules/*' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"
       }
     }

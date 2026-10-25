@@ -10,7 +10,15 @@ valid:
         "format": "biome format --write ."
       }
     }
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*'","lint:check:biome":"biome lint","lint:check:format":"npm run format:check","lint:fix":"biome lint --write"}}
 invalid:
+  - |
+    {"scripts":{"lint:check:biome":"biome lint --write"}}
+  - |
+    {"scripts":{"lint:check:forge":"forge lint --fix"}}
+  - |
+    {"scripts":{"lint:check:format":"biome format --write"}}
   - |
     {
       "scripts": {

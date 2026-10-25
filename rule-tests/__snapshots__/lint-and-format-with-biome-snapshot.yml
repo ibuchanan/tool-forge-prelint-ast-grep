@@ -1,13 +1,8 @@
 id: lint-and-format-with-biome
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -18,17 +13,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "devDependencies": {
-        "@biomejs/biome": "^1.9.0"
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"devDependencies\": {\n    \"@biomejs/biome\": \"^1.9.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -39,19 +26,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "biome lint ."
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"format\": \"biome format --write .\",\n    \"format:check\": \"biome format .\",\n    \"lint:check\": \"biome lint .\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -62,20 +39,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "eslint .",
-        "lint:fix": "biome lint --write ."
-      }
-    }
-  : labels:
-    - source: '@forge/api'
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"format\": \"biome format --write .\",\n    \"format:check\": \"biome format .\",\n    \"lint:check\": \"eslint .\",\n    \"lint:fix\": \"biome lint --write .\"\n  }\n}\n":
+    labels:
+    - source: "@forge/api"
       style: primary
       start: 27
       end: 37
@@ -86,14 +52,9 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "dependencies": {
-        "@forge/react": "^4.0.0"
-      }
-    }
-  : labels:
-    - source: '@forge/react'
+  "{\n  \"dependencies\": {\n    \"@forge/react\": \"^4.0.0\"\n  }\n}\n":
+    labels:
+    - source: "@forge/react"
       style: primary
       start: 27
       end: 39
@@ -104,13 +65,8 @@ snapshots:
       style: secondary
       start: 4
       end: 54
-  ? |
-    {
-      "devDependencies": {
-        "@biomejs/biome": "^1.9.0"
-      }
-    }
-  : labels:
+  "{\n  \"devDependencies\": {\n    \"@biomejs/biome\": \"^1.9.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "devDependencies": {
@@ -129,13 +85,8 @@ snapshots:
       style: secondary
       start: 0
       end: 62
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -154,15 +105,8 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "biome lint ."
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"format\": \"biome format --write .\",\n    \"format:check\": \"biome format .\",\n    \"lint:check\": \"biome lint .\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -185,16 +129,8 @@ snapshots:
       style: secondary
       start: 0
       end: 134
-  ? |
-    {
-      "scripts": {
-        "format": "biome format --write .",
-        "format:check": "biome format .",
-        "lint:check": "eslint .",
-        "lint:fix": "biome lint --write ."
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"format\": \"biome format --write .\",\n    \"format:check\": \"biome format .\",\n    \"lint:check\": \"eslint .\",\n    \"lint:fix\": \"biome lint --write .\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -219,3 +155,165 @@ snapshots:
       style: secondary
       start: 0
       end: 170
+  "{\"config\":{\"scripts\":{\n  \"format\":\"biome format --write\",\n  \"format:check\":\"biome format\",\n  \"lint:check:biome\":\"biome lint\",\n  \"lint:check:format\":\"npm run format:check\",\n  \"lint:fix\":\"biome lint --write\"\n}}}\n":
+    labels:
+    - source: |-
+        {"config":{"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:check:format":"npm run format:check",
+          "lint:fix":"biome lint --write"
+        }}}
+      style: primary
+      start: 0
+      end: 209
+    - source: |
+        {"config":{"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:check:format":"npm run format:check",
+          "lint:fix":"biome lint --write"
+        }}}
+      style: secondary
+      start: 0
+      end: 210
+  "{\"devDependencies\":{\"@biomejs/biome\":\"^2.5.0\"}}\n":
+    labels:
+    - source: "{\"devDependencies\":{\"@biomejs/biome\":\"^2.5.0\"}}"
+      style: primary
+      start: 0
+      end: 47
+    - source: |
+        {"devDependencies":{"@biomejs/biome":"^2.5.0"}}
+      style: secondary
+      start: 0
+      end: 48
+  "{\"scripts\":{\n  \"format\":\"biome format --write\",\n  \"format:check\":\"biome format\",\n  \"lint:check\":\"biome lint\",\n  \"lint:check:format\":\"npm run format:check\",\n  \"lint:fix\":\"biome lint --write\"\n}}\n":
+    labels:
+    - source: |-
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check":"biome lint",
+          "lint:check:format":"npm run format:check",
+          "lint:fix":"biome lint --write"
+        }}
+      style: primary
+      start: 0
+      end: 192
+    - source: |
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check":"biome lint",
+          "lint:check:format":"npm run format:check",
+          "lint:fix":"biome lint --write"
+        }}
+      style: secondary
+      start: 0
+      end: 193
+  "{\"scripts\":{\n  \"format\":\"biome format --write\",\n  \"format:check\":\"biome format\",\n  \"lint:check:biome\":\"biome lint\",\n  \"lint:check:format\":\"npm run format\",\n  \"lint:fix\":\"biome lint --write\"\n}}\n":
+    labels:
+    - source: |-
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:check:format":"npm run format",
+          "lint:fix":"biome lint --write"
+        }}
+      style: primary
+      start: 0
+      end: 192
+    - source: |
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:check:format":"npm run format",
+          "lint:fix":"biome lint --write"
+        }}
+      style: secondary
+      start: 0
+      end: 193
+  "{\"scripts\":{\n  \"format\":\"biome format --write\",\n  \"format:check\":\"biome format\",\n  \"lint:check:biome\":\"biome lint\",\n  \"lint:check:format\":\"npm run format:check\"\n}}\n":
+    labels:
+    - source: |-
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:check:format":"npm run format:check"
+        }}
+      style: primary
+      start: 0
+      end: 163
+    - source: |
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:check:format":"npm run format:check"
+        }}
+      style: secondary
+      start: 0
+      end: 164
+  "{\"scripts\":{\n  \"format\":\"biome format --write\",\n  \"format:check\":\"biome format\",\n  \"lint:check:biome\":\"biome lint\",\n  \"lint:fix\":\"biome lint --write\"\n}}\n":
+    labels:
+    - source: |-
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:fix":"biome lint --write"
+        }}
+      style: primary
+      start: 0
+      end: 152
+    - source: |
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"biome lint",
+          "lint:fix":"biome lint --write"
+        }}
+      style: secondary
+      start: 0
+      end: 153
+  "{\"scripts\":{\n  \"format\":\"biome format --write\",\n  \"format:check\":\"biome format\",\n  \"lint:check:biome\":\"eslint .\",\n  \"lint:check:format\":\"npm run format:check\",\n  \"lint:fix\":\"biome lint --write\"\n}}\n":
+    labels:
+    - source: |-
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"eslint .",
+          "lint:check:format":"npm run format:check",
+          "lint:fix":"biome lint --write"
+        }}
+      style: primary
+      start: 0
+      end: 196
+    - source: |
+        {"scripts":{
+          "format":"biome format --write",
+          "format:check":"biome format",
+          "lint:check:biome":"eslint .",
+          "lint:check:format":"npm run format:check",
+          "lint:fix":"biome lint --write"
+        }}
+      style: secondary
+      start: 0
+      end: 197
+  "{\"scripts\":{\"build\":\"tsc\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"build\":\"tsc\"}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        {"scripts":{"build":"tsc"}}
+      style: secondary
+      start: 0
+      end: 28

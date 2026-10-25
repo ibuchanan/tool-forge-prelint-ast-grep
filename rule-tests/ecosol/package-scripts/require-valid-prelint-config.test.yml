@@ -7,11 +7,18 @@ valid:
         "build": "tsc"
       }
     }
-  # Installed under its default package name
+  # Legacy: lint:prelint with valid config
   - |
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
+      }
+    }
+  # New: lint:check:prelint with valid config
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --globs '!specs/**' --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"
       }
     }
   # Installed under a different dependency key (git dependency, no fixed npm name)
@@ -36,11 +43,18 @@ valid:
       }
     }
 invalid:
-  # No --config flag at all
+  # No --config flag at all (legacy)
   - |
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --globs '!node_modules/**'"
+      }
+    }
+  # No --config flag at all (new)
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --globs '!specs/**' --globs '!node_modules/**'"
       }
     }
   # --config points at the root config, not a shipped tier
@@ -55,5 +69,12 @@ invalid:
     {
       "scripts": {
         "lint:prelint": "ast-grep scan --config biome.json --globs '!node_modules/**'"
+      }
+    }
+  # Wrong config with new script name
+  - |
+    {
+      "scripts": {
+        "lint:check:prelint": "ast-grep scan --globs '!specs/**' --config ./biome.json --globs '!node_modules/**'"
       }
     }

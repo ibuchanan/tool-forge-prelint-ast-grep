@@ -1,25 +1,23 @@
 id: lint-with-prelint
 valid:
-  # Present, wired to a shipped tier the normal way
+  # Drop Calf's generated task is selected by lint:check:*.
   - |
-    {
-      "scripts": {
-        "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.ecosol.yml --globs '!node_modules/**'"
-      }
-    }
-  # Present but misconfigured (that's require-valid-prelint-config's and
-  # require-prelint-node-modules-glob's concern, not this rule's)
+    {"scripts":{"lint:check:prelint":"ast-grep scan --globs '!specs/**' --globs '!node_modules/**' --config ./node_modules/@forge-ahead/prelint/sgconfig.ecosol.yml"}}
+  # Config and glob correctness belong to the companion rules.
   - |
-    {
-      "scripts": {
-        "lint:prelint": "ast-grep scan --config sgconfig.yml"
-      }
-    }
+    {"scripts":{"lint:check:prelint":"ast-grep scan --config sgconfig.yml"}}
 invalid:
-  # Missing entirely
   - |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
+    {"scripts":{"build":"tsc"}}
+  # The old name is not selected by the new aggregate glob.
+  - |
+    {"scripts":{"lint:prelint":"ast-grep scan --config sgconfig.ecosol.yml"}}
+  # Only a string-valued task in the root scripts object counts.
+  - |
+    {"lint:check:prelint":"ast-grep scan"}
+  - |
+    {"config":{"scripts":{"lint:check:prelint":"ast-grep scan"}}}
+  - |
+    {"scripts":{"other":{"lint:check:prelint":"ast-grep scan"}}}
+  - |
+    {"scripts":{"lint:check:prelint":false}}

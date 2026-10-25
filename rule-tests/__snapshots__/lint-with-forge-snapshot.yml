@@ -90,6 +90,28 @@ snapshots:
       style: secondary
       start: 0
       end: 60
+  "{\"config\":{\"scripts\":{\"lint:check:forge\":\"fence-rider lint\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"scripts\":{\"lint:check:forge\":\"fence-rider lint\"}}}"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        {"config":{"scripts":{"lint:check:forge":"fence-rider lint"}}}
+      style: secondary
+      start: 0
+      end: 63
+  "{\"lint:check:forge\":\"forge lint\",\"scripts\":{\"build\":\"tsc\"}}\n":
+    labels:
+    - source: "{\"lint:check:forge\":\"forge lint\",\"scripts\":{\"build\":\"tsc\"}}"
+      style: primary
+      start: 0
+      end: 59
+    - source: |
+        {"lint:check:forge":"forge lint","scripts":{"build":"tsc"}}
+      style: secondary
+      start: 0
+      end: 60
   "{\"lint:forge\": \"forge lint\", \"scripts\": {\"build\": \"tsc\"}}\n":
     labels:
     - source: "{\"lint:forge\": \"forge lint\", \"scripts\": {\"build\": \"tsc\"}}"
@@ -123,3 +145,69 @@ snapshots:
       style: secondary
       start: 0
       end: 68
+  "{\"scripts\":{\"build\":\"tsc\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"build\":\"tsc\"}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        {"scripts":{"build":"tsc"}}
+      style: secondary
+      start: 0
+      end: 28
+  "{\"scripts\":{\"lint\":\"forge lint\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"forge lint\"}}"
+      style: primary
+      start: 0
+      end: 33
+    - source: |
+        {"scripts":{"lint":"forge lint"}}
+      style: secondary
+      start: 0
+      end: 34
+  "{\"scripts\":{\"lint:check:forge\":\"echo ready\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:forge\":\"echo ready\"}}"
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {"scripts":{"lint:check:forge":"echo ready"}}
+      style: secondary
+      start: 0
+      end: 46
+  "{\"scripts\":{\"lint:check:forge\":\"my-forge lint && fence-rider linting\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:forge\":\"my-forge lint && fence-rider linting\"}}"
+      style: primary
+      start: 0
+      end: 71
+    - source: |
+        {"scripts":{"lint:check:forge":"my-forge lint && fence-rider linting"}}
+      style: secondary
+      start: 0
+      end: 72
+  "{\"scripts\":{\"lint:forge\":\"forge lint\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:forge\":\"forge lint\"}}"
+      style: primary
+      start: 0
+      end: 39
+    - source: |
+        {"scripts":{"lint:forge":"forge lint"}}
+      style: secondary
+      start: 0
+      end: 40
+  "{\"scripts\":{\"other\":{\"lint:check:forge\":\"forge lint\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"other\":{\"lint:check:forge\":\"forge lint\"}}}"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        {"scripts":{"other":{"lint:check:forge":"forge lint"}}}
+      style: secondary
+      start: 0
+      end: 56

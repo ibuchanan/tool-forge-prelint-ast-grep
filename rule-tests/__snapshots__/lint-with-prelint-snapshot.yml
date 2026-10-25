@@ -1,12 +1,7 @@
 id: lint-with-prelint
 snapshots:
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -25,3 +20,69 @@ snapshots:
       style: secondary
       start: 0
       end: 42
+  "{\"config\":{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"scripts\":{\"lint:check:prelint\":\"ast-grep scan\"}}}"
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {"config":{"scripts":{"lint:check:prelint":"ast-grep scan"}}}
+      style: secondary
+      start: 0
+      end: 62
+  "{\"lint:check:prelint\":\"ast-grep scan\"}\n":
+    labels:
+    - source: "{\"lint:check:prelint\":\"ast-grep scan\"}"
+      style: primary
+      start: 0
+      end: 38
+    - source: |
+        {"lint:check:prelint":"ast-grep scan"}
+      style: secondary
+      start: 0
+      end: 39
+  "{\"scripts\":{\"build\":\"tsc\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"build\":\"tsc\"}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: |
+        {"scripts":{"build":"tsc"}}
+      style: secondary
+      start: 0
+      end: 28
+  "{\"scripts\":{\"lint:check:prelint\":false}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:prelint\":false}}"
+      style: primary
+      start: 0
+      end: 40
+    - source: |
+        {"scripts":{"lint:check:prelint":false}}
+      style: secondary
+      start: 0
+      end: 41
+  "{\"scripts\":{\"lint:prelint\":\"ast-grep scan --config sgconfig.ecosol.yml\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:prelint\":\"ast-grep scan --config sgconfig.ecosol.yml\"}}"
+      style: primary
+      start: 0
+      end: 73
+    - source: |
+        {"scripts":{"lint:prelint":"ast-grep scan --config sgconfig.ecosol.yml"}}
+      style: secondary
+      start: 0
+      end: 74
+  "{\"scripts\":{\"other\":{\"lint:check:prelint\":\"ast-grep scan\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"other\":{\"lint:check:prelint\":\"ast-grep scan\"}}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        {"scripts":{"other":{"lint:check:prelint":"ast-grep scan"}}}
+      style: secondary
+      start: 0
+      end: 61

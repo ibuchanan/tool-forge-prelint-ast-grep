@@ -7,7 +7,7 @@ valid:
     {"scripts":{"lint":"run-p --print-label --npm-path npm 'lint:check:*'"}}
   # Explicit task lists and optional runner flags are supported too.
   - |
-    {"scripts":{"lint":"run-p lint:prelint lint:check lint:forge"}}
+    {"scripts":{"lint":"run-p lint:check:prelint lint:check:biome lint:check:forge lint:check:format lint:check:typecheck"}}
   - |
     {"scripts":{"lint":"run-p lint:check:biome lint:check:forge --print-label"}}
   - |

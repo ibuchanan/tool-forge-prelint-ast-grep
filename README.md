@@ -93,19 +93,24 @@ point `ast-grep` at the installed config file:
   --globs '!node_modules/**'
 ```
 
-The expected project integration is a package script named `lint:prelint`:
+The expected project integration is a package script named `lint:check:prelint`:
 
 ```json
 {
   "scripts": {
-    "lint:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml --globs '!node_modules/**'",
-    "lint": "npm run lint:prelint && forge lint"
+    "lint:check:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.recommended.yml --globs '!node_modules/**'",
+    "lint:check:forge": "forge lint",
+    "lint": "run-p --npm-path npm --print-label \"lint:check:*\""
   }
 }
 ```
 
+The parallel aggregate uses `run-p` from `npm-run-all2`.
+Drop Calf places read-only tasks under `lint:check:*`, including
+`lint:check:biome`, `lint:check:format`, and `lint:check:typecheck`;
+keep write-back tasks such as `lint:fix` outside that namespace.
 If your app already has a `lint` script,
-keep it and add `lint:prelint` to the script or CI job
+keep its checks and add `lint:check:prelint` to the script or CI job
 that should fail early on Forge Prelint findings.
 Keep the `--globs '!node_modules/**'` argument so ast-grep does not traverse
 vendored dependencies.
@@ -156,7 +161,7 @@ and write new rules for problems you don't want to repeat.
 A typical local or CI order is:
 
 ```sh
-npm run lint:prelint
+npm run lint:check:prelint
 forge lint
 npm test
 ```
@@ -282,7 +287,7 @@ npm script hygiene for the `scripts` block:
 
 - **recommended** — wiring `size:check` when size-limit tooling is
   configured, keeping read-only check scripts (`lint`, `lint:check`,
-  `format:check`) free of `--write`/`--fix` flags that would mutate files
+  `lint:check:*`, `format:check`) free of `--write`/`--fix` flags that would mutate files
   instead of failing on drift, and reviewing automatically-triggered npm
   lifecycle scripts (a common supply-chain attack vector). The
   `review-download-and-execute-script` warning also checks literal curl/wget

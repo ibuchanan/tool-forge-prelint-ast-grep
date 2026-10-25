@@ -4,14 +4,14 @@ severity: warning
 message: >
   Read-only script should not include a write-back flag; move it to the `:fix` variant instead.
 note: >
-  Scripts like `lint`, `lint:check`, and `format:check` are expected to be read-only
+  Scripts like `lint`, `lint:check`, `lint:check:*`, and `format:check` are expected to be read-only
   gates in CI. A `--write` or `--fix` flag on one of these makes the "check" script
   mutate files, which hides drift instead of failing on it.
   See the Biome CLI reference for the read-only vs --write distinction:
   https://biomejs.dev/reference/cli/
 rule:
   kind: pair
-  regex: '^"(lint|lint:check|format:check)"\s*:\s*"[^"]*(--write|--fix)[^"]*"'
+  regex: '^"(lint|lint:check(:[a-zA-Z0-9_-]+)*|format:check)"\s*:\s*"[^"]*(--write|--fix)[^"]*"'
   inside:
     stopBy: end
     kind: pair
@@ -25,7 +25,7 @@ ignores:
   - "**/specs/**"
 metadata:
   precision: medium
-  precision-rationale: "The regex finds --write or --fix text in lint/lint:check/format:check script values. Tests distinguish fix variants, but inert quoted examples, flag substrings and tool-specific meanings are untested gaps; the rule is not a shell parser. Evidence: rule-tests/recommended/package-scripts/no-write-flags-in-readonly-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-write-flags-in-readonly-script-snapshot.yml."
+  precision-rationale: "The regex finds --write or --fix text in lint/lint:check/lint:check:*/format:check script values. Tests distinguish fix variants, but inert quoted examples, flag substrings and tool-specific meanings are untested gaps; the rule is not a shell parser. Evidence: rule-tests/recommended/package-scripts/no-write-flags-in-readonly-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-write-flags-in-readonly-script-snapshot.yml."
   impact: medium
   impact-rationale: A genuinely mutating check can rewrite source during CI and hide formatting or lint drift instead of reporting it, reducing gate reliability. Biome documents the write flag, but a textual flag match alone does not prove mutation.
   scope-profile:

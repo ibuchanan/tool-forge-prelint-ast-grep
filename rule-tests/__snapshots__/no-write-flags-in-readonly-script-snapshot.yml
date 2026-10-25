@@ -1,13 +1,8 @@
 id: no-write-flags-in-readonly-script
 snapshots:
-  ? |
-    {
-      "scripts": {
-        "format:check": "biome format --write ."
-      }
-    }
-  : labels:
-    - source: '"format:check": "biome format --write ."'
+  "{\n  \"scripts\": {\n    \"format:check\": \"biome format --write .\"\n  }\n}\n":
+    labels:
+    - source: "\"format:check\": \"biome format --write .\""
       style: primary
       start: 21
       end: 61
@@ -18,14 +13,9 @@ snapshots:
       style: secondary
       start: 4
       end: 65
-  ? |
-    {
-      "scripts": {
-        "lint": "biome lint --write"
-      }
-    }
-  : labels:
-    - source: '"lint": "biome lint --write"'
+  "{\n  \"scripts\": {\n    \"lint\": \"biome lint --write\"\n  }\n}\n":
+    labels:
+    - source: "\"lint\": \"biome lint --write\""
       style: primary
       start: 21
       end: 49
@@ -36,14 +26,9 @@ snapshots:
       style: secondary
       start: 4
       end: 53
-  ? |
-    {
-      "scripts": {
-        "lint:check": "biome lint --fix"
-      }
-    }
-  : labels:
-    - source: '"lint:check": "biome lint --fix"'
+  "{\n  \"scripts\": {\n    \"lint:check\": \"biome lint --fix\"\n  }\n}\n":
+    labels:
+    - source: "\"lint:check\": \"biome lint --fix\""
       style: primary
       start: 21
       end: 53
@@ -54,3 +39,33 @@ snapshots:
       style: secondary
       start: 4
       end: 57
+  "{\"scripts\":{\"lint:check:biome\":\"biome lint --write\"}}\n":
+    labels:
+    - source: "\"lint:check:biome\":\"biome lint --write\""
+      style: primary
+      start: 12
+      end: 51
+    - source: "\"scripts\":{\"lint:check:biome\":\"biome lint --write\"}"
+      style: secondary
+      start: 1
+      end: 52
+  "{\"scripts\":{\"lint:check:forge\":\"forge lint --fix\"}}\n":
+    labels:
+    - source: "\"lint:check:forge\":\"forge lint --fix\""
+      style: primary
+      start: 12
+      end: 49
+    - source: "\"scripts\":{\"lint:check:forge\":\"forge lint --fix\"}"
+      style: secondary
+      start: 1
+      end: 50
+  "{\"scripts\":{\"lint:check:format\":\"biome format --write\"}}\n":
+    labels:
+    - source: "\"lint:check:format\":\"biome format --write\""
+      style: primary
+      start: 12
+      end: 54
+    - source: "\"scripts\":{\"lint:check:format\":\"biome format --write\"}"
+      style: secondary
+      start: 1
+      end: 55
