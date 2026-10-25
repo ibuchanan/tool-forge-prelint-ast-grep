@@ -18,7 +18,34 @@ valid:
         "@forge-ahead/errors": "^1.0.0"
       }
     }
+  # Generated and owner-selected references are not version-pinned.
+  - |
+    {"dependencies":{"@forge-ahead/errors":"github:ibuchanan/forge-ahead-errors#0.1.0"}}
+  - |
+    {"dependencies":{"@forge-ahead/errors":"npm:@example/errors@^2"}}
+  - |
+    {"dependencies":{"@forge-ahead/errors":"file:../errors"}}
 invalid:
+  # Only a direct entry in root dependencies satisfies this advice.
+  - |
+    {"@forge-ahead/errors":"^1.0.0"}
+  - |
+    {"config":{"dependencies":{"@forge-ahead/errors":"^1.0.0"}}}
+  - |
+    {"dependencies":{"config":{"@forge-ahead/errors":"^1.0.0"}}}
+  - |
+    {"scripts":{"@forge-ahead/errors":"echo installed"}}
+  - |
+    {"peerDependencies":{"@forge-ahead/errors":"^1.0.0"}}
+  - |
+    {"optionalDependencies":{"@forge-ahead/errors":"^1.0.0"}}
+  - |
+    {"customdependencies":{"@forge-ahead/errors":"^1.0.0"}}
+  - |
+    {"dependencies":{"@forge-ahead/errors-extra":"^1.0.0"}}
+  # A development-only entry is not a production dependency.
+  - |
+    {"devDependencies":{"@forge-ahead/errors":"^1.0.0"}}
   # Missing entirely — always expected, this tool always scans a Forge app
   - |
     {

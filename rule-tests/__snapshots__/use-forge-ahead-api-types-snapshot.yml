@@ -1,12 +1,7 @@
 id: use-forge-ahead-api-types
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -16,10 +11,17 @@ snapshots:
       style: primary
       start: 0
       end: 54
-    - source: '@forge/api'
+    - source: "\"@forge/api\": \"^4.0.0\""
       style: secondary
-      start: 27
-      end: 37
+      start: 26
+      end: 48
+    - source: |-
+        {
+            "@forge/api": "^4.0.0"
+          }
+      style: secondary
+      start: 20
+      end: 52
     - source: |-
         "dependencies": {
             "@forge/api": "^4.0.0"
@@ -36,14 +38,8 @@ snapshots:
       style: secondary
       start: 0
       end: 55
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0",
-        "@forge-ahead/errors": "^1.0.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\",\n    \"@forge-ahead/errors\": \"^1.0.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -54,10 +50,18 @@ snapshots:
       style: primary
       start: 0
       end: 91
-    - source: '@forge/api'
+    - source: "\"@forge/api\": \"^4.0.0\""
       style: secondary
-      start: 27
-      end: 37
+      start: 26
+      end: 48
+    - source: |-
+        {
+            "@forge/api": "^4.0.0",
+            "@forge-ahead/errors": "^1.0.0"
+          }
+      style: secondary
+      start: 20
+      end: 89
     - source: |-
         "dependencies": {
             "@forge/api": "^4.0.0",
@@ -76,3 +80,210 @@ snapshots:
       style: secondary
       start: 0
       end: 92
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"@forge-ahead/atlassian-api-types-extra\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"@forge-ahead/atlassian-api-types-extra\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 90
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\",\"@forge-ahead/atlassian-api-types-extra\":\"^1.0.0\"}"
+      style: secondary
+      start: 16
+      end: 89
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"@forge-ahead/atlassian-api-types-extra\":\"^1.0.0\"}"
+      style: secondary
+      start: 1
+      end: 89
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0","@forge-ahead/atlassian-api-types-extra":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 91
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 95
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}"
+      style: secondary
+      start: 16
+      end: 94
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}"
+      style: secondary
+      start: 1
+      end: 94
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0","config":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 96
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}"
+      style: primary
+      start: 0
+      end: 84
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"@forge-ahead/atlassian-api-types":"^1.0.0"}
+      style: secondary
+      start: 0
+      end: 85
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"config\":{\"dependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"config\":{\"dependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 112
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"config":{"dependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 113
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"customdependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"customdependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 107
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"customdependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 108
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"devDependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"devDependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 104
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"devDependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 105
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"optionalDependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"optionalDependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 109
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"optionalDependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 110
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"peerDependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"peerDependencies\":{\"@forge-ahead/atlassian-api-types\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 105
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"peerDependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 106
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"scripts\":{\"@forge-ahead/atlassian-api-types\":\"echo installed\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"scripts\":{\"@forge-ahead/atlassian-api-types\":\"echo installed\"}}"
+      style: primary
+      start: 0
+      end: 104
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"scripts":{"@forge-ahead/atlassian-api-types":"echo installed"}}
+      style: secondary
+      start: 0
+      end: 105

@@ -2,13 +2,15 @@ id: use-forge-ahead-api-types
 language: Json
 severity: info
 message: >
-  Add `@forge-ahead/atlassian-api-types` when this Forge app uses `@forge/api`.
+  Consider adding `@forge-ahead/atlassian-api-types` to `dependencies` when this app uses `@forge/api`.
 note: >
-  Apps that call Atlassian product APIs through @forge/api
-  should depend on @forge-ahead/atlassian-api-types
-  so request and response mappings can use generated Atlassian API types.
-  Frontend-only or event-only apps do not need this package
-  unless they also make Atlassian API calls.
+  This advisory checks a direct root dependencies entry when @forge/api is
+  declared there. Generated Atlassian API types can reduce local type maintenance;
+  the declaration does not prove product API calls, compatible types or actual use.
+  Drop Calf seeds this package unconditionally, but its references are owner-managed.
+  Intentional removal, frontend-only apps or equivalent local types may warrant
+  review and suppression rather than installation. Scope scans to Forge app
+  directories; dependency keys and capability tags do not establish app identity.
   https://github.com/ibuchanan/forge-ahead-atlassian-api-types
 rule:
   kind: object
@@ -16,17 +18,22 @@ rule:
     kind: document
   all:
     - has:
-        stopBy: end
         kind: pair
-        regex: '"dependencies"\s*:'
+        regex: '^"dependencies"\s*:'
         has:
-          stopBy: end
-          kind: string_content
-          regex: "^@forge/api$"
+          kind: object
+          has:
+            kind: pair
+            regex: '^"@forge/api"\s*:'
     - not:
         has:
           kind: pair
-          regex: '"@forge-ahead/atlassian-api-types"\s*:'
+          regex: '^"dependencies"\s*:'
+          has:
+            kind: object
+            has:
+              kind: pair
+              regex: '^"@forge-ahead/atlassian-api-types"\s*:'
 files:
   - "**/package.json"
 ignores:
@@ -35,10 +42,13 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
-  references: ["https://github.com/ibuchanan/forge-ahead-atlassian-api-types"]
+  tags: [capability:forge-ahead]
+  references:
+    - https://github.com/ibuchanan/forge-ahead-atlassian-api-types
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-ahead.ts
   category: forge-ahead
   scope-profile: [package-json, tests]
   precision: medium
-  precision-rationale: "Tests distinguish production @forge/api from bridge/react/resolver/event-only dependencies and accept the preferred types package. Depending on @forge/api does not prove product API calls or a deployable app; equivalent local types and actual package usage remain assessment gaps. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-api-types.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-ahead-api-types-snapshot.yml."
+  precision-rationale: "Tests require direct root production keys for both @forge/api applicability and the types helper, reject nested/unrelated/development-only entries and accept generated and owner-selected references. Depending on @forge/api does not prove product API calls or app identity; intentional removal, equivalent local types, reference validity and actual use remain assessment gaps. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-api-types.test.yml and rule-tests/__snapshots__/use-forge-ahead-api-types-snapshot.yml; scripts/check-fixtures.sh scans generated dependency declarations and isolated mutations."
   impact: low
   impact-rationale: The package supplies generated API types and mapping helpers; omitting the team's preferred source can add type-maintenance and integration-review work. Dependency absence alone does not demonstrate wrong requests or a runtime/security failure.

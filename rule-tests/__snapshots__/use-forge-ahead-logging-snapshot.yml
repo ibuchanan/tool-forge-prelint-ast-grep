@@ -1,12 +1,7 @@
 id: use-forge-ahead-logging
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -25,14 +20,8 @@ snapshots:
       style: secondary
       start: 0
       end: 55
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0",
-        "@forge-ahead/errors": "^1.0.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\",\n    \"@forge-ahead/errors\": \"^1.0.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -53,15 +42,8 @@ snapshots:
       style: secondary
       start: 0
       end: 92
-  ? |
-    {
-      "dependencies": {
-        "@forge/bridge": "*",
-        "@forge/react": "*",
-        "@forge/resolver": "*"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/bridge\": \"*\",\n    \"@forge/react\": \"*\",\n    \"@forge/resolver\": \"*\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -84,13 +66,8 @@ snapshots:
       style: secondary
       start: 0
       end: 106
-  ? |
-    {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -109,3 +86,102 @@ snapshots:
       style: secondary
       start: 0
       end: 53
+  "{\"@forge-ahead/logging\":\"^1.0.0\"}\n":
+    labels:
+    - source: "{\"@forge-ahead/logging\":\"^1.0.0\"}"
+      style: primary
+      start: 0
+      end: 33
+    - source: |
+        {"@forge-ahead/logging":"^1.0.0"}
+      style: secondary
+      start: 0
+      end: 34
+  "{\"config\":{\"dependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"dependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {"config":{"dependencies":{"@forge-ahead/logging":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 62
+  "{\"customdependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"customdependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        {"customdependencies":{"@forge-ahead/logging":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 57
+  "{\"dependencies\":{\"@forge-ahead/logging-extra\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge-ahead/logging-extra\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        {"dependencies":{"@forge-ahead/logging-extra":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 57
+  "{\"dependencies\":{\"config\":{\"@forge-ahead/logging\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"config\":{\"@forge-ahead/logging\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {"dependencies":{"config":{"@forge-ahead/logging":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 62
+  "{\"devDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"devDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {"devDependencies":{"@forge-ahead/logging":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 54
+  "{\"optionalDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"optionalDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 58
+    - source: |
+        {"optionalDependencies":{"@forge-ahead/logging":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 59
+  "{\"peerDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"peerDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 54
+    - source: |
+        {"peerDependencies":{"@forge-ahead/logging":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 55
+  "{\"scripts\":{\"@forge-ahead/logging\":\"echo installed\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"@forge-ahead/logging\":\"echo installed\"}}"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {"scripts":{"@forge-ahead/logging":"echo installed"}}
+      style: secondary
+      start: 0
+      end: 54

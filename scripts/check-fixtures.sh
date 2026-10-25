@@ -87,6 +87,51 @@ for variant in generated commonjs missing-type public missing-private owner-meta
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
 
+# Forge Ahead declarations are static seed advice, not runtime integration proof.
+forge_ahead_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_forge_ahead.XXXXXX")
+for variant in generated api-app owner-references; do
+  case "$variant" in
+  generated) edit='.' ;;
+  api-app) edit='.dependencies["@forge/api"] = "^7"' ;;
+  owner-references) edit='.dependencies |= with_entries(.value = "file:../owner-helper")' ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$forge_ahead_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
+    --json=compact "$forge_ahead_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e 'type == "array" and length == 0' >/dev/null; then
+    printf 'Unexpected Forge Ahead findings for %s: %s\n' "$variant" "$findings" >&2
+    exit 1
+  fi
+done
+for helper in api-types errors logging; do
+  package="@forge-ahead/$helper"
+  if [ "$helper" = api-types ]; then package='@forge-ahead/atlassian-api-types'; fi
+  for section in missing devDependencies config scripts; do
+    jq --arg package "$package" --arg section "$section" '
+      .dependencies["@forge/api"] = "^7" |
+      .dependencies[$package] as $reference |
+      del(.dependencies[$package]) |
+      if $section == "missing" then .
+      elif $section == "config" then .config.dependencies[$package] = $reference
+      else .[$section][$package] = $reference end
+    ' "$DROP_CALF_PACKAGE" >"$forge_ahead_work/package.json"
+    findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
+      --include-metadata --json=compact "$forge_ahead_work/package.json")
+    if ! printf '%s\n' "$findings" | jq -e --arg rule "use-forge-ahead-$helper" '
+      type == "array" and length == 1 and
+      all(.[]; .ruleId == $rule and .severity == "info" and
+        (.metadata.tags | index("capability:forge-ahead") != null))
+    ' >/dev/null; then
+      printf 'Unexpected Forge Ahead findings for %s in %s: %s\n' "$helper" "$section" "$findings" >&2
+      exit 1
+    fi
+  done
+done
+gate=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
+  --min-severity error --json=compact "$forge_ahead_work/package.json")
+printf '%s\n' "$gate" | jq -e 'type == "array" and length == 0' >/dev/null
+echo 'Generated Forge Ahead declarations, owner references and placement mutations produced expected advisory findings.'
+
 # Vitest conventions map command/config text, not test execution or coverage quality.
 vitest_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_vitest.XXXXXX")
 for variant in generated no-optional-flag flag-order watch-default implicit-watch missing-coverage disabled-coverage; do

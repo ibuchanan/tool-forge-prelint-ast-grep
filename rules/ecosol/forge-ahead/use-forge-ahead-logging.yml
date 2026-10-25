@@ -2,17 +2,15 @@ id: use-forge-ahead-logging
 language: Json
 severity: info
 message: >
-  Add `@forge-ahead/logging` for structured & redacted Forge logging.
+  Consider adding `@forge-ahead/logging` to `dependencies` for shared Forge logging helpers.
 note: >
-  Use `@forge-ahead/logging` for structured and redacted logging
-  instead of backing into those features with ad hoc console.log calls
-  that can leak unredacted payloads or blow up log volume.
-  This rule assumes package.json belongs to a Forge app: in a monorepo, a
-  workspace root or an internal shared library's package.json will also
-  match — even one that imports @forge packages without being deployable
-  itself. manifest.yml is the real signal for "is this a Forge app," and
-  ast-grep can't check whether that file exists, so scope the scan to your
-  Forge app directories rather than the whole monorepo.
+  This advisory checks a direct root dependencies entry for the team's preferred
+  logging helpers. Drop Calf seeds the package, but its references are owner-managed;
+  intentional removal or equivalent safe logging may warrant review and suppression
+  rather than installation. A declaration does not prove logger use, compatibility,
+  redaction configuration or safe log volume. Scope scans to Forge app directories:
+  workspace roots and shared libraries also match, and ast-grep cannot check for
+  manifest.yml in another file. Capability tags do not establish app identity.
   https://github.com/ibuchanan/forge-ahead-logging
 rule:
   kind: object
@@ -20,9 +18,13 @@ rule:
     kind: document
   not:
     has:
-      stopBy: end
       kind: pair
-      regex: '"@forge-ahead/logging"\s*:'
+      regex: '^"dependencies"\s*:'
+      has:
+        kind: object
+        has:
+          kind: pair
+          regex: '^"@forge-ahead/logging"\s*:'
 files:
   - "**/package.json"
 ignores:
@@ -31,10 +33,13 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
-  references: ["https://github.com/ibuchanan/forge-ahead-logging"]
+  tags: [capability:forge-ahead]
+  references:
+    - https://github.com/ibuchanan/forge-ahead-logging
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-ahead.ts
   category: forge-ahead
   scope-profile: [package-json, tests]
   precision: medium
-  precision-rationale: "Tests accept the preferred package and flag absence in Forge and express-only examples. The descendant-key check does not establish production dependency placement, app identity, redaction configuration or logger use; those are assessment gaps. Equivalent safe logging is possible. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-logging.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-ahead-logging-snapshot.yml."
+  precision-rationale: "Tests accept direct root production declarations with generated and owner-selected references and flag missing, development-only, nested and unrelated keys, including non-Forge packages. App identity, intentional owner removal, reference validity, logger use and redaction configuration remain assessment gaps; equivalent safe logging is possible. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-logging.test.yml and rule-tests/__snapshots__/use-forge-ahead-logging-snapshot.yml; scripts/check-fixtures.sh scans generated dependency declarations and isolated mutations."
   impact: low
   impact-rationale: The referenced package provides a shared structured/redacted logger. Failing this dependency convention creates maintenance divergence; it does not establish sensitive logging, excessive volume or that installing the package makes logging safe.

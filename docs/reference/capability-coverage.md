@@ -338,6 +338,48 @@ Static fixtures scan generated scripts/config, optional flag variants, owner
 provider/exclusion choices and isolated mutations. No package test, watch or
 coverage command, dependency installation or native Vitest initialization is run.
 
+## Forge Ahead: advisory production dependency declarations
+
+Three existing informational ecosol rules map to `capability:forge-ahead`:
+`use-forge-ahead-api-types`, `use-forge-ahead-errors` and
+`use-forge-ahead-logging`. `no-verbose-hot-path-logging` and generic logging or
+security rules are not generated dependency conventions and are not tagged.
+IDs, scope profiles, native filename routes and medium-precision/low-impact
+ratings remain unchanged.
+
+The reviewed source is the
+[Forge Ahead capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-ahead.ts).
+It seeds `@forge-ahead/atlassian-api-types`, `@forge-ahead/errors` and
+`@forge-ahead/logging` in production dependencies, without source files or runtime
+configuration. References are owner-managed; freshness skips GitHub references.
+Validation is an explicit no-op, leaving runtime integration to app build/tests.
+
+The matchers now require each helper as a direct key in the root `dependencies`
+object. Root lookalikes, nested metadata, scripts, development, peer and optional
+sections do not satisfy that placement. The API-types rule retains its production
+`@forge/api` applicability gate, now limited to that direct root key rather than
+descendant keys or string values. Frontend/event-only apps without that declaration
+are not reported. This is partial seed coverage: Drop Calf seeds API types even
+without `@forge/api`, but that alone does not justify a broader advisory.
+
+Generated GitHub references and owner-selected registry ranges, aliases, local,
+workspace and tarball strings remain accepted without version pinning. These
+checks inspect literal keys, not dependency reference values or installation
+results. Escaped key spellings, duplicate keys, schema validity, reference validity,
+version compatibility and effective package-manager resolution remain native-tool
+or review responsibilities. Source imports, logger adoption, error normalization,
+redaction settings and safe log volume are not established by installation.
+Intentional owner removal or equivalent helpers may warrant review and suppression
+of the corresponding advisory, not automatic restoration of seeded packages.
+
+Native routing remains existing `package.json` files, excluding node_modules,
+dist, coverage and specs; missing files are not diagnosed. Callers select Forge-app
+directories because these rules cannot compare another file's manifest or establish
+app identity. Static fixture scans cover generated declarations, an API-using app,
+owner references and isolated missing/misplaced helpers. The error-only consumer
+gate remains nonblocking. No package is installed, app task executed or source
+adoption inferred, and the stored generated snapshot is unchanged.
+
 ## TypeScript: compiler conventions and lint delegation
 
 Twenty-four existing rules and the new `lint-with-typescript` advisory map to

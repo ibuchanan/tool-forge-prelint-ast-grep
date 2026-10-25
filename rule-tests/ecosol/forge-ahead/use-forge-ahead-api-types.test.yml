@@ -31,7 +31,48 @@ valid:
         "@forge/events": "^3.0.0"
       }
     }
+  # Nested dependencies do not establish production @forge/api applicability.
+  - |
+    {"config":{"dependencies":{"@forge/api":"^4.0.0"}}}
+  # The gate requires the direct root production key, not values or lookalikes.
+  - |
+    {"devDependencies":{"@forge/api":"^4.0.0"}}
+  - |
+    {"dependencies":{"other":"@forge/api"}}
+  - |
+    {"dependencies":{"config":{"@forge/api":"^4.0.0"}}}
+  - |
+    {"customdependencies":{"@forge/api":"^4.0.0"}}
+  - |
+    {"dependencies":{"@forge/api-extra":"^4.0.0"}}
+  # Generated and owner-selected references are not version-pinned.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","@forge-ahead/atlassian-api-types":"github:ibuchanan/forge-ahead-atlassian-api-types#0.1.0"}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","@forge-ahead/atlassian-api-types":"npm:@example/api-types@^2"}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","@forge-ahead/atlassian-api-types":"file:../api-types"}}
 invalid:
+  # Only a direct entry in root dependencies satisfies this advice.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"@forge-ahead/atlassian-api-types":"^1.0.0"}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"config":{"dependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","config":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"scripts":{"@forge-ahead/atlassian-api-types":"echo installed"}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"peerDependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"optionalDependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"customdependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","@forge-ahead/atlassian-api-types-extra":"^1.0.0"}}
+  # The helper in devDependencies does not satisfy production placement.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"devDependencies":{"@forge-ahead/atlassian-api-types":"^1.0.0"}}
   # Missing when the app uses @forge/api
   - |
     {

@@ -1,12 +1,7 @@
 id: use-forge-ahead-errors
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -25,15 +20,8 @@ snapshots:
       style: secondary
       start: 0
       end: 55
-  ? |
-    {
-      "dependencies": {
-        "@forge/bridge": "*",
-        "@forge/react": "*",
-        "@forge/resolver": "*"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/bridge\": \"*\",\n    \"@forge/react\": \"*\",\n    \"@forge/resolver\": \"*\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -56,13 +44,8 @@ snapshots:
       style: secondary
       start: 0
       end: 106
-  ? |
-    {
-      "dependencies": {
-        "@forge/events": "^3.0.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/events\": \"^3.0.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -81,13 +64,8 @@ snapshots:
       style: secondary
       start: 0
       end: 58
-  ? |
-    {
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -103,6 +81,105 @@ snapshots:
             "express": "^4.18.0"
           }
         }
+      style: secondary
+      start: 0
+      end: 53
+  "{\"@forge-ahead/errors\":\"^1.0.0\"}\n":
+    labels:
+    - source: "{\"@forge-ahead/errors\":\"^1.0.0\"}"
+      style: primary
+      start: 0
+      end: 32
+    - source: |
+        {"@forge-ahead/errors":"^1.0.0"}
+      style: secondary
+      start: 0
+      end: 33
+  "{\"config\":{\"dependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"dependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        {"config":{"dependencies":{"@forge-ahead/errors":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 61
+  "{\"customdependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"customdependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        {"customdependencies":{"@forge-ahead/errors":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 56
+  "{\"dependencies\":{\"@forge-ahead/errors-extra\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge-ahead/errors-extra\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        {"dependencies":{"@forge-ahead/errors-extra":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 56
+  "{\"dependencies\":{\"config\":{\"@forge-ahead/errors\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"config\":{\"@forge-ahead/errors\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        {"dependencies":{"config":{"@forge-ahead/errors":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 61
+  "{\"devDependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"devDependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        {"devDependencies":{"@forge-ahead/errors":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 53
+  "{\"optionalDependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"optionalDependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        {"optionalDependencies":{"@forge-ahead/errors":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 58
+  "{\"peerDependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"peerDependencies\":{\"@forge-ahead/errors\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {"peerDependencies":{"@forge-ahead/errors":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 54
+  "{\"scripts\":{\"@forge-ahead/errors\":\"echo installed\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"@forge-ahead/errors\":\"echo installed\"}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        {"scripts":{"@forge-ahead/errors":"echo installed"}}
       style: secondary
       start: 0
       end: 53

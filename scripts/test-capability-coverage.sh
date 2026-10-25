@@ -104,6 +104,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "typescript"')
 }
 printf 'PASS: compiler, build and typecheck conventions are discoverable\n'
 
+expected=$'forge-ahead\timplemented\tuse-forge-ahead-api-types,use-forge-ahead-errors,use-forge-ahead-logging'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "forge-ahead"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: Forge Ahead dependency conventions must be discoverable without runtime logging advice; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: Forge Ahead dependency conventions are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.
