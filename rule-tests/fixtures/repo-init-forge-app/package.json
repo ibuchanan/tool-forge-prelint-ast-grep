@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
+    "clean": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
     "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md",
     "check": "run-p --npm-path npm --print-label format:check typecheck lint test size:check",

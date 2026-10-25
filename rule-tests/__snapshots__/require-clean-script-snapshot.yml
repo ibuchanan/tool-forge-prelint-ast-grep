@@ -1,0 +1,365 @@
+id: require-clean-script
+snapshots:
+  "{ \"config\": { \"scripts\": { \"clean\": \"rm -rf dist\" } } }\n":
+    labels:
+    - source: "{ \"config\": { \"scripts\": { \"clean\": \"rm -rf dist\" } } }"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        { "config": { "scripts": { "clean": "rm -rf dist" } } }
+      style: secondary
+      start: 0
+      end: 56
+  "{ \"name\": \"forge-app\" }\n":
+    labels:
+    - source: "{ \"name\": \"forge-app\" }"
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  "{ \"scripts\": [{ \"clean\": \"rm -rf dist\" }] }\n":
+    labels:
+    - source: "{ \"scripts\": [{ \"clean\": \"rm -rf dist\" }] }"
+      style: primary
+      start: 0
+      end: 43
+    - source: |
+        { "scripts": [{ "clean": "rm -rf dist" }] }
+      style: secondary
+      start: 0
+      end: 44
+  "{ \"scripts\": null }\n":
+    labels:
+    - source: "{ \"scripts\": null }"
+      style: primary
+      start: 0
+      end: 19
+    - source: |
+        { "scripts": null }
+      style: secondary
+      start: 0
+      end: 20
+  "{ \"scripts\": { \"clean\": \"\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"\" } }"
+      style: primary
+      start: 0
+      end: 30
+    - source: |
+        { "scripts": { "clean": "" } }
+      style: secondary
+      start: 0
+      end: 31
+  "{ \"scripts\": { \"clean\": \"bash scripts/clean.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"bash scripts/clean.sh\" } }"
+      style: primary
+      start: 0
+      end: 51
+    - source: |
+        { "scripts": { "clean": "bash scripts/clean.sh" } }
+      style: secondary
+      start: 0
+      end: 52
+  "{ \"scripts\": { \"clean\": \"echo 'rm -rf dist'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"echo 'rm -rf dist'\" } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "clean": "echo 'rm -rf dist'" } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"clean\": \"echo rm -rf dist\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"echo rm -rf dist\" } }"
+      style: primary
+      start: 0
+      end: 46
+    - source: |
+        { "scripts": { "clean": "echo rm -rf dist" } }
+      style: secondary
+      start: 0
+      end: 47
+  "{ \"scripts\": { \"clean\": \"printf 'rm -rf dist'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"printf 'rm -rf dist'\" } }"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        { "scripts": { "clean": "printf 'rm -rf dist'" } }
+      style: secondary
+      start: 0
+      end: 51
+  "{ \"scripts\": { \"clean\": \"rm -rf .\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf .\" } }"
+      style: primary
+      start: 0
+      end: 38
+    - source: |
+        { "scripts": { "clean": "rm -rf ." } }
+      style: secondary
+      start: 0
+      end: 39
+  "{ \"scripts\": { \"clean\": \"rm -rf ../dist\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf ../dist\" } }"
+      style: primary
+      start: 0
+      end: 44
+    - source: |
+        { "scripts": { "clean": "rm -rf ../dist" } }
+      style: secondary
+      start: 0
+      end: 45
+  "{ \"scripts\": { \"clean\": \"rm -rf /dist\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf /dist\" } }"
+      style: primary
+      start: 0
+      end: 42
+    - source: |
+        { "scripts": { "clean": "rm -rf /dist" } }
+      style: secondary
+      start: 0
+      end: 43
+  "{ \"scripts\": { \"clean\": \"rm -rf dist && rm -rf src\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist && rm -rf src\" } }"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        { "scripts": { "clean": "rm -rf dist && rm -rf src" } }
+      style: secondary
+      start: 0
+      end: 56
+  "{ \"scripts\": { \"clean\": \"rm -rf dist --help\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist --help\" } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "clean": "rm -rf dist --help" } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"clean\": \"rm -rf dist bun.lock\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist bun.lock\" } }"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        { "scripts": { "clean": "rm -rf dist bun.lock" } }
+      style: secondary
+      start: 0
+      end: 51
+  "{ \"scripts\": { \"clean\": \"rm -rf dist package-lock.json\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist package-lock.json\" } }"
+      style: primary
+      start: 0
+      end: 59
+    - source: |
+        { "scripts": { "clean": "rm -rf dist package-lock.json" } }
+      style: secondary
+      start: 0
+      end: 60
+  "{ \"scripts\": { \"clean\": \"rm -rf dist pnpm-lock.yaml\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist pnpm-lock.yaml\" } }"
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        { "scripts": { "clean": "rm -rf dist pnpm-lock.yaml" } }
+      style: secondary
+      start: 0
+      end: 57
+  "{ \"scripts\": { \"clean\": \"rm -rf dist yarn.lock\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist yarn.lock\" } }"
+      style: primary
+      start: 0
+      end: 51
+    - source: |
+        { "scripts": { "clean": "rm -rf dist yarn.lock" } }
+      style: secondary
+      start: 0
+      end: 52
+  "{ \"scripts\": { \"clean\": \"rm -rf dist-old\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist-old\" } }"
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        { "scripts": { "clean": "rm -rf dist-old" } }
+      style: secondary
+      start: 0
+      end: 46
+  "{ \"scripts\": { \"clean\": \"rm -rf dist/*\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist/*\" } }"
+      style: primary
+      start: 0
+      end: 43
+    - source: |
+        { "scripts": { "clean": "rm -rf dist/*" } }
+      style: secondary
+      start: 0
+      end: 44
+  "{ \"scripts\": { \"clean\": \"rm -rf dist/../src\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist/../src\" } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "clean": "rm -rf dist/../src" } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"clean\": \"rm -rf dist; rm -rf node_modules\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf dist; rm -rf node_modules\" } }"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "scripts": { "clean": "rm -rf dist; rm -rf node_modules" } }
+      style: secondary
+      start: 0
+      end: 63
+  "{ \"scripts\": { \"clean\": \"rm -rf distribution\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf distribution\" } }"
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        { "scripts": { "clean": "rm -rf distribution" } }
+      style: secondary
+      start: 0
+      end: 50
+  "{ \"scripts\": { \"clean\": \"rm -rf node_modules package-lock.json dist\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf node_modules package-lock.json dist\" } }"
+      style: primary
+      start: 0
+      end: 72
+    - source: |
+        { "scripts": { "clean": "rm -rf node_modules package-lock.json dist" } }
+      style: secondary
+      start: 0
+      end: 73
+  "{ \"scripts\": { \"clean\": \"rm -rf src\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"rm -rf src\" } }"
+      style: primary
+      start: 0
+      end: 40
+    - source: |
+        { "scripts": { "clean": "rm -rf src" } }
+      style: secondary
+      start: 0
+      end: 41
+  "{ \"scripts\": { \"clean\": \"true # rm -rf dist\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": \"true # rm -rf dist\" } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "clean": "true # rm -rf dist" } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"clean\": [\"rm -rf dist\"] } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": [\"rm -rf dist\"] } }"
+      style: primary
+      start: 0
+      end: 43
+    - source: |
+        { "scripts": { "clean": ["rm -rf dist"] } }
+      style: secondary
+      start: 0
+      end: 44
+  "{ \"scripts\": { \"clean\": false } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": false } }"
+      style: primary
+      start: 0
+      end: 33
+    - source: |
+        { "scripts": { "clean": false } }
+      style: secondary
+      start: 0
+      end: 34
+  "{ \"scripts\": { \"clean\": null } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": null } }"
+      style: primary
+      start: 0
+      end: 32
+    - source: |
+        { "scripts": { "clean": null } }
+      style: secondary
+      start: 0
+      end: 33
+  "{ \"scripts\": { \"clean\": { \"command\": \"rm -rf dist\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean\": { \"command\": \"rm -rf dist\" } } }"
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        { "scripts": { "clean": { "command": "rm -rf dist" } } }
+      style: secondary
+      start: 0
+      end: 57
+  "{ \"scripts\": { \"clean:dist\": \"rm -rf dist\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"clean:dist\": \"rm -rf dist\" } }"
+      style: primary
+      start: 0
+      end: 46
+    - source: |
+        { "scripts": { "clean:dist": "rm -rf dist" } }
+      style: secondary
+      start: 0
+      end: 47
+  "{ \"scripts\": { \"nested\": { \"clean\": \"rm -rf dist\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"nested\": { \"clean\": \"rm -rf dist\" } } }"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        { "scripts": { "nested": { "clean": "rm -rf dist" } } }
+      style: secondary
+      start: 0
+      end: 56
+  "{ \"scripts\": {} }\n":
+    labels:
+    - source: "{ \"scripts\": {} }"
+      style: primary
+      start: 0
+      end: 17
+    - source: |
+        { "scripts": {} }
+      style: secondary
+      start: 0
+      end: 18

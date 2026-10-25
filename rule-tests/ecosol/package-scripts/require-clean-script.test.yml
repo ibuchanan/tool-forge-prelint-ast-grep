@@ -1,0 +1,78 @@
+id: require-clean-script
+valid:
+  # Maintained Forge-app command from the pinned clean-build capability.
+  - |
+    { "scripts": { "clean": "rm -rf dist" } }
+  # Equivalent direct removal: ordinary spacing and an explicit relative path.
+  - |
+    { "scripts": { "clean": "  rm  -rf  ./dist/  " } }
+  - |
+    { "scripts": { "clean": "rm -rf dist/", "clean:cache": "owner-cache-helper" }, "config": { "scripts": { "clean": "owner-helper" } } }
+invalid:
+  - |
+    { "name": "forge-app" }
+  - |
+    { "scripts": {} }
+  - |
+    { "scripts": null }
+  - |
+    { "scripts": { "clean": null } }
+  - |
+    { "scripts": { "clean": false } }
+  - |
+    { "scripts": { "clean": ["rm -rf dist"] } }
+  - |
+    { "scripts": { "clean": { "command": "rm -rf dist" } } }
+  - |
+    { "config": { "scripts": { "clean": "rm -rf dist" } } }
+  - |
+    { "scripts": { "nested": { "clean": "rm -rf dist" } } }
+  - |
+    { "scripts": [{ "clean": "rm -rf dist" }] }
+  - |
+    { "scripts": { "clean:dist": "rm -rf dist" } }
+  - |
+    { "scripts": { "clean": "" } }
+  - |
+    { "scripts": { "clean": "echo rm -rf dist" } }
+  - |
+    { "scripts": { "clean": "echo 'rm -rf dist'" } }
+  - |
+    { "scripts": { "clean": "printf 'rm -rf dist'" } }
+  - |
+    { "scripts": { "clean": "true # rm -rf dist" } }
+  - |
+    { "scripts": { "clean": "rm -rf distribution" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist-old" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist/*" } }
+  - |
+    { "scripts": { "clean": "rm -rf ." } }
+  - |
+    { "scripts": { "clean": "rm -rf src" } }
+  - |
+    { "scripts": { "clean": "rm -rf node_modules package-lock.json dist" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist package-lock.json" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist bun.lock" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist yarn.lock" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist pnpm-lock.yaml" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist/../src" } }
+  - |
+    { "scripts": { "clean": "rm -rf /dist" } }
+  - |
+    { "scripts": { "clean": "rm -rf ../dist" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist && rm -rf src" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist; rm -rf node_modules" } }
+  - |
+    { "scripts": { "clean": "rm -rf dist --help" } }
+  # Unsupported wrappers need review, not an assertion that deletion occurred.
+  - |
+    { "scripts": { "clean": "bash scripts/clean.sh" } }

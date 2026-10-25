@@ -1,0 +1,60 @@
+id: require-clean-script
+language: Json
+severity: info
+message: >
+  Set `scripts.clean` to `rm -rf dist` to keep Forge app cleanup limited to build output.
+note: >
+  Drop Calf maintains a dist-only clean command for Forge apps; the library
+  reinstall workflow intentionally removes dependencies and a lockfile as well.
+  Accepts only direct `rm -rf dist`, with ordinary spacing, an optional ./
+  prefix and an optional trailing slash on dist; no extra arguments or chaining.
+  This bounded direct-command text check does not execute cleanup, prove that
+  dist exists or audit arbitrary shell safety. A quoted mention is not execution.
+  Scope this ecosol rule to caller-selected Forge-app package.json directories,
+  not library reinstall workflows. Review and suppress equivalent owner-managed
+  wrappers rather than treating every unsupported command as destructive.
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/composition/profiles.ts
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/clean-build.ts
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      has:
+        field: key
+        regex: '^"scripts"$'
+      all:
+        - has:
+            field: value
+            kind: object
+            has:
+              kind: pair
+              has:
+                field: key
+                regex: '^"clean"$'
+              all:
+                - has:
+                    field: value
+                    kind: string
+                    regex: '^"[ \t]*rm[ \t]+-rf[ \t]+(?:\./)?dist/?[ \t]*"$'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  references:
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/composition/profiles.ts
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/clean-build.ts
+    - https://www.gnu.org/software/coreutils/manual/html_node/rm-invocation.html
+  tags: [capability:clean-build]
+  category: package-scripts
+  precision: medium
+  precision-rationale: "Bounded direct-command convention; equivalent wrappers and escaped JSON require review, not a destructive-execution conclusion. Evidence: rule-tests/ecosol/package-scripts/require-clean-script.test.yml and rule-tests/__snapshots__/require-clean-script-snapshot.yml."
+  impact: low
+  impact-rationale: A missing or drifted preferred cleanup entrypoint needs bounded developer-workflow repair; command text alone does not prove data loss or execution.
+  scope-profile: [package-json, tests]

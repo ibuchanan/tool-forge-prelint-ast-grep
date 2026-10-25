@@ -132,6 +132,45 @@ gate=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
 printf '%s\n' "$gate" | jq -e 'type == "array" and length == 0' >/dev/null
 echo 'Generated Forge Ahead declarations, owner references and placement mutations produced expected advisory findings.'
 
+# Clean command checks inspect text only; never invoke cleanup on these fixtures.
+clean_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_clean_build.XXXXXX")
+for variant in generated relative missing non-string nested inert lookalike source root reinstall lockfile chain; do
+  expected=1
+  case "$variant" in
+  generated)
+    edit='.'
+    expected=0
+    ;;
+  relative)
+    edit='.scripts.clean = "  rm  -rf  ./dist/  "'
+    expected=0
+    ;;
+  missing) edit='del(.scripts.clean)' ;;
+  non-string) edit='.scripts.clean = ["rm -rf dist"]' ;;
+  nested) edit='.config.scripts.clean = .scripts.clean | del(.scripts.clean)' ;;
+  inert) edit='.scripts.clean = "echo '\''rm -rf dist'\''"' ;;
+  lookalike) edit='.scripts.clean = "rm -rf distribution"' ;;
+  source) edit='.scripts.clean = "rm -rf src"' ;;
+  root) edit='.scripts.clean = "rm -rf ."' ;;
+  reinstall) edit='.scripts.clean = "rm -rf node_modules package-lock.json dist"' ;;
+  lockfile) edit='.scripts.clean = "rm -rf dist package-lock.json"' ;;
+  chain) edit='.scripts.clean = "rm -rf dist && rm -rf src"' ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$clean_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^require-clean-script$' \
+    --include-metadata --json=compact "$clean_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --argjson count "$expected" '
+    type == "array" and length == $count and
+    all(.[]; .ruleId == "require-clean-script" and .severity == "info" and
+      (.metadata.tags | index("capability:clean-build") != null))
+  ' >/dev/null; then
+    printf 'Unexpected clean command findings for %s: expected %s, got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo 'Generated dist-only clean command and static mutations produced expected findings.'
+
 # Size Limit checks static declarations only; never build or measure owner output.
 size_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_size_limit.XXXXXX")
 for variant in generated owner-budget custom-size legacy-size missing-check no-build preset-app; do

@@ -479,6 +479,45 @@ versions, retained size scripts and isolated missing-command/no-build/preset mut
 No app build, size command, output cleanup, hook or dependency installation is run;
 the stored generated snapshot and all consumer snapshots remain unchanged.
 
+## Clean build: dist-only command text
+
+`require-clean-script` is an informational ecosol convention tagged
+`capability:clean-build`. It checks a direct root `scripts.clean` string in an
+existing `package.json`. Callers select Forge-app directories; the rule does not
+infer app identity from a manifest or its capability tag. Library reinstall
+workflows are outside this precondition.
+
+The reviewed source is the
+[clean-build capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/clean-build.ts).
+The pinned [profile selection](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/composition/profiles.ts)
+uses `cleanBuild()` for Forge apps, maintaining `rm -rf dist`. Libraries select
+`reinstall: true`, intentionally adding `node_modules` and `package-lock.json`.
+Initialization, update and validation never execute either cleanup command.
+
+| Component  | Recognized literal forms                                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------------ |
+| Invocation | Direct `rm -rf`, with ordinary spaces between tokens and at either end.                                      |
+| Target     | Only `dist`, `./dist`, `dist/` or `./dist/`; no extra arguments.                                             |
+| Placement  | Direct root `scripts` object and direct `clean` string; unrelated nested keys do not satisfy the convention. |
+
+Missing entries, non-string values, inert echo/printf mentions, lookalike targets,
+source/project-root/dependency/lockfile targets and command chains receive one
+finding. The message recommends the maintained command; it does not claim that
+an unsupported command executed or deleted anything. This is medium-precision,
+low-impact workflow advice, not a complete shell safety audit. Alternative flag
+spellings, quoted paths, wrappers, environment assignments and escaped JSON
+spellings require review and possible suppression for an equivalent owner workflow.
+
+Native routing covers `package.json` only, including test-local app examples and
+excluding node_modules, dist, coverage and specs. Missing files, duplicate keys,
+package-schema validity, command resolution, shell/environment behavior, symlink
+resolution, dist existence and successful cleanup remain native-tool or review
+responsibilities. A passing literal command does not establish filesystem safety.
+Static tests scan generated packages and isolated mutations only; no clean task,
+build, dependency installation or output deletion is performed. The stored
+Drop Calf snapshot is unchanged; the legacy zero-findings fixture gains only
+the maintained clean declaration.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an
