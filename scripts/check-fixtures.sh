@@ -48,6 +48,45 @@ if ! printf '%s\n' "$catalog_findings" | jq -e 'type == "array" and length == 0'
 fi
 echo "$DROP_CALF_CATALOG produced zero catalog convention findings."
 
+# Package metadata maps existing policies without freezing catalog identity or version.
+DROP_CALF_PACKAGE="fixtures/drop-calf-forge-app/package.json"
+mkdir -p .scratch
+package_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_package_metadata.XXXXXX")
+for variant in generated commonjs missing-type public missing-private owner-metadata; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  commonjs)
+    edit='.type = "commonjs"'
+    expected='require-package-type-module'
+    ;;
+  missing-type)
+    edit='del(.type)'
+    expected='require-package-type-module'
+    ;;
+  public)
+    edit='.private = false'
+    expected='require-package-private-true'
+    ;;
+  missing-private)
+    edit='del(.private)'
+    expected='require-package-private-true'
+    ;;
+  owner-metadata) edit='.name = "@example/custom-app" | .version = "2.3.4-beta.1" | .description = "Owner-authored description" | del(.author)' ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$package_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^require-package-(type-module|private-true)$' \
+    --json=compact "$package_work/package.json")
+  actual=$(printf '%s\n' "$findings" | jq -r '.[].ruleId' | sort)
+  if [ "$actual" != "$expected" ]; then
+    printf 'Unexpected package metadata findings for %s: expected "%s", got "%s"\n' \
+      "$variant" "$expected" "$actual" >&2
+    exit 1
+  fi
+done
+echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
+
 # Both Biome filenames must be parsed as JSON and checked by the same rule.
 for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/biome-invalid/biome.jsonc; do
   matches=$(ast-grep scan --config sgconfig.ecosol.yml \

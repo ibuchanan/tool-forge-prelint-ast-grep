@@ -189,3 +189,12 @@ expect_rejected category "$RULE" 'duplicate mapping keys'
 printf 'id: example\nmetadata: {precision: null, impact: [high], owasp: 42, cwe: false}\n' >"$RULE"
 expect_rejected normalize "$RULE" 'classification'
 printf 'PASS: ambiguous YAML and malformed classifications require review\n'
+
+# Capability discovery maps the two existing policies, not other packaging advice.
+discovered=$(yq -N -r 'select((.metadata.tags // []) | contains(["capability:package-metadata"])) | .id' rules/*/*/*.yml | sort)
+expected=$'require-package-private-true\nrequire-package-type-module'
+if [[ $discovered != "$expected" ]]; then
+  printf 'FAIL: package-metadata discovery expected:\n%s\nGot:\n%s\n' "$expected" "$discovered" >&2
+  exit 1
+fi
+printf 'PASS: package-metadata discovery returns exactly the type and privacy rules\n'

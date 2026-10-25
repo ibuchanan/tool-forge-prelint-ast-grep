@@ -26,6 +26,7 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:package-metadata]
   references:
     ["https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#type"]
   category: package-json

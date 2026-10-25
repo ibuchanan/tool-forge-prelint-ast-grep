@@ -10,6 +10,7 @@ note: >
   npm package.json fields reference:
   https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#private
 metadata:
+  tags: [capability:package-metadata]
   category: package-json
   precision: high
   precision-rationale: >
