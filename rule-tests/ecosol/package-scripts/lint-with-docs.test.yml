@@ -1,0 +1,84 @@
+id: lint-with-docs
+valid:
+  # Maintained command from the pinned documentation capability.
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 \"**/*.md\" && cspell lint \"**/*.md\"" } }
+  # Equivalent shell quoting and spacing, including explicit relative globs.
+  - |
+    { "scripts": { "lint:docs": "  markdownlint-cli2  './**/*.md'  &&  cspell  lint  '**/*.md'  " } }
+  - |
+    { "scripts": { "lint": "run-p lint:check:*", "lint:docs": "markdownlint-cli2 '**/*.md'&&cspell lint \"./**/*.md\"" }, "config": { "scripts": { "lint:docs": "echo ignored" } } }
+invalid:
+  - |
+    { "name": "forge-app" }
+  - "{}"
+  - '{ "scripts": {} }'
+  - '{ "scripts": null }'
+  - '{ "scripts": [] }'
+  - '{ "scripts": { "lint:docs": null } }'
+  - '{ "scripts": { "lint:docs": false } }'
+  - '{ "scripts": { "lint:docs": 1 } }'
+  - |
+    { "scripts": { "lint:docs": ["markdownlint-cli2 \"**/*.md\" && cspell lint \"**/*.md\""] } }
+  - |
+    { "scripts": { "lint:docs": { "command": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } } }
+  - |
+    { "config": { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } } }
+  - |
+    { "scripts": { "nested": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } } }
+  - |
+    { "scripts": [{ "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" }] }
+  - |
+    { "scripts": { "lint:check:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs:extra": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } }
+  - '{ "scripts": { "lint:docs": "" } }'
+  - '{ "scripts": { "lint:docs": "  " } }'
+  - |
+    { "scripts": { "lint:docs": "echo markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && echo cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "echo \"markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'\"" } }
+  - |
+    { "scripts": { "lint:docs": "true # markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2-extra '**/*.md' && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell-extra lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint-extra '**/*.md'" } }
+  # Globs must reach the tools literally, not be expanded by the shell.
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 **/*.md && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint **/*.md" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.mdx' && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md.bak'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md'junk && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md'junk" } }
+  # Fail-fast sequencing, with no fix flags or trailing error masking.
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md'; cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' || cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' & cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 --fix '**/*.md' && cspell lint '**/*.md'" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md' || true" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md' --help" } }
+  - |
+    { "scripts": { "lint:docs": "markdownlint-cli2 '**/*.md' && cspell lint '**/*.md' # owner comment" } }
+  # Unsupported wrappers require review, not a conclusion that linting failed.
+  - '{ "scripts": { "lint:docs": "bash scripts/docs.sh" } }'

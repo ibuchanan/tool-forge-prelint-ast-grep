@@ -24,6 +24,7 @@
     "lint:check:format": "npm run format:check",
     "lint:check:prelint": "ast-grep scan --config node_modules/tool-forge-prelint-ast-grep/sgconfig.strict.yml --globs '!specs/**' --globs '!node_modules/**'",
     "lint:check:typecheck": "npm run typecheck",
+    "lint:docs": "markdownlint-cli2 \"**/*.md\" && cspell lint \"**/*.md\"",
     "lint:fix": "biome lint --write .",
     "prepare": "lefthook install",
     "release": "bash scripts/release.sh",

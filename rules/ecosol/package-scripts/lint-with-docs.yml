@@ -1,0 +1,62 @@
+id: lint-with-docs
+language: Json
+severity: info
+message: >
+  Set `scripts.lint:docs` to run `markdownlint-cli2` and `cspell lint` on quoted Markdown globs joined by `&&`.
+note: >
+  Drop Calf maintains a separate documentation lint entrypoint, not `lint:check:docs`.
+  Accepts `markdownlint-cli2` followed by `cspell lint`, joined by `&&`, each with
+  exactly one quoted `**/*.md` or `./**/*.md` glob. Single quotes, JSON-escaped
+  double quotes and ordinary spacing are supported; no flags, wrappers, extra
+  arguments, shell chains or comments. This bounded direct-command text check
+  does not execute tools, load owner configs, resolve config references or
+  establish effective read-only behavior, Markdown or spelling correctness.
+  Config pairs, dictionaries and documents remain owner-managed; missing files
+  and aggregate selection are not checked. Scope this ecosol
+  convention to caller-selected Forge-app package.json directories. Equivalent
+  owner-managed wrappers require review and possible suppression of this rule.
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/docs.ts
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      has:
+        field: key
+        regex: '^"scripts"$'
+      all:
+        - has:
+            field: value
+            kind: object
+            has:
+              kind: pair
+              has:
+                field: key
+                regex: '^"lint:docs"$'
+              all:
+                - has:
+                    field: value
+                    kind: string
+                    regex: >-
+                      ^"[ \t]*markdownlint-cli2[ \t]+(?:'(?:\./)?\*\*/\*\.md'|\\"(?:\./)?\*\*/\*\.md\\")[ \t]*&&[ \t]*cspell[ \t]+lint[ \t]+(?:'(?:\./)?\*\*/\*\.md'|\\"(?:\./)?\*\*/\*\.md\\")[ \t]*"$
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  references:
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/docs.ts
+    - https://github.com/igorshubovych/markdownlint-cli2#command-line
+    - https://cspell.org/docs/api/cspell/#lint
+  tags: [capability:docs]
+  category: package-scripts
+  precision: medium
+  precision-rationale: "Bounded direct-command convention; equivalent wrappers and escaped JSON spellings need review, not a claim that documentation validation failed. Evidence: rule-tests/ecosol/package-scripts/lint-with-docs.test.yml and scripts/check-docs-fixtures.sh."
+  impact: low
+  impact-rationale: A missing or drifted documentation lint entrypoint needs bounded developer-workflow repair; command text does not establish prose quality or production failure.
+  scope-profile: [package-json, tests]

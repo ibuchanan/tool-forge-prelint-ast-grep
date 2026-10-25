@@ -136,6 +136,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "todo"')
 }
 printf 'PASS: optional TODO entrypoint advice is discoverable\n'
 
+expected=$'docs\timplemented\tlint-with-docs'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "docs"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: documentation lint entrypoint must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: documentation lint entrypoint is discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

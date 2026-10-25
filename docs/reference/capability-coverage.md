@@ -553,6 +553,59 @@ cannot be diagnosed. Static tests never execute the generated or owner commands.
 The stored generated snapshot is unchanged; the legacy zero-findings fixture gains
 only the seeded TODO declaration.
 
+## Docs: maintained Markdown and spelling entrypoint
+
+`lint-with-docs` is an informational ecosol convention tagged `capability:docs`.
+It checks a direct root `scripts.lint:docs` string in an existing `package.json`.
+Medium precision and low impact reflect bounded workflow advice, not proof of
+failed documentation validation. Callers select Forge-app directories; tags do
+not detect apps or installed capabilities.
+
+The reviewed source is the
+[docs capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/docs.ts).
+Its maintained command is `markdownlint-cli2 "**/*.md" && cspell lint "**/*.md"`.
+The rule accepts that command, ordinary spacing, single or JSON-escaped double
+quotes independently on either glob, and an optional `./` prefix on each glob.
+Both tools must appear in the maintained order with `&&` fail-fast sequencing
+and exactly one quoted recursive Markdown glob per tool. Missing, non-string,
+nested, inert, one-tool-only, unquoted/lookalike-glob, lookalike-command,
+non-fail-fast and extra-argument forms receive one finding. Explicit fix flags,
+help flags and trailing error masking do not satisfy this bounded command form.
+
+Other globs, tool order, flags, wrappers, environment assignments and escaped
+JSON spellings require review and possible suppression for an equivalent owner
+workflow (`--off=lint-with-docs`). The matcher is not a shell parser or complete
+CLI validator. Command text does not establish tool installation, glob expansion,
+successful execution,
+actual Markdown style, spelling quality or effective read-only behavior: owner
+configuration can enable fixes even without a literal command-line fix flag.
+The [Markdownlint CLI](https://github.com/igorshubovych/markdownlint-cli2#command-line)
+and [CSpell lint reference](https://cspell.org/docs/api/cspell/#lint) define native
+command behavior.
+
+**Aggregate coverage gap:** `lint:docs` remains outside the generated
+`lint:check:*` selection, so the default `check`/pre-push path does not establish
+documentation lint coverage. This rule neither renames it to `lint:check:docs`
+nor requires aggregate inclusion. Changing that wiring is a separate upstream
+policy decision, not a prerequisite for satisfying the maintained entrypoint.
+
+Drop Calf seeds tools, `.markdownlint-cli2.jsonc`, `.cspell.jsonc`, development
+guidance and Diátaxis/spec starters; dictionaries, rule choices, configs and prose
+remain owner-managed after initialization, including deletions. Its native
+validation loads configs/references without linting content, skips an absent
+config pair and fails a partial pair. Although JSONC is parsable in principle,
+companion-file existence, reference resolution and effective config validation
+remain cross-file/native-tool responsibilities; no fake pair-existence rule is
+added. Missing documents, template equality, content classification and prose
+quality are not checked.
+
+Native routing covers only `package.json`, including test-local app examples,
+excluding node_modules, dist, coverage and specs. Missing files, duplicate keys,
+package validity and arbitrary shell behavior remain outside coverage. Static
+fixtures scan the generated package and isolated mutations without running owner
+docs commands or resolving external configuration. The stored Drop Calf snapshot
+is unchanged; the legacy zero-findings fixture gains only the maintained script.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an
