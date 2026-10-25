@@ -93,6 +93,37 @@ snapshots:
       style: secondary
       start: 23
       end: 48
+  "{\"scripts\": {\"forge:deploy\": \"cmd=$(fence-rider deploy); sh -c \\\"$cmd\\\" sh\"}}\n":
+    labels:
+    - source: "\"forge:deploy\": \"cmd=$(fence-rider deploy); sh -c \\\"$cmd\\\" sh\""
+      style: primary
+      start: 13
+      end: 75
+    - source: |
+        {"scripts": {"forge:deploy": "cmd=$(fence-rider deploy); sh -c \"$cmd\" sh"}}
+      style: secondary
+      start: 0
+      end: 78
+    - source: "{\"scripts\": {\"forge:deploy\": \"cmd=$(fence-rider deploy); sh -c \\\"$cmd\\\" sh\"}}"
+      style: secondary
+      start: 0
+      end: 77
+    - source: "\"scripts\""
+      style: secondary
+      start: 1
+      end: 10
+    - source: "\"scripts\": {\"forge:deploy\": \"cmd=$(fence-rider deploy); sh -c \\\"$cmd\\\" sh\"}"
+      style: secondary
+      start: 1
+      end: 76
+    - source: "{\"forge:deploy\": \"cmd=$(fence-rider deploy); sh -c \\\"$cmd\\\" sh\"}"
+      style: secondary
+      start: 12
+      end: 76
+    - source: "\"cmd=$(fence-rider deploy); sh -c \\\"$cmd\\\" sh\""
+      style: secondary
+      start: 29
+      end: 75
   "{\"scripts\": {\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\"}}\n":
     labels:
     - source: "\"install\": \"bash -c \\\"$(fence-rider install -- --non-interactive)\\\"\""

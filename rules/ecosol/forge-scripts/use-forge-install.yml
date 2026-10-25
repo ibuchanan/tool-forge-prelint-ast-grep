@@ -2,42 +2,68 @@ id: use-forge-install
 language: Json
 severity: info
 message: >
-  Add or rename this wrapper script as `forge:install` for `forge install`.
+  Add a `forge:install` script with install command text; keep other lifecycle roles under their own names.
+
 note: >
-  A `forge:` namespace keeps Forge CLI wrapper scripts
-  discoverable by a predictable name.
-  Pair this naming convention with `use-fence-rider-for-forge-install`
-  for the ecosol configuration-resolution workflow.
-  This rule assumes package.json belongs to a Forge app: in a monorepo, a
-  workspace root or an internal shared library's package.json will also
-  match — even one that imports @forge packages without being deployable
-  itself. manifest.yml is the real signal for "is this a Forge app," and
-  ast-grep can't check whether that file exists, so scope the scan to your
-  Forge app directories rather than the whole monorepo.
-  Forge CLI install reference:
-  https://developer.atlassian.com/platform/forge/cli-reference/install/
+  Drop Calf maintains forge:install as a guarded Fence Rider install command without --upgrade. Direct Forge install text also satisfies this naming check; the separate use-fence-rider-for-forge-install rule checks the configuration workflow. Only a string directly under root scripts satisfies presence. Recognizable install commands under other script names are also reported. This is a bounded text check, not shell parsing: echoes, quoting, extra commands, forwarded flags and successful execution are not validated. Suppress for an intentionally maintained external helper or alternative workflow. For install with --upgrade, use forge:upgrade instead; flag order (install -- --upgrade or install --upgrade) is accepted by both checks. This rule assumes package.json belongs to a Forge app: in a monorepo, a workspace root or an internal shared library's package.json will also match — even one that imports @forge packages without being deployable itself. manifest.yml is the real signal for "is this a Forge app," and ast-grep can't check whether that file exists, so scope the scan to your Forge app directories rather than the whole monorepo. Forge CLI install reference: https://developer.atlassian.com/platform/forge/cli-reference/install/ https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/secrets.ts
+
 rule:
   any:
-    - all:
-        - kind: pair
-          regex: 'forge install\b'
+    - kind: pair
+      has:
+        field: value
+        kind: string
+        regex: '(^|[\s"'';&|(])(forge|fence-rider)[ \t]+install([\s"'';&|)]|$)'
+      not:
+        has:
+          field: key
+          regex: '^"forge:install"$'
+      inside:
+        kind: object
+        inside:
+          kind: pair
+          has:
+            field: key
+            regex: '^"scripts"$'
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"scripts"\s*:'
-        - not:
-            regex: "--upgrade"
-        - not:
-            regex: '^"forge:install"\s*:'
-    - all:
-        - kind: object
-          inside:
-            kind: document
+            kind: object
+            inside:
+              kind: document
+      all:
         - not:
             has:
-              stopBy: end
+              field: value
+              regex: (^|[\s"';&|(])--upgrade([\s"';&|)]|$)
+    - kind: object
+      inside:
+        kind: document
+      not:
+        has:
+          stopBy: end
+          kind: pair
+          has:
+            field: key
+            regex: '^"forge:install"$'
+          all:
+            - has:
+                field: value
+                kind: string
+                regex: '(^|[\s"'';&|(])(forge|fence-rider)[ \t]+install([\s"'';&|)]|$)'
+            - not:
+                has:
+                  field: value
+                  regex: (^|[\s"';&|(])--upgrade([\s"';&|)]|$)
+          inside:
+            kind: object
+            inside:
               kind: pair
-              regex: '"forge:install"\s*:'
+              has:
+                field: key
+                regex: '^"scripts"$'
+              inside:
+                kind: object
+                inside:
+                  kind: document
 files:
   - "**/package.json"
 ignores:
@@ -46,11 +72,13 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: ["capability:secrets"]
   references:
-    ["https://developer.atlassian.com/platform/forge/cli-reference/install/"]
+    - https://developer.atlassian.com/platform/forge/cli-reference/install/
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/secrets.ts
   category: forge-scripts
   precision: medium
   impact: low
-  impact-rationale: Forge documents the command's operation, not a mandatory package-script name. Missing the team's forge namespace creates discoverability and maintenance friction; it does not itself select the wrong app, grant consent, expose a secret or execute remote changes.
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests cover named/misnamed install wrappers, coexistence with upgrade and absence. The direct-command branch excludes text containing --upgrade; descendant-key presence does not prove scripts placement or command validity. Shell semantics, effective app identity and unrelated flag text remain assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-install.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-install-snapshot.yml."
+  impact-rationale: The pinned capability maintains a predictable Forge lifecycle entrypoint. Genuine drift impedes discoverability and maintenance; matching command text proves neither execution nor remote targets, consent or secret handling. Bounded workflow friction warrants low impact.
+  precision-rationale: "Tests cover direct and guarded install command text, misnamed keys, missing scripts, wrong lifecycle roles and upgrade separation. Root script placement and string shape are checked; shell interpretation, inert quoted mentions, additional commands, equivalent helpers and deployable app identity remain assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-install.test.yml and rule-tests/__snapshots__/use-forge-install-snapshot.yml."

@@ -1,15 +1,7 @@
 id: use-forge-install
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -34,17 +26,9 @@ snapshots:
       style: secondary
       start: 0
       end: 94
-  ? |
-    {
-      "dependencies": {
-        "@forge/kvs": "^2.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
-    - source: '@forge/kvs'
+  "{\n  \"dependencies\": {\n    \"@forge/kvs\": \"^2.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
+    - source: "@forge/kvs"
       style: primary
       start: 27
       end: 37
@@ -55,13 +39,8 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -80,13 +59,48 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "install": "forge install --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"fence:install\": \"fence-rider install --site \\\"$FORGE_SITE\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "fence:install": "fence-rider install --site \"$FORGE_SITE\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        {
+          "scripts": {
+            "fence:install": "fence-rider install --site \"$FORGE_SITE\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 89
+  "{\n  \"scripts\": {\n    \"forge-install\": \"forge install --site \\\"$FORGE_SITE\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "forge-install": "forge install --site \"$FORGE_SITE\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 82
+    - source: |
+        {
+          "scripts": {
+            "forge-install": "forge install --site \"$FORGE_SITE\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 83
+  "{\n  \"scripts\": {\n    \"install\": \"forge install --site \\\"$FORGE_SITE\\\" --product \\\"$FORGE_PRODUCT\\\"\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -105,3 +119,14 @@ snapshots:
       style: secondary
       start: 0
       end: 106
+  "{\"scripts\": {\"forge:install\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"forge:install\": \"cmd=$(fence-rider uninstall) && sh -c \\\"$cmd\\\" sh\"}}"
+      style: primary
+      start: 0
+      end: 83
+    - source: |
+        {"scripts": {"forge:install": "cmd=$(fence-rider uninstall) && sh -c \"$cmd\" sh"}}
+      style: secondary
+      start: 0
+      end: 84

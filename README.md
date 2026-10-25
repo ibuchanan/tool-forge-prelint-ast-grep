@@ -321,7 +321,14 @@ The ecosol rules recommend Fence Rider for package scripts containing literal
 `forge deploy`, `forge tunnel`, or `forge variables set` commands. The variable
 rule also recognizes node/bun calls to `scripts/forge-vars-from-secretspec.js`,
 replacing that helper's separate inventory with SecretSpec's runtime scope.
-These rules supersede `use-secretspec-for-forge-commands`.
+These rules supersede `use-secretspec-for-forge-commands`. The exact root
+`lint:check:forge` command `forge lint` is exempt from the lint wrapper preference
+because Drop Calf maintains that direct validation entrypoint. Other script names,
+flags and chaining retain the preference; this is not proof of safe environment
+inputs. Lifecycle naming, wrapper and execution-safety checks are discoverable
+with `capability:secrets`; the additional lint/tunnel preferences are not tagged.
+See [capability coverage](docs/reference/capability-coverage.md#secrets-lifecycle-command-text-and-native-validation)
+for the command matrix and native SecretSpec validation boundary.
 
 `require-fence-rider-script-execution` flags bare generator-only scripts;
 `no-unguarded-fence-rider-evaluation` flags direct command-substitution execution

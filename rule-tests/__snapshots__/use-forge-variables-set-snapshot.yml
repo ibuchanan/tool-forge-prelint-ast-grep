@@ -1,15 +1,7 @@
 id: use-forge-variables-set
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -34,17 +26,9 @@ snapshots:
       style: secondary
       start: 0
       end: 94
-  ? |
-    {
-      "dependencies": {
-        "@forge/events": "^3.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
-    - source: '@forge/events'
+  "{\n  \"dependencies\": {\n    \"@forge/events\": \"^3.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
+    - source: "@forge/events"
       style: primary
       start: 27
       end: 40
@@ -55,13 +39,8 @@ snapshots:
       style: secondary
       start: 4
       end: 55
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -80,13 +59,48 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "forge:variables:set-encrypted": "source .env && forge variables set --encrypt --environment \"$FORGE_ENVIRONMENT\""
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"fence:variables:set\": \"fence-rider variables set --environment \\\"$FORGE_ENVIRONMENT\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "fence:variables:set": "fence-rider variables set --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 114
+    - source: |
+        {
+          "scripts": {
+            "fence:variables:set": "fence-rider variables set --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 115
+  "{\n  \"scripts\": {\n    \"forge-variables-set\": \"forge variables set --environment \\\"$FORGE_ENVIRONMENT\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "forge-variables-set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 108
+    - source: |
+        {
+          "scripts": {
+            "forge-variables-set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 109
+  "{\n  \"scripts\": {\n    \"forge:variables:set-encrypted\": \"source .env && forge variables set --encrypt --environment \\\"$FORGE_ENVIRONMENT\\\"\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -105,13 +119,8 @@ snapshots:
       style: secondary
       start: 0
       end: 144
-  ? |
-    {
-      "scripts": {
-        "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"variables:set\": \"forge variables set --environment \\\"$FORGE_ENVIRONMENT\\\"\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -130,3 +139,14 @@ snapshots:
       style: secondary
       start: 0
       end: 103
+  "{\"scripts\": {\"forge:variables:set\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"forge:variables:set\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh\"}}"
+      style: primary
+      start: 0
+      end: 86
+    - source: |
+        {"scripts": {"forge:variables:set": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh"}}
+      style: secondary
+      start: 0
+      end: 87

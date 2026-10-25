@@ -1,15 +1,7 @@
 id: use-forge-uninstall
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -34,17 +26,9 @@ snapshots:
       style: secondary
       start: 0
       end: 94
-  ? |
-    {
-      "dependencies": {
-        "@forge/bridge": "^4.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
-    - source: '@forge/bridge'
+  "{\n  \"dependencies\": {\n    \"@forge/bridge\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
+    - source: "@forge/bridge"
       style: primary
       start: 27
       end: 40
@@ -55,13 +39,8 @@ snapshots:
       style: secondary
       start: 4
       end: 55
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -80,13 +59,48 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"fence:uninstall\": \"fence-rider uninstall --site \\\"$FORGE_SITE\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "fence:uninstall": "fence-rider uninstall --site \"$FORGE_SITE\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 92
+    - source: |
+        {
+          "scripts": {
+            "fence:uninstall": "fence-rider uninstall --site \"$FORGE_SITE\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 93
+  "{\n  \"scripts\": {\n    \"forge-uninstall\": \"forge uninstall --site \\\"$FORGE_SITE\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "forge-uninstall": "forge uninstall --site \"$FORGE_SITE\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 86
+    - source: |
+        {
+          "scripts": {
+            "forge-uninstall": "forge uninstall --site \"$FORGE_SITE\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 87
+  "{\n  \"scripts\": {\n    \"uninstall\": \"forge uninstall --site \\\"$FORGE_SITE\\\" --product \\\"$FORGE_PRODUCT\\\"\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -105,3 +119,14 @@ snapshots:
       style: secondary
       start: 0
       end: 110
+  "{\"scripts\": {\"forge:uninstall\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"forge:uninstall\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh\"}}"
+      style: primary
+      start: 0
+      end: 82
+    - source: |
+        {"scripts": {"forge:uninstall": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh"}}
+      style: secondary
+      start: 0
+      end: 83

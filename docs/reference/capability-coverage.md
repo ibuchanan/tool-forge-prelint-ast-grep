@@ -262,3 +262,67 @@ temporary copy. The legacy zero-findings fixture includes those declarations but
 intentionally has no release helper, demonstrating that script presence does not
 prove helper existence. No release workflow, helper, check command, git-cliff or
 remote publication is executed during verification.
+
+## Secrets: lifecycle command text and native validation
+
+The reviewed source is the
+[Drop Calf secrets capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/secrets.ts).
+It maintains six root package scripts. Twelve existing ecosol rules are tagged
+`capability:secrets`: six `use-forge-*` naming checks, four lifecycle wrapper
+preferences (deploy, install/upgrade, uninstall and variables), and the two
+Fence Rider execution-safety checks. IDs, tiers and severities are preserved.
+The naming checks remain informational, medium precision and low impact;
+wrapper preferences are advisory, not Forge platform requirements.
+
+| Script                | Maintained command                                                                              |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| `forge:register`      | `forge register`                                                                                |
+| `forge:deploy`        | `cmd=$(fence-rider deploy -- --non-interactive) && sh -c "$cmd" sh`                             |
+| `forge:install`       | `cmd=$(fence-rider install -- --confirm-scopes --non-interactive) && sh -c "$cmd" sh`           |
+| `forge:uninstall`     | `cmd=$(fence-rider uninstall) && sh -c "$cmd" sh`                                               |
+| `forge:upgrade`       | `cmd=$(fence-rider install -- --upgrade --confirm-scopes --non-interactive) && sh -c "$cmd" sh` |
+| `forge:variables:set` | `fence-rider variables`                                                                         |
+
+The naming checks require a direct root `scripts` string containing recognizable
+command-role text. Wrong names, missing scripts, wrong types, unrelated nesting
+and command lookalikes do not satisfy that convention. Install and upgrade are
+separated by a bounded `--upgrade` token; options may appear in either order.
+Direct Forge lifecycle commands still satisfy naming, but trigger the separate
+wrapper preference. The legacy variable-upload helper is accepted for naming
+and remains subject to the variable wrapper preference. These are text checks,
+not shell parsers: quoted/inert mentions, additional commands, JSON escape
+spellings, arbitrary helpers and effective CLI options require native validation
+or review and possible suppression. Callers select Forge-app packages; no app
+identity, installation, flag validity, consent, target or execution is inferred.
+
+`use-fence-rider-for-forge-lint` exempts only the root `lint:check:forge` value
+`forge lint` with ordinary whitespace. That reviewed exception reflects Drop
+Calf's maintained direct validation task; flags, wrappers, chaining and other
+script names retain the preference. The rule's advisory severity and ratings
+are unchanged. Presence of the lint task and Prelint configuration remain
+separate policies. The lint and tunnel preferences are not tagged as required
+secrets coverage; no tunnel task or SecretSpec values are required by this subset.
+
+`require-fence-rider-script-execution` detects bare generator-only commands;
+`no-unguarded-fence-rider-evaluation` detects direct eval/shell substitutions,
+simple shell pipes and the literal root `cmd=$(fence-rider ...); sh -c "$cmd"`
+form (including eval/bash/zsh variants). Guarded `&&` capture remains accepted.
+Other variable names, conditionals, escaped or compound shell forms, redirection,
+pipefail mentions and external helpers retain the documented limits of those
+rules. Neither matching command text nor a zero-findings scan proves failure
+propagation for arbitrary shell programs.
+
+| Artifact or result                    | Coverage boundary                                                                                                                     |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `secretspec.toml` syntax and schema   | Native TOML parsing and structural validation by Drop Calf/SecretSpec; no YAML surrogate matching.                                    |
+| Profile/scope membership              | Native validation checks declared default-profile members, scopes and supported declaration shapes without resolving values.          |
+| Owner declarations and tool reference | Owner-managed; no required real values, dependency pin or missing-file detection.                                                     |
+| Encryption and credential isolation   | Not proved by script text; no values are resolved, credentials read or uploads inspected.                                             |
+| Effective command behavior            | Forge/Fence Rider execution, prerequisite environment, forwarded options, exit status and remote success remain native-tool concerns. |
+
+The stored generated fixture predates forwarded flags and is unchanged. The
+static fixture check applies the six pinned command literals to a temporary
+package copy, verifies the convention subset, and mutates missing/wrong-role,
+wrong-type, nested/lookalike commands, missing execution, unguarded evaluation
+and direct lifecycle commands. Tests never execute the package scripts, resolve
+SecretSpec, read real credentials or contact Forge.

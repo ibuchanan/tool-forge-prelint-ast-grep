@@ -56,6 +56,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "release"')
 }
 printf 'PASS: explicit release and owner validation entrypoints are discoverable\n'
 
+expected=$'secrets\timplemented\tno-unguarded-fence-rider-evaluation,require-fence-rider-script-execution,use-fence-rider-for-forge-deploy,use-fence-rider-for-forge-install,use-fence-rider-for-forge-uninstall,use-fence-rider-for-forge-variables,use-forge-deploy,use-forge-install,use-forge-register,use-forge-uninstall,use-forge-upgrade,use-forge-variables-set'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "secrets"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: lifecycle naming, wrappers and execution safety must be discoverable without lint/tunnel preferences; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: secrets lifecycle conventions are discoverable without optional lint/tunnel preferences\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

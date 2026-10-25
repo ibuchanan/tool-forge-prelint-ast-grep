@@ -27,11 +27,27 @@ valid:
       }
     }
 invalid:
+  # Known lifecycle commands must keep their role even under the expected name.
+  - |
+    {"scripts": {"forge:upgrade": "cmd=$(fence-rider register) && sh -c \"$cmd\" sh"}}
   # Present under the wrong key name
   - |
     {
       "scripts": {
         "upgrade": "forge install --upgrade --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge-upgrade": "forge install --upgrade --site \"$FORGE_SITE\""
+      }
+    }
+  # Misnamed Fence Rider (recognized command under wrong role key)
+  - |
+    {
+      "scripts": {
+        "fence:upgrade": "fence-rider install --upgrade --site \"$FORGE_SITE\""
       }
     }
   # Missing entirely, regardless of dependencies present

@@ -1,15 +1,7 @@
 id: use-forge-upgrade
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -34,17 +26,9 @@ snapshots:
       style: secondary
       start: 0
       end: 94
-  ? |
-    {
-      "dependencies": {
-        "@forge/kvs": "^2.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
-    - source: '@forge/kvs'
+  "{\n  \"dependencies\": {\n    \"@forge/kvs\": \"^2.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
+    - source: "@forge/kvs"
       style: primary
       start: 27
       end: 37
@@ -55,13 +39,8 @@ snapshots:
       style: secondary
       start: 4
       end: 52
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -80,13 +59,48 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "upgrade": "forge install --upgrade --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"fence:upgrade\": \"fence-rider install --upgrade --site \\\"$FORGE_SITE\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "fence:upgrade": "fence-rider install --upgrade --site \"$FORGE_SITE\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 98
+    - source: |
+        {
+          "scripts": {
+            "fence:upgrade": "fence-rider install --upgrade --site \"$FORGE_SITE\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 99
+  "{\n  \"scripts\": {\n    \"forge-upgrade\": \"forge install --upgrade --site \\\"$FORGE_SITE\\\"\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "forge-upgrade": "forge install --upgrade --site \"$FORGE_SITE\""
+          }
+        }
+      style: primary
+      start: 0
+      end: 92
+    - source: |
+        {
+          "scripts": {
+            "forge-upgrade": "forge install --upgrade --site \"$FORGE_SITE\""
+          }
+        }
+      style: secondary
+      start: 0
+      end: 93
+  "{\n  \"scripts\": {\n    \"upgrade\": \"forge install --upgrade --site \\\"$FORGE_SITE\\\" --product \\\"$FORGE_PRODUCT\\\"\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -105,3 +119,14 @@ snapshots:
       style: secondary
       start: 0
       end: 116
+  "{\"scripts\": {\"forge:upgrade\": \"cmd=$(fence-rider register) && sh -c \\\"$cmd\\\" sh\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"forge:upgrade\": \"cmd=$(fence-rider register) && sh -c \\\"$cmd\\\" sh\"}}"
+      style: primary
+      start: 0
+      end: 82
+    - source: |
+        {"scripts": {"forge:upgrade": "cmd=$(fence-rider register) && sh -c \"$cmd\" sh"}}
+      style: secondary
+      start: 0
+      end: 83

@@ -18,11 +18,27 @@ valid:
       }
     }
 invalid:
+  # Known lifecycle commands must keep their role even under the expected name.
+  - |
+    {"scripts": {"forge:uninstall": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh"}}
   # Present under the wrong key name
   - |
     {
       "scripts": {
         "uninstall": "forge uninstall --site \"$FORGE_SITE\" --product \"$FORGE_PRODUCT\""
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge-uninstall": "forge uninstall --site \"$FORGE_SITE\""
+      }
+    }
+  # Misnamed Fence Rider (recognized command under wrong role key)
+  - |
+    {
+      "scripts": {
+        "fence:uninstall": "fence-rider uninstall --site \"$FORGE_SITE\""
       }
     }
   # Missing entirely, regardless of dependencies present

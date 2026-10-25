@@ -18,11 +18,27 @@ valid:
       }
     }
 invalid:
+  # Known lifecycle commands must keep their role even under the expected name.
+  - |
+    {"scripts": {"forge:register": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh"}}
   # Present under the wrong key name
   - |
     {
       "scripts": {
         "register": "forge register"
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge-register": "forge register"
+      }
+    }
+  # Misnamed Fence Rider (recognized command under wrong role key)
+  - |
+    {
+      "scripts": {
+        "fence:register": "fence-rider register"
       }
     }
   # Missing entirely, regardless of dependencies present

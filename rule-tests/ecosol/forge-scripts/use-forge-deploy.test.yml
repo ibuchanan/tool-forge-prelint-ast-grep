@@ -24,6 +24,9 @@ valid:
       }
     }
 invalid:
+  # Known lifecycle commands must keep their role even under the expected name.
+  - |
+    {"scripts": {"forge:deploy": "cmd=$(fence-rider uninstall) && sh -c \"$cmd\" sh"}}
   # Present under the wrong key name
   - |
     {

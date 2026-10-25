@@ -2,40 +2,59 @@ id: use-forge-uninstall
 language: Json
 severity: info
 message: >
-  Add or rename this wrapper script as `forge:uninstall` for `forge uninstall`.
+  Add a `forge:uninstall` script with uninstall command text; keep other lifecycle roles under their own names.
+
 note: >
-  A `forge:` namespace keeps Forge CLI wrapper scripts
-  discoverable by a predictable name.
-  Pair this naming convention with `use-fence-rider-for-forge-uninstall`
-  for the ecosol configuration-resolution workflow.
-  This rule assumes package.json belongs to a Forge app: in a monorepo, a
-  workspace root or an internal shared library's package.json will also
-  match — even one that imports @forge packages without being deployable
-  itself. manifest.yml is the real signal for "is this a Forge app," and
-  ast-grep can't check whether that file exists, so scope the scan to your
-  Forge app directories rather than the whole monorepo.
-  Forge CLI uninstall reference:
-  https://developer.atlassian.com/platform/forge/cli-reference/uninstall/
+  Drop Calf maintains forge:uninstall as a guarded Fence Rider uninstall command. Direct Forge uninstall text also satisfies this naming check; the separate use-fence-rider-for-forge-uninstall rule checks the configuration workflow. Only a string directly under root scripts satisfies presence. Recognizable uninstall commands under other script names are also reported. This is a bounded text check, not shell parsing: echoes, quoting, extra commands, forwarded flags and successful execution are not validated. Suppress for an intentionally maintained external helper or alternative workflow. This rule assumes package.json belongs to a Forge app: in a monorepo, a workspace root or an internal shared library's package.json will also match — even one that imports @forge packages without being deployable itself. manifest.yml is the real signal for "is this a Forge app," and ast-grep can't check whether that file exists, so scope the scan to your Forge app directories rather than the whole monorepo. Forge CLI uninstall reference: https://developer.atlassian.com/platform/forge/cli-reference/uninstall/ https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/secrets.ts
+
 rule:
   any:
-    - all:
-        - kind: pair
-          regex: 'forge uninstall\b'
+    - kind: pair
+      has:
+        field: value
+        kind: string
+        regex: '(^|[\s"'';&|(])(forge|fence-rider)[ \t]+uninstall([\s"'';&|)]|$)'
+      not:
+        has:
+          field: key
+          regex: '^"forge:uninstall"$'
+      inside:
+        kind: object
+        inside:
+          kind: pair
+          has:
+            field: key
+            regex: '^"scripts"$'
           inside:
-            stopBy: end
-            kind: pair
-            regex: '"scripts"\s*:'
-        - not:
-            regex: '^"forge:uninstall"\s*:'
-    - all:
-        - kind: object
+            kind: object
+            inside:
+              kind: document
+    - kind: object
+      inside:
+        kind: document
+      not:
+        has:
+          stopBy: end
+          kind: pair
+          has:
+            field: key
+            regex: '^"forge:uninstall"$'
+          all:
+            - has:
+                field: value
+                kind: string
+                regex: '(^|[\s"'';&|(])(forge|fence-rider)[ \t]+uninstall([\s"'';&|)]|$)'
           inside:
-            kind: document
-        - not:
-            has:
-              stopBy: end
+            kind: object
+            inside:
               kind: pair
-              regex: '"forge:uninstall"\s*:'
+              has:
+                field: key
+                regex: '^"scripts"$'
+              inside:
+                kind: object
+                inside:
+                  kind: document
 files:
   - "**/package.json"
 ignores:
@@ -44,11 +63,13 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: ["capability:secrets"]
   references:
-    ["https://developer.atlassian.com/platform/forge/cli-reference/uninstall/"]
+    - https://developer.atlassian.com/platform/forge/cli-reference/uninstall/
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/secrets.ts
   category: forge-scripts
   precision: medium
   impact: low
-  impact-rationale: Forge documents the command's operation, not a mandatory package-script name. Missing the team's forge namespace creates discoverability and maintenance friction; it does not itself select the wrong app, grant consent, expose a secret or execute remote changes.
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests cover named/misnamed uninstall wrappers and missing scripts. Descendant-key presence does not prove scripts placement or implementation, and removal may intentionally use a separate controlled workflow. Those contextual distinctions and shell quoting are assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-uninstall.test.yml (valid/invalid) and rule-tests/__snapshots__/use-forge-uninstall-snapshot.yml."
+  impact-rationale: The pinned capability maintains a predictable Forge lifecycle entrypoint. Genuine drift impedes discoverability and maintenance; matching command text proves neither execution nor remote targets, consent or secret handling. Bounded workflow friction warrants low impact.
+  precision-rationale: "Tests cover direct and guarded uninstall command text, misnamed keys, missing scripts and wrong lifecycle roles. Root script placement and string shape are checked; shell interpretation, inert quoted mentions, additional commands, equivalent helpers and deployable app identity remain assessment gaps. Evidence: rule-tests/ecosol/forge-scripts/use-forge-uninstall.test.yml and rule-tests/__snapshots__/use-forge-uninstall-snapshot.yml."

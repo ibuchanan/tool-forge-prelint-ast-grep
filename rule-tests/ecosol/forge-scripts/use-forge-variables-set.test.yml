@@ -14,6 +14,20 @@ valid:
         "forge:variables:set": "node scripts/forge-vars-from-secretspec.js"
       }
     }
+  # Bun helper script is also accepted
+  - |
+    {
+      "scripts": {
+        "forge:variables:set": "bun scripts/forge-vars-from-secretspec.js"
+      }
+    }
+  # Fence Rider wrapper is accepted
+  - |
+    {
+      "scripts": {
+        "forge:variables:set": "fence-rider variables"
+      }
+    }
   # Dependencies are irrelevant now — this ruleset assumes it only ever runs
   # against a Forge app
   - |
@@ -26,11 +40,27 @@ valid:
       }
     }
 invalid:
+  # Known lifecycle commands must keep their role even under the expected name.
+  - |
+    {"scripts": {"forge:variables:set": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh"}}
   # Present under the wrong key name
   - |
     {
       "scripts": {
         "variables:set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  - |
+    {
+      "scripts": {
+        "forge-variables-set": "forge variables set --environment \"$FORGE_ENVIRONMENT\""
+      }
+    }
+  # Misnamed Fence Rider (recognized command under wrong role key)
+  - |
+    {
+      "scripts": {
+        "fence:variables:set": "fence-rider variables set --environment \"$FORGE_ENVIRONMENT\""
       }
     }
   # The separate encrypted-variant naming is now folded into forge:variables:set

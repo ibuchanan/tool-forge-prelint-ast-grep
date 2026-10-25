@@ -1,15 +1,7 @@
 id: use-forge-register
 snapshots:
-  ? |
-    {
-      "dependencies": {
-        "@forge/api": "^4.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"dependencies\": {\n    \"@forge/api\": \"^4.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "dependencies": {
@@ -34,17 +26,9 @@ snapshots:
       style: secondary
       start: 0
       end: 94
-  ? |
-    {
-      "dependencies": {
-        "@forge/events": "^3.0.0"
-      },
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
-    - source: '@forge/events'
+  "{\n  \"dependencies\": {\n    \"@forge/events\": \"^3.0.0\"\n  },\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
+    - source: "@forge/events"
       style: primary
       start: 27
       end: 40
@@ -55,13 +39,8 @@ snapshots:
       style: secondary
       start: 4
       end: 55
-  ? |
-    {
-      "scripts": {
-        "build": "tsc"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"build\": \"tsc\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -80,13 +59,48 @@ snapshots:
       style: secondary
       start: 0
       end: 42
-  ? |
-    {
-      "scripts": {
-        "register": "forge register"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"fence:register\": \"fence-rider register\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "fence:register": "fence-rider register"
+          }
+        }
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        {
+          "scripts": {
+            "fence:register": "fence-rider register"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 68
+  "{\n  \"scripts\": {\n    \"forge-register\": \"forge register\"\n  }\n}\n":
+    labels:
+    - source: |-
+        {
+          "scripts": {
+            "forge-register": "forge register"
+          }
+        }
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {
+          "scripts": {
+            "forge-register": "forge register"
+          }
+        }
+      style: secondary
+      start: 0
+      end: 62
+  "{\n  \"scripts\": {\n    \"register\": \"forge register\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -105,3 +119,14 @@ snapshots:
       style: secondary
       start: 0
       end: 56
+  "{\"scripts\": {\"forge:register\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"forge:register\": \"cmd=$(fence-rider deploy) && sh -c \\\"$cmd\\\" sh\"}}"
+      style: primary
+      start: 0
+      end: 81
+    - source: |
+        {"scripts": {"forge:register": "cmd=$(fence-rider deploy) && sh -c \"$cmd\" sh"}}
+      style: secondary
+      start: 0
+      end: 82
