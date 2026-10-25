@@ -49,3 +49,4 @@ echo "Both Biome config formats produced the expected finding."
 
 sh scripts/check-security-fixtures.sh
 bash scripts/check-scope-fixtures.sh
+bash scripts/check-page-title-fixtures.sh

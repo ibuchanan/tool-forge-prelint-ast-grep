@@ -2,17 +2,23 @@ id: review-duplicate-page-title
 language: Tsx
 severity: hint
 message: >
-  This heading duplicates the page title Forge already renders from the module's
-  `title` in manifest.yml.
+  This heading may repeat the host-rendered title; compare it with the module title.
 note: >
-  Forge page-type modules (global pages, project pages, admin pages, and similar)
-  display the module's `title` from manifest.yml in the page chrome automatically.
-  An xlarge/xxlarge <Heading> repeating that title is a common duplicate-title
-  pattern, especially in coding-agent-generated Forge UI. Compare this heading
-  against the module's `title` in manifest.yml and remove it if it repeats the
-  title, or use a smaller heading size if it serves a different purpose.
-  See the Forge manifest modules reference:
-  https://developer.atlassian.com/platform/forge/manifest-reference/modules/
+  Review xlarge/xxlarge Heading elements against the module's title in manifest.yml
+  and the rendered page. Host headers depend on the module and layout; not every
+  Forge surface displays a title. Remove a heading only when it redundantly
+  repeats that host title. Keep distinct section headings and useful structure;
+  do not shrink text merely to silence this hint. A single source heading can
+  repeat host chrome, while a distinct large section heading can still match.
+  This single-file heuristic cannot compare manifest titles or rendered UI.
+  It skips direct local function, class and lexical Heading declarations in an
+  enclosing program or block, but does not resolve imports, aliases, wrappers,
+  parameters or other bindings. Unresolved Heading names remain review candidates.
+  Coverage is frontend TSX only: native HTML, JSX files and Custom UI outside
+  frontend are not analyzed. Dynamic/computed sizes are not evaluated.
+  See the layout guidance and Heading reference:
+  https://developer.atlassian.com/platform/forge/jira-full-page-modules/
+  https://developer.atlassian.com/platform/forge/ui-kit/components/heading/
 rule:
   all:
     - kind: jsx_element
@@ -25,7 +31,27 @@ rule:
         field: open_tag
         has:
           kind: jsx_attribute
-          regex: 'size\s*=\s*"x?xlarge"'
+          regex: '^size\s*=\s*(["'']x?xlarge["'']|\{\s*["'']x?xlarge["'']\s*\})$'
+    - not:
+        inside:
+          stopBy: end
+          any:
+            - kind: program
+            - kind: statement_block
+          has:
+            any:
+              - any:
+                  - kind: function_declaration
+                  - kind: class_declaration
+                has:
+                  field: name
+                  regex: "^Heading$"
+              - kind: lexical_declaration
+                has:
+                  kind: variable_declarator
+                  has:
+                    field: name
+                    regex: "^Heading$"
 files:
   - "**/frontend/**"
 ignores:
@@ -35,7 +61,17 @@ ignores:
   - "**/specs/**"
 metadata:
   precision: low
-  precision-rationale: "Tests distinguish xlarge/xxlarge Heading elements from smaller headings and Text. The matcher never reads module title, heading text or module type; legitimate large section headings routinely match. Cross-file duplication and component identity remain assessment gaps. Evidence: rule-tests/recommended/frontend-ui/review-duplicate-page-title.test.yml (valid/invalid cases) and rule-tests/__snapshots__/review-duplicate-page-title-snapshot.yml."
+  precision-rationale: >-
+    Literal xlarge/xxlarge Heading attributes are review candidates, not proven
+    duplicates. Tests cover both quote styles, braced string literals, attribute
+    order and whitespace, smaller headings, lookalikes, direct local function,
+    lexical and class bindings, and sibling-scope isolation. Distinct large
+    sections still match; module type, manifest title, rendered chrome, import
+    aliases, wrappers and other bindings are unresolved. Low precision remains
+    appropriate. Evidence: rule-tests/recommended/frontend-ui/review-duplicate-page-title.test.yml,
+    rule-tests/__snapshots__/review-duplicate-page-title-snapshot.yml and
+    scripts/check-page-title-fixtures.sh; real-file routing is exercised by
+    scripts/check-scope-fixtures.sh.
   impact: low
   impact-rationale: A genuinely repeated module title adds visual clutter and confusing heading hierarchy. Forge modules define page titles, but a large heading alone does not establish duplication or accessibility noncompliance; removing it without comparison may remove useful structure.
   scope-profile:
@@ -43,5 +79,7 @@ metadata:
     - tests
   category: frontend-ui
   references:
-    - https://developer.atlassian.com/platform/forge/manifest-reference/modules/
+    - https://developer.atlassian.com/platform/forge/jira-full-page-modules/
+    - https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-admin-page/
+    - https://developer.atlassian.com/platform/forge/ui-kit/components/heading/
     - https://www.w3.org/WAI/tutorials/page-structure/headings/

@@ -2,10 +2,58 @@ id: review-duplicate-page-title
 valid:
   - '<Heading size="medium">Section title</Heading>'
   - "<Text>Just text</Text>"
+  - "<Heading size={'medium'}>Section title</Heading>"
+  - '<Heading size="large">Section title</Heading>'
+  # An explicit h1 alone is not a new candidate policy.
+  - '<Heading as="h1" size="medium">Page heading</Heading>'
+  - "<h1>Native HTML is outside this UI Kit rule</h1>"
+  - '<Heading data-size="xlarge">Attribute lookalike</Heading>'
+  - |
+    <Heading subtitle={'size="xlarge"'}>Attribute text</Heading>
+  - '<Heading size="xxxlarge">Value lookalike</Heading>'
+  - "<Heading size={pageSize}>Dynamic size</Heading>"
+  - "<Heading size={'x' + 'large'}>Computed size</Heading>"
+  - '<OtherHeading size="xlarge">Other component</OtherHeading>'
+  # A same-scope local function is not a Forge UI Kit import.
+  - |
+    function Heading(props) { return <h2>{props.children}</h2>; }
+    <Heading size="xlarge">Local section</Heading>
+  # A lexical binding in the enclosing function also identifies a local component.
+  - |
+    function Panel() {
+      const Heading = ({ children }) => <h2>{children}</h2>;
+      return <Heading size="xxlarge">Local section</Heading>;
+    }
+  - |
+    class Heading extends React.Component { render() { return <h2>Local</h2>; } }
+    <Heading size="xlarge">Local section</Heading>
 invalid:
-  # page-level heading duplicating the manifest title
+  # Candidate page heading; duplication still needs comparison with host chrome.
+  - "<Heading size='xlarge'>My App</Heading>"
   - '<Heading size="xlarge">My App</Heading>'
+  # Equivalent literal expression value, with the size attribute after another prop.
+  - '<Heading id="title" size={"xlarge"}>My App</Heading>'
+  - "<Heading size={'xxlarge'} id='title'>My App</Heading>"
+  - |
+    <Heading
+      id="title"
+      size = { 'xlarge' }
+    >My App</Heading>
+  - "<Heading size='xxlarge'>My App</Heading>"
   # xxlarge variant
   - '<Heading size="xxlarge">My App</Heading>'
   # size is not the first attribute
   - '<Heading as="h1" size="xlarge">My App</Heading>'
+  - |
+    import { Heading } from '@forge/react';
+    export const Page = () => <Heading size="xlarge">Configure</Heading>;
+  # Known false positive: a distinct large section still needs manual review.
+  - '<Heading size="xlarge">Connection history</Heading>'
+  # A local component in a sibling scope must not suppress this imported Heading.
+  - |
+    import { Heading } from '@forge/react';
+    function OtherPanel() {
+      const Heading = ({ children }) => <h2>{children}</h2>;
+      return <Heading size="medium">Local</Heading>;
+    }
+    export const Page = () => <Heading size="xxlarge">Configure</Heading>;

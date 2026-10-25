@@ -1,5 +1,31 @@
 id: review-duplicate-page-title
 snapshots:
+  "<Heading\n  id=\"title\"\n  size = { 'xlarge' }\n>My App</Heading>\n":
+    labels:
+    - source: |-
+        <Heading
+          id="title"
+          size = { 'xlarge' }
+        >My App</Heading>
+      style: primary
+      start: 0
+      end: 61
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: size = { 'xlarge' }
+      style: secondary
+      start: 24
+      end: 43
+    - source: size = { 'xlarge' }
+      style: secondary
+      start: 24
+      end: 43
   <Heading as="h1" size="xlarge">My App</Heading>:
     labels:
     - source: <Heading as="h1" size="xlarge">My App</Heading>
@@ -22,6 +48,50 @@ snapshots:
       style: secondary
       start: 17
       end: 30
+  "<Heading id=\"title\" size={\"xlarge\"}>My App</Heading>":
+    labels:
+    - source: <Heading id="title" size={"xlarge"}>My App</Heading>
+      style: primary
+      start: 0
+      end: 52
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: size={"xlarge"}
+      style: secondary
+      start: 20
+      end: 35
+    - source: size={"xlarge"}
+      style: secondary
+      start: 20
+      end: 35
+  <Heading size="xlarge">Connection history</Heading>:
+    labels:
+    - source: <Heading size="xlarge">Connection history</Heading>
+      style: primary
+      start: 0
+      end: 51
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: size="xlarge"
+      style: secondary
+      start: 9
+      end: 22
+    - source: size="xlarge"
+      style: secondary
+      start: 9
+      end: 22
   <Heading size="xlarge">My App</Heading>:
     labels:
     - source: <Heading size="xlarge">My App</Heading>
@@ -66,3 +136,113 @@ snapshots:
       style: secondary
       start: 9
       end: 23
+  <Heading size='xlarge'>My App</Heading>:
+    labels:
+    - source: <Heading size='xlarge'>My App</Heading>
+      style: primary
+      start: 0
+      end: 39
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: size='xlarge'
+      style: secondary
+      start: 9
+      end: 22
+    - source: size='xlarge'
+      style: secondary
+      start: 9
+      end: 22
+  <Heading size='xxlarge'>My App</Heading>:
+    labels:
+    - source: <Heading size='xxlarge'>My App</Heading>
+      style: primary
+      start: 0
+      end: 40
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: size='xxlarge'
+      style: secondary
+      start: 9
+      end: 23
+    - source: size='xxlarge'
+      style: secondary
+      start: 9
+      end: 23
+  "<Heading size={'xxlarge'} id='title'>My App</Heading>":
+    labels:
+    - source: <Heading size={'xxlarge'} id='title'>My App</Heading>
+      style: primary
+      start: 0
+      end: 53
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: size={'xxlarge'}
+      style: secondary
+      start: 9
+      end: 25
+    - source: size={'xxlarge'}
+      style: secondary
+      start: 9
+      end: 25
+  "import { Heading } from '@forge/react';\nexport const Page = () => <Heading size=\"xlarge\">Configure</Heading>;\n":
+    labels:
+    - source: <Heading size="xlarge">Configure</Heading>
+      style: primary
+      start: 66
+      end: 108
+    - source: Heading
+      style: secondary
+      start: 67
+      end: 74
+    - source: Heading
+      style: secondary
+      start: 67
+      end: 74
+    - source: size="xlarge"
+      style: secondary
+      start: 75
+      end: 88
+    - source: size="xlarge"
+      style: secondary
+      start: 75
+      end: 88
+  "import { Heading } from '@forge/react';\nfunction OtherPanel() {\n  const Heading = ({ children }) => <h2>{children}</h2>;\n  return <Heading size=\"medium\">Local</Heading>;\n}\nexport const Page = () => <Heading size=\"xxlarge\">Configure</Heading>;\n":
+    labels:
+    - source: <Heading size="xxlarge">Configure</Heading>
+      style: primary
+      start: 198
+      end: 241
+    - source: Heading
+      style: secondary
+      start: 199
+      end: 206
+    - source: Heading
+      style: secondary
+      start: 199
+      end: 206
+    - source: size="xxlarge"
+      style: secondary
+      start: 207
+      end: 221
+    - source: size="xxlarge"
+      style: secondary
+      start: 207
+      end: 221
