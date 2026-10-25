@@ -114,6 +114,52 @@ for variant in generated missing legacy; do
 done
 echo "Generated changelog command and package mutations produced the expected findings."
 
+# The stored generated package predates release; apply only the pinned package wiring.
+# These are static inputs: never invoke the helper or any release checks.
+release_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_release.XXXXXX")
+jq '.scripts.release = "bash scripts/release.sh" |
+  .scripts["release:check"] = "npm run test && npm run typecheck"' \
+  "$DROP_CALF_PACKAGE" >"$release_work/generated.json"
+for variant in generated owner-checks missing-release missing-check inert-release inert-check; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  owner-checks) edit='.scripts["release:check"] = "npm run lint && npm run security:audit && npm run typecheck"' ;;
+  missing-release)
+    edit='del(.scripts.release)'
+    expected='require-release-script'
+    ;;
+  missing-check)
+    edit='del(.scripts["release:check"])'
+    expected='require-release-check-script'
+    ;;
+  inert-release)
+    edit='.scripts.release = "echo bash scripts/release.sh"'
+    expected='require-release-script'
+    ;;
+  inert-check)
+    edit='.scripts["release:check"] = "echo checks passed"'
+    expected='require-release-check-script'
+    ;;
+  esac
+  jq "$edit" "$release_work/generated.json" >"$release_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^require-release(-check)?-script$' --include-metadata --json=compact "$release_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    (map(.ruleId) | sort) == (if $expected == "" then [] else [$expected] end) and
+    all(.[]; .severity == "info" and (.metadata.tags | index("capability:release") != null))
+  ' >/dev/null; then
+    printf 'Unexpected release findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+  # Advisory conventions must not turn the consumer error-only gate into a release test.
+  gate=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^require-release(-check)?-script$' \
+    --min-severity error --json=compact "$release_work/package.json")
+  printf '%s\n' "$gate" | jq -e 'type == "array" and length == 0' >/dev/null
+done
+echo "Pinned release package wiring and static mutations produced the expected findings."
+
 # Node checks root engines policy, not seeded type versions or runtime selection.
 node_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_node.XXXXXX")
 for variant in generated refreshed-types removed-types nested-engines root-engines; do

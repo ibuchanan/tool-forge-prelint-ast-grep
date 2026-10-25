@@ -1,0 +1,55 @@
+id: require-release-script
+language: Json
+severity: info
+message: >
+  Set `scripts.release` to `bash scripts/release.sh` to invoke the maintained release helper explicitly.
+note: >
+  Drop Calf maintains this explicit release entrypoint and its Bash helper.
+  Direct bash invocation accepts ordinary spaces and an optional ./ path prefix,
+  without arguments, quoting, wrappers, environment assignments or chaining.
+  This bounded package-text check does not prove helper existence, check execution,
+  worktree cleanliness or atomic publication, and never runs a release.
+  Scope this ecosol convention to Forge-app package.json files; review and suppress
+  equivalent owner-managed wrappers rather than treating them as unsafe releases.
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/release.ts
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      has:
+        field: key
+        regex: '^"scripts"$'
+      all:
+        - has:
+            field: value
+            kind: object
+            has:
+              kind: pair
+              has:
+                field: key
+                regex: '^"release"$'
+              all:
+                - has:
+                    field: value
+                    kind: string
+                    regex: '^"[ \t]*bash[ \t]+(?:\./)?scripts/release\.sh[ \t]*"$'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  references:
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/release.ts
+  tags: [capability:release]
+  category: package-scripts
+  precision: medium
+  precision-rationale: "Bounded direct-command check; equivalent wrappers and escaped JSON need review. Script text does not establish execution or release safety. Evidence: rule-tests/ecosol/package-scripts/require-release-script.test.yml and rule-tests/__snapshots__/require-release-script-snapshot.yml."
+  impact: low
+  impact-rationale: A missing preferred entrypoint needs bounded developer-workflow repair, not proof of failed checks or unsafe publication.
+  scope-profile: [package-json, tests]

@@ -25,6 +25,8 @@
     "lint:check:typecheck": "npm run typecheck",
     "lint:fix": "biome lint --write .",
     "prepare": "lefthook install",
+    "release": "bash scripts/release.sh",
+    "release:check": "npm run test && npm run typecheck",
     "size:check": "npm run build && size-limit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

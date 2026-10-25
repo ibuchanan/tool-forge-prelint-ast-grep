@@ -1,0 +1,244 @@
+id: require-release-check-script
+snapshots:
+  "{ \"name\": \"forge-app\" }\n":
+    labels:
+    - source: "{ \"name\": \"forge-app\" }"
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  "{ \"other\": { \"scripts\": { \"release:check\": \"npm test\" } } }\n":
+    labels:
+    - source: "{ \"other\": { \"scripts\": { \"release:check\": \"npm test\" } } }"
+      style: primary
+      start: 0
+      end: 59
+    - source: |
+        { "other": { "scripts": { "release:check": "npm test" } } }
+      style: secondary
+      start: 0
+      end: 60
+  "{ \"scripts\": [{ \"release:check\": \"npm test\" }] }\n":
+    labels:
+    - source: "{ \"scripts\": [{ \"release:check\": \"npm test\" }] }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": [{ "release:check": "npm test" }] }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": null }\n":
+    labels:
+    - source: "{ \"scripts\": null }"
+      style: primary
+      start: 0
+      end: 19
+    - source: |
+        { "scripts": null }
+      style: secondary
+      start: 0
+      end: 20
+  "{ \"scripts\": { \"nested\": { \"release:check\": \"npm test\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"nested\": { \"release:check\": \"npm test\" } } }"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        { "scripts": { "nested": { "release:check": "npm test" } } }
+      style: secondary
+      start: 0
+      end: 61
+  "{ \"scripts\": { \"release-check\": \"npm test\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release-check\": \"npm test\" } }"
+      style: primary
+      start: 0
+      end: 46
+    - source: |
+        { "scripts": { "release-check": "npm test" } }
+      style: secondary
+      start: 0
+      end: 47
+  "{ \"scripts\": { \"release:check\": \"   \" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"   \" } }"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        { "scripts": { "release:check": "   " } }
+      style: secondary
+      start: 0
+      end: 42
+  "{ \"scripts\": { \"release:check\": \"\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"\" } }"
+      style: primary
+      start: 0
+      end: 38
+    - source: |
+        { "scripts": { "release:check": "" } }
+      style: secondary
+      start: 0
+      end: 39
+  "{ \"scripts\": { \"release:check\": \"# npm test\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"# npm test\" } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "release:check": "# npm test" } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"release:check\": \":\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \":\" } }"
+      style: primary
+      start: 0
+      end: 39
+    - source: |
+        { "scripts": { "release:check": ":" } }
+      style: secondary
+      start: 0
+      end: 40
+  "{ \"scripts\": { \"release:check\": \"Not yet implemented\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"Not yet implemented\" } }"
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        { "scripts": { "release:check": "Not yet implemented" } }
+      style: secondary
+      start: 0
+      end: 58
+  "{ \"scripts\": { \"release:check\": \"TODO\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"TODO\" } }"
+      style: primary
+      start: 0
+      end: 42
+    - source: |
+        { "scripts": { "release:check": "TODO" } }
+      style: secondary
+      start: 0
+      end: 43
+  "{ \"scripts\": { \"release:check\": \"echo checks passed\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"echo checks passed\" } }"
+      style: primary
+      start: 0
+      end: 56
+    - source: |
+        { "scripts": { "release:check": "echo checks passed" } }
+      style: secondary
+      start: 0
+      end: 57
+  "{ \"scripts\": { \"release:check\": \"exit 0\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"exit 0\" } }"
+      style: primary
+      start: 0
+      end: 44
+    - source: |
+        { "scripts": { "release:check": "exit 0" } }
+      style: secondary
+      start: 0
+      end: 45
+  "{ \"scripts\": { \"release:check\": \"false\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"false\" } }"
+      style: primary
+      start: 0
+      end: 43
+    - source: |
+        { "scripts": { "release:check": "false" } }
+      style: secondary
+      start: 0
+      end: 44
+  "{ \"scripts\": { \"release:check\": \"placeholder\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"placeholder\" } }"
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        { "scripts": { "release:check": "placeholder" } }
+      style: secondary
+      start: 0
+      end: 50
+  "{ \"scripts\": { \"release:check\": \"printf 'All good'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"printf 'All good'\" } }"
+      style: primary
+      start: 0
+      end: 55
+    - source: |
+        { "scripts": { "release:check": "printf 'All good'" } }
+      style: secondary
+      start: 0
+      end: 56
+  "{ \"scripts\": { \"release:check\": \"true\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": \"true\" } }"
+      style: primary
+      start: 0
+      end: 42
+    - source: |
+        { "scripts": { "release:check": "true" } }
+      style: secondary
+      start: 0
+      end: 43
+  "{ \"scripts\": { \"release:check\": [\"npm test\"] } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": [\"npm test\"] } }"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        { "scripts": { "release:check": ["npm test"] } }
+      style: secondary
+      start: 0
+      end: 49
+  "{ \"scripts\": { \"release:check\": false } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": false } }"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        { "scripts": { "release:check": false } }
+      style: secondary
+      start: 0
+      end: 42
+  "{ \"scripts\": { \"release:check\": { \"command\": \"npm test\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:check\": { \"command\": \"npm test\" } } }"
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        { "scripts": { "release:check": { "command": "npm test" } } }
+      style: secondary
+      start: 0
+      end: 62
+  "{ \"scripts\": {} }\n":
+    labels:
+    - source: "{ \"scripts\": {} }"
+      style: primary
+      start: 0
+      end: 17
+    - source: |
+        { "scripts": {} }
+      style: secondary
+      start: 0
+      end: 18

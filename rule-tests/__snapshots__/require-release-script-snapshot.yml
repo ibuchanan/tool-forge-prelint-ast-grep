@@ -1,0 +1,244 @@
+id: require-release-script
+snapshots:
+  "{ \"name\": \"forge-app\" }\n":
+    labels:
+    - source: "{ \"name\": \"forge-app\" }"
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  "{ \"other\": { \"scripts\": { \"release\": \"bash scripts/release.sh\" } } }\n":
+    labels:
+    - source: "{ \"other\": { \"scripts\": { \"release\": \"bash scripts/release.sh\" } } }"
+      style: primary
+      start: 0
+      end: 68
+    - source: |
+        { "other": { "scripts": { "release": "bash scripts/release.sh" } } }
+      style: secondary
+      start: 0
+      end: 69
+  "{ \"scripts\": [{ \"release\": \"bash scripts/release.sh\" }] }\n":
+    labels:
+    - source: "{ \"scripts\": [{ \"release\": \"bash scripts/release.sh\" }] }"
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        { "scripts": [{ "release": "bash scripts/release.sh" }] }
+      style: secondary
+      start: 0
+      end: 58
+  "{ \"scripts\": null }\n":
+    labels:
+    - source: "{ \"scripts\": null }"
+      style: primary
+      start: 0
+      end: 19
+    - source: |
+        { "scripts": null }
+      style: secondary
+      start: 0
+      end: 20
+  "{ \"scripts\": { \"nested\": { \"release\": \"bash scripts/release.sh\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"nested\": { \"release\": \"bash scripts/release.sh\" } } }"
+      style: primary
+      start: 0
+      end: 69
+    - source: |
+        { "scripts": { "nested": { "release": "bash scripts/release.sh" } } }
+      style: secondary
+      start: 0
+      end: 70
+  "{ \"scripts\": { \"release\": \"\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"\" } }"
+      style: primary
+      start: 0
+      end: 32
+    - source: |
+        { "scripts": { "release": "" } }
+      style: secondary
+      start: 0
+      end: 33
+  "{ \"scripts\": { \"release\": \"bash -c 'echo scripts/release.sh'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"bash -c 'echo scripts/release.sh'\" } }"
+      style: primary
+      start: 0
+      end: 65
+    - source: |
+        { "scripts": { "release": "bash -c 'echo scripts/release.sh'" } }
+      style: secondary
+      start: 0
+      end: 66
+  "{ \"scripts\": { \"release\": \"bash -n scripts/release.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"bash -n scripts/release.sh\" } }"
+      style: primary
+      start: 0
+      end: 58
+    - source: |
+        { "scripts": { "release": "bash -n scripts/release.sh" } }
+      style: secondary
+      start: 0
+      end: 59
+  "{ \"scripts\": { \"release\": \"bash scripts/other.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"bash scripts/other.sh\" } }"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        { "scripts": { "release": "bash scripts/other.sh" } }
+      style: secondary
+      start: 0
+      end: 54
+  "{ \"scripts\": { \"release\": \"bash scripts/release.sh && echo done\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"bash scripts/release.sh && echo done\" } }"
+      style: primary
+      start: 0
+      end: 68
+    - source: |
+        { "scripts": { "release": "bash scripts/release.sh && echo done" } }
+      style: secondary
+      start: 0
+      end: 69
+  "{ \"scripts\": { \"release\": \"bash scripts/release.sh --help\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"bash scripts/release.sh --help\" } }"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "scripts": { "release": "bash scripts/release.sh --help" } }
+      style: secondary
+      start: 0
+      end: 63
+  "{ \"scripts\": { \"release\": \"bash scripts/release.sh.bak\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"bash scripts/release.sh.bak\" } }"
+      style: primary
+      start: 0
+      end: 59
+    - source: |
+        { "scripts": { "release": "bash scripts/release.sh.bak" } }
+      style: secondary
+      start: 0
+      end: 60
+  "{ \"scripts\": { \"release\": \"echo 'bash scripts/release.sh'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"echo 'bash scripts/release.sh'\" } }"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "scripts": { "release": "echo 'bash scripts/release.sh'" } }
+      style: secondary
+      start: 0
+      end: 63
+  "{ \"scripts\": { \"release\": \"echo Not implemented\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"echo Not implemented\" } }"
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        { "scripts": { "release": "echo Not implemented" } }
+      style: secondary
+      start: 0
+      end: 53
+  "{ \"scripts\": { \"release\": \"echo bash scripts/release.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"echo bash scripts/release.sh\" } }"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        { "scripts": { "release": "echo bash scripts/release.sh" } }
+      style: secondary
+      start: 0
+      end: 61
+  "{ \"scripts\": { \"release\": \"sh scripts/release.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"sh scripts/release.sh\" } }"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        { "scripts": { "release": "sh scripts/release.sh" } }
+      style: secondary
+      start: 0
+      end: 54
+  "{ \"scripts\": { \"release\": \"true # bash scripts/release.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": \"true # bash scripts/release.sh\" } }"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        { "scripts": { "release": "true # bash scripts/release.sh" } }
+      style: secondary
+      start: 0
+      end: 63
+  "{ \"scripts\": { \"release\": [\"bash scripts/release.sh\"] } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": [\"bash scripts/release.sh\"] } }"
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        { "scripts": { "release": ["bash scripts/release.sh"] } }
+      style: secondary
+      start: 0
+      end: 58
+  "{ \"scripts\": { \"release\": null } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": null } }"
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        { "scripts": { "release": null } }
+      style: secondary
+      start: 0
+      end: 35
+  "{ \"scripts\": { \"release\": { \"command\": \"bash scripts/release.sh\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release\": { \"command\": \"bash scripts/release.sh\" } } }"
+      style: primary
+      start: 0
+      end: 70
+    - source: |
+        { "scripts": { "release": { "command": "bash scripts/release.sh" } } }
+      style: secondary
+      start: 0
+      end: 71
+  "{ \"scripts\": { \"release:prepare\": \"bash scripts/release.sh\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"release:prepare\": \"bash scripts/release.sh\" } }"
+      style: primary
+      start: 0
+      end: 63
+    - source: |
+        { "scripts": { "release:prepare": "bash scripts/release.sh" } }
+      style: secondary
+      start: 0
+      end: 64
+  "{ \"scripts\": {} }\n":
+    labels:
+    - source: "{ \"scripts\": {} }"
+      style: primary
+      start: 0
+      end: 17
+    - source: |
+        { "scripts": {} }
+      style: secondary
+      start: 0
+      end: 18

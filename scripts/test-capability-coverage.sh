@@ -48,6 +48,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "changelog"')
 }
 printf 'PASS: changelog regeneration entrypoint is discoverable\n'
 
+expected=$'release\timplemented\trequire-release-check-script,require-release-script'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "release"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: explicit release and owner validation entrypoints must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: explicit release and owner validation entrypoints are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.
