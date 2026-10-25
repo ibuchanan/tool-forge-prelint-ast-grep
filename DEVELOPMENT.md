@@ -77,6 +77,16 @@ To step through mismatches interactively:
 npm run test:interactive
 ```
 
+## Capability coverage
+
+The read-only `bash scripts/report-capability-coverage.sh` reports active tagged
+checks separately from unmapped conventions and reviewed unsupported results.
+The [capability coverage reference](docs/reference/capability-coverage.md) records
+status semantics, the Git ignore parser limitation, and Drop Calf's managed-block
+ownership. `bash scripts/test-capability-coverage.sh` checks the report and bounded
+native parser/routing evidence in the standard authoring suite. Zero findings on
+an unsupported file do not establish compliance.
+
 ## Adding or changing a rule
 
 The [rule-authoring policy](docs/reference/rule-authoring-policy.md) specifies

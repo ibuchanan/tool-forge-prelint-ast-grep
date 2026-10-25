@@ -42,6 +42,9 @@ capabilities:
   - todo
   - docs
   - git-hooks
+# Explicit unsupported dispositions, not missing mappings or inert rule tags.
+# Evidence and reconciliation ownership: docs/reference/capability-coverage.md
+capability-coverage-gaps: [gitignore]
 # Reviewed precision rows and impact columns; off is preserved outside the matrix.
 severity:
   low: { low: hint, medium: info, high: warning }
