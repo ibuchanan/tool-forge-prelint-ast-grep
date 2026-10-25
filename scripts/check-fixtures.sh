@@ -87,6 +87,34 @@ for variant in generated commonjs missing-type public missing-private owner-meta
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
 
+# OSS consumes catalog licensing; Node derives the independently checked package field.
+oss_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_oss.XXXXXX")
+for variant in generated catalog-license package-license; do
+  cp "$DROP_CALF_CATALOG" "$oss_work/catalog-info.yaml"
+  cp "$DROP_CALF_PACKAGE" "$oss_work/package.json"
+  expected=''
+  case "$variant" in
+  catalog-license)
+    yq -i '.metadata.annotations."forge-ranch/license" = "MIT"' "$oss_work/catalog-info.yaml"
+    expected='require-catalog-license-apache-2-0'
+    ;;
+  package-license)
+    jq '.license = "MIT"' "$DROP_CALF_PACKAGE" >"$oss_work/package.json"
+    expected='require-package-license-apache-2-0'
+    ;;
+  esac
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^require-(catalog|package)-license-apache-2-0$' \
+    --json=compact "$oss_work")
+  actual=$(printf '%s\n' "$findings" | jq -r '.[].ruleId' | sort)
+  if [ "$actual" != "$expected" ]; then
+    printf 'Unexpected OSS findings for %s: expected "%s", got "%s"\n' \
+      "$variant" "$expected" "$actual" >&2
+    exit 1
+  fi
+done
+echo "Generated OSS licensing inputs and independent mutations produced the expected findings."
+
 # Both Biome filenames must be parsed as JSON and checked by the same rule.
 for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/biome-invalid/biome.jsonc; do
   matches=$(ast-grep scan --config sgconfig.ecosol.yml \

@@ -203,3 +203,4 @@ rules/strict/triggers/prefer-trigger-filter.yml	manifest	include
 rules/ecosol/devtools/require-catalog-component-kind.yml	catalog	include
 rules/ecosol/devtools/require-catalog-user-owner.yml	catalog	include
 rules/ecosol/devtools/require-catalog-copyright-date.yml	catalog	include
+rules/ecosol/devtools/require-catalog-license-apache-2-0.yml	catalog	include

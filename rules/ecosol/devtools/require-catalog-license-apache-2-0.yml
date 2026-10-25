@@ -1,0 +1,91 @@
+id: require-catalog-license-apache-2-0
+language: Yaml
+severity: info
+message: Set `metadata.annotations.forge-ranch/license` to `Apache-2.0` for the pinned Drop Calf OSS templates.
+note: >
+  The selected Drop Calf OSS templates require Apache-2.0 from the catalog;
+  missing, empty or other license inputs prevent asset generation or update.
+  This is a catalog-producer/OSS-consumer convention, not generic Backstage
+  acceptance or a legal determination. Exclude this rule when using another
+  licensing/template convention; do not change licensing without owner approval.
+  Scope scans to intended app roots. Only existing literal catalog mappings are
+  checked; aliases, tags, block and escape-encoded scalars require native validation.
+  Missing documents, LICENSE equivalence and catalog/package/OWNER agreement
+  require Drop Calf reconciliation or manual review. Owner README prose is not checked.
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/oss.ts
+  https://backstage.io/docs/features/software-catalog/descriptor-format/#annotations-optional
+rule:
+  any:
+    - kind: block_mapping
+    - kind: flow_mapping
+  inside:
+    any:
+      - kind: block_node
+      - kind: flow_node
+    inside:
+      kind: document
+  not:
+    has:
+      all:
+        - has:
+            field: key
+            regex: '^(metadata|"metadata"|''metadata'')$'
+        - has:
+            field: value
+            has:
+              any:
+                - kind: block_mapping
+                - kind: flow_mapping
+              has:
+                all:
+                  - has:
+                      field: key
+                      regex: '^(annotations|"annotations"|''annotations'')$'
+                  - has:
+                      field: value
+                      has:
+                        any:
+                          - kind: block_mapping
+                          - kind: flow_mapping
+                        has:
+                          all:
+                            - has:
+                                field: key
+                                regex: '^(forge-ranch/license|"forge-ranch/license"|''forge-ranch/license'')$'
+                            - has:
+                                field: value
+                                regex: '^(Apache-2\.0|"Apache-2\.0"|''Apache-2\.0'')$'
+files:
+  - "**/catalog-info.yaml"
+ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
+  - "**/node_modules/**"
+  - "**/specs/**"
+metadata:
+  category: devtools
+  precision: high
+  precision-rationale: >
+    Direct root metadata, annotations and license pairs require the literal
+    Apache-2.0 string consumed by the pinned OSS templates, in block or flow YAML.
+    Missing, empty, wrong-type and nested/lookalike inputs cannot satisfy the check.
+    Evidence: rule-tests/ecosol/devtools/require-catalog-license-apache-2-0.test.yml.
+    Aliases, tags, block and escape-encoded scalars require native validation;
+    filename routing does not establish that this OSS convention was selected.
+  impact: low
+  impact-rationale: >
+    An unsupported catalog input stops local OSS asset generation/update before
+    writes. This is recoverable convention drift, not proof of invalid legal
+    documents, a release prohibition or a runtime security failure.
+  scope-profile: [unique]
+  scope-rationale: >
+    Only catalog-info.yaml supplies the pinned OSS consumer input; catalog-info.yml
+    and unrelated YAML filenames are excluded. No standard artifact selector names it.
+    Apply the shared baseline, retain test-local catalogs and build/vendor/fixture
+    directories, and scope caller scans to intended app roots. Tags do not detect apps.
+  # Catalog produces the annotation consumed by the selected OSS templates.
+  tags: [capability:catalog, capability:oss]
+  references:
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/oss.ts
+    - https://backstage.io/docs/features/software-catalog/descriptor-format/#annotations-optional
+    - https://www.apache.org/licenses/LICENSE-2.0

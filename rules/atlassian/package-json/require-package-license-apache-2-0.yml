@@ -18,7 +18,13 @@ rule:
   not:
     has:
       kind: pair
-      regex: '"license"\s*:\s*"Apache-2\.0"'
+      all:
+        - has:
+            field: key
+            regex: '^"license"$'
+        - has:
+            field: value
+            regex: '^"Apache-2\.0"$'
 files:
   - "**/package.json"
 ignores:
@@ -27,12 +33,14 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  # Node derives package licensing from the catalog annotation consumed by OSS.
+  tags: [capability:oss, capability:node]
   references:
     - https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#license
     - https://go.atlassian.com/credo-checklist-sample-app
   category: package-json
   precision: medium
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests accept Apache-2.0 and flag MIT or missing license, including private and express-only packages. The matcher reads a top-level pair but cannot establish that the package is an Atlassian OSS sample or compare LICENSE text. Applicability and legal approval are assessment gaps, not inferred from the filename. Evidence: rule-tests/atlassian/package-json/require-package-license-apache-2-0.test.yml (valid/invalid) and rule-tests/__snapshots__/require-package-license-apache-2-0-snapshot.yml."
+  precision-rationale: "Tests accept the literal root Apache-2.0 license and flag MIT, missing license and nested license lookalikes, including private and express-only packages. Explicit key/value field checks prevent nested declarations from satisfying the root policy. Escape-encoded keys/values require native validation. The matcher cannot establish that the package is an Atlassian OSS sample or compare LICENSE text. Applicability and legal approval are assessment gaps, not inferred from the filename. Evidence: rule-tests/atlassian/package-json/require-package-license-apache-2-0.test.yml (valid/invalid) and rule-tests/__snapshots__/require-package-license-apache-2-0-snapshot.yml."
   impact: medium
   impact-rationale: npm documents license declarations and the referenced sample-app credo supplies the organization convention. Genuine divergence in an approved sample can misstate downstream usage terms and block release until corrected; this is bounded compliance/release risk, not a security flaw or a legal determination.

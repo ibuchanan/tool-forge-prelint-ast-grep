@@ -19,7 +19,13 @@ valid:
         "@forge/api": "^8.0"
       }
     }
+  - '{"license": "Apache-2.0", "metadata": {"license": "MIT"}}'
 invalid:
+  - '{"metadata": {"license": "Apache-2.0"}}'
+  - '{"license": "MIT", "metadata": {"license": "Apache-2.0"}}'
+  - '{"license": {"license": "Apache-2.0"}}'
+  - '{"license": "Apache-2.0 OR MIT"}'
+  - '{"license": "Apache-2.0-extra"}'
   - |
     {
       "license": "MIT"

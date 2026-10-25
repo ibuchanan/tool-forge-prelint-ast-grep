@@ -198,3 +198,17 @@ if [[ $discovered != "$expected" ]]; then
   exit 1
 fi
 printf 'PASS: package-metadata discovery returns exactly the type and privacy rules\n'
+
+# Node derives the package license from the catalog input consumed by OSS.
+for capability in oss node; do
+  discovered=$(CAPABILITY="capability:$capability" yq -N -r 'select(strenv(CAPABILITY) == "capability:oss" or .id == "require-package-license-apache-2-0") | select((.metadata.tags // []) | contains([strenv(CAPABILITY)])) | .id' rules/*/*/*.yml | sort)
+  expected='require-package-license-apache-2-0'
+  if [[ $capability == oss ]]; then
+    expected=$'require-catalog-license-apache-2-0\nrequire-package-license-apache-2-0'
+  fi
+  if [[ $discovered != "$expected" ]]; then
+    printf 'FAIL: %s discovery expected:\n%s\nGot:\n%s\n' "$capability" "$expected" "$discovered" >&2
+    exit 1
+  fi
+  printf 'PASS: %s discovery returns the expected licensing policies\n' "$capability"
+done

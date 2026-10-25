@@ -1,0 +1,53 @@
+id: require-catalog-license-apache-2-0
+valid:
+  - "metadata: {annotations: {forge-ranch/license: Apache-2.0}}"
+  - '{metadata: {annotations: {forge-ranch/license: "Apache-2.0"}}}'
+  - "'metadata': {'annotations': {'forge-ranch/license': 'Apache-2.0'}}"
+  - |
+    metadata:
+      title: Owner-selected title
+      annotations:
+        forge-ranch/license: Apache-2.0 # selected OSS convention
+        forge-ranch/copyright-date: "1999-2001"
+    spec:
+      owner: user:custom/owner
+      lifecycle: production
+  - |
+    "metadata":
+      "annotations":
+        "forge-ranch/license": "Apache-2.0"
+  - "{metadata: {annotations: {forge-ranch/license: Apache-2.0, license: MIT}}, license: MIT}"
+invalid:
+  - "metadata: {annotations: {forge-ranch/license: MIT}}"
+  - "{}"
+  - "metadata: {}"
+  - "metadata: {annotations: {}}"
+  - 'metadata: {annotations: {forge-ranch/license: ""}}'
+  - 'metadata: {annotations: {forge-ranch/license: " "}}'
+  - 'metadata: {annotations: {forge-ranch/license: " Apache-2.0"}}'
+  - 'metadata: {annotations: {forge-ranch/license: "Apache-2.0 "}}'
+  - "metadata: {annotations: {forge-ranch/license: apache-2.0}}"
+  - "metadata: {annotations: {forge-ranch/license: Apache-2.0-or-later}}"
+  - 'metadata: {annotations: {forge-ranch/license: "Apache-2x0"}}'
+  - "metadata: {annotations: {forge-ranch/license: null}}"
+  - "metadata: {annotations: {forge-ranch/license: true}}"
+  - "metadata: {annotations: {forge-ranch/license: 42}}"
+  - "metadata: {annotations: {forge-ranch/license: []}}"
+  - "metadata: {annotations: {forge-ranch/license: {license: Apache-2.0}}}"
+  - "metadata: {annotations: {forge-ranch/license: [Apache-2.0]}}"
+  - "metadata: null"
+  - "metadata: {annotations: null}"
+  - "metadata: {annotations: [{forge-ranch/license: Apache-2.0}]}"
+  - "metadata: [{annotations: {forge-ranch/license: Apache-2.0}}]"
+  - "metadata: {forge-ranch/license: Apache-2.0}"
+  - "annotations: {forge-ranch/license: Apache-2.0}"
+  - "spec: {metadata: {annotations: {forge-ranch/license: Apache-2.0}}}"
+  - "metadata: {annotations: {nested: {forge-ranch/license: Apache-2.0}}}"
+  - "metadata: {annotations: {other/license: Apache-2.0}}"
+  - "metadata: {annotations: {forge-ranch/license-extra: Apache-2.0}}"
+  - "metadata: {annotations: {license: Apache-2.0}}"
+  - "metadata: {annotations: {forge-ranch/license: MIT, nested: {forge-ranch/license: Apache-2.0}}}"
+  - |
+    metadata:
+      annotations:
+        forge-ranch/license:

@@ -1,0 +1,431 @@
+id: require-catalog-license-apache-2-0
+snapshots:
+  "annotations: {forge-ranch/license: Apache-2.0}":
+    labels:
+    - source: "annotations: {forge-ranch/license: Apache-2.0}"
+      style: primary
+      start: 0
+      end: 46
+    - source: "annotations: {forge-ranch/license: Apache-2.0}"
+      style: secondary
+      start: 0
+      end: 46
+    - source: "annotations: {forge-ranch/license: Apache-2.0}"
+      style: secondary
+      start: 0
+      end: 46
+  "metadata:\n  annotations:\n    forge-ranch/license:\n":
+    labels:
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/license:
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/license:
+      style: secondary
+      start: 0
+      end: 50
+    - source: |
+        metadata:
+          annotations:
+            forge-ranch/license:
+      style: secondary
+      start: 0
+      end: 50
+  "metadata: [{annotations: {forge-ranch/license: Apache-2.0}}]":
+    labels:
+    - source: "metadata: [{annotations: {forge-ranch/license: Apache-2.0}}]"
+      style: primary
+      start: 0
+      end: 60
+    - source: "metadata: [{annotations: {forge-ranch/license: Apache-2.0}}]"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "metadata: [{annotations: {forge-ranch/license: Apache-2.0}}]"
+      style: secondary
+      start: 0
+      end: 60
+  "metadata: null":
+    labels:
+    - source: "metadata: null"
+      style: primary
+      start: 0
+      end: 14
+    - source: "metadata: null"
+      style: secondary
+      start: 0
+      end: 14
+    - source: "metadata: null"
+      style: secondary
+      start: 0
+      end: 14
+  "metadata: {annotations: [{forge-ranch/license: Apache-2.0}]}":
+    labels:
+    - source: "metadata: {annotations: [{forge-ranch/license: Apache-2.0}]}"
+      style: primary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: [{forge-ranch/license: Apache-2.0}]}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: [{forge-ranch/license: Apache-2.0}]}"
+      style: secondary
+      start: 0
+      end: 60
+  "metadata: {annotations: null}":
+    labels:
+    - source: "metadata: {annotations: null}"
+      style: primary
+      start: 0
+      end: 29
+    - source: "metadata: {annotations: null}"
+      style: secondary
+      start: 0
+      end: 29
+    - source: "metadata: {annotations: null}"
+      style: secondary
+      start: 0
+      end: 29
+  "metadata: {annotations: {forge-ranch/license-extra: Apache-2.0}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license-extra: Apache-2.0}}"
+      style: primary
+      start: 0
+      end: 64
+    - source: "metadata: {annotations: {forge-ranch/license-extra: Apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 64
+    - source: "metadata: {annotations: {forge-ranch/license-extra: Apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 64
+  "metadata: {annotations: {forge-ranch/license: \" \"}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: \" \"}}"
+      style: primary
+      start: 0
+      end: 51
+    - source: "metadata: {annotations: {forge-ranch/license: \" \"}}"
+      style: secondary
+      start: 0
+      end: 51
+    - source: "metadata: {annotations: {forge-ranch/license: \" \"}}"
+      style: secondary
+      start: 0
+      end: 51
+  "metadata: {annotations: {forge-ranch/license: \" Apache-2.0\"}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: \" Apache-2.0\"}}"
+      style: primary
+      start: 0
+      end: 61
+    - source: "metadata: {annotations: {forge-ranch/license: \" Apache-2.0\"}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "metadata: {annotations: {forge-ranch/license: \" Apache-2.0\"}}"
+      style: secondary
+      start: 0
+      end: 61
+  "metadata: {annotations: {forge-ranch/license: \"\"}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: \"\"}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: "metadata: {annotations: {forge-ranch/license: \"\"}}"
+      style: secondary
+      start: 0
+      end: 50
+    - source: "metadata: {annotations: {forge-ranch/license: \"\"}}"
+      style: secondary
+      start: 0
+      end: 50
+  "metadata: {annotations: {forge-ranch/license: \"Apache-2.0 \"}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: \"Apache-2.0 \"}}"
+      style: primary
+      start: 0
+      end: 61
+    - source: "metadata: {annotations: {forge-ranch/license: \"Apache-2.0 \"}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: "metadata: {annotations: {forge-ranch/license: \"Apache-2.0 \"}}"
+      style: secondary
+      start: 0
+      end: 61
+  "metadata: {annotations: {forge-ranch/license: \"Apache-2x0\"}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: \"Apache-2x0\"}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: {forge-ranch/license: \"Apache-2x0\"}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: {forge-ranch/license: \"Apache-2x0\"}}"
+      style: secondary
+      start: 0
+      end: 60
+  "metadata: {annotations: {forge-ranch/license: 42}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: 42}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: "metadata: {annotations: {forge-ranch/license: 42}}"
+      style: secondary
+      start: 0
+      end: 50
+    - source: "metadata: {annotations: {forge-ranch/license: 42}}"
+      style: secondary
+      start: 0
+      end: 50
+  "metadata: {annotations: {forge-ranch/license: Apache-2.0-or-later}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: Apache-2.0-or-later}}"
+      style: primary
+      start: 0
+      end: 67
+    - source: "metadata: {annotations: {forge-ranch/license: Apache-2.0-or-later}}"
+      style: secondary
+      start: 0
+      end: 67
+    - source: "metadata: {annotations: {forge-ranch/license: Apache-2.0-or-later}}"
+      style: secondary
+      start: 0
+      end: 67
+  "metadata: {annotations: {forge-ranch/license: MIT, nested: {forge-ranch/license: Apache-2.0}}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: MIT, nested: {forge-ranch/license: Apache-2.0}}}"
+      style: primary
+      start: 0
+      end: 94
+    - source: "metadata: {annotations: {forge-ranch/license: MIT, nested: {forge-ranch/license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 94
+    - source: "metadata: {annotations: {forge-ranch/license: MIT, nested: {forge-ranch/license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 94
+  "metadata: {annotations: {forge-ranch/license: MIT}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: MIT}}"
+      style: primary
+      start: 0
+      end: 51
+    - source: "metadata: {annotations: {forge-ranch/license: MIT}}"
+      style: secondary
+      start: 0
+      end: 51
+    - source: "metadata: {annotations: {forge-ranch/license: MIT}}"
+      style: secondary
+      start: 0
+      end: 51
+  "metadata: {annotations: {forge-ranch/license: [Apache-2.0]}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: [Apache-2.0]}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: {forge-ranch/license: [Apache-2.0]}}"
+      style: secondary
+      start: 0
+      end: 60
+    - source: "metadata: {annotations: {forge-ranch/license: [Apache-2.0]}}"
+      style: secondary
+      start: 0
+      end: 60
+  "metadata: {annotations: {forge-ranch/license: []}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: []}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: "metadata: {annotations: {forge-ranch/license: []}}"
+      style: secondary
+      start: 0
+      end: 50
+    - source: "metadata: {annotations: {forge-ranch/license: []}}"
+      style: secondary
+      start: 0
+      end: 50
+  "metadata: {annotations: {forge-ranch/license: apache-2.0}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: apache-2.0}}"
+      style: primary
+      start: 0
+      end: 58
+    - source: "metadata: {annotations: {forge-ranch/license: apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 58
+    - source: "metadata: {annotations: {forge-ranch/license: apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 58
+  "metadata: {annotations: {forge-ranch/license: null}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: null}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: "metadata: {annotations: {forge-ranch/license: null}}"
+      style: secondary
+      start: 0
+      end: 52
+    - source: "metadata: {annotations: {forge-ranch/license: null}}"
+      style: secondary
+      start: 0
+      end: 52
+  "metadata: {annotations: {forge-ranch/license: true}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: true}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: "metadata: {annotations: {forge-ranch/license: true}}"
+      style: secondary
+      start: 0
+      end: 52
+    - source: "metadata: {annotations: {forge-ranch/license: true}}"
+      style: secondary
+      start: 0
+      end: 52
+  "metadata: {annotations: {forge-ranch/license: {license: Apache-2.0}}}":
+    labels:
+    - source: "metadata: {annotations: {forge-ranch/license: {license: Apache-2.0}}}"
+      style: primary
+      start: 0
+      end: 69
+    - source: "metadata: {annotations: {forge-ranch/license: {license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 69
+    - source: "metadata: {annotations: {forge-ranch/license: {license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 69
+  "metadata: {annotations: {license: Apache-2.0}}":
+    labels:
+    - source: "metadata: {annotations: {license: Apache-2.0}}"
+      style: primary
+      start: 0
+      end: 46
+    - source: "metadata: {annotations: {license: Apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 46
+    - source: "metadata: {annotations: {license: Apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 46
+  "metadata: {annotations: {nested: {forge-ranch/license: Apache-2.0}}}":
+    labels:
+    - source: "metadata: {annotations: {nested: {forge-ranch/license: Apache-2.0}}}"
+      style: primary
+      start: 0
+      end: 68
+    - source: "metadata: {annotations: {nested: {forge-ranch/license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 68
+    - source: "metadata: {annotations: {nested: {forge-ranch/license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 68
+  "metadata: {annotations: {other/license: Apache-2.0}}":
+    labels:
+    - source: "metadata: {annotations: {other/license: Apache-2.0}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: "metadata: {annotations: {other/license: Apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 52
+    - source: "metadata: {annotations: {other/license: Apache-2.0}}"
+      style: secondary
+      start: 0
+      end: 52
+  "metadata: {annotations: {}}":
+    labels:
+    - source: "metadata: {annotations: {}}"
+      style: primary
+      start: 0
+      end: 27
+    - source: "metadata: {annotations: {}}"
+      style: secondary
+      start: 0
+      end: 27
+    - source: "metadata: {annotations: {}}"
+      style: secondary
+      start: 0
+      end: 27
+  "metadata: {forge-ranch/license: Apache-2.0}":
+    labels:
+    - source: "metadata: {forge-ranch/license: Apache-2.0}"
+      style: primary
+      start: 0
+      end: 43
+    - source: "metadata: {forge-ranch/license: Apache-2.0}"
+      style: secondary
+      start: 0
+      end: 43
+    - source: "metadata: {forge-ranch/license: Apache-2.0}"
+      style: secondary
+      start: 0
+      end: 43
+  "metadata: {}":
+    labels:
+    - source: "metadata: {}"
+      style: primary
+      start: 0
+      end: 12
+    - source: "metadata: {}"
+      style: secondary
+      start: 0
+      end: 12
+    - source: "metadata: {}"
+      style: secondary
+      start: 0
+      end: 12
+  "spec: {metadata: {annotations: {forge-ranch/license: Apache-2.0}}}":
+    labels:
+    - source: "spec: {metadata: {annotations: {forge-ranch/license: Apache-2.0}}}"
+      style: primary
+      start: 0
+      end: 66
+    - source: "spec: {metadata: {annotations: {forge-ranch/license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 66
+    - source: "spec: {metadata: {annotations: {forge-ranch/license: Apache-2.0}}}"
+      style: secondary
+      start: 0
+      end: 66
+  "{}":
+    labels:
+    - source: "{}"
+      style: primary
+      start: 0
+      end: 2
+    - source: "{}"
+      style: secondary
+      start: 0
+      end: 2
+    - source: "{}"
+      style: secondary
+      start: 0
+      end: 2

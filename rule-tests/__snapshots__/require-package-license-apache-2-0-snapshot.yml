@@ -1,10 +1,7 @@
 id: require-package-license-apache-2-0
 snapshots:
-  ? |
-    {
-      "license": "MIT"
-    }
-  : labels:
+  "{\n  \"license\": \"MIT\"\n}\n":
+    labels:
     - source: |-
         {
           "license": "MIT"
@@ -19,14 +16,8 @@ snapshots:
       style: secondary
       start: 0
       end: 23
-  ? |
-    {
-      "license": "MIT",
-      "dependencies": {
-        "express": "^4.18.0"
-      }
-    }
-  : labels:
+  "{\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "license": "MIT",
@@ -47,11 +38,8 @@ snapshots:
       style: secondary
       start: 0
       end: 73
-  ? |
-    {
-      "private": true
-    }
-  : labels:
+  "{\n  \"private\": true\n}\n":
+    labels:
     - source: |-
         {
           "private": true
@@ -66,3 +54,53 @@ snapshots:
       style: secondary
       start: 0
       end: 22
+  "{\"license\": \"Apache-2.0 OR MIT\"}":
+    labels:
+    - source: "{\"license\": \"Apache-2.0 OR MIT\"}"
+      style: primary
+      start: 0
+      end: 32
+    - source: "{\"license\": \"Apache-2.0 OR MIT\"}"
+      style: secondary
+      start: 0
+      end: 32
+  "{\"license\": \"Apache-2.0-extra\"}":
+    labels:
+    - source: "{\"license\": \"Apache-2.0-extra\"}"
+      style: primary
+      start: 0
+      end: 31
+    - source: "{\"license\": \"Apache-2.0-extra\"}"
+      style: secondary
+      start: 0
+      end: 31
+  "{\"license\": \"MIT\", \"metadata\": {\"license\": \"Apache-2.0\"}}":
+    labels:
+    - source: "{\"license\": \"MIT\", \"metadata\": {\"license\": \"Apache-2.0\"}}"
+      style: primary
+      start: 0
+      end: 57
+    - source: "{\"license\": \"MIT\", \"metadata\": {\"license\": \"Apache-2.0\"}}"
+      style: secondary
+      start: 0
+      end: 57
+  "{\"license\": {\"license\": \"Apache-2.0\"}}":
+    labels:
+    - source: "{\"license\": {\"license\": \"Apache-2.0\"}}"
+      style: primary
+      start: 0
+      end: 38
+    - source: "{\"license\": {\"license\": \"Apache-2.0\"}}"
+      style: secondary
+      start: 0
+      end: 38
+  "{\"metadata\": {\"license\": \"Apache-2.0\"}}":
+    labels:
+    - source: "{\"metadata\": {\"license\": \"Apache-2.0\"}}"
+      style: primary
+      start: 0
+      end: 39
+    - source: "{\"metadata\": {\"license\": \"Apache-2.0\"}}"
+      style: secondary
+      start: 0
+      end: 39
