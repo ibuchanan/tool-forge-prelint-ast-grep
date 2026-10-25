@@ -2,27 +2,72 @@ id: require-lefthook-pre-commit-gitleaks
 language: Yaml
 severity: warning
 message: >
-  Add a pre-commit gitleaks guard to lefthook.yml.
+  Declare a staged Gitleaks scan in a Lefthook pre-commit command, not just a `gitleaks` entry name.
 note: >
-  Running gitleaks before every commit catches leaked secrets
-  (API keys, tokens)
-  before they ever reach git history,
-  where removing them requires a history rewrite
-  and extra effort to revoke the secrets.
-  Lefthook configuration reference:
-  https://lefthook.dev/configuration/
-  Gitleaks project:
+  Drop Calf seeds `gitleaks git --pre-commit --staged` with a PATH preflight;
+  the legacy `gitleaks protect --staged` declaration is also supported. Command
+  names are owner-selected. This checks literal direct commands and the bounded
+  seeded preflight, not scanner availability, installed hooks, effective skip
+  filters, execution success or the absence of secrets. Other shell wrappers,
+  YAML aliases/merges/escapes and external configuration need native review.
+  Missing or zero-byte files are not diagnosed. Review equivalent owner guards
+  before suppressing with --off=require-lefthook-pre-commit-gitleaks.
+  https://lefthook.dev/configuration/run.html
   https://github.com/gitleaks/gitleaks
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml
+utils:
+  mapping:
+    any:
+      - kind: block_mapping
+      - kind: flow_mapping
+  staged-scan:
+    any:
+      - regex: '^([ \t]*gitleaks[ \t]+(protect[ \t]+--staged|git[ \t]+(--pre-commit[ \t]+--staged|--staged[ \t]+--pre-commit))[ \t]*|"[ \t]*gitleaks[ \t]+(protect[ \t]+--staged|git[ \t]+(--pre-commit[ \t]+--staged|--staged[ \t]+--pre-commit))[ \t]*"|''[ \t]*gitleaks[ \t]+(protect[ \t]+--staged|git[ \t]+(--pre-commit[ \t]+--staged|--staged[ \t]+--pre-commit))[ \t]*'')$'
+      - has:
+          kind: block_scalar
+          regex: '^\|[-+]?\r?\n([ \t]*command -v gitleaks >/dev/null 2>&1 \|\| \{\r?\n[ \t]*echo "gitleaks not found on PATH\. Install it with: brew install gitleaks" >&2\r?\n[ \t]*exit 1\r?\n[ \t]*\}\r?\n)?[ \t]*gitleaks[ \t]+(protect[ \t]+--staged|git[ \t]+(--pre-commit[ \t]+--staged|--staged[ \t]+--pre-commit))[ \t\r\n]*$'
 rule:
-  kind: block_mapping
-  inside:
-    kind: block_node
-    inside:
-      kind: document
+  kind: stream
   not:
     has:
-      kind: block_mapping_pair
-      regex: 'pre-commit:[\s\S]*?gitleaks:'
+      kind: document
+      has:
+        any:
+          - kind: block_node
+          - kind: flow_node
+        has:
+          matches: mapping
+          has:
+            all:
+              - has:
+                  field: key
+                  regex: '^(pre-commit|"pre-commit"|''pre-commit'')$'
+              - has:
+                  field: value
+                  has:
+                    matches: mapping
+                    has:
+                      all:
+                        - has:
+                            field: key
+                            regex: '^(commands|"commands"|''commands'')$'
+                        - has:
+                            field: value
+                            has:
+                              matches: mapping
+                              has:
+                                has:
+                                  field: value
+                                  has:
+                                    matches: mapping
+                                    has:
+                                      all:
+                                        - has:
+                                            field: key
+                                            regex: '^(run|"run"|''run'')$'
+                                        - has:
+                                            field: value
+                                            matches: staged-scan
 files:
   - "**/lefthook.yml"
 ignores:
@@ -32,12 +77,23 @@ ignores:
   - "**/specs/**"
 metadata:
   references:
-    - https://lefthook.dev/configuration/
+    - https://lefthook.dev/configuration/run.html
     - https://github.com/gitleaks/gitleaks
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml
   category: git-hooks
   precision: medium
   scope-profile: [unique]
   scope-rationale: "Select only the reviewed configuration filenames: lefthook.yml, not lefthook.yaml. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
-  precision-rationale: "Tests cover a gitleaks-named pre-commit entry and its absence. Key spelling is not executable scanner validation; alternate names, external configuration and effective skip/filter behavior remain assessment gaps. Absence does not establish a committed secret or lack of other secret scanning. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-commit-gitleaks.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-commit-gitleaks-snapshot.yml."
+  precision-rationale: >
+    Direct root pre-commit/commands/owner-selected command/run pairs require a
+    literal staged scan, supporting block/flow mappings, quoted/direct commands
+    and the seeded PATH-preflight block. Tests reject inert names, comments,
+    early exits, nested/lookalike entries and masked failures. Other effective
+    wrappers, scanner flags, YAML resolution and skip/filter behavior remain
+    assessment gaps. Absence does not establish a committed secret or lack of
+    other scanning. Evidence:
+    rule-tests/ecosol/git-hooks/require-lefthook-pre-commit-gitleaks.test.yml and
+    scripts/check-git-hooks-fixtures.sh.
   impact: high
   impact-rationale: Gitleaks detects credentials before they enter history. Where a real credential is staged and no equivalent guard catches it, omitting the intended scan can permit credential exposure and unauthorized access requiring revocation. This conditional harm is not established by missing configuration alone.
+  tags: [capability:git-hooks]

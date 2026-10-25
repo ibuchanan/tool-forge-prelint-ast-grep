@@ -144,6 +144,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "docs"')
 }
 printf 'PASS: documentation lint entrypoint is discoverable\n'
 
+expected=$'git-hooks\timplemented\trequire-lefthook-pre-commit-format,require-lefthook-pre-commit-gitleaks,require-lefthook-pre-push-check,require-lefthook-prepare'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "git-hooks"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: hook setup, pre-commit guards and pre-push delegation must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: hook declarations are discoverable without owning package aggregate composition\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

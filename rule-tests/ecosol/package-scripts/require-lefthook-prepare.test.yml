@@ -15,7 +15,23 @@ valid:
         "prepare": "lefthook install"
       }
     }
+  - |
+    {"scripts": {"prepare": "lefthook install||true"}}
+  - |
+    {"scripts": {"prepare": "lefthook install  ||  true"}}
 invalid:
+  - |
+    {"scripts": {"prepare": true}}
+  - |
+    {"scripts": {"prepare": ["lefthook", "install"]}}
+  - |
+    {"scripts": {"prepare": "echo lefthook install"}}
+  - |
+    {"scripts": {"prepare-extra": "lefthook install || true"}}
+  - |
+    {"scripts": {"prepare": "lefthook install --help"}}
+  - |
+    {"scripts": {"prepare": "lefthook install || echo ignored"}}
   - |
     {
       "scripts": {

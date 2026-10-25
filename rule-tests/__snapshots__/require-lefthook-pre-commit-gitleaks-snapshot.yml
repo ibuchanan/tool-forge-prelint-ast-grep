@@ -1,17 +1,67 @@
 id: require-lefthook-pre-commit-gitleaks
 snapshots:
-  ? |
-    pre-commit:
-      commands:
-        lint:
-          run: npm run lint
-        format:
-          run: npm run format:check
-    pre-push:
-      commands:
-        test:
-          run: npm run test
-  : labels:
+  "other:\n  pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}\n":
+    labels:
+    - source: |
+        other:
+          pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}
+      style: primary
+      start: 0
+      end: 87
+  "pre-commit-extra: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}\n":
+    labels:
+    - source: |
+        pre-commit-extra: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-commit:\n  commands:\n    gitleaks:\n      run: echo gitleaks git --pre-commit --staged\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: echo gitleaks git --pre-commit --staged
+      style: primary
+      start: 0
+      end: 89
+  "pre-commit:\n  commands:\n    gitleaks:\n      run: |\n        echo skipped\n        # gitleaks git --pre-commit --staged\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: |
+                echo skipped
+                # gitleaks git --pre-commit --staged
+      style: primary
+      start: 0
+      end: 117
+  "pre-commit:\n  commands:\n    gitleaks:\n      run: |\n        exit 0\n        gitleaks git --pre-commit --staged\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: |
+                exit 0
+                gitleaks git --pre-commit --staged
+      style: primary
+      start: 0
+      end: 109
+  "pre-commit:\n  commands:\n    gitleaks:\n      run: |\n        gitleaks git --pre-commit --staged || true\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            gitleaks:
+              run: |
+                gitleaks git --pre-commit --staged || true
+      style: primary
+      start: 0
+      end: 102
+  "pre-commit:\n  commands:\n    lint:\n      run: npm run lint\n    format:\n      run: npm run format:check\npre-push:\n  commands:\n    test:\n      run: npm run test\n":
+    labels:
     - source: |
         pre-commit:
           commands:
@@ -26,40 +76,99 @@ snapshots:
       style: primary
       start: 0
       end: 158
+  "pre-commit: {commands-extra: {gitleaks: {run: gitleaks git --pre-commit --staged}}}\n":
+    labels:
     - source: |
-        pre-commit:
-          commands:
-            lint:
-              run: npm run lint
-            format:
-              run: npm run format:check
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        pre-commit: {commands-extra: {gitleaks: {run: gitleaks git --pre-commit --staged}}}
+      style: primary
       start: 0
-      end: 158
+      end: 84
+  "pre-commit: {commands: {gitleaks: {other: {run: gitleaks git --pre-commit --staged}}}}\n":
+    labels:
     - source: |
-        pre-commit:
-          commands:
-            lint:
-              run: npm run lint
-            format:
-              run: npm run format:check
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        pre-commit: {commands: {gitleaks: {other: {run: gitleaks git --pre-commit --staged}}}}
+      style: primary
       start: 0
-      end: 158
-  ? |
-    pre-push:
-      commands:
-        test:
-          run: npm run test
-  : labels:
+      end: 87
+  "pre-commit: {commands: {gitleaks: {run-extra: gitleaks git --pre-commit --staged}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run-extra: gitleaks git --pre-commit --staged}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-commit: {commands: {gitleaks: {run: 'echo \"gitleaks git --pre-commit --staged\"'}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: 'echo "gitleaks git --pre-commit --staged"'}}}
+      style: primary
+      start: 0
+      end: 87
+  "pre-commit: {commands: {gitleaks: {run: [gitleaks, git, --pre-commit, --staged]}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: [gitleaks, git, --pre-commit, --staged]}}}
+      style: primary
+      start: 0
+      end: 83
+  "pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged --help}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged --help}}}
+      style: primary
+      start: 0
+      end: 85
+  "pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged || true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged || true}}}
+      style: primary
+      start: 0
+      end: 86
+  "pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged-extra}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged-extra}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit}}}
+      style: primary
+      start: 0
+      end: 69
+  "pre-commit: {commands: {gitleaks: {run: gitleaks git --staged}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: gitleaks git --staged}}}
+      style: primary
+      start: 0
+      end: 65
+  "pre-commit: {commands: {gitleaks: {run: gitleaks-extra git --pre-commit --staged}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: gitleaks-extra git --pre-commit --staged}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-commit: {commands: {gitleaks: {run: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {gitleaks: {run: true}}}
+      style: primary
+      start: 0
+      end: 48
+  "pre-commit: {other: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}}\n":
+    labels:
+    - source: |
+        pre-commit: {other: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}}
+      style: primary
+      start: 0
+      end: 87
+  "pre-push:\n  commands:\n    test:\n      run: npm run test\n":
+    labels:
     - source: |
         pre-push:
           commands:
@@ -68,19 +177,10 @@ snapshots:
       style: primary
       start: 0
       end: 56
+  "{}\n":
+    labels:
     - source: |
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        {}
+      style: primary
       start: 0
-      end: 56
-    - source: |
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
-      start: 0
-      end: 56
+      end: 3

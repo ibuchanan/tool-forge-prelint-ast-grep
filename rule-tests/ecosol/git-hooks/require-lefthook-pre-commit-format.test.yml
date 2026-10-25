@@ -2,16 +2,80 @@ id: require-lefthook-pre-commit-format
 valid:
   - |
     pre-commit:
+      parallel: true
       commands:
-        gitleaks:
-          run: gitleaks protect --staged
+        format:
+          run: npm run format --if-present
+          stage_fixed: true
+  - |
+    pre-commit:
+      commands:
+        owner-formatting:
+          stage_fixed: true
+          run: '  bun  run  --if-present  format  '
+          glob: '*.ts'
+  - |
+    'pre-commit': {commands: {style: {run: "npm run format", 'stage_fixed': true}}}
+  - |
+    pre-commit: {commands: {style: {run: bun run format --if-present, stage_fixed: true}}}
+invalid:
+  - |
+    pre-commit:
+      commands:
+        format:
+          run: echo npm run format
+          stage_fixed: true
+  - |
+    pre-commit:
+      commands:
         format:
           run: npm run format:check
-    pre-push:
+          stage_fixed: true
+  - |
+    pre-commit:
       commands:
-        test:
-          run: npm run test
-invalid:
+        format:
+          run: npm run format
+  - |
+    pre-commit: {commands: {format: {run: npm run format, stage_fixed: false}}}
+  - |
+    pre-commit: {commands: {format: {run: npm run format, stage_fixed: 'true'}}}
+  - |
+    other:
+      pre-commit: {commands: {format: {run: npm run format, stage_fixed: true}}}
+  - |
+    pre-commit: {other: {commands: {format: {run: npm run format, stage_fixed: true}}}}
+  - |
+    pre-commit: {commands: {format: {other: {run: npm run format, stage_fixed: true}}}}
+  - |
+    pre-commit:
+      commands:
+        format:
+          run: npm run format
+        unrelated:
+          stage_fixed: true
+  - |
+    pre-commit-extra: {commands: {format: {run: npm run format, stage_fixed: true}}}
+  - |
+    pre-commit: {commands-extra: {format: {run: npm run format, stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run-extra: npm run format, stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: npm run formatter, stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: npm run format || true, stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: npm run format --help, stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: 'echo "npm run format"', stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: [npm, run, format], stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: true, stage_fixed: true}}}
+  - |
+    pre-commit: {commands: {format: {run: npm run format, stage_fixed: true-extra}}}
+  - |
+    pre-push: {commands: {format: {run: npm run format, stage_fixed: true}}}
   - |
     pre-commit:
       commands:
@@ -29,3 +93,5 @@ invalid:
       commands:
         test:
           run: npm run test
+  - |
+    {}

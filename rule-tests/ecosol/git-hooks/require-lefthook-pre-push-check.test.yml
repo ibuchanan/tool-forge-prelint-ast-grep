@@ -1,0 +1,88 @@
+id: require-lefthook-pre-push-check
+valid:
+  - |
+    pre-push:
+      commands:
+        check:
+          run: npm run check
+  - |
+    pre-push:
+      parallel: true
+      commands:
+        owner-validation:
+          run: '  bun  run  check  '
+          skip: merge
+  - |
+    "pre-push": {"commands": {verify: {"run": "npm run check"}}}
+invalid:
+  - |
+    pre-commit:
+      commands:
+        format:
+          run: npm run format
+  - |
+    pre-push:
+      commands:
+        check:
+          run: echo npm run check
+  - |
+    pre-push:
+      commands:
+        lint:
+          run: npm run lint
+        test:
+          run: npm run test
+        size:
+          run: npm run size:check
+  - |
+    other:
+      pre-push:
+        commands:
+          check:
+            run: npm run check
+  - |
+    pre-push:
+      other:
+        commands:
+          check:
+            run: npm run check
+  - |
+    pre-push:
+      commands:
+        check:
+          other:
+            run: npm run check
+  - |
+    pre-push:
+      commands:
+        check:
+          run: npm run check-extra
+  - |
+    pre-push-extra: {commands: {check: {run: npm run check}}}
+  - |
+    pre-push: {commands-extra: {check: {run: npm run check}}}
+  - |
+    pre-push: {commands: {check: {run-extra: npm run check}}}
+  - |
+    pre-push: {commands: {check: {run: npm run check --if-present}}}
+  - |
+    pre-push: {commands: {check: {run: npm run check || true}}}
+  - |
+    pre-push: {commands: {check: {run: 'echo "npm run check"'}}}
+  - |
+    pre-push: {commands: {check: {run: true}}}
+  - |
+    pre-push: {commands: {check: {run: [npm, run, check]}}}
+  - |
+    pre-push: {commands: {check: {run: npm run check --help}}}
+  - |
+    pre-push: {commands: {check: {run: npm run check; echo done}}}
+  - |
+    pre-push: {run: npm run check}
+  - |
+    pre-push: {commands: {run: npm run check}}
+  - |
+    pre-commit: {commands: {check: {run: npm run check}}}
+    pre-push: {commands: {check: {run: echo skipped}}}
+  - |
+    {}

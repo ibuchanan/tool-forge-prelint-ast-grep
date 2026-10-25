@@ -1,0 +1,96 @@
+id: require-lefthook-pre-push-check
+language: Yaml
+severity: info
+message: >
+  Delegate a Lefthook pre-push command to `npm run check` or `bun run check` instead of copying checks.
+note: >
+  Drop Calf seeds pre-push delegation to the package check script so hook and
+  local/CI validation share one entrypoint. Command names are owner-selected.
+  This checks literal declarations, not installed hooks, effective skip filters,
+  package script contents or successful execution. Aliases, merges, escaped or
+  block scalars and external configuration require native validation. Missing or
+  zero-byte files are not diagnosed. Review equivalent owner wrappers before
+  suppressing with --off=require-lefthook-pre-push-check.
+  https://lefthook.dev/configuration/run.html
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml
+utils:
+  mapping:
+    any:
+      - kind: block_mapping
+      - kind: flow_mapping
+rule:
+  kind: stream
+  not:
+    has:
+      kind: document
+      has:
+        any:
+          - kind: block_node
+          - kind: flow_node
+        has:
+          matches: mapping
+          has:
+            all:
+              - has:
+                  field: key
+                  regex: '^(pre-push|"pre-push"|''pre-push'')$'
+              - has:
+                  field: value
+                  has:
+                    matches: mapping
+                    has:
+                      all:
+                        - has:
+                            field: key
+                            regex: '^(commands|"commands"|''commands'')$'
+                        - has:
+                            field: value
+                            has:
+                              matches: mapping
+                              has:
+                                has:
+                                  field: value
+                                  has:
+                                    matches: mapping
+                                    has:
+                                      all:
+                                        - has:
+                                            field: key
+                                            regex: '^(run|"run"|''run'')$'
+                                        - has:
+                                            field: value
+                                            regex: '^([ \t]*(npm|bun)[ \t]+run[ \t]+check[ \t]*|"[ \t]*(npm|bun)[ \t]+run[ \t]+check[ \t]*"|''[ \t]*(npm|bun)[ \t]+run[ \t]+check[ \t]*'')$'
+files:
+  - "**/lefthook.yml"
+ignores:
+  - "**/coverage/**"
+  - "**/dist/**"
+  - "**/node_modules/**"
+  - "**/specs/**"
+metadata:
+  category: git-hooks
+  precision: medium
+  precision-rationale: >
+    Direct root pre-push/commands/owner-selected command/run pairs distinguish
+    literal check delegation from missing, nested, inert and copied-tool entries.
+    Block and flow mappings are supported. Evidence:
+    rule-tests/ecosol/git-hooks/require-lefthook-pre-push-check.test.yml and
+    scripts/check-git-hooks-fixtures.sh. Other effective wrappers, YAML resolution,
+    duplicate keys, multi-document validity and skip/filter behavior remain
+    native-tool concerns; absence does not prove that validation never runs.
+  impact: low
+  impact-rationale: >
+    Copying checks into pre-push can cause recoverable workflow drift from the
+    central package check. Missing delegation does not demonstrate a production
+    failure or the absence of other validation, so this convention is advisory.
+  scope-profile: [unique]
+  scope-rationale: >
+    Select only lefthook.yml, not lefthook.yaml, matching the existing reviewed
+    hook rules and pinned capability. No standard artifact selector names it.
+    Apply the shared baseline, retain test-local configurations and build/vendor/
+    fixture directories, and scope caller scans to app roots. Filename routing
+    does not establish application identity.
+  tags: [capability:git-hooks]
+  references:
+    - https://lefthook.dev/configuration/run.html
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml

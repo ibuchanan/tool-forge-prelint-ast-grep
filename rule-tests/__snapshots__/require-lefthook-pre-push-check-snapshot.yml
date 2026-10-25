@@ -1,0 +1,178 @@
+id: require-lefthook-pre-push-check
+snapshots:
+  "other:\n  pre-push:\n    commands:\n      check:\n        run: npm run check\n":
+    labels:
+    - source: |
+        other:
+          pre-push:
+            commands:
+              check:
+                run: npm run check
+      style: primary
+      start: 0
+      end: 73
+  "pre-commit:\n  commands:\n    format:\n      run: npm run format\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            format:
+              run: npm run format
+      style: primary
+      start: 0
+      end: 62
+  "pre-commit: {commands: {check: {run: npm run check}}}\npre-push: {commands: {check: {run: echo skipped}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {check: {run: npm run check}}}
+        pre-push: {commands: {check: {run: echo skipped}}}
+      style: primary
+      start: 0
+      end: 105
+  "pre-push-extra: {commands: {check: {run: npm run check}}}\n":
+    labels:
+    - source: |
+        pre-push-extra: {commands: {check: {run: npm run check}}}
+      style: primary
+      start: 0
+      end: 58
+  "pre-push:\n  commands:\n    check:\n      other:\n        run: npm run check\n":
+    labels:
+    - source: |
+        pre-push:
+          commands:
+            check:
+              other:
+                run: npm run check
+      style: primary
+      start: 0
+      end: 73
+  "pre-push:\n  commands:\n    check:\n      run: echo npm run check\n":
+    labels:
+    - source: |
+        pre-push:
+          commands:
+            check:
+              run: echo npm run check
+      style: primary
+      start: 0
+      end: 63
+  "pre-push:\n  commands:\n    check:\n      run: npm run check-extra\n":
+    labels:
+    - source: |
+        pre-push:
+          commands:
+            check:
+              run: npm run check-extra
+      style: primary
+      start: 0
+      end: 64
+  "pre-push:\n  commands:\n    lint:\n      run: npm run lint\n    test:\n      run: npm run test\n    size:\n      run: npm run size:check\n":
+    labels:
+    - source: |
+        pre-push:
+          commands:
+            lint:
+              run: npm run lint
+            test:
+              run: npm run test
+            size:
+              run: npm run size:check
+      style: primary
+      start: 0
+      end: 130
+  "pre-push:\n  other:\n    commands:\n      check:\n        run: npm run check\n":
+    labels:
+    - source: |
+        pre-push:
+          other:
+            commands:
+              check:
+                run: npm run check
+      style: primary
+      start: 0
+      end: 73
+  "pre-push: {commands-extra: {check: {run: npm run check}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands-extra: {check: {run: npm run check}}}
+      style: primary
+      start: 0
+      end: 58
+  "pre-push: {commands: {check: {run-extra: npm run check}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run-extra: npm run check}}}
+      style: primary
+      start: 0
+      end: 58
+  "pre-push: {commands: {check: {run: 'echo \"npm run check\"'}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: 'echo "npm run check"'}}}
+      style: primary
+      start: 0
+      end: 61
+  "pre-push: {commands: {check: {run: [npm, run, check]}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: [npm, run, check]}}}
+      style: primary
+      start: 0
+      end: 56
+  "pre-push: {commands: {check: {run: npm run check --help}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: npm run check --help}}}
+      style: primary
+      start: 0
+      end: 59
+  "pre-push: {commands: {check: {run: npm run check --if-present}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: npm run check --if-present}}}
+      style: primary
+      start: 0
+      end: 65
+  "pre-push: {commands: {check: {run: npm run check || true}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: npm run check || true}}}
+      style: primary
+      start: 0
+      end: 60
+  "pre-push: {commands: {check: {run: npm run check; echo done}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: npm run check; echo done}}}
+      style: primary
+      start: 0
+      end: 63
+  "pre-push: {commands: {check: {run: true}}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {check: {run: true}}}
+      style: primary
+      start: 0
+      end: 43
+  "pre-push: {commands: {run: npm run check}}\n":
+    labels:
+    - source: |
+        pre-push: {commands: {run: npm run check}}
+      style: primary
+      start: 0
+      end: 43
+  "pre-push: {run: npm run check}\n":
+    labels:
+    - source: |
+        pre-push: {run: npm run check}
+      style: primary
+      start: 0
+      end: 31
+  "{}\n":
+    labels:
+    - source: |
+        {}
+      style: primary
+      start: 0
+      end: 3

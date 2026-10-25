@@ -606,6 +606,64 @@ fixtures scan the generated package and isolated mutations without running owner
 docs commands or resolving external configuration. The stored Drop Calf snapshot
 is unchanged; the legacy zero-findings fixture gains only the maintained script.
 
+## Git hooks: setup, pre-commit declarations and pre-push delegation
+
+Four ecosol rules map to `capability:git-hooks`:
+
+| Rule                                   | Bounded declaration check                                                                |
+| -------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `require-lefthook-prepare`             | Existing root `scripts.prepare` runs `lefthook install`, with optional success fallback. |
+| `require-lefthook-pre-commit-format`   | One pre-commit command delegates to `format` and declares boolean `stage_fixed: true`.   |
+| `require-lefthook-pre-commit-gitleaks` | One pre-commit command declares staged Gitleaks scanning.                                |
+| `require-lefthook-pre-push-check`      | One pre-push command delegates to the package `check` script.                            |
+
+The reviewed [capability](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/git-hooks.ts)
+and [template](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml)
+seed parallel pre-commit scanning/formatting and pre-push delegation. Hook YAML is
+owner-managed after init; update does not restore the template. Prepare remains
+maintained package policy. Forge-app does not require the library profile's
+build-on-prepare composition. Aggregate selection belongs to `capability:lint`,
+not hook checks, and no byte-identical YAML or fixed command names are required.
+
+YAML checks follow direct root hook → commands → owner-selected command → run
+pairs, supporting block/flow mappings and literal plain or quoted keys/commands.
+Unrelated hooks, nested lookalikes, similarly named keys and inert echoes do not
+satisfy the paths. Format delegation accepts npm/Bun `run format`, ordinary
+spacing and optional `--if-present` before or after the script name. Formatting
+intentionally writes and stages fixes; `format:check` alone does not satisfy this
+seed convention. The `stage_fixed` boolean must be in the same command, not a
+sibling command. The scanner accepts `gitleaks git --pre-commit --staged` with
+either flag order, legacy `gitleaks protect --staged`, and literal block scalars
+with either a direct scan or the bounded seeded PATH-preflight block. The latter
+recognizes the seed's fixed error message, not arbitrary equivalent preflights.
+Pre-push accepts only npm/Bun `run check` with ordinary spacing, without optional
+execution, help flags, trailing chains or error masking. Copied lint/test/size
+lists do not satisfy delegation.
+
+Prepare's matcher, scope and ratings are unchanged. The two strengthened
+pre-commit rules retain medium precision and their existing low/high impact,
+respectively; severity remains info/warning. The new pre-push rule has medium
+precision, low impact and info severity. Owner wrappers, direct formatter tools,
+other scanner flags/preflights, Lefthook jobs/scripts, inherited/external config,
+YAML aliases/merges/tags/escapes, duplicate keys, multi-document validity and
+arbitrary shell semantics remain outside these bounded checks. Equivalent owner
+workflows warrant review and possible `--off=<rule-id>` suppression, not automatic
+restoration of seeded hooks. Native behavior is defined by Lefthook's
+[run](https://lefthook.dev/configuration/run.html) and
+[stage_fixed](https://lefthook.dev/configuration/stage_fixed.html) references and
+[Gitleaks](https://github.com/gitleaks/gitleaks).
+
+Native hook routing remains `lefthook.yml` only, not `lefthook.yaml`; prepare
+retains `package.json`. Test-local configurations are included; node_modules,
+dist, coverage and specs are excluded. Callers select app roots; filenames and
+tags do not establish app identity. Missing and zero-byte files are not diagnosed.
+Installed hooks, scanner availability, actual writes/staging, skip filters,
+package target contents and successful execution are not established by text.
+Static fixtures apply only the pinned wiring to a temporary copy of the older
+stored snapshot, then mutate declarations. They never run prepare, hooks,
+Gitleaks, owner formatting or Git writes. The stored generated snapshot remains
+unchanged; the requested delivery commit is separate from static verification.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

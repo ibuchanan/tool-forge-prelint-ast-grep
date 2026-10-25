@@ -2,23 +2,75 @@ id: require-lefthook-pre-commit-format
 language: Yaml
 severity: info
 message: >
-  Add a pre-commit format guard to lefthook.yml.
+  Run the package `format` script with `stage_fixed: true` in a Lefthook pre-commit command.
 note: >
-  Running a format check before every commit
-  catches formatting drift before it's committed,
-  keeping diffs focused on real changes instead of mixed-in reformatting.
-  Lefthook configuration reference:
-  https://lefthook.dev/configuration/
+  Drop Calf seeds an intentionally writing pre-commit formatter and stages its
+  fixes; format:check is the separate read-only validation task. Command names
+  are owner-selected. Supported npm/Bun run spellings may include --if-present.
+  This checks declarations, not installed hooks, actual writes, staging effects,
+  effective skip filters or successful execution. Aliases, merges, escaped/block
+  scalars and external configuration require native validation. Missing or
+  zero-byte files are not diagnosed. Review equivalent owner wrappers before
+  suppressing with --off=require-lefthook-pre-commit-format.
+  https://lefthook.dev/configuration/run.html
+  https://lefthook.dev/configuration/stage_fixed.html
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml
+utils:
+  mapping:
+    any:
+      - kind: block_mapping
+      - kind: flow_mapping
 rule:
-  kind: block_mapping
-  inside:
-    kind: block_node
-    inside:
-      kind: document
+  kind: stream
   not:
     has:
-      kind: block_mapping_pair
-      regex: 'pre-commit:[\s\S]*?\bformat:'
+      kind: document
+      has:
+        any:
+          - kind: block_node
+          - kind: flow_node
+        has:
+          matches: mapping
+          has:
+            all:
+              - has:
+                  field: key
+                  regex: '^(pre-commit|"pre-commit"|''pre-commit'')$'
+              - has:
+                  field: value
+                  has:
+                    matches: mapping
+                    has:
+                      all:
+                        - has:
+                            field: key
+                            regex: '^(commands|"commands"|''commands'')$'
+                        - has:
+                            field: value
+                            has:
+                              matches: mapping
+                              has:
+                                has:
+                                  field: value
+                                  has:
+                                    matches: mapping
+                                    all:
+                                      - has:
+                                          all:
+                                            - has:
+                                                field: key
+                                                regex: '^(run|"run"|''run'')$'
+                                            - has:
+                                                field: value
+                                                regex: '^([ \t]*(npm|bun)[ \t]+run[ \t]+(--if-present[ \t]+)?format([ \t]+--if-present)?[ \t]*|"[ \t]*(npm|bun)[ \t]+run[ \t]+(--if-present[ \t]+)?format([ \t]+--if-present)?[ \t]*"|''[ \t]*(npm|bun)[ \t]+run[ \t]+(--if-present[ \t]+)?format([ \t]+--if-present)?[ \t]*'')$'
+                                      - has:
+                                          all:
+                                            - has:
+                                                field: key
+                                                regex: '^(stage_fixed|"stage_fixed"|''stage_fixed'')$'
+                                            - has:
+                                                field: value
+                                                regex: "^true$"
 files:
   - "**/lefthook.yml"
 ignores:
@@ -27,11 +79,22 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
-  references: ["https://lefthook.dev/configuration/"]
+  references:
+    - https://lefthook.dev/configuration/run.html
+    - https://lefthook.dev/configuration/stage_fixed.html
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml
   category: git-hooks
   precision: medium
   scope-profile: [unique]
   scope-rationale: "Select only the reviewed configuration filenames: lefthook.yml, not lefthook.yaml. No standard artifact selector names these files. Preserve test-local configurations and helpers intentionally, apply the shared baseline, and keep build, vendor and fixture directories eligible. Filename routing does not establish application identity."
-  precision-rationale: "Tests cover a format-named pre-commit entry, missing entry and absent pre-commit hook. The regex checks a key, not run contents or skip/filter behavior; equivalently named scripts, inherited configuration and flow YAML are untested assessment gaps. A missing key is not proof formatting never runs. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-commit-format.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-pre-commit-format-snapshot.yml."
+  precision-rationale: >
+    Direct root pre-commit/commands/owner-selected command pairs require literal
+    format delegation and boolean stage_fixed in the same command, in block/flow
+    mappings. Tests reject inert, check-only, nested and similarly named entries.
+    Equivalent owner wrappers, YAML resolution and effective skip/filter behavior
+    remain assessment gaps; a missing declaration is not proof formatting never
+    runs. Evidence: rule-tests/ecosol/git-hooks/require-lefthook-pre-commit-format.test.yml
+    and scripts/check-git-hooks-fixtures.sh.
   impact: low
   impact-rationale: Lefthook can run formatting before commits; genuine omission of the local guard permits recoverable formatting churn and noisier reviews, not a demonstrated production or security failure.
+  tags: [capability:git-hooks]

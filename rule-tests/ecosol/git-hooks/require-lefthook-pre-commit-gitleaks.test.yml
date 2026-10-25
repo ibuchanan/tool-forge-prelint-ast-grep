@@ -11,7 +11,84 @@ valid:
       commands:
         test:
           run: npm run test
+  - |
+    pre-commit:
+      parallel: true
+      commands:
+        scan-secrets:
+          run: |
+            command -v gitleaks >/dev/null 2>&1 || {
+              echo "gitleaks not found on PATH. Install it with: brew install gitleaks" >&2
+              exit 1
+            }
+            gitleaks git --pre-commit --staged
+  - |
+    'pre-commit': {commands: {owner-scan: {run: '  gitleaks  git  --staged  --pre-commit  '}}}
+  - |
+    pre-commit: {commands: {scan: {run: "gitleaks git --pre-commit --staged"}}}
+  - |
+    pre-commit:
+      commands:
+        scan:
+          run: |-
+            gitleaks git --pre-commit --staged
 invalid:
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: echo gitleaks git --pre-commit --staged
+  - |
+    pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: gitleaks git --staged}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged-extra}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: gitleaks-extra git --pre-commit --staged}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged || true}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged --help}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: 'echo "gitleaks git --pre-commit --staged"'}}}
+  - |
+    other:
+      pre-commit: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}
+  - |
+    pre-commit: {other: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}}
+  - |
+    pre-commit: {commands: {gitleaks: {other: {run: gitleaks git --pre-commit --staged}}}}
+  - |
+    pre-commit-extra: {commands: {gitleaks: {run: gitleaks git --pre-commit --staged}}}
+  - |
+    pre-commit: {commands-extra: {gitleaks: {run: gitleaks git --pre-commit --staged}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run-extra: gitleaks git --pre-commit --staged}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: [gitleaks, git, --pre-commit, --staged]}}}
+  - |
+    pre-commit: {commands: {gitleaks: {run: true}}}
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: |
+            echo skipped
+            # gitleaks git --pre-commit --staged
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: |
+            exit 0
+            gitleaks git --pre-commit --staged
+  - |
+    pre-commit:
+      commands:
+        gitleaks:
+          run: |
+            gitleaks git --pre-commit --staged || true
   - |
     pre-commit:
       commands:
@@ -29,3 +106,5 @@ invalid:
       commands:
         test:
           run: npm run test
+  - |
+    {}

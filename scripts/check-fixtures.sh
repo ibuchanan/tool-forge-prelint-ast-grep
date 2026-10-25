@@ -740,6 +740,7 @@ done
 
 echo "Both Biome config formats produced the expected finding."
 
+bash scripts/check-git-hooks-fixtures.sh
 bash scripts/check-docs-fixtures.sh
 bash scripts/check-typescript-fixtures.sh
 sh scripts/check-secrets-fixtures.sh

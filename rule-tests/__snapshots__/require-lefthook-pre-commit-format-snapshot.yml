@@ -1,17 +1,66 @@
 id: require-lefthook-pre-commit-format
 snapshots:
-  ? |
-    pre-commit:
-      commands:
-        gitleaks:
-          run: gitleaks protect --staged
-        lint:
-          run: npm run lint
-    pre-push:
-      commands:
-        test:
-          run: npm run test
-  : labels:
+  "other:\n  pre-commit: {commands: {format: {run: npm run format, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        other:
+          pre-commit: {commands: {format: {run: npm run format, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-commit-extra: {commands: {format: {run: npm run format, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit-extra: {commands: {format: {run: npm run format, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 81
+  "pre-commit:\n  commands:\n    format:\n      run: echo npm run format\n      stage_fixed: true\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            format:
+              run: echo npm run format
+              stage_fixed: true
+      style: primary
+      start: 0
+      end: 91
+  "pre-commit:\n  commands:\n    format:\n      run: npm run format\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            format:
+              run: npm run format
+      style: primary
+      start: 0
+      end: 62
+  "pre-commit:\n  commands:\n    format:\n      run: npm run format\n    unrelated:\n      stage_fixed: true\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            format:
+              run: npm run format
+            unrelated:
+              stage_fixed: true
+      style: primary
+      start: 0
+      end: 101
+  "pre-commit:\n  commands:\n    format:\n      run: npm run format:check\n      stage_fixed: true\n":
+    labels:
+    - source: |
+        pre-commit:
+          commands:
+            format:
+              run: npm run format:check
+              stage_fixed: true
+      style: primary
+      start: 0
+      end: 92
+  "pre-commit:\n  commands:\n    gitleaks:\n      run: gitleaks protect --staged\n    lint:\n      run: npm run lint\npre-push:\n  commands:\n    test:\n      run: npm run test\n":
+    labels:
     - source: |
         pre-commit:
           commands:
@@ -26,40 +75,99 @@ snapshots:
       style: primary
       start: 0
       end: 165
+  "pre-commit: {commands-extra: {format: {run: npm run format, stage_fixed: true}}}\n":
+    labels:
     - source: |
-        pre-commit:
-          commands:
-            gitleaks:
-              run: gitleaks protect --staged
-            lint:
-              run: npm run lint
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        pre-commit: {commands-extra: {format: {run: npm run format, stage_fixed: true}}}
+      style: primary
       start: 0
-      end: 165
+      end: 81
+  "pre-commit: {commands: {format: {other: {run: npm run format, stage_fixed: true}}}}\n":
+    labels:
     - source: |
-        pre-commit:
-          commands:
-            gitleaks:
-              run: gitleaks protect --staged
-            lint:
-              run: npm run lint
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        pre-commit: {commands: {format: {other: {run: npm run format, stage_fixed: true}}}}
+      style: primary
       start: 0
-      end: 165
-  ? |
-    pre-push:
-      commands:
-        test:
-          run: npm run test
-  : labels:
+      end: 84
+  "pre-commit: {commands: {format: {run-extra: npm run format, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run-extra: npm run format, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 81
+  "pre-commit: {commands: {format: {run: 'echo \"npm run format\"', stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: 'echo "npm run format"', stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-commit: {commands: {format: {run: [npm, run, format], stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: [npm, run, format], stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 79
+  "pre-commit: {commands: {format: {run: npm run format --help, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: npm run format --help, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 82
+  "pre-commit: {commands: {format: {run: npm run format || true, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: npm run format || true, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 83
+  "pre-commit: {commands: {format: {run: npm run format, stage_fixed: 'true'}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: npm run format, stage_fixed: 'true'}}}
+      style: primary
+      start: 0
+      end: 77
+  "pre-commit: {commands: {format: {run: npm run format, stage_fixed: false}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: npm run format, stage_fixed: false}}}
+      style: primary
+      start: 0
+      end: 76
+  "pre-commit: {commands: {format: {run: npm run format, stage_fixed: true-extra}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: npm run format, stage_fixed: true-extra}}}
+      style: primary
+      start: 0
+      end: 81
+  "pre-commit: {commands: {format: {run: npm run formatter, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: npm run formatter, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 78
+  "pre-commit: {commands: {format: {run: true, stage_fixed: true}}}\n":
+    labels:
+    - source: |
+        pre-commit: {commands: {format: {run: true, stage_fixed: true}}}
+      style: primary
+      start: 0
+      end: 65
+  "pre-commit: {other: {commands: {format: {run: npm run format, stage_fixed: true}}}}\n":
+    labels:
+    - source: |
+        pre-commit: {other: {commands: {format: {run: npm run format, stage_fixed: true}}}}
+      style: primary
+      start: 0
+      end: 84
+  "pre-push:\n  commands:\n    test:\n      run: npm run test\n":
+    labels:
     - source: |
         pre-push:
           commands:
@@ -68,19 +176,17 @@ snapshots:
       style: primary
       start: 0
       end: 56
+  "pre-push: {commands: {format: {run: npm run format, stage_fixed: true}}}\n":
+    labels:
     - source: |
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        pre-push: {commands: {format: {run: npm run format, stage_fixed: true}}}
+      style: primary
       start: 0
-      end: 56
+      end: 73
+  "{}\n":
+    labels:
     - source: |
-        pre-push:
-          commands:
-            test:
-              run: npm run test
-      style: secondary
+        {}
+      style: primary
       start: 0
-      end: 56
+      end: 3

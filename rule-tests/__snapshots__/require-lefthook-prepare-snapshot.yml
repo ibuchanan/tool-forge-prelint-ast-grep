@@ -1,10 +1,7 @@
 id: require-lefthook-prepare
 snapshots:
-  ? |
-    {
-      "name": "forge-app"
-    }
-  : labels:
+  "{\n  \"name\": \"forge-app\"\n}\n":
+    labels:
     - source: |-
         {
           "name": "forge-app"
@@ -19,13 +16,8 @@ snapshots:
       style: secondary
       start: 0
       end: 26
-  ? |
-    {
-      "scripts": {
-        "prepare": "echo ready"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"prepare\": \"echo ready\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -44,13 +36,8 @@ snapshots:
       style: secondary
       start: 0
       end: 51
-  ? |
-    {
-      "scripts": {
-        "test": "vitest run"
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"test\": \"vitest run\"\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -69,18 +56,8 @@ snapshots:
       style: secondary
       start: 0
       end: 48
-  ? |
-    {
-      "scripts": {
-        "test": "vitest run"
-      },
-      "other": {
-        "scripts": {
-          "prepare": "lefthook install || true"
-        }
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"test\": \"vitest run\"\n  },\n  \"other\": {\n    \"scripts\": {\n      \"prepare\": \"lefthook install || true\"\n    }\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -109,16 +86,8 @@ snapshots:
       style: secondary
       start: 0
       end: 133
-  ? |
-    {
-      "scripts": {
-        "test": "vitest run",
-        "nested": {
-          "prepare": "lefthook install"
-        }
-      }
-    }
-  : labels:
+  "{\n  \"scripts\": {\n    \"test\": \"vitest run\",\n    \"nested\": {\n      \"prepare\": \"lefthook install\"\n    }\n  }\n}\n":
+    labels:
     - source: |-
         {
           "scripts": {
@@ -143,3 +112,69 @@ snapshots:
       style: secondary
       start: 0
       end: 107
+  "{\"scripts\": {\"prepare\": \"echo lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"prepare\": \"echo lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {"scripts": {"prepare": "echo lefthook install"}}
+      style: secondary
+      start: 0
+      end: 50
+  "{\"scripts\": {\"prepare\": \"lefthook install --help\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"prepare\": \"lefthook install --help\"}}"
+      style: primary
+      start: 0
+      end: 51
+    - source: |
+        {"scripts": {"prepare": "lefthook install --help"}}
+      style: secondary
+      start: 0
+      end: 52
+  "{\"scripts\": {\"prepare\": \"lefthook install || echo ignored\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"prepare\": \"lefthook install || echo ignored\"}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        {"scripts": {"prepare": "lefthook install || echo ignored"}}
+      style: secondary
+      start: 0
+      end: 61
+  "{\"scripts\": {\"prepare\": [\"lefthook\", \"install\"]}}\n":
+    labels:
+    - source: "{\"scripts\": {\"prepare\": [\"lefthook\", \"install\"]}}"
+      style: primary
+      start: 0
+      end: 49
+    - source: |
+        {"scripts": {"prepare": ["lefthook", "install"]}}
+      style: secondary
+      start: 0
+      end: 50
+  "{\"scripts\": {\"prepare\": true}}\n":
+    labels:
+    - source: "{\"scripts\": {\"prepare\": true}}"
+      style: primary
+      start: 0
+      end: 30
+    - source: |
+        {"scripts": {"prepare": true}}
+      style: secondary
+      start: 0
+      end: 31
+  "{\"scripts\": {\"prepare-extra\": \"lefthook install || true\"}}\n":
+    labels:
+    - source: "{\"scripts\": {\"prepare-extra\": \"lefthook install || true\"}}"
+      style: primary
+      start: 0
+      end: 58
+    - source: |
+        {"scripts": {"prepare-extra": "lefthook install || true"}}
+      style: secondary
+      start: 0
+      end: 59

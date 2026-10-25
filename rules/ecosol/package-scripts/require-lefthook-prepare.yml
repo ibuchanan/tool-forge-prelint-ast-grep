@@ -34,6 +34,7 @@ ignores:
 metadata:
   references: ["https://lefthook.dev/installation/"]
   category: package-scripts
+  tags: [capability:git-hooks]
   precision: medium
   scope-profile: [package-json, tests]
   precision-rationale: "Tests distinguish a top-level prepare install command with optional fallback from missing, inert and nested entries. Alternative installation workflows can be effective; lifecycle skipping and actual hook installation are unresolved assessment gaps, not facts established by script text. Evidence: rule-tests/ecosol/package-scripts/require-lefthook-prepare.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-prepare-snapshot.yml."
