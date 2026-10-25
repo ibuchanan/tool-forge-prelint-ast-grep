@@ -1,0 +1,64 @@
+id: require-changelog-script
+language: Json
+severity: info
+message: >
+  Set `scripts.changelog` to regenerate `CHANGELOG.md` with `git cliff --config cliff.toml --unreleased -o CHANGELOG.md`.
+note: >
+  Drop Calf maintains a git-cliff regeneration entrypoint using output rather
+  than prepend to avoid repeated entries. Accepts direct git cliff commands with
+  --config/-c cliff.toml, --unreleased and --output/-o CHANGELOG.md in any order;
+  output may omit its default path. Long equals and attached short-option values,
+  --offline and --tag/-t with a literal version are supported. This bounded text
+  check does not interpret shell quoting, wrappers, environment variables or
+  escaped JSON, nor prove command success, TOML validity, history or equivalence.
+  Scope this ecosol convention to Forge-app package.json files. Owner-authored
+  cliff.toml policy and changelog contents are not frozen; suppress the rule for
+  an equivalent owner-managed wrapper after review.
+  https://git-cliff.org/docs/usage/args/
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/changelog.ts
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      has:
+        field: key
+        regex: '^"scripts"$'
+      all:
+        - has:
+            field: value
+            kind: object
+            has:
+              kind: pair
+              has:
+                field: key
+                regex: '^"changelog"$'
+              all:
+                - has:
+                    field: value
+                    kind: string
+                    all:
+                      - regex: '^"[ \t]*git[ \t]+cliff(?:[ \t]+(?:--config(?:[ \t]+|=)cliff\.toml|-c(?:[ \t]+|=)?cliff\.toml|--unreleased|--output(?:(?:[ \t]+|=)CHANGELOG\.md)?|-o(?:(?:[ \t]+|=)?CHANGELOG\.md)?|--offline|--tag(?:[ \t]+|=)[A-Za-z0-9][A-Za-z0-9._/+:-]*|-t(?:[ \t]+|=)?[A-Za-z0-9][A-Za-z0-9._/+:-]*))+[ \t]*"$'
+                      - regex: '[ \t](?:--config(?:[ \t]+|=)|-c(?:[ \t]+|=)?)cliff\.toml(?:[ \t]|")'
+                      - regex: '[ \t]--unreleased(?:[ \t]|")'
+                      - regex: '[ \t](?:--output(?:(?:[ \t]+|=)CHANGELOG\.md)?|-o(?:(?:[ \t]+|=)?CHANGELOG\.md)?)(?:[ \t]|")'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  references:
+    - https://git-cliff.org/docs/usage/args/
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/changelog.ts
+  tags: [capability:changelog]
+  category: package-scripts
+  precision: medium
+  precision-rationale: "Literal direct-command convention check; equivalent wrappers and escaped JSON spellings need review. No shell execution or native validation is inferred. Evidence: rule-tests/ecosol/package-scripts/require-changelog-script.test.yml and rule-tests/__snapshots__/require-changelog-script-snapshot.yml."
+  impact: low
+  impact-rationale: A missing preferred entrypoint or prepend workflow needs bounded developer-workflow repair; it does not prove invalid release history, policy or production behavior.
+  scope-profile: [package-json, tests]

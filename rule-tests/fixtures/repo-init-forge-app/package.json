@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "changelog": "git cliff --offline --unreleased --prepend CHANGELOG.md",
+    "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md",
     "check": "run-p --npm-path npm --print-label format:check typecheck lint test size:check",
     "dev": "tsc -p tsconfig.build.json --watch",
     "forge:deploy": "cmd=$(fence-rider deploy -- --non-interactive) && sh -c \"$cmd\" sh",

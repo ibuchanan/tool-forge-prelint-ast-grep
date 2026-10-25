@@ -33,6 +33,7 @@ rules/ecosol/package-scripts/require-typescript-build-script.yml	package	include
 rules/ecosol/package-scripts/require-valid-prelint-config.yml	package	include
 rules/ecosol/package-scripts/require-vitest-coverage-script.yml	package	include
 rules/ecosol/package-scripts/require-vitest-run-script.yml	package	include
+rules/ecosol/package-scripts/require-changelog-script.yml	package	include
 rules/ecosol/package-scripts/typecheck-with-typescript.yml	package	include
 rules/ecosol/package-scripts/use-explicit-vitest-watch.yml	package	include
 rules/ecosol/secrets/no-unguarded-fence-rider-evaluation.yml	package	include

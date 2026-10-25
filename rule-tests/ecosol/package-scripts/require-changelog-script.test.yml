@@ -1,0 +1,89 @@
+id: require-changelog-script
+valid:
+  # Exact command from the pinned Drop Calf changelog capability.
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } }
+  # Output spellings and flag order do not change regeneration.
+  - |
+    { "scripts": { "changelog": "git cliff --output=CHANGELOG.md --unreleased --config=cliff.toml" } }
+  - |
+    { "scripts": { "changelog": "git cliff --unreleased --output CHANGELOG.md --config cliff.toml" } }
+  - |
+    { "scripts": { "changelog": "git cliff -oCHANGELOG.md --unreleased -ccliff.toml" } }
+  - |
+    { "scripts": { "changelog": "git cliff -c=cliff.toml -o=CHANGELOG.md --unreleased" } }
+  # git-cliff defaults a bare output option to CHANGELOG.md.
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output" } }
+  - |
+    { "scripts": { "changelog": "git cliff -o --unreleased -c cliff.toml" } }
+  # Offline mode and owner-selected release tags do not freeze policy/version.
+  - |
+    { "scripts": { "changelog": "git cliff --offline --config cliff.toml --tag v2.3.4-beta.1 --unreleased -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "  git  cliff -t=v9.0.0 -o CHANGELOG.md --unreleased -c cliff.toml  " }, "version": "9.0.0", "config": { "changelog": "owner data" } }
+invalid:
+  - |
+    { "name": "forge-app" }
+  # Malformed long-option assignments are not output spellings.
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output==CHANGELOG.md" } }
+  - |
+    { "scripts": {} }
+  - |
+    { "scripts": null }
+  - |
+    { "scripts": { "changelog": null } }
+  - |
+    { "scripts": { "changelog": ["git cliff --config cliff.toml --unreleased -o CHANGELOG.md"] } }
+  - |
+    { "scripts": { "changelog:generate": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } }
+  - |
+    { "other": { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } } }
+  - |
+    { "scripts": { "nested": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } } }
+  - |
+    { "scripts": [{ "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" }] }
+  - |
+    { "scripts": { "changelog": { "command": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } } }
+  - |
+    { "scripts": { "changelog": "" } }
+  - |
+    { "scripts": { "changelog": "echo git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "echo 'git cliff --config cliff.toml --unreleased -o CHANGELOG.md'" } }
+  - |
+    { "scripts": { "changelog": "git cliffhanger --config cliff.toml --unreleased -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --offline --unreleased --prepend CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -p CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --prepend CHANGELOG.md -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --unreleased -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config other.toml --unreleased -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o OTHER.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output=CHANGELOG.md.bak" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output-file CHANGELOG.md" } }
+  # A token in another argument, comment, or command is not an executed option.
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --tag --unreleased -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased # -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased && echo -o CHANGELOG.md" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md; echo done" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md --help" } }
+  - |
+    { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md --init" } }

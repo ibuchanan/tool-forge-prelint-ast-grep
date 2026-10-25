@@ -87,6 +87,33 @@ for variant in generated commonjs missing-type public missing-private owner-meta
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
 
+# Changelog command checks are static; never run regeneration on these fixtures.
+changelog_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_changelog.XXXXXX")
+for variant in generated missing legacy; do
+  expected=1
+  case "$variant" in
+  generated)
+    edit='.'
+    expected=0
+    ;;
+  missing) edit='del(.scripts.changelog)' ;;
+  legacy) edit='.scripts.changelog = "git cliff --offline --unreleased --prepend CHANGELOG.md"' ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$changelog_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^require-changelog-script$' --include-metadata --json=compact "$changelog_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --argjson count "$expected" '
+    type == "array" and length == $count and
+    all(.[]; .ruleId == "require-changelog-script" and .severity == "info" and
+      (.metadata.tags | index("capability:changelog") != null))
+  ' >/dev/null; then
+    printf 'Unexpected changelog findings for %s: expected %s, got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo "Generated changelog command and package mutations produced the expected findings."
+
 # Node checks root engines policy, not seeded type versions or runtime selection.
 node_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_node.XXXXXX")
 for variant in generated refreshed-types removed-types nested-engines root-engines; do

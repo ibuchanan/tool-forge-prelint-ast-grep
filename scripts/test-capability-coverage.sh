@@ -40,6 +40,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "forge-manifest"')
 }
 printf 'PASS: manifest runtime shape and Forge lint entrypoint are discoverable\n'
 
+expected=$'changelog\timplemented\trequire-changelog-script'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "changelog"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: changelog regeneration must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: changelog regeneration entrypoint is discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

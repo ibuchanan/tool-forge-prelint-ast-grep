@@ -172,3 +172,49 @@ manifest/security rules.
 
 Tests use static YAML examples, real-file scans and capability reporting only.
 No credentials are resolved and no Forge lint, deployment or installation is run.
+
+## Changelog: regeneration entrypoint text
+
+`require-changelog-script` checks a direct root `scripts.changelog` string in an
+existing `package.json`. It reports an informational ecosol convention finding
+when the bounded direct-command form is absent. Callers select Forge-app package
+directories; the `capability:changelog` tag does not detect apps or install tools.
+Generic placeholder rules retain their separate ownership and are not tagged.
+
+The reviewed source is the
+[Drop Calf changelog capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/changelog.ts).
+Its maintained command is `git cliff --config cliff.toml --unreleased -o CHANGELOG.md`.
+Initialization seeds `cliff.toml`, `CHANGELOG.md` and git-cliff; update maintains
+the package command and tool pin, not the owner-authored policy or output files.
+No fixed release version, commit groups, headings or file contents are enforced.
+
+| Command component       | Recognized literal forms                                                                                                                                             |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Invocation              | Direct `git cliff`, with ordinary space separation.                                                                                                                  |
+| Policy                  | `--config cliff.toml`, `--config=cliff.toml`, `-c cliff.toml`, `-ccliff.toml`, `-c=cliff.toml`.                                                                      |
+| Selection               | `--unreleased`.                                                                                                                                                      |
+| Output                  | `--output CHANGELOG.md`, `--output=CHANGELOG.md`, `-o CHANGELOG.md`, `-oCHANGELOG.md`, `-o=CHANGELOG.md`, or bare `--output`/`-o` using the documented default path. |
+| Other supported options | `--offline`, `--tag`/`-t` with an unquoted literal version; required options can appear in any order.                                                                |
+
+The [git-cliff argument reference](https://git-cliff.org/docs/usage/args/) defines
+native options and defaults. Echo/lookalike commands, missing required options,
+wrong literal paths, prepend variants, shell comments/chaining and inert
+`--help`/`--init` commands do not satisfy this rule. Unsupported equivalent forms
+such as wrappers, shell quoting, environment assignments, alternate relative
+path spellings, other flags and escaped JSON spellings require review and, where
+appropriate, suppression of this convention check. The matcher is not a shell
+parser or a complete CLI validator; duplicate options and environment-dependent
+behavior remain native-tool concerns.
+
+| Artifact or result          | Coverage boundary                                                                                                                |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Existing package entrypoint | Literal direct-command convention only; root scripts nesting and package filename routing are checked.                           |
+| `cliff.toml` acceptance     | TOML syntax, Tera templates and release-policy semantics require native git-cliff validation.                                    |
+| Git history                 | Repository availability, commit/tag selection and conventional-commit interpretation require native validation.                  |
+| Changelog output            | Successful regeneration, equivalence and idempotence require native execution; script text does not prove valid release history. |
+| Tool pin and missing files  | No installation, version compatibility, missing-package/config/output detection or cross-file comparison.                        |
+
+Tests scan static package examples and generated-package mutations only. They do
+not run git-cliff, regenerate files or mutate Git history. The older repo-init
+compliance fixture's prepend script is updated to the maintained command; the
+separately generated Drop Calf fixture is unchanged.

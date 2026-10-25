@@ -1,0 +1,343 @@
+id: require-changelog-script
+snapshots:
+  "{ \"name\": \"forge-app\" }\n":
+    labels:
+    - source: "{ \"name\": \"forge-app\" }"
+      style: primary
+      start: 0
+      end: 23
+    - source: |
+        { "name": "forge-app" }
+      style: secondary
+      start: 0
+      end: 24
+  "{ \"other\": { \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } } }\n":
+    labels:
+    - source: "{ \"other\": { \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } } }"
+      style: primary
+      start: 0
+      end: 105
+    - source: |
+        { "other": { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } } }
+      style: secondary
+      start: 0
+      end: 106
+  "{ \"scripts\": [{ \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" }] }\n":
+    labels:
+    - source: "{ \"scripts\": [{ \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" }] }"
+      style: primary
+      start: 0
+      end: 94
+    - source: |
+        { "scripts": [{ "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" }] }
+      style: secondary
+      start: 0
+      end: 95
+  "{ \"scripts\": null }\n":
+    labels:
+    - source: "{ \"scripts\": null }"
+      style: primary
+      start: 0
+      end: 19
+    - source: |
+        { "scripts": null }
+      style: secondary
+      start: 0
+      end: 20
+  "{ \"scripts\": { \"changelog\": \"\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"\" } }"
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        { "scripts": { "changelog": "" } }
+      style: secondary
+      start: 0
+      end: 35
+  "{ \"scripts\": { \"changelog\": \"echo 'git cliff --config cliff.toml --unreleased -o CHANGELOG.md'\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"echo 'git cliff --config cliff.toml --unreleased -o CHANGELOG.md'\" } }"
+      style: primary
+      start: 0
+      end: 99
+    - source: |
+        { "scripts": { "changelog": "echo 'git cliff --config cliff.toml --unreleased -o CHANGELOG.md'" } }
+      style: secondary
+      start: 0
+      end: 100
+  "{ \"scripts\": { \"changelog\": \"echo git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"echo git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 97
+    - source: |
+        { "scripts": { "changelog": "echo git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 98
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --tag --unreleased -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --tag --unreleased -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 98
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --tag --unreleased -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 99
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased # -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased # -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 94
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased # -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 95
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased && echo -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased && echo -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 100
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased && echo -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 101
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --output-file CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --output-file CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 103
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output-file CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 104
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --output==CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --output==CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 99
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output==CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 100
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --output=CHANGELOG.md.bak\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --output=CHANGELOG.md.bak\" } }"
+      style: primary
+      start: 0
+      end: 102
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --output=CHANGELOG.md.bak" } }
+      style: secondary
+      start: 0
+      end: 103
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --prepend CHANGELOG.md -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased --prepend CHANGELOG.md -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 115
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased --prepend CHANGELOG.md -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 116
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md --help\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md --help\" } }"
+      style: primary
+      start: 0
+      end: 99
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md --help" } }
+      style: secondary
+      start: 0
+      end: 100
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md --init\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md --init\" } }"
+      style: primary
+      start: 0
+      end: 99
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md --init" } }
+      style: secondary
+      start: 0
+      end: 100
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md; echo done\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md; echo done\" } }"
+      style: primary
+      start: 0
+      end: 103
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md; echo done" } }
+      style: secondary
+      start: 0
+      end: 104
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o OTHER.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o OTHER.md\" } }"
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -o OTHER.md" } }
+      style: secondary
+      start: 0
+      end: 89
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -p CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -p CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 92
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased -p CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 93
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml --unreleased\" } }"
+      style: primary
+      start: 0
+      end: 76
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml --unreleased" } }
+      style: secondary
+      start: 0
+      end: 77
+  "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config cliff.toml -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 79
+    - source: |
+        { "scripts": { "changelog": "git cliff --config cliff.toml -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 80
+  "{ \"scripts\": { \"changelog\": \"git cliff --config other.toml --unreleased -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --config other.toml --unreleased -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 92
+    - source: |
+        { "scripts": { "changelog": "git cliff --config other.toml --unreleased -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 93
+  "{ \"scripts\": { \"changelog\": \"git cliff --offline --unreleased --prepend CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --offline --unreleased --prepend CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 89
+    - source: |
+        { "scripts": { "changelog": "git cliff --offline --unreleased --prepend CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 90
+  "{ \"scripts\": { \"changelog\": \"git cliff --unreleased -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliff --unreleased -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 72
+    - source: |
+        { "scripts": { "changelog": "git cliff --unreleased -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 73
+  "{ \"scripts\": { \"changelog\": \"git cliffhanger --config cliff.toml --unreleased -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": \"git cliffhanger --config cliff.toml --unreleased -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 98
+    - source: |
+        { "scripts": { "changelog": "git cliffhanger --config cliff.toml --unreleased -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 99
+  "{ \"scripts\": { \"changelog\": [\"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\"] } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": [\"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\"] } }"
+      style: primary
+      start: 0
+      end: 94
+    - source: |
+        { "scripts": { "changelog": ["git cliff --config cliff.toml --unreleased -o CHANGELOG.md"] } }
+      style: secondary
+      start: 0
+      end: 95
+  "{ \"scripts\": { \"changelog\": null } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": null } }"
+      style: primary
+      start: 0
+      end: 36
+    - source: |
+        { "scripts": { "changelog": null } }
+      style: secondary
+      start: 0
+      end: 37
+  "{ \"scripts\": { \"changelog\": { \"command\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog\": { \"command\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } } }"
+      style: primary
+      start: 0
+      end: 107
+    - source: |
+        { "scripts": { "changelog": { "command": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } } }
+      style: secondary
+      start: 0
+      end: 108
+  "{ \"scripts\": { \"changelog:generate\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"changelog:generate\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } }"
+      style: primary
+      start: 0
+      end: 101
+    - source: |
+        { "scripts": { "changelog:generate": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } }
+      style: secondary
+      start: 0
+      end: 102
+  "{ \"scripts\": { \"nested\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } } }\n":
+    labels:
+    - source: "{ \"scripts\": { \"nested\": { \"changelog\": \"git cliff --config cliff.toml --unreleased -o CHANGELOG.md\" } } }"
+      style: primary
+      start: 0
+      end: 106
+    - source: |
+        { "scripts": { "nested": { "changelog": "git cliff --config cliff.toml --unreleased -o CHANGELOG.md" } } }
+      style: secondary
+      start: 0
+      end: 107
+  "{ \"scripts\": {} }\n":
+    labels:
+    - source: "{ \"scripts\": {} }"
+      style: primary
+      start: 0
+      end: 17
+    - source: |
+        { "scripts": {} }
+      style: secondary
+      start: 0
+      end: 18
