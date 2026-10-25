@@ -36,6 +36,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   references:
     - https://www.typescriptlang.org/tsconfig/#extends
     - https://www.typescriptlang.org/tsconfig/#noEmit

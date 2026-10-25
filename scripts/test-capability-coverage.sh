@@ -96,6 +96,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "test"')
 }
 printf 'PASS: Vitest conventions are discoverable under the test capability\n'
 
+expected=$'typescript\timplemented\tlint-with-typescript,no-forge-jsx-factory-override-mismatch,no-forge-jsx-override-mismatch,no-forge-source-map-override-mismatch,require-tsconfig-include-src,require-tsconfig-lib-es2022,require-tsconfig-module-resolution-node,require-tsconfig-out-dir-dist,require-tsconfig-root-dir-src,require-tsconfig-target-es2022,require-tsconfig-typecheck-exact-optional-property-types,require-tsconfig-typecheck-extends-no-emit,require-tsconfig-typecheck-include-tests,require-tsconfig-typecheck-no-implicit-override,require-tsconfig-typecheck-no-implicit-returns,require-tsconfig-typecheck-no-property-access-from-index-signature,require-tsconfig-typecheck-no-unchecked-indexed-access,require-tsconfig-typecheck-no-unchecked-side-effect-imports,require-typescript-build-script,typecheck-with-typescript,use-tsconfig-consistent-file-casing,use-tsconfig-es-module-interop,use-tsconfig-skip-lib-check,use-tsconfig-strict-mode,use-typescript-5'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "typescript"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: compiler, build and typecheck conventions must be discoverable as typescript; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: compiler, build and typecheck conventions are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

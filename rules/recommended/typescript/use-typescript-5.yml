@@ -32,6 +32,7 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests distinguish simple 5.x dependency strings from 4.x/6.x and no declaration. The pair matcher is not restricted to devDependencies and the regex is not a semver resolver; compatible compound ranges, prereleases and lockfile resolutions are untested gaps. Evidence: rule-tests/recommended/typescript/use-typescript-5.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-typescript-5-snapshot.yml."
   impact: medium

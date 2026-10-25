@@ -1,0 +1,37 @@
+id: lint-with-typescript
+valid:
+  - |
+    {"scripts":{"lint:check:typecheck":"npm run typecheck"}}
+  - |
+    {"scripts":{"lint:check:typecheck":"bun run typecheck"}}
+  - |
+    {"scripts":{"lint:check:typecheck":"  npm   run   typecheck  ","typecheck":"tsc --project tsconfig.typecheck.json --noEmit"}}
+invalid:
+  - |
+    {}
+  - |
+    {"scripts":{"lint:check:typecheck":"echo npm run typecheck"}}
+  - |
+    {"scripts":{"lint:check:typecheck":"npm run typecheck:watch"}}
+  - |
+    {"scripts":{"lint:check:typecheck":"npm run build"}}
+  - |
+    {"scripts":{"lint:check:typecheck":"tsc --project tsconfig.typecheck.json --noEmit"}}
+  - |
+    {"scripts":{"lint:check:typecheck":true}}
+  - |
+    {"scripts":{"lint:check:typecheck":null}}
+  - |
+    {"scripts":"npm run typecheck"}
+  - |
+    {"config":{"scripts":{"lint:check:typecheck":"npm run typecheck"}}}
+  - |
+    {"scripts":{"nested":{"lint:check:typecheck":"npm run typecheck"}}}
+  - |
+    {"lint:check:typecheck":"npm run typecheck"}
+  - |
+    {"scripts":{"lint:typecheck":"npm run typecheck"}}
+  - |
+    {"scripts":{"lint:check:typecheck":"npm run typecheck && echo done"}}
+  - |
+    {"scripts":{"typecheck":"tsc --project tsconfig.typecheck.json --noEmit"}}

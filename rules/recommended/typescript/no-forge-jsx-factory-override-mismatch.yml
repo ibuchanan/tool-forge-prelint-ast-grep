@@ -26,6 +26,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests distinguish explicit factory/fragment-factory declarations from no pragma. The matcher does not establish UI Kit 2 usage, automatic runtime settings or the property value; legitimate non-UI-Kit JSX factories remain an untested gap. Unlike sibling config checks it does not back off on extends. Evidence: rule-tests/recommended/typescript/no-forge-jsx-factory-override-mismatch.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-forge-jsx-factory-override-mismatch-snapshot.yml."
   impact: high

@@ -23,6 +23,7 @@ rules/ecosol/package-json/use-node-24.yml	package	include
 rules/ecosol/package-scripts/lint-and-format-with-biome.yml	package	include
 rules/ecosol/package-scripts/lint-with-forge.yml	package	include
 rules/ecosol/package-scripts/lint-with-prelint.yml	package	include
+rules/ecosol/package-scripts/lint-with-typescript.yml	package	include
 rules/ecosol/package-scripts/no-invalid-script-name-chars.yml	package	include
 rules/ecosol/package-scripts/no-stale-placeholder.yml	package	include
 rules/ecosol/package-scripts/require-composed-check.yml	package	include

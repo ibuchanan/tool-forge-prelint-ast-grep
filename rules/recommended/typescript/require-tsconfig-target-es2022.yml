@@ -37,6 +37,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests compare exact ES2022 with other/missing targets and skip extends. Older compatible emit targets, alternate runtimes and build overrides are untested gaps. The preserved Node 18 assertion is not verified by metadata migration. Evidence: rule-tests/recommended/typescript/require-tsconfig-target-es2022.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-target-es2022-snapshot.yml."
   impact: medium

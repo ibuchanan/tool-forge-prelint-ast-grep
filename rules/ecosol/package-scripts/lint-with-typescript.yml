@@ -1,0 +1,46 @@
+id: lint-with-typescript
+language: Json
+severity: info
+message: >
+  Delegate `scripts.lint:check:typecheck` to `npm run typecheck` or `bun run typecheck`.
+note: >
+  Drop Calf supplies this delegate so the lint:check:* aggregate selects the
+  dedicated typecheck task. This rule checks a direct root scripts entry and
+  bounded command text only; typecheck-with-typescript checks the compiler task
+  separately. It does not prove target presence, shell execution, effective
+  compiler options or successful compilation. Review and suppress this advisory
+  for equivalent owner-managed orchestration rather than replacing it blindly.
+  https://docs.npmjs.com/cli/v11/commands/npm-run-script
+  https://bun.sh/docs/cli/run
+rule:
+  kind: object
+  inside:
+    kind: document
+  not:
+    has:
+      kind: pair
+      regex: '^"scripts"\s*:'
+      has:
+        kind: object
+        has:
+          kind: pair
+          regex: '^"lint:check:typecheck"\s*:\s*"\s*(npm|bun)\s+run\s+typecheck\s*"$'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  tags: [capability:typescript]
+  references:
+    - https://docs.npmjs.com/cli/v11/commands/npm-run-script
+    - https://bun.sh/docs/cli/run
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/typescript.ts
+  category: package-scripts
+  precision: medium
+  scope-profile: [package-json, tests]
+  precision-rationale: "Tests accept direct npm/Bun delegates and reject missing, inert, wrong-target, non-string and nested entries. This is bounded command text, not a shell parser; wrappers, flags, escaped JSON spellings and equivalent orchestration need review. Evidence: rule-tests/ecosol/package-scripts/lint-with-typescript.test.yml and rule-tests/__snapshots__/lint-with-typescript-snapshot.yml; scripts/check-typescript-fixtures.sh verifies native package routing."
+  impact: low
+  impact-rationale: Omitting the namespaced delegate can leave type checking out of the team's lint aggregate. Independent validation may still run typecheck; genuine drift is recoverable workflow friction, not proof of runtime failure.

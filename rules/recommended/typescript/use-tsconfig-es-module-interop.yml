@@ -35,6 +35,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: low
   precision-rationale: "Tests compare explicit true with false/absence and skip extends. The note permits omission. Projects with no affected imports or intentionally different CJS/ESM conventions routinely match; actual module interoperability is an untested gap. Evidence: rule-tests/recommended/typescript/use-tsconfig-es-module-interop.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-es-module-interop-snapshot.yml."
   impact: medium

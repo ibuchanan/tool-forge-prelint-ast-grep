@@ -37,6 +37,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests check sourceMap true versus false/absent and skip extends. The matcher does not inspect the installed Forge bundler; its hardcoded override is an unchanged source claim, not demonstrated by these tests. Nested property text and alternate build paths remain untested gaps. Evidence: rule-tests/recommended/typescript/no-forge-source-map-override-mismatch.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-forge-source-map-override-mismatch-snapshot.yml."
   impact: low

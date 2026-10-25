@@ -36,6 +36,7 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   references:
     ["https://www.typescriptlang.org/docs/handbook/compiler-options.html"]
   category: package-scripts

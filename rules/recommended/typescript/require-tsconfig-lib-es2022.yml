@@ -38,6 +38,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests check literal ES2022 membership, allow DOM and skip extends. Default libs and other compatible runtime baselines are not resolved. The native Node 18 assumption is historical, not validated against an app runtime; these are assessment gaps. Evidence: rule-tests/recommended/typescript/require-tsconfig-lib-es2022.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-lib-es2022-snapshot.yml."
   impact: medium

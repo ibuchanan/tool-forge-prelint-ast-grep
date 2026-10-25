@@ -36,6 +36,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests cover react-jsx versus other/missing settings and intentionally skip configs with extends. Neither UI Kit 2 identity nor delegated JSX transformation is established; a backend-only or separately transformed project is an untested contextual gap. Evidence: rule-tests/recommended/typescript/no-forge-jsx-override-mismatch.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-forge-jsx-override-mismatch-snapshot.yml."
   impact: high

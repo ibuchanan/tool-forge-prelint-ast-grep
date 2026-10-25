@@ -37,6 +37,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
   precision-rationale: "Tests require a literal src array entry, permit additional entries and skip extends. Default discovery, src glob equivalents, files lists and alternate handler directories are untested gaps; missing this exact text need not leave handlers unchecked. Evidence: rule-tests/recommended/typescript/require-tsconfig-include-src.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-include-src-snapshot.yml."
   impact: medium

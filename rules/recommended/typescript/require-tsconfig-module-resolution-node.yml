@@ -2,16 +2,14 @@ id: require-tsconfig-module-resolution-node
 language: Json
 severity: warning
 message: >
-  tsconfig.json compilerOptions.moduleResolution must be "Node" to match how
-  Forge's Node 18 runtime and webpack actually resolve packages.
+  Set base tsconfig.json compilerOptions.moduleResolution to "Node"; use a separate config for local typechecking.
 note: >
-  moduleResolution is derived from Forge's Node 18 backend runtime, not a
-  team convention — every Forge app resolves packages the same way. Unlike
-  jsx/jsxFactory/sourceMap, the bundler does not correct a wrong
-  moduleResolution for you: drift here (e.g. "bundler" or "NodeNext") can
-  make tsc accept import specifiers that fail to resolve once actually
-  built. Use a separate tsconfig.typecheck.json if you want a different
-  moduleResolution for local-only tooling.
+  Drop Calf's Forge-app base uses Node resolution for its local build and
+  Forge Webpack baseline. TypeScript accepts case-equivalent Node spellings.
+  This is not a universal runtime or installed-bundler compatibility test.
+  The separately scoped tsconfig.typecheck.json can use Node or Bundler
+  resolution according to dependency traits; this rule does not inspect it.
+  Other owner-selected base policies need review and possible suppression.
   This rule assumes a single self-contained tsconfig.json:
   ast-grep can't follow extends to a shared base config,
   so it backs off entirely whenever extends is present
@@ -30,7 +28,7 @@ rule:
     - not:
         has:
           kind: pair
-          regex: '"compilerOptions"\s*:[\s\S]*?"moduleResolution"\s*:\s*"Node"'
+          regex: '"compilerOptions"\s*:[\s\S]*?"moduleResolution"\s*:\s*"(?i:node)"'
 files:
   - "**/tsconfig.json"
 ignores:
@@ -39,8 +37,9 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: medium
-  precision-rationale: "Tests distinguish exact Node text from bundler/missing settings and skip extends. Case-equivalent accepted values, compatible defaults and alternate frontend configurations are untested gaps. No actual import or installed Forge bundler is inspected; Node 18 scope is an unchanged historical assumption. Evidence: rule-tests/recommended/typescript/require-tsconfig-module-resolution-node.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-module-resolution-node-snapshot.yml."
+  precision-rationale: "Tests accept case-equivalent Node spellings, reject Bundler/missing base settings and skip extends. Native fixtures keep typecheck Node/Bundler variants outside this base-only scope. Compatible defaults and alternate base policies remain assessment gaps; no imports or installed Forge bundler are inspected. Evidence: rule-tests/recommended/typescript/require-tsconfig-module-resolution-node.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-tsconfig-module-resolution-node-snapshot.yml."
   impact: medium
   impact-rationale: A genuine local-versus-build resolver mismatch can accept imports that later fail to bundle. TypeScript documents resolver modes; a different mode is not proof that any import is incompatible.
   scope-profile:

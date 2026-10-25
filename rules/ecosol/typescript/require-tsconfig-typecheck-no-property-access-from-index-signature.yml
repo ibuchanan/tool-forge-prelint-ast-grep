@@ -29,6 +29,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   references:
     [
       "https://www.typescriptlang.org/tsconfig/#noPropertyAccessFromIndexSignature",

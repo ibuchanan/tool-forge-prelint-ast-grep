@@ -1,0 +1,156 @@
+id: lint-with-typescript
+snapshots:
+  "{\"config\":{\"scripts\":{\"lint:check:typecheck\":\"npm run typecheck\"}}}\n":
+    labels:
+    - source: "{\"config\":{\"scripts\":{\"lint:check:typecheck\":\"npm run typecheck\"}}}"
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        {"config":{"scripts":{"lint:check:typecheck":"npm run typecheck"}}}
+      style: secondary
+      start: 0
+      end: 68
+  "{\"lint:check:typecheck\":\"npm run typecheck\"}\n":
+    labels:
+    - source: "{\"lint:check:typecheck\":\"npm run typecheck\"}"
+      style: primary
+      start: 0
+      end: 44
+    - source: |
+        {"lint:check:typecheck":"npm run typecheck"}
+      style: secondary
+      start: 0
+      end: 45
+  "{\"scripts\":\"npm run typecheck\"}\n":
+    labels:
+    - source: "{\"scripts\":\"npm run typecheck\"}"
+      style: primary
+      start: 0
+      end: 31
+    - source: |
+        {"scripts":"npm run typecheck"}
+      style: secondary
+      start: 0
+      end: 32
+  "{\"scripts\":{\"lint:check:typecheck\":\"echo npm run typecheck\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":\"echo npm run typecheck\"}}"
+      style: primary
+      start: 0
+      end: 61
+    - source: |
+        {"scripts":{"lint:check:typecheck":"echo npm run typecheck"}}
+      style: secondary
+      start: 0
+      end: 62
+  "{\"scripts\":{\"lint:check:typecheck\":\"npm run build\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":\"npm run build\"}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        {"scripts":{"lint:check:typecheck":"npm run build"}}
+      style: secondary
+      start: 0
+      end: 53
+  "{\"scripts\":{\"lint:check:typecheck\":\"npm run typecheck && echo done\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":\"npm run typecheck && echo done\"}}"
+      style: primary
+      start: 0
+      end: 69
+    - source: |
+        {"scripts":{"lint:check:typecheck":"npm run typecheck && echo done"}}
+      style: secondary
+      start: 0
+      end: 70
+  "{\"scripts\":{\"lint:check:typecheck\":\"npm run typecheck:watch\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":\"npm run typecheck:watch\"}}"
+      style: primary
+      start: 0
+      end: 62
+    - source: |
+        {"scripts":{"lint:check:typecheck":"npm run typecheck:watch"}}
+      style: secondary
+      start: 0
+      end: 63
+  "{\"scripts\":{\"lint:check:typecheck\":\"tsc --project tsconfig.typecheck.json --noEmit\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":\"tsc --project tsconfig.typecheck.json --noEmit\"}}"
+      style: primary
+      start: 0
+      end: 85
+    - source: |
+        {"scripts":{"lint:check:typecheck":"tsc --project tsconfig.typecheck.json --noEmit"}}
+      style: secondary
+      start: 0
+      end: 86
+  "{\"scripts\":{\"lint:check:typecheck\":null}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":null}}"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {"scripts":{"lint:check:typecheck":null}}
+      style: secondary
+      start: 0
+      end: 42
+  "{\"scripts\":{\"lint:check:typecheck\":true}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:check:typecheck\":true}}"
+      style: primary
+      start: 0
+      end: 41
+    - source: |
+        {"scripts":{"lint:check:typecheck":true}}
+      style: secondary
+      start: 0
+      end: 42
+  "{\"scripts\":{\"lint:typecheck\":\"npm run typecheck\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint:typecheck\":\"npm run typecheck\"}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        {"scripts":{"lint:typecheck":"npm run typecheck"}}
+      style: secondary
+      start: 0
+      end: 51
+  "{\"scripts\":{\"nested\":{\"lint:check:typecheck\":\"npm run typecheck\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"nested\":{\"lint:check:typecheck\":\"npm run typecheck\"}}}"
+      style: primary
+      start: 0
+      end: 67
+    - source: |
+        {"scripts":{"nested":{"lint:check:typecheck":"npm run typecheck"}}}
+      style: secondary
+      start: 0
+      end: 68
+  "{\"scripts\":{\"typecheck\":\"tsc --project tsconfig.typecheck.json --noEmit\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"typecheck\":\"tsc --project tsconfig.typecheck.json --noEmit\"}}"
+      style: primary
+      start: 0
+      end: 74
+    - source: |
+        {"scripts":{"typecheck":"tsc --project tsconfig.typecheck.json --noEmit"}}
+      style: secondary
+      start: 0
+      end: 75
+  "{}\n":
+    labels:
+    - source: "{}"
+      style: primary
+      start: 0
+      end: 2
+    - source: |
+        {}
+      style: secondary
+      start: 0
+      end: 3

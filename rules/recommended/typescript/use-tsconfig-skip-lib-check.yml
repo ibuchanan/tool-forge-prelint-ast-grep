@@ -36,6 +36,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: low
   precision-rationale: "Tests compare explicit true with false/absence and skip extends. Full declaration checking is legitimate and can catch real incompatibilities; performance and third-party declaration failures are untested gaps rather than proven violations. Evidence: rule-tests/recommended/typescript/use-tsconfig-skip-lib-check.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-skip-lib-check-snapshot.yml."
   impact: low

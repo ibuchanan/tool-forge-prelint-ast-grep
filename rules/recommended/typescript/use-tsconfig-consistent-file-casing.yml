@@ -37,6 +37,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: low
   precision-rationale: "Tests recognize explicit true, false/absence and extends backoff. The note permits omission; compiler-version defaults and actual casing inconsistencies are untested gaps. A missing explicit option routinely matches otherwise working projects. Evidence: rule-tests/recommended/typescript/use-tsconfig-consistent-file-casing.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-consistent-file-casing-snapshot.yml."
   impact: medium

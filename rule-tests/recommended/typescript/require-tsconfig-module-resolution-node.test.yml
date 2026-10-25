@@ -1,5 +1,8 @@
 id: require-tsconfig-module-resolution-node
 valid:
+  # TypeScript accepts case-equivalent resolver names.
+  - |
+    {"compilerOptions":{"moduleResolution":"node"}}
   - |
     {
       "compilerOptions": {

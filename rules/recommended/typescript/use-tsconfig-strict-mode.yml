@@ -36,6 +36,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:typescript]
   precision: low
   precision-rationale: "Tests compare explicit strict true with false/absence and skip extends. Individual strict suboptions or deliberate staged adoption are untested gaps; omission is explicitly permitted by the note, so it is conditional advice. Evidence: rule-tests/recommended/typescript/use-tsconfig-strict-mode.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-tsconfig-strict-mode-snapshot.yml."
   impact: medium

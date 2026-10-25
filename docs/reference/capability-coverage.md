@@ -338,6 +338,61 @@ Static fixtures scan generated scripts/config, optional flag variants, owner
 provider/exclusion choices and isolated mutations. No package test, watch or
 coverage command, dependency installation or native Vitest initialization is run.
 
+## TypeScript: compiler conventions and lint delegation
+
+Twenty-four existing rules and the new `lint-with-typescript` advisory map to
+`capability:typescript`. The existing mapping covers the build/typecheck scripts,
+TypeScript 5 declaration, base compiler options, Forge JSX/source-map mismatches
+and the dedicated typecheck flags. Unrelated source-code rules are not tagged.
+Tags do not establish app identity, installed dependencies or successful compilation.
+
+The reviewed source is the
+[TypeScript capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/typescript.ts).
+Its Forge-app commands are `tsc --project tsconfig.json`,
+`tsc --project tsconfig.typecheck.json --noEmit` and `npm run typecheck` for
+`lint:check:typecheck`. The build rule also retains the legacy build-project
+command. `typecheck-with-typescript` retains its existing explicit project/noEmit
+text policy; the separate delegate rule does not duplicate compiler validation.
+
+| Artifact                  | Bounded convention                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `package.json`            | `lint-with-typescript` requires a direct root `scripts.lint:check:typecheck` string containing only `npm run typecheck` or `bun run typecheck`, with ordinary whitespace. Missing, non-string, nested, inert, direct-compiler and wrong-target entries are reported. Flags, wrappers, chaining and escaped JSON spellings need review and possible suppression. Target existence and actual invocation are not inferred. |
+| `tsconfig.json`           | Existing base-only filename routing remains unchanged. ES2022, Node resolution, source root/dist output and strict defaults are checked by their existing rules. The resolver now accepts case-equivalent `Node` spellings, including `node`; its historical Node 18 claim is removed. Other base resolver policies require review, not a universal incompatibility diagnosis.                                           |
+| `tsconfig.typecheck.json` | Separate existing rules check explicit extends/noEmit, strict flags and test/test-directory include forms. Base-only rootDir and resolution rules never apply here, even without extends. Both `Node` and `Bundler` resolution remain accepted; no new typecheck-resolution rule is introduced.                                                                                                                          |
+| Other compiler variants   | Build/declarations configs and alternate `.jsonc` filenames are not pulled into base-only checks. JSONC comments in the conventional `.json` filenames are supported and tested. Forge-app does not require a declarations project.                                                                                                                                                                                      |
+
+Drop Calf's final default Vitest-backed typecheck config uses `rootDir: "."`,
+`moduleResolution: "Bundler"`, source/test/tests plus `vitest.config.ts`, and
+exclusions for generated/spec paths. Removing the Vitest/tsdown dependency traits
+selects Node resolution and omits the Vitest config include. Static rules do not
+read another file's dependencies to infer those traits. Owner comments, paths and
+unrelated options are retained; no new default freezes them or a dependency pin.
+
+[TypeScript extends](https://www.typescriptlang.org/tsconfig/#extends) and
+[include](https://www.typescriptlang.org/tsconfig/#include) define effective
+inheritance and file selection. Existing base checks generally back off whenever
+extends is present; the explicit JSX-factory check retains its existing behavior.
+The dedicated noEmit/include rules do not resolve inherited settings, arrays of
+base configs, CLI overrides or custom test layouts. Valid inherited noEmit or
+include can therefore require suppression after review; missing literal entries
+do not prove emit collisions or omitted tests. The existing compiler-script
+matcher also remains a descendant text check rather than root-script or effective
+noEmit proof. These are documented gaps, not stronger new enforcement claims.
+
+Native compiler configuration loading, `--showConfig`, compilation and Forge
+bundling are separate results: configuration acceptance is not successful
+compilation. Missing files, duplicate keys, effective includes/excludes, module
+resolution, tool installation and cross-file agreement remain native-tool or
+review responsibilities. Existing ratings and severities are preserved; the new
+delegate is informational, with medium precision and low impact. Equivalent
+owner workflows need review and possible suppression rather than forced rewrites.
+
+Static fixtures verify independent base/typecheck JSONC inputs, supported resolver
+variants, wrong-file lookalikes, inherited backoff and isolated script/config
+mutations. No compiler, generated package task, deployment or dependency install
+is run. The stored generated snapshot is unchanged; only the pinned delegate is
+applied to a temporary package copy for these checks.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an
