@@ -48,6 +48,8 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  # Prelint supplies the task; forge-manifest uses it for native validation.
+  tags: [capability:prelint, capability:forge-manifest]
   category: package-scripts
   references:
     ["https://developer.atlassian.com/platform/forge/cli-reference/lint/"]

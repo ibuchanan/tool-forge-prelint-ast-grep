@@ -1,0 +1,69 @@
+id: require-numeric-forge-runtime
+valid:
+  - |
+    app:
+      runtime:
+        name: nodejs24.x
+  # Numeric shape is not a claim of platform support or an exact seed requirement.
+  - "app: {runtime: {name: nodejs22.x}}"
+  - "{app: {runtime: {name: nodejs999999.x}}}"
+  - "{app: {runtime: {name: nodejs1.x}}}"
+  - |
+    "app":
+      'runtime':
+        "name": 'nodejs20.x' # owner comment
+        memoryMB: 512
+        architecture: arm64
+      id: owner-selected
+    modules: {}
+    runtime: {name: sandbox}
+    name: unrelated
+  - '{''app'': {''runtime'': {''name'': "nodejs26.x"}}}'
+  - |
+    app: # owner identity and other settings are not constrained
+      id: different-owner
+      runtime: {name: nodejs24.x, memoryMB: 1024}
+  - |
+    app: {runtime: {name: nodejs24.x}}
+    metadata: {app: {runtime: {name: sandbox}}}
+invalid:
+  - |
+    app:
+      runtime:
+        name: sandbox
+  # Zero-byte files are skipped by native scans; nonempty files remain checkable.
+  - "# owner has not declared a runtime yet"
+  - "null"
+  - "{}"
+  - "app: {}"
+  - "app: null"
+  - "app: []"
+  - "app: owner"
+  - "app: {runtime: {}}"
+  - "app: {runtime: null}"
+  - "app: {runtime: nodejs24.x}"
+  - "app: {runtime: [{name: nodejs24.x}]}"
+  - "app: {runtime: {name: null}}"
+  - 'app: {runtime: {name: ""}}'
+  - "app: {runtime: {name: 24}}"
+  - "app: {runtime: {name: [nodejs24.x]}}"
+  - "app: {runtime: {name: {name: nodejs24.x}}}"
+  # Numeric pins become a positive major, not aliases, ranges or exact versions.
+  - "app: {runtime: {name: nodejs0.x}}"
+  - "app: {runtime: {name: nodejs024.x}}"
+  - "app: {runtime: {name: nodejs24}}"
+  - "app: {runtime: {name: nodejs24.1.2}}"
+  - "app: {runtime: {name: nodejsv24.x}}"
+  - "app: {runtime: {name: nodejs24Zx}}"
+  - "app: {runtime: {name: nodejs24.x-extra}}"
+  - 'app: {runtime: {name: " nodejs24.x"}}'
+  - 'app: {runtime: {name: "nodejs24.x "}}'
+  # A similarly named or nested property cannot satisfy the root app path.
+  - "runtime: {name: nodejs24.x}"
+  - "name: nodejs24.x"
+  - "application: {runtime: {name: nodejs24.x}}"
+  - "metadata: {app: {runtime: {name: nodejs24.x}}}"
+  - "app: {config: {runtime: {name: nodejs24.x}}}"
+  - "app: {runtime: {config: {name: nodejs24.x}}}"
+  - "{app: {runtime: {name: sandbox}}, metadata: {app: {runtime: {name: nodejs24.x}}}}"
+  - "- app: {runtime: {name: nodejs24.x}}"

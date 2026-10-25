@@ -116,6 +116,45 @@ for variant in generated refreshed-types removed-types nested-engines root-engin
 done
 echo "Generated Node package and type/engines mutations produced the expected findings."
 
+# Runtime shape is local to an existing manifest, not platform/version agreement.
+manifest_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_manifest.XXXXXX")
+for variant in generated future missing-runtime malformed wrong-nesting comment whitespace empty; do
+  expected=1
+  case "$variant" in
+  generated)
+    payload='app: {runtime: {name: nodejs24.x}, id: owner-selected}'
+    expected=0
+    ;;
+  future)
+    payload='app: {runtime: {name: nodejs999999.x}}'
+    expected=0
+    ;;
+  missing-runtime) payload='app: {id: owner-selected}' ;;
+  malformed) payload='app: {runtime: {name: sandbox}}' ;;
+  wrong-nesting) payload='metadata: {app: {runtime: {name: nodejs24.x}}}' ;;
+  comment) payload='# owner has not declared a runtime yet' ;;
+  whitespace) payload=' ' ;;
+  empty)
+    # Native ast-grep skips zero-byte files; no findings are not compliance.
+    payload=''
+    expected=0
+    ;;
+  esac
+  printf '%s' "$payload" >"$manifest_work/manifest.yml"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^require-numeric-forge-runtime$' --include-metadata --json=compact "$manifest_work/manifest.yml")
+  if ! printf '%s\n' "$findings" | jq -e --argjson count "$expected" '
+    type == "array" and length == $count and
+    all(.[]; .ruleId == "require-numeric-forge-runtime" and .severity == "info" and
+      (.metadata.tags | index("capability:forge-manifest") != null))
+  ' >/dev/null; then
+    printf 'Unexpected runtime-shape findings for %s: expected %s, got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo "Generated numeric runtime shape and manifest mutations produced the expected findings."
+
 # OSS consumes catalog licensing; Node derives the independently checked package field.
 oss_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_oss.XXXXXX")
 for variant in generated catalog-license package-license; do

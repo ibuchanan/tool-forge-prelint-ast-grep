@@ -32,6 +32,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "node"')
 }
 printf 'PASS: node coverage exposes engines and catalog-derived licensing checks\n'
 
+expected=$'forge-manifest\timplemented\tlint-with-forge,require-numeric-forge-runtime'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "forge-manifest"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: manifest coverage must expose runtime shape and the Forge lint entrypoint; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: manifest runtime shape and Forge lint entrypoint are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

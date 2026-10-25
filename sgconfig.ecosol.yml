@@ -26,6 +26,7 @@ ruleDirs:
   - rules/ecosol/devtools
   - rules/ecosol/forge-ahead
   - rules/ecosol/git-hooks
+  - rules/ecosol/manifest
   - rules/ecosol/package-json
   - rules/ecosol/typescript
   - rules/ecosol/package-scripts

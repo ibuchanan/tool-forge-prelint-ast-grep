@@ -127,3 +127,48 @@ and runtime/deployment compatibility remain outside the check. Node remains
 artifact gaps do not mark the whole capability unsupported. No parser plugin,
 file-existence auditor, semver regex, host version change or Node download is
 introduced.
+
+## Forge manifest: runtime shape and native lint entrypoint
+
+`require-numeric-forge-runtime` checks the direct root `app.runtime.name` path in
+existing `manifest.yml` and `manifest.yaml` files. It accepts literal
+`nodejs<major>.x` values with a positive numeric major and no leading zero,
+including plain, single-quoted and double-quoted scalars in block or flow mappings.
+It reports one informational finding for a missing or malformed declaration in
+nonempty files, including whitespace-only and comment-only inputs. Native scans
+skip zero-byte files; zero findings there do not establish compliance. Unrelated
+or nested `runtime` and `name` fields do not satisfy the path. Owner-selected app
+identity, modules, scopes, handlers, memory and architecture are not checked.
+
+This is a Drop Calf convention, not a list of supported Forge runtimes. A numeric
+future or retired version can pass. Current platform values and runtime semantics
+remain defined by the [Forge manifest reference](https://developer.atlassian.com/platform/forge/manifest-reference/#runtime)
+and [Node.js runtime guide](https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/).
+YAML aliases, merges, tags, escape-encoded or block scalars, duplicate keys and
+multi-document schema validity require native validation; this rule does not
+resolve YAML values or validate the entire schema.
+
+The reviewed source is the
+[Forge-manifest capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-manifest.ts).
+It converts a numeric `.nvmrc` pin, optionally prefixed by `v` and including minor
+or patch components, into `nodejs<major>.x`. Update reconciles an existing
+`manifest.yml`, preserving app identity and other settings; it does not create a
+missing manifest. The static rule also covers the repository's standard
+`manifest.yaml` routing, without claiming Drop Calf updates that alternate name.
+
+`lint-with-forge` checks the `lint:check:forge` script's recognizable command text.
+Its two tags have distinct meanings: `capability:prelint` supplies that task, while
+`capability:forge-manifest` uses native Forge lint for manifest/source validation.
+The mapping changes no matcher, rating or routing and does not tag unrelated
+manifest/security rules.
+
+| Artifact or relationship                            | Coverage boundary                                                                                                                              |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Literal runtime declaration in an existing manifest | Checked locally; syntactic shape does not establish platform support.                                                                          |
+| `.nvmrc` agreement                                  | Cross-file reconciliation remains owned by Drop Calf; the two declarations are not compared.                                                   |
+| Handler/export and module/resource wiring           | Source and cross-file relationships remain native Forge lint responsibilities.                                                                 |
+| Missing manifest or `.nvmrc`, or zero-byte manifest | No file-existence detection, and native ast-grep scans skip zero-byte files; neither absence nor skipped input is passing manifest validation. |
+| Credentials and actual Forge lint success           | Consuming-tool execution prerequisites/results, not inferred from package command text or capability tags.                                     |
+
+Tests use static YAML examples, real-file scans and capability reporting only.
+No credentials are resolved and no Forge lint, deployment or installation is run.

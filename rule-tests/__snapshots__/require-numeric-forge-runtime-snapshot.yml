@@ -1,0 +1,209 @@
+id: require-numeric-forge-runtime
+snapshots:
+  "# owner has not declared a runtime yet":
+    labels:
+    - source: "# owner has not declared a runtime yet"
+      style: primary
+      start: 0
+      end: 38
+  "- app: {runtime: {name: nodejs24.x}}":
+    labels:
+    - source: "- app: {runtime: {name: nodejs24.x}}"
+      style: primary
+      start: 0
+      end: 36
+  "app:\n  runtime:\n    name: sandbox\n":
+    labels:
+    - source: |
+        app:
+          runtime:
+            name: sandbox
+      style: primary
+      start: 0
+      end: 34
+  "app: []":
+    labels:
+    - source: "app: []"
+      style: primary
+      start: 0
+      end: 7
+  "app: null":
+    labels:
+    - source: "app: null"
+      style: primary
+      start: 0
+      end: 9
+  "app: owner":
+    labels:
+    - source: "app: owner"
+      style: primary
+      start: 0
+      end: 10
+  "app: {config: {runtime: {name: nodejs24.x}}}":
+    labels:
+    - source: "app: {config: {runtime: {name: nodejs24.x}}}"
+      style: primary
+      start: 0
+      end: 44
+  "app: {runtime: [{name: nodejs24.x}]}":
+    labels:
+    - source: "app: {runtime: [{name: nodejs24.x}]}"
+      style: primary
+      start: 0
+      end: 36
+  "app: {runtime: nodejs24.x}":
+    labels:
+    - source: "app: {runtime: nodejs24.x}"
+      style: primary
+      start: 0
+      end: 26
+  "app: {runtime: null}":
+    labels:
+    - source: "app: {runtime: null}"
+      style: primary
+      start: 0
+      end: 20
+  "app: {runtime: {config: {name: nodejs24.x}}}":
+    labels:
+    - source: "app: {runtime: {config: {name: nodejs24.x}}}"
+      style: primary
+      start: 0
+      end: 44
+  "app: {runtime: {name: \" nodejs24.x\"}}":
+    labels:
+    - source: "app: {runtime: {name: \" nodejs24.x\"}}"
+      style: primary
+      start: 0
+      end: 37
+  "app: {runtime: {name: \"\"}}":
+    labels:
+    - source: "app: {runtime: {name: \"\"}}"
+      style: primary
+      start: 0
+      end: 26
+  "app: {runtime: {name: \"nodejs24.x \"}}":
+    labels:
+    - source: "app: {runtime: {name: \"nodejs24.x \"}}"
+      style: primary
+      start: 0
+      end: 37
+  "app: {runtime: {name: 24}}":
+    labels:
+    - source: "app: {runtime: {name: 24}}"
+      style: primary
+      start: 0
+      end: 26
+  "app: {runtime: {name: [nodejs24.x]}}":
+    labels:
+    - source: "app: {runtime: {name: [nodejs24.x]}}"
+      style: primary
+      start: 0
+      end: 36
+  "app: {runtime: {name: nodejs0.x}}":
+    labels:
+    - source: "app: {runtime: {name: nodejs0.x}}"
+      style: primary
+      start: 0
+      end: 33
+  "app: {runtime: {name: nodejs024.x}}":
+    labels:
+    - source: "app: {runtime: {name: nodejs024.x}}"
+      style: primary
+      start: 0
+      end: 35
+  "app: {runtime: {name: nodejs24.1.2}}":
+    labels:
+    - source: "app: {runtime: {name: nodejs24.1.2}}"
+      style: primary
+      start: 0
+      end: 36
+  "app: {runtime: {name: nodejs24.x-extra}}":
+    labels:
+    - source: "app: {runtime: {name: nodejs24.x-extra}}"
+      style: primary
+      start: 0
+      end: 40
+  "app: {runtime: {name: nodejs24Zx}}":
+    labels:
+    - source: "app: {runtime: {name: nodejs24Zx}}"
+      style: primary
+      start: 0
+      end: 34
+  "app: {runtime: {name: nodejs24}}":
+    labels:
+    - source: "app: {runtime: {name: nodejs24}}"
+      style: primary
+      start: 0
+      end: 32
+  "app: {runtime: {name: nodejsv24.x}}":
+    labels:
+    - source: "app: {runtime: {name: nodejsv24.x}}"
+      style: primary
+      start: 0
+      end: 35
+  "app: {runtime: {name: null}}":
+    labels:
+    - source: "app: {runtime: {name: null}}"
+      style: primary
+      start: 0
+      end: 28
+  "app: {runtime: {name: {name: nodejs24.x}}}":
+    labels:
+    - source: "app: {runtime: {name: {name: nodejs24.x}}}"
+      style: primary
+      start: 0
+      end: 42
+  "app: {runtime: {}}":
+    labels:
+    - source: "app: {runtime: {}}"
+      style: primary
+      start: 0
+      end: 18
+  "app: {}":
+    labels:
+    - source: "app: {}"
+      style: primary
+      start: 0
+      end: 7
+  "application: {runtime: {name: nodejs24.x}}":
+    labels:
+    - source: "application: {runtime: {name: nodejs24.x}}"
+      style: primary
+      start: 0
+      end: 42
+  "metadata: {app: {runtime: {name: nodejs24.x}}}":
+    labels:
+    - source: "metadata: {app: {runtime: {name: nodejs24.x}}}"
+      style: primary
+      start: 0
+      end: 46
+  "name: nodejs24.x":
+    labels:
+    - source: "name: nodejs24.x"
+      style: primary
+      start: 0
+      end: 16
+  "null":
+    labels:
+    - source: "null"
+      style: primary
+      start: 0
+      end: 4
+  "runtime: {name: nodejs24.x}":
+    labels:
+    - source: "runtime: {name: nodejs24.x}"
+      style: primary
+      start: 0
+      end: 27
+  "{app: {runtime: {name: sandbox}}, metadata: {app: {runtime: {name: nodejs24.x}}}}":
+    labels:
+    - source: "{app: {runtime: {name: sandbox}}, metadata: {app: {runtime: {name: nodejs24.x}}}}"
+      style: primary
+      start: 0
+      end: 81
+  "{}":
+    labels:
+    - source: "{}"
+      style: primary
+      start: 0
+      end: 2

@@ -1,0 +1,89 @@
+id: require-numeric-forge-runtime
+language: Yaml
+severity: info
+message: >
+  Set `app.runtime.name` to `nodejs<major>.x` with a positive numeric major for the Drop Calf convention.
+note: >
+  Drop Calf derives this declaration from a numeric .nvmrc pin in an existing
+  manifest. This literal shape check does not select Node 24, establish platform
+  support, or compare files. Forge lint remains responsible for supported runtime
+  values, manifest schema and source wiring. Missing and zero-byte files are not
+  diagnosed by native scans. Aliases, merges, tags, escaped and block scalars need
+  native validation; use literal keys and a literal runtime name here.
+  Scope scans to intended Forge-app directories. No app identity, modules, scopes,
+  handlers, memory or architecture settings are imposed.
+  https://developer.atlassian.com/platform/forge/manifest-reference/#runtime
+  https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-manifest.ts
+rule:
+  kind: stream
+  not:
+    has:
+      kind: document
+      has:
+        any:
+          - kind: block_node
+          - kind: flow_node
+        has:
+          any:
+            - kind: block_mapping
+            - kind: flow_mapping
+          has:
+            all:
+              - has:
+                  field: key
+                  regex: '^(app|"app"|''app'')$'
+              - has:
+                  field: value
+                  has:
+                    any:
+                      - kind: block_mapping
+                      - kind: flow_mapping
+                    has:
+                      all:
+                        - has:
+                            field: key
+                            regex: '^(runtime|"runtime"|''runtime'')$'
+                        - has:
+                            field: value
+                            has:
+                              any:
+                                - kind: block_mapping
+                                - kind: flow_mapping
+                              has:
+                                all:
+                                  - has:
+                                      field: key
+                                      regex: '^(name|"name"|''name'')$'
+                                  - has:
+                                      field: value
+                                      regex: '^(nodejs[1-9][0-9]*\.x|"nodejs[1-9][0-9]*\.x"|''nodejs[1-9][0-9]*\.x'')$'
+files:
+  - "**/manifest.yml"
+  - "**/manifest.yaml"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  category: manifest
+  precision: high
+  precision-rationale: >
+    Direct root app/runtime/name mapping pairs and an anchored literal value
+    distinguish numeric positive-major declarations from absence, malformed values
+    and nested lookalikes. Block and flow mappings are supported. Evidence:
+    rule-tests/ecosol/manifest/require-numeric-forge-runtime.test.yml and native
+    manifest routing fixtures. YAML alias, merge, tag and escape resolution,
+    duplicate keys and multi-document schema validity remain native-tool concerns.
+  impact: low
+  impact-rationale: >
+    A missing or malformed numeric declaration drifts from Drop Calf's owned runtime
+    convention and requires local configuration repair. The shape alone establishes
+    neither a supported runtime nor a deployment failure, so this bounded convention
+    check is informational rather than a platform compatibility gate.
+  scope-profile: [manifest, tests]
+  tags: [capability:forge-manifest]
+  references:
+    - https://developer.atlassian.com/platform/forge/manifest-reference/#runtime
+    - https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-manifest.ts
