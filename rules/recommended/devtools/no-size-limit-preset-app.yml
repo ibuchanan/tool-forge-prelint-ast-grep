@@ -8,7 +8,7 @@ note: >
   to time a page load in a browser context. A Forge app's backend bundle
   never runs in a browser, so that measurement doesn't apply, and the
   Puppeteer dependency adds unnecessary weight and CI friction.
-  Use @size-limit/file to measure raw byte size instead.
+  Use @size-limit/file to measure built file sizes instead.
   See https://github.com/ai/size-limit#-presets-app
 rule:
   all:
@@ -26,6 +26,8 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags:
+    - capability:size-limit
   precision: medium
   precision-rationale: "The matcher finds preset-app string content under devDependencies, not the measured artifact or actual use. Tests compare file versus app presets. A package containing a legitimate Custom UI browser bundle or an unrelated matching string value is an untested assessment gap. Evidence: rule-tests/recommended/devtools/no-size-limit-preset-app.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-size-limit-preset-app-snapshot.yml."
   impact: low

@@ -4,11 +4,12 @@ severity: hint
 message: >
   Add size-limit to measure and prevent bundle bloat
 note: >
-  Bundle bloat contributes to unwanted Forge spend.
-  size-limit reports the exact byte cost of your JavaScript after build
-  and can fail CI if the bundle exceeds a threshold.
-  Add @size-limit/file to devDependencies
-  and a "size-limit" key to package.json.
+  Bundle budgets make byte growth visible; absence of this tool does not
+  prove bundle bloat or material Forge spend. size-limit measures built files
+  and can fail CI when an owner-selected threshold is exceeded.
+  Add size-limit and @size-limit/file to devDependencies and a "size-limit"
+  budget to package.json. Review and suppress this advisory when external
+  configuration or equivalent budget tooling already covers the workflow.
   See https://github.com/ai/size-limit
 rule:
   kind: string_content
@@ -32,6 +33,8 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags:
+    - capability:size-limit
   precision: low
   precision-rationale: "A build string under scripts without a nearby size-limit pair triggers. Tests cover inline config and non-build scripts, not external configuration, another budget tool or monorepo orchestration. A normal build without this particular tool routinely matches. Evidence: rule-tests/recommended/devtools/use-size-limit.test.yml (valid/invalid cases) and rule-tests/__snapshots__/use-size-limit-snapshot.yml."
   impact: low

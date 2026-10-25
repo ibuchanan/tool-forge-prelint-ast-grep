@@ -435,6 +435,50 @@ mutations. No compiler, generated package task, deployment or dependency install
 is run. The stored generated snapshot is unchanged; only the pinned delegate is
 applied to a temporary package copy for these checks.
 
+## Size Limit: budget advice and build-before-measure text
+
+Three existing recommended rules map to `capability:size-limit` without changing
+matchers, IDs, native scope, precision/impact ratings, severities or snapshots:
+
+| Rule                        | Bounded coverage                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `use-size-limit`            | Hint for a build string under scripts without a nearby `size-limit` pair; low precision and low impact.      |
+| `no-size-limit-preset-app`  | Advisory for `@size-limit/preset-app` under devDependencies; medium precision and low impact.                |
+| `require-size-check-script` | Configured tooling requires the literal `npm run build && size-limit` command; medium precision, low impact. |
+
+The reviewed source is the
+[Size Limit capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/size-limit.ts).
+It seeds `size-limit`, `@size-limit/file` and a 10 kB budget, then maintains the
+build-before-measure `size:check` command. Budget labels, paths and thresholds
+remain owner-managed; these checks freeze neither those defaults nor tool versions.
+Only a legacy `size` script equal to the former generated command is removed by
+Drop Calf update. Static checks do not perform that migration: custom or legacy
+`size` scripts may coexist with a compliant `size:check`, but do not replace it.
+
+The generated workflow is pre-push → `check` → `size:check`. The
+[lint capability](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/lint.ts)
+owns aggregate selection, while
+[git-hooks](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/git-hooks.ts)
+owns hook wiring. Neither is retagged as size-limit, and these three checks do
+not establish that the task is selected or invoked by a hook.
+
+These are existing bounded descendant/text matchers, not package-schema or shell
+validation. Nested/lookalike keys or values may satisfy or trigger them; the exact
+script text does not prove direct root placement, successful build or measurement.
+External configuration, equivalent owner orchestration, other budget tooling or
+legitimate browser measurement for Custom UI require review and possible suppression
+of the corresponding advisory. Missing this tool does not prove bundle bloat or
+material Forge spend. Actual byte measurement, artifact freshness, budget validity,
+paired tool compatibility and installation remain native-tool or build/test concerns.
+Drop Calf validation itself skips measurement rather than building owner output.
+
+Native routing remains existing `package.json` files, excluding node_modules,
+dist, coverage and specs; callers select Forge-app directories, and missing files
+cannot be diagnosed. Static fixtures scan generated declarations, owner budget/tool
+versions, retained size scripts and isolated missing-command/no-build/preset mutations.
+No app build, size command, output cleanup, hook or dependency installation is run;
+the stored generated snapshot and all consumer snapshots remain unchanged.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

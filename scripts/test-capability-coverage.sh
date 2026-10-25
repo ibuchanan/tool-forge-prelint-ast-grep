@@ -112,6 +112,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "forge-ahead"')
 }
 printf 'PASS: Forge Ahead dependency conventions are discoverable\n'
 
+expected=$'size-limit\timplemented\tno-size-limit-preset-app,require-size-check-script,use-size-limit'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "size-limit"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: size-budget advice, file preset and build-before-measure checks must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: size-limit conventions are discoverable without aggregate or hook ownership\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

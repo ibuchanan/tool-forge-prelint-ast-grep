@@ -132,6 +132,57 @@ gate=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
 printf '%s\n' "$gate" | jq -e 'type == "array" and length == 0' >/dev/null
 echo 'Generated Forge Ahead declarations, owner references and placement mutations produced expected advisory findings.'
 
+# Size Limit checks static declarations only; never build or measure owner output.
+size_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_size_limit.XXXXXX")
+for variant in generated owner-budget custom-size legacy-size missing-check no-build preset-app; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  owner-budget)
+    edit='.["size-limit"] = [{"name": "Owner worker", "path": "build/worker.mjs", "limit": "75 kB"}] |
+      .devDependencies["size-limit"] = "^99" | .devDependencies["@size-limit/file"] = "^99"'
+    ;;
+  custom-size) edit='.scripts.size = "bash scripts/owner-size.sh"' ;;
+  legacy-size) edit='.scripts.size = "npm run build && size-limit"' ;;
+  missing-check)
+    edit='del(.scripts["size:check"])'
+    expected='require-size-check-script'
+    ;;
+  no-build)
+    edit='.scripts["size:check"] = "size-limit"'
+    expected='require-size-check-script'
+    ;;
+  preset-app)
+    edit='del(.devDependencies["@size-limit/file"]) | .devDependencies["@size-limit/preset-app"] = "^14"'
+    expected='no-size-limit-preset-app'
+    ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$size_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.recommended.yml \
+    --filter '^(use-size-limit|no-size-limit-preset-app|require-size-check-script)$' \
+    --include-metadata --json=compact "$size_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    ([.[].ruleId] | unique | join("\n")) == $expected and
+    all(.[]; .metadata.tags | index("capability:size-limit") != null)
+  ' >/dev/null; then
+    printf 'Unexpected Size Limit findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+  if [ "$variant" = missing-check ]; then
+    if ! printf '%s\n' "$findings" | jq -e '
+      length > 0 and all(.[];
+        .severity == "info" and
+        (.note | test("pre-push.*`check`.*`size:check`")) and
+        (.note | contains("calls this script directly") | not))
+    ' >/dev/null; then
+      printf 'Size Limit diagnostic must describe pre-push through check to size:check: %s\n' "$findings" >&2
+      exit 1
+    fi
+  fi
+done
+echo 'Generated Size Limit declarations, owner budgets/scripts and isolated mutations produced expected findings.'
+
 # Vitest conventions map command/config text, not test execution or coverage quality.
 vitest_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_vitest.XXXXXX")
 for variant in generated no-optional-flag flag-order watch-default implicit-watch missing-coverage disabled-coverage; do

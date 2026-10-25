@@ -6,8 +6,10 @@ message: >
 note: >
   When size-limit tooling is configured (a "size-limit" config key or an
   @size-limit/* devDependency), run `npm run build && size-limit` via
-  `size:check`. Drop Calf's pre-push hook calls this script directly;
-  a legacy `size` script alone does not satisfy the check.
+  `size:check`. Drop Calf's pre-push hook delegates to `check`, which selects
+  `size:check`; lint owns aggregate composition and git-hooks owns hook wiring.
+  A legacy `size` script alone does not satisfy this command convention;
+  a separate owner-authored `size` script may coexist with `size:check`.
   See https://github.com/ai/size-limit
 rule:
   all:
@@ -35,10 +37,12 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags:
+    - capability:size-limit
   precision: medium
   precision-rationale: "Tests distinguish configured size-limit tooling with the exact required command from missing, legacy or different scripts. Equivalent build/check orchestration and external size-limit configuration are untested gaps; textual command inequality is not proof that size checking is absent. Evidence: rule-tests/recommended/package-scripts/require-size-check-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/require-size-check-script-snapshot.yml."
   impact: low
-  impact-rationale: Missing build-before-measure orchestration can leave stale size measurements or a failing size:check hook. Size Limit supports build-time budgets; the direct consequence here is local tooling friction, not proven excessive spend.
+  impact-rationale: Missing build-before-measure orchestration can leave stale measurements or a failing check aggregate, selected by the generated pre-push hook. Aggregate composition belongs to lint and hook wiring to git-hooks. The direct consequence is local tooling friction, not proven excessive spend.
   scope-profile:
     - package-json
     - tests
