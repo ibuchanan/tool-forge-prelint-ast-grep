@@ -32,6 +32,7 @@ ignores:
   - "**/node_modules/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:test]
   references: ["https://vitest.dev/config/#globals"]
   category: devtools
   scope-profile: [unique]

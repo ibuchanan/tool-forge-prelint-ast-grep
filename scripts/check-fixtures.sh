@@ -87,6 +87,71 @@ for variant in generated commonjs missing-type public missing-private owner-meta
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
 
+# Vitest conventions map command/config text, not test execution or coverage quality.
+vitest_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_vitest.XXXXXX")
+for variant in generated no-optional-flag flag-order watch-default implicit-watch missing-coverage disabled-coverage; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  no-optional-flag) edit='.scripts |= with_entries(if (.key | startswith("test")) then .value |= sub(" --passWithNoTests"; "") else . end)' ;;
+  flag-order) edit='.scripts["test:coverage"] = "vitest run --passWithNoTests --coverage"' ;;
+  watch-default)
+    edit='.scripts.test = "vitest run --watch"'
+    expected='require-vitest-run-script'
+    ;;
+  implicit-watch)
+    edit='.scripts["test:watch"] = "vitest"'
+    expected='use-explicit-vitest-watch'
+    ;;
+  missing-coverage)
+    edit='del(.scripts["test:coverage"])'
+    expected='require-vitest-coverage-script'
+    ;;
+  disabled-coverage)
+    edit='.scripts["test:coverage"] = "vitest run --coverage=false"'
+    expected='require-vitest-coverage-script'
+    ;;
+  esac
+  jq "$edit" "$DROP_CALF_PACKAGE" >"$vitest_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^(require-vitest-(run-script|coverage-script)|use-explicit-vitest-watch)$' \
+    --include-metadata --json=compact "$vitest_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    ([.[].ruleId] | sort | join("\n")) == $expected and
+    all(.[]; .metadata.tags | index("capability:test") != null)
+  ' >/dev/null; then
+    printf 'Unexpected Vitest script findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+for variant in generated owner-config globals-on missing-globals; do
+  expected=''
+  case "$variant" in
+  generated) cp fixtures/drop-calf-forge-app/vitest.config.ts "$vitest_work/vitest.config.ts" ;;
+  owner-config) printf '%s\n' 'export default defineConfig({ test: { globals: false, exclude: ["owner/**"], coverage: { provider: "istanbul" } } });' >"$vitest_work/vitest.config.ts" ;;
+  globals-on)
+    printf '%s\n' 'export default defineConfig({ test: { globals: true } });' >"$vitest_work/vitest.config.ts"
+    expected='require-vitest-globals-false'
+    ;;
+  missing-globals)
+    printf '%s\n' 'export default defineConfig({ test: {} });' >"$vitest_work/vitest.config.ts"
+    expected='require-vitest-globals-false'
+    ;;
+  esac
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^require-vitest-globals-false$' \
+    --include-metadata --json=compact "$vitest_work/vitest.config.ts")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    ([.[].ruleId] | sort | join("\n")) == $expected and
+    all(.[]; .severity == "info" and (.metadata.tags | index("capability:test") != null))
+  ' >/dev/null; then
+    printf 'Unexpected Vitest config findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo 'Generated Vitest scripts/config, optional flags, owner config and isolated mutations produced expected findings.'
+
 # Prelint checks command text only; never execute these package tasks.
 prelint_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_prelint.XXXXXX")
 jq '.scripts = {

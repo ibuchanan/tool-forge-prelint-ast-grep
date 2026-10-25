@@ -88,6 +88,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "lint"')
 }
 printf 'PASS: lint aggregates and shared read-only guard are discoverable\n'
 
+expected=$'test\timplemented\trequire-vitest-coverage-script,require-vitest-globals-false,require-vitest-run-script,use-explicit-vitest-watch'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "test"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: Vitest run, watch, coverage and explicit-globals conventions must be discoverable as test; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: Vitest conventions are discoverable under the test capability\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

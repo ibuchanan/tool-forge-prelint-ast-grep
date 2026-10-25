@@ -294,6 +294,50 @@ The generated snapshot, hook files, individual task policies and package depende
 are unchanged. No generated aggregate, formatter, Forge command, secret resolution,
 release or hook is executed by these tests.
 
+## Test: Vitest command text and explicit globals
+
+Four existing ecosol rules map to `capability:test`, not `capability:vitest`.
+The mapping changes no matcher, ID, native scope, rating, severity or snapshot.
+
+| Rule                             | Coverage                                                                                                       |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `require-vitest-run-script`      | Root `scripts.test` starts with `vitest run`, without recognized watch flags; warning severity.                |
+| `require-vitest-coverage-script` | Root `scripts.test:coverage` contains `vitest run` and enabled `--coverage`; informational.                    |
+| `use-explicit-vitest-watch`      | Reports bare `vitest` in `test:watch`; accepts explicit watch commands and absent scripts; informational.      |
+| `require-vitest-globals-false`   | Checks explicit `test.globals: false` in recognized `defineConfig` calls in `vitest.config.ts`; informational. |
+
+The reviewed source is the
+[test capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/vitest.ts).
+Forge-app selects Vitest, unlike profiles using Bun's runner. Its maintained
+commands are `vitest run --passWithNoTests`, `vitest watch --passWithNoTests` and
+`vitest run --coverage --passWithNoTests`. The optional no-tests flag is not
+required by these rules, and coverage flags may precede or follow it.
+No sample tests, coverage thresholds or pinned dependency versions are required.
+
+Vitest and a matching V8 provider are seeded dependencies. Provider version
+alignment, config loading, test discovery and coverage-provider initialization
+are native-tool/dependency evidence, not claims established by command text.
+Drop Calf validation discovers files and initializes coverage without running tests;
+these static checks do neither. Successful execution, presence or quality of tests,
+actual coverage and model evaluations are outside this mapping.
+
+Vitest configuration is seeded then owner-managed. V8 and the generated exclusion
+list are defaults, not additional mandatory policy; alternative providers and
+owner exclusions remain accepted. The explicit-globals check is existing team
+advice, not proof of ambient-global usage: omitted globals already defaults to
+false. Intentional inherited settings or equivalent owner workflows need review
+and possible suppression, not automatic replacement of configuration.
+
+Command matchers are bounded text checks, not shell parsers. Config matching does
+not resolve imports, aliases, inheritance or effective merged settings. Native
+routes remain `package.json` and `vitest.config.ts`, excluding node_modules, dist,
+coverage and specs; missing files cannot be diagnosed. Callers select Forge-app
+directories; capability tags do not detect apps or installed capabilities.
+
+Static fixtures scan generated scripts/config, optional flag variants, owner
+provider/exclusion choices and isolated mutations. No package test, watch or
+coverage command, dependency installation or native Vitest initialization is run.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

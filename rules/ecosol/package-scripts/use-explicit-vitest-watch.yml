@@ -23,6 +23,7 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:test]
   references: ["https://vitest.dev/guide/cli.html"]
   category: package-scripts
   precision: high
