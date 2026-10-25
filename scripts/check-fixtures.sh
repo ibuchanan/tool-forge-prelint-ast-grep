@@ -226,6 +226,88 @@ for extension in json jsonc; do
 done
 echo "Biome JSON/JSONC defaults, owner options and advisory mutations produced the expected findings."
 
+# Lint owns aggregate selection, not individual producer implementations or hooks.
+# Apply the pinned package wiring to the older generated snapshot; never run tasks.
+lint_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_lint.XXXXXX")
+jq '.scripts |= (del(.["lint:check"], .["lint:forge"], .["lint:prelint"]) + {
+  "lint": "run-p --npm-path npm --print-label \"lint:check:*\"",
+  "check": "run-p --npm-path npm --print-label \"{lint,test,size:check,pack:check}\"",
+  "lint:check:prelint": "ast-grep scan",
+  "lint:check:biome": "biome lint",
+  "lint:check:forge": "forge lint",
+  "lint:check:format": "npm run format:check",
+  "lint:check:typecheck": "npm run typecheck"
+}) | del(.scripts["pack:check"])' "$DROP_CALF_PACKAGE" >"$lint_work/generated.json"
+for variant in generated optional-pack explicit flags-only omitted-producer omitted-test self-lint self-check fix-lint fix-check format-check write-leaf lookalike nested; do
+  expected=''
+  case "$variant" in
+  generated) edit='.' ;;
+  optional-pack) edit='.scripts["pack:check"] = "attw --pack"' ;;
+  explicit)
+    edit='.scripts.lint = "run-p lint:check:forge lint:check:format lint:check:prelint lint:check:typecheck lint:check:biome --print-label --npm-path npm" |
+      .scripts.check = "run-p size:check lint test --print-label --npm-path npm"'
+    ;;
+  flags-only)
+    edit='.scripts.lint = "run-p --npm-path npm --print-label"'
+    expected='require-composed-lint'
+    ;;
+  omitted-producer)
+    edit='.scripts.lint = "run-p lint:check:biome lint:check:forge lint:check:format lint:check:typecheck"'
+    expected='require-composed-lint'
+    ;;
+  omitted-test)
+    edit='.scripts.check = "run-p lint size:check"'
+    expected='require-composed-check'
+    ;;
+  self-lint)
+    edit='.scripts.lint += " lint"'
+    expected='require-composed-lint'
+    ;;
+  self-check)
+    edit='.scripts.check += " check"'
+    expected='require-composed-check'
+    ;;
+  fix-lint)
+    edit='.scripts.lint += " lint:fix"'
+    expected='require-composed-lint'
+    ;;
+  fix-check)
+    edit='.scripts.check += " lint:fix"'
+    expected='require-composed-check'
+    ;;
+  format-check)
+    edit='.scripts.check += " format"'
+    expected='require-composed-check'
+    ;;
+  write-leaf)
+    edit='.scripts["lint:check:biome"] += " --write"'
+    expected='no-write-flags-in-readonly-script'
+    ;;
+  lookalike)
+    edit='.scripts.lint = "run-p lint:check:prelint-extra lint:check:biome lint:check:forge lint:check:format lint:check:typecheck"'
+    expected='require-composed-lint'
+    ;;
+  nested)
+    edit='.config.scripts = .scripts | del(.scripts.lint)'
+    expected='require-composed-lint'
+    ;;
+  esac
+  jq "$edit" "$lint_work/generated.json" >"$lint_work/package.json"
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^(require-composed-(lint|check)|no-write-flags-in-readonly-script)$' \
+    --include-metadata --json=compact "$lint_work/package.json")
+  if ! printf '%s\n' "$findings" | jq -e --arg expected "$expected" '
+    map(.ruleId) == (if $expected == "" then [] else [$expected] end) and
+    all(.[]; (.metadata.tags | index("capability:lint") != null) and
+      .severity == (if .ruleId == "no-write-flags-in-readonly-script" then "warning" else "info" end))
+  ' >/dev/null; then
+    printf 'Unexpected lint aggregate findings for %s: expected "%s", got %s\n' \
+      "$variant" "$expected" "$findings" >&2
+    exit 1
+  fi
+done
+echo "Pinned lint/check selections, optional pack task and static mutations produced the expected findings."
+
 # Changelog command checks are static; never run regeneration on these fixtures.
 changelog_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_changelog.XXXXXX")
 for variant in generated missing legacy; do

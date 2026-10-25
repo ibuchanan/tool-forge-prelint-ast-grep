@@ -2,7 +2,7 @@ id: require-composed-lint
 language: Json
 severity: info
 message: >
-  Compose the `lint` script with `run-p` from `npm-run-all2` to run lint checks in parallel.
+  Select declared read-only lint tasks with `run-p`; exclude `lint` itself and write-back tasks.
 note: >
   Forge Prelint, Biome, and Forge Lint scan the source tree independently,
   so compose their read-only npm scripts with `run-p` from npm-run-all2
@@ -12,8 +12,14 @@ note: >
   Use `--npm-path npm` to select npm explicitly and `--print-label` to identify
   each task's output. Keep Git hook configuration separate from npm script
   composition so local and CI checks do not depend on hook file filters.
-  This rule checks a direct `run-p` command in the root `scripts.lint` field,
-  not the runner dependency, option validity, task coverage, or shell semantics.
+  This rule checks direct root scripts.lint command text and declared standard
+  lint:check:prelint/biome/forge/format/typecheck tasks. The lint:check:* pattern
+  or complete explicit equivalents cover those declarations; lint:docs is separate.
+  Literal self-selection, :fix selections, lint:* and a selected format task with
+  --write/--fix text are rejected. Unknown producer names, other glob/brace forms,
+  indirect writes, runner options, dependencies and shell semantics are not resolved.
+  Equivalent owner orchestration requires review and possible rule suppression;
+  no finding does not prove task existence, complete selection or successful lint.
   Scope the scan to Forge app directories: ast-grep cannot establish deployable
   app identity by checking whether manifest.yml exists in another file.
   https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-p.md
@@ -27,9 +33,82 @@ rule:
       regex: '^"scripts"\s*:'
       has:
         kind: object
-        has:
-          kind: pair
-          regex: '^"lint"\s*:\s*"\s*run-p\s+[^\s"]'
+        all:
+          - has:
+              kind: pair
+              all:
+                - regex: '^"lint"\s*:\s*"\s*run-p\s+'
+                - regex: >-
+                    (\s|\\"|')lint:check:(\*|[a-zA-Z0-9_-]+)(\s|\\"|'|")
+                - not:
+                    regex: >-
+                      (\s|\\"|'|[,{])(lint|lint:\*|format:fix|[a-zA-Z0-9_:*:-]+:fix)(\s|\\"|'|[},]|")
+          - not:
+              all:
+                - has:
+                    kind: pair
+                    regex: '^"format"\s*:\s*"[^"]*(--write|--fix)'
+                - has:
+                    kind: pair
+                    all:
+                      - regex: '^"lint"\s*:'
+                      - regex: >-
+                          (\s|\\"|'|[,{])format(\s|\\"|'|[},]|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"lint:check:prelint"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"lint"\s*:'
+                    - regex: >-
+                        (\s|\\"|')lint:check:(\*|prelint)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"lint:check:biome"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"lint"\s*:'
+                    - regex: >-
+                        (\s|\\"|')lint:check:(\*|biome)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"lint:check:forge"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"lint"\s*:'
+                    - regex: >-
+                        (\s|\\"|')lint:check:(\*|forge)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"lint:check:format"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"lint"\s*:'
+                    - regex: >-
+                        (\s|\\"|')lint:check:(\*|format)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"lint:check:typecheck"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"lint"\s*:'
+                    - regex: >-
+                        (\s|\\"|')lint:check:(\*|typecheck)(\s|\\"|'|")
 files:
   - "**/package.json"
 ignores:
@@ -38,11 +117,12 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:lint]
   references:
     - https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-p.md
   category: package-scripts
   precision: medium
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests accept direct run-p commands with quoted globs, explicit tasks, whitespace and varying flags; they reject Lefthook delegation, sequential chains, lookalikes, bare run-p and misplaced keys. The matcher does not validate runner options, task coverage, dependencies or shell semantics; equivalent orchestration and deployable app identity remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-lint.test.yml (valid/invalid) and rule-tests/__snapshots__/require-composed-lint-snapshot.yml."
+  precision-rationale: "Tests accept the generated lint:check:* pattern and complete explicit standard task lists with varying flags, quotes and whitespace. Same-root-scripts checks reject omitted declared prelint/biome/forge/format/typecheck tasks, literal self-selection, conventional :fix selections, lint:* and selection of a format command containing write flags. Arbitrary producer names, richer patterns, option arguments, wrappers, JSON escapes and shell semantics remain assessment gaps requiring review/suppression; medium precision and low impact retain info severity. Evidence: rule-tests/ecosol/package-scripts/require-composed-lint.test.yml, rule-tests/__snapshots__/require-composed-lint-snapshot.yml and scripts/check-fixtures.sh."
   impact: low
   impact-rationale: npm-run-all2 documents parallel npm-script composition. Genuine divergence adds bounded workflow maintenance or runtime overhead; a sequential complete lint suite is not a security or correctness violation by itself.

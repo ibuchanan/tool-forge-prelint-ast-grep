@@ -253,6 +253,47 @@ success. Effective inherited configuration, schema validity and tool acceptance
 remain Biome responsibilities; missing files cannot be reported. No formatter,
 linter, migration or generated package task is executed by these checks.
 
+## Lint: bounded same-package aggregate selection
+
+`require-composed-lint`, `require-composed-check` and the shared
+`no-write-flags-in-readonly-script` guard map to `capability:lint`. The guard retains
+`capability:biome`: Biome supplies read-only tasks, while lint owns their aggregate
+wiring. Tags do not imply exclusive ownership, installed tools or app detection.
+The composition rules remain informational ecosol conventions with medium
+precision and low impact; native filename routing and scope are unchanged.
+
+The reviewed source is the
+[lint capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/lint.ts).
+It maintains direct `run-p --npm-path npm --print-label` commands selecting
+`lint:check:*` and `{lint,test,size:check,pack:check}`, independently of Lefthook.
+The pinned [runner tests](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/tests/capabilities/lint.test.ts)
+record that unmatched patterns are optional, whereas a missing literal task fails.
+Forge-app does not supply `pack:check`; its absence is not a finding. The native
+runner, not these static checks, defines pattern expansion and execution behavior.
+
+| Aggregate | Bounded selection checks                                                                                                                                                                                                                                                                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lint`    | Recognizable `lint:check:*` or explicit task tokens. Declared `lint:check:prelint`, `biome`, `forge`, `format` and `typecheck` producers must be covered by that pattern or their explicit names.                                                                                                                                                                   |
+| `check`   | Generated brace pattern or explicit `lint`, `test`, `size:check`, `pack:check` tokens. Every one of those declared tasks must be covered; absent tasks are not required. `*:check` covers the size/package pair, not `lint` or `test`. Legacy `check:*` is recognized but cannot cover declared `lint` or `test` by itself.                                         |
+| Both      | Direct root `scripts` object only; flag order, ordinary spacing and unquoted/single-quoted/JSON-escaped double-quoted task tokens are accepted. Literal self-selection, conventional `:fix` selections and `lint:*` are rejected. Selecting `format` is rejected when its same-file command contains `--write` or `--fix`. Unselected write-back tasks are allowed. |
+
+`lint:docs` remains independent and need not be selected. The shared read-only
+guard retains its existing warning behavior for literal write flags in lint and
+format-check tasks. Neither composition check resolves arbitrary producer names,
+option-argument roles, shell comments/chains, wrappers, aliases, inherited scripts,
+JSON escape spellings, indirect mutation or general glob/brace equivalence.
+A matching token can occur in inert argument text; unknown producer omissions or
+richer unsafe selections may escape detection. Equivalent owner orchestration
+requires review and possible suppression rather than an inferred completeness
+claim. Task/dependency presence, valid options, output labels, success and actual
+independence remain native-tool responsibilities.
+
+Static fixtures apply only pinned task wiring to a temporary copy of the older
+Drop Calf snapshot, including absent/present optional tasks and isolated mutations.
+The generated snapshot, hook files, individual task policies and package dependencies
+are unchanged. No generated aggregate, formatter, Forge command, secret resolution,
+release or hook is executed by these tests.
+
 ## Changelog: regeneration entrypoint text
 
 `require-changelog-script` checks a direct root `scripts.changelog` string in an

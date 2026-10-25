@@ -80,6 +80,14 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "biome"')
 }
 printf 'PASS: Biome scripts and reviewed configuration defaults are discoverable\n'
 
+expected=$'lint\timplemented\tno-write-flags-in-readonly-script,require-composed-check,require-composed-lint'
+actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "lint"')
+[[ $actual == "$expected" ]] || {
+  printf 'FAIL: lint aggregates and the shared read-only guard must be discoverable; got: %s\n' "$actual" >&2
+  exit 1
+}
+printf 'PASS: lint aggregates and shared read-only guard are discoverable\n'
+
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_gitignore.XXXXXX")
 # These are Git ignore syntax, not shell programs or YAML/JSON documents.

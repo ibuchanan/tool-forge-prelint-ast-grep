@@ -237,6 +237,171 @@ snapshots:
       style: secondary
       start: 0
       end: 32
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' 'lint:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' 'lint:*'\"}}"
+      style: primary
+      start: 0
+      end: 52
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*' 'lint:*'"}}
+      style: secondary
+      start: 0
+      end: 53
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' 'lint:check:biome:fix'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' 'lint:check:biome:fix'\"}}"
+      style: primary
+      start: 0
+      end: 66
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*' 'lint:check:biome:fix'"}}
+      style: secondary
+      start: 0
+      end: 67
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' \\\"{lint,lint:fix}\\\"\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' \\\"{lint,lint:fix}\\\"\"}}"
+      style: primary
+      start: 0
+      end: 63
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*' \"{lint,lint:fix}\""}}
+      style: secondary
+      start: 0
+      end: 64
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' format\",\"format\":\"biome format --write\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' format\",\"format\":\"biome format --write\"}}"
+      style: primary
+      start: 0
+      end: 82
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*' format","format":"biome format --write"}}
+      style: secondary
+      start: 0
+      end: 83
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' lint\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' lint\"}}"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*' lint"}}
+      style: secondary
+      start: 0
+      end: 49
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' lint:fix\",\"lint:fix\":\"biome lint --write\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*' lint:fix\",\"lint:fix\":\"biome lint --write\"}}"
+      style: primary
+      start: 0
+      end: 84
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*' lint:fix","lint:fix":"biome lint --write"}}
+      style: secondary
+      start: 0
+      end: 85
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:*suffix'\",\"lint:check:prelint\":\"ast-grep scan\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:*suffix'\",\"lint:check:prelint\":\"ast-grep scan\"}}"
+      style: primary
+      start: 0
+      end: 86
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:*suffix'","lint:check:prelint":"ast-grep scan"}}
+      style: secondary
+      start: 0
+      end: 87
+  "{\"scripts\":{\"lint\":\"run-p 'lint:check:prelint-extra'\",\"lint:check:prelint\":\"ast-grep scan\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p 'lint:check:prelint-extra'\",\"lint:check:prelint\":\"ast-grep scan\"}}"
+      style: primary
+      start: 0
+      end: 92
+    - source: |
+        {"scripts":{"lint":"run-p 'lint:check:prelint-extra'","lint:check:prelint":"ast-grep scan"}}
+      style: secondary
+      start: 0
+      end: 93
+  "{\"scripts\":{\"lint\":\"run-p --npm-path npm --print-label\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p --npm-path npm --print-label\"}}"
+      style: primary
+      start: 0
+      end: 57
+    - source: |
+        {"scripts":{"lint":"run-p --npm-path npm --print-label"}}
+      style: secondary
+      start: 0
+      end: 58
+  "{\"scripts\":{\"lint\":\"run-p build\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p build\"}}"
+      style: primary
+      start: 0
+      end: 34
+    - source: |
+        {"scripts":{"lint":"run-p build"}}
+      style: secondary
+      start: 0
+      end: 35
+  "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:biome\":\"biome lint\",\"lint:check:prelint\":\"ast-grep scan\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:biome\":\"biome lint\",\"lint:check:prelint\":\"ast-grep scan\"}}"
+      style: primary
+      start: 0
+      end: 114
+    - source: |
+        {"scripts":{"lint":"run-p lint:check:biome","lint:check:biome":"biome lint","lint:check:prelint":"ast-grep scan"}}
+      style: secondary
+      start: 0
+      end: 115
+  "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:forge\":\"forge lint\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:forge\":\"forge lint\"}}"
+      style: primary
+      start: 0
+      end: 77
+    - source: |
+        {"scripts":{"lint":"run-p lint:check:biome","lint:check:forge":"forge lint"}}
+      style: secondary
+      start: 0
+      end: 78
+  "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:format\":\"npm run format:check\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:format\":\"npm run format:check\"}}"
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        {"scripts":{"lint":"run-p lint:check:biome","lint:check:format":"npm run format:check"}}
+      style: secondary
+      start: 0
+      end: 89
+  "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:typecheck\":\"npm run typecheck\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p lint:check:biome\",\"lint:check:typecheck\":\"npm run typecheck\"}}"
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        {"scripts":{"lint":"run-p lint:check:biome","lint:check:typecheck":"npm run typecheck"}}
+      style: secondary
+      start: 0
+      end: 89
+  "{\"scripts\":{\"lint\":\"run-p lint:check:prelint\",\"lint:check:biome\":\"biome lint\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"lint\":\"run-p lint:check:prelint\",\"lint:check:biome\":\"biome lint\"}}"
+      style: primary
+      start: 0
+      end: 79
+    - source: |
+        {"scripts":{"lint":"run-p lint:check:prelint","lint:check:biome":"biome lint"}}
+      style: secondary
+      start: 0
+      end: 80
   "{\"scripts\":{\"lint\":\"run-p\"}}\n":
     labels:
     - source: "{\"scripts\":{\"lint\":\"run-p\"}}"

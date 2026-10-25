@@ -12,10 +12,45 @@ valid:
     {"scripts":{"check":"run-p 'check:*' --print-label"}}
   - |
     {"scripts":{"check":"  run-p   'check:*'"}}
+  # Pinned brace selection preserves optional tasks, including an absent pack:check.
+  - |
+    {"scripts":{"check":"run-p --npm-path npm --print-label \"{lint,test,size:check,pack:check}\"","lint":"run-p 'lint:check:*'","test":"vitest run","size:check":"size-limit","lint:docs":"markdownlint-cli2"}}
+  - |
+    {"scripts":{"check":"run-p '{lint,test,size:check,pack:check}' --print-label","lint":"run-p 'lint:check:*'","test":"vitest run","size:check":"size-limit","pack:check":"attw --pack"}}
+  - |
+    {"scripts":{"check":"  run-p --print-label 'size:check' test lint --npm-path npm","lint":"run-p 'lint:check:*'","test":"vitest run","size:check":"size-limit"}}
   # Dependencies do not determine whether the package is a Forge app.
   - |
     {"dependencies":{"@forge/api":"^4.0.0"},"scripts":{"check":"run-p 'check:*'"}}
 invalid:
+  - |
+    {"scripts":{"check":"run-p build"}}
+  - |
+    {"scripts":{"check":"run-p lint-extra test size:check","lint":"run-p 'lint:check:*'"}}
+  - |
+    {"scripts":{"check":"run-p lint test 'size:check:watch'","size:check":"size-limit"}}
+  - |
+    {"scripts":{"check":"run-p lint test check"}}
+  - |
+    {"scripts":{"check":"run-p '{lint,test,size:check,pack:check,check}'"}}
+  - |
+    {"scripts":{"check":"run-p '{lint,test,size:check,pack:check}' lint:fix","lint:fix":"biome lint --write"}}
+  - |
+    {"scripts":{"check":"run-p lint test format","format":"biome format --write"}}
+  - |
+    {"scripts":{"check":"run-p lint test '*:fix'"}}
+  # Each declared workflow must be covered; pack:check is optional, not required.
+  - |
+    {"scripts":{"check":"run-p test size:check","lint":"run-p 'lint:check:*'"}}
+  - |
+    {"scripts":{"check":"run-p lint size:check","test":"vitest run"}}
+  - |
+    {"scripts":{"check":"run-p lint test","size:check":"size-limit"}}
+  - |
+    {"scripts":{"check":"run-p lint test size:check","pack:check":"attw --pack"}}
+  # Flags alone do not select a verification task.
+  - |
+    {"scripts":{"check":"run-p --npm-path npm --print-label"}}
   - |
     {"scripts":{"build":"tsc"}}
   - |

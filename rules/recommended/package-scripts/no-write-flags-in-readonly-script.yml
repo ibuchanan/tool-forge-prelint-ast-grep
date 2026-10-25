@@ -24,9 +24,9 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
-  # Biome supplies format:check and lint:check:biome; this shared guard keeps
-  # those tasks read-only without claiming exclusive Biome ownership.
-  tags: [capability:biome]
+  # Biome supplies read-only formatting/lint tasks; lint owns read-only aggregate
+  # wiring. This guard materially checks both conventions, not exclusive ownership.
+  tags: [capability:biome, capability:lint]
   precision: medium
   precision-rationale: "The regex finds --write or --fix text in lint/lint:check/lint:check:*/format:check script values. Tests distinguish fix variants, but inert quoted examples, flag substrings and tool-specific meanings are untested gaps; the rule is not a shell parser. Evidence: rule-tests/recommended/package-scripts/no-write-flags-in-readonly-script.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-write-flags-in-readonly-script-snapshot.yml."
   impact: medium

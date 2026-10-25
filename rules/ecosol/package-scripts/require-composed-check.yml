@@ -2,7 +2,7 @@ id: require-composed-check
 language: Json
 severity: info
 message: >
-  Compose the `check` script with `run-p` from `npm-run-all2` to run independent checks in parallel.
+  Select declared verification tasks with `run-p`; exclude `check` itself and write-back tasks.
 note: >
   Compose independent read-only validation scripts with `run-p` from npm-run-all2
   instead of delegating to Lefthook's pre-push hook or repeating a sequential
@@ -12,8 +12,15 @@ note: >
   `--print-label` to identify each task's output. Keep dependent build steps
   ordered within their own scripts. Local and CI checks should not depend on
   Git hook file filters or require Lefthook's `--force` flag.
-  This rule checks a direct `run-p` command in the root `scripts.check` field,
-  not the runner dependency, option validity, task coverage, or shell semantics.
+  This rule checks direct root scripts.check text against declared lint, test,
+  size:check and pack:check tasks. The generated {lint,test,size:check,pack:check}
+  pattern or complete explicit equivalents are accepted; pack:check is not required
+  to exist. A *:check pattern covers size:check/pack:check, not lint/test.
+  Literal self-selection, :fix selections, lint:* and a selected format task with
+  --write/--fix text are rejected. Other glob/brace forms, aliases, indirect writes,
+  runner options, dependencies and shell semantics are not resolved. Equivalent
+  owner orchestration requires review and possible rule suppression; no finding
+  does not prove task existence, complete selection, independence or success.
   Scope the scan to Forge app directories: ast-grep cannot establish deployable
   app identity by checking whether manifest.yml exists in another file.
   https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-p.md
@@ -27,9 +34,71 @@ rule:
       regex: '^"scripts"\s*:'
       has:
         kind: object
-        has:
-          kind: pair
-          regex: '^"check"\s*:\s*"\s*run-p\s+[^\s"]'
+        all:
+          - has:
+              kind: pair
+              all:
+                - regex: '^"check"\s*:\s*"\s*run-p\s+'
+                - regex: >-
+                    (\s|\\"|')(\{lint,test,size:check,pack:check\}|check:\*|\*:check|lint|test|size:check|pack:check)(\s|\\"|'|")
+                - not:
+                    regex: >-
+                      (\s|\\"|'|[,{])(check|lint:\*|format:fix|[a-zA-Z0-9_:*:-]+:fix)(\s|\\"|'|[},]|")
+          - not:
+              all:
+                - has:
+                    kind: pair
+                    regex: '^"format"\s*:\s*"[^"]*(--write|--fix)'
+                - has:
+                    kind: pair
+                    all:
+                      - regex: '^"check"\s*:'
+                      - regex: >-
+                          (\s|\\"|'|[,{])format(\s|\\"|'|[},]|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"lint"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"check"\s*:'
+                    - regex: >-
+                        (\s|\\"|')(\{lint,test,size:check,pack:check\}|lint)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"test"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"check"\s*:'
+                    - regex: >-
+                        (\s|\\"|')(\{lint,test,size:check,pack:check\}|test)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"size:check"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"check"\s*:'
+                    - regex: >-
+                        (\s|\\"|')(\{lint,test,size:check,pack:check\}|\*:check|size:check)(\s|\\"|'|")
+          - any:
+              - not:
+                  has:
+                    kind: pair
+                    regex: '^"pack:check"\s*:'
+              - has:
+                  kind: pair
+                  all:
+                    - regex: '^"check"\s*:'
+                    - regex: >-
+                        (\s|\\"|')(\{lint,test,size:check,pack:check\}|\*:check|pack:check)(\s|\\"|'|")
 files:
   - "**/package.json"
 ignores:
@@ -38,11 +107,12 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
+  tags: [capability:lint]
   references:
     - https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-p.md
   category: package-scripts
   precision: medium
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests accept direct run-p commands with quoted globs, explicit tasks, whitespace and varying flags; they reject Lefthook delegation with or without force, sequential chains, lookalikes, bare run-p and misplaced keys. The matcher does not validate runner options, task coverage, dependencies or shell semantics; equivalent orchestration and deployable app identity remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-check.test.yml (valid/invalid) and rule-tests/__snapshots__/require-composed-check-snapshot.yml."
+  precision-rationale: "Tests accept the generated brace pattern with optional pack:check absent or present, complete explicit lists and bounded check globs. Same-root-scripts checks reject omitted declared lint/test/size:check/pack:check tasks, literal self-selection and known write-back selections, while preserving flag ordering and hook independence. Richer patterns, option arguments, aliases, JSON escapes, arbitrary tasks, transitive writes and shell semantics remain assessment gaps requiring review/suppression; medium precision and low impact retain info severity. Evidence: rule-tests/ecosol/package-scripts/require-composed-check.test.yml, rule-tests/__snapshots__/require-composed-check-snapshot.yml and scripts/check-fixtures.sh."
   impact: low
   impact-rationale: npm-run-all2 documents parallel npm-script composition. Genuine duplication can drift and add local maintenance overhead. Sequential or alternate complete checks are not inherently unsafe, and the script text alone does not guarantee task independence or complete validation.

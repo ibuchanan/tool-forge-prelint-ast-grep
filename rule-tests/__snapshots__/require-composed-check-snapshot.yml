@@ -159,6 +159,149 @@ snapshots:
       style: secondary
       start: 0
       end: 33
+  "{\"scripts\":{\"check\":\"run-p '{lint,test,size:check,pack:check,check}'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p '{lint,test,size:check,pack:check,check}'\"}}"
+      style: primary
+      start: 0
+      end: 71
+    - source: |
+        {"scripts":{"check":"run-p '{lint,test,size:check,pack:check,check}'"}}
+      style: secondary
+      start: 0
+      end: 72
+  "{\"scripts\":{\"check\":\"run-p '{lint,test,size:check,pack:check}' lint:fix\",\"lint:fix\":\"biome lint --write\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p '{lint,test,size:check,pack:check}' lint:fix\",\"lint:fix\":\"biome lint --write\"}}"
+      style: primary
+      start: 0
+      end: 106
+    - source: |
+        {"scripts":{"check":"run-p '{lint,test,size:check,pack:check}' lint:fix","lint:fix":"biome lint --write"}}
+      style: secondary
+      start: 0
+      end: 107
+  "{\"scripts\":{\"check\":\"run-p --npm-path npm --print-label\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p --npm-path npm --print-label\"}}"
+      style: primary
+      start: 0
+      end: 58
+    - source: |
+        {"scripts":{"check":"run-p --npm-path npm --print-label"}}
+      style: secondary
+      start: 0
+      end: 59
+  "{\"scripts\":{\"check\":\"run-p build\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p build\"}}"
+      style: primary
+      start: 0
+      end: 35
+    - source: |
+        {"scripts":{"check":"run-p build"}}
+      style: secondary
+      start: 0
+      end: 36
+  "{\"scripts\":{\"check\":\"run-p lint size:check\",\"test\":\"vitest run\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint size:check\",\"test\":\"vitest run\"}}"
+      style: primary
+      start: 0
+      end: 65
+    - source: |
+        {"scripts":{"check":"run-p lint size:check","test":"vitest run"}}
+      style: secondary
+      start: 0
+      end: 66
+  "{\"scripts\":{\"check\":\"run-p lint test '*:fix'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint test '*:fix'\"}}"
+      style: primary
+      start: 0
+      end: 47
+    - source: |
+        {"scripts":{"check":"run-p lint test '*:fix'"}}
+      style: secondary
+      start: 0
+      end: 48
+  "{\"scripts\":{\"check\":\"run-p lint test 'size:check:watch'\",\"size:check\":\"size-limit\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint test 'size:check:watch'\",\"size:check\":\"size-limit\"}}"
+      style: primary
+      start: 0
+      end: 84
+    - source: |
+        {"scripts":{"check":"run-p lint test 'size:check:watch'","size:check":"size-limit"}}
+      style: secondary
+      start: 0
+      end: 85
+  "{\"scripts\":{\"check\":\"run-p lint test check\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint test check\"}}"
+      style: primary
+      start: 0
+      end: 45
+    - source: |
+        {"scripts":{"check":"run-p lint test check"}}
+      style: secondary
+      start: 0
+      end: 46
+  "{\"scripts\":{\"check\":\"run-p lint test format\",\"format\":\"biome format --write\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint test format\",\"format\":\"biome format --write\"}}"
+      style: primary
+      start: 0
+      end: 78
+    - source: |
+        {"scripts":{"check":"run-p lint test format","format":"biome format --write"}}
+      style: secondary
+      start: 0
+      end: 79
+  "{\"scripts\":{\"check\":\"run-p lint test size:check\",\"pack:check\":\"attw --pack\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint test size:check\",\"pack:check\":\"attw --pack\"}}"
+      style: primary
+      start: 0
+      end: 77
+    - source: |
+        {"scripts":{"check":"run-p lint test size:check","pack:check":"attw --pack"}}
+      style: secondary
+      start: 0
+      end: 78
+  "{\"scripts\":{\"check\":\"run-p lint test\",\"size:check\":\"size-limit\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint test\",\"size:check\":\"size-limit\"}}"
+      style: primary
+      start: 0
+      end: 65
+    - source: |
+        {"scripts":{"check":"run-p lint test","size:check":"size-limit"}}
+      style: secondary
+      start: 0
+      end: 66
+  "{\"scripts\":{\"check\":\"run-p lint-extra test size:check\",\"lint\":\"run-p 'lint:check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p lint-extra test size:check\",\"lint\":\"run-p 'lint:check:*'\"}}"
+      style: primary
+      start: 0
+      end: 86
+    - source: |
+        {"scripts":{"check":"run-p lint-extra test size:check","lint":"run-p 'lint:check:*'"}}
+      style: secondary
+      start: 0
+      end: 87
+  "{\"scripts\":{\"check\":\"run-p test size:check\",\"lint\":\"run-p 'lint:check:*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"check\":\"run-p test size:check\",\"lint\":\"run-p 'lint:check:*'\"}}"
+      style: primary
+      start: 0
+      end: 75
+    - source: |
+        {"scripts":{"check":"run-p test size:check","lint":"run-p 'lint:check:*'"}}
+      style: secondary
+      start: 0
+      end: 76
   "{\"scripts\":{\"check\":\"run-p\"}}\n":
     labels:
     - source: "{\"scripts\":{\"check\":\"run-p\"}}"

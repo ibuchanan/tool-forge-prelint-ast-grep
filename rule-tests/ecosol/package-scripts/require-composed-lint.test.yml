@@ -12,10 +12,56 @@ valid:
     {"scripts":{"lint":"run-p lint:check:biome lint:check:forge --print-label"}}
   - |
     {"scripts":{"lint":"  run-p   'lint:check:*'"}}
+  # All declared standard producers can be listed in any order; docs is independent.
+  - |
+    {"scripts":{"lint":"run-p --print-label 'lint:check:format' lint:check:prelint lint:check:typecheck lint:check:forge lint:check:biome --npm-path npm","lint:check:prelint":"ast-grep scan","lint:check:biome":"biome lint","lint:check:forge":"forge lint","lint:check:format":"npm run format:check","lint:check:typecheck":"npm run typecheck","lint:docs":"markdownlint-cli2"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*'","lint:check:owner":"owner-check","lint:docs":"markdownlint-cli2","lint:fix":"biome lint --write"}}
+  # Nested lookalike producers are not declared tasks.
+  - |
+    {"scripts":{"lint":"run-p lint:check:biome"},"config":{"scripts":{"lint:check:prelint":"ast-grep scan"}}}
+  # Unselected mutations, read-only format overrides and token suffixes are not write-back selections.
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' format:check lint-extra","format":"biome format --write","format:check":"biome format","lint:fix":"biome lint --write"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' format","format":"biome format"}}
   # Dependencies do not determine whether the package is a Forge app.
   - |
     {"dependencies":{"@forge/api":"^4.0.0"},"scripts":{"lint":"run-p 'lint:check:*'"}}
 invalid:
+  - |
+    {"scripts":{"lint":"run-p build"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:prelint-extra'","lint:check:prelint":"ast-grep scan"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*suffix'","lint:check:prelint":"ast-grep scan"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' 'lint:check:biome:fix'"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' \"{lint,lint:fix}\""}}
+  # Direct self-selection and known write-back tasks invalidate otherwise complete lists.
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' lint"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' lint:fix","lint:fix":"biome lint --write"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' format","format":"biome format --write"}}
+  - |
+    {"scripts":{"lint":"run-p 'lint:check:*' 'lint:*'"}}
+  # A partial explicit list must not silently drop another declared producer.
+  - |
+    {"scripts":{"lint":"run-p lint:check:biome","lint:check:biome":"biome lint","lint:check:prelint":"ast-grep scan"}}
+  - |
+    {"scripts":{"lint":"run-p lint:check:prelint","lint:check:biome":"biome lint"}}
+  - |
+    {"scripts":{"lint":"run-p lint:check:biome","lint:check:forge":"forge lint"}}
+  - |
+    {"scripts":{"lint":"run-p lint:check:biome","lint:check:format":"npm run format:check"}}
+  - |
+    {"scripts":{"lint":"run-p lint:check:biome","lint:check:typecheck":"npm run typecheck"}}
+  # An argument is not evidence that the intended lint family is selected.
+  - |
+    {"scripts":{"lint":"run-p --npm-path npm --print-label"}}
   - |
     {"scripts":{"build":"tsc"}}
   - |
