@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 set -eu
 
+phase_started=$(date +%s)
+report_phase() {
+  now=$(date +%s)
+  printf 'fixture phase %-24s %ss\n' "$1" "$((now - phase_started))" >&2
+  phase_started=$now
+}
+
 FIXTURE_DIR="rule-tests/fixtures/repo-init-forge-app"
 OUTPUT=$(ast-grep scan --config sgconfig.ecosol.yml "$FIXTURE_DIR")
 
@@ -13,6 +20,7 @@ if [ -n "$OUTPUT" ]; then
 fi
 
 echo "$FIXTURE_DIR produced zero ecosol findings, as expected."
+report_phase repo-init
 
 # Drop Calf's default forge-app output is generated separately. Validate each
 # supported convention subset without treating unrelated gaps as compliance.
@@ -86,6 +94,7 @@ for variant in generated commonjs missing-type public missing-private owner-meta
   fi
 done
 echo "$DROP_CALF_PACKAGE and metadata mutations produced the expected findings."
+report_phase package-metadata
 
 # Forge Ahead declarations are static seed advice, not runtime integration proof.
 forge_ahead_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_forge_ahead.XXXXXX")
@@ -131,6 +140,7 @@ gate=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
   --min-severity error --json=compact "$forge_ahead_work/package.json")
 printf '%s\n' "$gate" | jq -e 'type == "array" and length == 0' >/dev/null
 echo 'Generated Forge Ahead declarations, owner references and placement mutations produced expected advisory findings.'
+report_phase forge-ahead
 
 # TODO tooling is optional seed advice; scan text without running owner commands.
 todo_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_todo.XXXXXX")
@@ -181,6 +191,7 @@ for mode in --min-severity=error --off=prefer-todo-script; do
   printf '%s\n' "$advice" | jq -e 'type == "array" and length == 0' >/dev/null
 done
 echo 'Generated TODO command, optional mutations and owner opt-out produced expected advice.'
+report_phase todo
 
 # Clean command checks inspect text only; never invoke cleanup on these fixtures.
 clean_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_clean_build.XXXXXX")
@@ -220,6 +231,7 @@ for variant in generated relative missing non-string nested inert lookalike sour
   fi
 done
 echo 'Generated dist-only clean command and static mutations produced expected findings.'
+report_phase clean-build
 
 # Size Limit checks static declarations only; never build or measure owner output.
 size_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_size_limit.XXXXXX")
@@ -271,6 +283,7 @@ for variant in generated owner-budget custom-size legacy-size missing-check no-b
   fi
 done
 echo 'Generated Size Limit declarations, owner budgets/scripts and isolated mutations produced expected findings.'
+report_phase size-limit
 
 # Vitest conventions map command/config text, not test execution or coverage quality.
 vitest_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_vitest.XXXXXX")
@@ -336,6 +349,7 @@ for variant in generated owner-config globals-on missing-globals; do
   fi
 done
 echo 'Generated Vitest scripts/config, optional flags, owner config and isolated mutations produced expected findings.'
+report_phase vitest
 
 # Prelint checks command text only; never execute these package tasks.
 prelint_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_prelint.XXXXXX")
@@ -429,6 +443,7 @@ for variant in generated bun missing-task write-lint write-format; do
   fi
 done
 echo "Pinned Biome tasks, npm/Bun delegates and read-only mutations produced the expected findings."
+report_phase biome-tasks
 
 for extension in json jsonc; do
   for variant in generated schema owner-options dist indent branch ignore; do
@@ -475,6 +490,7 @@ for extension in json jsonc; do
   done
 done
 echo "Biome JSON/JSONC defaults, owner options and advisory mutations produced the expected findings."
+report_phase biome-config
 
 # Lint owns aggregate selection, not individual producer implementations or hooks.
 # Apply the pinned package wiring to the older generated snapshot; never run tasks.
@@ -557,6 +573,7 @@ for variant in generated optional-pack explicit flags-only omitted-producer omit
   fi
 done
 echo "Pinned lint/check selections, optional pack task and static mutations produced the expected findings."
+report_phase lint-scripts
 
 # Changelog command checks are static; never run regeneration on these fixtures.
 changelog_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_changelog.XXXXXX")
@@ -584,6 +601,7 @@ for variant in generated missing legacy; do
   fi
 done
 echo "Generated changelog command and package mutations produced the expected findings."
+report_phase changelog
 
 # Node checks root engines policy, not seeded type versions or runtime selection.
 node_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_node.XXXXXX")
@@ -613,6 +631,7 @@ for variant in generated refreshed-types removed-types nested-engines root-engin
   fi
 done
 echo "Generated Node package and type/engines mutations produced the expected findings."
+report_phase node
 
 # Runtime shape is local to an existing manifest, not platform/version agreement.
 manifest_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_manifest.XXXXXX")
@@ -652,6 +671,7 @@ for variant in generated future missing-runtime malformed wrong-nesting comment 
   fi
 done
 echo "Generated numeric runtime shape and manifest mutations produced the expected findings."
+report_phase forge-manifest
 
 # OSS consumes catalog licensing; Node derives the independently checked package field.
 oss_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_oss.XXXXXX")
@@ -680,6 +700,7 @@ for variant in generated catalog-license package-license; do
   fi
 done
 echo "Generated OSS licensing inputs and independent mutations produced the expected findings."
+report_phase oss
 
 # Both Biome filenames must be parsed as JSON and checked by the same rule.
 for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/biome-invalid/biome.jsonc; do
@@ -693,11 +714,19 @@ for path in rule-tests/fixtures/biome-invalid/biome.json rule-tests/fixtures/bio
 done
 
 echo "Both Biome config formats produced the expected finding."
+report_phase biome-filename
 
 bash scripts/check-git-hooks-fixtures.sh
+report_phase git-hooks
 bash scripts/check-docs-fixtures.sh
+report_phase docs
 bash scripts/check-typescript-fixtures.sh
+report_phase typescript
 sh scripts/check-secrets-fixtures.sh
+report_phase secrets
 sh scripts/check-security-fixtures.sh
+report_phase security
 bash scripts/check-scope-fixtures.sh
+report_phase scope-routing
 bash scripts/check-page-title-fixtures.sh
+report_phase page-title
