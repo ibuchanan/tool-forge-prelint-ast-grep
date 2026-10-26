@@ -21,19 +21,19 @@ for file in "$@"; do
     printf '%s: YAML parse/structure check failed\n' "$file" >&2
     exit 2
   fi
-  if ! yq --from-file authoring/checks/values.yq "$file" >"$work/values"; then
-    printf '%s: value parser/check failed\n' "$file" >&2
-    exit 2
-  fi
-  while IFS= read -r diagnostic; do
-    [[ -n $diagnostic ]] || continue
-    if [[ $diagnostic == REVIEW:* ]]; then
-      printf '%s: %s\n' "$file" "$diagnostic"
-    else
-      printf '%s\t%s\t%s\n' "$file" "${diagnostic%%:*}" "$diagnostic" >>"$work/findings"
-    fi
-  done <"$work/values"
 done
+if ! RULE_AUTHORING_DIR="$RULE_AUTHORING_DIR" yq -r 'filename as $file | [eval(load_str(strenv(RULE_AUTHORING_DIR) + "/checks/values.yq"))] as $diagnostics | $diagnostics[] as $diagnostic | [$file, $diagnostic] | @tsv' "$@" >"$work/values"; then
+  printf 'Value parser/check failed\n' >&2
+  exit 2
+fi
+while IFS=$'\t' read -r file diagnostic; do
+  [[ -n $diagnostic ]] || continue
+  if [[ $diagnostic == REVIEW:* ]]; then
+    printf '%s: %s\n' "$file" "$diagnostic"
+  else
+    printf '%s\t%s\t%s\n' "$file" "${diagnostic%%:*}" "$diagnostic" >>"$work/findings"
+  fi
+done <"$work/values"
 status=0
 ast-grep scan --config authoring/sgconfig.yml --json=compact "$@" >"$work/scan.json" 2>"$work/scanner-errors" || status=$?
 if [[ $status -gt 1 ]] || ! jq -e 'type == "array" and all(.[]; (.file | type == "string") and (.ruleId | type == "string") and (.message | type == "string"))' "$work/scan.json" >/dev/null; then
