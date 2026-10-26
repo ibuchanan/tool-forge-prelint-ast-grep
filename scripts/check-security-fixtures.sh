@@ -135,17 +135,39 @@ cp rule-tests/fixtures/security/owasp-source.txt "$TMP/owasp/tests/source.spec.j
 for dir in __tests__ dist build node_modules/example; do
   cp rule-tests/fixtures/security/owasp-source.txt "$TMP/owasp/$dir/source.ts"
 done
-for rule in review-input-filesystem-path review-input-redirect no-weak-hash no-insecure-randomness no-jwt-none-algorithm review-input-sql review-input-shell-command no-dynamic-code-evaluation review-raw-html-sink no-disabled-tls-verification no-wildcard-cors-origin review-hardcoded-secret review-input-module-load review-input-fetch-url; do
-  for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
-    : > "$TMP/expected"
-    if [ "$config" != sgconfig.recommended.yml ]; then
+rules='review-input-filesystem-path review-input-redirect no-weak-hash no-insecure-randomness no-jwt-none-algorithm review-input-sql review-input-shell-command no-dynamic-code-evaluation review-raw-html-sink no-disabled-tls-verification no-wildcard-cors-origin review-hardcoded-secret review-input-module-load review-input-fetch-url'
+filter=''
+for rule in $rules; do
+  if [ -n "$filter" ]; then filter="$filter|"; fi
+  filter="$filter$rule"
+done
+filter="^((($filter))(-tsx|-js)?|no-package-main)$"
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  : > "$TMP/expected"
+  if [ "$config" != sgconfig.recommended.yml ]; then
+    for rule in $rules; do
       for ext in ts tsx js jsx mjs cjs mts cts; do
-        printf '%s/owasp/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+        printf '%s\t%s/owasp/source.%s\n' "$rule" "$TMP" "$ext" >> "$TMP/expected"
       done
-      printf '%s/owasp/build/source.ts\n' "$TMP" >> "$TMP/expected"
-    fi
-    # Earlier fixture groups may also contain this family; isolate the new group.
-    scan "$config" "^($rule(-tsx|-js)?|no-package-main)$" "$TMP/owasp"
-  done
+      printf '%s\t%s/owasp/build/source.ts\n' "$rule" "$TMP" >> "$TMP/expected"
+    done
+  fi
+  status=0
+  "$AST_GREP" scan --config "$config" --filter "$filter" --json=compact "$TMP/owasp" > "$TMP/actual.json" 2> "$TMP/errors" || status=$?
+  if [ "$status" -gt 1 ] || ! jq -e 'type == "array"' "$TMP/actual.json" >/dev/null; then
+    echo "Scanner failed for OWASP routing in $config (exit $status)" >&2
+    while IFS= read -r line; do printf '%s\n' "$line" >&2; done < "$TMP/errors"
+    exit "$status"
+  fi
+  jq -r '
+    .[] | . as $finding |
+    ($finding.ruleId | sub("(-tsx|-js)$"; "")) as $rule |
+    [$rule, $finding.file] | @tsv
+  ' "$TMP/actual.json" | sort -u > "$TMP/actual"
+  sort -u "$TMP/expected" -o "$TMP/expected"
+  if ! diff -u "$TMP/expected" "$TMP/actual"; then
+    echo "Unexpected OWASP scan routing in $config" >&2
+    exit 1
+  fi
 done
 echo 'Security fixtures: language variants, tier inclusion, manifest/package paths, and source exclusions passed.'
