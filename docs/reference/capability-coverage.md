@@ -710,49 +710,20 @@ not run git-cliff, regenerate files or mutate Git history. The older repo-init
 compliance fixture's prepend script is updated to the maintained command; the
 separately generated Drop Calf fixture is unchanged.
 
-## Release: explicit package entrypoints
+## Release: unsupported for Forge apps
 
-Two informational ecosol rules are tagged `capability:release` and inspect only
-existing `package.json` files selected by the caller for Forge apps:
+The ecosol profile does not require release scripts or release-check scripts in
+Forge-app `package.json` files. Forge apps are deployed through Forge tooling;
+a generic package release helper is not an applicable Forge-app convention.
+The Drop Calf release capability is a project-generation implementation detail,
+not a requirement for all Forge apps.
 
-| Rule                           | Recognized convention                                                                                                                                                      |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `require-release-script`       | Direct root `scripts.release` string invoking `bash scripts/release.sh`; ordinary spacing and an optional `./` path prefix are accepted. No helper arguments are accepted. |
-| `require-release-check-script` | Direct root `scripts.release:check` string with a recognizable command start, excluding empty, echo/printf, no-op/exit, comment-only and placeholder starts.               |
-
-The reviewed source is the
-[Drop Calf release capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/release.ts).
-It maintains `release` and the Bash helper, seeds `release:check` with
-`npm run test && npm run typecheck` for Forge apps, and supplies that check only
-when missing on update. Owner-defined validation commands and extensions are
-accepted without requiring the seeded text, fixed task names, `pack:check`, a
-version, a tool pin or changelog policy. Git-cliff command ownership remains with
-the changelog capability; generic lifecycle and placeholder rules are not tagged
-as release rules.
-
-The entrypoint matchers are bounded text checks, not shell interpreters. Quoted
-helper paths, wrappers, environment assignments and chaining in `release` need
-review and possible suppression. Logging-first validation commands also need
-review, even when later commands perform checks. A command-like string can pass
-without existing, succeeding or actually validating anything; arbitrary shell
-syntax, escaped JSON spellings, aliases and disguised no-ops are not resolved.
-Suppression of an equivalent owner workflow does not establish release safety.
-
-| Artifact or result                    | Coverage boundary                                                                                                                                          |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Existing package entrypoints          | Direct root strings and recognizable text only; unrelated nesting, wrong types, inert echoes and helper lookalikes do not satisfy the convention.          |
-| Helper presence and contents          | No missing-helper detection or shell inspection. Branch guards, clean-worktree guards, argument handling and atomic-push semantics are outside this slice. |
-| Owner-check preservation              | Native Drop Calf update behavior; the matcher accepts owner commands but does not observe or prove an update cycle.                                        |
-| Validation execution                  | No task existence, checks execution, pass/fail, prerequisites or tool installation is inferred.                                                            |
-| Versioning, Git state and publication | No version changes, commits, tags, worktree cleanliness, remote access or atomic publication is inferred from local script text.                           |
-
-Tests scan static package strings and mutations only. The stored generated
-Drop Calf fixture predates release wiring and remains unchanged; the fixture
-check applies the two exact package commands from the pinned capability to a
-temporary copy. The legacy zero-findings fixture includes those declarations but
-intentionally has no release helper, demonstrating that script presence does not
-prove helper existence. No release workflow, helper, check command, git-cliff or
-remote publication is executed during verification.
+Release-specific package conventions are therefore recorded as **unsupported**
+in the coverage report rather than implemented as lint rules. This does not
+prohibit a Forge app from defining owner-managed release or validation commands;
+it means the ecosol rules do not require those scripts or assess their safety.
+The separate changelog entrypoint convention is documented under
+[Changelog](#changelog-regeneration-entrypoint-text).
 
 ## Secrets: lifecycle command text and native validation
 

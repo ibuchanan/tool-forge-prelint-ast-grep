@@ -40,8 +40,6 @@ rules/ecosol/package-scripts/require-vitest-run-script.yml	package	include
 rules/ecosol/package-scripts/require-changelog-script.yml	package	include
 rules/ecosol/package-scripts/require-clean-script.yml	package	include
 rules/ecosol/package-scripts/prefer-todo-script.yml	package	include
-rules/ecosol/package-scripts/require-release-check-script.yml	package	include
-rules/ecosol/package-scripts/require-release-script.yml	package	include
 rules/ecosol/package-scripts/typecheck-with-typescript.yml	package	include
 rules/ecosol/package-scripts/use-explicit-vitest-watch.yml	package	include
 rules/ecosol/secrets/no-unguarded-fence-rider-evaluation.yml	package	include

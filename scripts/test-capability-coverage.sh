@@ -48,13 +48,13 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "changelog"')
 }
 printf 'PASS: changelog regeneration entrypoint is discoverable\n'
 
-expected=$'release\timplemented\trequire-release-check-script,require-release-script'
+expected=$'release\tunsupported\t'
 actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "release"')
 [[ $actual == "$expected" ]] || {
-  printf 'FAIL: explicit release and owner validation entrypoints must be discoverable; got: %s\n' "$actual" >&2
+  printf 'FAIL: Forge-app release coverage must remain unsupported; got: %s\n' "$actual" >&2
   exit 1
 }
-printf 'PASS: explicit release and owner validation entrypoints are discoverable\n'
+printf 'PASS: Forge-app release coverage is explicitly unsupported\n'
 
 expected=$'secrets\timplemented\tno-unguarded-fence-rider-evaluation,require-fence-rider-script-execution,use-fence-rider-for-forge-deploy,use-fence-rider-for-forge-install,use-fence-rider-for-forge-uninstall,use-fence-rider-for-forge-variables,use-forge-deploy,use-forge-install,use-forge-register,use-forge-uninstall,use-forge-upgrade,use-forge-variables-set'
 actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "secrets"')
