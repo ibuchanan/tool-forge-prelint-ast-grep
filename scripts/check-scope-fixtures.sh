@@ -6,6 +6,12 @@ source scripts/rule-metadata-env.sh
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_scope.XXXXXX")
 # Keep routing evidence under .scratch for maintainer inspection.
+for config in recommended strict atlassian ecosol; do
+  yq -r '.ruleDirs[]' "sgconfig.$config.yml" >"$work/$config.dirs"
+  : >"$work/$config.ids"
+  : >"$work/$config.apps"
+  : >"$work/$config.expected"
+done
 count=0
 while IFS=$'\t' read -r rule scope tests; do
   [[ $rule != \#* && -n $rule ]] || continue
@@ -21,15 +27,17 @@ while IFS=$'\t' read -r rule scope tests; do
     printf 'Unknown test policy: %s\n' "$tests" >&2
     exit 1
   }
-  id=$(yq '.id' "$rule")
+  id=${rule##*/}
+  id=${id%.yml}
   tier=${rule#rules/}
   tier=${tier%%/*}
   test="rule-tests/${rule#rules/}"
   test=${test%.yml}.test.yml
   app="$work/$id"
   mkdir -p "$app"
-  yq -r '.invalid[0]' "$test" >"$work/payload"
-  [[ -s $work/payload ]] || {
+  payload="$app/payload"
+  yq -r '.invalid[0]' "$test" >"$payload"
+  [[ -s $payload ]] || {
     printf 'Missing invalid example: %s\n' "$test" >&2
     exit 1
   }
@@ -86,7 +94,7 @@ while IFS=$'\t' read -r rule scope tests; do
         path=${path#./}
         path=${path//\/\.\//\/}
         mkdir -p "$app/$(dirname "$path")"
-        cp "$work/payload" "$app/$path"
+        [[ -e $app/$path ]] || ln "$payload" "$app/$path"
         expected=$included
         case $prefix in
         nested/dist | node_modules | dep/node_modules | dist | coverage | nested/coverage | specs | nested/specs) expected=false ;;
@@ -98,7 +106,7 @@ while IFS=$'\t' read -r rule scope tests; do
         path="$directory/source.$suffix.$ext"
         path=${path#./}
         mkdir -p "$app/$(dirname "$path")"
-        cp "$work/payload" "$app/$path"
+        ln "$payload" "$app/$path"
         if [[ $included == true && $tests == include && $scope != frontend-index && $name == source.* ]]; then
           printf '%s\n' "$path" >>"$work/expected"
         fi
@@ -108,7 +116,7 @@ while IFS=$'\t' read -r rule scope tests; do
           path="$prefix/src/index.$ext"
           path=${path#./}
           mkdir -p "$app/$(dirname "$path")"
-          cp "$work/payload" "$app/$path"
+          ln "$payload" "$app/$path"
           [[ $ext == ts ]] || continue
           case $prefix in
           dist | coverage | specs | node_modules) continue ;;
@@ -120,35 +128,60 @@ while IFS=$'\t' read -r rule scope tests; do
     done
     # Similar names must not widen filename-specific policies.
     if [[ $name != source.* ]]; then
-      cp "$work/payload" "$app/other.$ext"
+      ln "$payload" "$app/other.$ext"
     fi
   done
   sort -u "$work/expected" -o "$work/expected"
+  directory=${rule%/*}
   for config in recommended strict atlassian ecosol; do
     active=false
     case $tier:$config in
     recommended:* | strict:strict | strict:atlassian | strict:ecosol | atlassian:atlassian | atlassian:ecosol | ecosol:ecosol) active=true ;;
     esac
-    status=0
-    # A recommended sentinel keeps filters nonempty in tiers without this rule.
-    ast-grep scan --config "sgconfig.$config.yml" --filter "^($id|no-package-main)$" --no-ignore hidden --no-ignore vcs --no-ignore dot --no-ignore global --no-ignore exclude --json=compact "$app" >"$work/scan.json" 2>"$work/errors" || status=$?
-    if [[ $status -gt 1 ]] || ! jq -e 'type == "array"' "$work/scan.json" >/dev/null; then
-      printf 'Scanner failed for %s in %s (status %s)\n' "$id" "$config" "$status" >&2
+    configured=false
+    grep -Fqx "$directory" "$work/$config.dirs" && configured=true
+    if [[ $active != "$configured" ]]; then
+      printf 'Unexpected rule-directory membership: %s in %s (expected %s)\n' \
+        "$directory" "$config" "$active" >&2
       exit 1
     fi
-    jq -r --arg id "$id" --arg root "$app/" '.[] | select(.ruleId == $id) | .file | ltrimstr($root)' "$work/scan.json" | sort -u >"$work/actual"
-    if [[ $active == true ]]; then
-      cp "$work/expected" "$work/tier-expected"
-    else
-      : >"$work/tier-expected"
-    fi
-    if ! diff -u "$work/tier-expected" "$work/actual"; then
-      printf 'Unexpected routing: %s in %s; evidence: %s\n' "$id" "$config" "$work" >&2
-      exit 1
-    fi
+    [[ $active == true ]] || continue
+    printf '%s\n' "$id" >>"$work/$config.ids"
+    printf '%s\n' "$app" >>"$work/$config.apps"
+    while IFS= read -r path; do
+      printf '%s\t%s\n' "$id" "$path" >>"$work/$config.expected"
+    done <"$work/expected"
   done
   count=$((count + 1))
 done <rule-tests/fixtures/scope-routing.tsv
+
+for tier in recommended strict atlassian ecosol; do
+  [[ -s $work/$tier.ids ]] || continue
+  ids=$(paste -sd '|' "$work/$tier.ids")
+  apps=()
+  while IFS= read -r app; do
+    apps[${#apps[@]}]=$app
+  done <"$work/$tier.apps"
+  status=0
+  ast-grep scan --config "sgconfig.$tier.yml" --filter "^($ids)$" \
+    --no-ignore hidden --no-ignore vcs --no-ignore dot --no-ignore global --no-ignore exclude \
+    --json=compact "${apps[@]}" >"$work/$tier.scan.json" 2>"$work/$tier.errors" || status=$?
+  if [[ $status -gt 1 ]] || ! jq -e 'type == "array"' "$work/$tier.scan.json" >/dev/null; then
+    printf 'Scanner failed for %s routing (status %s)\n' "$tier" "$status" >&2
+    cat "$work/$tier.errors" >&2
+    exit 1
+  fi
+  jq -r --arg root "$work/" '
+    .[] | .ruleId as $id | (.file | ltrimstr($root)) as $path |
+    select($path | split("/")[0] == $id) |
+    [$id, ($path | sub("^[^/]+/"; ""))] | @tsv
+  ' "$work/$tier.scan.json" | sort -u >"$work/$tier.actual"
+  sort -u "$work/$tier.expected" -o "$work/$tier.expected"
+  if ! diff -u "$work/$tier.expected" "$work/$tier.actual"; then
+    printf 'Unexpected routing in %s; evidence: %s\n' "$tier" "$work" >&2
+    exit 1
+  fi
+done
 if [[ $# == 0 ]]; then
   printf '%s\n' rules/*/*/*.yml | sort >"$work/definitions"
   awk -F '\t' '!/^#/ && NF { print $1 }' rule-tests/fixtures/scope-routing.tsv | sort >"$work/cases"
