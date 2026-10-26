@@ -5,6 +5,11 @@ cd "$(dirname "$0")/.."
 source scripts/rule-metadata-env.sh
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_scope.XXXXXX")
+phase_started=$SECONDS
+report_timing() {
+  printf 'scope phase %-22s %ss\n' "$1" "$((SECONDS - phase_started))" >&2
+  phase_started=$SECONDS
+}
 # Keep routing evidence under .scratch for maintainer inspection.
 for config in recommended strict atlassian ecosol; do
   yq -r '.ruleDirs[]' "sgconfig.$config.yml" >"$work/$config.dirs"
@@ -36,12 +41,19 @@ while IFS=$'\t' read -r rule scope tests; do
   app="$work/$id"
   mkdir -p "$app"
   payload="$app/payload"
-  yq -r '.invalid[0]' "$test" >"$payload"
+  metadata="$work/metadata"
+  TEST_FILE="$test" yq -r '[.language, (load(strenv(TEST_FILE)).invalid[0])] | .[]' "$rule" >"$metadata"
+  {
+    IFS= read -r language || true
+    while IFS= read -r line || [[ -n $line ]]; do
+      printf '%s\n' "$line"
+    done
+  } <"$metadata" >"$payload"
   [[ -s $payload ]] || {
     printf 'Missing invalid example: %s\n' "$test" >&2
     exit 1
   }
-  case $(yq '.language' "$rule") in
+  case $language in
   TypeScript) extensions='ts mts cts' ;;
   Tsx) extensions=tsx ;;
   JavaScript) extensions='js jsx mjs cjs' ;;
@@ -93,7 +105,8 @@ while IFS=$'\t' read -r rule scope tests; do
         path=${path#./}
         path=${path#./}
         path=${path//\/\.\//\/}
-        mkdir -p "$app/$(dirname "$path")"
+        parent="$app/$(dirname "$path")"
+        [[ -d $parent ]] || mkdir -p "$parent"
         [[ -e $app/$path ]] || ln "$payload" "$app/$path"
         expected=$included
         case $prefix in
@@ -105,7 +118,8 @@ while IFS=$'\t' read -r rule scope tests; do
       for suffix in test spec; do
         path="$directory/source.$suffix.$ext"
         path=${path#./}
-        mkdir -p "$app/$(dirname "$path")"
+        parent="$app/$(dirname "$path")"
+        [[ -d $parent ]] || mkdir -p "$parent"
         ln "$payload" "$app/$path"
         if [[ $included == true && $tests == include && $scope != frontend-index && $name == source.* ]]; then
           printf '%s\n' "$path" >>"$work/expected"
@@ -115,7 +129,8 @@ while IFS=$'\t' read -r rule scope tests; do
         for prefix in . nested build fixtures tests/helpers tests/config dist coverage specs node_modules; do
           path="$prefix/src/index.$ext"
           path=${path#./}
-          mkdir -p "$app/$(dirname "$path")"
+          parent="$app/$(dirname "$path")"
+          [[ -d $parent ]] || mkdir -p "$parent"
           ln "$payload" "$app/$path"
           [[ $ext == ts ]] || continue
           case $prefix in
@@ -154,6 +169,7 @@ while IFS=$'\t' read -r rule scope tests; do
   done
   count=$((count + 1))
 done <rule-tests/fixtures/scope-routing.tsv
+report_timing fixture-generation
 
 for tier in recommended strict atlassian ecosol; do
   [[ -s $work/$tier.ids ]] || continue
@@ -171,6 +187,7 @@ for tier in recommended strict atlassian ecosol; do
     cat "$work/$tier.errors" >&2
     exit 1
   fi
+  report_timing "$tier-scan"
   jq -r --arg root "$work/" '
     .[] | .ruleId as $id | (.file | ltrimstr($root)) as $path |
     select($path | split("/")[0] == $id) |
@@ -181,6 +198,7 @@ for tier in recommended strict atlassian ecosol; do
     printf 'Unexpected routing in %s; evidence: %s\n' "$tier" "$work" >&2
     exit 1
   fi
+  report_timing "$tier-compare"
 done
 if [[ $# == 0 ]]; then
   printf '%s\n' rules/*/*/*.yml | sort >"$work/definitions"
