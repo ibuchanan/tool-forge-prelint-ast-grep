@@ -726,7 +726,5 @@ sh scripts/check-secrets-fixtures.sh
 report_phase secrets
 sh scripts/check-security-fixtures.sh
 report_phase security
-bash scripts/check-scope-fixtures.sh
-report_phase scope-routing
 bash scripts/check-page-title-fixtures.sh
 report_phase page-title

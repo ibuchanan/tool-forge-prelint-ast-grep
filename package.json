@@ -25,6 +25,7 @@
     "release:prepare": "scripts/release-prepare.sh",
     "test": "ast-grep test --test-dir rule-tests && npm run test:fixtures && npm run test:authoring",
     "test:authoring": "bash scripts/test-authoring.sh",
+    "test:file-targeting": "bash scripts/check-scope-fixtures.sh",
     "test:fixtures": "scripts/check-fixtures.sh",
     "test:interactive": "ast-grep test --test-dir rule-tests --interactive",
     "test:update": "ast-grep test --test-dir rule-tests --update-all",

@@ -61,6 +61,7 @@ output exactly.
 
 ```sh
 npm test             # rule tests + fixture regression check
+npm run test:file-targeting # slow: rule file globs and tier membership
 npm run format:check # prettier --check
 npm run check        # both of the above
 ```

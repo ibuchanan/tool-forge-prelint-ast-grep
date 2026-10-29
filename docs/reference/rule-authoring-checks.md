@@ -17,6 +17,8 @@ structural invariants, not assessment approval.
 | `bash scripts/check-package.sh`                                                                  | Actual archive membership and loading of all four packed consumer configurations                         |
 
 `npm test` composes consumer tests, real-file fixtures, and `test:authoring`.
+The slow `test:file-targeting` routing check runs separately; Lefthook pre-push
+runs it only when rules, `sgconfig*.yml` or its fixtures change.
 The existing Lefthook pre-push command and any CI running `npm test` therefore
 include enforcement; this repository has no separate hosted CI configuration.
 `npm run check` retains its existing Lefthook delegation. Authoring tooling

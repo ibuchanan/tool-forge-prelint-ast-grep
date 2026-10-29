@@ -28,7 +28,7 @@ The user approved the public scanner/status seams and coverage choices on
 
 ## Routing evidence
 
-`bash scripts/check-scope-fixtures.sh` exercises the shipped recommended, strict,
+`npm run test:file-targeting` (`bash scripts/check-scope-fixtures.sh`) exercises the shipped recommended, strict,
 Atlassian and Ecosol configurations. An optional rule path or category path
 selects a slice. `rule-tests/fixtures/scope-routing.tsv` records independently
 reviewed positive boundaries and test policy, not inferred glob equivalence.
