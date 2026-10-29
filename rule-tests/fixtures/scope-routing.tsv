@@ -135,8 +135,8 @@ rules/strict/imports/no-forge-kvs-in-frontend-tsx.yml	frontend	include
 rules/strict/imports/no-forge-kvs-in-frontend.yml	frontend	include
 rules/strict/imports/no-forge-ui-import-tsx.yml	all	include
 rules/strict/imports/no-forge-ui-import.yml	all	include
-rules/strict/imports/no-unapproved-forge-react-components-tsx.yml	frontend	include
-rules/strict/imports/no-unapproved-forge-react-components.yml	frontend	include
+rules/strict/imports/prefer-documented-forge-react-exports-tsx.yml	frontend	include
+rules/strict/imports/prefer-documented-forge-react-exports.yml	frontend	include
 rules/strict/package-json/prefer-forge-fetch.yml	package	include
 rules/strict/performance/no-storage-query-scan.yml	all	exclude
 rules/strict/runtime-boundaries/no-frontend-escape-imports-tsx.yml	frontend	include

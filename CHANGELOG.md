@@ -1,3 +1,17 @@
+## [Unreleased]
+
+### Changed
+
+- Rename `no-unapproved-forge-react-components` and its `-tsx` variant to
+  `prefer-documented-forge-react-exports` and `prefer-documented-forge-react-exports-tsx`.
+  Update rule-ID overrides and suppression comments to use the new names.
+  Clarify the documentation-backed API preference, stale-list false positives,
+  and rule-specific suppression with an accepted-risk explanation.
+- Check documented exports separately for exact `@forge/react` and
+  `@forge/react/jira` imports, recognizing documented `CustomFieldEdit` imports
+  from the Jira entry point, including aliases. Other entry points and similarly
+  named packages are outside this check. Warning severity is unchanged.
+
 ## [0.11.0] - 2026-10-24
 
 ### 🚀 Features

@@ -1,0 +1,17 @@
+id: prefer-documented-forge-react-exports-tsx
+valid:
+  - "import { Button } from '@forge/react'"
+  - "import { Pressable } from '@forge/react'"
+  - 'import { Button as Submit } from "@forge/react"'
+  - "import { CustomFieldEdit } from '@forge/react/jira'"
+  - 'import { CustomFieldEdit as Edit } from "@forge/react/jira"'
+  - "import { OldComponent } from '@forge/react-extra'"
+  - "import { OldComponent } from 'other/@forge/react'"
+  - "import { OldComponent } from '@forge/react/other'"
+invalid:
+  - "import { OldComponent } from '@forge/react'"
+  - 'import { OldComponent as Legacy } from "@forge/react"'
+  - "import { CustomFieldEdit } from '@forge/react'"
+  - "import { Button } from '@forge/react/jira'"
+  - 'import { OldComponent } from "@forge/react/jira"'
+  - "import { CustomFieldEdit, OldComponent } from '@forge/react/jira'"

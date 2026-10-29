@@ -1,0 +1,98 @@
+id: prefer-documented-forge-react-exports-tsx
+language: Tsx
+severity: warning
+message: >-
+  Forge React import is not in this rule's documented-export list.
+  Verify its documentation before use.
+note: |-
+  Prefer the documented Forge UI Kit APIs:
+  https://developer.atlassian.com/platform/forge/ui-kit/components/
+
+  Published documentation specifies API behavior, props or signatures,
+  and constraints, providing a shared reference for implementation,
+  troubleshooting, and support. An export being available in the package
+  or accepted by TypeScript does not establish that it is documented.
+
+  This rule checks separate maintained lists for named imports from
+  @forge/react and @forge/react/jira, not live documentation. Other entry
+  points are not checked. CustomFieldEdit is documented (Preview) at:
+  https://developer.atlassian.com/platform/forge/ui-kit/jira-components/custom-field-edit/
+  Newly documented APIs may be missing from these lists, so a finding
+  does not prove the API is undocumented or unsupported.
+
+  Check the documentation for the exact export and import path. If
+  documented, update the list with its reference. Otherwise, prefer a
+  documented alternative or accept the risk explicitly. Put a comment
+  explaining the reason and accepted risk above a rule-specific ignore
+  directive immediately before the flagged import line:
+
+  // Accepted risk: using an undocumented API because <reason>; <risk>.
+  // ast-grep-ignore: prefer-documented-forge-react-exports-tsx
+  import { UndocumentedExport } from '@forge/react';
+
+  Keep the directive adjacent to the flagged line, including for multiline
+  imports. Do not use a bare ast-grep-ignore, which suppresses all rules.
+  See https://ast-grep.github.io/guide/project/severity.html
+rule:
+  kind: import_specifier
+  any:
+    - inside:
+        stopBy: end
+        kind: import_statement
+        has:
+          field: source
+          regex: '^["'']@forge/react["'']$'
+      not:
+        matches: documented-main-export
+    - inside:
+        stopBy: end
+        kind: import_statement
+        has:
+          field: source
+          regex: '^["'']@forge/react/jira["'']$'
+      not:
+        has:
+          field: name
+          regex: "^CustomFieldEdit$"
+utils:
+  documented-main-export:
+    has:
+      field: name
+      regex: "^(Box|Inline|Stack|Grid|Flex|Text|Heading|Em|Strong|Strike|Code|CodeBlock|Form|FormSection|FormHeader|FormFooter|Label|Textfield|TextArea|Checkbox|CheckboxGroup|Radio|RadioGroup|Select|Toggle|Range|DatePicker|TimePicker|Calendar|UserPicker|Button|LinkButton|LoadingButton|ButtonGroup|DynamicTable|List|ListItem|Badge|Lozenge|Tag|TagGroup|BarChart|LineChart|PieChart|SingleValueChart|HorizontalBarChart|HorizontalStackBarChart|StackBarChart|DonutChart|Modal|ModalHeader|ModalTitle|ModalBody|ModalFooter|ModalTransition|SectionMessage|SectionMessageAction|ErrorMessage|HelperMessage|ValidMessage|EmptyState|Spinner|ProgressBar|ProgressTracker|Icon|Image|Link|Tooltip|Popup|Pressable|User|UserGroup|Frame|InlineEdit|Comment|AdfRenderer|ForgeReconciler|RequiredAsterisk|FileCard|FilePicker|xcss|useProductContext|useConfig|useTheme|usePermissions|useContentProperty|useSpaceProperty|useIssueProperty|useTranslation|useForm|useObjectStore|I18nProvider|replaceUnsupportedDocumentNodes|Global)$"
+files:
+  - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  category: imports
+  references:
+    - https://developer.atlassian.com/platform/forge/ui-kit/components/
+    - https://developer.atlassian.com/platform/forge/ui-kit/jira-components/custom-field-edit/
+  precision: medium
+  precision-rationale: >-
+    Named imports outside the maintained documented-export list match,
+    but list membership is only a proxy for published documentation.
+    Newly documented exports can produce false positives. Exact import
+    source fields select separate lists for @forge/react and @forge/react/jira;
+    imported name fields handle aliases without conflating local names.
+    Tests cover documented CustomFieldEdit imports, aliases, both quote
+    styles, entry-point mismatches, mixed imports, and unrelated packages.
+    Other entry points, default and namespace imports, and re-exports are
+    outside this named-import check. Evidence:
+    rule-tests/strict/imports/prefer-documented-forge-react-exports-tsx.test.yml
+    and rule-tests/__snapshots__/prefer-documented-forge-react-exports-tsx-snapshot.yml.
+  impact: medium
+  impact-rationale: >-
+    Using APIs without published behavioral contracts can increase
+    implementation uncertainty and troubleshooting, maintenance, and
+    support effort. Documented APIs provide a shared reference for
+    expected behavior and constraints. A finding alone does not
+    establish a build failure, runtime defect, or lack of vendor
+    support, and may reflect an outdated list rather than undocumented
+    usage.
+  scope-profile:
+    - frontend
+    - tests
