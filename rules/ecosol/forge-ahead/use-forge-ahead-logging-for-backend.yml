@@ -1,0 +1,71 @@
+id: use-forge-ahead-logging-for-backend
+language: Json
+severity: info
+message: >
+  Consider adding `@forge-ahead/logging` to `dependencies` for shared Forge backend logging helpers.
+note: >
+  This advisory checks backend Forge packages that directly declare `@forge/api`,
+  `@forge/resolver`, or `@forge/events` in root `dependencies`. It does not report
+  UI-only apps without those backend dependencies. Drop Calf seeds the package, but
+  its references are owner-managed; intentional removal or equivalent safe logging
+  may warrant review and suppression rather than installation. A declaration does
+  not prove logger use, compatibility, redaction configuration or safe log volume.
+  The package.json-only gate is a dependency heuristic, not manifest inspection.
+  https://github.com/ibuchanan/forge-ahead-logging
+rule:
+  kind: object
+  inside:
+    kind: document
+  all:
+    - any:
+        - has:
+            kind: pair
+            regex: '^"dependencies"\s*:'
+            has:
+              kind: object
+              has:
+                kind: pair
+                regex: '^"@forge/api"\s*:'
+        - has:
+            kind: pair
+            regex: '^"dependencies"\s*:'
+            has:
+              kind: object
+              has:
+                kind: pair
+                regex: '^"@forge/resolver"\s*:'
+        - has:
+            kind: pair
+            regex: '^"dependencies"\s*:'
+            has:
+              kind: object
+              has:
+                kind: pair
+                regex: '^"@forge/events"\s*:'
+    - not:
+        has:
+          kind: pair
+          regex: '^"dependencies"\s*:'
+          has:
+            kind: object
+            has:
+              kind: pair
+              regex: '^"@forge-ahead/logging"\s*:'
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  tags: [capability:forge-ahead]
+  references:
+    - https://github.com/ibuchanan/forge-ahead-logging
+    - https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-ahead.ts
+  category: forge-ahead
+  scope-profile: [package-json, tests]
+  precision: medium
+  precision-rationale: "Tests require a direct root production dependency on @forge/api, @forge/resolver, or @forge/events and flag a missing or misplaced logger dependency only when that gate is present. UI-only and unrelated packages are accepted. App manifest identity, intentional owner removal, reference validity, logger use and redaction configuration remain assessment gaps; equivalent safe logging is possible. Evidence: rule-tests/ecosol/forge-ahead/use-forge-ahead-logging-for-backend.test.yml and rule-tests/__snapshots__/use-forge-ahead-logging-for-backend-snapshot.yml."
+  impact: low
+  impact-rationale: The referenced package provides a shared structured/redacted logger. Failing this dependency convention creates maintenance divergence; it does not establish sensitive logging, excessive volume or that installing the package makes logging safe.

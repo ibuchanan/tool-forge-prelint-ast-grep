@@ -1,0 +1,117 @@
+id: use-forge-ahead-logging-for-backend
+snapshots:
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/logging\":\"^1.0.0\"}}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/logging\":\"^1.0.0\"}}}"
+      style: primary
+      start: 0
+      end: 83
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: secondary
+      start: 16
+      end: 82
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\",\"config\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: secondary
+      start: 1
+      end: 82
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0","config":{"@forge-ahead/logging":"^1.0.0"}}}
+      style: secondary
+      start: 0
+      end: 84
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"devDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"},\"devDependencies\":{\"@forge-ahead/logging\":\"^1.0.0\"}}"
+      style: primary
+      start: 0
+      end: 92
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"},"devDependencies":{"@forge-ahead/logging":"^1.0.0"}}
+      style: secondary
+      start: 0
+      end: 93
+  "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/api\":\"^4.0.0\"}}"
+      style: primary
+      start: 0
+      end: 40
+    - source: "\"@forge/api\":\"^4.0.0\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/api\":\"^4.0.0\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/api":"^4.0.0"}}
+      style: secondary
+      start: 0
+      end: 41
+  "{\"dependencies\":{\"@forge/events\":\"^3.0.0\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/events\":\"^3.0.0\"}}"
+      style: primary
+      start: 0
+      end: 43
+    - source: "\"@forge/events\":\"^3.0.0\""
+      style: secondary
+      start: 17
+      end: 41
+    - source: "{\"@forge/events\":\"^3.0.0\"}"
+      style: secondary
+      start: 16
+      end: 42
+    - source: "\"dependencies\":{\"@forge/events\":\"^3.0.0\"}"
+      style: secondary
+      start: 1
+      end: 42
+    - source: |
+        {"dependencies":{"@forge/events":"^3.0.0"}}
+      style: secondary
+      start: 0
+      end: 44
+  "{\"dependencies\":{\"@forge/resolver\":\"*\"}}\n":
+    labels:
+    - source: "{\"dependencies\":{\"@forge/resolver\":\"*\"}}"
+      style: primary
+      start: 0
+      end: 40
+    - source: "\"@forge/resolver\":\"*\""
+      style: secondary
+      start: 17
+      end: 38
+    - source: "{\"@forge/resolver\":\"*\"}"
+      style: secondary
+      start: 16
+      end: 39
+    - source: "\"dependencies\":{\"@forge/resolver\":\"*\"}"
+      style: secondary
+      start: 1
+      end: 39
+    - source: |
+        {"dependencies":{"@forge/resolver":"*"}}
+      style: secondary
+      start: 0
+      end: 41

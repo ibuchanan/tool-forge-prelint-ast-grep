@@ -340,12 +340,13 @@ coverage command, dependency installation or native Vitest initialization is run
 
 ## Forge Ahead: advisory production dependency declarations
 
-Three existing informational ecosol rules map to `capability:forge-ahead`:
+Three informational ecosol rules map to `capability:forge-ahead`:
 `use-forge-ahead-api-types`, `use-forge-ahead-errors` and
-`use-forge-ahead-logging`. `no-verbose-hot-path-logging` and generic logging or
-security rules are not generated dependency conventions and are not tagged.
-IDs, scope profiles, native filename routes and medium-precision/low-impact
-ratings remain unchanged.
+`use-forge-ahead-logging-for-backend`. The last rule applies only when root
+production dependencies directly declare `@forge/api`, `@forge/resolver` or
+`@forge/events`; this heuristic avoids reporting UI-only packages without those
+backend dependencies. `no-verbose-hot-path-logging` and generic logging or security
+rules are separate and are not tagged as dependency conventions.
 
 The reviewed source is the
 [Forge Ahead capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/forge-ahead.ts).
@@ -354,13 +355,14 @@ It seeds `@forge-ahead/atlassian-api-types`, `@forge-ahead/errors` and
 configuration. References are owner-managed; freshness skips GitHub references.
 Validation is an explicit no-op, leaving runtime integration to app build/tests.
 
-The matchers now require each helper as a direct key in the root `dependencies`
+The matchers require each helper as a direct key in the root `dependencies`
 object. Root lookalikes, nested metadata, scripts, development, peer and optional
-sections do not satisfy that placement. The API-types rule retains its production
-`@forge/api` applicability gate, now limited to that direct root key rather than
-descendant keys or string values. Frontend/event-only apps without that declaration
-are not reported. This is partial seed coverage: Drop Calf seeds API types even
-without `@forge/api`, but that alone does not justify a broader advisory.
+sections do not satisfy that placement. The API-types rule is gated on direct root
+`@forge/api`; the backend logging rule is gated on any direct root `@forge/api`,
+`@forge/resolver` or `@forge/events` dependency. UI-only packages without those
+backend dependencies are not reported. These dependency keys are heuristics rather
+than manifest-aware app detection. Drop Calf seeds API types unconditionally, but
+that alone does not justify a broader API-types advisory.
 
 Generated GitHub references and owner-selected registry ranges, aliases, local,
 workspace and tarball strings remain accepted without version pinning. These
@@ -375,10 +377,9 @@ of the corresponding advisory, not automatic restoration of seeded packages.
 Native routing remains existing `package.json` files, excluding node_modules,
 dist, coverage and specs; missing files are not diagnosed. Callers select Forge-app
 directories because these rules cannot compare another file's manifest or establish
-app identity. Static fixture scans cover generated declarations, an API-using app,
-owner references and isolated missing/misplaced helpers. The error-only consumer
-gate remains nonblocking. No package is installed, app task executed or source
-adoption inferred, and the stored generated snapshot is unchanged.
+app identity. Static fixtures cover UI-only packages, each backend dependency gate,
+owner references and missing or misplaced helpers. No package is installed, app
+task executed or source adoption inferred; generated snapshots are checked in.
 
 ## TypeScript: compiler conventions and lint delegation
 

@@ -8,7 +8,7 @@ rules/ecosol/devtools/require-vitest-globals-false.yml	vitest	include
 rules/ecosol/forge-ahead/no-verbose-hot-path-logging.yml	entry	exclude
 rules/ecosol/forge-ahead/use-forge-ahead-api-types.yml	package	include
 rules/ecosol/forge-ahead/use-forge-ahead-errors.yml	package	include
-rules/ecosol/forge-ahead/use-forge-ahead-logging.yml	package	include
+rules/ecosol/forge-ahead/use-forge-ahead-logging-for-backend.yml	package	include
 rules/ecosol/forge-scripts/use-forge-deploy.yml	package	include
 rules/ecosol/forge-scripts/use-forge-install.yml	package	include
 rules/ecosol/forge-scripts/use-forge-register.yml	package	include

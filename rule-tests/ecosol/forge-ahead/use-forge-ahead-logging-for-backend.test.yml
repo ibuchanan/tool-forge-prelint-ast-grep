@@ -1,0 +1,37 @@
+id: use-forge-ahead-logging-for-backend
+valid:
+  # UI-only apps do not require the backend logger.
+  - |
+    {"dependencies":{"@forge/bridge":"*","@forge/react":"*"}}
+  - |
+    {"dependencies":{"@forge/bridge":"*","@forge/react":"*","@forge/resolver":"*","@forge-ahead/logging":"^1.0.0"}}
+  # Unrelated packages and non-production Forge packages do not activate the gate.
+  - |
+    {"dependencies":{"express":"^4.18.0"}}
+  - |
+    {"devDependencies":{"@forge/api":"^4.0.0"}}
+  - |
+    {"dependencies":{"@forge/events-extra":"^3.0.0"}}
+  # Backend package with the direct production logger dependency.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","@forge-ahead/logging":"github:ibuchanan/forge-ahead-logging#0.1.0"}}
+  - |
+    {"dependencies":{"@forge/resolver":"*","@forge-ahead/logging":"workspace:*"}}
+  - |
+    {"dependencies":{"@forge/events":"^3.0.0","@forge-ahead/logging":"https://example.com/logging.tgz"}}
+  # Development-only backend packages do not activate the gate.
+  - |
+    {"dependencies":{"express":"^4.18.0"},"devDependencies":{"@forge/api":"^4.0.0"}}
+invalid:
+  # Nested or development-only logger entries do not satisfy the advice.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0","config":{"@forge-ahead/logging":"^1.0.0"}}}
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"},"devDependencies":{"@forge-ahead/logging":"^1.0.0"}}
+  # Each direct backend package dependency activates the gate.
+  - |
+    {"dependencies":{"@forge/api":"^4.0.0"}}
+  - |
+    {"dependencies":{"@forge/resolver":"*"}}
+  - |
+    {"dependencies":{"@forge/events":"^3.0.0"}}

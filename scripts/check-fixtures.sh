@@ -126,7 +126,9 @@ for helper in api-types errors logging; do
     ' "$DROP_CALF_PACKAGE" >"$forge_ahead_work/package.json"
     findings=$(ast-grep scan --config sgconfig.ecosol.yml --filter '^use-forge-ahead-' \
       --include-metadata --json=compact "$forge_ahead_work/package.json")
-    if ! printf '%s\n' "$findings" | jq -e --arg rule "use-forge-ahead-$helper" '
+    rule="use-forge-ahead-$helper"
+    if [ "$helper" = logging ]; then rule=use-forge-ahead-logging-for-backend; fi
+    if ! printf '%s\n' "$findings" | jq -e --arg rule "$rule" '
       type == "array" and length == 1 and
       all(.[]; .ruleId == $rule and .severity == "info" and
         (.metadata.tags | index("capability:forge-ahead") != null))

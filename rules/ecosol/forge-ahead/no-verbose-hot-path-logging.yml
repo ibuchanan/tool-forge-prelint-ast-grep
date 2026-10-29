@@ -10,7 +10,7 @@ note: >
   can increase log volume and expose sensitive data.
   createForgeLogger({ name }) gives a structured logger
   (logger.info({ ... }, "message"), logger.debug({ ... }, "message")).
-  See use-forge-ahead-logging.
+  See use-forge-ahead-logging-for-backend.
   See Forge cost optimisation guidance on logging best practices:
   https://developer.atlassian.com/platform/forge/optimise-forge-costs/
   https://github.com/ibuchanan/forge-ahead-logging
