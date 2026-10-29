@@ -8,11 +8,11 @@ pre-push:
   commands:
     test:
       run: npm run test
-    # Slow (minutes): only needed when rule globs or tier membership change.
+    # Check changed rules; config, ledger, or checker changes run the full matrix.
     file-targeting:
       glob:
         - "rules/**"
         - "sgconfig*.yml"
         - "rule-tests/fixtures/scope-routing.tsv"
         - "scripts/check-scope-fixtures.sh"
-      run: npm run test:file-targeting
+      run: npm run test:file-targeting -- {files}

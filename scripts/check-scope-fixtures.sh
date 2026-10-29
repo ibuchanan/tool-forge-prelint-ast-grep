@@ -3,6 +3,23 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/rule-metadata-env.sh
+# Changed rule paths can be checked alone; changes to routing infrastructure need
+# the complete matrix. An unknown/deleted rule also falls back to the full run.
+selected=()
+full=false
+[[ $# -gt 0 ]] || full=true
+for path in "$@"; do
+  case $path in
+    rules/*/*/*.yml)
+      if [[ -f $path ]] && awk -F '\t' -v path="$path" '$1 == path { found = 1 } END { exit !found }' rule-tests/fixtures/scope-routing.tsv; then
+        selected+=("$path")
+      else
+        full=true
+      fi
+      ;;
+    *) full=true ;;
+  esac
+done
 mkdir -p .scratch
 work=$(mktemp -d "$PWD/.scratch/tmp_rovo_scope.XXXXXX")
 phase_started=$SECONDS
@@ -20,7 +37,13 @@ done
 count=0
 while IFS=$'\t' read -r rule scope tests; do
   [[ $rule != \#* && -n $rule ]] || continue
-  [[ $# == 0 || $rule == "$1/"* || $rule == "$1" ]] || continue
+  if [[ $full == false ]]; then
+    found=false
+    for path in "${selected[@]}"; do
+      [[ $rule == "$path" ]] && found=true
+    done
+    [[ $found == true ]] || continue
+  fi
   case $scope in
   all | non-frontend | frontend | frontend-index | resolvers | backend | entry | package | manifest | catalog | biome | hooks | tsconfig | typecheck | vitest) ;;
   *)
@@ -200,14 +223,12 @@ for tier in recommended strict atlassian ecosol; do
   fi
   report_timing "$tier-compare"
 done
-if [[ $# == 0 ]]; then
-  printf '%s\n' rules/*/*/*.yml | sort >"$work/definitions"
-  awk -F '\t' '!/^#/ && NF { print $1 }' rule-tests/fixtures/scope-routing.tsv | sort >"$work/cases"
-  diff -u "$work/definitions" "$work/cases" || {
-    printf 'Missing, duplicate or stale scope cases\n' >&2
-    exit 1
-  }
-fi
+printf '%s\n' rules/*/*/*.yml | sort >"$work/definitions"
+awk -F '\t' '!/^#/ && NF { print $1 }' rule-tests/fixtures/scope-routing.tsv | sort >"$work/cases"
+diff -u "$work/definitions" "$work/cases" || {
+  printf 'Missing, duplicate or stale scope cases\n' >&2
+  exit 1
+}
 [[ $count -gt 0 ]] || {
   printf 'No scope cases selected\n' >&2
   exit 1

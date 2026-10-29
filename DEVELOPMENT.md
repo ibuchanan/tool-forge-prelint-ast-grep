@@ -61,9 +61,10 @@ output exactly.
 
 ```sh
 npm test             # rule tests + fixture regression check
-npm run test:file-targeting # slow: rule file globs and tier membership
+npm run test:file-targeting # full routing matrix (slow); rule file globs and tier membership
+npm run test:file-targeting -- rules/ecosol/forge-ahead/use-forge-ahead-api-types.yml # focused rule routing
 npm run format:check # prettier --check
-npm run check        # both of the above
+npm run check        # pre-push hooks (full routing with --force)
 ```
 
 To regenerate snapshots after changing a rule:
