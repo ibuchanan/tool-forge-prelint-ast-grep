@@ -1,3 +1,61 @@
+# Changelog
+
+All notable changes to this project are documented here.
+
+## [0.12.0] - 2026-10-29
+
+### 🚀 Features
+
+- *(catalog)* Add convention checks and capability tags
+- *(metadata)* Map package policies to Drop Calf
+- *(oss)* Validate catalog licensing inputs
+- *(coverage)* Record unsupported gitignore checks
+- *(manifest)* Check numeric Forge runtime declarations
+- *(changelog)* Check regeneration entrypoint
+- *(release)* Check explicit package entrypoints
+- *(prelint)* Check specifications scan exclusion
+- *(biome)* Tag existing capability conventions
+- *(lint)* Check same-package aggregate selections
+- *(test)* Map Vitest conventions to test capability
+- *(typescript)* Check typecheck lint delegation
+- *(size-limit)* Map existing budget conventions
+- *(ecosol)* Check dist-only clean commands
+- *(ecosol)* Add optional TODO workflow advice
+- *(ecosol)* Check documentation lint entrypoint
+- *(ecosol)* Check hook command delegation
+
+### 🐛 Bug Fixes
+
+- *(ecosol)* Replace Lefthook composition with run-p
+- *(lint)* Align scripts with Drop Calf check tasks
+- *(ui)* Make page-title review advisory
+- *(node)* Align checks with current Forge-app policy
+- *(secrets)* Align Forge lifecycle convention checks
+- *(forge-ahead)* Check production dependency placement
+- *(ecosol)* Remove Forge-app release rules
+- *(imports)* [**breaking**] Clarify documented Forge React exports
+- *(release)* Keep breaking changes on 0.x
+
+### 📚 Documentation
+
+- *(plan)* Add Drop Calf capability convention tickets
+
+### ⚡ Performance
+
+- *(authoring)* Batch YAML value checks
+- *(scope)* Reduce routing fixture setup
+
+### 🧪 Testing
+
+- *(scope)* Batch routing scans for faster checks
+- *(security)* Batch OWASP fixture scans
+- *(fixtures)* Report phase durations
+
+### ⚙️ Miscellaneous Tasks
+
+- Stop tracking scratch backlog README
+- *(scratch)* Remove extraneous committed scratch files
+- *(git)* Stop tracking scratch todo file
 ## [Unreleased]
 
 ### Changed
