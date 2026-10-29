@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here.
 
+## [0.12.1] - 2026-10-29
+
+### 🐛 Bug Fixes
+
+- *(forge-ahead)* Gate logging advice on backend deps
+
+### ⚡ Performance
+
+- *(test)* Split file-targeting check from npm test
+- *(tests)* Scope pre-push routing to changed rules
+
 ## [0.12.0] - 2026-10-29
 
 ### 🚀 Features
