@@ -1,0 +1,7 @@
+id: no-hand-built-forge-module-url-tsx
+valid:
+  - '<Link href={await router.getUrl({ target: "module", moduleKey: "settings" })}>Settings</Link>'
+  - '<Link href="https://example.com/settings/apps/configure/123">Settings</Link>'
+invalid:
+  - '<Link href="/jira/settings/apps/configure/123">Settings</Link>'
+  - "<Link href={`https://${site}/jira/settings/apps/configure/${appId}`}>Settings</Link>"

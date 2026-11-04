@@ -1,0 +1,36 @@
+id: no-hand-built-forge-module-url
+language: TypeScript
+severity: warning
+message: >-
+  Do not construct a Forge module URL. Use `router.getUrl`, `router.navigate`, or `router.open` with a module key.
+note: >-
+  Jira owns the /jira/settings/apps/configure/ route. Constructing it from app or environment IDs duplicates platform routing and can break when those details change. For an href use `router.getUrl({ target: "module", moduleKey: "…" })`; for navigation use `router.navigate` or `router.open` with the same target. The module key and navigation intent cannot be inferred safely, so this rule has no fix. NavigationLocation and getUrl are in Preview; check supported modules before migrating. See https://developer.atlassian.com/platform/forge/apis-reference/ui-api-bridge/router/
+rule:
+  any:
+    - kind: string
+      regex: "/jira/settings/apps/configure/"
+    - kind: template_string
+      regex: "/jira/settings/apps/configure/"
+files:
+  - "**/frontend/**"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
+metadata:
+  category: frontend-ui
+  references:
+    - https://developer.atlassian.com/platform/forge/apis-reference/ui-api-bridge/router/
+  precision: medium
+  precision-rationale: >-
+    The matcher identifies only string and template literals containing the exact Jira configure route; tests cover both literal forms, interpolated routes, unrelated URLs and router calls. It does not prove the destination has a supported Forge module key or distinguish a deliberate link to another app's configuration, so matches need review. Evidence: rule-tests/strict/frontend-ui/no-hand-built-forge-module-url.test.yml.
+  impact: medium
+  impact-rationale: >-
+    Hand-built module links duplicate platform-managed app and environment routing and can send users to a broken destination if those details change. This is a navigation reliability issue rather than proof of a security failure; the bridge router reference documents module-key navigation and URL resolution.
+  scope-profile: [frontend]

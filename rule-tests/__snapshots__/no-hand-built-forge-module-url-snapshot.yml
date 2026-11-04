@@ -1,0 +1,26 @@
+id: no-hand-built-forge-module-url
+snapshots:
+  const href = "/jira/settings/apps/configure/123":
+    labels:
+    - source: "\"/jira/settings/apps/configure/123\""
+      style: primary
+      start: 13
+      end: 48
+  const href = '/jira/settings/apps/configure/123':
+    labels:
+    - source: "'/jira/settings/apps/configure/123'"
+      style: primary
+      start: 13
+      end: 48
+  "const href = `https://${site}/jira/settings/apps/configure/${appId}/${environmentId}`":
+    labels:
+    - source: "`https://${site}/jira/settings/apps/configure/${appId}/${environmentId}`"
+      style: primary
+      start: 13
+      end: 85
+  const href = base + "/jira/settings/apps/configure/" + appId:
+    labels:
+    - source: "\"/jira/settings/apps/configure/\""
+      style: primary
+      start: 20
+      end: 52

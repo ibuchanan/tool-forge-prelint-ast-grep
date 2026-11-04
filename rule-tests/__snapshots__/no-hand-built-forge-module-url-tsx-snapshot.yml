@@ -1,0 +1,14 @@
+id: no-hand-built-forge-module-url-tsx
+snapshots:
+  <Link href="/jira/settings/apps/configure/123">Settings</Link>:
+    labels:
+    - source: "\"/jira/settings/apps/configure/123\""
+      style: primary
+      start: 11
+      end: 46
+  "<Link href={`https://${site}/jira/settings/apps/configure/${appId}`}>Settings</Link>":
+    labels:
+    - source: "`https://${site}/jira/settings/apps/configure/${appId}`"
+      style: primary
+      start: 12
+      end: 67

@@ -1,0 +1,8 @@
+id: no-hand-built-forge-module-url-js
+valid:
+  - 'const href = "https://example.com/settings/apps/configure/123"'
+  - 'const href = await router.getUrl({ target: "module", moduleKey: "settings" })'
+  - 'router.navigate({ target: "module", moduleKey: "settings" })'
+invalid:
+  - 'const href = "/jira/settings/apps/configure/123"'
+  - "const href = `https://${site}/jira/settings/apps/configure/${appId}`"

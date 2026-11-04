@@ -1,0 +1,13 @@
+id: no-hand-built-forge-module-url
+valid:
+  - 'const href = "https://example.com/settings/apps/configure/123"'
+  - 'const href = "/jira/settings/apps/other/123"'
+  - 'const href = await router.getUrl({ target: "module", moduleKey: "settings" })'
+  - 'router.navigate({ target: "module", moduleKey: "settings" })'
+  - 'router.open({ target: "module", moduleKey: "settings" })'
+  - "// /jira/settings/apps/configure/123"
+invalid:
+  - 'const href = "/jira/settings/apps/configure/123"'
+  - "const href = '/jira/settings/apps/configure/123'"
+  - "const href = `https://${site}/jira/settings/apps/configure/${appId}/${environmentId}`"
+  - 'const href = base + "/jira/settings/apps/configure/" + appId'

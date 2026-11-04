@@ -123,6 +123,9 @@ rules/strict/api-usage/review-dynamic-forge-sql-js.yml	all	exclude
 rules/strict/api-usage/review-dynamic-forge-sql-tsx.yml	all	exclude
 rules/strict/api-usage/review-dynamic-forge-sql.yml	all	exclude
 rules/strict/frontend-ui/no-deprecated-table.yml	frontend	include
+rules/strict/frontend-ui/no-hand-built-forge-module-url-js.yml	frontend	exclude
+rules/strict/frontend-ui/no-hand-built-forge-module-url-tsx.yml	frontend	exclude
+rules/strict/frontend-ui/no-hand-built-forge-module-url.yml	frontend	exclude
 rules/strict/frontend-ui/no-native-html-elements.yml	frontend	include
 rules/strict/frontend-ui/no-render-from-forge-react.yml	frontend	include
 rules/strict/frontend-ui/require-forge-reconciler-render.yml	frontend-index	include
