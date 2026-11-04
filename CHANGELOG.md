@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## [0.13.0] - 2026-11-04
+
+### 🚀 Features
+
+- *(lint)* Flag hand-built Forge module URLs
+
 ## [0.12.1] - 2026-10-29
 
 ### 🐛 Bug Fixes
