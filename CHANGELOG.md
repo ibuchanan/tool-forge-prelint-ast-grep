@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## [0.13.1] - 2026-11-05
+
+### 🐛 Bug Fixes
+
+- *(security)* Ignore auth context labels in secret rule
+
 ## [0.13.0] - 2026-11-04
 
 ### 🚀 Features
