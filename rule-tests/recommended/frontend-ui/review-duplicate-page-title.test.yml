@@ -4,6 +4,8 @@ valid:
   - "<Text>Just text</Text>"
   - "<Heading size={'medium'}>Section title</Heading>"
   - '<Heading size="large">Section title</Heading>'
+  - '<Heading as="h2" size="large">Section title</Heading>'
+  - '<Heading as="h1" size={pageSize}>Dynamic size</Heading>'
   # An explicit h1 alone is not a new candidate policy.
   - '<Heading as="h1" size="medium">Page heading</Heading>'
   - "<h1>Native HTML is outside this UI Kit rule</h1>"
@@ -44,6 +46,19 @@ invalid:
   - '<Heading size="xxlarge">My App</Heading>'
   # size is not the first attribute
   - '<Heading as="h1" size="xlarge">My App</Heading>'
+  # Large explicit h1, including the conditional used by shared page/panel UIs.
+  - '<Heading as="h1" size="large">Explore Forge licensing</Heading>'
+  - "<Heading size={'large'} as={'h1'}>Explore Forge licensing</Heading>"
+  - |
+    import ForgeReconciler, { Heading, Stack, useProductContext } from '@forge/react';
+    function App() {
+      const context = useProductContext();
+      const isPanel = context?.moduleKey === 'license-issue-panel';
+      return <Stack>{!isPanel && (
+        <Heading as="h1" size="large">Explore Forge licensing</Heading>
+      )}</Stack>;
+    }
+    ForgeReconciler.render(<App />);
   - |
     import { Heading } from '@forge/react';
     export const Page = () => <Heading size="xlarge">Configure</Heading>;

@@ -4,7 +4,7 @@ severity: hint
 message: >
   This heading may repeat the host-rendered title; compare it with the module title.
 note: >
-  Review xlarge/xxlarge Heading elements against the module's title in manifest.yml
+  Review xlarge/xxlarge Heading elements and large h1 headings against the module's title in manifest.yml
   and the rendered page. Host headers depend on the module and layout; not every
   Forge surface displays a title. Remove a heading only when it redundantly
   repeats that host title. Keep distinct section headings and useful structure;
@@ -29,9 +29,17 @@ rule:
           regex: "^Heading$"
     - has:
         field: open_tag
-        has:
-          kind: jsx_attribute
-          regex: '^size\s*=\s*(["'']x?xlarge["'']|\{\s*["'']x?xlarge["'']\s*\})$'
+        any:
+          - has:
+              kind: jsx_attribute
+              regex: '^size\s*=\s*(["'']x?xlarge["'']|\{\s*["'']x?xlarge["'']\s*\})$'
+          - all:
+              - has:
+                  kind: jsx_attribute
+                  regex: '^as\s*=\s*(["'']h1["'']|\{\s*["'']h1["'']\s*\})$'
+              - has:
+                  kind: jsx_attribute
+                  regex: '^size\s*=\s*(["'']large["'']|\{\s*["'']large["'']\s*\})$'
     - not:
         inside:
           stopBy: end
@@ -62,9 +70,10 @@ ignores:
 metadata:
   precision: low
   precision-rationale: >-
-    Literal xlarge/xxlarge Heading attributes are review candidates, not proven
-    duplicates. Tests cover both quote styles, braced string literals, attribute
-    order and whitespace, smaller headings, lookalikes, direct local function,
+    Literal xlarge/xxlarge headings and explicit large h1 headings are review
+    candidates, not proven duplicates. Tests cover both quote styles, braced
+    string literals, attribute order and whitespace, smaller headings,
+    conditional rendering, lookalikes, direct local function,
     lexical and class bindings, and sibling-scope isolation. Distinct large
     sections still match; module type, manifest title, rendered chrome, import
     aliases, wrappers and other bindings are unresolved. Low precision remains

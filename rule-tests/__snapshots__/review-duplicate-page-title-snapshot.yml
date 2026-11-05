@@ -22,10 +22,40 @@ snapshots:
       style: secondary
       start: 24
       end: 43
-    - source: size = { 'xlarge' }
+    - source: |-
+        <Heading
+          id="title"
+          size = { 'xlarge' }
+        >
       style: secondary
-      start: 24
-      end: 43
+      start: 0
+      end: 45
+  <Heading as="h1" size="large">Explore Forge licensing</Heading>:
+    labels:
+    - source: <Heading as="h1" size="large">Explore Forge licensing</Heading>
+      style: primary
+      start: 0
+      end: 63
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: as="h1"
+      style: secondary
+      start: 9
+      end: 16
+    - source: size="large"
+      style: secondary
+      start: 17
+      end: 29
+    - source: <Heading as="h1" size="large">
+      style: secondary
+      start: 0
+      end: 30
   <Heading as="h1" size="xlarge">My App</Heading>:
     labels:
     - source: <Heading as="h1" size="xlarge">My App</Heading>
@@ -44,10 +74,10 @@ snapshots:
       style: secondary
       start: 17
       end: 30
-    - source: size="xlarge"
+    - source: <Heading as="h1" size="xlarge">
       style: secondary
-      start: 17
-      end: 30
+      start: 0
+      end: 31
   "<Heading id=\"title\" size={\"xlarge\"}>My App</Heading>":
     labels:
     - source: <Heading id="title" size={"xlarge"}>My App</Heading>
@@ -66,10 +96,10 @@ snapshots:
       style: secondary
       start: 20
       end: 35
-    - source: size={"xlarge"}
+    - source: <Heading id="title" size={"xlarge"}>
       style: secondary
-      start: 20
-      end: 35
+      start: 0
+      end: 36
   <Heading size="xlarge">Connection history</Heading>:
     labels:
     - source: <Heading size="xlarge">Connection history</Heading>
@@ -88,10 +118,10 @@ snapshots:
       style: secondary
       start: 9
       end: 22
-    - source: size="xlarge"
+    - source: <Heading size="xlarge">
       style: secondary
-      start: 9
-      end: 22
+      start: 0
+      end: 23
   <Heading size="xlarge">My App</Heading>:
     labels:
     - source: <Heading size="xlarge">My App</Heading>
@@ -110,10 +140,10 @@ snapshots:
       style: secondary
       start: 9
       end: 22
-    - source: size="xlarge"
+    - source: <Heading size="xlarge">
       style: secondary
-      start: 9
-      end: 22
+      start: 0
+      end: 23
   <Heading size="xxlarge">My App</Heading>:
     labels:
     - source: <Heading size="xxlarge">My App</Heading>
@@ -132,10 +162,10 @@ snapshots:
       style: secondary
       start: 9
       end: 23
-    - source: size="xxlarge"
+    - source: <Heading size="xxlarge">
       style: secondary
-      start: 9
-      end: 23
+      start: 0
+      end: 24
   <Heading size='xlarge'>My App</Heading>:
     labels:
     - source: <Heading size='xlarge'>My App</Heading>
@@ -154,10 +184,10 @@ snapshots:
       style: secondary
       start: 9
       end: 22
-    - source: size='xlarge'
+    - source: <Heading size='xlarge'>
       style: secondary
-      start: 9
-      end: 22
+      start: 0
+      end: 23
   <Heading size='xxlarge'>My App</Heading>:
     labels:
     - source: <Heading size='xxlarge'>My App</Heading>
@@ -176,10 +206,36 @@ snapshots:
       style: secondary
       start: 9
       end: 23
-    - source: size='xxlarge'
+    - source: <Heading size='xxlarge'>
+      style: secondary
+      start: 0
+      end: 24
+  "<Heading size={'large'} as={'h1'}>Explore Forge licensing</Heading>":
+    labels:
+    - source: <Heading size={'large'} as={'h1'}>Explore Forge licensing</Heading>
+      style: primary
+      start: 0
+      end: 67
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: Heading
+      style: secondary
+      start: 1
+      end: 8
+    - source: as={'h1'}
+      style: secondary
+      start: 24
+      end: 33
+    - source: size={'large'}
       style: secondary
       start: 9
       end: 23
+    - source: <Heading size={'large'} as={'h1'}>
+      style: secondary
+      start: 0
+      end: 34
   "<Heading size={'xxlarge'} id='title'>My App</Heading>":
     labels:
     - source: <Heading size={'xxlarge'} id='title'>My App</Heading>
@@ -198,10 +254,36 @@ snapshots:
       style: secondary
       start: 9
       end: 25
-    - source: size={'xxlarge'}
+    - source: <Heading size={'xxlarge'} id='title'>
       style: secondary
-      start: 9
-      end: 25
+      start: 0
+      end: 37
+  "import ForgeReconciler, { Heading, Stack, useProductContext } from '@forge/react';\nfunction App() {\n  const context = useProductContext();\n  const isPanel = context?.moduleKey === 'license-issue-panel';\n  return <Stack>{!isPanel && (\n    <Heading as=\"h1\" size=\"large\">Explore Forge licensing</Heading>\n  )}</Stack>;\n}\nForgeReconciler.render(<App />);\n":
+    labels:
+    - source: <Heading as="h1" size="large">Explore Forge licensing</Heading>
+      style: primary
+      start: 238
+      end: 301
+    - source: Heading
+      style: secondary
+      start: 239
+      end: 246
+    - source: Heading
+      style: secondary
+      start: 239
+      end: 246
+    - source: as="h1"
+      style: secondary
+      start: 247
+      end: 254
+    - source: size="large"
+      style: secondary
+      start: 255
+      end: 267
+    - source: <Heading as="h1" size="large">
+      style: secondary
+      start: 238
+      end: 268
   "import { Heading } from '@forge/react';\nexport const Page = () => <Heading size=\"xlarge\">Configure</Heading>;\n":
     labels:
     - source: <Heading size="xlarge">Configure</Heading>
@@ -220,10 +302,10 @@ snapshots:
       style: secondary
       start: 75
       end: 88
-    - source: size="xlarge"
+    - source: <Heading size="xlarge">
       style: secondary
-      start: 75
-      end: 88
+      start: 66
+      end: 89
   "import { Heading } from '@forge/react';\nfunction OtherPanel() {\n  const Heading = ({ children }) => <h2>{children}</h2>;\n  return <Heading size=\"medium\">Local</Heading>;\n}\nexport const Page = () => <Heading size=\"xxlarge\">Configure</Heading>;\n":
     labels:
     - source: <Heading size="xxlarge">Configure</Heading>
@@ -242,7 +324,7 @@ snapshots:
       style: secondary
       start: 207
       end: 221
-    - source: size="xxlarge"
+    - source: <Heading size="xxlarge">
       style: secondary
-      start: 207
-      end: 221
+      start: 198
+      end: 222
