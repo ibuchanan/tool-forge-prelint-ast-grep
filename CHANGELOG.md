@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## [0.13.2] - 2026-11-08
+
+### 🐛 Bug Fixes
+
+- *(lint)* Flag large UI Kit page headings
+
 ## [0.13.1] - 2026-11-05
 
 ### 🐛 Bug Fixes
