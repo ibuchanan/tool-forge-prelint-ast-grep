@@ -124,6 +124,19 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
   fi
   scan "$config" '^(review-personal-data-logging(-tsx|-js)?|no-package-main)$'
 done
+# Anonymous/unlicensed module access is manifest-only in every composing tier.
+mkdir -p "$TMP/access/tests" "$TMP/access/build" "$TMP/access/nested"
+for dir in dist coverage specs node_modules/example; do
+  mkdir -p "$TMP/access/$dir"
+  cp rule-tests/fixtures/security/anonymous-module-manifest.txt "$TMP/access/$dir/manifest.yml"
+done
+for path in manifest.yml manifest.yaml other.yaml tests/manifest.yml build/manifest.yaml nested/manifest.yml; do
+  cp rule-tests/fixtures/security/anonymous-module-manifest.txt "$TMP/access/$path"
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  printf '%s/access/%s\n' "$TMP" manifest.yml "$TMP" manifest.yaml "$TMP" tests/manifest.yml "$TMP" build/manifest.yaml "$TMP" nested/manifest.yml > "$TMP/expected"
+  scan "$config" '^review-anonymous-module-access$' "$TMP/access"
+done
 # OWASP security families must route consistently across languages and tiers.
 mkdir -p "$TMP/owasp/tests" "$TMP/owasp/__tests__" "$TMP/owasp/dist" "$TMP/owasp/build" "$TMP/owasp/node_modules/example"
 for ext in ts tsx js jsx mjs cjs mts cts; do

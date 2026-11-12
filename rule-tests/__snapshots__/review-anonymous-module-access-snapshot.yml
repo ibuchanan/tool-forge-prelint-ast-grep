@@ -1,0 +1,327 @@
+id: review-anonymous-module-access
+snapshots:
+  "\"modules\": {macro: [{key: public, 'access': 'anonymous'}]}\n":
+    labels:
+    - source: "'access': 'anonymous'"
+      style: primary
+      start: 34
+      end: 55
+    - source: "[{key: public, 'access': 'anonymous'}]"
+      style: secondary
+      start: 19
+      end: 57
+    - source: "{key: public, 'access': 'anonymous'}"
+      style: secondary
+      start: 20
+      end: 56
+    - source: "'access'"
+      style: secondary
+      start: 34
+      end: 42
+    - source: "'anonymous'"
+      style: secondary
+      start: 44
+      end: 55
+    - source: "\"modules\""
+      style: secondary
+      start: 0
+      end: 9
+    - source: "\"modules\": {macro: [{key: public, 'access': 'anonymous'}]}"
+      style: secondary
+      start: 0
+      end: 58
+    - source: "macro: [{key: public, 'access': 'anonymous'}]"
+      style: secondary
+      start: 12
+      end: 57
+  "modules:\n  confluence:contentAction:\n    - key: action\n      unlicensedAccess:\n        - unlicensed\n":
+    labels:
+    - source: |
+        unlicensedAccess:
+                - unlicensed
+      style: primary
+      start: 61
+      end: 100
+    - source: |
+        - key: action
+              unlicensedAccess:
+                - unlicensed
+      style: secondary
+      start: 41
+      end: 100
+    - source: unlicensed
+      style: secondary
+      start: 89
+      end: 99
+    - source: "- unlicensed"
+      style: secondary
+      start: 87
+      end: 99
+    - source: |
+        - unlicensed
+      style: secondary
+      start: 87
+      end: 100
+    - source: |
+        - unlicensed
+      style: secondary
+      start: 87
+      end: 100
+    - source: unlicensedAccess
+      style: secondary
+      start: 61
+      end: 77
+    - source: modules
+      style: secondary
+      start: 0
+      end: 7
+    - source: |
+        modules:
+          confluence:contentAction:
+            - key: action
+              unlicensedAccess:
+                - unlicensed
+      style: secondary
+      start: 0
+      end: 100
+    - source: |
+        confluence:contentAction:
+            - key: action
+              unlicensedAccess:
+                - unlicensed
+      style: secondary
+      start: 11
+      end: 100
+  "modules:\n  jiraServiceManagement:portalFooter:\n    - key: footer\n      access: anonymous\n":
+    labels:
+    - source: "access: anonymous"
+      style: primary
+      start: 71
+      end: 88
+    - source: |
+        - key: footer
+              access: anonymous
+      style: secondary
+      start: 51
+      end: 89
+    - source: access
+      style: secondary
+      start: 71
+      end: 77
+    - source: anonymous
+      style: secondary
+      start: 79
+      end: 88
+    - source: modules
+      style: secondary
+      start: 0
+      end: 7
+    - source: |
+        modules:
+          jiraServiceManagement:portalFooter:
+            - key: footer
+              access: anonymous
+      style: secondary
+      start: 0
+      end: 89
+    - source: |
+        jiraServiceManagement:portalFooter:
+            - key: footer
+              access: anonymous
+      style: secondary
+      start: 11
+      end: 89
+  "modules:\n  jiraServiceManagement:portalHeader:\n    - key: header\n      'unlicensedAccess': [\"customer\"]\n":
+    labels:
+    - source: "'unlicensedAccess': [\"customer\"]"
+      style: primary
+      start: 71
+      end: 103
+    - source: |
+        - key: header
+              'unlicensedAccess': ["customer"]
+      style: secondary
+      start: 51
+      end: 104
+    - source: "\"customer\""
+      style: secondary
+      start: 92
+      end: 102
+    - source: "[\"customer\"]"
+      style: secondary
+      start: 91
+      end: 103
+    - source: "[\"customer\"]"
+      style: secondary
+      start: 91
+      end: 103
+    - source: "'unlicensedAccess'"
+      style: secondary
+      start: 71
+      end: 89
+    - source: modules
+      style: secondary
+      start: 0
+      end: 7
+    - source: |
+        modules:
+          jiraServiceManagement:portalHeader:
+            - key: header
+              'unlicensedAccess': ["customer"]
+      style: secondary
+      start: 0
+      end: 104
+    - source: |
+        jiraServiceManagement:portalHeader:
+            - key: header
+              'unlicensedAccess': ["customer"]
+      style: secondary
+      start: 11
+      end: 104
+  "modules:\n  macro:\n    - key: public\n      access:\n        - anonymous\n":
+    labels:
+    - source: |
+        access:
+                - anonymous
+      style: primary
+      start: 42
+      end: 70
+    - source: |
+        - key: public
+              access:
+                - anonymous
+      style: secondary
+      start: 22
+      end: 70
+    - source: access
+      style: secondary
+      start: 42
+      end: 48
+    - source: anonymous
+      style: secondary
+      start: 60
+      end: 69
+    - source: "- anonymous"
+      style: secondary
+      start: 58
+      end: 69
+    - source: |
+        - anonymous
+      style: secondary
+      start: 58
+      end: 70
+    - source: |
+        - anonymous
+      style: secondary
+      start: 58
+      end: 70
+    - source: modules
+      style: secondary
+      start: 0
+      end: 7
+    - source: |
+        modules:
+          macro:
+            - key: public
+              access:
+                - anonymous
+      style: secondary
+      start: 0
+      end: 70
+    - source: |
+        macro:
+            - key: public
+              access:
+                - anonymous
+      style: secondary
+      start: 11
+      end: 70
+  "modules:\n  macro:\n    - key: public\n      access: [licensed, anonymous]\n":
+    labels:
+    - source: "access: [licensed, anonymous]"
+      style: primary
+      start: 42
+      end: 71
+    - source: |
+        - key: public
+              access: [licensed, anonymous]
+      style: secondary
+      start: 22
+      end: 72
+    - source: access
+      style: secondary
+      start: 42
+      end: 48
+    - source: anonymous
+      style: secondary
+      start: 61
+      end: 70
+    - source: "[licensed, anonymous]"
+      style: secondary
+      start: 50
+      end: 71
+    - source: "[licensed, anonymous]"
+      style: secondary
+      start: 50
+      end: 71
+    - source: modules
+      style: secondary
+      start: 0
+      end: 7
+    - source: |
+        modules:
+          macro:
+            - key: public
+              access: [licensed, anonymous]
+      style: secondary
+      start: 0
+      end: 72
+    - source: |
+        macro:
+            - key: public
+              access: [licensed, anonymous]
+      style: secondary
+      start: 11
+      end: 72
+  "modules: {jiraServiceManagement:portalFooter: [{key: footer, unlicensedAccess: [customer, anonymous]}]}\n":
+    labels:
+    - source: "unlicensedAccess: [customer, anonymous]"
+      style: primary
+      start: 61
+      end: 100
+    - source: "[{key: footer, unlicensedAccess: [customer, anonymous]}]"
+      style: secondary
+      start: 46
+      end: 102
+    - source: "{key: footer, unlicensedAccess: [customer, anonymous]}"
+      style: secondary
+      start: 47
+      end: 101
+    - source: customer
+      style: secondary
+      start: 80
+      end: 88
+    - source: "[customer, anonymous]"
+      style: secondary
+      start: 79
+      end: 100
+    - source: "[customer, anonymous]"
+      style: secondary
+      start: 79
+      end: 100
+    - source: unlicensedAccess
+      style: secondary
+      start: 61
+      end: 77
+    - source: modules
+      style: secondary
+      start: 0
+      end: 7
+    - source: "modules: {jiraServiceManagement:portalFooter: [{key: footer, unlicensedAccess: [customer, anonymous]}]}"
+      style: secondary
+      start: 0
+      end: 103
+    - source: "jiraServiceManagement:portalFooter: [{key: footer, unlicensedAccess: [customer, anonymous]}]"
+      style: secondary
+      start: 10
+      end: 102

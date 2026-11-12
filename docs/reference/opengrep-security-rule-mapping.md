@@ -17,7 +17,20 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
 | `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`, `forge-process-env-in-ui-render`, `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                           | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
-| `forge-manifest-anonymous-access-module`, `forge-manifest-dev-tunnel-egress`, `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                          | **Not converted**: needs YAML path-aware checks and routing tests                                                                                                   |
+| `forge-manifest-dev-tunnel-egress`, `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                    | **Not converted**: needs YAML path-aware checks and routing tests                                                                                                   |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
+
+`forge-manifest-anonymous-access-module` now has a **partial syntax conversion** in
+`review-anonymous-module-access` (recommended, inherited by the other tiers). It
+reviews direct module declarations under top-level `modules`: literal
+`access: anonymous` or access lists containing `anonymous`, and `unlicensedAccess`
+lists containing `anonymous`, `unlicensed`, or `customer`. Block/flow mappings and
+sequences and quoted keys/values are covered; unrelated and nested configuration
+keys are excluded. Real scanner fixtures check both manifest filenames, tier
+composition, and generated/dependency directory exclusions. Unlicensed/customer
+users may be authenticated. A finding proves neither module/user-type support nor
+missing resolver authorization, restricted-data exposure, unsafe writes, or
+billable abuse. YAML aliases/merges and cross-file resolver reachability are not
+resolved; OpenGrep/manual authorization review remains necessary.
 
 The `review-` rules report candidates rather than proven vulnerabilities. See each rule's `note` and precision rationale for false positives and missed forms. For rule authoring conventions, see [rule-authoring-policy](rule-authoring-policy.md).

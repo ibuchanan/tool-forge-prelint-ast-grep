@@ -1,0 +1,70 @@
+id: review-anonymous-module-access
+valid:
+  - |
+    modules:
+      jiraServiceManagement:portalFooter:
+        - key: footer
+          resource: main
+  # Access declarations outside top-level modules or nested in a resolver are unrelated.
+  - |
+    access: anonymous
+    unlicensedAccess: [anonymous]
+    app: {access: anonymous, unlicensedAccess: [customer]}
+    metadata: {modules: {macro: [{access: anonymous}]}}
+    modules:
+      macro:
+        - key: safe
+          resolver: {access: anonymous, unlicensedAccess: [unlicensed]}
+          config: {unlicensedAccess: [anonymous]}
+  # Empty lists, lookalike values and unsupported shapes do not opt in.
+  - |
+    modules:
+      macro:
+        - key: safe
+          access: anonymous-preview
+          unlicensedAccess: []
+        - key: licensed
+          access: licensed
+          unlicensedAccess: [licensed, not-anonymous]
+        - key: invalid-object
+          unlicensedAccess: {anonymous: true}
+        - key: description
+          description: "unlicensedAccess: [anonymous]"
+  - |
+    modules: {macro: [{access: [licensed, [anonymous]], unlicensedAccess: [[anonymous]]}]}
+  - |
+    modules:
+      access: anonymous
+      macro: {access: anonymous, unlicensedAccess: [customer]}
+invalid:
+  - |
+    modules:
+      macro:
+        - key: public
+          access: [licensed, anonymous]
+  - |
+    modules:
+      macro:
+        - key: public
+          access:
+            - anonymous
+  - |
+    "modules": {macro: [{key: public, 'access': 'anonymous'}]}
+  - |
+    modules:
+      jiraServiceManagement:portalHeader:
+        - key: header
+          'unlicensedAccess': ["customer"]
+  - |
+    modules:
+      jiraServiceManagement:portalFooter:
+        - key: footer
+          access: anonymous
+  - |
+    modules: {jiraServiceManagement:portalFooter: [{key: footer, unlicensedAccess: [customer, anonymous]}]}
+  - |
+    modules:
+      confluence:contentAction:
+        - key: action
+          unlicensedAccess:
+            - unlicensed

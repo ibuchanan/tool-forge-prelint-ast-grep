@@ -1,0 +1,113 @@
+id: review-anonymous-module-access
+language: Yaml
+severity: warning
+message: Review anonymous or unlicensed module access. Check authorization in reachable resolvers.
+note: >
+  Reviews module-level access: anonymous (scalar or list) and unlicensedAccess lists
+  containing anonymous, unlicensed or customer in block/flow YAML. Unlicensed and customer
+  users may be authenticated; they are not necessarily anonymous. Declarations are review
+  candidates, not proof of unsafe resolvers or supported module/user-type combinations.
+  Inspect reachable reads, writes and billable operations for independent caller/resource
+  authorization. YAML aliases and merge expansion are not resolved. See
+  https://developer.atlassian.com/platform/forge/access-to-forge-apps-for-unlicensed-users/
+utils:
+  mapping-pair:
+    any:
+      - kind: block_mapping_pair
+      - kind: flow_pair
+rule:
+  matches: mapping-pair
+  all:
+    - inside:
+        stopBy:
+          matches: mapping-pair
+        any:
+          - kind: block_sequence_item
+          - kind: flow_node
+            inside:
+              kind: flow_sequence
+  any:
+    - all:
+        - has:
+            field: key
+            regex: '^["'']?access["'']?$'
+        - has:
+            field: value
+            any:
+              - regex: '^["'']?anonymous["'']?$'
+              - kind: flow_node
+                has:
+                  kind: flow_sequence
+                  has:
+                    kind: flow_node
+                    regex: '^["'']?anonymous["'']?$'
+              - kind: block_node
+                has:
+                  kind: block_sequence
+                  has:
+                    kind: block_sequence_item
+                    has:
+                      kind: flow_node
+                      regex: '^["'']?anonymous["'']?$'
+    - has:
+        field: key
+        regex: '^["'']?unlicensedAccess["'']?$'
+      all:
+        - has:
+            field: value
+            any:
+              - kind: flow_node
+                has:
+                  kind: flow_sequence
+                  has:
+                    kind: flow_node
+                    regex: '^["'']?(anonymous|unlicensed|customer)["'']?$'
+              - kind: block_node
+                has:
+                  kind: block_sequence
+                  has:
+                    kind: block_sequence_item
+                    has:
+                      kind: flow_node
+                      regex: '^["'']?(anonymous|unlicensed|customer)["'']?$'
+  inside:
+    stopBy:
+      matches: mapping-pair
+    matches: mapping-pair
+    inside:
+      stopBy:
+        matches: mapping-pair
+      matches: mapping-pair
+      has:
+        field: key
+        regex: '^["'']?modules["'']?$'
+      not:
+        inside:
+          stopBy: end
+          matches: mapping-pair
+files:
+  - "**/manifest.yaml"
+  - "**/manifest.yml"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  precision: low
+  precision-rationale: >
+    Literal access declarations identify review candidates, not missing authorization.
+    Legitimate reviewed modules also match. Block/flow syntax and unrelated-key boundaries
+    are exercised in rule-tests/recommended/manifest/review-anonymous-module-access.test.yml.
+    Alias and merge resolution remain assessment gaps.
+  impact: high
+  impact-rationale: >
+    Exposing privileged app reads or writes to less privileged callers without independent
+    authorization can disclose restricted product data or modify shared state. Access opt-in
+    alone does not establish such harm, and unlicensed users are not necessarily anonymous.
+  scope-profile:
+    - manifest
+    - tests
+  category: manifest
+  references:
+    - https://developer.atlassian.com/platform/forge/access-to-forge-apps-for-unlicensed-users/

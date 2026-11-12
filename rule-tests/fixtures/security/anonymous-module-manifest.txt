@@ -1,0 +1,7 @@
+modules:
+  jiraServiceManagement:portalFooter:
+    - key: footer
+      unlicensedAccess:
+        - anonymous
+        - customer
+  macro: [{key: public, access: anonymous}]

@@ -85,6 +85,7 @@ rules/recommended/frontend-ui/prefer-frame-for-custom-ui.yml	frontend	include
 rules/recommended/frontend-ui/require-strict-mode.yml	frontend	include
 rules/recommended/frontend-ui/review-duplicate-page-title.yml	frontend	include
 rules/recommended/manifest/no-classic-product-scopes.yml	manifest	include
+rules/recommended/manifest/review-anonymous-module-access.yml	manifest	include
 rules/recommended/manifest/review-broad-manifest-scopes.yml	manifest	include
 rules/recommended/manifest/review-forge-remotes.yml	manifest	include
 rules/recommended/manifest/review-privileged-manifest-capabilities.yml	manifest	include
