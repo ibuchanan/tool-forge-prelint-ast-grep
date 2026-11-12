@@ -1,0 +1,39 @@
+id: review-environment-in-ui-tsx
+valid:
+  - const token = process.env.API_TOKEN;
+  - console.log(process.env.API_TOKEN);
+  - const view = <Text>process.env.API_TOKEN</Text>;
+  - const view = <Text title="process.env.API_TOKEN" />;
+  - const token = process.env.API_TOKEN; const view = <Text>{token}</Text>;
+  - const env = process.env; const view = <Text>{env.API_TOKEN}</Text>;
+  - const view = <Button onClick={() => send(process.env.API_TOKEN)} />;
+  - const view = <Widget callback={function () { return process.env.API_TOKEN; }} />;
+  - const view = <Widget callback={() => { const env = process.env; return env; }} />;
+  - const view = <Text>{config.API_TOKEN}</Text>;
+  - const view = <Text>{process.version}</Text>;
+  - const token = process.env.API_TOKEN; const view = React.createElement(Text, null, token);
+  - const { API_TOKEN } = process.env; const view = <Text>{API_TOKEN}</Text>;
+  - const view = React.createElement(Text, null, process.env.API_TOKEN);
+  - const view = <Text>{(() => process.env.API_TOKEN)()}</Text>;
+  - const view = <Text>{process[envName].API_TOKEN}</Text>;
+invalid:
+  - const view = <Text>{process.env.VERSION}</Text>;
+  - const view = <Text>{process.env[fieldName]}</Text>;
+  - const view = <Text>{process.env.API_TOKEN}</Text>;
+  - const view = <Text title={process.env.API_TOKEN}>Label</Text>;
+  - const view = <Widget value={process.env.API_TOKEN} />;
+  - const view = <Text>{`Token ${process.env.API_TOKEN}`}</Text>;
+  - const view = <Widget value={"Token " + process.env.API_TOKEN} />;
+  - const view = <Text>{process.env.API_TOKEN || "unset"}</Text>;
+  - const view = <Text>{format(process.env.API_TOKEN)}</Text>;
+  - "const view = <Widget options={{token: process.env.API_TOKEN}} />;"
+  - const view = <Text>{process.env['API_TOKEN']}</Text>;
+  - const view = <Text>{process['env'].API_TOKEN}</Text>;
+  - const view = <Widget value={process["env"]["API_TOKEN"]} />;
+  - const view = <Text>{JSON.stringify(process.env)}</Text>;
+  - const view = <Widget {...process.env} />;
+  - const view = <Text>{process.env.NODE_ENV}</Text>;
+  - const view = <Widget value={process.env.PUBLIC_BASE_URL} />;
+  - const view = <Text>{process.env.LOG_LEVEL}</Text>;
+  - const view = <Widget value={process.env.SECRET_VERSION_TOKEN} />;
+  - const view = <Button onClick={() => <Text>{process.env.API_TOKEN}</Text>} />;

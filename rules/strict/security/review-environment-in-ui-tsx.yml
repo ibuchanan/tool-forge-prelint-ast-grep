@@ -1,0 +1,67 @@
+id: review-environment-in-ui-tsx
+language: Tsx
+severity: warning
+message: Environment values reach JSX output. Review sensitivity and render only explicitly public fields.
+note: >-
+  Reviews direct process.env and process['env'] reads, including fields, stringification
+  and spreads, inside JSX children and attributes. Public and diagnostic values (NODE_ENV,
+  VERSION, PUBLIC_, LOG_LEVEL and similar names) deliberately match: names do not establish
+  safety. This is a review warning, not proof of a secret leak. Helpers may sanitize values
+  and component props may not be displayed. Aliases, destructuring, createElement calls,
+  deferred functions without nested JSX, and cross-file flows are not traced. Shadowed
+  process identifiers can match. Applies to Custom UI outside frontend paths too.
+  Keep secrets server-side and expose only explicitly public fields. See
+  https://developer.atlassian.com/platform/forge/environments-and-versions/#environment-variables
+  and https://cwe.mitre.org/data/definitions/200.html
+rule:
+  any:
+    - pattern: process.env
+    - kind: subscript_expression
+      all:
+        - has:
+            field: object
+            pattern: process
+        - has:
+            field: index
+            kind: string
+            regex: '^[''\"]env[''\"]$'
+  inside:
+    kind: jsx_expression
+    stopBy:
+      any:
+        - kind: arrow_function
+        - kind: function_expression
+        - kind: function_declaration
+        - kind: method_definition
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
+metadata:
+  category: security
+  cwe: "CWE-200: Exposure of Sensitive Information to an Unauthorized Actor"
+  references:
+    - https://developer.atlassian.com/platform/forge/environments-and-versions/#environment-variables
+    - https://cwe.mitre.org/data/definitions/200.html
+  precision: low
+  precision-rationale: >-
+    Direct environment reads in JSX are review signals, not proof that a value is
+    secret or rendered by the receiving component. Public/diagnostic configuration
+    can match. rule-tests/strict/security/review-environment-in-ui-tsx.test.yml and
+    rule-tests/__snapshots__/review-environment-in-ui-tsx-snapshot.yml cover direct
+    children/props and counterexamples. Aliases and cross-file flows are unresolved.
+  impact: high
+  impact-rationale: >-
+    Rendering credentials or private configuration exposes them to UI users outside
+    their intended backend boundary, potentially enabling unauthorized access.
+    CWE-200 and Forge environment-variable guidance support this consequence;
+    non-sensitive values and props that are not displayed do not establish exposure.
+  scope-profile:
+    - frontend
+    - backend

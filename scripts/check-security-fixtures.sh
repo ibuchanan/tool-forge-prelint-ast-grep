@@ -210,6 +210,33 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
     scan "$config" "^($rule(-tsx|-js)?|no-package-main)$" "$TMP/runtime"
   done
 done
+# JSX environment rendering applies in UI Kit, Custom UI and shared source paths.
+mkdir -p "$TMP/environment-ui"
+for ext in tsx js jsx mjs cjs; do
+  for dir in . src frontend nested/frontend backend resolvers static/custom-ui lib build tests __tests__ dist coverage specs node_modules/example; do
+    mkdir -p "$TMP/environment-ui/$dir"
+    cp rule-tests/fixtures/security/environment-ui.txt "$TMP/environment-ui/$dir/source.$ext"
+  done
+  for suffix in test spec; do
+    cp rule-tests/fixtures/security/environment-ui.txt "$TMP/environment-ui/source.$suffix.$ext"
+  done
+  printf '%s\n' 'const token = process.env.API_TOKEN;' > "$TMP/environment-ui/safe.$ext"
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  : > "$TMP/expected"
+  if [ "$config" != sgconfig.recommended.yml ]; then
+    for ext in tsx js jsx mjs cjs; do
+      for dir in . src frontend nested/frontend backend resolvers static/custom-ui lib build; do
+        if [ "$dir" = . ]; then
+          printf '%s/environment-ui/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+        else
+          printf '%s/environment-ui/%s/source.%s\n' "$TMP" "$dir" "$ext" >> "$TMP/expected"
+        fi
+      done
+    done
+  fi
+  scan "$config" '^(review-environment-in-ui-(tsx|js)|no-package-main)$' "$TMP/environment-ui"
+done
 # OWASP security families must route consistently across languages and tiers.
 mkdir -p "$TMP/owasp/tests" "$TMP/owasp/__tests__" "$TMP/owasp/dist" "$TMP/owasp/build" "$TMP/owasp/node_modules/example"
 for ext in ts tsx js jsx mjs cjs mts cts; do

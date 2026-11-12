@@ -16,10 +16,47 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-api-fetch-tainted-url`, `forge-asapp-user-input-in-path`, `forge-assume-trusted-route-dynamic-path`, `forge-invoke-remote-dynamic-path`, `forge-storage-key-user-controlled`, `forge-storage-tainted-key`, `forge-request-headers-from-payload` | **Not converted**: source-to-sink taint and/or authorization context cannot be established by the current syntax checks                                             |
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
-| `forge-process-env-in-ui-render`, `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                                                                                            | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
+| `forge-process-env-in-ui-render`                                                                                                                                                                                                                       | Partial direct JSX syntax review via `review-environment-in-ui-tsx` and `review-environment-in-ui-js`; no secret provenance or alias/cross-file flow                |
+| `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                                                                                                                              | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
 | `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | New `review-shared-hosting-wildcard-egress` (partial YAML syntax conversion; selected provider wildcards only, no ownership or traffic proof)                       |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
 | `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`                                                                                                                                                                                        | Partial syntax review via `review-child-process-import` and `review-filesystem-import`; current native runtime allows built-ins, so no blanket prohibition          |
+
+## Environment values in JSX output: direct syntax review
+
+`forge-process-env-in-ui-render` has partial direct-render coverage through
+strict-tier `review-environment-in-ui-tsx` and `review-environment-in-ui-js`.
+Both report `process.env` and literal `process['env']` reads inside JSX children
+and attributes, including nested calls, templates, operators, object props,
+bracket/dynamic field access, whole-environment stringification and spreads.
+Nested JSX inside a callback is checked, but traversal stops at intervening
+function boundaries: an event handler's environment read alone is not UI output.
+No non-JSX TypeScript companion is added because this bounded check requires JSX.
+The existing `no-environment-disclosure` remains responsible for its separate
+whole-environment logging, handler-return and model-message sinks.
+
+These are nonblocking **review warnings** (low precision, high potential impact),
+not proof of a secret leak. Unlike OpenGrep's name-based exclusions, public and
+diagnostic names such as `NODE_ENV`, `PUBLIC_BASE_URL`, `LOG_LEVEL` and `VERSION`
+are deliberately included and tested. Names do not prove safety; broad substring
+exclusions would also hide names such as `SECRET_VERSION_TOKEN`. Review whether
+the value is sensitive and whether the component actually exposes the prop.
+Sanitizing helpers and shadowed `process` identifiers may match. No automatic fix
+is safe. See the [Forge environment-variable guidance](https://developer.atlassian.com/platform/forge/environments-and-versions/#environment-variables)
+and [CWE-200](https://cwe.mitre.org/data/definitions/200.html).
+
+Aliases, destructuring, imported values, cross-file flows, `createElement` calls,
+computed access to the `env` property itself, and reads behind intervening function
+boundaries (including immediately invoked functions) remain gaps, not evidence
+of safety. This is a syntax comparison against the vendored source, not execution
+of OpenGrep or equivalent taint/secret-provenance analysis.
+
+Snippet tests and snapshots cover direct sinks and counterexamples; real-scanner
+fixtures verify TSX and JS/JSX/MJS/CJS, strict/Atlassian/Ecosol inclusion and
+recommended absence, UI Kit and Custom UI outside `frontend`, shared/backend and
+`build` source paths, plus baseline and test exclusions. `build` remains included
+under repository policy rather than copying OpenGrep's exclusion. No manifest,
+component identity, bundle configuration or runtime reachability is inferred.
 
 ## Runtime capability imports: reviewed, not blanket-prohibited
 

@@ -1,0 +1,218 @@
+id: review-environment-in-ui-js
+snapshots:
+  "const view = <Button onClick={() => <Text>{process.env.API_TOKEN}</Text>} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 43
+      end: 54
+    - source: "{process.env.API_TOKEN}"
+      style: secondary
+      start: 42
+      end: 65
+  "const view = <Text title={process.env.API_TOKEN}>Label</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 26
+      end: 37
+    - source: "{process.env.API_TOKEN}"
+      style: secondary
+      start: 25
+      end: 48
+  "const view = <Text>{JSON.stringify(process.env)}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 35
+      end: 46
+    - source: "{JSON.stringify(process.env)}"
+      style: secondary
+      start: 19
+      end: 48
+  "const view = <Text>{`Token ${process.env.API_TOKEN}`}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 29
+      end: 40
+    - source: "{`Token ${process.env.API_TOKEN}`}"
+      style: secondary
+      start: 19
+      end: 53
+  "const view = <Text>{format(process.env.API_TOKEN)}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 27
+      end: 38
+    - source: "{format(process.env.API_TOKEN)}"
+      style: secondary
+      start: 19
+      end: 50
+  "const view = <Text>{process.env.API_TOKEN || \"unset\"}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env.API_TOKEN || \"unset\"}"
+      style: secondary
+      start: 19
+      end: 53
+  "const view = <Text>{process.env.API_TOKEN}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env.API_TOKEN}"
+      style: secondary
+      start: 19
+      end: 42
+  "const view = <Text>{process.env.LOG_LEVEL}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env.LOG_LEVEL}"
+      style: secondary
+      start: 19
+      end: 42
+  "const view = <Text>{process.env.NODE_ENV}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env.NODE_ENV}"
+      style: secondary
+      start: 19
+      end: 41
+  "const view = <Text>{process.env.VERSION}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env.VERSION}"
+      style: secondary
+      start: 19
+      end: 40
+  "const view = <Text>{process.env['API_TOKEN']}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env['API_TOKEN']}"
+      style: secondary
+      start: 19
+      end: 45
+  "const view = <Text>{process.env[fieldName]}</Text>;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 20
+      end: 31
+    - source: "{process.env[fieldName]}"
+      style: secondary
+      start: 19
+      end: 43
+  "const view = <Text>{process['env'].API_TOKEN}</Text>;":
+    labels:
+    - source: process['env']
+      style: primary
+      start: 20
+      end: 34
+    - source: process
+      style: secondary
+      start: 20
+      end: 27
+    - source: "'env'"
+      style: secondary
+      start: 28
+      end: 33
+    - source: "{process['env'].API_TOKEN}"
+      style: secondary
+      start: 19
+      end: 45
+  "const view = <Widget options={{token: process.env.API_TOKEN}} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 38
+      end: 49
+    - source: "{{token: process.env.API_TOKEN}}"
+      style: secondary
+      start: 29
+      end: 61
+  "const view = <Widget value={\"Token \" + process.env.API_TOKEN} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 39
+      end: 50
+    - source: "{\"Token \" + process.env.API_TOKEN}"
+      style: secondary
+      start: 27
+      end: 61
+  "const view = <Widget value={process.env.API_TOKEN} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 28
+      end: 39
+    - source: "{process.env.API_TOKEN}"
+      style: secondary
+      start: 27
+      end: 50
+  "const view = <Widget value={process.env.PUBLIC_BASE_URL} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 28
+      end: 39
+    - source: "{process.env.PUBLIC_BASE_URL}"
+      style: secondary
+      start: 27
+      end: 56
+  "const view = <Widget value={process.env.SECRET_VERSION_TOKEN} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 28
+      end: 39
+    - source: "{process.env.SECRET_VERSION_TOKEN}"
+      style: secondary
+      start: 27
+      end: 61
+  "const view = <Widget value={process[\"env\"][\"API_TOKEN\"]} />;":
+    labels:
+    - source: process["env"]
+      style: primary
+      start: 28
+      end: 42
+    - source: process
+      style: secondary
+      start: 28
+      end: 35
+    - source: "\"env\""
+      style: secondary
+      start: 36
+      end: 41
+    - source: "{process[\"env\"][\"API_TOKEN\"]}"
+      style: secondary
+      start: 27
+      end: 56
+  "const view = <Widget {...process.env} />;":
+    labels:
+    - source: process.env
+      style: primary
+      start: 25
+      end: 36
+    - source: "{...process.env}"
+      style: secondary
+      start: 21
+      end: 37
