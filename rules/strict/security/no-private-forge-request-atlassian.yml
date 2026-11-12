@@ -1,0 +1,39 @@
+id: no-private-forge-request-atlassian
+language: TypeScript
+severity: error
+message: Avoid calling private `__requestAtlassian`; use public `asApp()` or `asUser()` request APIs.
+note: >
+  This check detects direct calls to the private Forge API entry point, including member calls.
+  It cannot resolve aliases or establish that a different tenant was accessed. Public product
+  request APIs keep authorization and tenant context explicit. See
+  https://developer.atlassian.com/platform/forge/apis-reference/fetch-api-product.requestjira/
+rule:
+  any:
+    - pattern: __requestAtlassian($$$ARGS)
+    - pattern: $API.__requestAtlassian($$$ARGS)
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
+metadata:
+  category: security
+  precision: high
+  precision-rationale: >-
+    Direct calls are explicit, but shadowed local functions and aliases are not distinguished.
+    rule-tests/strict/security/no-private-forge-request-atlassian.test.yml checks direct,
+    member and unrelated calls; no cross-tenant behavior is proven.
+  impact: high
+  impact-rationale: >-
+    If this private entry point is used to target another tenant, isolation can fail.
+    A call alone does not demonstrate access to another tenant.
+  scope-profile: [frontend, backend]
+  references:
+    - https://developer.atlassian.com/platform/forge/apis-reference/fetch-api-product.requestjira/
+    - https://developer.atlassian.com/platform/forge/security/
+  cwe: "CWE-668: Exposure of Resource to Wrong Sphere"

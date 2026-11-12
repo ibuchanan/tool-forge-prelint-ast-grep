@@ -1,0 +1,7 @@
+id: review-wildcard-postmessage-origin
+valid:
+  - "window.postMessage(data, 'https://example.com');"
+  - "window.postMessage(data, event.origin);"
+invalid:
+  - "window.postMessage(data, '*');"
+  - "postMessage(data, '*', ports);"

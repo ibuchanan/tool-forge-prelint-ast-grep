@@ -1,0 +1,14 @@
+id: review-wildcard-postmessage-origin
+snapshots:
+  "postMessage(data, '*', ports);":
+    labels:
+    - source: postMessage(data, '*', ports)
+      style: primary
+      start: 0
+      end: 29
+  "window.postMessage(data, '*');":
+    labels:
+    - source: window.postMessage(data, '*')
+      style: primary
+      start: 0
+      end: 29

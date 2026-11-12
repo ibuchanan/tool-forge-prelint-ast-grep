@@ -1,0 +1,14 @@
+id: no-private-forge-request-atlassian
+snapshots:
+  "__requestAtlassian({site: cloudId});":
+    labels:
+    - source: "__requestAtlassian({site: cloudId})"
+      style: primary
+      start: 0
+      end: 35
+  "api.__requestAtlassian({site: cloudId});":
+    labels:
+    - source: "api.__requestAtlassian({site: cloudId})"
+      style: primary
+      start: 0
+      end: 39

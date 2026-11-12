@@ -1,0 +1,7 @@
+id: no-private-forge-request-atlassian
+valid:
+  - "api.asApp().requestJira(route`/rest/api/3/issue`);"
+  - "api.requestJira('/rest/api/3/issue');"
+invalid:
+  - "__requestAtlassian({site: cloudId});"
+  - "api.__requestAtlassian({site: cloudId});"

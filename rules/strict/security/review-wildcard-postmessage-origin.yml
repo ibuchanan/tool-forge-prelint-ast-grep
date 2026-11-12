@@ -1,0 +1,40 @@
+id: review-wildcard-postmessage-origin
+language: TypeScript
+severity: warning
+message: Review `postMessage` with `*` target origin; use an exact trusted origin for sensitive messages.
+note: >
+  A wildcard target origin can deliver Window messages to an unintended recipient if the
+  destination navigates. This matches calls with a literal wildcard second argument, not
+  only Forge Custom UI Window calls; worker messages or intentionally public data can be safe.
+  See https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#security_concerns
+rule:
+  any:
+    - pattern: $WINDOW.postMessage($MESSAGE, '*')
+    - pattern: $WINDOW.postMessage($MESSAGE, '*', $$$REST)
+    - pattern: postMessage($MESSAGE, '*')
+    - pattern: postMessage($MESSAGE, '*', $$$REST)
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
+metadata:
+  category: security
+  precision: medium
+  precision-rationale: >-
+    A literal wildcard is reliable syntactic evidence, but the receiver and message sensitivity
+    are unknown. rule-tests/strict/security/review-wildcard-postmessage-origin.test.yml checks
+    direct/member calls and non-wildcard alternatives.
+  impact: medium
+  impact-rationale: >-
+    Sensitive messages can be exposed if the recipient window navigates before dispatch;
+    public messages and worker targets need not have that consequence.
+  scope-profile: [frontend, backend]
+  references:
+    - https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#security_concerns
+  cwe: "CWE-346: Origin Validation Error"
