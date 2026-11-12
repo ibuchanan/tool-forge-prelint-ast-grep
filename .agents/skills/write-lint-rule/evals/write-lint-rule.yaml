@@ -1,0 +1,177 @@
+- description: "write-lint-rule designs clear metadata for a forbidding rule"
+  vars:
+    skill_path: "src/skills/write-lint-rule/SKILL.md"
+    task: |
+      I am creating a custom lint rule that forbids JavaScript `eval()` calls.
+      Help me choose the rule ID and write the alert message and long note.
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 2
+      references: 2
+    expect_substrings:
+      recommended_actions:
+        - "no-"
+        - "kebab-case"
+        - "message"
+        - "note"
+      guardrails:
+        - "120"
+    expect_any_substrings:
+      recommended_actions:
+        - ["`eval`", "eval()"]
+      guardrails:
+        - ["sarcasm", "shame", "shaming"]
+      references:
+        - ["OWASP", "MDN", "ESLint", "rustc", "ast-grep"]
+
+- description: "write-lint-rule uses enforcing prefixes for required practices"
+  vars:
+    skill_path: "src/skills/write-lint-rule/SKILL.md"
+    task: |
+      I need a lint rule for service handlers that must declare a timeout.
+      It enforces a required practice rather than forbidding a bad API. What
+      should the ID and message strategy be?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 1
+      references: 1
+    expect_substrings:
+      recommended_actions:
+        - "require-"
+        - "kebab-case"
+      "*":
+        - "context"
+        - "problem"
+        - "alternative"
+    expect_any_substrings:
+      "*":
+        - ["no-", "forbidding"]
+    reject_substrings:
+      recommended_actions:
+        - "disallow"
+
+- description: "write-lint-rule applies namespace guidance for organization rules"
+  vars:
+    skill_path: "src/skills/write-lint-rule/SKILL.md"
+    task: |
+      We need an internal security lint rule for Atlassian-only APIs that should
+      not be used in public sample apps. How should the rule ID be scoped, and
+      what naming pitfalls should I avoid?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 2
+      references: 1
+    expect_substrings:
+      recommended_actions:
+        - "namespace"
+        - "/"
+        - "kebab-case"
+    expect_any_substrings:
+      recommended_actions:
+        - ["security/", "atlassian/", "company/"]
+      "*":
+        - ["stable", "stability", "rename"]
+        - ["acronym", "acronyms"]
+
+- description: "write-lint-rule favors concise objective alert text"
+  vars:
+    skill_path: "src/skills/write-lint-rule/SKILL.md"
+    task: |
+      Rewrite this lint message so it is useful in CLI output:
+      "Why would you put secrets in source code? That's terrible."
+      The rule detects hardcoded API tokens.
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    array_min_lengths:
+      recommended_actions: 2
+      guardrails: 2
+      references: 1
+    expect_substrings:
+      recommended_actions:
+        - "hardcoded"
+        - "secret"
+    expect_any_substrings:
+      recommended_actions:
+        - ["remove", "environment variables", "secrets manager", "replace"]
+      guardrails:
+        - ["shame", "shaming", "sarcasm"]
+      "*":
+        - ["objective", "concrete", "actionable"]
+    reject_substrings:
+      recommended_actions:
+        - "terrible"
+        - "why would you"
+
+- description: "write-lint-rule structures long-form rule documentation"
+  vars:
+    skill_path: "src/skills/write-lint-rule/SKILL.md"
+    task: |
+      I already have a rule ID and a short message. Now I need the long-form
+      documentation for a performance lint rule. What sections and evidence
+      should the docs contain?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 1
+      references: 2
+    expect_substrings:
+      recommended_actions:
+        - "overview"
+        - "rationale"
+        - "URL"
+    expect_any_substrings:
+      recommended_actions:
+        - ["when not to use", "edge cases", "disable"]
+      "*":
+        - ["examples", "code snippets"]
+        - ["performance", "MDN", "language docs", "authoritative"]
+
+- description: "write-lint-rule handles ast-grep rule-facing metadata"
+  vars:
+    skill_path: "src/skills/write-lint-rule/SKILL.md"
+    task: |
+      I am writing an ast-grep rule for a deprecated import. I only need the
+      human-facing fields: ID, message, and note. What should those fields look
+      like?
+    required_paths:
+      summary: true
+      recommended_actions: true
+      guardrails: true
+      references: true
+    array_min_lengths:
+      recommended_actions: 3
+      guardrails: 1
+      references: 2
+    expect_substrings:
+      recommended_actions:
+        - "id"
+        - "message"
+        - "note"
+        - "deprecated"
+      references:
+        - "ast-grep"
+    expect_any_substrings:
+      "*":
+        - ["link", "URL", "authoritative"]
