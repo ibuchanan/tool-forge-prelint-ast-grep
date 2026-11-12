@@ -1,5 +1,11 @@
 id: no-unsafe-custom-ui-csp
 valid:
+  - 'permissions: {content: {scripts: [wasm-unsafe-eval, "sha384-abc123", "nonce-abc123"]}}'
+  - "permissions: {external: {scripts: [unsafe-eval, unsafe-inline]}}"
+  - "other: {permissions: {content: {scripts: [unsafe-inline]}}}"
+  - "permissions: {content: {scripts: [{metadata: unsafe-eval}]}}"
+  - "unsafe: &unsafe unsafe-eval\npermissions: {content: {scripts: [*unsafe]}}"
+  - "permissions:\n  content:\n    scripts:\n      - |\n        unsafe-eval"
   - "permissions: {content: {styles: [unsafe-inline]}}"
   - 'permissions: {content: {scripts: ["sha256-abc123"]}}'
   - "permissions:\n  content:\n    styles:\n      - unsafe-inline"
@@ -11,6 +17,8 @@ valid:
   - "permissions: {content: {scripts: [&pin 'sha256-abc123']}}"
   - "other: {content: {scripts: [&unsafe unsafe-eval]}}"
 invalid:
+  - "permissions:\n  content:\n    scripts:\n      - unsafe-inline # reviewed exception required\n      - 'unsafe-eval'"
+  - '"permissions": {"content": {"scripts": ["unsafe-inline", "unsafe-eval"]}}'
   - "permissions: {content: {scripts: [!!str unsafe-eval]}}"
   - "permissions:\n  content:\n    scripts:\n      - \"'unsafe-inline'\""
   - "permissions:\n  content:\n    scripts:\n      - unsafe-eval"

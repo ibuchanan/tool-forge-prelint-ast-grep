@@ -1,0 +1,18 @@
+permissions:
+  external:
+    scripts:
+      - '*'
+      - address: '*'
+        category: analytics
+  content:
+    scripts:
+      - unsafe-inline
+      - unsafe-eval
+    styles:
+      - unsafe-inline
+other:
+  permissions:
+    external:
+      scripts: ['*']
+    content:
+      scripts: [unsafe-eval]

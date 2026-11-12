@@ -2,16 +2,16 @@ id: no-wildcard-egress
 language: Yaml
 severity: warning
 message: >
-  Wildcard fetch egress permits every destination. Prefer an explicit domain allowlist.
+  Wildcard fetch or script egress permits every destination. Prefer an explicit domain allowlist.
 note: >
-  Reviews exact wildcard fetch entries under permissions.external.fetch.backend/client, in
-  scalar or address-object form, including flow YAML. Wildcards are supported and may be
-  intentional (for example client popup workflows); a match is not an invalid manifest or proof
+  Reviews exact wildcard entries under permissions.external.fetch.backend/client and
+  permissions.external.scripts, in scalar or address-object form, including flow YAML.
+  Wildcards are supported and may be intentional (for example client popup workflows); a match is not an invalid manifest or proof
   of exfiltration. Specific host wildcards and remote-reference resolution are outside this
   check. See https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
   https://developer.atlassian.com/platform/forge/manifest-reference/permissions/ Inline scalar
-  declarations with YAML anchors/tags are inspected; alias references and merge expansion are
-  not resolved.
+  declarations with YAML anchors/tags are inspected; alias references, merge expansion and
+  block scalars are not resolved.
 utils:
   mapping-pair:
     any:
@@ -27,6 +27,31 @@ rule:
         - kind: double_quote_scalar
           regex: "^[\"']\\*[\"']$"
     - any:
+        - inside:
+            stopBy:
+              matches: mapping-pair
+            matches: mapping-pair
+            has:
+              field: key
+              regex: '^["'']?scripts["'']?$'
+            inside:
+              stopBy:
+                matches: mapping-pair
+              matches: mapping-pair
+              has:
+                field: key
+                regex: '^["'']?external["'']?$'
+              inside:
+                stopBy:
+                  matches: mapping-pair
+                matches: mapping-pair
+                has:
+                  field: key
+                  regex: '^["'']?permissions["'']?$'
+                not:
+                  inside:
+                    stopBy: end
+                    matches: mapping-pair
         - inside:
             stopBy:
               matches: mapping-pair
@@ -63,6 +88,38 @@ rule:
                   has:
                     field: key
                     regex: '^["'']?(?:permissions)["'']?$'
+                  not:
+                    inside:
+                      stopBy: end
+                      matches: mapping-pair
+        - inside:
+            stopBy:
+              matches: mapping-pair
+            matches: mapping-pair
+            has:
+              field: key
+              regex: '^["'']?address["'']?$'
+            inside:
+              stopBy:
+                matches: mapping-pair
+              matches: mapping-pair
+              has:
+                field: key
+                regex: '^["'']?scripts["'']?$'
+              inside:
+                stopBy:
+                  matches: mapping-pair
+                matches: mapping-pair
+                has:
+                  field: key
+                  regex: '^["'']?external["'']?$'
+                inside:
+                  stopBy:
+                    matches: mapping-pair
+                  matches: mapping-pair
+                  has:
+                    field: key
+                    regex: '^["'']?permissions["'']?$'
                   not:
                     inside:
                       stopBy: end
@@ -126,9 +183,9 @@ ignores:
   - "**/specs/**"
 metadata:
   precision: medium
-  precision-rationale: "Exact wildcard fetch scalars and address objects are distinguished from domain wildcards, unrelated locations and nested metadata in block/flow YAML. The note permits intentional wildcard workflows, so narrowing feasibility needs review. Alias/merge expansion and remote-reference resolution remain gaps. Evidence: rule-tests/recommended/security/no-wildcard-egress.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-wildcard-egress-snapshot.yml."
+  precision-rationale: "Exact wildcard fetch and external script scalars/address objects are distinguished from domain wildcards, unrelated locations and nested metadata in block/flow YAML, including quoted keys and inline anchors/tags. Intentional wildcard workflows still need review. Aliases, merges, block scalars and remote-reference resolution remain gaps. Evidence: rule-tests/recommended/security/no-wildcard-egress.test.yml, rule-tests/__snapshots__/no-wildcard-egress-snapshot.yml and scripts/check-security-fixtures.sh (manifest routing in all four tiers)."
   impact: high
-  impact-rationale: An unrestricted fetch destination removes a destination allowlist barrier; if compromised code or untrusted destinations are used, sensitive data can be sent to arbitrary hosts. Supported wildcard workflows and a declaration alone do not prove exfiltration.
+  impact-rationale: An unrestricted fetch or script destination removes a destination allowlist barrier; if compromised code or untrusted destinations are used, sensitive data can be sent to arbitrary hosts or scripts loaded from them. Supported wildcard workflows and a declaration alone do not prove exfiltration or script injection.
   scope-profile:
     - manifest
     - tests

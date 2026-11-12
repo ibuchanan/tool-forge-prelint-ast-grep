@@ -11,8 +11,9 @@ note: >
   execution. Supported CSP exceptions require review, not automatic removal. See
   https://top10.owasp.org/2025/A02_2025-Security_Misconfiguration/ and
   https://developer.atlassian.com/platform/forge/manifest-reference/permissions/ Inline scalar
-  declarations with YAML anchors/tags are inspected; alias references and merge expansion are
-  not resolved.
+  declarations with YAML anchors/tags are inspected; alias references, merge expansion and
+  block scalars are not resolved. wasm-unsafe-eval, nonce entries and external script host
+  lists are not reported.
 utils:
   mapping-pair:
     any:
@@ -68,7 +69,7 @@ ignores:
   - "**/specs/**"
 metadata:
   precision: medium
-  precision-rationale: "Path-aware block/flow matchers distinguish unsafe script entries from styles, hashes, URLs and unrelated keys; inline anchors are covered. A supported reviewed script exception can still be justified. Alias/merge resolution and whether unsafe execution is actually needed remain assessment gaps. Evidence: rule-tests/recommended/security/no-unsafe-custom-ui-csp.test.yml (valid/invalid cases) and rule-tests/__snapshots__/no-unsafe-custom-ui-csp-snapshot.yml."
+  precision-rationale: "Path-aware block/flow matchers distinguish unsafe script entries from styles, hashes, nonces, wasm-unsafe-eval, external script hosts, URLs and unrelated keys; inline anchors/tags are covered. A reviewed script exception can still be justified. Aliases, merges, block scalars and whether unsafe execution is needed remain assessment gaps. Evidence: rule-tests/recommended/security/no-unsafe-custom-ui-csp.test.yml, rule-tests/__snapshots__/no-unsafe-custom-ui-csp-snapshot.yml and scripts/check-security-fixtures.sh (manifest routing in all four tiers)."
   impact: high
   impact-rationale: Permitting unrestricted inline or evaluated scripts weakens CSP defense in depth. If untrusted script text reaches execution, weakened restrictions can permit sensitive-data access or user-context actions. The configuration alone does not establish an exploitable injection.
   scope-profile:

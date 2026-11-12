@@ -163,6 +163,21 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
   printf '%s/shared/%s\n' "$TMP" manifest.yml "$TMP" manifest.yaml "$TMP" tests/manifest.yml "$TMP" build/manifest.yaml "$TMP" nested/manifest.yml > "$TMP/expected"
   scan "$config" '^review-shared-hosting-wildcard-egress$' "$TMP/shared"
 done
+# Reconciled script egress/CSP checks are manifest-only in every composing tier.
+mkdir -p "$TMP/scripts/tests" "$TMP/scripts/build" "$TMP/scripts/nested"
+for dir in dist coverage specs node_modules/example; do
+  mkdir -p "$TMP/scripts/$dir"
+  cp rule-tests/fixtures/security/script-permissions-manifest.txt "$TMP/scripts/$dir/manifest.yml"
+done
+for path in manifest.yml manifest.yaml other.yaml tests/manifest.yml build/manifest.yaml nested/manifest.yml; do
+  cp rule-tests/fixtures/security/script-permissions-manifest.txt "$TMP/scripts/$path"
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  for rule in no-wildcard-egress no-unsafe-custom-ui-csp; do
+    printf '%s/scripts/%s\n' "$TMP" manifest.yml "$TMP" manifest.yaml "$TMP" tests/manifest.yml "$TMP" build/manifest.yaml "$TMP" nested/manifest.yml > "$TMP/expected"
+    scan "$config" "^$rule$" "$TMP/scripts"
+  done
+done
 # OWASP security families must route consistently across languages and tiers.
 mkdir -p "$TMP/owasp/tests" "$TMP/owasp/__tests__" "$TMP/owasp/dist" "$TMP/owasp/build" "$TMP/owasp/node_modules/example"
 for ext in ts tsx js jsx mjs cjs mts cts; do

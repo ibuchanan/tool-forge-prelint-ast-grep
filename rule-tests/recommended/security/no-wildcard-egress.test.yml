@@ -1,5 +1,12 @@
 id: no-wildcard-egress
 valid:
+  - 'permissions: {external: {scripts: ["https://cdn.example.com", "https://*.example.com", {address: "https://cdn.example.com"}]}}'
+  - 'permissions: {external: {scripts: [{metadata: {address: "*"}}, {remote: "*"}]}}'
+  - 'other: {permissions: {external: {scripts: ["*"]}}}'
+  - 'permissions: {content: {scripts: ["*"]}}'
+  - 'scripts: ["*"]'
+  - "permissions:\n  external:\n    scripts:\n      - |\n        *"
+  - "all: &all '*'\npermissions: {external: {scripts: [*all]}}"
   - "permissions:\n  external:\n    fetch:\n      backend:\n        - \"https://api.example.com\""
   - 'permissions: {external: {fetch: {backend: [{address: "https://api.example.com"}, {remote: backend}]}}}'
   - 'other: {external: {fetch: {backend: ["*"]}}}'
@@ -11,6 +18,11 @@ valid:
   - "other:\n  external:\n    fetch:\n      backend:\n        - &all '*'"
   - "permissions: {external: {fetch: {backend: [{address: &host 'https://api.example.com'}]}}}"
 invalid:
+  - '"permissions": {"external": {"scripts": ["*", {"address": "*"}]}}'
+  - "permissions:\n  external:\n    scripts:\n      - address: '*' # load any host\n        category: analytics"
+  - 'permissions: {external: {scripts: [&all !!str "*"]}}'
+  - 'permissions: {external: {scripts: [{address: "*", category: analytics}]}}'
+  - "permissions:\n  external:\n    scripts:\n      - '*'"
   - 'permissions: {external: {fetch: {backend: [!!str "*"]}}}'
   - "permissions:\n  external:\n    fetch:\n      backend:\n        - \"*\""
   - "permissions:\n  external:\n    fetch:\n      client:\n        - address: \"*\"\n          category: analytics"

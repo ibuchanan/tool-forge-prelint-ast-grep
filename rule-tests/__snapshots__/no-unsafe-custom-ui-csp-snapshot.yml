@@ -30,6 +30,36 @@ snapshots:
       style: secondary
       start: 28
       end: 56
+  "\"permissions\": {\"content\": {\"scripts\": [\"unsafe-inline\", \"unsafe-eval\"]}}":
+    labels:
+    - source: "\"unsafe-inline\""
+      style: primary
+      start: 40
+      end: 55
+    - source: "\"permissions\""
+      style: secondary
+      start: 0
+      end: 13
+    - source: "\"permissions\": {\"content\": {\"scripts\": [\"unsafe-inline\", \"unsafe-eval\"]}}"
+      style: secondary
+      start: 0
+      end: 73
+    - source: "\"content\""
+      style: secondary
+      start: 16
+      end: 25
+    - source: "\"content\": {\"scripts\": [\"unsafe-inline\", \"unsafe-eval\"]}"
+      style: secondary
+      start: 16
+      end: 72
+    - source: "\"scripts\""
+      style: secondary
+      start: 28
+      end: 37
+    - source: "\"scripts\": [\"unsafe-inline\", \"unsafe-eval\"]"
+      style: secondary
+      start: 28
+      end: 71
   "permissions:\n  content:\n    scripts:\n      - \"'unsafe-eval'\"\n":
     labels:
     - source: "- \"'unsafe-eval'\""
@@ -159,6 +189,48 @@ snapshots:
       style: secondary
       start: 28
       end: 56
+  "permissions:\n  content:\n    scripts:\n      - unsafe-inline # reviewed exception required\n      - 'unsafe-eval'":
+    labels:
+    - source: unsafe-inline
+      style: primary
+      start: 45
+      end: 58
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |-
+        permissions:
+          content:
+            scripts:
+              - unsafe-inline # reviewed exception required
+              - 'unsafe-eval'
+      style: secondary
+      start: 0
+      end: 110
+    - source: content
+      style: secondary
+      start: 15
+      end: 22
+    - source: |-
+        content:
+            scripts:
+              - unsafe-inline # reviewed exception required
+              - 'unsafe-eval'
+      style: secondary
+      start: 15
+      end: 110
+    - source: scripts
+      style: secondary
+      start: 28
+      end: 35
+    - source: |-
+        scripts:
+              - unsafe-inline # reviewed exception required
+              - 'unsafe-eval'
+      style: secondary
+      start: 28
+      end: 110
   "permissions:\n  content:\n    scripts: [\"unsafe-inline\"]":
     labels:
     - source: "\"unsafe-inline\""

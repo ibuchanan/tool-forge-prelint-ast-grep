@@ -46,6 +46,36 @@ snapshots:
       style: secondary
       start: 52
       end: 66
+  "\"permissions\": {\"external\": {\"scripts\": [\"*\", {\"address\": \"*\"}]}}":
+    labels:
+    - source: "\"*\""
+      style: primary
+      start: 41
+      end: 44
+    - source: "\"permissions\""
+      style: secondary
+      start: 0
+      end: 13
+    - source: "\"permissions\": {\"external\": {\"scripts\": [\"*\", {\"address\": \"*\"}]}}"
+      style: secondary
+      start: 0
+      end: 65
+    - source: "\"external\""
+      style: secondary
+      start: 16
+      end: 26
+    - source: "\"external\": {\"scripts\": [\"*\", {\"address\": \"*\"}]}"
+      style: secondary
+      start: 16
+      end: 64
+    - source: "\"scripts\""
+      style: secondary
+      start: 29
+      end: 38
+    - source: "\"scripts\": [\"*\", {\"address\": \"*\"}]"
+      style: secondary
+      start: 29
+      end: 63
   "permissions:\n  external:\n    fetch:\n      backend:\n        - \"*\"":
     labels:
     - source: "\"*\""
@@ -275,6 +305,95 @@ snapshots:
       style: secondary
       start: 42
       end: 55
+  "permissions:\n  external:\n    scripts:\n      - '*'":
+    labels:
+    - source: "'*'"
+      style: primary
+      start: 46
+      end: 49
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |-
+        permissions:
+          external:
+            scripts:
+              - '*'
+      style: secondary
+      start: 0
+      end: 49
+    - source: external
+      style: secondary
+      start: 15
+      end: 23
+    - source: |-
+        external:
+            scripts:
+              - '*'
+      style: secondary
+      start: 15
+      end: 49
+    - source: scripts
+      style: secondary
+      start: 29
+      end: 36
+    - source: |-
+        scripts:
+              - '*'
+      style: secondary
+      start: 29
+      end: 49
+  "permissions:\n  external:\n    scripts:\n      - address: '*' # load any host\n        category: analytics":
+    labels:
+    - source: "'*'"
+      style: primary
+      start: 55
+      end: 58
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |-
+        permissions:
+          external:
+            scripts:
+              - address: '*' # load any host
+                category: analytics
+      style: secondary
+      start: 0
+      end: 102
+    - source: external
+      style: secondary
+      start: 15
+      end: 23
+    - source: |-
+        external:
+            scripts:
+              - address: '*' # load any host
+                category: analytics
+      style: secondary
+      start: 15
+      end: 102
+    - source: scripts
+      style: secondary
+      start: 29
+      end: 36
+    - source: |-
+        scripts:
+              - address: '*' # load any host
+                category: analytics
+      style: secondary
+      start: 29
+      end: 102
+    - source: address
+      style: secondary
+      start: 46
+      end: 53
+    - source: "address: '*'"
+      style: secondary
+      start: 46
+      end: 58
   "permissions: {external: {fetch: {backend: [!!str \"*\"]}}}":
     labels:
     - source: "\"*\""
@@ -397,3 +516,71 @@ snapshots:
       style: secondary
       start: 43
       end: 60
+  "permissions: {external: {scripts: [&all !!str \"*\"]}}":
+    labels:
+    - source: "\"*\""
+      style: primary
+      start: 46
+      end: 49
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {scripts: [&all !!str \"*\"]}}"
+      style: secondary
+      start: 0
+      end: 52
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {scripts: [&all !!str \"*\"]}"
+      style: secondary
+      start: 14
+      end: 51
+    - source: scripts
+      style: secondary
+      start: 25
+      end: 32
+    - source: "scripts: [&all !!str \"*\"]"
+      style: secondary
+      start: 25
+      end: 50
+  "permissions: {external: {scripts: [{address: \"*\", category: analytics}]}}":
+    labels:
+    - source: "\"*\""
+      style: primary
+      start: 45
+      end: 48
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {scripts: [{address: \"*\", category: analytics}]}}"
+      style: secondary
+      start: 0
+      end: 73
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {scripts: [{address: \"*\", category: analytics}]}"
+      style: secondary
+      start: 14
+      end: 72
+    - source: scripts
+      style: secondary
+      start: 25
+      end: 32
+    - source: "scripts: [{address: \"*\", category: analytics}]"
+      style: secondary
+      start: 25
+      end: 71
+    - source: address
+      style: secondary
+      start: 36
+      end: 43
+    - source: "address: \"*\""
+      style: secondary
+      start: 36
+      end: 48
