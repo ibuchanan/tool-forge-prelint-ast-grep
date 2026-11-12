@@ -1,0 +1,9 @@
+permissions:
+  external:
+    fetch:
+      backend:
+        - https://demo.ngrok-free.app
+      client:
+        - address: https://demo.localtunnel.me
+    scripts: [https://assets.trycloudflare.com/widget.js]
+    images: [{address: https://images.loca.lt/banner.png}]

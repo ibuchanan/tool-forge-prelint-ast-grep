@@ -17,7 +17,7 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
 | `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`, `forge-process-env-in-ui-render`, `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                           | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
-| `forge-manifest-dev-tunnel-egress`, `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                    | **Not converted**: needs YAML path-aware checks and routing tests                                                                                                   |
+| `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | **Not converted**: needs YAML path-aware checks and routing tests                                                                                                   |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
 
 `forge-manifest-anonymous-access-module` now has a **partial syntax conversion** in
@@ -32,5 +32,22 @@ users may be authenticated. A finding proves neither module/user-type support no
 missing resolver authorization, restricted-data exposure, unsafe writes, or
 billable abuse. YAML aliases/merges and cross-file resolver reachability are not
 resolved; OpenGrep/manual authorization review remains necessary.
+
+`forge-manifest-dev-tunnel-egress` now has a **partial syntax conversion** in
+`review-development-tunnel-egress` (recommended, inherited by the other tiers).
+It checks literal scalar and address-object entries under top-level
+`permissions.external.fetch.backend/client` and the external
+`scripts/styles/images/fonts/media/frames` lists. Block/flow mappings and sequences,
+quoted keys/values, host wildcards, case-insensitive hosts and URL ports/paths are
+covered. Hostname boundaries exclude lookalike hosts and tunnel names appearing
+only in URL paths/queries, descriptions or unrelated keys. The service families
+are ngrok/ngrok-free (io/app/dev), localtunnel.me, loca.lt, trycloudflare.com,
+serveo.net, localhost.run, tunnelmole.com/net, localtonet.com and pinggy.io.
+Real scanner fixtures check both manifest filenames, tier inheritance and directory
+exclusions. This is bounded YAML syntax matching, not URL validation, a complete
+tunnel-service inventory, or proof of hostname reassignment, traffic or compromise.
+Aliases, merge expansion, tagged/anchored scalar normalization, block scalars,
+computed values and remote-reference destinations are not resolved; manual review
+remains necessary. Intentional tunnel use requires review rather than an automatic fix.
 
 The `review-` rules report candidates rather than proven vulnerabilities. See each rule's `note` and precision rationale for false positives and missed forms. For rule authoring conventions, see [rule-authoring-policy](rule-authoring-policy.md).

@@ -1,0 +1,69 @@
+id: review-development-tunnel-egress
+valid:
+  - 'permissions: {external: {fetch: {backend: ["https://api.example.com"]}}}'
+  # A hostname substring in prose, URL paths, queries or another host is not tunnel egress.
+  - |
+    description: https://demo.ngrok.io
+    permissions:
+      external:
+        fetch:
+          backend:
+            - https://ngrok.io.example.com
+            - https://notngrok.io
+            - https://api.example.com/ngrok.io
+            - https://api.example.com?next=https://demo.ngrok.io
+            - https://demo.ngrok.io@api.example.com
+            - {remote: demo.ngrok.io}
+            - {metadata: {address: https://demo.ngrok.io}}
+            - {description: https://demo.ngrok.io, address: https://api.example.com}
+  - |
+    other: {permissions: {external: {fetch: {backend: [https://demo.ngrok.io]}}}}
+    permissions:
+      content: {scripts: [https://demo.ngrok.io]}
+      external:
+        description: https://demo.ngrok.io
+        unknown: [https://demo.ngrok.io]
+        fetch: {other: [https://demo.ngrok.io]}
+  # Unsupported nested lists/maps and scalar declarations are not egress entries.
+  - |
+    permissions:
+      external:
+        scripts: https://demo.ngrok.io
+        images: {address: https://demo.ngrok.io}
+        fetch:
+          backend:
+            - [https://demo.ngrok.io]
+            - {address: [https://demo.ngrok.io]}
+invalid:
+  - '"permissions": {"external": {"fetch": {"client": [{"address": "HTTPS://DEMO.NGROK.IO:443/path", category: analytics}]}}}'
+  - 'permissions: {external: {fetch: {backend: ["*.ngrok.app"]}}}'
+  - "permissions: {external: {fetch: {client: [demo.ngrok.dev, demo.ngrok-free.io, demo.ngrok-free.dev]}}}"
+  - 'permissions: {external: {images: ["demo.localtunnel.me"]}}'
+  - 'permissions: {external: {images: [{address: "https://demo.pinggy.io/path?q=1"}]}}'
+  - |
+    permissions:
+      external:
+        fetch:
+          client:
+            - address: 'https://demo.tunnelmole.com'
+              category: analytics
+  - |
+    permissions:
+      external:
+        scripts:
+          - https://assets.trycloudflare.com/widget.js
+  - |
+    permissions:
+      external:
+        images:
+          - address: https://images.loca.lt/banner.png
+  - "permissions: {external: {styles: [https://theme.serveo.net/main.css]}}"
+  - "permissions: {external: {fonts: [https://font.localhost.run/font.woff2]}}"
+  - "permissions: {external: {media: [https://video.tunnelmole.net/clip.mp4]}}"
+  - "permissions: {external: {frames: [https://frame.localtonet.com]}}"
+  - |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - https://demo.ngrok-free.app
