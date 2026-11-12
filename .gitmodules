@@ -1,3 +1,6 @@
 [submodule "vendor/ranch-rig-drop-calf"]
 	path = vendor/ranch-rig-drop-calf
 	url = https://github.com/ibuchanan/ranch-rig-drop-calf.git
+[submodule "vendor/forge-skills"]
+	path = vendor/forge-skills
+	url = https://github.com/atlassian/forge-skills.git
