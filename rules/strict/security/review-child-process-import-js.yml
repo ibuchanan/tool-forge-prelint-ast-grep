@@ -1,0 +1,87 @@
+id: review-child-process-import-js
+language: JavaScript
+severity: warning
+message: Review subprocess module loading in Forge functions. Validate runtime support and command inputs.
+note: >-
+  Reviews literal child_process and node:child_process imports, require calls and
+  dynamic imports in non-frontend source paths. The deprecated sandbox did not
+  support child_process; the current Node.js runtime allows built-in modules, so
+  an import is not a prohibited operation or evidence of command injection.
+  Check deployed runtime support, command inputs and invocation lifetime before
+  retaining subprocess code. No automatic fix is safe. Computed module names,
+  loader aliases, shadowed require bindings, dependency code and manifest-to-handler
+  reachability are not resolved. See https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/
+  and https://developer.atlassian.com/platform/forge/runtime-reference/legacy-runtime-reference/
+metadata:
+  category: security
+  precision: low
+  precision-rationale: >-
+    Literal module loading identifies a subprocess capability for review, not a
+    runtime violation. Current native Node.js permits built-ins, and require may
+    be shadowed. rule-tests/strict/security/review-child-process-import-js.test.yml
+    and rule-tests/__snapshots__/review-child-process-import-js-snapshot.yml cover
+    literal loads and unrelated modules. Computed names, aliases, re-exports and
+    handler reachability remain gaps. Language companion to
+    review-child-process-import.yml; TypeScript-specific syntax patterns are not
+    included.
+  impact: high
+  impact-rationale: >-
+    Executing attacker-controlled commands can run code with application
+    privileges; an unsupported subprocess can prevent a handler from operating.
+    The runtime references distinguish the legacy restriction from native
+    Node.js support. An import alone proves neither execution nor exploitation.
+  references:
+    - https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/
+    - https://developer.atlassian.com/platform/forge/runtime-reference/legacy-runtime-reference/
+    - https://cwe.mitre.org/data/definitions/78.html
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Review potential function code outside conventional frontend, static, UI and
+    public paths without claiming manifest reachability. Exclude tooling,
+    configuration and generator files as well as the shared baseline and tests.
+    Custom layouts and remote services require separate review.
+rule:
+  any:
+    - kind: import_statement
+      not:
+        regex: '^import\s+type\b'
+      has:
+        stopBy: end
+        field: source
+        kind: string
+        regex: ^['"](node:)?child_process['"]$
+    - kind: call_expression
+      any:
+        - pattern: require($MODULE)
+        - pattern: import($MODULE)
+        - pattern: import($MODULE, $$$OPTIONS)
+      has:
+        field: arguments
+        has:
+          nthChild: 1
+          kind: string
+          regex: ^['"](node:)?child_process['"]$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
+  - "**/frontend/**"
+  - "**/static/**"
+  - "**/ui/**"
+  - "**/webui/**"
+  - "**/public/**"
+  - "**/chrome-extension/**"
+  - "**/scripts/**"
+  - "**/tools/**"
+  - "**/bin/**"
+  - "**/.github/**"
+  - "**/.bitbucket/**"
+  - "**/*.config.*"
+  - "**/generate-*.*"

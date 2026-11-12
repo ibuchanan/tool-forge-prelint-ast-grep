@@ -45,7 +45,7 @@ while IFS=$'\t' read -r rule scope tests; do
     [[ $found == true ]] || continue
   fi
   case $scope in
-  all | non-frontend | frontend | frontend-index | resolvers | backend | entry | package | manifest | catalog | biome | hooks | tsconfig | typecheck | vitest) ;;
+  all | non-frontend | runtime-review | frontend | frontend-index | resolvers | backend | entry | package | manifest | catalog | biome | hooks | tsconfig | typecheck | vitest) ;;
   *)
     printf 'Unknown routing case: %s\n' "$scope" >&2
     exit 1
@@ -113,8 +113,8 @@ while IFS=$'\t' read -r rule scope tests; do
       case $scope:$directory in
       catalog:*) [[ $ext != yaml ]] || included=true ;;
       all:* | package:* | manifest:* | biome:* | hooks:* | tsconfig:* | typecheck:* | vitest:*) included=true ;;
-      non-frontend:frontend | non-frontend:nested/frontend) ;;
-      non-frontend:*) included=true ;;
+      non-frontend:frontend | non-frontend:nested/frontend | runtime-review:frontend | runtime-review:nested/frontend | runtime-review:static/custom-ui) ;;
+      non-frontend:* | runtime-review:*) included=true ;;
       frontend:frontend | frontend:nested/frontend | frontend-index:frontend | frontend-index:nested/frontend) included=true ;;
       resolvers:resolvers | backend:resolvers | backend:external | backend:import-lifecycle | entry:resolvers | entry:external | entry:import-lifecycle) included=true ;;
       *) ;;

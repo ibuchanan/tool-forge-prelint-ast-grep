@@ -1,0 +1,25 @@
+id: review-child-process-import-js
+valid:
+  - import path from 'node:path';
+  - import cp from 'child_process-extra';
+  - import cp from './child_process';
+  - const text = "require('child_process')";
+  - "// import cp from 'child_process';"
+  # Unsupported loaders and computed names are gaps, not safe usage.
+  - require(moduleName);
+  - import('child_' + 'process');
+  - loader('child_process');
+  - object.require('child_process');
+  - export { exec } from 'child_process';
+invalid:
+  - import { exec } from 'node:child_process';
+  - import cp from 'child_process';
+  - import * as cp from "node:child_process";
+  - import 'child_process';
+  - import { exec as execute, spawn } from 'child_process';
+  - const cp = require('child_process');
+  - require('node:child_process').exec(command);
+  - const { spawn } = require("node:child_process");
+  - await import('child_process');
+  - (await import('node:child_process')).spawn(command);
+  - "await import('child_process', { with: { mode: 'test' } });"

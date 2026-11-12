@@ -1,0 +1,232 @@
+id: review-filesystem-import
+snapshots:
+  await import('fs');:
+    labels:
+    - source: import('fs')
+      style: primary
+      start: 6
+      end: 18
+    - source: "'fs'"
+      style: secondary
+      start: 13
+      end: 17
+    - source: "'fs'"
+      style: secondary
+      start: 13
+      end: 17
+  "await import('fs', { with: { mode: 'test' } });":
+    labels:
+    - source: "import('fs', { with: { mode: 'test' } })"
+      style: primary
+      start: 6
+      end: 46
+    - source: "'fs'"
+      style: secondary
+      start: 13
+      end: 17
+    - source: "'fs'"
+      style: secondary
+      start: 13
+      end: 17
+  await import('fs/promises');:
+    labels:
+    - source: import('fs/promises')
+      style: primary
+      start: 6
+      end: 27
+    - source: "'fs/promises'"
+      style: secondary
+      start: 13
+      end: 26
+    - source: "'fs/promises'"
+      style: secondary
+      start: 13
+      end: 26
+  "await import('node:fs');":
+    labels:
+    - source: import('node:fs')
+      style: primary
+      start: 6
+      end: 23
+    - source: "'node:fs'"
+      style: secondary
+      start: 13
+      end: 22
+    - source: "'node:fs'"
+      style: secondary
+      start: 13
+      end: 22
+  "await import('node:fs/promises');":
+    labels:
+    - source: import('node:fs/promises')
+      style: primary
+      start: 6
+      end: 32
+    - source: "'node:fs/promises'"
+      style: secondary
+      start: 13
+      end: 31
+    - source: "'node:fs/promises'"
+      style: secondary
+      start: 13
+      end: 31
+  const fs = require('fs');:
+    labels:
+    - source: require('fs')
+      style: primary
+      start: 11
+      end: 24
+    - source: "'fs'"
+      style: secondary
+      start: 19
+      end: 23
+    - source: "'fs'"
+      style: secondary
+      start: 19
+      end: 23
+  "const fs = require('node:fs');":
+    labels:
+    - source: require('node:fs')
+      style: primary
+      start: 11
+      end: 29
+    - source: "'node:fs'"
+      style: secondary
+      start: 19
+      end: 28
+    - source: "'node:fs'"
+      style: secondary
+      start: 19
+      end: 28
+  "const { readFile } = require('fs/promises');":
+    labels:
+    - source: require('fs/promises')
+      style: primary
+      start: 21
+      end: 43
+    - source: "'fs/promises'"
+      style: secondary
+      start: 29
+      end: 42
+    - source: "'fs/promises'"
+      style: secondary
+      start: 29
+      end: 42
+  "function load(require) { return require('fs'); }":
+    labels:
+    - source: require('fs')
+      style: primary
+      start: 32
+      end: 45
+    - source: "'fs'"
+      style: secondary
+      start: 40
+      end: 44
+    - source: "'fs'"
+      style: secondary
+      start: 40
+      end: 44
+  import 'fs';:
+    labels:
+    - source: import 'fs';
+      style: primary
+      start: 0
+      end: 12
+    - source: "'fs'"
+      style: secondary
+      start: 7
+      end: 11
+  "import 'node:fs/promises';":
+    labels:
+    - source: import 'node:fs/promises';
+      style: primary
+      start: 0
+      end: 26
+    - source: "'node:fs/promises'"
+      style: secondary
+      start: 7
+      end: 25
+  import * as fs from 'fs';:
+    labels:
+    - source: import * as fs from 'fs';
+      style: primary
+      start: 0
+      end: 25
+    - source: "'fs'"
+      style: secondary
+      start: 20
+      end: 24
+  "import * as fs from 'node:fs/promises';":
+    labels:
+    - source: import * as fs from 'node:fs/promises';
+      style: primary
+      start: 0
+      end: 39
+    - source: "'node:fs/promises'"
+      style: secondary
+      start: 20
+      end: 38
+  import fs = require('fs');:
+    labels:
+    - source: fs = require('fs')
+      style: primary
+      start: 7
+      end: 25
+    - source: "'fs'"
+      style: secondary
+      start: 20
+      end: 24
+  import fs from 'fs';:
+    labels:
+    - source: import fs from 'fs';
+      style: primary
+      start: 0
+      end: 20
+    - source: "'fs'"
+      style: secondary
+      start: 15
+      end: 19
+  "import fs from 'node:fs';":
+    labels:
+    - source: import fs from 'node:fs';
+      style: primary
+      start: 0
+      end: 25
+    - source: "'node:fs'"
+      style: secondary
+      start: 15
+      end: 24
+  "import { readFile as read, writeFile } from 'fs/promises';":
+    labels:
+    - source: import { readFile as read, writeFile } from 'fs/promises';
+      style: primary
+      start: 0
+      end: 58
+    - source: "'fs/promises'"
+      style: secondary
+      start: 44
+      end: 57
+  "import { type Stats } from 'fs';":
+    labels:
+    - source: import { type Stats } from 'fs';
+      style: primary
+      start: 0
+      end: 32
+    - source: "'fs'"
+      style: secondary
+      start: 27
+      end: 31
+  "require('node:fs/promises').writeFile(path, data);":
+    labels:
+    - source: require('node:fs/promises')
+      style: primary
+      start: 0
+      end: 27
+    - source: "'node:fs/promises'"
+      style: secondary
+      start: 8
+      end: 26
+    - source: "'node:fs/promises'"
+      style: secondary
+      start: 8
+      end: 26

@@ -1,0 +1,33 @@
+id: review-filesystem-import-js
+valid:
+  - import path from 'node:path';
+  - import fs from 'fs-extra';
+  - import fs from './fs';
+  - import fs from 'fs/promises/extra';
+  - const text = "require('fs')";
+  - "// import fs from 'fs';"
+  # These nonmatches document unsupported resolution, not safe usage.
+  - require(moduleName);
+  - import('node:' + 'fs');
+  - loader('fs');
+  - object.require('fs');
+  - export { readFile } from 'fs';
+invalid:
+  - import fs from 'node:fs';
+  - import fs from 'fs';
+  - import * as fs from 'fs';
+  - import * as fs from 'node:fs/promises';
+  - import { readFile as read, writeFile } from 'fs/promises';
+  - import 'fs';
+  - import 'node:fs/promises';
+  - const fs = require('fs');
+  - const fs = require('node:fs');
+  - const { readFile } = require('fs/promises');
+  - require('node:fs/promises').writeFile(path, data);
+  - await import('fs');
+  - await import('node:fs');
+  - await import('fs/promises');
+  - await import('node:fs/promises');
+  - "await import('fs', { with: { mode: 'test' } });"
+  # Inline erased specifiers and shadowed loaders are conservative review matches.
+  - function load(require) { return require('fs'); }

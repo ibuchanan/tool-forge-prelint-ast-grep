@@ -1,0 +1,95 @@
+id: review-filesystem-import-tsx
+language: Tsx
+severity: warning
+message: Review filesystem module loading in Forge functions. Use Forge storage for durable tenant data.
+note: >-
+  Reviews literal fs, node:fs, fs/promises and node:fs/promises imports,
+  require calls and dynamic imports in non-frontend source paths. Native Node.js
+  permits built-in modules; an import, bundled asset read or temporary file is
+  not inherently prohibited. Do not rely on local disk for durable storage or
+  persist customer data between invocations. Check tenant isolation and use
+  Forge storage for durable data. No automatic fix is safe. Explicit import type
+  declarations are excluded; inline type specifiers may still match. Re-exports,
+  computed names, loader aliases, shadowed require bindings, dependency code and
+  manifest-to-handler reachability are not resolved. See
+  https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/
+metadata:
+  category: security
+  precision: low
+  precision-rationale: >-
+    Literal module loading identifies filesystem access for review, not a
+    runtime violation. Native Node.js permits built-ins, legitimate asset reads
+    may match and require may be shadowed. The paired
+    rule-tests/strict/security/review-filesystem-import-tsx.test.yml and
+    rule-tests/__snapshots__/review-filesystem-import-tsx-snapshot.yml cover literal
+    loads and unrelated modules. Computed names, aliases, re-exports, inline
+    type-only specifiers and handler reachability remain gaps. Companions retain
+    the same policy with language-specific parser support.
+  impact: high
+  impact-rationale: >-
+    Persisting customer data on disk between invocations can compromise tenant
+    isolation, contrary to the native runtime developer responsibilities.
+    Treating local disk as durable storage can lose application data. An import
+    alone proves neither persistence nor exposure; legitimate asset reads and
+    invocation-local temporary files need not have these consequences.
+  references:
+    - https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/
+    - https://developer.atlassian.com/platform/forge/runtime-reference/storage-api/
+  scope-profile:
+    - unique
+  scope-rationale: >-
+    Review potential function code outside conventional frontend, static, UI and
+    public paths without claiming manifest reachability. Exclude tooling,
+    configuration and generator files as well as the shared baseline and tests.
+    Custom layouts and remote services require separate review.
+rule:
+  any:
+    - kind: import_statement
+      not:
+        regex: '^import\s+type\b'
+      has:
+        field: source
+        kind: string
+        regex: ^['"](node:)?fs(/promises)?['"]$
+    - kind: import_require_clause
+      not:
+        inside:
+          regex: '^import\s+type\b'
+      has:
+        field: source
+        kind: string
+        regex: ^['"](node:)?fs(/promises)?['"]$
+    - kind: call_expression
+      any:
+        - pattern: require($MODULE)
+        - pattern: import($MODULE)
+        - pattern: import($MODULE, $$$OPTIONS)
+      has:
+        field: arguments
+        has:
+          nthChild: 1
+          kind: string
+          regex: ^['"](node:)?fs(/promises)?['"]$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
+  - "**/frontend/**"
+  - "**/static/**"
+  - "**/ui/**"
+  - "**/webui/**"
+  - "**/public/**"
+  - "**/chrome-extension/**"
+  - "**/scripts/**"
+  - "**/tools/**"
+  - "**/bin/**"
+  - "**/.github/**"
+  - "**/.bitbucket/**"
+  - "**/*.config.*"
+  - "**/generate-*.*"

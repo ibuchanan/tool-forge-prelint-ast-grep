@@ -178,6 +178,38 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
     scan "$config" "^$rule$" "$TMP/scripts"
   done
 done
+# Runtime capabilities are review-only and exclude frontend, tooling and tests.
+mkdir -p "$TMP/runtime"
+for ext in ts tsx js jsx mjs cjs mts cts; do
+  for dir in . src backend resolvers external import-lifecycle lib build nested/src; do
+    mkdir -p "$TMP/runtime/$dir"
+    cp rule-tests/fixtures/security/runtime-modules.txt "$TMP/runtime/$dir/source.$ext"
+  done
+  for dir in frontend static/custom-ui ui webui public chrome-extension scripts tools bin .github .bitbucket node_modules/example dist coverage specs test tests __tests__ src/scripts nested/tools nested/tests src/frontend; do
+    mkdir -p "$TMP/runtime/$dir"
+    cp rule-tests/fixtures/security/runtime-modules.txt "$TMP/runtime/$dir/source.$ext"
+  done
+  for name in source.test source.spec tool.config generate-data; do
+    cp rule-tests/fixtures/security/runtime-modules.txt "$TMP/runtime/$name.$ext"
+  done
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  for rule in review-child-process-import review-filesystem-import; do
+    : > "$TMP/expected"
+    if [ "$config" != sgconfig.recommended.yml ]; then
+      for ext in ts tsx js jsx mjs cjs mts cts; do
+        for dir in . src backend resolvers external import-lifecycle lib build nested/src; do
+          if [ "$dir" = . ]; then
+            printf '%s/runtime/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+          else
+            printf '%s/runtime/%s/source.%s\n' "$TMP" "$dir" "$ext" >> "$TMP/expected"
+          fi
+        done
+      done
+    fi
+    scan "$config" "^($rule(-tsx|-js)?|no-package-main)$" "$TMP/runtime"
+  done
+done
 # OWASP security families must route consistently across languages and tiers.
 mkdir -p "$TMP/owasp/tests" "$TMP/owasp/__tests__" "$TMP/owasp/dist" "$TMP/owasp/build" "$TMP/owasp/node_modules/example"
 for ext in ts tsx js jsx mjs cjs mts cts; do

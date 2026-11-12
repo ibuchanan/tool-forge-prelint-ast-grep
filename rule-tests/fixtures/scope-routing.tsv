@@ -1,4 +1,10 @@
 # Rule path	Reviewed positive scope	Test policy
+rules/strict/security/review-child-process-import.yml	runtime-review	exclude
+rules/strict/security/review-child-process-import-js.yml	runtime-review	exclude
+rules/strict/security/review-child-process-import-tsx.yml	runtime-review	exclude
+rules/strict/security/review-filesystem-import.yml	runtime-review	exclude
+rules/strict/security/review-filesystem-import-js.yml	runtime-review	exclude
+rules/strict/security/review-filesystem-import-tsx.yml	runtime-review	exclude
 rules/atlassian/package-json/require-package-license-apache-2-0.yml	package	include
 rules/ecosol/devtools/require-biome-files-exclude-dist.yml	biome	include
 rules/ecosol/devtools/require-biome-formatter-indent-style.yml	biome	include

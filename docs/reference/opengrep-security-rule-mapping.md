@@ -16,9 +16,47 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-api-fetch-tainted-url`, `forge-asapp-user-input-in-path`, `forge-assume-trusted-route-dynamic-path`, `forge-invoke-remote-dynamic-path`, `forge-storage-key-user-controlled`, `forge-storage-tainted-key`, `forge-request-headers-from-payload` | **Not converted**: source-to-sink taint and/or authorization context cannot be established by the current syntax checks                                             |
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
-| `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`, `forge-process-env-in-ui-render`, `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                           | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
+| `forge-process-env-in-ui-render`, `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                                                                                            | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
 | `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | New `review-shared-hosting-wildcard-egress` (partial YAML syntax conversion; selected provider wildcards only, no ownership or traffic proof)                       |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
+| `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`                                                                                                                                                                                        | Partial syntax review via `review-child-process-import` and `review-filesystem-import`; current native runtime allows built-ins, so no blanket prohibition          |
+
+## Runtime capability imports: reviewed, not blanket-prohibited
+
+`forge-sandbox-no-child-process` and `forge-sandbox-no-filesystem` have partial
+syntax overlap with new strict-tier `review-child-process-import` and
+`review-filesystem-import` (TypeScript, TSX and JavaScript companions). They are
+**warning-level review checks, not equivalent prohibitions**. The source rules
+assign ERROR to subprocess loading and WARNING to filesystem loading. The
+[current Node.js runtime reference](https://developer.atlassian.com/platform/forge/function-reference/nodejs-runtime/)
+allows built-in modules and requires that customer data not persist in memory or
+on disk across invocations. The child_process unsupported-module list belongs to
+the [deprecated legacy sandbox](https://developer.atlassian.com/platform/forge/runtime-reference/legacy-runtime-reference/).
+No cross-file manifest/runtime inference is attempted. An import alone cannot
+establish command injection, forbidden process execution, durable storage misuse
+or cross-tenant disk persistence; legitimate built-in use can match. Low precision
+and high potential impact yield nonblocking warnings under the severity matrix.
+
+Both rules cover exact bare and `node:` literal specifiers in default, namespace,
+named/aliased and side-effect imports, require calls and dynamic imports (including
+options). Filesystem coverage includes `fs/promises` and `node:fs/promises`.
+TypeScript/TSX also support import-equals; explicit `import type` declarations
+are excluded, but inline type-only specifiers may still match. Re-exports,
+computed names, loader aliases, lexical require shadowing, transitive dependency
+loads, direct calls through previously bound aliases, actual filesystem paths,
+command trust and invocation lifetime are not resolved. Nonmatching test snippets
+for these forms document gaps, not safety. Compared with the vendored filesystem
+rule, side-effect and dynamic imports and named `node:fs/promises` imports are
+additional bounded syntax coverage.
+
+Real-scanner fixtures exercise TS/MTS/CTS, TSX and JS/JSX/MJS/CJS; strict-tier
+inheritance by Atlassian/Ecosol and absence from recommended; root, backend,
+resolver, lifecycle, external and unconventional source paths; and frontend,
+static/UI/public, tooling/configuration/generator, tests and baseline exclusions.
+`build` is intentionally included per repository scope policy, unlike the source
+rule's build exclusion. Paths do not prove Forge function reachability or exclude
+all remote-service/custom frontend layouts. Manual runtime and tenant-isolation
+review remains necessary; neither rule supplies an automatic fix.
 
 ## Reconciled wildcard egress and script CSP checks
 
