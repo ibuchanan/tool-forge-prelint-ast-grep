@@ -1,0 +1,9 @@
+permissions:
+  external:
+    fetch:
+      backend:
+        - '*.s3.amazonaws.com'
+      client:
+        - address: https://*.vercel.app
+    scripts: ['https://*.cloudfront.net/widget.js']
+    images: [{address: '*.storage.googleapis.com'}]

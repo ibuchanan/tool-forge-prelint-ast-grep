@@ -1,0 +1,106 @@
+id: review-shared-hosting-wildcard-egress
+valid:
+  - |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - '*'
+            - https://tenant.cloudfront.net
+            - https://my-bucket.s3.us-east-1.amazonaws.com
+            - '*.example.com'
+            - '*.atlassian.net'
+            - '*.segment.io'
+  # Host boundaries exclude lookalikes, userinfo and wildcards only in paths/queries.
+  - |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - '*.cloudfront.net.example.com'
+            - '*.notcloudfront.net'
+            - 'https://*.cloudfront.net@safe.example.com'
+            - 'https://safe.example.com/*.cloudfront.net'
+            - 'https://safe.example.com?next=*.vercel.app'
+            - '*.tenant.vercel.app'
+            - {remote: '*.cloudfront.net'}
+            - {metadata: {address: '*.cloudfront.net'}}
+            - {description: '*.vercel.app', address: https://tenant.vercel.app}
+  # Only direct entries in top-level external egress lists are reviewed.
+  - |
+    description: '*.cloudfront.net'
+    other: {permissions: {external: {fetch: {backend: ['*.cloudfront.net']}}}}
+    permissions:
+      content: {scripts: ['*.cloudfront.net']}
+      external:
+        description: '*.cloudfront.net'
+        unknown: ['*.cloudfront.net']
+        fetch: {other: ['*.cloudfront.net']}
+        scripts: '*.cloudfront.net'
+        images: {address: '*.cloudfront.net'}
+        frames:
+          - ['*.cloudfront.net']
+          - {address: ['*.cloudfront.net']}
+  # YAML indirection and block-scalar normalization are deliberately not resolved.
+  - |
+    shared: &shared '*.cloudfront.net'
+    permissions:
+      external:
+        fetch:
+          backend:
+            - *shared
+            - >-
+              *.vercel.app
+invalid:
+  - "permissions: {external: {fetch: {backend: ['*.s3.amazonaws.com']}}}"
+  - '"permissions": {"external": {"fetch": {"client": [{"address": "HTTPS://*.VERCEL.APP:443/path?q=1", category: analytics}]}}}'
+  - "permissions: {external: {fetch: {backend: ['*.github.io.']}}}"
+  - "permissions: {external: {scripts: ['https://*.cloudfront.net/widget.js']}}"
+  - "permissions: {external: {styles: [{address: '*.netlify.app'}]}}"
+  - "permissions: {external: {images: ['*.googleapis.com']}}"
+  - "permissions: {external: {fonts: ['*.pages.dev']}}"
+  - "permissions: {external: {media: ['*.r2.dev']}}"
+  - |
+    permissions:
+      external:
+        frames:
+          - address: 'https://*.herokuapp.com'
+  # Selected provider families from the migration source, not arbitrary domain suffixes.
+  - |
+    permissions:
+      external:
+        fetch:
+          client:
+            - '*.amazonaws.com'
+            - '*.s3.us-east-1.amazonaws.com'
+            - '*.googleapis.com'
+            - '*.storage.googleapis.com'
+            - '*.appspot.com'
+            - '*.web.app'
+            - '*.firebaseapp.com'
+            - '*.github.io'
+            - '*.githubusercontent.com'
+            - '*.herokuapp.com'
+            - '*.azurewebsites.net'
+            - '*.blob.core.windows.net'
+            - '*.vercel.app'
+            - '*.netlify.app'
+            - '*.pages.dev'
+            - '*.workers.dev'
+            - '*.onrender.com'
+            - '*.fly.dev'
+            - '*.glitch.me'
+            - '*.repl.co'
+            - '*.wp.com'
+            - '*.wordpress.com'
+            - '*.blogspot.com'
+            - '*.surge.sh'
+            - '*.digitaloceanspaces.com'
+            - '*.backblazeb2.com'
+            - '*.r2.dev'
+  - |
+    permissions:
+      external:
+        fetch:
+          backend:
+            - '*.cloudfront.net'

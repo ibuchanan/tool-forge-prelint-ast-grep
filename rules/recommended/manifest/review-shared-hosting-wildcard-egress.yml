@@ -1,0 +1,122 @@
+id: review-shared-hosting-wildcard-egress
+language: Yaml
+severity: warning
+message: Shared-hosting wildcard egress admits other tenants. Replace it with exact hosts or justify the scope.
+note: >
+  Reviews literal wildcard hosts on selected shared-hosting, CDN and object-storage
+  domains in permissions.external.fetch.backend/client and external
+  scripts/styles/images/fonts/media/frames lists, including scalar and address-object
+  entries in block/flow YAML. These wildcards can admit destinations controlled by
+  other tenants. Prefer exact hosts or document why the wider scope is needed.
+  A declaration is a review candidate, not proof of traffic, exfiltration or compromise.
+  Exact hosts and unrestricted * egress are outside this check. YAML aliases, merges,
+  computed values and remote references are not resolved.
+  See https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+utils:
+  mapping-pair:
+    any:
+      - kind: block_mapping_pair
+      - kind: flow_pair
+  external:
+    matches: mapping-pair
+    has:
+      field: key
+      regex: '^["'']?external["'']?$'
+    inside:
+      stopBy:
+        matches: mapping-pair
+      matches: mapping-pair
+      has:
+        field: key
+        regex: '^["'']?permissions["'']?$'
+      not:
+        inside:
+          stopBy: end
+          matches: mapping-pair
+  egress-list:
+    any:
+      - matches: fetch-list
+      - matches: mapping-pair
+        has:
+          field: key
+          regex: '^["'']?(scripts|styles|images|fonts|media|frames)["'']?$'
+        inside:
+          stopBy:
+            matches: mapping-pair
+          matches: external
+  fetch-list:
+    matches: mapping-pair
+    has:
+      field: key
+      regex: '^["'']?(backend|client)["'']?$'
+    inside:
+      stopBy:
+        matches: mapping-pair
+      matches: mapping-pair
+      has:
+        field: key
+        regex: '^["'']?fetch["'']?$'
+      inside:
+        stopBy:
+          matches: mapping-pair
+        matches: external
+  egress-item:
+    any:
+      - kind: block_sequence_item
+        inside:
+          kind: block_sequence
+          inside:
+            kind: block_node
+            inside:
+              matches: egress-list
+      - kind: flow_node
+        inside:
+          kind: flow_sequence
+          inside:
+            kind: flow_node
+            inside:
+              matches: egress-list
+rule:
+  kind: flow_node
+  regex: '(?i)^["'']?(https?://)?\*\.(cloudfront\.net|amazonaws\.com|s3\.([a-z0-9.-]+\.)?amazonaws\.com|googleapis\.com|storage\.googleapis\.com|appspot\.com|web\.app|firebaseapp\.com|github\.io|githubusercontent\.com|herokuapp\.com|azurewebsites\.net|blob\.core\.windows\.net|vercel\.app|netlify\.app|pages\.dev|workers\.dev|onrender\.com|fly\.dev|glitch\.me|repl\.co|wp\.com|wordpress\.com|blogspot\.com|surge\.sh|digitaloceanspaces\.com|backblazeb2\.com|r2\.dev)\.?(:[0-9]+)?([/?#][^\s"'']*)?["'']?$'
+  all:
+    - any:
+        - matches: egress-item
+        - inside:
+            matches: egress-item
+        - inside:
+            matches: mapping-pair
+            has:
+              field: key
+              regex: '^["'']?address["'']?$'
+            inside:
+              stopBy:
+                matches: mapping-pair
+              matches: egress-item
+files:
+  - "**/manifest.yaml"
+  - "**/manifest.yml"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  precision: medium
+  precision-rationale: >
+    Literal selected shared-provider wildcards are bounded to egress paths and host
+    boundaries; intentional broad permissions still need review. Block/flow and
+    counterexample evidence lives in
+    rule-tests/recommended/manifest/review-shared-hosting-wildcard-egress.test.yml.
+    YAML aliases, merges and remote references are not resolved.
+  impact: high
+  impact-rationale: >
+    Shared-provider wildcards can permit sensitive requests or resource loads from
+    other tenants' hosts. A declaration alone does not prove traffic or compromise.
+  scope-profile:
+    - manifest
+    - tests
+  category: manifest
+  references:
+    - https://developer.atlassian.com/platform/forge/manifest-reference/permissions/
+  owasp: A02:2025

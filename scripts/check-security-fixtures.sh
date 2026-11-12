@@ -150,6 +150,19 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
   printf '%s/tunnel/%s\n' "$TMP" manifest.yml "$TMP" manifest.yaml "$TMP" tests/manifest.yml "$TMP" build/manifest.yaml "$TMP" nested/manifest.yml > "$TMP/expected"
   scan "$config" '^review-development-tunnel-egress$' "$TMP/tunnel"
 done
+# Shared-hosting wildcards are manifest-only in every composing tier.
+mkdir -p "$TMP/shared/tests" "$TMP/shared/build" "$TMP/shared/nested"
+for dir in dist coverage specs node_modules/example; do
+  mkdir -p "$TMP/shared/$dir"
+  cp rule-tests/fixtures/security/shared-hosting-wildcard-manifest.txt "$TMP/shared/$dir/manifest.yml"
+done
+for path in manifest.yml manifest.yaml other.yaml tests/manifest.yml build/manifest.yaml nested/manifest.yml; do
+  cp rule-tests/fixtures/security/shared-hosting-wildcard-manifest.txt "$TMP/shared/$path"
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  printf '%s/shared/%s\n' "$TMP" manifest.yml "$TMP" manifest.yaml "$TMP" tests/manifest.yml "$TMP" build/manifest.yaml "$TMP" nested/manifest.yml > "$TMP/expected"
+  scan "$config" '^review-shared-hosting-wildcard-egress$' "$TMP/shared"
+done
 # OWASP security families must route consistently across languages and tiers.
 mkdir -p "$TMP/owasp/tests" "$TMP/owasp/__tests__" "$TMP/owasp/dist" "$TMP/owasp/build" "$TMP/owasp/node_modules/example"
 for ext in ts tsx js jsx mjs cjs mts cts; do

@@ -17,7 +17,7 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
 | `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`, `forge-process-env-in-ui-render`, `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                           | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
-| `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | **Not converted**: needs YAML path-aware checks and routing tests                                                                                                   |
+| `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | New `review-shared-hosting-wildcard-egress` (partial YAML syntax conversion; selected provider wildcards only, no ownership or traffic proof)                       |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
 
 `forge-manifest-anonymous-access-module` now has a **partial syntax conversion** in
@@ -49,5 +49,29 @@ tunnel-service inventory, or proof of hostname reassignment, traffic or compromi
 Aliases, merge expansion, tagged/anchored scalar normalization, block scalars,
 computed values and remote-reference destinations are not resolved; manual review
 remains necessary. Intentional tunnel use requires review rather than an automatic fix.
+
+`forge-manifest-shared-hosting-wildcard-egress` now has a **partial syntax conversion**
+in `review-shared-hosting-wildcard-egress` (recommended, inherited by the other tiers).
+It reviews wildcard hosts directly under top-level
+`permissions.external.fetch.backend/client` and external
+`scripts/styles/images/fonts/media/frames` lists. Block/flow YAML, quoted keys and
+values, scalar/address-object entries, case-insensitive hosts and URL ports/paths
+are covered. The selected provider suffixes are cloudfront.net, amazonaws.com,
+s3.amazonaws.com and regional s3.*.amazonaws.com, googleapis.com,
+storage.googleapis.com, appspot.com, web.app, firebaseapp.com, github.io,
+githubusercontent.com, herokuapp.com, azurewebsites.net, blob.core.windows.net,
+vercel.app, netlify.app, pages.dev, workers.dev, onrender.com, fly.dev, glitch.me,
+repl.co, wp.com, wordpress.com, blogspot.com, surge.sh, digitaloceanspaces.com,
+backblazeb2.com and r2.dev. Each requires a leading `*.`; exact hosts, unrestricted
+`*` (handled separately by `no-wildcard-egress`), unrelated/Atlassian/analytics
+suffixes and narrower tenant-specific wildcards are not reported.
+Unlike the source's unbounded text search, hostname boundaries and YAML paths
+exclude descriptions, lookalike suffixes, userinfo and host strings only in URL
+paths/queries. Real scanner fixtures check both manifest filenames, inherited
+tiers and directory exclusions. This is not a complete provider inventory or URL
+validator, and does not establish tenant ownership, actual requests or compromise.
+Aliases, merge expansion, tagged/anchored scalar normalization, block scalars,
+computed values and remote-reference destinations are not resolved. There is no
+automatic fix; intentional broad permissions and missed forms need manual review.
 
 The `review-` rules report candidates rather than proven vulnerabilities. See each rule's `note` and precision rationale for false positives and missed forms. For rule authoring conventions, see [rule-authoring-policy](rule-authoring-policy.md).

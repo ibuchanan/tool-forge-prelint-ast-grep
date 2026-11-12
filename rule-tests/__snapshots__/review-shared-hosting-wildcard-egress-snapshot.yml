@@ -1,0 +1,704 @@
+id: review-shared-hosting-wildcard-egress
+snapshots:
+  "\"permissions\": {\"external\": {\"fetch\": {\"client\": [{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]}}}":
+    labels:
+    - source: "\"HTTPS://*.VERCEL.APP:443/path?q=1\""
+      style: primary
+      start: 62
+      end: 97
+    - source: "\"permissions\""
+      style: secondary
+      start: 0
+      end: 13
+    - source: "\"permissions\": {\"external\": {\"fetch\": {\"client\": [{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]}}}"
+      style: secondary
+      start: 0
+      end: 123
+    - source: "\"external\""
+      style: secondary
+      start: 16
+      end: 26
+    - source: "\"external\": {\"fetch\": {\"client\": [{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]}}"
+      style: secondary
+      start: 16
+      end: 122
+    - source: "\"fetch\""
+      style: secondary
+      start: 29
+      end: 36
+    - source: "\"fetch\": {\"client\": [{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]}"
+      style: secondary
+      start: 29
+      end: 121
+    - source: "\"client\""
+      style: secondary
+      start: 39
+      end: 47
+    - source: "\"client\": [{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]"
+      style: secondary
+      start: 39
+      end: 120
+    - source: "[{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]"
+      style: secondary
+      start: 49
+      end: 120
+    - source: "[{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}]"
+      style: secondary
+      start: 49
+      end: 120
+    - source: "{\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\", category: analytics}"
+      style: secondary
+      start: 50
+      end: 119
+    - source: "\"address\""
+      style: secondary
+      start: 51
+      end: 60
+    - source: "\"address\": \"HTTPS://*.VERCEL.APP:443/path?q=1\""
+      style: secondary
+      start: 51
+      end: 97
+  "permissions:\n  external:\n    fetch:\n      backend:\n        - '*.cloudfront.net'\n":
+    labels:
+    - source: "'*.cloudfront.net'"
+      style: primary
+      start: 61
+      end: 79
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |
+        permissions:
+          external:
+            fetch:
+              backend:
+                - '*.cloudfront.net'
+      style: secondary
+      start: 0
+      end: 80
+    - source: external
+      style: secondary
+      start: 15
+      end: 23
+    - source: |
+        external:
+            fetch:
+              backend:
+                - '*.cloudfront.net'
+      style: secondary
+      start: 15
+      end: 80
+    - source: fetch
+      style: secondary
+      start: 29
+      end: 34
+    - source: |
+        fetch:
+              backend:
+                - '*.cloudfront.net'
+      style: secondary
+      start: 29
+      end: 80
+    - source: backend
+      style: secondary
+      start: 42
+      end: 49
+    - source: |
+        backend:
+                - '*.cloudfront.net'
+      style: secondary
+      start: 42
+      end: 80
+    - source: |
+        - '*.cloudfront.net'
+      style: secondary
+      start: 59
+      end: 80
+    - source: |
+        - '*.cloudfront.net'
+      style: secondary
+      start: 59
+      end: 80
+    - source: "- '*.cloudfront.net'"
+      style: secondary
+      start: 59
+      end: 79
+  "permissions:\n  external:\n    fetch:\n      client:\n        - '*.amazonaws.com'\n        - '*.s3.us-east-1.amazonaws.com'\n        - '*.googleapis.com'\n        - '*.storage.googleapis.com'\n        - '*.appspot.com'\n        - '*.web.app'\n        - '*.firebaseapp.com'\n        - '*.github.io'\n        - '*.githubusercontent.com'\n        - '*.herokuapp.com'\n        - '*.azurewebsites.net'\n        - '*.blob.core.windows.net'\n        - '*.vercel.app'\n        - '*.netlify.app'\n        - '*.pages.dev'\n        - '*.workers.dev'\n        - '*.onrender.com'\n        - '*.fly.dev'\n        - '*.glitch.me'\n        - '*.repl.co'\n        - '*.wp.com'\n        - '*.wordpress.com'\n        - '*.blogspot.com'\n        - '*.surge.sh'\n        - '*.digitaloceanspaces.com'\n        - '*.backblazeb2.com'\n        - '*.r2.dev'\n":
+    labels:
+    - source: "'*.amazonaws.com'"
+      style: primary
+      start: 60
+      end: 77
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |
+        permissions:
+          external:
+            fetch:
+              client:
+                - '*.amazonaws.com'
+                - '*.s3.us-east-1.amazonaws.com'
+                - '*.googleapis.com'
+                - '*.storage.googleapis.com'
+                - '*.appspot.com'
+                - '*.web.app'
+                - '*.firebaseapp.com'
+                - '*.github.io'
+                - '*.githubusercontent.com'
+                - '*.herokuapp.com'
+                - '*.azurewebsites.net'
+                - '*.blob.core.windows.net'
+                - '*.vercel.app'
+                - '*.netlify.app'
+                - '*.pages.dev'
+                - '*.workers.dev'
+                - '*.onrender.com'
+                - '*.fly.dev'
+                - '*.glitch.me'
+                - '*.repl.co'
+                - '*.wp.com'
+                - '*.wordpress.com'
+                - '*.blogspot.com'
+                - '*.surge.sh'
+                - '*.digitaloceanspaces.com'
+                - '*.backblazeb2.com'
+                - '*.r2.dev'
+      style: secondary
+      start: 0
+      end: 802
+    - source: external
+      style: secondary
+      start: 15
+      end: 23
+    - source: |
+        external:
+            fetch:
+              client:
+                - '*.amazonaws.com'
+                - '*.s3.us-east-1.amazonaws.com'
+                - '*.googleapis.com'
+                - '*.storage.googleapis.com'
+                - '*.appspot.com'
+                - '*.web.app'
+                - '*.firebaseapp.com'
+                - '*.github.io'
+                - '*.githubusercontent.com'
+                - '*.herokuapp.com'
+                - '*.azurewebsites.net'
+                - '*.blob.core.windows.net'
+                - '*.vercel.app'
+                - '*.netlify.app'
+                - '*.pages.dev'
+                - '*.workers.dev'
+                - '*.onrender.com'
+                - '*.fly.dev'
+                - '*.glitch.me'
+                - '*.repl.co'
+                - '*.wp.com'
+                - '*.wordpress.com'
+                - '*.blogspot.com'
+                - '*.surge.sh'
+                - '*.digitaloceanspaces.com'
+                - '*.backblazeb2.com'
+                - '*.r2.dev'
+      style: secondary
+      start: 15
+      end: 802
+    - source: fetch
+      style: secondary
+      start: 29
+      end: 34
+    - source: |
+        fetch:
+              client:
+                - '*.amazonaws.com'
+                - '*.s3.us-east-1.amazonaws.com'
+                - '*.googleapis.com'
+                - '*.storage.googleapis.com'
+                - '*.appspot.com'
+                - '*.web.app'
+                - '*.firebaseapp.com'
+                - '*.github.io'
+                - '*.githubusercontent.com'
+                - '*.herokuapp.com'
+                - '*.azurewebsites.net'
+                - '*.blob.core.windows.net'
+                - '*.vercel.app'
+                - '*.netlify.app'
+                - '*.pages.dev'
+                - '*.workers.dev'
+                - '*.onrender.com'
+                - '*.fly.dev'
+                - '*.glitch.me'
+                - '*.repl.co'
+                - '*.wp.com'
+                - '*.wordpress.com'
+                - '*.blogspot.com'
+                - '*.surge.sh'
+                - '*.digitaloceanspaces.com'
+                - '*.backblazeb2.com'
+                - '*.r2.dev'
+      style: secondary
+      start: 29
+      end: 802
+    - source: client
+      style: secondary
+      start: 42
+      end: 48
+    - source: |
+        client:
+                - '*.amazonaws.com'
+                - '*.s3.us-east-1.amazonaws.com'
+                - '*.googleapis.com'
+                - '*.storage.googleapis.com'
+                - '*.appspot.com'
+                - '*.web.app'
+                - '*.firebaseapp.com'
+                - '*.github.io'
+                - '*.githubusercontent.com'
+                - '*.herokuapp.com'
+                - '*.azurewebsites.net'
+                - '*.blob.core.windows.net'
+                - '*.vercel.app'
+                - '*.netlify.app'
+                - '*.pages.dev'
+                - '*.workers.dev'
+                - '*.onrender.com'
+                - '*.fly.dev'
+                - '*.glitch.me'
+                - '*.repl.co'
+                - '*.wp.com'
+                - '*.wordpress.com'
+                - '*.blogspot.com'
+                - '*.surge.sh'
+                - '*.digitaloceanspaces.com'
+                - '*.backblazeb2.com'
+                - '*.r2.dev'
+      style: secondary
+      start: 42
+      end: 802
+    - source: |
+        - '*.amazonaws.com'
+                - '*.s3.us-east-1.amazonaws.com'
+                - '*.googleapis.com'
+                - '*.storage.googleapis.com'
+                - '*.appspot.com'
+                - '*.web.app'
+                - '*.firebaseapp.com'
+                - '*.github.io'
+                - '*.githubusercontent.com'
+                - '*.herokuapp.com'
+                - '*.azurewebsites.net'
+                - '*.blob.core.windows.net'
+                - '*.vercel.app'
+                - '*.netlify.app'
+                - '*.pages.dev'
+                - '*.workers.dev'
+                - '*.onrender.com'
+                - '*.fly.dev'
+                - '*.glitch.me'
+                - '*.repl.co'
+                - '*.wp.com'
+                - '*.wordpress.com'
+                - '*.blogspot.com'
+                - '*.surge.sh'
+                - '*.digitaloceanspaces.com'
+                - '*.backblazeb2.com'
+                - '*.r2.dev'
+      style: secondary
+      start: 58
+      end: 802
+    - source: |
+        - '*.amazonaws.com'
+                - '*.s3.us-east-1.amazonaws.com'
+                - '*.googleapis.com'
+                - '*.storage.googleapis.com'
+                - '*.appspot.com'
+                - '*.web.app'
+                - '*.firebaseapp.com'
+                - '*.github.io'
+                - '*.githubusercontent.com'
+                - '*.herokuapp.com'
+                - '*.azurewebsites.net'
+                - '*.blob.core.windows.net'
+                - '*.vercel.app'
+                - '*.netlify.app'
+                - '*.pages.dev'
+                - '*.workers.dev'
+                - '*.onrender.com'
+                - '*.fly.dev'
+                - '*.glitch.me'
+                - '*.repl.co'
+                - '*.wp.com'
+                - '*.wordpress.com'
+                - '*.blogspot.com'
+                - '*.surge.sh'
+                - '*.digitaloceanspaces.com'
+                - '*.backblazeb2.com'
+                - '*.r2.dev'
+      style: secondary
+      start: 58
+      end: 802
+    - source: "- '*.amazonaws.com'"
+      style: secondary
+      start: 58
+      end: 77
+  "permissions:\n  external:\n    frames:\n      - address: 'https://*.herokuapp.com'\n":
+    labels:
+    - source: "'https://*.herokuapp.com'"
+      style: primary
+      start: 54
+      end: 79
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: |
+        permissions:
+          external:
+            frames:
+              - address: 'https://*.herokuapp.com'
+      style: secondary
+      start: 0
+      end: 80
+    - source: external
+      style: secondary
+      start: 15
+      end: 23
+    - source: |
+        external:
+            frames:
+              - address: 'https://*.herokuapp.com'
+      style: secondary
+      start: 15
+      end: 80
+    - source: frames
+      style: secondary
+      start: 29
+      end: 35
+    - source: |
+        frames:
+              - address: 'https://*.herokuapp.com'
+      style: secondary
+      start: 29
+      end: 80
+    - source: |
+        - address: 'https://*.herokuapp.com'
+      style: secondary
+      start: 43
+      end: 80
+    - source: |
+        - address: 'https://*.herokuapp.com'
+      style: secondary
+      start: 43
+      end: 80
+    - source: |
+        - address: 'https://*.herokuapp.com'
+      style: secondary
+      start: 43
+      end: 80
+    - source: address
+      style: secondary
+      start: 45
+      end: 52
+    - source: "address: 'https://*.herokuapp.com'"
+      style: secondary
+      start: 45
+      end: 79
+  "permissions: {external: {fetch: {backend: ['*.github.io.']}}}":
+    labels:
+    - source: "'*.github.io.'"
+      style: primary
+      start: 43
+      end: 57
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {fetch: {backend: ['*.github.io.']}}}"
+      style: secondary
+      start: 0
+      end: 61
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {fetch: {backend: ['*.github.io.']}}"
+      style: secondary
+      start: 14
+      end: 60
+    - source: fetch
+      style: secondary
+      start: 25
+      end: 30
+    - source: "fetch: {backend: ['*.github.io.']}"
+      style: secondary
+      start: 25
+      end: 59
+    - source: backend
+      style: secondary
+      start: 33
+      end: 40
+    - source: "backend: ['*.github.io.']"
+      style: secondary
+      start: 33
+      end: 58
+    - source: "['*.github.io.']"
+      style: secondary
+      start: 42
+      end: 58
+    - source: "['*.github.io.']"
+      style: secondary
+      start: 42
+      end: 58
+  "permissions: {external: {fetch: {backend: ['*.s3.amazonaws.com']}}}":
+    labels:
+    - source: "'*.s3.amazonaws.com'"
+      style: primary
+      start: 43
+      end: 63
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {fetch: {backend: ['*.s3.amazonaws.com']}}}"
+      style: secondary
+      start: 0
+      end: 67
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {fetch: {backend: ['*.s3.amazonaws.com']}}"
+      style: secondary
+      start: 14
+      end: 66
+    - source: fetch
+      style: secondary
+      start: 25
+      end: 30
+    - source: "fetch: {backend: ['*.s3.amazonaws.com']}"
+      style: secondary
+      start: 25
+      end: 65
+    - source: backend
+      style: secondary
+      start: 33
+      end: 40
+    - source: "backend: ['*.s3.amazonaws.com']"
+      style: secondary
+      start: 33
+      end: 64
+    - source: "['*.s3.amazonaws.com']"
+      style: secondary
+      start: 42
+      end: 64
+    - source: "['*.s3.amazonaws.com']"
+      style: secondary
+      start: 42
+      end: 64
+  "permissions: {external: {fonts: ['*.pages.dev']}}":
+    labels:
+    - source: "'*.pages.dev'"
+      style: primary
+      start: 33
+      end: 46
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {fonts: ['*.pages.dev']}}"
+      style: secondary
+      start: 0
+      end: 49
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {fonts: ['*.pages.dev']}"
+      style: secondary
+      start: 14
+      end: 48
+    - source: fonts
+      style: secondary
+      start: 25
+      end: 30
+    - source: "fonts: ['*.pages.dev']"
+      style: secondary
+      start: 25
+      end: 47
+    - source: "['*.pages.dev']"
+      style: secondary
+      start: 32
+      end: 47
+    - source: "['*.pages.dev']"
+      style: secondary
+      start: 32
+      end: 47
+  "permissions: {external: {images: ['*.googleapis.com']}}":
+    labels:
+    - source: "'*.googleapis.com'"
+      style: primary
+      start: 34
+      end: 52
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {images: ['*.googleapis.com']}}"
+      style: secondary
+      start: 0
+      end: 55
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {images: ['*.googleapis.com']}"
+      style: secondary
+      start: 14
+      end: 54
+    - source: images
+      style: secondary
+      start: 25
+      end: 31
+    - source: "images: ['*.googleapis.com']"
+      style: secondary
+      start: 25
+      end: 53
+    - source: "['*.googleapis.com']"
+      style: secondary
+      start: 33
+      end: 53
+    - source: "['*.googleapis.com']"
+      style: secondary
+      start: 33
+      end: 53
+  "permissions: {external: {media: ['*.r2.dev']}}":
+    labels:
+    - source: "'*.r2.dev'"
+      style: primary
+      start: 33
+      end: 43
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {media: ['*.r2.dev']}}"
+      style: secondary
+      start: 0
+      end: 46
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {media: ['*.r2.dev']}"
+      style: secondary
+      start: 14
+      end: 45
+    - source: media
+      style: secondary
+      start: 25
+      end: 30
+    - source: "media: ['*.r2.dev']"
+      style: secondary
+      start: 25
+      end: 44
+    - source: "['*.r2.dev']"
+      style: secondary
+      start: 32
+      end: 44
+    - source: "['*.r2.dev']"
+      style: secondary
+      start: 32
+      end: 44
+  "permissions: {external: {scripts: ['https://*.cloudfront.net/widget.js']}}":
+    labels:
+    - source: "'https://*.cloudfront.net/widget.js'"
+      style: primary
+      start: 35
+      end: 71
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {scripts: ['https://*.cloudfront.net/widget.js']}}"
+      style: secondary
+      start: 0
+      end: 74
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {scripts: ['https://*.cloudfront.net/widget.js']}"
+      style: secondary
+      start: 14
+      end: 73
+    - source: scripts
+      style: secondary
+      start: 25
+      end: 32
+    - source: "scripts: ['https://*.cloudfront.net/widget.js']"
+      style: secondary
+      start: 25
+      end: 72
+    - source: "['https://*.cloudfront.net/widget.js']"
+      style: secondary
+      start: 34
+      end: 72
+    - source: "['https://*.cloudfront.net/widget.js']"
+      style: secondary
+      start: 34
+      end: 72
+  "permissions: {external: {styles: [{address: '*.netlify.app'}]}}":
+    labels:
+    - source: "'*.netlify.app'"
+      style: primary
+      start: 44
+      end: 59
+    - source: permissions
+      style: secondary
+      start: 0
+      end: 11
+    - source: "permissions: {external: {styles: [{address: '*.netlify.app'}]}}"
+      style: secondary
+      start: 0
+      end: 63
+    - source: external
+      style: secondary
+      start: 14
+      end: 22
+    - source: "external: {styles: [{address: '*.netlify.app'}]}"
+      style: secondary
+      start: 14
+      end: 62
+    - source: styles
+      style: secondary
+      start: 25
+      end: 31
+    - source: "styles: [{address: '*.netlify.app'}]"
+      style: secondary
+      start: 25
+      end: 61
+    - source: "[{address: '*.netlify.app'}]"
+      style: secondary
+      start: 33
+      end: 61
+    - source: "[{address: '*.netlify.app'}]"
+      style: secondary
+      start: 33
+      end: 61
+    - source: "{address: '*.netlify.app'}"
+      style: secondary
+      start: 34
+      end: 60
+    - source: address
+      style: secondary
+      start: 35
+      end: 42
+    - source: "address: '*.netlify.app'"
+      style: secondary
+      start: 35
+      end: 59
