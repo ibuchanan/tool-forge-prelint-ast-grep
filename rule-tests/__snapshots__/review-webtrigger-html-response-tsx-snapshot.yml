@@ -1,0 +1,652 @@
+id: review-webtrigger-html-response-tsx
+snapshots:
+  "const handler = () => ({ body: `${value}`, headers: { \"content-type\": [\"text/html\"] } });":
+    labels:
+    - source: "{ body: `${value}`, headers: { \"content-type\": [\"text/html\"] } }"
+      style: primary
+      start: 23
+      end: 87
+    - source: headers
+      style: secondary
+      start: 43
+      end: 50
+    - source: "\"content-type\""
+      style: secondary
+      start: 54
+      end: 68
+    - source: "\"text/html\""
+      style: secondary
+      start: 71
+      end: 82
+    - source: "[\"text/html\"]"
+      style: secondary
+      start: 70
+      end: 83
+    - source: "\"content-type\": [\"text/html\"]"
+      style: secondary
+      start: 54
+      end: 83
+    - source: "{ \"content-type\": [\"text/html\"] }"
+      style: secondary
+      start: 52
+      end: 85
+    - source: "headers: { \"content-type\": [\"text/html\"] }"
+      style: secondary
+      start: 43
+      end: 85
+    - source: body
+      style: secondary
+      start: 25
+      end: 29
+    - source: ${value}
+      style: secondary
+      start: 32
+      end: 40
+    - source: "`${value}`"
+      style: secondary
+      start: 31
+      end: 41
+    - source: "body: `${value}`"
+      style: secondary
+      start: 25
+      end: 41
+  "const response = { \"body\": `${value}`, \"headers\": { \"Content-Type\": [\"text/html\"] } };":
+    labels:
+    - source: "{ \"body\": `${value}`, \"headers\": { \"Content-Type\": [\"text/html\"] } }"
+      style: primary
+      start: 17
+      end: 85
+    - source: "\"headers\""
+      style: secondary
+      start: 39
+      end: 48
+    - source: "\"Content-Type\""
+      style: secondary
+      start: 52
+      end: 66
+    - source: "\"text/html\""
+      style: secondary
+      start: 69
+      end: 80
+    - source: "[\"text/html\"]"
+      style: secondary
+      start: 68
+      end: 81
+    - source: "\"Content-Type\": [\"text/html\"]"
+      style: secondary
+      start: 52
+      end: 81
+    - source: "{ \"Content-Type\": [\"text/html\"] }"
+      style: secondary
+      start: 50
+      end: 83
+    - source: "\"headers\": { \"Content-Type\": [\"text/html\"] }"
+      style: secondary
+      start: 39
+      end: 83
+    - source: "\"body\""
+      style: secondary
+      start: 19
+      end: 25
+    - source: ${value}
+      style: secondary
+      start: 28
+      end: 36
+    - source: "`${value}`"
+      style: secondary
+      start: 27
+      end: 37
+    - source: "\"body\": `${value}`"
+      style: secondary
+      start: 19
+      end: 37
+  "const response = { body: `${value}`, headers: { \"Content-Type\": [\"text/html; charset=utf-8\"] } };":
+    labels:
+    - source: "{ body: `${value}`, headers: { \"Content-Type\": [\"text/html; charset=utf-8\"] } }"
+      style: primary
+      start: 17
+      end: 96
+    - source: headers
+      style: secondary
+      start: 37
+      end: 44
+    - source: "\"Content-Type\""
+      style: secondary
+      start: 48
+      end: 62
+    - source: "\"text/html; charset=utf-8\""
+      style: secondary
+      start: 65
+      end: 91
+    - source: "[\"text/html; charset=utf-8\"]"
+      style: secondary
+      start: 64
+      end: 92
+    - source: "\"Content-Type\": [\"text/html; charset=utf-8\"]"
+      style: secondary
+      start: 48
+      end: 92
+    - source: "{ \"Content-Type\": [\"text/html; charset=utf-8\"] }"
+      style: secondary
+      start: 46
+      end: 94
+    - source: "headers: { \"Content-Type\": [\"text/html; charset=utf-8\"] }"
+      style: secondary
+      start: 37
+      end: 94
+    - source: body
+      style: secondary
+      start: 19
+      end: 23
+    - source: ${value}
+      style: secondary
+      start: 26
+      end: 34
+    - source: "`${value}`"
+      style: secondary
+      start: 25
+      end: 35
+    - source: "body: `${value}`"
+      style: secondary
+      start: 19
+      end: 35
+  "const response = { body: `${value}`, headers: { \"content-type\": [\"text/html; charset=utf-8\"] } };":
+    labels:
+    - source: "{ body: `${value}`, headers: { \"content-type\": [\"text/html; charset=utf-8\"] } }"
+      style: primary
+      start: 17
+      end: 96
+    - source: headers
+      style: secondary
+      start: 37
+      end: 44
+    - source: "\"content-type\""
+      style: secondary
+      start: 48
+      end: 62
+    - source: "\"text/html; charset=utf-8\""
+      style: secondary
+      start: 65
+      end: 91
+    - source: "[\"text/html; charset=utf-8\"]"
+      style: secondary
+      start: 64
+      end: 92
+    - source: "\"content-type\": [\"text/html; charset=utf-8\"]"
+      style: secondary
+      start: 48
+      end: 92
+    - source: "{ \"content-type\": [\"text/html; charset=utf-8\"] }"
+      style: secondary
+      start: 46
+      end: 94
+    - source: "headers: { \"content-type\": [\"text/html; charset=utf-8\"] }"
+      style: secondary
+      start: 37
+      end: 94
+    - source: body
+      style: secondary
+      start: 19
+      end: 23
+    - source: ${value}
+      style: secondary
+      start: 26
+      end: 34
+    - source: "`${value}`"
+      style: secondary
+      start: 25
+      end: 35
+    - source: "body: `${value}`"
+      style: secondary
+      start: 19
+      end: 35
+  "const response = { body: `<p>${request.body}</p>`, statusCode: 200, headers: { \"Content-Type\": [\"text/html\"] } };":
+    labels:
+    - source: "{ body: `<p>${request.body}</p>`, statusCode: 200, headers: { \"Content-Type\": [\"text/html\"] } }"
+      style: primary
+      start: 17
+      end: 112
+    - source: headers
+      style: secondary
+      start: 68
+      end: 75
+    - source: "\"Content-Type\""
+      style: secondary
+      start: 79
+      end: 93
+    - source: "\"text/html\""
+      style: secondary
+      start: 96
+      end: 107
+    - source: "[\"text/html\"]"
+      style: secondary
+      start: 95
+      end: 108
+    - source: "\"Content-Type\": [\"text/html\"]"
+      style: secondary
+      start: 79
+      end: 108
+    - source: "{ \"Content-Type\": [\"text/html\"] }"
+      style: secondary
+      start: 77
+      end: 110
+    - source: "headers: { \"Content-Type\": [\"text/html\"] }"
+      style: secondary
+      start: 68
+      end: 110
+    - source: body
+      style: secondary
+      start: 19
+      end: 23
+    - source: ${request.body}
+      style: secondary
+      start: 29
+      end: 44
+    - source: "`<p>${request.body}</p>`"
+      style: secondary
+      start: 25
+      end: 49
+    - source: "body: `<p>${request.body}</p>`"
+      style: secondary
+      start: 19
+      end: 49
+  "const response = { headers: { 'Content-Type': ['text/html'] }, body: `${DOMPurify.sanitize(value)}` };":
+    labels:
+    - source: "{ headers: { 'Content-Type': ['text/html'] }, body: `${DOMPurify.sanitize(value)}` }"
+      style: primary
+      start: 17
+      end: 101
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'Content-Type'"
+      style: secondary
+      start: 30
+      end: 44
+    - source: "'text/html'"
+      style: secondary
+      start: 47
+      end: 58
+    - source: "['text/html']"
+      style: secondary
+      start: 46
+      end: 59
+    - source: "'Content-Type': ['text/html']"
+      style: secondary
+      start: 30
+      end: 59
+    - source: "{ 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 28
+      end: 61
+    - source: "headers: { 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 19
+      end: 61
+    - source: body
+      style: secondary
+      start: 63
+      end: 67
+    - source: ${DOMPurify.sanitize(value)}
+      style: secondary
+      start: 70
+      end: 98
+    - source: "`${DOMPurify.sanitize(value)}`"
+      style: secondary
+      start: 69
+      end: 99
+    - source: "body: `${DOMPurify.sanitize(value)}`"
+      style: secondary
+      start: 63
+      end: 99
+  "const response = { headers: { 'Content-Type': ['text/html'] }, body: `${escapeHtml(value)}` };":
+    labels:
+    - source: "{ headers: { 'Content-Type': ['text/html'] }, body: `${escapeHtml(value)}` }"
+      style: primary
+      start: 17
+      end: 93
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'Content-Type'"
+      style: secondary
+      start: 30
+      end: 44
+    - source: "'text/html'"
+      style: secondary
+      start: 47
+      end: 58
+    - source: "['text/html']"
+      style: secondary
+      start: 46
+      end: 59
+    - source: "'Content-Type': ['text/html']"
+      style: secondary
+      start: 30
+      end: 59
+    - source: "{ 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 28
+      end: 61
+    - source: "headers: { 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 19
+      end: 61
+    - source: body
+      style: secondary
+      start: 63
+      end: 67
+    - source: ${escapeHtml(value)}
+      style: secondary
+      start: 70
+      end: 90
+    - source: "`${escapeHtml(value)}`"
+      style: secondary
+      start: 69
+      end: 91
+    - source: "body: `${escapeHtml(value)}`"
+      style: secondary
+      start: 63
+      end: 91
+  "const response = { headers: { 'Content-Type': ['text/html'] }, body: `${safeValue}` };":
+    labels:
+    - source: "{ headers: { 'Content-Type': ['text/html'] }, body: `${safeValue}` }"
+      style: primary
+      start: 17
+      end: 85
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'Content-Type'"
+      style: secondary
+      start: 30
+      end: 44
+    - source: "'text/html'"
+      style: secondary
+      start: 47
+      end: 58
+    - source: "['text/html']"
+      style: secondary
+      start: 46
+      end: 59
+    - source: "'Content-Type': ['text/html']"
+      style: secondary
+      start: 30
+      end: 59
+    - source: "{ 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 28
+      end: 61
+    - source: "headers: { 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 19
+      end: 61
+    - source: body
+      style: secondary
+      start: 63
+      end: 67
+    - source: ${safeValue}
+      style: secondary
+      start: 70
+      end: 82
+    - source: "`${safeValue}`"
+      style: secondary
+      start: 69
+      end: 83
+    - source: "body: `${safeValue}`"
+      style: secondary
+      start: 63
+      end: 83
+  "const response = { headers: { 'Content-Type': ['text/html'] }, body: `<h1>${data}</h1>` };":
+    labels:
+    - source: "{ headers: { 'Content-Type': ['text/html'] }, body: `<h1>${data}</h1>` }"
+      style: primary
+      start: 17
+      end: 89
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'Content-Type'"
+      style: secondary
+      start: 30
+      end: 44
+    - source: "'text/html'"
+      style: secondary
+      start: 47
+      end: 58
+    - source: "['text/html']"
+      style: secondary
+      start: 46
+      end: 59
+    - source: "'Content-Type': ['text/html']"
+      style: secondary
+      start: 30
+      end: 59
+    - source: "{ 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 28
+      end: 61
+    - source: "headers: { 'Content-Type': ['text/html'] }"
+      style: secondary
+      start: 19
+      end: 61
+    - source: body
+      style: secondary
+      start: 63
+      end: 67
+    - source: ${data}
+      style: secondary
+      start: 74
+      end: 81
+    - source: "`<h1>${data}</h1>`"
+      style: secondary
+      start: 69
+      end: 87
+    - source: "body: `<h1>${data}</h1>`"
+      style: secondary
+      start: 63
+      end: 87
+  "const response = { headers: { 'Content-Type': ['text/html; charset=utf-8'] }, body: `${value}` };":
+    labels:
+    - source: "{ headers: { 'Content-Type': ['text/html; charset=utf-8'] }, body: `${value}` }"
+      style: primary
+      start: 17
+      end: 96
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'Content-Type'"
+      style: secondary
+      start: 30
+      end: 44
+    - source: "'text/html; charset=utf-8'"
+      style: secondary
+      start: 47
+      end: 73
+    - source: "['text/html; charset=utf-8']"
+      style: secondary
+      start: 46
+      end: 74
+    - source: "'Content-Type': ['text/html; charset=utf-8']"
+      style: secondary
+      start: 30
+      end: 74
+    - source: "{ 'Content-Type': ['text/html; charset=utf-8'] }"
+      style: secondary
+      start: 28
+      end: 76
+    - source: "headers: { 'Content-Type': ['text/html; charset=utf-8'] }"
+      style: secondary
+      start: 19
+      end: 76
+    - source: body
+      style: secondary
+      start: 78
+      end: 82
+    - source: ${value}
+      style: secondary
+      start: 85
+      end: 93
+    - source: "`${value}`"
+      style: secondary
+      start: 84
+      end: 94
+    - source: "body: `${value}`"
+      style: secondary
+      start: 78
+      end: 94
+  "const response = { headers: { 'X-Test': ['yes'], 'Content-Type': ['text/html', 'other'] }, body: `<p>${first}${second}</p>` };":
+    labels:
+    - source: "{ headers: { 'X-Test': ['yes'], 'Content-Type': ['text/html', 'other'] }, body: `<p>${first}${second}</p>` }"
+      style: primary
+      start: 17
+      end: 125
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'Content-Type'"
+      style: secondary
+      start: 49
+      end: 63
+    - source: "'text/html'"
+      style: secondary
+      start: 66
+      end: 77
+    - source: "['text/html', 'other']"
+      style: secondary
+      start: 65
+      end: 87
+    - source: "'Content-Type': ['text/html', 'other']"
+      style: secondary
+      start: 49
+      end: 87
+    - source: "{ 'X-Test': ['yes'], 'Content-Type': ['text/html', 'other'] }"
+      style: secondary
+      start: 28
+      end: 89
+    - source: "headers: { 'X-Test': ['yes'], 'Content-Type': ['text/html', 'other'] }"
+      style: secondary
+      start: 19
+      end: 89
+    - source: body
+      style: secondary
+      start: 91
+      end: 95
+    - source: ${first}
+      style: secondary
+      start: 101
+      end: 109
+    - source: "`<p>${first}${second}</p>`"
+      style: secondary
+      start: 97
+      end: 123
+    - source: "body: `<p>${first}${second}</p>`"
+      style: secondary
+      start: 91
+      end: 123
+  "const response = { headers: { 'content-type': ['text/html; charset=utf-8'] }, body: `${value}` };":
+    labels:
+    - source: "{ headers: { 'content-type': ['text/html; charset=utf-8'] }, body: `${value}` }"
+      style: primary
+      start: 17
+      end: 96
+    - source: headers
+      style: secondary
+      start: 19
+      end: 26
+    - source: "'content-type'"
+      style: secondary
+      start: 30
+      end: 44
+    - source: "'text/html; charset=utf-8'"
+      style: secondary
+      start: 47
+      end: 73
+    - source: "['text/html; charset=utf-8']"
+      style: secondary
+      start: 46
+      end: 74
+    - source: "'content-type': ['text/html; charset=utf-8']"
+      style: secondary
+      start: 30
+      end: 74
+    - source: "{ 'content-type': ['text/html; charset=utf-8'] }"
+      style: secondary
+      start: 28
+      end: 76
+    - source: "headers: { 'content-type': ['text/html; charset=utf-8'] }"
+      style: secondary
+      start: 19
+      end: 76
+    - source: body
+      style: secondary
+      start: 78
+      end: 82
+    - source: ${value}
+      style: secondary
+      start: 85
+      end: 93
+    - source: "`${value}`"
+      style: secondary
+      start: 84
+      end: 94
+    - source: "body: `${value}`"
+      style: secondary
+      start: 78
+      end: 94
+  "function handler() { return { headers: { 'content-type': ['text/html'] }, body: `${value}` }; }":
+    labels:
+    - source: "{ headers: { 'content-type': ['text/html'] }, body: `${value}` }"
+      style: primary
+      start: 28
+      end: 92
+    - source: headers
+      style: secondary
+      start: 30
+      end: 37
+    - source: "'content-type'"
+      style: secondary
+      start: 41
+      end: 55
+    - source: "'text/html'"
+      style: secondary
+      start: 58
+      end: 69
+    - source: "['text/html']"
+      style: secondary
+      start: 57
+      end: 70
+    - source: "'content-type': ['text/html']"
+      style: secondary
+      start: 41
+      end: 70
+    - source: "{ 'content-type': ['text/html'] }"
+      style: secondary
+      start: 39
+      end: 72
+    - source: "headers: { 'content-type': ['text/html'] }"
+      style: secondary
+      start: 30
+      end: 72
+    - source: body
+      style: secondary
+      start: 74
+      end: 78
+    - source: ${value}
+      style: secondary
+      start: 81
+      end: 89
+    - source: "`${value}`"
+      style: secondary
+      start: 80
+      end: 90
+    - source: "body: `${value}`"
+      style: secondary
+      start: 74
+      end: 90

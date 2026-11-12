@@ -221,6 +221,9 @@ rules/strict/security/review-raw-html-sink.yml	all	exclude
 rules/strict/security/review-untrusted-authorization-identity-js.yml	all	exclude
 rules/strict/security/review-untrusted-authorization-identity-tsx.yml	all	exclude
 rules/strict/security/review-untrusted-authorization-identity.yml	all	exclude
+rules/strict/security/review-webtrigger-html-response-js.yml	all	exclude
+rules/strict/security/review-webtrigger-html-response-tsx.yml	all	exclude
+rules/strict/security/review-webtrigger-html-response.yml	all	exclude
 rules/strict/triggers/prefer-trigger-filter.yml	manifest	include
 rules/ecosol/devtools/require-catalog-component-kind.yml	catalog	include
 rules/ecosol/devtools/require-catalog-user-owner.yml	catalog	include

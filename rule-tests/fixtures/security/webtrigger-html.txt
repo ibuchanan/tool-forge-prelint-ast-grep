@@ -1,0 +1,5 @@
+export const handler = () => ({
+  body: `<h1>${request.body}</h1>`,
+  statusCode: 200,
+  headers: { 'Content-Type': ['text/html; charset=utf-8'] },
+});

@@ -17,10 +17,42 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
 | `forge-process-env-in-ui-render`                                                                                                                                                                                                                       | Partial direct JSX syntax review via `review-environment-in-ui-tsx` and `review-environment-in-ui-js`; no secret provenance or alias/cross-file flow                |
-| `forge-webtrigger-html-response-interpolation`, `forge-payload-merge-prototype-pollution`                                                                                                                                                              | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
+| `forge-payload-merge-prototype-pollution`                                                                                                                                                                                                              | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
 | `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | New `review-shared-hosting-wildcard-egress` (partial YAML syntax conversion; selected provider wildcards only, no ownership or traffic proof)                       |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
 | `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`                                                                                                                                                                                        | Partial syntax review via `review-child-process-import` and `review-filesystem-import`; current native runtime allows built-ins, so no blanket prohibition          |
+| `forge-webtrigger-html-response-interpolation`                                                                                                                                                                                                         | Partial direct literal response review via `review-webtrigger-html-response` and TSX/JS companions; no alias tracing or sanitizer correctness proof                 |
+
+## HTML web-trigger responses: direct syntax review
+
+`forge-webtrigger-html-response-interpolation` has a **partial syntax conversion**
+in strict-tier `review-webtrigger-html-response` and its TSX/JavaScript companions
+(inherited by Atlassian/Ecosol, absent from recommended). It matches sibling
+literal `headers` and `body` properties on the same object, regardless of order:
+`Content-Type` or `content-type` arrays containing exactly `text/html` or
+`text/html; charset=utf-8`, and a direct template body with a substitution.
+Quoted keys, single/double-quoted header strings, extra properties/header values,
+return objects and arrow-expression objects are covered. JSON headers, static
+HTML/string templates, escaped template markers and headers/body split across
+nested objects are excluded. Shape alone does not prove web-trigger reachability;
+a response-shaped unrelated object can still match.
+
+Unlike the source's ERROR classification and sanitizer-name exclusions, this is a
+low-precision/high-impact review warning. Direct `escapeHtml`, `DOMPurify.sanitize`
+and safe-looking variable names still match: neither a function name nor local
+syntax establishes correct context-sensitive escaping, input trust or executable
+XSS. No automatic fix is provided. Source alias-assignment forms (`body: html`),
+concatenations, header aliases, computed keys, scalar header values, other MIME
+casing/parameters and cross-file flows are not resolved. Nonmatching alias tests
+document **gaps**, not safety; sanitizer flows require manual review.
+
+Evidence: `rule-tests/strict/security/review-webtrigger-html-response*.test.yml`
+and their snapshots cover direct forms and counterexamples. Real-scanner fixtures
+exercise TS/MTS/CTS, TSX and JS/JSX/MJS/CJS, tier inheritance, root/backend/frontend/
+Custom UI/shared/build paths and test/dependency/generated exclusions. Unlike the
+source rule, static and build paths remain eligible under repository scope policy;
+paths do not establish runtime identity. This is bounded syntax review, not
+OpenGrep equivalence or a replacement for source-to-sink/output-encoding review.
 
 ## Environment values in JSX output: direct syntax review
 

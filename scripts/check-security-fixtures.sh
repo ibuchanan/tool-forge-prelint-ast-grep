@@ -283,4 +283,30 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
     exit 1
   fi
 done
+# Direct HTML response review: all parser variants and unrestricted runtime scope.
+mkdir -p "$TMP/webtrigger-html"
+for ext in ts mts cts tsx js jsx mjs cjs; do
+  for dir in . src frontend backend resolvers static/custom-ui lib build tests __tests__ dist coverage specs node_modules/example; do
+    mkdir -p "$TMP/webtrigger-html/$dir"
+    cp rule-tests/fixtures/security/webtrigger-html.txt "$TMP/webtrigger-html/$dir/source.$ext"
+  done
+  for suffix in test spec; do
+    cp rule-tests/fixtures/security/webtrigger-html.txt "$TMP/webtrigger-html/source.$suffix.$ext"
+  done
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  : > "$TMP/expected"
+  if [ "$config" != sgconfig.recommended.yml ]; then
+    for ext in ts mts cts tsx js jsx mjs cjs; do
+      for dir in . src frontend backend resolvers static/custom-ui lib build; do
+        if [ "$dir" = . ]; then
+          printf '%s/webtrigger-html/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+        else
+          printf '%s/webtrigger-html/%s/source.%s\n' "$TMP" "$dir" "$ext" >> "$TMP/expected"
+        fi
+      done
+    done
+  fi
+  scan "$config" '^(review-webtrigger-html-response(-tsx|-js)?|no-package-main)$' "$TMP/webtrigger-html"
+done
 echo 'Security fixtures: language variants, tier inclusion, manifest/package paths, and source exclusions passed.'

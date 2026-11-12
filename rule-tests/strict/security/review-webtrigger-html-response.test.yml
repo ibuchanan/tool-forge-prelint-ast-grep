@@ -1,0 +1,35 @@
+id: review-webtrigger-html-response
+valid:
+  - "const response = { headers: { 'Content-Type': ['application/json'] }, body: `${data}` };"
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: '<h1>Static</h1>' };"
+  - 'const response = { headers: { "Content-Type": ["text/html"] }, body: `<h1>Static</h1>` };'
+  - 'const response = { headers: { "Content-Type": ["text/html"] }, body: `<p>\${literal}</p>` };'
+  - "const unrelated = { headers: { 'Content-Type': ['text/html'] }, nested: { body: `${data}` } };"
+  - "const unrelated = { nested: { headers: { 'Content-Type': ['text/html'] } }, body: `${data}` };"
+  - "const unrelated = { headers: { nested: { 'Content-Type': ['text/html'] } }, body: `${data}` };"
+  - "const unrelated = { headers: { 'X-Note': ['text/html'] }, body: `${data}` };"
+  - "const unrelated = { headers: { 'Content-Type': [['text/html']] }, body: `${data}` };"
+  - "const unrelated = { headers: { 'Content-Type': ['text/htmlish'] }, body: `${data}` };"
+  - "const unrelated = { headers: { 'Content-Type': ['application/json'] }, body: `text/html ${data}` };"
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: () => `${data}` };"
+  # Gaps: aliases, concatenations, scalar headers and non-listed MIME casing/parameters are not safety evidence.
+  - "const html = `<p>${data}</p>`; const response = { headers: { 'Content-Type': ['text/html'] }, body: html };"
+  - "const headers = { 'Content-Type': ['text/html'] }; const response = { headers, body: `${data}` };"
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: prefix + `${data}` };"
+  - "const response = { headers: { 'Content-Type': 'text/html' }, body: `${data}` };"
+  - "const response = { headers: { 'Content-Type': ['TEXT/HTML'] }, body: `${data}` };"
+  - "const response = { headers: { 'Content-Type': ['text/html; charset=UTF-8'] }, body: `${data}` };"
+invalid:
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: `<h1>${data}</h1>` };"
+  - 'const response = { body: `<p>${request.body}</p>`, statusCode: 200, headers: { "Content-Type": ["text/html"] } };'
+  - "function handler() { return { headers: { 'content-type': ['text/html'] }, body: `${value}` }; }"
+  - 'const handler = () => ({ body: `${value}`, headers: { "content-type": ["text/html"] } });'
+  - "const response = { headers: { 'Content-Type': ['text/html; charset=utf-8'] }, body: `${value}` };"
+  - 'const response = { body: `${value}`, headers: { "Content-Type": ["text/html; charset=utf-8"] } };'
+  - "const response = { headers: { 'content-type': ['text/html; charset=utf-8'] }, body: `${value}` };"
+  - 'const response = { body: `${value}`, headers: { "content-type": ["text/html; charset=utf-8"] } };'
+  - "const response = { headers: { 'X-Test': ['yes'], 'Content-Type': ['text/html', 'other'] }, body: `<p>${first}${second}</p>` };"
+  - 'const response = { "body": `${value}`, "headers": { "Content-Type": ["text/html"] } };'
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: `${escapeHtml(value)}` };"
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: `${DOMPurify.sanitize(value)}` };"
+  - "const response = { headers: { 'Content-Type': ['text/html'] }, body: `${safeValue}` };"

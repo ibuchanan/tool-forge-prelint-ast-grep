@@ -1,0 +1,80 @@
+id: review-webtrigger-html-response-js
+language: JavaScript
+severity: warning
+message: HTML response bodies interpolate values. Return JSON or review context-appropriate HTML escaping.
+note: >-
+  Reviews literal response objects combining HTML Content-Type arrays with directly
+  interpolated template bodies. Interpolation does not prove untrusted input or XSS;
+  escaped values and unrelated response-shaped objects may match. Receiver identity,
+  aliases, cross-file flows and sanitizer correctness are not resolved. Prefer JSON
+  or context-appropriate output encoding. No automatic fix is safe.
+  See https://developer.atlassian.com/platform/forge/runtime-reference/web-trigger-api/
+  and https://cwe.mitre.org/data/definitions/79.html
+metadata:
+  category: security
+  cwe: "CWE-79: Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)"
+  references:
+    - https://developer.atlassian.com/platform/forge/runtime-reference/web-trigger-api/
+    - https://cwe.mitre.org/data/definitions/79.html
+  precision: low
+  precision-rationale: >-
+    Literal HTML headers and interpolated template bodies are review signals,
+    including correctly escaped values and response-shaped non-webtrigger objects.
+    rule-tests/strict/security/review-webtrigger-html-response-js.test.yml and
+    rule-tests/__snapshots__/review-webtrigger-html-response-js-snapshot.yml cover
+    direct shapes and counterexamples. Source trust, aliases and sanitizer
+    correctness are not established; a match is not proof of XSS.
+  impact: high
+  impact-rationale: >-
+    Untrusted values rendered without context-appropriate encoding in an HTML
+    web-trigger response can execute script on its origin or expose private data.
+    CWE-79 and Forge web-trigger response guidance support this consequence;
+    static or correctly escaped values do not establish executable injection.
+  scope-profile:
+    - frontend
+    - backend
+rule:
+  kind: object
+  all:
+    - has:
+        kind: pair
+        all:
+          - has:
+              field: key
+              regex: '^(["'']headers["'']|headers)$'
+          - has:
+              field: value
+              kind: object
+              has:
+                kind: pair
+                all:
+                  - has:
+                      field: key
+                      regex: '^["''](Content-Type|content-type)["'']$'
+                  - has:
+                      field: value
+                      kind: array
+                      has:
+                        kind: string
+                        regex: '^["'']text/html(; charset=utf-8)?["'']$'
+    - has:
+        kind: pair
+        all:
+          - has:
+              field: key
+              regex: '^(["'']body["'']|body)$'
+          - has:
+              field: value
+              kind: template_string
+              has:
+                kind: template_substitution
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
