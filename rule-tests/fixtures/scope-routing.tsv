@@ -1,4 +1,7 @@
 # Rule path	Reviewed positive scope	Test policy
+rules/strict/security/review-payload-merge.yml	all	exclude
+rules/strict/security/review-payload-merge-tsx.yml	all	exclude
+rules/strict/security/review-payload-merge-js.yml	all	exclude
 rules/strict/security/review-environment-in-ui-tsx.yml	all	exclude
 rules/strict/security/review-environment-in-ui-js.yml	all	exclude
 rules/strict/security/review-child-process-import.yml	runtime-review	exclude

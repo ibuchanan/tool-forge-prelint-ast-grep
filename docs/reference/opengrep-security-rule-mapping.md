@@ -17,11 +17,55 @@ Source: `vendor/forge-skills/skills/forge-security-review/assets/opengrep-rules/
 | `forge-resolver-returns-secret`, `forge-token-in-plain-storage`, `forge-sensitive-data-console-logging`, `forge-ui-credential-console-logging`, `forge-atlassian-api-token-basic-auth`, `forge-bitbucket-basic-auth-credential`                        | **Not converted**: secret provenance/context would need additional review; `review-hardcoded-secret` and `no-sensitive-data-logging` are related but not equivalent |
 | `forge-webtrigger-missing-auth`, `forge-resolver-global-write-without-permission-check`, `forge-payload-identity-trusted`, `forge-context-identifier-payload-fallback`, `forge-hardcoded-account-gate`, `forge-jwt-literal-secret`                     | **Not converted**: authorization or authentication context needs a dedicated design and focused fixtures                                                            |
 | `forge-process-env-in-ui-render`                                                                                                                                                                                                                       | Partial direct JSX syntax review via `review-environment-in-ui-tsx` and `review-environment-in-ui-js`; no secret provenance or alias/cross-file flow                |
-| `forge-payload-merge-prototype-pollution`                                                                                                                                                                                                              | **Not converted**: needs targeted syntax and counterexample tests                                                                                                   |
+| `forge-payload-merge-prototype-pollution`                                                                                                                                                                                                              | Partial direct-source review via strict-tier `review-payload-merge` and TSX/JS companions; no taint, alias or key-copy-loop analysis                                |
 | `forge-manifest-shared-hosting-wildcard-egress`                                                                                                                                                                                                        | New `review-shared-hosting-wildcard-egress` (partial YAML syntax conversion; selected provider wildcards only, no ownership or traffic proof)                       |
 | `forge-llm-output-drives-privileged-action`                                                                                                                                                                                                            | **Not converted**: requires model-output provenance and action authorization analysis                                                                               |
 | `forge-sandbox-no-child-process`, `forge-sandbox-no-filesystem`                                                                                                                                                                                        | Partial syntax review via `review-child-process-import` and `review-filesystem-import`; current native runtime allows built-ins, so no blanket prohibition          |
 | `forge-webtrigger-html-response-interpolation`                                                                                                                                                                                                         | Partial direct literal response review via `review-webtrigger-html-response` and TSX/JS companions; no alias tracing or sanitizer correctness proof                 |
+
+## Payload merges: direct-source review, not taint tracking
+
+`forge-payload-merge-prototype-pollution` has a **partial syntax conversion** in
+strict-tier `review-payload-merge` and its TSX/JavaScript companions, inherited by
+Atlassian/Ecosol and absent from recommended. The warning matches direct calls to
+`merge`/`deepmerge` or receiver methods `merge`, `mergeWith`, `defaultsDeep`,
+`assign` and `extend` when a source argument after the target is directly:
+
+- `payload`, or dot-access `req.payload`, `request.payload`, `args.payload` or
+  `input.payload`, including subsequent dot/bracket field access;
+- dot-access `body` on `event`, `evt`, `e`, `req`, `request` or `webtriggerEvent`,
+  including subsequent fields;
+- `JSON.parse` of one of those direct body expressions, including subsequent fields.
+
+Later source arguments are included, but payload used only as the target is not.
+Object/array literals, object spread, string/comment lookalikes and inline
+schema/pick helper results are excluded. Their exclusion is a syntax boundary,
+**not proof that a schema or sanitizer is correct**. Already-validated variables,
+shadowed identifiers, unrelated same-named methods and patched libraries can
+still match. The low-precision/high-impact warning requests review, not a claim
+of attacker control, unsafe library version, authorization bypass or global
+prototype mutation. No automatic fix is provided.
+
+Unlike the source rule, fresh-object targets remain eligible: deep merges into
+`{}` can still be unsafe, and `Object.assign({}, payload)` can invoke a prototype
+setter on the result. Shallow assignment does not by itself prove pollution of
+`Object.prototype`. Prefer schema validation and allowlisted field construction;
+see [OWASP's prevention guidance](https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html)
+and [CWE-1321](https://cwe.mitre.org/data/definitions/1321.html).
+
+Renamed/destructured resolver payloads, aliases across statements, computed access
+to the initial payload/body property, wrapper/conditional expressions, bare
+`assign`/`extend`, computed callee names, key-copy loops and cross-function/file
+flows remain gaps. Nonmatching alias/loop fixtures document missing coverage, not
+safety. Keep OpenGrep/manual review for provenance and guarded key-copy behavior;
+this matcher does not reproduce the source's taint sanitizers or ERROR policy.
+
+Evidence: `rule-tests/strict/security/review-payload-merge*.test.yml` and snapshots
+exercise merge families, source/target positions, false-positive boundaries and
+known gaps. Real-scanner fixtures exercise TS/MTS/CTS, TSX, JS/JSX/MJS/CJS, tier
+inheritance, frontend/backend/Custom UI/shared/build paths and baseline/test
+exclusions. Source paths do not establish resolver identity; `build` stays eligible
+under repository scope policy rather than copying the OpenGrep exclusion.
 
 ## HTML web-trigger responses: direct syntax review
 

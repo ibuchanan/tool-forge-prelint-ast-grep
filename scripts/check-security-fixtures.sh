@@ -309,4 +309,29 @@ for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.ym
   fi
   scan "$config" '^(review-webtrigger-html-response(-tsx|-js)?|no-package-main)$' "$TMP/webtrigger-html"
 done
+# Direct merge sources use the same all-source, non-test scope in every language.
+for ext in ts mts cts tsx js jsx mjs cjs; do
+  for dir in . src frontend backend resolvers static/custom-ui lib build tests __tests__ dist coverage specs node_modules/example; do
+    mkdir -p "$TMP/payload-merge/$dir"
+    cp rule-tests/fixtures/security/payload-merge.txt "$TMP/payload-merge/$dir/source.$ext"
+  done
+  for suffix in test spec; do
+    cp rule-tests/fixtures/security/payload-merge.txt "$TMP/payload-merge/source.$suffix.$ext"
+  done
+done
+for config in sgconfig.recommended.yml sgconfig.strict.yml sgconfig.atlassian.yml sgconfig.ecosol.yml; do
+  : > "$TMP/expected"
+  if [ "$config" != sgconfig.recommended.yml ]; then
+    for ext in ts mts cts tsx js jsx mjs cjs; do
+      for dir in . src frontend backend resolvers static/custom-ui lib build; do
+        if [ "$dir" = . ]; then
+          printf '%s/payload-merge/source.%s\n' "$TMP" "$ext" >> "$TMP/expected"
+        else
+          printf '%s/payload-merge/%s/source.%s\n' "$TMP" "$dir" "$ext" >> "$TMP/expected"
+        fi
+      done
+    done
+  fi
+  scan "$config" '^(review-payload-merge(-tsx|-js)?|no-package-main)$' "$TMP/payload-merge"
+done
 echo 'Security fixtures: language variants, tier inclusion, manifest/package paths, and source exclusions passed.'

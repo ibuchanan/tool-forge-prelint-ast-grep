@@ -1,0 +1,7 @@
+id: review-payload-merge-tsx
+valid:
+  - "const view = <Panel value={merge(target, schema.parse(payload))} />;"
+  - "const view = <Panel value={merge(payload, defaults)} />;"
+invalid:
+  - "const view = <Panel value={merge(target, payload)} />;"
+  - Object.assign(target, JSON.parse(event.body));

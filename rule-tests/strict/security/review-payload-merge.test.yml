@@ -1,0 +1,40 @@
+id: review-payload-merge
+valid:
+  - merge(target, defaults);
+  - merge(payload, defaults);
+  - "Object.assign(target, { name: payload.name });"
+  - const copy = { ...payload };
+  - merge(target, schema.parse(payload));
+  - merge(target, pick(payload, ['name']));
+  - const input = payload; merge(target, input);
+  - merge(target, { ...payload });
+  - merge(target, [payload]);
+  - merge(target, () => payload);
+  - merge(target, payloadText);
+  - other.merge(target, trusted);
+  - assign(target, payload);
+  - const text = 'merge(target, payload)';
+  - merge(target, response.body);
+  - Object.assign(target, schema.safeParse(payload));
+  - merge(/* source is the target */ payload, defaults);
+  - merge(payload);
+  - Object.assign(payload);
+  - "for (const key in payload) { target[key] = payload[key]; }"
+  - 'resolver.define("save", ({ payload: data }) => merge(target, data));'
+  - merge(target, req['payload']);
+  - merge(target, 'payload');
+  - "/* merge(target, payload); */"
+invalid:
+  - merge(target, payload);
+  - _.merge(target, req.payload);
+  - deepmerge(target, request.payload.options);
+  - helpers.mergeWith(target, args.payload, customizer);
+  - helpers.defaultsDeep(target, input.payload['options']);
+  - helpers.assign(target, payload.options);
+  - helpers.extend(target, event.body);
+  - Object.assign(target, JSON.parse(request.body));
+  - merge(target, defaults, payload);
+  - merge({}, payload);
+  - Object.assign({}, payload);
+  - "const payload = schema.parse(raw); merge(target, payload);"
+  - "const merge = patchedMerge; merge(target, payload);"

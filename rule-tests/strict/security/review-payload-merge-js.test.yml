@@ -1,0 +1,15 @@
+id: review-payload-merge-js
+valid:
+  - 'const view = <Panel value={merge(target, pick(payload, ["name"]))} />;'
+  - "Object.assign(target, { name: payload.name });"
+  - merge(payload, defaults);
+invalid:
+  - "const view = <Panel value={merge(target, payload)} />;"
+  - _.merge(target, req.payload);
+  - deepmerge(target, request.payload.options);
+  - helpers.mergeWith(target, args.payload, customizer);
+  - helpers.defaultsDeep(target, input.payload['options']);
+  - helpers.assign(target, payload.options);
+  - helpers.extend(target, event.body);
+  - Object.assign(target, JSON.parse(request.body));
+  - merge(target, defaults, payload);

@@ -1,0 +1,292 @@
+id: review-payload-merge-js
+snapshots:
+  "Object.assign(target, JSON.parse(request.body));":
+    labels:
+    - source: Object.assign(target, JSON.parse(request.body))
+      style: primary
+      start: 0
+      end: 47
+    - source: assign
+      style: secondary
+      start: 7
+      end: 13
+    - source: Object.assign
+      style: secondary
+      start: 0
+      end: 13
+    - source: request
+      style: secondary
+      start: 33
+      end: 40
+    - source: body
+      style: secondary
+      start: 41
+      end: 45
+    - source: request.body
+      style: secondary
+      start: 33
+      end: 45
+    - source: (request.body)
+      style: secondary
+      start: 32
+      end: 46
+    - source: target
+      style: secondary
+      start: 14
+      end: 20
+    - source: JSON.parse(request.body)
+      style: secondary
+      start: 22
+      end: 46
+    - source: JSON.parse(request.body)
+      style: secondary
+      start: 22
+      end: 46
+  "_.merge(target, req.payload);":
+    labels:
+    - source: _.merge(target, req.payload)
+      style: primary
+      start: 0
+      end: 28
+    - source: merge
+      style: secondary
+      start: 2
+      end: 7
+    - source: _.merge
+      style: secondary
+      start: 0
+      end: 7
+    - source: req
+      style: secondary
+      start: 16
+      end: 19
+    - source: payload
+      style: secondary
+      start: 20
+      end: 27
+    - source: target
+      style: secondary
+      start: 8
+      end: 14
+    - source: req.payload
+      style: secondary
+      start: 16
+      end: 27
+    - source: req.payload
+      style: secondary
+      start: 16
+      end: 27
+  "const view = <Panel value={merge(target, payload)} />;":
+    labels:
+    - source: merge(target, payload)
+      style: primary
+      start: 27
+      end: 49
+    - source: merge
+      style: secondary
+      start: 27
+      end: 32
+    - source: target
+      style: secondary
+      start: 33
+      end: 39
+    - source: payload
+      style: secondary
+      start: 41
+      end: 48
+    - source: payload
+      style: secondary
+      start: 41
+      end: 48
+  "deepmerge(target, request.payload.options);":
+    labels:
+    - source: deepmerge(target, request.payload.options)
+      style: primary
+      start: 0
+      end: 42
+    - source: deepmerge
+      style: secondary
+      start: 0
+      end: 9
+    - source: request
+      style: secondary
+      start: 18
+      end: 25
+    - source: payload
+      style: secondary
+      start: 26
+      end: 33
+    - source: request.payload
+      style: secondary
+      start: 18
+      end: 33
+    - source: target
+      style: secondary
+      start: 10
+      end: 16
+    - source: request.payload.options
+      style: secondary
+      start: 18
+      end: 41
+    - source: request.payload.options
+      style: secondary
+      start: 18
+      end: 41
+  "helpers.assign(target, payload.options);":
+    labels:
+    - source: helpers.assign(target, payload.options)
+      style: primary
+      start: 0
+      end: 39
+    - source: assign
+      style: secondary
+      start: 8
+      end: 14
+    - source: helpers.assign
+      style: secondary
+      start: 0
+      end: 14
+    - source: payload
+      style: secondary
+      start: 23
+      end: 30
+    - source: target
+      style: secondary
+      start: 15
+      end: 21
+    - source: payload.options
+      style: secondary
+      start: 23
+      end: 38
+    - source: payload.options
+      style: secondary
+      start: 23
+      end: 38
+  "helpers.defaultsDeep(target, input.payload['options']);":
+    labels:
+    - source: helpers.defaultsDeep(target, input.payload['options'])
+      style: primary
+      start: 0
+      end: 54
+    - source: defaultsDeep
+      style: secondary
+      start: 8
+      end: 20
+    - source: helpers.defaultsDeep
+      style: secondary
+      start: 0
+      end: 20
+    - source: input
+      style: secondary
+      start: 29
+      end: 34
+    - source: payload
+      style: secondary
+      start: 35
+      end: 42
+    - source: input.payload
+      style: secondary
+      start: 29
+      end: 42
+    - source: target
+      style: secondary
+      start: 21
+      end: 27
+    - source: input.payload['options']
+      style: secondary
+      start: 29
+      end: 53
+    - source: input.payload['options']
+      style: secondary
+      start: 29
+      end: 53
+  "helpers.extend(target, event.body);":
+    labels:
+    - source: helpers.extend(target, event.body)
+      style: primary
+      start: 0
+      end: 34
+    - source: extend
+      style: secondary
+      start: 8
+      end: 14
+    - source: helpers.extend
+      style: secondary
+      start: 0
+      end: 14
+    - source: event
+      style: secondary
+      start: 23
+      end: 28
+    - source: body
+      style: secondary
+      start: 29
+      end: 33
+    - source: target
+      style: secondary
+      start: 15
+      end: 21
+    - source: event.body
+      style: secondary
+      start: 23
+      end: 33
+    - source: event.body
+      style: secondary
+      start: 23
+      end: 33
+  "helpers.mergeWith(target, args.payload, customizer);":
+    labels:
+    - source: helpers.mergeWith(target, args.payload, customizer)
+      style: primary
+      start: 0
+      end: 51
+    - source: mergeWith
+      style: secondary
+      start: 8
+      end: 17
+    - source: helpers.mergeWith
+      style: secondary
+      start: 0
+      end: 17
+    - source: args
+      style: secondary
+      start: 26
+      end: 30
+    - source: payload
+      style: secondary
+      start: 31
+      end: 38
+    - source: target
+      style: secondary
+      start: 18
+      end: 24
+    - source: args.payload
+      style: secondary
+      start: 26
+      end: 38
+    - source: args.payload
+      style: secondary
+      start: 26
+      end: 38
+  "merge(target, defaults, payload);":
+    labels:
+    - source: merge(target, defaults, payload)
+      style: primary
+      start: 0
+      end: 32
+    - source: merge
+      style: secondary
+      start: 0
+      end: 5
+    - source: defaults
+      style: secondary
+      start: 14
+      end: 22
+    - source: payload
+      style: secondary
+      start: 24
+      end: 31
+    - source: payload
+      style: secondary
+      start: 24
+      end: 31

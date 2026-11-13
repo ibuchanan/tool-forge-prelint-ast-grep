@@ -1,0 +1,66 @@
+id: review-payload-merge-tsx
+snapshots:
+  "Object.assign(target, JSON.parse(event.body));":
+    labels:
+    - source: Object.assign(target, JSON.parse(event.body))
+      style: primary
+      start: 0
+      end: 45
+    - source: assign
+      style: secondary
+      start: 7
+      end: 13
+    - source: Object.assign
+      style: secondary
+      start: 0
+      end: 13
+    - source: event
+      style: secondary
+      start: 33
+      end: 38
+    - source: body
+      style: secondary
+      start: 39
+      end: 43
+    - source: event.body
+      style: secondary
+      start: 33
+      end: 43
+    - source: (event.body)
+      style: secondary
+      start: 32
+      end: 44
+    - source: target
+      style: secondary
+      start: 14
+      end: 20
+    - source: JSON.parse(event.body)
+      style: secondary
+      start: 22
+      end: 44
+    - source: JSON.parse(event.body)
+      style: secondary
+      start: 22
+      end: 44
+  "const view = <Panel value={merge(target, payload)} />;":
+    labels:
+    - source: merge(target, payload)
+      style: primary
+      start: 27
+      end: 49
+    - source: merge
+      style: secondary
+      start: 27
+      end: 32
+    - source: target
+      style: secondary
+      start: 33
+      end: 39
+    - source: payload
+      style: secondary
+      start: 41
+      end: 48
+    - source: payload
+      style: secondary
+      start: 41
+      end: 48

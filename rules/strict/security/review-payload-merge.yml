@@ -1,0 +1,106 @@
+id: review-payload-merge
+language: TypeScript
+severity: warning
+message: Review payload-derived merge sources for prototype pollution. Validate keys or copy only allowlisted fields.
+note: >-
+  Reviews direct payload-like sources passed to merge/assign helpers. Names alone
+  do not establish untrusted input, library identity or a vulnerable implementation.
+  Previously validated payloads and patched libraries can match. Aliases, helper
+  calls and key-copy loops are not traced; a nonmatch is not evidence of safety.
+  Validate keys with a schema or copy allowlisted fields. No automatic fix is safe.
+  See https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html
+  and https://cwe.mitre.org/data/definitions/1321.html
+metadata:
+  category: security
+  cwe: "CWE-1321: Improperly Controlled Modification of Object Prototype Attributes (Prototype Pollution)"
+  references:
+    - https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html
+    - https://cwe.mitre.org/data/definitions/1321.html
+  precision: low
+  precision-rationale: >-
+    Direct payload-like sources in merge calls provide a bounded review signal,
+    not proof of source trust or unsafe library behavior. Validated identifiers,
+    shadowed helper names and patched libraries can match.
+    rule-tests/strict/security/review-payload-merge.test.yml and
+    rule-tests/__snapshots__/review-payload-merge-snapshot.yml cover source/target
+    positions and counterexamples. Aliases and sanitizer correctness are not resolved.
+  impact: high
+  impact-rationale: >-
+    Unsafe recursive merges or setter-invoking copies of attacker-controlled keys
+    can modify object prototypes, corrupt authorization decisions or affect later
+    invocations. CWE-1321 and OWASP prototype pollution guidance support the harm;
+    a shallow copy into a fresh object does not itself prove global pollution.
+  scope-profile:
+    - frontend
+    - backend
+rule:
+  kind: call_expression
+  all:
+    - has:
+        field: function
+        any:
+          - kind: identifier
+            regex: ^(merge|deepmerge)$
+          - kind: member_expression
+            has:
+              field: property
+              regex: ^(merge|mergeWith|defaultsDeep|assign|extend)$
+    - has:
+        field: arguments
+        has:
+          all:
+            - matches: input-source
+            - follows:
+                not:
+                  any:
+                    - regex: "^[,(]$"
+                    - kind: comment
+                stopBy: end
+utils:
+  input-source:
+    any:
+      - kind: identifier
+        regex: ^payload$
+      - all:
+          - kind: member_expression
+          - has:
+              field: object
+              kind: identifier
+              regex: ^(req|request|args|input)$
+          - has:
+              field: property
+              regex: ^payload$
+      - matches: body-source
+      - all:
+          - any:
+              - kind: member_expression
+              - kind: subscript_expression
+          - has:
+              field: object
+              matches: input-source
+      - all:
+          - pattern: JSON.parse($BODY)
+          - has:
+              kind: arguments
+              has:
+                matches: body-source
+  body-source:
+    kind: member_expression
+    all:
+      - has:
+          field: object
+          kind: identifier
+          regex: ^(event|evt|e|req|request|webtriggerEvent)$
+      - has:
+          field: property
+          regex: ^body$
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+  - "**/__tests__/**"
+  - "**/test/**"
+  - "**/tests/**"
