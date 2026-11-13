@@ -1,6 +1,9 @@
 id: no-global-state-mutation
 valid:
   - "const requestId = globalThis.crypto.randomUUID()"
+  - "const tenantId = process.env.TENANT_ID"
+  - "process.env.NODE_ENV = 'production'"
+  - "const env = {}; env.TENANT_ID = context.cloudId"
   - "const globalState = {}; globalState.cache = {}"
   - |
     export async function handler(context) {
@@ -14,3 +17,6 @@ invalid:
   - "globalThis.count++"
   - "delete global.cache"
   - "globalThis['cache'] = {}"
+  - "process.env.TENANT_ID = context.cloudId"
+  - "process.env['TENANT_ID'] = context.cloudId"
+  - "process.env['NODE_ENV'] = 'production'"

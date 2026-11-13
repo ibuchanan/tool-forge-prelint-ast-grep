@@ -36,3 +36,21 @@ snapshots:
       style: primary
       start: 0
       end: 24
+  process.env.TENANT_ID = context.cloudId:
+    labels:
+    - source: process.env.TENANT_ID = context.cloudId
+      style: primary
+      start: 0
+      end: 39
+  "process.env['NODE_ENV'] = 'production'":
+    labels:
+    - source: process.env['NODE_ENV'] = 'production'
+      style: primary
+      start: 0
+      end: 38
+  "process.env['TENANT_ID'] = context.cloudId":
+    labels:
+    - source: process.env['TENANT_ID'] = context.cloudId
+      style: primary
+      start: 0
+      end: 42

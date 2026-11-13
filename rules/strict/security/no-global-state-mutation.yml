@@ -2,7 +2,7 @@ id: no-global-state-mutation
 language: TypeScript
 severity: error
 message: >
-  Avoid mutating `global` or `globalThis`.
+  Avoid mutating `global`, `globalThis`, or `process.env`.
   Keep Forge tenant data per invocation or tenant-keyed.
 note: >
   Forge runtime processes can be reused across invocations,
@@ -16,6 +16,11 @@ note: >
   https://developer.atlassian.com/platform/forge/tenant-data-isolation/
 rule:
   any:
+    - all:
+        - pattern: process.env.$PROP = $VALUE
+        - not:
+            pattern: process.env.NODE_ENV = $VALUE
+    - pattern: process.env[$KEY] = $VALUE
     - pattern: globalThis.$PROP = $VALUE
     - pattern: globalThis[$KEY] = $VALUE
     - pattern: global.$PROP = $VALUE
@@ -60,8 +65,11 @@ metadata:
     - https://developer.atlassian.com/platform/forge/tenant-data-isolation/
   precision: high
   precision-rationale: >-
-    Assignments, updates, deletes and listed mutator calls on global/globalThis
-    directly violate the stated no-global-mutation convention.
+    Assignments, updates, deletes and listed mutator calls on global/globalThis,
+    plus direct process.env assignments, violate the no-shared-mutation convention.
+    Dotted process.env.NODE_ENV is excluded as a build/runtime setting; bracket
+    notation follows the source matcher and is reported. Fixtures cover these
+    forms alongside reads/local state as negative controls. This is not dataflow.
     rule-tests/strict/security/no-global-state-mutation.test.yml and
     rule-tests/__snapshots__/no-global-state-mutation-snapshot.yml together
     cover direct/bracket writes, increment, delete and a tenant-keyed global Map
