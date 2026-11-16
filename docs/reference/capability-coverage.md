@@ -340,8 +340,8 @@ coverage command, dependency installation or native Vitest initialization is run
 
 ## Forge Ahead: advisory production dependency declarations
 
-Three informational ecosol rules map to `capability:forge-ahead`:
-`use-forge-ahead-api-types`, `use-forge-ahead-errors` and
+Two informational ecosol rules map to `capability:forge-ahead`:
+`use-forge-ahead-errors` and
 `use-forge-ahead-logging-for-backend`. The last rule applies only when root
 production dependencies directly declare `@forge/api`, `@forge/resolver` or
 `@forge/events`; this heuristic avoids reporting UI-only packages without those
@@ -357,12 +357,12 @@ Validation is an explicit no-op, leaving runtime integration to app build/tests.
 
 The matchers require each helper as a direct key in the root `dependencies`
 object. Root lookalikes, nested metadata, scripts, development, peer and optional
-sections do not satisfy that placement. The API-types rule is gated on direct root
-`@forge/api`; the backend logging rule is gated on any direct root `@forge/api`,
+sections do not satisfy that placement. The backend logging rule is gated on any
+direct root `@forge/api`,
 `@forge/resolver` or `@forge/events` dependency. UI-only packages without those
 backend dependencies are not reported. These dependency keys are heuristics rather
-than manifest-aware app detection. Drop Calf seeds API types unconditionally, but
-that alone does not justify a broader API-types advisory.
+than manifest-aware app detection. API types are not lint-enforced; choosing the
+types library or an alternative remains a review decision.
 
 Generated GitHub references and owner-selected registry ranges, aliases, local,
 workspace and tarball strings remain accepted without version pinning. These
@@ -480,44 +480,29 @@ versions, retained size scripts and isolated missing-command/no-build/preset mut
 No app build, size command, output cleanup, hook or dependency installation is run;
 the stored generated snapshot and all consumer snapshots remain unchanged.
 
-## Clean build: dist-only command text
+## Clean build: owner-managed cleanup entrypoint
 
 `require-clean-script` is an informational ecosol convention tagged
-`capability:clean-build`. It checks a direct root `scripts.clean` string in an
-existing `package.json`. Callers select Forge-app directories; the rule does not
-infer app identity from a manifest or its capability tag. Library reinstall
-workflows are outside this precondition.
+`capability:clean-build`. It checks that the root `scripts` object declares a
+`clean` string with non-whitespace content. Missing, empty, whitespace-only or
+non-string values receive one finding; nested lookalikes do not satisfy it.
+Callers select Forge-app directories; neither a manifest nor a capability tag
+establishes app identity for this rule.
 
-The reviewed source is the
-[clean-build capability at `be86d05309a32f7eef8988205208c17ca94e7a4c`](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/clean-build.ts).
-The pinned [profile selection](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/composition/profiles.ts)
-uses `cleanBuild()` for Forge apps, maintaining `rm -rf dist`. Libraries select
-`reinstall: true`, intentionally adding `node_modules` and `package-lock.json`.
-Initialization, update and validation never execute either cleanup command.
+The upstream
+[clean-build capability](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/clean-build.ts)
+seeds `rm -rf dist` for Forge apps, but lint does not enforce that implementation.
+Cleanup targets, generated-source deletion, wrappers, command chains and separate
+`clean:hard` or other `clean:*` tasks are owner-managed. Even a no-op string passes:
+this checks a discoverable declaration, not command behavior or filesystem safety.
 
-| Component  | Recognized literal forms                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------ |
-| Invocation | Direct `rm -rf`, with ordinary spaces between tokens and at either end.                                      |
-| Target     | Only `dist`, `./dist`, `dist/` or `./dist/`; no extra arguments.                                             |
-| Placement  | Direct root `scripts` object and direct `clean` string; unrelated nested keys do not satisfy the convention. |
-
-Missing entries, non-string values, inert echo/printf mentions, lookalike targets,
-source/project-root/dependency/lockfile targets and command chains receive one
-finding. The message recommends the maintained command; it does not claim that
-an unsupported command executed or deleted anything. This is medium-precision,
-low-impact workflow advice, not a complete shell safety audit. Alternative flag
-spellings, quoted paths, wrappers, environment assignments and escaped JSON
-spellings require review and possible suppression for an equivalent owner workflow.
-
-Native routing covers `package.json` only, including test-local app examples and
-excluding node_modules, dist, coverage and specs. Missing files, duplicate keys,
-package-schema validity, command resolution, shell/environment behavior, symlink
-resolution, dist existence and successful cleanup remain native-tool or review
-responsibilities. A passing literal command does not establish filesystem safety.
-Static tests scan generated packages and isolated mutations only; no clean task,
-build, dependency installation or output deletion is performed. The stored
-Drop Calf snapshot is unchanged; the legacy zero-findings fixture gains only
-the maintained clean declaration.
+This remains medium-precision, low-impact workflow advice. Native routing covers
+`package.json` only, excluding node_modules, dist, coverage and specs. Missing
+files, duplicate or escaped keys, arbitrary Unicode whitespace encodings,
+package-schema validity, command resolution, shell/environment behavior and
+successful cleanup remain native-tool or review responsibilities. Static tests
+scan declarations only; no cleanup command is executed. The generated Drop Calf
+fixture remains unchanged.
 
 ## TODO: optional seeded entrypoint advice
 

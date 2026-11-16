@@ -104,7 +104,7 @@ actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "typescript"')
 }
 printf 'PASS: compiler, build and typecheck conventions are discoverable\n'
 
-expected=$'forge-ahead\timplemented\tuse-forge-ahead-api-types,use-forge-ahead-errors,use-forge-ahead-logging-for-backend'
+expected=$'forge-ahead\timplemented\tuse-forge-ahead-errors,use-forge-ahead-logging-for-backend'
 actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "forge-ahead"')
 [[ $actual == "$expected" ]] || {
   printf 'FAIL: Forge Ahead dependency conventions must be discoverable without runtime logging advice; got: %s\n' "$actual" >&2
@@ -123,10 +123,10 @@ printf 'PASS: size-limit conventions are discoverable without aggregate or hook 
 expected=$'clean-build\timplemented\trequire-clean-script'
 actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "clean-build"')
 [[ $actual == "$expected" ]] || {
-  printf 'FAIL: dist-only clean entrypoint must be discoverable; got: %s\n' "$actual" >&2
+  printf 'FAIL: clean entrypoint must be discoverable; got: %s\n' "$actual" >&2
   exit 1
 }
-printf 'PASS: dist-only clean entrypoint is discoverable\n'
+printf 'PASS: clean entrypoint is discoverable\n'
 
 expected=$'todo\timplemented\tprefer-todo-script'
 actual=$(printf '%s\n' "$report" | awk -F '\t' '$1 == "todo"')

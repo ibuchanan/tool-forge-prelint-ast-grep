@@ -98,10 +98,11 @@ report_phase package-metadata
 
 # Forge Ahead declarations are static seed advice, not runtime integration proof.
 forge_ahead_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_forge_ahead.XXXXXX")
-for variant in generated api-app owner-references; do
+for variant in generated api-app owner-references without-api-types; do
   case "$variant" in
   generated) edit='.' ;;
   api-app) edit='.dependencies["@forge/api"] = "^7"' ;;
+  without-api-types) edit='.dependencies["@forge/api"] = "^7" | del(.dependencies["@forge-ahead/atlassian-api-types"])' ;;
   owner-references) edit='.dependencies |= with_entries(.value = "file:../owner-helper")' ;;
   esac
   jq "$edit" "$DROP_CALF_PACKAGE" >"$forge_ahead_work/package.json"
@@ -112,9 +113,8 @@ for variant in generated api-app owner-references; do
     exit 1
   fi
 done
-for helper in api-types errors logging; do
+for helper in errors logging; do
   package="@forge-ahead/$helper"
-  if [ "$helper" = api-types ]; then package='@forge-ahead/atlassian-api-types'; fi
   for section in missing devDependencies config scripts; do
     jq --arg package "$package" --arg section "$section" '
       .dependencies["@forge/api"] = "^7" |
@@ -197,8 +197,8 @@ report_phase todo
 
 # Clean command checks inspect text only; never invoke cleanup on these fixtures.
 clean_work=$(mktemp -d "$PWD/.scratch/tmp_rovo_clean_build.XXXXXX")
-for variant in generated relative missing non-string nested inert lookalike source root reinstall lockfile chain; do
-  expected=1
+for variant in generated relative missing non-string nested empty whitespace owner-targets wrapper inert lookalike source root reinstall lockfile chain; do
+  expected=0
   case "$variant" in
   generated)
     edit='.'
@@ -208,9 +208,13 @@ for variant in generated relative missing non-string nested inert lookalike sour
     edit='.scripts.clean = "  rm  -rf  ./dist/  "'
     expected=0
     ;;
-  missing) edit='del(.scripts.clean)' ;;
-  non-string) edit='.scripts.clean = ["rm -rf dist"]' ;;
-  nested) edit='.config.scripts.clean = .scripts.clean | del(.scripts.clean)' ;;
+  missing) edit='del(.scripts.clean)'; expected=1 ;;
+  non-string) edit='.scripts.clean = ["rm -rf dist"]'; expected=1 ;;
+  nested) edit='.config.scripts.clean = .scripts.clean | del(.scripts.clean)'; expected=1 ;;
+  empty) edit='.scripts.clean = ""'; expected=1 ;;
+  whitespace) edit='.scripts.clean = " \t\n"'; expected=1 ;;
+  owner-targets) edit='.scripts.clean = "rm -rf ./dist ./src/discourse/api" | .scripts["clean:hard"] = "npm run clean && rm -rf ./node_modules package-lock.json"' ;;
+  wrapper) edit='.scripts.clean = "bash scripts/clean.sh"' ;;
   inert) edit='.scripts.clean = "echo '\''rm -rf dist'\''"' ;;
   lookalike) edit='.scripts.clean = "rm -rf distribution"' ;;
   source) edit='.scripts.clean = "rm -rf src"' ;;
@@ -232,7 +236,7 @@ for variant in generated relative missing non-string nested inert lookalike sour
     exit 1
   fi
 done
-echo 'Generated dist-only clean command and static mutations produced expected findings.'
+echo 'Clean entrypoint declarations and owner-managed commands produced expected findings.'
 report_phase clean-build
 
 # Size Limit checks static declarations only; never build or measure owner output.
