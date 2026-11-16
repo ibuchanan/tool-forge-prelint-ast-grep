@@ -269,10 +269,10 @@ The canonical baseline, in write order, is:
 - "**/specs/**"
 ```
 
-This is the union of relevant exclusions in the vendored Drop Calf
-[Prelint command](../../vendor/ranch-rig-drop-calf/src/prelint.ts),
-[Biome template](../../vendor/ranch-rig-drop-calf/templates/biome/biome.jsonc), and
-[Vitest template](../../vendor/ranch-rig-drop-calf/templates/vitest/vitest.config.ts),
+This is the union of relevant exclusions in the upstream Drop Calf
+[Prelint command](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/3f991e138a23343ed3f5fc6c5499a0ae54aa68e1/src/prelint.ts),
+[Biome template](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/3f991e138a23343ed3f5fc6c5499a0ae54aa68e1/templates/biome/biome.jsonc), and
+[Vitest template](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/3f991e138a23343ed3f5fc6c5499a0ae54aa68e1/templates/vitest/vitest.config.ts),
 not its entire `.gitignore`. The generator revision at adoption is
 `3f991e138a23343ed3f5fc6c5499a0ae54aa68e1`. Nested `specs` is an intentional
 generalization of its root-only Prelint exclusion. Later generator changes do

@@ -38,13 +38,13 @@ Forge app; it must produce zero findings when scanned with
 `sgconfig.ecosol.yml` — `npm run test:fixtures` enforces this.
 
 `fixtures/drop-calf-forge-app/` is the verbatim default `forge-app` tooling
-output from the vendored Drop Calf module. It starts from an empty directory,
+output from the upstream Drop Calf module. It starts from an empty directory,
 so it has no manifest, source, or registered app identity. To refresh it, use
 a fresh empty input directory (outside the fixture), then export locally:
 
 ```sh
 mkdir -p .scratch/tmp_rovo_drop_calf_input
-dagger call -m ./vendor/ranch-rig-drop-calf init-changes \
+dagger call -m github.com/ibuchanan/ranch-rig-drop-calf@3f991e138a23343ed3f5fc6c5499a0ae54aa68e1 init-changes \
   --directory ./.scratch/tmp_rovo_drop_calf_input \
   --profile forge-app --owner tester --package-name sample \
   export --path ./fixtures/drop-calf-forge-app
