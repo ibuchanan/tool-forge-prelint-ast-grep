@@ -1,0 +1,301 @@
+id: require-composed-skill-links
+snapshots:
+  "{\"scripts\":{\"prepare\":\"echo run-s 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"echo run-s 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        {"scripts":{"prepare":"echo run-s 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 89
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 50
+      end: 86
+    - source: "{\"prepare\":\"echo run-s 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 87
+    - source: "\"scripts\":{\"prepare\":\"echo run-s 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 87
+  "{\"scripts\":{\"prepare\":\"lefthook install || true && npm run skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"lefthook install || true && npm run skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 118
+    - source: |
+        {"scripts":{"prepare":"lefthook install || true && npm run skill:link-wrangler","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 119
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 80
+      end: 116
+    - source: "{\"prepare\":\"lefthook install || true && npm run skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 117
+    - source: "\"scripts\":{\"prepare\":\"lefthook install || true && npm run skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 117
+  "{\"scripts\":{\"prepare\":\"run-p 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-p 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 83
+    - source: |
+        {"scripts":{"prepare":"run-p 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 84
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 45
+      end: 81
+    - source: "{\"prepare\":\"run-p 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 82
+    - source: "\"scripts\":{\"prepare\":\"run-p 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 82
+  "{\"scripts\":{\"prepare\":\"run-s 'skill:link-*' || true\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s 'skill:link-*' || true\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 91
+    - source: |
+        {"scripts":{"prepare":"run-s 'skill:link-*' || true","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 92
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 53
+      end: 89
+    - source: "{\"prepare\":\"run-s 'skill:link-*' || true\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 90
+    - source: "\"scripts\":{\"prepare\":\"run-s 'skill:link-*' || true\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 90
+  "{\"scripts\":{\"prepare\":\"run-s \\\"prepare\\\" 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s \\\"prepare\\\" 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 95
+    - source: |
+        {"scripts":{"prepare":"run-s \"prepare\" 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 96
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 57
+      end: 93
+    - source: "{\"prepare\":\"run-s \\\"prepare\\\" 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 94
+    - source: "\"scripts\":{\"prepare\":\"run-s \\\"prepare\\\" 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 94
+  "{\"scripts\":{\"prepare\":\"run-s prepare 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 91
+    - source: |
+        {"scripts":{"prepare":"run-s prepare 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 92
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 53
+      end: 89
+    - source: "{\"prepare\":\"run-s prepare 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 90
+    - source: "\"scripts\":{\"prepare\":\"run-s prepare 'skill:link-*'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 90
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*extra'\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*extra'\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 102
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*extra'","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 103
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 64
+      end: 100
+    - source: "{\"prepare\":\"run-s prepare:hooks 'skill:link-*extra'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 101
+    - source: "\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*extra'\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 101
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks skill:link-*\",\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks skill:link-*\",\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 95
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks skill:link-*","skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 96
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 57
+      end: 93
+    - source: "{\"prepare\":\"run-s prepare:hooks skill:link-*\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 94
+    - source: "\"scripts\":{\"prepare\":\"run-s prepare:hooks skill:link-*\",\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 94
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\",\"skill:link-other\":\"node other.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\",\"skill:link-other\":\"node other.js\"}}"
+      style: primary
+      start: 0
+      end: 137
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks skill:link-wrangler","skill:link-wrangler":"node link.js","skill:link-other":"node other.js"}}
+      style: secondary
+      start: 0
+      end: 138
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 64
+      end: 100
+    - source: "{\"prepare\":\"run-s prepare:hooks skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\",\"skill:link-other\":\"node other.js\"}"
+      style: secondary
+      start: 11
+      end: 136
+    - source: "\"scripts\":{\"prepare\":\"run-s prepare:hooks skill:link-wrangler\",\"skill:link-wrangler\":\"node link.js\",\"skill:link-other\":\"node other.js\"}"
+      style: secondary
+      start: 1
+      end: 136
+  "{\"scripts\":{\"prepare\":true,\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":true,\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 65
+    - source: |
+        {"scripts":{"prepare":true,"skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 66
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 27
+      end: 63
+    - source: "{\"prepare\":true,\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 64
+    - source: "\"scripts\":{\"prepare\":true,\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 64
+  "{\"scripts\":{\"skill:link-wrangler\":\"node link.js\",\"nested\":{\"prepare\":\"run-s 'skill:link-*'\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"skill:link-wrangler\":\"node link.js\",\"nested\":{\"prepare\":\"run-s 'skill:link-*'\"}}}"
+      style: primary
+      start: 0
+      end: 94
+    - source: |
+        {"scripts":{"skill:link-wrangler":"node link.js","nested":{"prepare":"run-s 'skill:link-*'"}}}
+      style: secondary
+      start: 0
+      end: 95
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 12
+      end: 48
+    - source: "{\"skill:link-wrangler\":\"node link.js\",\"nested\":{\"prepare\":\"run-s 'skill:link-*'\"}}"
+      style: secondary
+      start: 11
+      end: 93
+    - source: "\"scripts\":{\"skill:link-wrangler\":\"node link.js\",\"nested\":{\"prepare\":\"run-s 'skill:link-*'\"}}"
+      style: secondary
+      start: 1
+      end: 93
+  "{\"scripts\":{\"skill:link-wrangler\":\"node link.js\"},\"other\":{\"scripts\":{\"prepare\":\"run-s 'skill:link-*'\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"skill:link-wrangler\":\"node link.js\"},\"other\":{\"scripts\":{\"prepare\":\"run-s 'skill:link-*'\"}}}"
+      style: primary
+      start: 0
+      end: 105
+    - source: |
+        {"scripts":{"skill:link-wrangler":"node link.js"},"other":{"scripts":{"prepare":"run-s 'skill:link-*'"}}}
+      style: secondary
+      start: 0
+      end: 106
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 12
+      end: 48
+    - source: "{\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 49
+    - source: "\"scripts\":{\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 49
+  "{\"scripts\":{\"skill:link-wrangler\":\"node link.js\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"skill:link-wrangler\":\"node link.js\"}}"
+      style: primary
+      start: 0
+      end: 50
+    - source: |
+        {"scripts":{"skill:link-wrangler":"node link.js"}}
+      style: secondary
+      start: 0
+      end: 51
+    - source: "\"skill:link-wrangler\":\"node link.js\""
+      style: secondary
+      start: 12
+      end: 48
+    - source: "{\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 11
+      end: 49
+    - source: "\"scripts\":{\"skill:link-wrangler\":\"node link.js\"}"
+      style: secondary
+      start: 1
+      end: 49

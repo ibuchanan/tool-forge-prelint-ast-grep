@@ -178,3 +178,135 @@ snapshots:
       style: secondary
       start: 0
       end: 59
+  "{\"scripts\":{\"prepare\":\"echo run-s prepare:hooks\",\"prepare:hooks\":\"lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"echo run-s prepare:hooks\",\"prepare:hooks\":\"lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 85
+    - source: |
+        {"scripts":{"prepare":"echo run-s prepare:hooks","prepare:hooks":"lefthook install"}}
+      style: secondary
+      start: 0
+      end: 86
+  "{\"scripts\":{\"prepare\":\"lefthook install || trueish\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"lefthook install || trueish\"}}"
+      style: primary
+      start: 0
+      end: 53
+    - source: |
+        {"scripts":{"prepare":"lefthook install || trueish"}}
+      style: secondary
+      start: 0
+      end: 54
+  "{\"scripts\":{\"prepare\":\"lefthook install-later\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"lefthook install-later\"}}"
+      style: primary
+      start: 0
+      end: 48
+    - source: |
+        {"scripts":{"prepare":"lefthook install-later"}}
+      style: secondary
+      start: 0
+      end: 49
+  "{\"scripts\":{\"prepare\":\"run-s 'skill:link-*' prepare:hooks\",\"prepare:hooks\":\"lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s 'skill:link-*' prepare:hooks\",\"prepare:hooks\":\"lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 95
+    - source: |
+        {"scripts":{"prepare":"run-s 'skill:link-*' prepare:hooks","prepare:hooks":"lefthook install"}}
+      style: secondary
+      start: 0
+      end: 96
+  "{\"scripts\":{\"prepare\":\"run-s 'skill:link-*'\",\"prepare:hooks\":\"lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s 'skill:link-*'\",\"prepare:hooks\":\"lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 81
+    - source: |
+        {"scripts":{"prepare":"run-s 'skill:link-*'","prepare:hooks":"lefthook install"}}
+      style: secondary
+      start: 0
+      end: 82
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*'\",\"prepare:hooks\":\"echo lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*'\",\"prepare:hooks\":\"echo lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 100
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'","prepare:hooks":"echo lefthook install"}}
+      style: secondary
+      start: 0
+      end: 101
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*'\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks 'skill:link-*'\"}}"
+      style: primary
+      start: 0
+      end: 60
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'"}}
+      style: secondary
+      start: 0
+      end: 61
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks prepare\",\"prepare:hooks\":\"lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks prepare\",\"prepare:hooks\":\"lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks prepare","prepare:hooks":"lefthook install"}}
+      style: secondary
+      start: 0
+      end: 89
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks || true\",\"prepare:hooks\":\"lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks || true\",\"prepare:hooks\":\"lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 88
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks || true","prepare:hooks":"lefthook install"}}
+      style: secondary
+      start: 0
+      end: 89
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks\",\"nested\":{\"prepare:hooks\":\"lefthook install\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks\",\"nested\":{\"prepare:hooks\":\"lefthook install\"}}}"
+      style: primary
+      start: 0
+      end: 91
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks","nested":{"prepare:hooks":"lefthook install"}}}
+      style: secondary
+      start: 0
+      end: 92
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks\"},\"other\":{\"scripts\":{\"prepare:hooks\":\"lefthook install\"}}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks\"},\"other\":{\"scripts\":{\"prepare:hooks\":\"lefthook install\"}}}"
+      style: primary
+      start: 0
+      end: 102
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks"},"other":{"scripts":{"prepare:hooks":"lefthook install"}}}
+      style: secondary
+      start: 0
+      end: 103
+  "{\"scripts\":{\"prepare\":\"run-s prepare:hooks-extra\",\"prepare:hooks\":\"lefthook install\"}}\n":
+    labels:
+    - source: "{\"scripts\":{\"prepare\":\"run-s prepare:hooks-extra\",\"prepare:hooks\":\"lefthook install\"}}"
+      style: primary
+      start: 0
+      end: 86
+    - source: |
+        {"scripts":{"prepare":"run-s prepare:hooks-extra","prepare:hooks":"lefthook install"}}
+      style: secondary
+      start: 0
+      end: 87

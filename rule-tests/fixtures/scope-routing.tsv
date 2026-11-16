@@ -41,6 +41,7 @@ rules/ecosol/package-scripts/no-invalid-script-name-chars.yml	package	include
 rules/ecosol/package-scripts/no-stale-placeholder.yml	package	include
 rules/ecosol/package-scripts/require-composed-check.yml	package	include
 rules/ecosol/package-scripts/require-composed-lint.yml	package	include
+rules/ecosol/package-scripts/require-composed-skill-links.yml	package	include
 rules/ecosol/package-scripts/require-lefthook-prepare.yml	package	include
 rules/ecosol/package-scripts/require-prelint-node-modules-glob.yml	package	include
 rules/ecosol/package-scripts/require-prelint-specs-glob.yml	package	include

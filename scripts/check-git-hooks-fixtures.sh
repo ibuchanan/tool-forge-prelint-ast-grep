@@ -91,7 +91,7 @@ for variant in generated bun owner-names flow missing-push inert-push copied-lis
   fi
 done
 
-for variant in generated strict fallback-spacing missing inert nested non-string; do
+for variant in generated strict fallback-spacing direct-composed composed composed-flags composed-missing-skills missing-hooks inert-hooks unselected-hooks missing inert nested non-string; do
   expected=1
   case "$variant" in
   generated)
@@ -106,6 +106,21 @@ for variant in generated strict fallback-spacing missing inert nested non-string
     edit='.scripts.prepare = "lefthook install||true"'
     expected=0
     ;;
+  direct-composed)
+    edit='.scripts.prepare = "lefthook install || true && npm run skill:link-wrangler"'
+    expected=0
+    ;;
+  composed | composed-flags | composed-missing-skills | missing-hooks | inert-hooks | unselected-hooks)
+    edit='.scripts.prepare = "run-s prepare:hooks '\''skill:link-*'\''" | .scripts["prepare:hooks"] = "lefthook install || true" | .scripts["skill:link-wrangler"] = "node link.js"'
+    expected=0
+    case "$variant" in
+    composed-flags) edit+=' | .scripts.prepare = "run-s --npm-path npm --print-label prepare:hooks '\''skill:link-*'\''"' ;;
+    composed-missing-skills) edit+=' | .scripts.prepare = "run-s prepare:hooks"' ;;
+    missing-hooks) edit+=' | del(.scripts["prepare:hooks"])'; expected=1 ;;
+    inert-hooks) edit+=' | .scripts["prepare:hooks"] = "echo lefthook install"'; expected=1 ;;
+    unselected-hooks) edit+=' | .scripts.prepare = "run-s '\''skill:link-*'\''"'; expected=1 ;;
+    esac
+    ;;
   missing) edit='del(.scripts.prepare)' ;;
   inert) edit='.scripts.prepare = "echo lefthook install"' ;;
   nested) edit='.other.scripts.prepare = .scripts.prepare | del(.scripts.prepare)' ;;
@@ -119,6 +134,17 @@ for variant in generated strict fallback-spacing missing inert nested non-string
       .severity == "info" and (.metadata.tags | index("capability:git-hooks") != null))
   ' <<<"$findings" >/dev/null; then
     printf 'Unexpected prepare findings for %s: %s\n' "$variant" "$findings" >&2
+    exit 1
+  fi
+  # Skill composition is conditional and independent of hook installation.
+  expected_skills=0
+  [[ $variant == composed-missing-skills ]] && expected_skills=1
+  findings=$(ast-grep scan --config sgconfig.ecosol.yml \
+    --filter '^require-composed-skill-links$' --json=compact "$work/package.json")
+  if ! jq -e --argjson count "$expected_skills" '
+    length == $count and all(.[]; .ruleId == "require-composed-skill-links" and .severity == "info")
+  ' <<<"$findings" >/dev/null; then
+    printf 'Unexpected skill-link findings for %s: %s\n' "$variant" "$findings" >&2
     exit 1
   fi
 done

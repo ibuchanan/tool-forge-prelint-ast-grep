@@ -2,15 +2,22 @@ id: require-lefthook-prepare
 language: Json
 severity: info
 message: >
-  Add a `prepare` script that runs `lefthook install` so Git hooks are set up on install.
+  Run `lefthook install` in `prepare`, directly or through a selected `prepare:hooks` task.
 note: >
-  Drop Calf enforces `scripts.prepare: "lefthook install || true"` for Forge apps.
-  Accepting `lefthook install` without the fallback also supports repositories
-  that want installation failures to fail the package install. This checks the
-  script configuration, not whether hooks were installed; package managers can
-  skip lifecycle scripts. Scope this ecosol rule to Forge app package.json files.
-  Lefthook installation reference:
+  Install local Git hooks during package preparation. Accepts a direct
+  lefthook install command with optional || true and subsequent && work,
+  or run-s from npm-run-all2 selecting prepare:hooks as its first task.
+  The selected prepare:hooks script must directly run lefthook install,
+  optionally tolerating failure with || true. Runner options --npm-path npm
+  and --print-label are supported before task names; task names may be
+  unquoted, single-quoted or JSON-escaped double-quoted. Other wrappers,
+  aliases, runner options and shell semantics require review or suppression.
+  This checks declarations in the same root scripts object, not successful
+  hook installation; package managers can skip lifecycle scripts.
+  Additional preparation still warrants lifecycle security review.
+  Scope this ecosol rule to Forge app package.json files.
   https://lefthook.dev/installation/
+  https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-s.md
 rule:
   kind: object
   inside:
@@ -21,9 +28,25 @@ rule:
       regex: '^"scripts"\s*:'
       has:
         kind: object
-        has:
-          kind: pair
-          regex: '^"prepare"\s*:\s*"lefthook install(\s*\|\|\s*true)?"$'
+        any:
+          - has:
+              kind: pair
+              regex: '^"prepare"\s*:\s*"\s*lefthook\s+install(\s*\|\|\s*true)?\s*(&&\s*[^\s"].*)?"$'
+          - all:
+              - has:
+                  kind: pair
+                  regex: '^"prepare:hooks"\s*:\s*"\s*lefthook\s+install(\s*\|\|\s*true)?\s*"$'
+              - not:
+                  has:
+                    kind: pair
+                    all:
+                      - regex: '^"prepare"\s*:'
+                      - regex: >-
+                          (\s|\\"|')prepare(\s|\\"|'|")
+              - has:
+                  kind: pair
+                  regex: >-
+                    ^"prepare"\s*:\s*"\s*run-s\s+(?:(?:--npm-path\s+npm|--print-label)\s+)*(?:prepare:hooks|'prepare:hooks'|\\"prepare:hooks\\")(?:\s+(?:[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*|'[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*'|\\"[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*\\"))*\s*"$
 files:
   - "**/package.json"
 ignores:
@@ -32,11 +55,13 @@ ignores:
   - "**/coverage/**"
   - "**/specs/**"
 metadata:
-  references: ["https://lefthook.dev/installation/"]
+  references:
+    - https://lefthook.dev/installation/
+    - https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-s.md
   category: package-scripts
   tags: [capability:git-hooks]
   precision: medium
   scope-profile: [package-json, tests]
-  precision-rationale: "Tests distinguish a top-level prepare install command with optional fallback from missing, inert and nested entries. Alternative installation workflows can be effective; lifecycle skipping and actual hook installation are unresolved assessment gaps, not facts established by script text. Evidence: rule-tests/ecosol/package-scripts/require-lefthook-prepare.test.yml (valid/invalid) and rule-tests/__snapshots__/require-lefthook-prepare-snapshot.yml."
+  precision-rationale: "Tests accept direct installation with optional fallback and subsequent work, or bounded run-s delegation to a same-root prepare:hooks definition. Missing, inert, nested, lookalike and unselected hooks are rejected. Arbitrary shell semantics, wrappers, transitive aliases, task existence beyond prepare:hooks and actual installation remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-lefthook-prepare.test.yml and scripts/check-git-hooks-fixtures.sh."
   impact: low
-  impact-rationale: Lefthook installation wires local hooks; genuine absence of the intended setup creates local configuration friction and inconsistent feedback. It does not show that security guards or CI are absent, and a configured prepare command need not execute.
+  impact-rationale: Lefthook installation wires local hooks; genuine absence creates local configuration friction and inconsistent feedback. It does not show that security guards or CI are absent, and a configured prepare command need not execute.

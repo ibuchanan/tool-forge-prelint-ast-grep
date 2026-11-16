@@ -21,6 +21,11 @@ valid:
       }
     }
 invalid:
+  # Delegating additional work does not establish lifecycle safety.
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'","prepare:hooks":"lefthook install || true","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"lefthook install || true && npm run skill:link-wrangler"}}
   - |
     {
       "scripts": {

@@ -1,0 +1,51 @@
+id: require-composed-skill-links
+valid:
+  - |
+    {}
+  - |
+    {"scripts":{"prepare":"lefthook install || true"}}
+  # Skills are optional; similarly named and nested scripts do not activate policy.
+  - |
+    {"scripts":{"skill:link":"node link.js","skill:linking-x":"node link.js"}}
+  - |
+    {"other":{"scripts":{"skill:link-wrangler":"node link.js"}}}
+  - |
+    {"scripts":{"nested":{"skill:link-wrangler":"node link.js"}}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'","prepare:hooks":"lefthook install || true","skill:link-wrangler":"node link.js","skill:link-other":"node other.js"}}
+  - |
+    {"scripts":{"prepare":"run-s --npm-path npm --print-label prepare:hooks \"skill:link-*\"","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s --print-label --npm-path npm 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+  # Substrings in task names are not literal aggregate self-selection.
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*' skill:link-prepare-config","skill:link-prepare-config":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s 'skill:link-*'","skill:link-other.tool":"node link.js"}}
+invalid:
+  - |
+    {"scripts":{"skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":true,"skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"lefthook install || true && npm run skill:link-wrangler","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks skill:link-wrangler","skill:link-wrangler":"node link.js","skill:link-other":"node other.js"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks skill:link-*","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*extra'","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"echo run-s 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-p 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s 'skill:link-*' || true","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"prepare":"run-s \"prepare\" 'skill:link-*'","skill:link-wrangler":"node link.js"}}
+  - |
+    {"scripts":{"skill:link-wrangler":"node link.js","nested":{"prepare":"run-s 'skill:link-*'"}}}
+  - |
+    {"scripts":{"skill:link-wrangler":"node link.js"},"other":{"scripts":{"prepare":"run-s 'skill:link-*'"}}}

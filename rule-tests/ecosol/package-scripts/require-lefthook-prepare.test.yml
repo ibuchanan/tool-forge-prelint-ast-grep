@@ -19,7 +19,45 @@ valid:
     {"scripts": {"prepare": "lefthook install||true"}}
   - |
     {"scripts": {"prepare": "lefthook install  ||  true"}}
+  # Direct composition preserves the existing user workflow.
+  - |
+    {"scripts":{"prepare":"lefthook install || true && npm run skill:link-wrangler"}}
+  - |
+    {"scripts":{"prepare":"lefthook install && npm run skill:link-wrangler"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'","prepare:hooks":"lefthook install || true"}}
+  - |
+    {"scripts":{"prepare":"run-s --npm-path npm --print-label prepare:hooks 'skill:link-*'","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s --print-label --npm-path npm \"prepare:hooks\" \"skill:link-*\"","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s 'prepare:hooks'","prepare:hooks":"lefthook install"}}
 invalid:
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks prepare","prepare:hooks":"lefthook install"}}
+  # Hooks must be selected first, not merely mentioned later.
+  - |
+    {"scripts":{"prepare":"run-s 'skill:link-*' prepare:hooks","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks 'skill:link-*'","prepare:hooks":"echo lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s 'skill:link-*'","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks-extra","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"echo run-s prepare:hooks","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks || true","prepare:hooks":"lefthook install"}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks","nested":{"prepare:hooks":"lefthook install"}}}
+  - |
+    {"scripts":{"prepare":"run-s prepare:hooks"},"other":{"scripts":{"prepare:hooks":"lefthook install"}}}
+  - |
+    {"scripts":{"prepare":"lefthook install-later"}}
+  - |
+    {"scripts":{"prepare":"lefthook install || trueish"}}
   - |
     {"scripts": {"prepare": true}}
   - |

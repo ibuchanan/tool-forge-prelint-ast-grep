@@ -607,16 +607,35 @@ fixtures scan the generated package and isolated mutations without running owner
 docs commands or resolving external configuration. The stored Drop Calf snapshot
 is unchanged; the legacy zero-findings fixture gains only the maintained script.
 
+## Conditional skill-link preparation
+
+`require-composed-skill-links` checks packages declaring root `skill:link-*`
+scripts. Their `prepare` must use `run-s` and select a quoted `'skill:link-*'`
+(or JSON-escaped double-quoted) glob, so adding another linking task requires
+no aggregate-list edit. Packages without linking tasks are unaffected. Literal
+task names and `--npm-path npm` / `--print-label` before task names are accepted;
+explicit partial lists, unquoted globs, literal self-selection, shell chains and
+aggregate failure masking are rejected. This ecosol rule has medium precision,
+low impact and info severity; it has no capability tag because skill linking is
+not a separate capability in the current coverage inventory.
+
+This is a bounded declaration check, not shell interpretation or proof of task
+existence, safe implementation or successful linking. Keep failure tolerance in
+`prepare:hooks`, not the aggregate. `avoid-life-cycle-scripts` deliberately still
+warns about composed preparation: delegation and task names do not establish
+that automatically executed commands are safe. The vendored generator and its
+verbatim snapshot are not changed by this rule update.
+
 ## Git hooks: setup, pre-commit declarations and pre-push delegation
 
 Four ecosol rules map to `capability:git-hooks`:
 
-| Rule                                   | Bounded declaration check                                                                |
-| -------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `require-lefthook-prepare`             | Existing root `scripts.prepare` runs `lefthook install`, with optional success fallback. |
-| `require-lefthook-pre-commit-format`   | One pre-commit command delegates to `format` and declares boolean `stage_fixed: true`.   |
-| `require-lefthook-pre-commit-gitleaks` | One pre-commit command declares staged Gitleaks scanning.                                |
-| `require-lefthook-pre-push-check`      | One pre-push command delegates to the package `check` script.                            |
+| Rule                                   | Bounded declaration check                                                                               |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `require-lefthook-prepare`             | Root `scripts.prepare` installs hooks directly or selects a declared `prepare:hooks` task with `run-s`. |
+| `require-lefthook-pre-commit-format`   | One pre-commit command delegates to `format` and declares boolean `stage_fixed: true`.                  |
+| `require-lefthook-pre-commit-gitleaks` | One pre-commit command declares staged Gitleaks scanning.                                               |
+| `require-lefthook-pre-push-check`      | One pre-push command delegates to the package `check` script.                                           |
 
 The reviewed [capability](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/src/capabilities/git-hooks.ts)
 and [template](https://github.com/ibuchanan/ranch-rig-drop-calf/blob/be86d05309a32f7eef8988205208c17ca94e7a4c/templates/git-hooks/lefthook.yml)
@@ -641,7 +660,11 @@ Pre-push accepts only npm/Bun `run check` with ordinary spacing, without optiona
 execution, help flags, trailing chains or error masking. Copied lint/test/size
 lists do not satisfy delegation.
 
-Prepare's matcher, scope and ratings are unchanged. The two strengthened
+Prepare accepts direct `lefthook install` with optional `|| true` and trailing
+`&&` work, or `run-s` selecting a same-root `prepare:hooks` script first. That
+task must contain only the installation command and optional fallback. Bounded
+runner options `--npm-path npm` and `--print-label` precede task names. Scope
+and ratings are unchanged. The two strengthened
 pre-commit rules retain medium precision and their existing low/high impact,
 respectively; severity remains info/warning. The new pre-push rule has medium
 precision, low impact and info severity. Owner wrappers, direct formatter tools,

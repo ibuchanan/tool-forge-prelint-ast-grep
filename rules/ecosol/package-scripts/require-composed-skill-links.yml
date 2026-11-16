@@ -1,0 +1,58 @@
+id: require-composed-skill-links
+language: Json
+severity: info
+message: >
+  Select declared `skill:link-*` tasks from `prepare` with `run-s` and a quoted `skill:link-*` glob.
+note: >
+  When a package declares skill:link-* scripts, select that namespace from
+  prepare with run-s from npm-run-all2 so new linking tasks are included
+  without maintaining a second list. Keep hook installation in prepare:hooks
+  and failure tolerance local to that task, not the aggregate prepare script.
+  Accepts literal task names and a single-quoted or JSON-escaped double-quoted
+  skill:link-* glob, with --npm-path npm and --print-label before task names.
+  Packages without skill:link-* declarations need no skill linking setup.
+  This bounded same-root scripts check does not resolve aliases, other glob
+  forms, arbitrary runner options, shell semantics, task implementations or
+  successful linking. A script name does not establish safety; additional
+  lifecycle work still requires review. Scope to Forge app package.json files.
+  https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-s.md
+rule:
+  kind: object
+  inside:
+    kind: document
+  has:
+    kind: pair
+    regex: '^"scripts"\s*:'
+    has:
+      kind: object
+      all:
+        - has:
+            kind: pair
+            regex: '^"skill:link-[^"]+"\s*:'
+        - not:
+            has:
+              kind: pair
+              all:
+                - regex: >-
+                    ^"prepare"\s*:\s*"\s*run-s\s+(?:(?:--npm-path\s+npm|--print-label)\s+)*(?:[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*|'[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*'|\\"[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*\\")(?:\s+(?:[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*|'[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*'|\\"[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_*-]+)*\\"))*\s*"$
+                - regex: >-
+                    \s('skill:link-\*'|\\"skill:link-\*\\")(\s|")
+                - not:
+                    regex: >-
+                      (\s|\\"|')prepare(\s|\\"|'|")
+files:
+  - "**/package.json"
+ignores:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/specs/**"
+metadata:
+  references:
+    - https://github.com/bcomnes/npm-run-all2/blob/HEAD/docs/run-s.md
+  category: package-scripts
+  precision: medium
+  scope-profile: [package-json, tests]
+  precision-rationale: "Tests check conditional root skill:link-* declarations and bounded run-s selection of a quoted namespace glob, including multiple tasks and runner flags. Missing selection, explicit partial lists, self-selection, error masking, nested lookalikes and inert commands are rejected. Aliases, other patterns, dependency installation, arbitrary shell semantics and actual linking remain assessment gaps. Evidence: rule-tests/ecosol/package-scripts/require-composed-skill-links.test.yml."
+  impact: low
+  impact-rationale: Omitting a declared skill-link task can leave local agent setup incomplete. This is bounded development workflow friction, not evidence of unsafe commands or failed application behavior.
